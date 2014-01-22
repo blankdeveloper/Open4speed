@@ -1,0 +1,91 @@
+TEXTS
+Start race
+Free ride
+Options
+About game
+Quit game
+\   Do you really want quit?
+\   Yes
+\    No
+      Loading
+      version 1.2.0
+\rst
+  You have unlocked new track
+//12
+\ Continue
+\   Back
+ Resume race
+   Restart
+ Cancel race
+Credits\\Programming by Lubos Vonasek\Physical engine by Bullet Physics\Music by audionautix.com\3D objects by 3Drt.com\3D cars by Lubos Vonasek\Menu background by movietools.info
+Licence\\Project is hosted on Google Code under\GNU GPL v3 licence\\Contact\\tridosm@gmail.com
+Pg. 1/2
+Pg. 2/2
+pos:   speed:        gear:   dst:
+   Options
+ You must win to unlock track
+//24
+\        You placed 1st
+\        You placed 2nd
+\        You placed 3rd
+//27
+  <
+  >
+//29
+\\\\\1 Midnight
+\\\\\2 Escape
+\\\\\3 Darkness
+\\\\\4 Evening
+\\\\\5 Runaway
+\\\\\6 Lost
+\\\\\7 Too slow
+\\\\\8 Gang me
+\\\\\9 Evil
+\\\\\10 Sunrise
+\\\\\11 Thugs
+\\\\\12 Check
+\\\\\13 No gas
+\\\\\14 Help me
+\\\\\15 Lasttime
+Pg. 1/5
+Pg. 2/5
+Pg. 3/5
+Pg. 4/5
+Pg. 5/5
+END
+
+TEXTCFG2
+    Music: 0%
+    Music: 10%
+    Music: 20%
+    Music: 30%
+    Music: 40%
+    Music: 50%
+    Music: 60%
+    Music: 70%
+    Music: 80%
+    Music: 90%
+    Music: 100%
+END
+
+TEXTCFG3
+    Sound: 0%
+    Sound: 10%
+    Sound: 20%
+    Sound: 30%
+    Sound: 40%
+    Sound: 50%
+    Sound: 60%
+    Sound: 70%
+    Sound: 80%
+    Sound: 90%
+    Sound: 100%
+END
+
+TEXTCFG5
+  Detail: poor
+  Detail: low
+  Detail: normal
+  Detail: high
+  Detail: ultra
+END

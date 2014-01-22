@@ -1,0 +1,1057 @@
+The system is: Linux - 3.5.0-26-generic - i686
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/gcc 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/c++ 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec430520669/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec430520669.dir/build.make CMakeFiles/cmTryCompileExec430520669.dir/build
+make[1]: Entering directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec430520669.dir/testCCompiler.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec430520669.dir/testCCompiler.c.o   -c /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTryCompileExec430520669
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec430520669.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec430520669.dir/testCCompiler.c.o  -o cmTryCompileExec430520669 -rdynamic 
+make[1]: Leaving directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec208470626/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec208470626.dir/build.make CMakeFiles/cmTryCompileExec208470626.dir/build
+make[1]: Entering directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec208470626.dir/CMakeCCompilerABI.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec208470626.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c
+Linking C executable cmTryCompileExec208470626
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec208470626.dir/link.txt --verbose=1
+/usr/bin/gcc       -v CMakeFiles/cmTryCompileExec208470626.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec208470626 -rdynamic  
+Using built-in specs.
+COLLECT_GCC=/usr/bin/gcc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/i686-linux-gnu/4.7/lto-wrapper
+Target: i686-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.7.2-2ubuntu1' --with-bugurl=file:///usr/share/doc/gcc-4.7/README.Bugs --enable-languages=c,c++,go,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.7 --enable-shared --enable-linker-build-id --with-system-zlib --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.7 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --enable-plugin --enable-objc-gc --enable-targets=all --disable-werror --with-arch-32=i686 --with-tune=generic --enable-checking=release --build=i686-linux-gnu --host=i686-linux-gnu --target=i686-linux-gnu
+Thread model: posix
+gcc version 4.7.2 (Ubuntu/Linaro 4.7.2-2ubuntu1) 
+COMPILER_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib/:/lib/i386-linux-gnu/:/lib/../lib/:/usr/lib/i386-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec208470626' '-rdynamic' '-mtune=generic' '-march=i686'
+ /usr/lib/gcc/i686-linux-gnu/4.7/collect2 --sysroot=/ --build-id --no-add-needed --as-needed --eh-frame-hdr -m elf_i386 --hash-style=gnu -export-dynamic -dynamic-linker /lib/ld-linux.so.2 -z relro -o cmTryCompileExec208470626 /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o /usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o -L/usr/lib/gcc/i686-linux-gnu/4.7 -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib -L/lib/i386-linux-gnu -L/lib/../lib -L/usr/lib/i386-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/i686-linux-gnu/4.7/../../.. CMakeFiles/cmTryCompileExec208470626.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/i686-linux-gnu/4.7/crtend.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o
+make[1]: Leaving directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:/usr/bin/make "cmTryCompileExec208470626/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec208470626.dir/build.make CMakeFiles/cmTryCompileExec208470626.dir/build]
+  ignore line: [make[1]: Entering directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp']
+  ignore line: [/usr/bin/cmake -E cmake_progress_report /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building C object CMakeFiles/cmTryCompileExec208470626.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec208470626.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTryCompileExec208470626]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec208470626.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/gcc       -v CMakeFiles/cmTryCompileExec208470626.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec208470626 -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/gcc]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/i686-linux-gnu/4.7/lto-wrapper]
+  ignore line: [Target: i686-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.7.2-2ubuntu1' --with-bugurl=file:///usr/share/doc/gcc-4.7/README.Bugs --enable-languages=c,c++,go,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.7 --enable-shared --enable-linker-build-id --with-system-zlib --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.7 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --enable-plugin --enable-objc-gc --enable-targets=all --disable-werror --with-arch-32=i686 --with-tune=generic --enable-checking=release --build=i686-linux-gnu --host=i686-linux-gnu --target=i686-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.7.2 (Ubuntu/Linaro 4.7.2-2ubuntu1) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib/:/lib/i386-linux-gnu/:/lib/../lib/:/usr/lib/i386-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec208470626' '-rdynamic' '-mtune=generic' '-march=i686']
+  link line: [ /usr/lib/gcc/i686-linux-gnu/4.7/collect2 --sysroot=/ --build-id --no-add-needed --as-needed --eh-frame-hdr -m elf_i386 --hash-style=gnu -export-dynamic -dynamic-linker /lib/ld-linux.so.2 -z relro -o cmTryCompileExec208470626 /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o /usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o -L/usr/lib/gcc/i686-linux-gnu/4.7 -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib -L/lib/i386-linux-gnu -L/lib/../lib -L/usr/lib/i386-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/i686-linux-gnu/4.7/../../.. CMakeFiles/cmTryCompileExec208470626.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/i686-linux-gnu/4.7/crtend.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o]
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/collect2] ==> ignore
+    arg [--sysroot=/] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--no-add-needed] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_i386] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib/ld-linux.so.2] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec208470626] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o] ==> ignore
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib]
+    arg [-L/lib/i386-linux-gnu] ==> dir [/lib/i386-linux-gnu]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/i386-linux-gnu] ==> dir [/usr/lib/i386-linux-gnu]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../..] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../..]
+    arg [CMakeFiles/cmTryCompileExec208470626.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/crtend.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o] ==> ignore
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7] ==> [/usr/lib/gcc/i686-linux-gnu/4.7]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu] ==> [/usr/lib/i386-linux-gnu]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib] ==> [/usr/lib]
+  collapse dir [/lib/i386-linux-gnu] ==> [/lib/i386-linux-gnu]
+  collapse dir [/lib/../lib] ==> [/lib]
+  collapse dir [/usr/lib/i386-linux-gnu] ==> [/usr/lib/i386-linux-gnu]
+  collapse dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../..] ==> [/usr/lib]
+  implicit libs: [c]
+  implicit dirs: [/usr/lib/gcc/i686-linux-gnu/4.7;/usr/lib/i386-linux-gnu;/usr/lib;/lib/i386-linux-gnu;/lib]
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1730940904/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1730940904.dir/build.make CMakeFiles/cmTryCompileExec1730940904.dir/build
+make[1]: Entering directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1730940904.dir/testCXXCompiler.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec1730940904.dir/testCXXCompiler.cxx.o -c /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTryCompileExec1730940904
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1730940904.dir/link.txt --verbose=1
+/usr/bin/c++          CMakeFiles/cmTryCompileExec1730940904.dir/testCXXCompiler.cxx.o  -o cmTryCompileExec1730940904 -rdynamic 
+make[1]: Leaving directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1873623200/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1873623200.dir/build.make CMakeFiles/cmTryCompileExec1873623200.dir/build
+make[1]: Entering directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1873623200.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec1873623200.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTryCompileExec1873623200
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1873623200.dir/link.txt --verbose=1
+/usr/bin/c++        -v CMakeFiles/cmTryCompileExec1873623200.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec1873623200 -rdynamic  
+Using built-in specs.
+COLLECT_GCC=/usr/bin/c++
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/i686-linux-gnu/4.7/lto-wrapper
+Target: i686-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.7.2-2ubuntu1' --with-bugurl=file:///usr/share/doc/gcc-4.7/README.Bugs --enable-languages=c,c++,go,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.7 --enable-shared --enable-linker-build-id --with-system-zlib --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.7 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --enable-plugin --enable-objc-gc --enable-targets=all --disable-werror --with-arch-32=i686 --with-tune=generic --enable-checking=release --build=i686-linux-gnu --host=i686-linux-gnu --target=i686-linux-gnu
+Thread model: posix
+gcc version 4.7.2 (Ubuntu/Linaro 4.7.2-2ubuntu1) 
+COMPILER_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib/:/lib/i386-linux-gnu/:/lib/../lib/:/usr/lib/i386-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec1873623200' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=i686'
+ /usr/lib/gcc/i686-linux-gnu/4.7/collect2 --sysroot=/ --build-id --no-add-needed --as-needed --eh-frame-hdr -m elf_i386 --hash-style=gnu -export-dynamic -dynamic-linker /lib/ld-linux.so.2 -z relro -o cmTryCompileExec1873623200 /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o /usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o -L/usr/lib/gcc/i686-linux-gnu/4.7 -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib -L/lib/i386-linux-gnu -L/lib/../lib -L/usr/lib/i386-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/i686-linux-gnu/4.7/../../.. CMakeFiles/cmTryCompileExec1873623200.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/i686-linux-gnu/4.7/crtend.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o
+make[1]: Leaving directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:/usr/bin/make "cmTryCompileExec1873623200/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec1873623200.dir/build.make CMakeFiles/cmTryCompileExec1873623200.dir/build]
+  ignore line: [make[1]: Entering directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp']
+  ignore line: [/usr/bin/cmake -E cmake_progress_report /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec1873623200.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++     -o CMakeFiles/cmTryCompileExec1873623200.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTryCompileExec1873623200]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1873623200.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++        -v CMakeFiles/cmTryCompileExec1873623200.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec1873623200 -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/c++]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/i686-linux-gnu/4.7/lto-wrapper]
+  ignore line: [Target: i686-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.7.2-2ubuntu1' --with-bugurl=file:///usr/share/doc/gcc-4.7/README.Bugs --enable-languages=c,c++,go,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.7 --enable-shared --enable-linker-build-id --with-system-zlib --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.7 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --enable-plugin --enable-objc-gc --enable-targets=all --disable-werror --with-arch-32=i686 --with-tune=generic --enable-checking=release --build=i686-linux-gnu --host=i686-linux-gnu --target=i686-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.7.2 (Ubuntu/Linaro 4.7.2-2ubuntu1) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib/:/lib/i386-linux-gnu/:/lib/../lib/:/usr/lib/i386-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec1873623200' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=i686']
+  link line: [ /usr/lib/gcc/i686-linux-gnu/4.7/collect2 --sysroot=/ --build-id --no-add-needed --as-needed --eh-frame-hdr -m elf_i386 --hash-style=gnu -export-dynamic -dynamic-linker /lib/ld-linux.so.2 -z relro -o cmTryCompileExec1873623200 /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o /usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o -L/usr/lib/gcc/i686-linux-gnu/4.7 -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib -L/lib/i386-linux-gnu -L/lib/../lib -L/usr/lib/i386-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/i686-linux-gnu/4.7/../../.. CMakeFiles/cmTryCompileExec1873623200.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/i686-linux-gnu/4.7/crtend.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o]
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/collect2] ==> ignore
+    arg [--sysroot=/] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--no-add-needed] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_i386] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib/ld-linux.so.2] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec1873623200] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o] ==> ignore
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib]
+    arg [-L/lib/i386-linux-gnu] ==> dir [/lib/i386-linux-gnu]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/i386-linux-gnu] ==> dir [/usr/lib/i386-linux-gnu]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../..] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../..]
+    arg [CMakeFiles/cmTryCompileExec1873623200.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/crtend.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o] ==> ignore
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7] ==> [/usr/lib/gcc/i686-linux-gnu/4.7]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu] ==> [/usr/lib/i386-linux-gnu]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib] ==> [/usr/lib]
+  collapse dir [/lib/i386-linux-gnu] ==> [/lib/i386-linux-gnu]
+  collapse dir [/lib/../lib] ==> [/lib]
+  collapse dir [/usr/lib/i386-linux-gnu] ==> [/usr/lib/i386-linux-gnu]
+  collapse dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../..] ==> [/usr/lib]
+  implicit libs: [stdc++;m;c]
+  implicit dirs: [/usr/lib/gcc/i686-linux-gnu/4.7;/usr/lib/i386-linux-gnu;/usr/lib;/lib/i386-linux-gnu;/lib]
+
+
+Determining if the function XOpenDisplay exists in the /usr/lib/i386-linux-gnu/libX11.so;/usr/lib/i386-linux-gnu/libXext.so passed with the following output:
+Change Dir: /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec493833451/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec493833451.dir/build.make CMakeFiles/cmTryCompileExec493833451.dir/build
+make[1]: Entering directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec493833451.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay   -o CMakeFiles/cmTryCompileExec493833451.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec493833451
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec493833451.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=XOpenDisplay    CMakeFiles/cmTryCompileExec493833451.dir/CheckFunctionExists.c.o  -o cmTryCompileExec493833451 -rdynamic -lX11 -lXext 
+make[1]: Leaving directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Determining if the function gethostbyname exists passed with the following output:
+Change Dir: /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2203949447/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2203949447.dir/build.make CMakeFiles/cmTryCompileExec2203949447.dir/build
+make[1]: Entering directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2203949447.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=gethostbyname   -o CMakeFiles/cmTryCompileExec2203949447.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec2203949447
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2203949447.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=gethostbyname    CMakeFiles/cmTryCompileExec2203949447.dir/CheckFunctionExists.c.o  -o cmTryCompileExec2203949447 -rdynamic 
+make[1]: Leaving directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Determining if the function connect exists passed with the following output:
+Change Dir: /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1232562460/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1232562460.dir/build.make CMakeFiles/cmTryCompileExec1232562460.dir/build
+make[1]: Entering directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1232562460.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=connect   -o CMakeFiles/cmTryCompileExec1232562460.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1232562460
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1232562460.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=connect    CMakeFiles/cmTryCompileExec1232562460.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1232562460 -rdynamic 
+make[1]: Leaving directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Determining if the function remove exists passed with the following output:
+Change Dir: /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3565264933/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3565264933.dir/build.make CMakeFiles/cmTryCompileExec3565264933.dir/build
+make[1]: Entering directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3565264933.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=remove   -o CMakeFiles/cmTryCompileExec3565264933.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3565264933
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3565264933.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=remove    CMakeFiles/cmTryCompileExec3565264933.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3565264933 -rdynamic 
+make[1]: Leaving directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Determining if the function shmat exists passed with the following output:
+Change Dir: /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1119202382/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1119202382.dir/build.make CMakeFiles/cmTryCompileExec1119202382.dir/build
+make[1]: Entering directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1119202382.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=shmat   -o CMakeFiles/cmTryCompileExec1119202382.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1119202382
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1119202382.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=shmat    CMakeFiles/cmTryCompileExec1119202382.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1119202382 -rdynamic 
+make[1]: Leaving directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Determining if the function IceConnectionNumber exists in the ICE passed with the following output:
+Change Dir: /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec526576710/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec526576710.dir/build.make CMakeFiles/cmTryCompileExec526576710.dir/build
+make[1]: Entering directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec526576710.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber   -o CMakeFiles/cmTryCompileExec526576710.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec526576710
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec526576710.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=IceConnectionNumber    CMakeFiles/cmTryCompileExec526576710.dir/CheckFunctionExists.c.o  -o cmTryCompileExec526576710 -rdynamic -lICE 
+make[1]: Leaving directory `/home/lubos/Škola/DPG/open4speedHD/jni/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+The system is: Linux - 3.5.0-32-generic - i686
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/gcc 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/c++ 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec17165995/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec17165995.dir/build.make CMakeFiles/cmTryCompileExec17165995.dir/build
+make[1]: Entering directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec17165995.dir/testCCompiler.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec17165995.dir/testCCompiler.c.o   -c /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTryCompileExec17165995
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec17165995.dir/link.txt --verbose=1
+/usr/bin/gcc         CMakeFiles/cmTryCompileExec17165995.dir/testCCompiler.c.o  -o cmTryCompileExec17165995 -rdynamic 
+make[1]: Leaving directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3707452044/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3707452044.dir/build.make CMakeFiles/cmTryCompileExec3707452044.dir/build
+make[1]: Entering directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3707452044.dir/CMakeCCompilerABI.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3707452044.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c
+Linking C executable cmTryCompileExec3707452044
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3707452044.dir/link.txt --verbose=1
+/usr/bin/gcc       -v CMakeFiles/cmTryCompileExec3707452044.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec3707452044 -rdynamic  
+Using built-in specs.
+COLLECT_GCC=/usr/bin/gcc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/i686-linux-gnu/4.7/lto-wrapper
+Target: i686-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.7.2-2ubuntu1' --with-bugurl=file:///usr/share/doc/gcc-4.7/README.Bugs --enable-languages=c,c++,go,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.7 --enable-shared --enable-linker-build-id --with-system-zlib --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.7 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --enable-plugin --enable-objc-gc --enable-targets=all --disable-werror --with-arch-32=i686 --with-tune=generic --enable-checking=release --build=i686-linux-gnu --host=i686-linux-gnu --target=i686-linux-gnu
+Thread model: posix
+gcc version 4.7.2 (Ubuntu/Linaro 4.7.2-2ubuntu1) 
+COMPILER_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib/:/lib/i386-linux-gnu/:/lib/../lib/:/usr/lib/i386-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3707452044' '-rdynamic' '-mtune=generic' '-march=i686'
+ /usr/lib/gcc/i686-linux-gnu/4.7/collect2 --sysroot=/ --build-id --no-add-needed --as-needed --eh-frame-hdr -m elf_i386 --hash-style=gnu -export-dynamic -dynamic-linker /lib/ld-linux.so.2 -z relro -o cmTryCompileExec3707452044 /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o /usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o -L/usr/lib/gcc/i686-linux-gnu/4.7 -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib -L/lib/i386-linux-gnu -L/lib/../lib -L/usr/lib/i386-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/i686-linux-gnu/4.7/../../.. CMakeFiles/cmTryCompileExec3707452044.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/i686-linux-gnu/4.7/crtend.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o
+make[1]: Leaving directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:/usr/bin/make "cmTryCompileExec3707452044/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec3707452044.dir/build.make CMakeFiles/cmTryCompileExec3707452044.dir/build]
+  ignore line: [make[1]: Entering directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp']
+  ignore line: [/usr/bin/cmake -E cmake_progress_report /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building C object CMakeFiles/cmTryCompileExec3707452044.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/gcc    -o CMakeFiles/cmTryCompileExec3707452044.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTryCompileExec3707452044]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3707452044.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/gcc       -v CMakeFiles/cmTryCompileExec3707452044.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec3707452044 -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/gcc]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/i686-linux-gnu/4.7/lto-wrapper]
+  ignore line: [Target: i686-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.7.2-2ubuntu1' --with-bugurl=file:///usr/share/doc/gcc-4.7/README.Bugs --enable-languages=c,c++,go,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.7 --enable-shared --enable-linker-build-id --with-system-zlib --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.7 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --enable-plugin --enable-objc-gc --enable-targets=all --disable-werror --with-arch-32=i686 --with-tune=generic --enable-checking=release --build=i686-linux-gnu --host=i686-linux-gnu --target=i686-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.7.2 (Ubuntu/Linaro 4.7.2-2ubuntu1) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib/:/lib/i386-linux-gnu/:/lib/../lib/:/usr/lib/i386-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3707452044' '-rdynamic' '-mtune=generic' '-march=i686']
+  link line: [ /usr/lib/gcc/i686-linux-gnu/4.7/collect2 --sysroot=/ --build-id --no-add-needed --as-needed --eh-frame-hdr -m elf_i386 --hash-style=gnu -export-dynamic -dynamic-linker /lib/ld-linux.so.2 -z relro -o cmTryCompileExec3707452044 /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o /usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o -L/usr/lib/gcc/i686-linux-gnu/4.7 -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib -L/lib/i386-linux-gnu -L/lib/../lib -L/usr/lib/i386-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/i686-linux-gnu/4.7/../../.. CMakeFiles/cmTryCompileExec3707452044.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/i686-linux-gnu/4.7/crtend.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o]
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/collect2] ==> ignore
+    arg [--sysroot=/] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--no-add-needed] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_i386] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib/ld-linux.so.2] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec3707452044] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o] ==> ignore
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib]
+    arg [-L/lib/i386-linux-gnu] ==> dir [/lib/i386-linux-gnu]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/i386-linux-gnu] ==> dir [/usr/lib/i386-linux-gnu]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../..] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../..]
+    arg [CMakeFiles/cmTryCompileExec3707452044.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/crtend.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o] ==> ignore
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7] ==> [/usr/lib/gcc/i686-linux-gnu/4.7]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu] ==> [/usr/lib/i386-linux-gnu]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib] ==> [/usr/lib]
+  collapse dir [/lib/i386-linux-gnu] ==> [/lib/i386-linux-gnu]
+  collapse dir [/lib/../lib] ==> [/lib]
+  collapse dir [/usr/lib/i386-linux-gnu] ==> [/usr/lib/i386-linux-gnu]
+  collapse dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../..] ==> [/usr/lib]
+  implicit libs: [c]
+  implicit dirs: [/usr/lib/gcc/i686-linux-gnu/4.7;/usr/lib/i386-linux-gnu;/usr/lib;/lib/i386-linux-gnu;/lib]
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1958233738/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1958233738.dir/build.make CMakeFiles/cmTryCompileExec1958233738.dir/build
+make[1]: Entering directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec1958233738.dir/testCXXCompiler.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec1958233738.dir/testCXXCompiler.cxx.o -c /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTryCompileExec1958233738
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1958233738.dir/link.txt --verbose=1
+/usr/bin/c++          CMakeFiles/cmTryCompileExec1958233738.dir/testCXXCompiler.cxx.o  -o cmTryCompileExec1958233738 -rdynamic 
+make[1]: Leaving directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3187148295/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3187148295.dir/build.make CMakeFiles/cmTryCompileExec3187148295.dir/build
+make[1]: Entering directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3187148295.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec3187148295.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTryCompileExec3187148295
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3187148295.dir/link.txt --verbose=1
+/usr/bin/c++        -v CMakeFiles/cmTryCompileExec3187148295.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec3187148295 -rdynamic  
+Using built-in specs.
+COLLECT_GCC=/usr/bin/c++
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/i686-linux-gnu/4.7/lto-wrapper
+Target: i686-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.7.2-2ubuntu1' --with-bugurl=file:///usr/share/doc/gcc-4.7/README.Bugs --enable-languages=c,c++,go,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.7 --enable-shared --enable-linker-build-id --with-system-zlib --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.7 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --enable-plugin --enable-objc-gc --enable-targets=all --disable-werror --with-arch-32=i686 --with-tune=generic --enable-checking=release --build=i686-linux-gnu --host=i686-linux-gnu --target=i686-linux-gnu
+Thread model: posix
+gcc version 4.7.2 (Ubuntu/Linaro 4.7.2-2ubuntu1) 
+COMPILER_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib/:/lib/i386-linux-gnu/:/lib/../lib/:/usr/lib/i386-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3187148295' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=i686'
+ /usr/lib/gcc/i686-linux-gnu/4.7/collect2 --sysroot=/ --build-id --no-add-needed --as-needed --eh-frame-hdr -m elf_i386 --hash-style=gnu -export-dynamic -dynamic-linker /lib/ld-linux.so.2 -z relro -o cmTryCompileExec3187148295 /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o /usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o -L/usr/lib/gcc/i686-linux-gnu/4.7 -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib -L/lib/i386-linux-gnu -L/lib/../lib -L/usr/lib/i386-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/i686-linux-gnu/4.7/../../.. CMakeFiles/cmTryCompileExec3187148295.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/i686-linux-gnu/4.7/crtend.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o
+make[1]: Leaving directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:/usr/bin/make "cmTryCompileExec3187148295/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec3187148295.dir/build.make CMakeFiles/cmTryCompileExec3187148295.dir/build]
+  ignore line: [make[1]: Entering directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp']
+  ignore line: [/usr/bin/cmake -E cmake_progress_report /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec3187148295.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++     -o CMakeFiles/cmTryCompileExec3187148295.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTryCompileExec3187148295]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3187148295.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++        -v CMakeFiles/cmTryCompileExec3187148295.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec3187148295 -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/c++]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/i686-linux-gnu/4.7/lto-wrapper]
+  ignore line: [Target: i686-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.7.2-2ubuntu1' --with-bugurl=file:///usr/share/doc/gcc-4.7/README.Bugs --enable-languages=c,c++,go,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.7 --enable-shared --enable-linker-build-id --with-system-zlib --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.7 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --enable-plugin --enable-objc-gc --enable-targets=all --disable-werror --with-arch-32=i686 --with-tune=generic --enable-checking=release --build=i686-linux-gnu --host=i686-linux-gnu --target=i686-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.7.2 (Ubuntu/Linaro 4.7.2-2ubuntu1) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib/:/lib/i386-linux-gnu/:/lib/../lib/:/usr/lib/i386-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3187148295' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=i686']
+  link line: [ /usr/lib/gcc/i686-linux-gnu/4.7/collect2 --sysroot=/ --build-id --no-add-needed --as-needed --eh-frame-hdr -m elf_i386 --hash-style=gnu -export-dynamic -dynamic-linker /lib/ld-linux.so.2 -z relro -o cmTryCompileExec3187148295 /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o /usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o -L/usr/lib/gcc/i686-linux-gnu/4.7 -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib -L/lib/i386-linux-gnu -L/lib/../lib -L/usr/lib/i386-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/i686-linux-gnu/4.7/../../.. CMakeFiles/cmTryCompileExec3187148295.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/i686-linux-gnu/4.7/crtend.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o]
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/collect2] ==> ignore
+    arg [--sysroot=/] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--no-add-needed] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_i386] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib/ld-linux.so.2] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec3187148295] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o] ==> ignore
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib]
+    arg [-L/lib/i386-linux-gnu] ==> dir [/lib/i386-linux-gnu]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/i386-linux-gnu] ==> dir [/usr/lib/i386-linux-gnu]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../..] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../..]
+    arg [CMakeFiles/cmTryCompileExec3187148295.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/crtend.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o] ==> ignore
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7] ==> [/usr/lib/gcc/i686-linux-gnu/4.7]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu] ==> [/usr/lib/i386-linux-gnu]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib] ==> [/usr/lib]
+  collapse dir [/lib/i386-linux-gnu] ==> [/lib/i386-linux-gnu]
+  collapse dir [/lib/../lib] ==> [/lib]
+  collapse dir [/usr/lib/i386-linux-gnu] ==> [/usr/lib/i386-linux-gnu]
+  collapse dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../..] ==> [/usr/lib]
+  implicit libs: [stdc++;m;c]
+  implicit dirs: [/usr/lib/gcc/i686-linux-gnu/4.7;/usr/lib/i386-linux-gnu;/usr/lib;/lib/i386-linux-gnu;/lib]
+
+
+Determining if the function XOpenDisplay exists in the /usr/lib/i386-linux-gnu/libX11.so;/usr/lib/i386-linux-gnu/libXext.so passed with the following output:
+Change Dir: /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec354274404/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec354274404.dir/build.make CMakeFiles/cmTryCompileExec354274404.dir/build
+make[1]: Entering directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec354274404.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay   -o CMakeFiles/cmTryCompileExec354274404.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec354274404
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec354274404.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=XOpenDisplay    CMakeFiles/cmTryCompileExec354274404.dir/CheckFunctionExists.c.o  -o cmTryCompileExec354274404 -rdynamic -lX11 -lXext 
+make[1]: Leaving directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Determining if the function gethostbyname exists passed with the following output:
+Change Dir: /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1950324979/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1950324979.dir/build.make CMakeFiles/cmTryCompileExec1950324979.dir/build
+make[1]: Entering directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1950324979.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=gethostbyname   -o CMakeFiles/cmTryCompileExec1950324979.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1950324979
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1950324979.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=gethostbyname    CMakeFiles/cmTryCompileExec1950324979.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1950324979 -rdynamic 
+make[1]: Leaving directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Determining if the function connect exists passed with the following output:
+Change Dir: /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1549762035/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1549762035.dir/build.make CMakeFiles/cmTryCompileExec1549762035.dir/build
+make[1]: Entering directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1549762035.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=connect   -o CMakeFiles/cmTryCompileExec1549762035.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1549762035
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1549762035.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=connect    CMakeFiles/cmTryCompileExec1549762035.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1549762035 -rdynamic 
+make[1]: Leaving directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Determining if the function remove exists passed with the following output:
+Change Dir: /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2580624900/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2580624900.dir/build.make CMakeFiles/cmTryCompileExec2580624900.dir/build
+make[1]: Entering directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2580624900.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=remove   -o CMakeFiles/cmTryCompileExec2580624900.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec2580624900
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2580624900.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=remove    CMakeFiles/cmTryCompileExec2580624900.dir/CheckFunctionExists.c.o  -o cmTryCompileExec2580624900 -rdynamic 
+make[1]: Leaving directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Determining if the function shmat exists passed with the following output:
+Change Dir: /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec487387250/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec487387250.dir/build.make CMakeFiles/cmTryCompileExec487387250.dir/build
+make[1]: Entering directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec487387250.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=shmat   -o CMakeFiles/cmTryCompileExec487387250.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec487387250
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec487387250.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=shmat    CMakeFiles/cmTryCompileExec487387250.dir/CheckFunctionExists.c.o  -o cmTryCompileExec487387250 -rdynamic 
+make[1]: Leaving directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Determining if the function IceConnectionNumber exists in the ICE passed with the following output:
+Change Dir: /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2692522661/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2692522661.dir/build.make CMakeFiles/cmTryCompileExec2692522661.dir/build
+make[1]: Entering directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2692522661.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber   -o CMakeFiles/cmTryCompileExec2692522661.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec2692522661
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2692522661.dir/link.txt --verbose=1
+/usr/bin/gcc     -DCHECK_FUNCTION_EXISTS=IceConnectionNumber    CMakeFiles/cmTryCompileExec2692522661.dir/CheckFunctionExists.c.o  -o cmTryCompileExec2692522661 -rdynamic -lICE 
+make[1]: Leaving directory `/home/josef/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+The system is: Linux - 3.8.0-29-generic - i686
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/cc 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/2.8.10.1/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/c++ 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/2.8.10.1/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec4041809640/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec4041809640.dir/build.make CMakeFiles/cmTryCompileExec4041809640.dir/build
+make[1]: Entering directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec4041809640.dir/testCCompiler.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec4041809640.dir/testCCompiler.c.o   -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTryCompileExec4041809640
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4041809640.dir/link.txt --verbose=1
+/usr/bin/cc         CMakeFiles/cmTryCompileExec4041809640.dir/testCCompiler.c.o  -o cmTryCompileExec4041809640 -rdynamic 
+make[1]: Leaving directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3400232469/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3400232469.dir/build.make CMakeFiles/cmTryCompileExec3400232469.dir/build
+make[1]: Entering directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3400232469.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec3400232469.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c
+Linking C executable cmTryCompileExec3400232469
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3400232469.dir/link.txt --verbose=1
+/usr/bin/cc       -v CMakeFiles/cmTryCompileExec3400232469.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec3400232469 -rdynamic  
+Using built-in specs.
+COLLECT_GCC=/usr/bin/cc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/i686-linux-gnu/4.7/lto-wrapper
+Target: i686-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.7.3-1ubuntu1' --with-bugurl=file:///usr/share/doc/gcc-4.7/README.Bugs --enable-languages=c,c++,go,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.7 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.7 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --enable-plugin --with-system-zlib --enable-objc-gc --enable-targets=all --with-cloog --enable-cloog-backend=ppl --disable-cloog-version-check --disable-ppl-version-check --enable-multiarch --disable-werror --with-arch-32=i686 --with-multilib-list=m32,m64,mx32 --with-tune=generic --enable-checking=release --build=i686-linux-gnu --host=i686-linux-gnu --target=i686-linux-gnu
+Thread model: posix
+gcc version 4.7.3 (Ubuntu/Linaro 4.7.3-1ubuntu1) 
+COMPILER_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib/:/lib/i386-linux-gnu/:/lib/../lib/:/usr/lib/i386-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3400232469' '-rdynamic' '-mtune=generic' '-march=i686'
+ /usr/lib/gcc/i686-linux-gnu/4.7/collect2 --sysroot=/ --build-id --eh-frame-hdr -m elf_i386 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib/ld-linux.so.2 -z relro -o cmTryCompileExec3400232469 /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o /usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o -L/usr/lib/gcc/i686-linux-gnu/4.7 -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib -L/lib/i386-linux-gnu -L/lib/../lib -L/usr/lib/i386-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/i686-linux-gnu/4.7/../../.. CMakeFiles/cmTryCompileExec3400232469.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/i686-linux-gnu/4.7/crtend.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o
+make[1]: Leaving directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:/usr/bin/make "cmTryCompileExec3400232469/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec3400232469.dir/build.make CMakeFiles/cmTryCompileExec3400232469.dir/build]
+  ignore line: [make[1]: Entering directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp']
+  ignore line: [/usr/bin/cmake -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building C object CMakeFiles/cmTryCompileExec3400232469.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc    -o CMakeFiles/cmTryCompileExec3400232469.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-2.8/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTryCompileExec3400232469]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3400232469.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc       -v CMakeFiles/cmTryCompileExec3400232469.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec3400232469 -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/cc]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/i686-linux-gnu/4.7/lto-wrapper]
+  ignore line: [Target: i686-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.7.3-1ubuntu1' --with-bugurl=file:///usr/share/doc/gcc-4.7/README.Bugs --enable-languages=c,c++,go,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.7 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.7 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --enable-plugin --with-system-zlib --enable-objc-gc --enable-targets=all --with-cloog --enable-cloog-backend=ppl --disable-cloog-version-check --disable-ppl-version-check --enable-multiarch --disable-werror --with-arch-32=i686 --with-multilib-list=m32,m64,mx32 --with-tune=generic --enable-checking=release --build=i686-linux-gnu --host=i686-linux-gnu --target=i686-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.7.3 (Ubuntu/Linaro 4.7.3-1ubuntu1) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib/:/lib/i386-linux-gnu/:/lib/../lib/:/usr/lib/i386-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3400232469' '-rdynamic' '-mtune=generic' '-march=i686']
+  link line: [ /usr/lib/gcc/i686-linux-gnu/4.7/collect2 --sysroot=/ --build-id --eh-frame-hdr -m elf_i386 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib/ld-linux.so.2 -z relro -o cmTryCompileExec3400232469 /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o /usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o -L/usr/lib/gcc/i686-linux-gnu/4.7 -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib -L/lib/i386-linux-gnu -L/lib/../lib -L/usr/lib/i386-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/i686-linux-gnu/4.7/../../.. CMakeFiles/cmTryCompileExec3400232469.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/i686-linux-gnu/4.7/crtend.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o]
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/collect2] ==> ignore
+    arg [--sysroot=/] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_i386] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib/ld-linux.so.2] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec3400232469] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o] ==> ignore
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib]
+    arg [-L/lib/i386-linux-gnu] ==> dir [/lib/i386-linux-gnu]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/i386-linux-gnu] ==> dir [/usr/lib/i386-linux-gnu]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../..] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../..]
+    arg [CMakeFiles/cmTryCompileExec3400232469.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/crtend.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o] ==> ignore
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7] ==> [/usr/lib/gcc/i686-linux-gnu/4.7]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu] ==> [/usr/lib/i386-linux-gnu]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib] ==> [/usr/lib]
+  collapse dir [/lib/i386-linux-gnu] ==> [/lib/i386-linux-gnu]
+  collapse dir [/lib/../lib] ==> [/lib]
+  collapse dir [/usr/lib/i386-linux-gnu] ==> [/usr/lib/i386-linux-gnu]
+  collapse dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../..] ==> [/usr/lib]
+  implicit libs: [c]
+  implicit dirs: [/usr/lib/gcc/i686-linux-gnu/4.7;/usr/lib/i386-linux-gnu;/usr/lib;/lib/i386-linux-gnu;/lib]
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3871868742/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3871868742.dir/build.make CMakeFiles/cmTryCompileExec3871868742.dir/build
+make[1]: Entering directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3871868742.dir/testCXXCompiler.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec3871868742.dir/testCXXCompiler.cxx.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTryCompileExec3871868742
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3871868742.dir/link.txt --verbose=1
+/usr/bin/c++          CMakeFiles/cmTryCompileExec3871868742.dir/testCXXCompiler.cxx.o  -o cmTryCompileExec3871868742 -rdynamic 
+make[1]: Leaving directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3994908959/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3994908959.dir/build.make CMakeFiles/cmTryCompileExec3994908959.dir/build
+make[1]: Entering directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3994908959.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++     -o CMakeFiles/cmTryCompileExec3994908959.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTryCompileExec3994908959
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3994908959.dir/link.txt --verbose=1
+/usr/bin/c++        -v CMakeFiles/cmTryCompileExec3994908959.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec3994908959 -rdynamic  
+Using built-in specs.
+COLLECT_GCC=/usr/bin/c++
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/i686-linux-gnu/4.7/lto-wrapper
+Target: i686-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.7.3-1ubuntu1' --with-bugurl=file:///usr/share/doc/gcc-4.7/README.Bugs --enable-languages=c,c++,go,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.7 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.7 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --enable-plugin --with-system-zlib --enable-objc-gc --enable-targets=all --with-cloog --enable-cloog-backend=ppl --disable-cloog-version-check --disable-ppl-version-check --enable-multiarch --disable-werror --with-arch-32=i686 --with-multilib-list=m32,m64,mx32 --with-tune=generic --enable-checking=release --build=i686-linux-gnu --host=i686-linux-gnu --target=i686-linux-gnu
+Thread model: posix
+gcc version 4.7.3 (Ubuntu/Linaro 4.7.3-1ubuntu1) 
+COMPILER_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib/:/lib/i386-linux-gnu/:/lib/../lib/:/usr/lib/i386-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3994908959' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=i686'
+ /usr/lib/gcc/i686-linux-gnu/4.7/collect2 --sysroot=/ --build-id --eh-frame-hdr -m elf_i386 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib/ld-linux.so.2 -z relro -o cmTryCompileExec3994908959 /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o /usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o -L/usr/lib/gcc/i686-linux-gnu/4.7 -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib -L/lib/i386-linux-gnu -L/lib/../lib -L/usr/lib/i386-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/i686-linux-gnu/4.7/../../.. CMakeFiles/cmTryCompileExec3994908959.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/i686-linux-gnu/4.7/crtend.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o
+make[1]: Leaving directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:/usr/bin/make "cmTryCompileExec3994908959/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTryCompileExec3994908959.dir/build.make CMakeFiles/cmTryCompileExec3994908959.dir/build]
+  ignore line: [make[1]: Entering directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp']
+  ignore line: [/usr/bin/cmake -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec3994908959.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++     -o CMakeFiles/cmTryCompileExec3994908959.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-2.8/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTryCompileExec3994908959]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3994908959.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++        -v CMakeFiles/cmTryCompileExec3994908959.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec3994908959 -rdynamic  ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/c++]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/i686-linux-gnu/4.7/lto-wrapper]
+  ignore line: [Target: i686-linux-gnu]
+  ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu/Linaro 4.7.3-1ubuntu1' --with-bugurl=file:///usr/share/doc/gcc-4.7/README.Bugs --enable-languages=c,c++,go,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-4.7 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --with-gxx-include-dir=/usr/include/c++/4.7 --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --enable-gnu-unique-object --enable-plugin --with-system-zlib --enable-objc-gc --enable-targets=all --with-cloog --enable-cloog-backend=ppl --disable-cloog-version-check --disable-ppl-version-check --enable-multiarch --disable-werror --with-arch-32=i686 --with-multilib-list=m32,m64,mx32 --with-tune=generic --enable-checking=release --build=i686-linux-gnu --host=i686-linux-gnu --target=i686-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.7.3 (Ubuntu/Linaro 4.7.3-1ubuntu1) ]
+  ignore line: [COMPILER_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/i686-linux-gnu/4.7/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib/:/lib/i386-linux-gnu/:/lib/../lib/:/usr/lib/i386-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/i686-linux-gnu/4.7/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec3994908959' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=i686']
+  link line: [ /usr/lib/gcc/i686-linux-gnu/4.7/collect2 --sysroot=/ --build-id --eh-frame-hdr -m elf_i386 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib/ld-linux.so.2 -z relro -o cmTryCompileExec3994908959 /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o /usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o -L/usr/lib/gcc/i686-linux-gnu/4.7 -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu -L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib -L/lib/i386-linux-gnu -L/lib/../lib -L/usr/lib/i386-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/i686-linux-gnu/4.7/../../.. CMakeFiles/cmTryCompileExec3994908959.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/i686-linux-gnu/4.7/crtend.o /usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o]
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/collect2] ==> ignore
+    arg [--sysroot=/] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_i386] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [--as-needed] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib/ld-linux.so.2] ==> ignore
+    arg [-zrelro] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec3994908959] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crt1.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crti.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/crtbegin.o] ==> ignore
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib]
+    arg [-L/lib/i386-linux-gnu] ==> dir [/lib/i386-linux-gnu]
+    arg [-L/lib/../lib] ==> dir [/lib/../lib]
+    arg [-L/usr/lib/i386-linux-gnu] ==> dir [/usr/lib/i386-linux-gnu]
+    arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+    arg [-L/usr/lib/gcc/i686-linux-gnu/4.7/../../..] ==> dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../..]
+    arg [CMakeFiles/cmTryCompileExec3994908959.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/crtend.o] ==> ignore
+    arg [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu/crtn.o] ==> ignore
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7] ==> [/usr/lib/gcc/i686-linux-gnu/4.7]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../i386-linux-gnu] ==> [/usr/lib/i386-linux-gnu]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../../../lib] ==> [/usr/lib]
+  collapse dir [/lib/i386-linux-gnu] ==> [/lib/i386-linux-gnu]
+  collapse dir [/lib/../lib] ==> [/lib]
+  collapse dir [/usr/lib/i386-linux-gnu] ==> [/usr/lib/i386-linux-gnu]
+  collapse dir [/usr/lib/../lib] ==> [/usr/lib]
+  collapse dir [/usr/lib/gcc/i686-linux-gnu/4.7/../../..] ==> [/usr/lib]
+  implicit libs: [stdc++;m;c]
+  implicit dirs: [/usr/lib/gcc/i686-linux-gnu/4.7;/usr/lib/i386-linux-gnu;/usr/lib;/lib/i386-linux-gnu;/lib]
+
+
+Determining if the function XOpenDisplay exists in the /usr/lib/i386-linux-gnu/libX11.so;/usr/lib/i386-linux-gnu/libXext.so passed with the following output:
+Change Dir: /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec663901801/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec663901801.dir/build.make CMakeFiles/cmTryCompileExec663901801.dir/build
+make[1]: Entering directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec663901801.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay   -o CMakeFiles/cmTryCompileExec663901801.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec663901801
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec663901801.dir/link.txt --verbose=1
+/usr/bin/cc     -DCHECK_FUNCTION_EXISTS=XOpenDisplay    CMakeFiles/cmTryCompileExec663901801.dir/CheckFunctionExists.c.o  -o cmTryCompileExec663901801 -rdynamic -lX11 -lXext 
+make[1]: Leaving directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Determining if the function gethostbyname exists passed with the following output:
+Change Dir: /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3466730402/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3466730402.dir/build.make CMakeFiles/cmTryCompileExec3466730402.dir/build
+make[1]: Entering directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3466730402.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=gethostbyname   -o CMakeFiles/cmTryCompileExec3466730402.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3466730402
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3466730402.dir/link.txt --verbose=1
+/usr/bin/cc     -DCHECK_FUNCTION_EXISTS=gethostbyname    CMakeFiles/cmTryCompileExec3466730402.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3466730402 -rdynamic 
+make[1]: Leaving directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Determining if the function connect exists passed with the following output:
+Change Dir: /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1778793840/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1778793840.dir/build.make CMakeFiles/cmTryCompileExec1778793840.dir/build
+make[1]: Entering directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1778793840.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=connect   -o CMakeFiles/cmTryCompileExec1778793840.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1778793840
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1778793840.dir/link.txt --verbose=1
+/usr/bin/cc     -DCHECK_FUNCTION_EXISTS=connect    CMakeFiles/cmTryCompileExec1778793840.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1778793840 -rdynamic 
+make[1]: Leaving directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Determining if the function remove exists passed with the following output:
+Change Dir: /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec18140765/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec18140765.dir/build.make CMakeFiles/cmTryCompileExec18140765.dir/build
+make[1]: Entering directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec18140765.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=remove   -o CMakeFiles/cmTryCompileExec18140765.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec18140765
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec18140765.dir/link.txt --verbose=1
+/usr/bin/cc     -DCHECK_FUNCTION_EXISTS=remove    CMakeFiles/cmTryCompileExec18140765.dir/CheckFunctionExists.c.o  -o cmTryCompileExec18140765 -rdynamic 
+make[1]: Leaving directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Determining if the function shmat exists passed with the following output:
+Change Dir: /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec558709767/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec558709767.dir/build.make CMakeFiles/cmTryCompileExec558709767.dir/build
+make[1]: Entering directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec558709767.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=shmat   -o CMakeFiles/cmTryCompileExec558709767.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec558709767
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec558709767.dir/link.txt --verbose=1
+/usr/bin/cc     -DCHECK_FUNCTION_EXISTS=shmat    CMakeFiles/cmTryCompileExec558709767.dir/CheckFunctionExists.c.o  -o cmTryCompileExec558709767 -rdynamic 
+make[1]: Leaving directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+
+Determining if the function IceConnectionNumber exists in the ICE passed with the following output:
+Change Dir: /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3638247389/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3638247389.dir/build.make CMakeFiles/cmTryCompileExec3638247389.dir/build
+make[1]: Entering directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3638247389.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber   -o CMakeFiles/cmTryCompileExec3638247389.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3638247389
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3638247389.dir/link.txt --verbose=1
+/usr/bin/cc     -DCHECK_FUNCTION_EXISTS=IceConnectionNumber    CMakeFiles/cmTryCompileExec3638247389.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3638247389 -rdynamic -lICE 
+make[1]: Leaving directory `/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles/CMakeTmp'
+
+

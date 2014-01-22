@@ -1,0 +1,367 @@
+LOADING
+race 0
+esc none
+mouse 0
+clearButtons
+setBackground 1
+addButton img -1 text 8 21x75-60x30 NONE
+forceRender
+finish FINISH
+END
+
+RACE1
+include COMMONPRERACE
+set 0
+include COMMONPOSTRACE
+END
+
+RACE2
+include COMMONPRERACE
+set 1
+include COMMONPOSTRACE
+END
+
+RACE3
+include COMMONPRERACE
+set 2
+include COMMONPOSTRACE
+END
+
+RACE4
+include COMMONPRERACE
+set 3
+include COMMONPOSTRACE
+END
+
+RACE5
+include COMMONPRERACE
+set 4
+include COMMONPOSTRACE
+END
+
+RACE6
+include COMMONPRERACE
+set 5
+include COMMONPOSTRACE
+END
+
+RACE7
+include COMMONPRERACE
+set 6
+include COMMONPOSTRACE
+END
+
+RACE8
+include COMMONPRERACE
+set 7
+include COMMONPOSTRACE
+END
+
+RACE9
+include COMMONPRERACE
+set 8
+include COMMONPOSTRACE
+END
+
+RACE10
+include COMMONPRERACE
+set 9
+include COMMONPOSTRACE
+END
+
+RACE11
+include COMMONPRERACE
+set 10
+include COMMONPOSTRACE
+END
+
+RACE12
+include COMMONPRERACE
+set 11
+include COMMONPOSTRACE
+END
+
+RACE13
+include COMMONPRERACE
+set 12
+include COMMONPOSTRACE
+END
+
+RACE14
+include COMMONPRERACE
+set 13
+include COMMONPOSTRACE
+END
+
+RACE15
+include COMMONPRERACE
+set 14
+include COMMONPOSTRACE
+END
+
+RACE16
+include COMMONPRERACE
+set 15
+include COMMONPOSTRACE
+END
+
+RACE17
+include COMMONPRERACE
+set 16
+include COMMONPOSTRACE
+END
+
+RACE18
+include COMMONPRERACE
+set 17
+include COMMONPOSTRACE
+END
+
+RACE19
+include COMMONPRERACE
+set 18
+include COMMONPOSTRACE
+END
+
+RACE20
+include COMMONPRERACE
+set 19
+include COMMONPOSTRACE
+END
+
+RACE21
+include COMMONPRERACE
+set 20
+include COMMONPOSTRACE
+END
+
+RACE22
+include COMMONPRERACE
+set 21
+include COMMONPOSTRACE
+END
+
+RACE23
+include COMMONPRERACE
+set 22
+include COMMONPOSTRACE
+END
+
+RACE24
+include COMMONPRERACE
+set 23
+include COMMONPOSTRACE
+END
+
+RACE25
+include COMMONPRERACE
+set 24
+include COMMONPOSTRACE
+END
+
+RACE26
+include COMMONPRERACE
+set 25
+include COMMONPOSTRACE
+END
+
+RACE27
+include COMMONPRERACE
+set 26
+include COMMONPOSTRACE
+END
+
+RACE28
+include COMMONPRERACE
+set 27
+include COMMONPOSTRACE
+END
+
+RACE29
+include COMMONPRERACE
+set 28
+include COMMONPOSTRACE
+END
+
+RACE30
+include COMMONPRERACE
+set 29
+include COMMONPOSTRACE
+END
+
+RACE31
+include COMMONPRERACE
+set 30
+include COMMONPOSTRACE
+END
+
+RACE32
+include COMMONPRERACE
+set 31
+include COMMONPOSTRACE
+END
+
+RACE33
+include COMMONPRERACE
+set 32
+include COMMONPOSTRACE
+END
+
+RACE34
+include COMMONPRERACE
+set 33
+include COMMONPOSTRACE
+END
+
+RACE35
+include COMMONPRERACE
+set 34
+include COMMONPOSTRACE
+END
+
+RACE36
+include COMMONPRERACE
+set 35
+include COMMONPOSTRACE
+END
+
+COMMONPRERACE
+//musicStop
+include LOADING
+include LOADCAR
+END
+
+COMMONPOSTRACE
+setCfg 1
+loadScene
+set 6
+rnd
+plus 1
+//musicPlay
+getCfg 2
+//musicSetVolume
+clearButtons
+include HUD
+//timeout 300 GOTOHELL
+timeout -1 NONE
+race 1
+active 1
+locked 1
+wait 1
+setBackground 4
+forceRender
+wait 0.5
+setBackground 5
+forceRender
+wait 0.5
+setBackground 6
+forceRender
+locked 0
+wait 0.5
+include RESUMERACE2
+END
+
+GOTOHELL
+nav 5
+END
+
+RESUMERACE
+esc PAUSEMENU
+mouse 0
+fxFlyOut
+clearButtons
+include HUD
+race 1
+active 1
+locked 0
+END
+
+RESUMERACE2
+esc PAUSEMENU
+mouse 0
+clearButtons
+include HUD
+race 1
+active 1
+locked 0
+END
+
+HUD
+setBackground 3
+addButton img 7 mon 0 -1x-5-101x17 NONE
+addButton img 0 mon 1 34x8.5-0x0 NONE
+addButton img 0 mon 2 65x8.5-0x0 NONE
+addButton img 0 mon 3 84x8.5-0x0 NONE
+addButton img 0 mon 4 12x8.5-0x0 NONE
+addButton img -1 text 21 0.1x8.5-60x5 NONE
+addButton img 2 text 10 1x24-15x25 RESET
+addButton img 0 mon 5 45x20-0x0 NONE
+END
+
+RESTARTRACE2
+esc none
+//musicStop
+muteSound
+active 0
+getCfg 1
+mouse 0
+clearButtons
+addButton img 0 text 8 20x35-60x30 NONE
+forceRender
+include COMMONPOSTRACE
+END
+
+RESTARTRACE
+include COMMONPRERACE
+getCfg 1
+include COMMONPOSTRACE
+END
+
+MAINMENU3
+//musicStop
+set 0
+//musicPlay
+getCfg 2
+//musicSetVolume
+race 0
+include TESTMENU
+END
+
+FINISH
+esc MAINMENU3
+muteSound
+mouse 1
+active 0
+muteSound
+clearButtons
+ifEql 3 FINISH3
+ifEql 2 FINISH2
+ifEql 1 FINISH1
+addButton img 2 text 12 35x50-30x20 MAINMENU3
+fxFlyIn
+END
+
+UNLOCK
+getCfg 4
+plus 1
+setCfg 4
+saveCfg
+addButton img -1 text 11 10x35-0x0 NONE
+END
+
+FINISH1
+addButton img 2 text 24 10x20-80x60 NONE
+getCfg 1
+minusCfg 4
+ifEql 0 UNLOCK
+END
+
+FINISH2
+addButton img 2 text 25 10x20-80x60 NONE
+addButton img -1 text 23 10x35-0x0 NONE
+END
+
+FINISH3
+addButton img 2 text 26 10x20-80x60 NONE
+addButton img -1 text 23 10x35-0x0 NONE
+END

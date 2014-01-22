@@ -140,13 +140,7 @@ texture* getTexture(const char* filename, float alpha) {
 
     /// create new instance
     logi("Load texture:", filename);
-    if (strcmp(getExtension(filename), "bmp") == 0) {
-      texture* instance = new bmp24(filename, alpha);
-      instance->instanceCount = 1;
-      strcpy(instance->texturename, filename);
-      textures->push_back(instance);
-      return instance;
-    } else if (strcmp(getExtension(filename), "png") == 0) {
+    if (strcmp(getExtension(filename), "png") == 0) {
       texture* instance = new pngloader(filename, alpha);
       instance->instanceCount = 1;
       strcpy(instance->texturename, filename);

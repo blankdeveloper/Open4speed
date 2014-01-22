@@ -62,7 +62,6 @@ extern zip* APKArchive;             ///< APK archive instance
 #include "components/input/keyboard.h"
 
 #include "utils/io.h"
-#include "components/texture/bmp24.h"
 #include "components/texture/pngloader.h"
 #include "components/texture/pxxloader.h"
 #include "components/texture/rgb.h"

@@ -262,8 +262,7 @@ components/input/keyboard.cpp \
 components/input/airacer.cpp \
 components/input/aitraffic.cpp \
 components/interfaces/model.cpp \
-components/renderer/glphong.cpp \
-components/texture/bmp24.cpp \
+components/renderer/gles20.cpp \
 components/texture/pngloader.cpp \
 components/texture/pxxloader.cpp \
 components/texture/rgb.cpp \

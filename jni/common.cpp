@@ -10,11 +10,6 @@
 #include "stdafx.h"
 
 /**
- * @brief renderLightmap render lightmaps and exit when it is true
- */
-bool renderLightmap = false;
-
-/**
  * @brief The game resources
  */
 std::vector<char*> *carList;                                    ///< List of all cars
@@ -141,6 +136,7 @@ char *string = new char[1024];  ///< Temp string
 int testUniform = 1;            ///< Uniform for testing
 shader* overshader;             ///< Shader to be applied
 bool matrixLock = 0;            ///< Lock for replacing car matrices
+bool renderLightmap = false;    ///< Render lightmap mode enability
 
 int config[configSize];                      ///< Temporary config data
 std::vector<char*> *configText[configSize];  ///< Config texts

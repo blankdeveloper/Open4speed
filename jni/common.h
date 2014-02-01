@@ -151,6 +151,7 @@ extern float mtime;                                 ///< Time stamp
 extern int lastkey;                                 ///< Last pressed key keycode
 extern shader* overshader;                          ///< Shader to be applied
 extern bool matrixLock;                             ///< Lock for replacing car matrices
+extern bool renderLightmap;                         ///< Render lightmap mode enability
 
 extern physics *physic;     ///< Physical engine instance
 extern renderer *xrenderer; ///< Renderer instance

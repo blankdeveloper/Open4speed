@@ -472,62 +472,14 @@ void loadScene(std::vector<char*> *atributes) {
         }
     }
 
-#ifndef ANDROID
-    /// create lightmaps
-    if (renderLightmap) {
-        xrenderer->prepareLM(trackdata->getLMCount());
-        for (unsigned int i = 0; i < trackdata->edgesCount; i++) {
-
-            /// get light parameters
-            char param[128];
-            sprintf(param, "LIGHT%d", i);
-            std::vector<char*> *lights = getListEx(param, "lights.ini");
-            char* shadername = getConfigStr("shader", lights);
-
-            /// light is enabled
-            if (strlen(shadername) > 0) {
-                shader* lightShader = getShader(shadername);
-                xrenderer->light.u_light_diffuse = glm::vec4(getConfig("R", lights), getConfig("G", lights), getConfig("B", lights), 0);
-                xrenderer->light.u_light_cut = cos(getConfig("cut", lights) * 3.14 / 180.0);
-                xrenderer->light.u_light_spot_eff = getConfig("spot", lights);
-                xrenderer->light.u_light_att = glm::vec4(getConfig("att0", lights), getConfig("att1", lights), getConfig("att2", lights), 0);
-                xrenderer->light.u_near = getConfig("near", lights);
-
-                /// apply all lights
-                for (unsigned int x = 0; x < trackdata->edges[i].size() / 2; x++) {
-                    edge e = trackdata->edges[i][x];
-                    xrenderer->light.u_light = glm::vec4(e.bx, e.by, e.bz, 1);
-                    xrenderer->light.u_light_dir = glm::vec4(e.bx - e.ax, e.by - e.ay, e.bz - e.az, 0);
-                    xrenderer->renderLMLight(lightShader);
-                    printf("%d/%d\n", i, x);
-                }
-            }
-            delete shadername;
-        }
-
-        xrenderer->saveLMs();
-        printf("OK\n");
-        exit(0);
-
-        /// test light
-        xrenderer->light.u_light_diffuse = glm::vec4(4.0, 4.0, 2.0, 0);
-        xrenderer->light.u_light_cut = cos(90.0 * 3.14 / 180.0);
-        xrenderer->light.u_light_spot_eff = 0.5;
-        xrenderer->light.u_light_att = glm::vec4(0.01, 0.02, 0.03, 0);
-        xrenderer->light.u_light = glm::vec4(-101.40275f, 10.741825f, 430.6763f, 1);
-        xrenderer->light.u_light_dir = glm::vec4(0, 1, 0, 0);
-        xrenderer->renderLMLight(getShader("lightmap_spot"));
-        xrenderer->saveLMs();
-        renderLightmap = false;
-    }
-#endif
-
     /// load lightmaps
-    for (unsigned int i = 0; i < trackdata->models.size(); i++) {
-        char filename[256];
-        sprintf(filename, getConfigStr("lightmap", atributes), trackdata->models[i].lmIndex);
-        //sprintf(filename, "lightmap%d.png", trackdata->models[i].lmIndex);
-        trackdata->models[i].lightmap = getTexture(filename, 1.0);
+    if (!renderLightmap) {
+        for (unsigned int i = 0; i < trackdata->models.size(); i++) {
+            char filename[256];
+            sprintf(filename, getConfigStr("lightmap", atributes), trackdata->models[i].lmIndex);
+            //sprintf(filename, "lightmap%d.png", trackdata->models[i].lmIndex);
+            trackdata->models[i].lightmap = getTexture(filename, 1.0);
+        }
     }
 }
 

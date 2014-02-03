@@ -18,7 +18,6 @@ float camY;                     ///< Camera position y
 float camZ;                     ///< Camera position z
 
 int lmFilter = -1;              ///< Filtering of objects to render
-const int rttsize = 2048;       ///< RTT texture size
 texture *glslfont = 0;          ///< Font texture
 shader* gui_shader = 0;         ///< GUI shader
 shader* scene_shader = 0;       ///< Scene shader
@@ -756,6 +755,80 @@ void gles20::renderText(float x, float y, float layer, const char* text) {
 }
 
 /**
+ * @brief getLMPixels get raw pixels of lightmap
+ * @param i is index of lightmap
+ * @return raw pixels
+ */
+GLubyte* gles20::getLMPixels(int i) {
+
+    GLubyte* pixels = new GLubyte[rttsize * rttsize * 4];
+
+#ifndef ANDROID
+    GLubyte* pixels2 = new GLubyte[rttsize * rttsize * 4];
+
+    /// get pixels
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glBindTexture(GL_TEXTURE_2D, lm[i].rendertexture);
+    glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+    glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels2);
+
+    /// fill holes
+    for (int a = 0; a < rttsize; a++) {
+        for (int b = 0; b < rttsize; b++) {
+            if (pixels[(b * rttsize + a) * 4 + 3] < 128) {
+                for (int i = -1; i <= 1; i++) {
+                    for (int j = -1; j <= 1; j++) {
+                        if ((a + i >= 0) && (a + i < rttsize) && (b + j >= 0) && (b + j < rttsize)) {
+                            if (pixels[((b + j) * rttsize + a + i) * 4 + 3] > 128) {
+                                for (int k = 0; k < 3; k++) {
+                                    pixels[(b * rttsize + a) * 4 + k] = pixels[((b + j) * rttsize + a + i) * 4 + k];
+                                }
+                                pixels[(b * rttsize + a) * 4 + 3] = 128;
+                            }
+                        }
+                        if (pixels[(b * rttsize + a) * 4 + 3] == 128) {
+                            break;
+                        }
+                    }
+                    if (pixels[(b * rttsize + a) * 4 + 3] == 128) {
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    /// blur
+    for (int a = 0; a < rttsize; a++) {
+        for (int b = 0; b < rttsize; b++) {
+            for (int k = 0; k < 3; k++) {
+                int count = 1;
+                int value = pixels[(b * rttsize + a) * 4 + k];
+                for (int i = -1; i <= 1; i++) {
+                    for (int j = -1; j <= 1; j++) {
+                        if ((b + j >= 0) && (b + j < rttsize))
+                            if ((a + i >= 0) && (a + i < rttsize))
+                                if (pixels[((b + j) * rttsize + a + i) * 4 + 3] > 128) {
+                                    count++;
+                                    value += pixels2[((b + j) * rttsize + a + i) * 4 + k];
+                                }
+                    }
+                }
+                pixels[(b * rttsize + a) * 4 + k] = value / count;
+            }
+        }
+    }
+
+    /// fix alpha channel
+    for (int a = 0; a < rttsize * rttsize; a++) {
+        pixels[a * 4 + 3] = 255;
+    }
+    delete[] pixels2;
+#endif
+    return pixels;
+}
+
+/**
  * @brief prepareLM prepare rendering of lightmaps
  * @param count is amount of lightmaps
  */
@@ -778,9 +851,8 @@ void gles20::prepareLM(int count) {
         lm[i].width = lm[i].res;
         lm[i].height = lm[i].res;
         initRTT(&lm[i]);
-        setRTT(&lm[i], 0);
-        setRTT(&lm[i], 1);
     }
+    resetLM(count);
 }
 
 /**
@@ -854,6 +926,16 @@ void gles20::renderLMLight(shader* lightrenderer) {
 }
 
 /**
+ * @brief resetLM clear lightmaps
+ * @param count is amount of lightmaps
+ */
+void gles20::resetLM(int count) {
+    for (int i = 0; i < count; i++) {
+        setRTT(&lm[i], 0);
+    }
+}
+
+/**
  * @brief saveLMs save lightmap into file
  */
 void gles20::saveLMs() {
@@ -861,65 +943,8 @@ void gles20::saveLMs() {
     /// save lightmap into file
     for (int i = 0; i < trackdata->getLMCount(); i++) {
 
-        /// get pixels
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        GLubyte* pixels = new GLubyte[rttsize * rttsize * 4];
-        GLubyte* pixels2 = new GLubyte[rttsize * rttsize * 4];
-        glBindTexture(GL_TEXTURE_2D, lm[i].rendertexture);
-        glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-        glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels2);
-
-        /// fill holes
-        for (int a = 0; a < rttsize; a++) {
-            for (int b = 0; b < rttsize; b++) {
-                if (pixels[(b * rttsize + a) * 4 + 3] < 128) {
-                    for (int i = -1; i <= 1; i++) {
-                        for (int j = -1; j <= 1; j++) {
-                            if ((a + i >= 0) && (a + i < rttsize) && (b + j >= 0) && (b + j < rttsize)) {
-                                if (pixels[((b + j) * rttsize + a + i) * 4 + 3] > 128) {
-                                    for (int k = 0; k < 3; k++) {
-                                        pixels[(b * rttsize + a) * 4 + k] = pixels[((b + j) * rttsize + a + i) * 4 + k];
-                                    }
-                                    pixels[(b * rttsize + a) * 4 + 3] = 128;
-                                }
-                            }
-                            if (pixels[(b * rttsize + a) * 4 + 3] == 128) {
-                                break;
-                            }
-                        }
-                        if (pixels[(b * rttsize + a) * 4 + 3] == 128) {
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        /// blur
-        for (int a = 0; a < rttsize; a++) {
-            for (int b = 0; b < rttsize; b++) {
-                for (int k = 0; k < 3; k++) {
-                    int count = 1;
-                    int value = pixels[(b * rttsize + a) * 4 + k];
-                    for (int i = -1; i <= 1; i++) {
-                        for (int j = -1; j <= 1; j++) {
-                            if ((b + j >= 0) && (b + j < rttsize))
-                                if ((a + i >= 0) && (a + i < rttsize))
-                                    if (pixels[((b + j) * rttsize + a + i) * 4 + 3] > 128) {
-                                        count++;
-                                        value += pixels2[((b + j) * rttsize + a + i) * 4 + k];
-                                    }
-                        }
-                    }
-                    pixels[(b * rttsize + a) * 4 + k] = value / count;
-                }
-            }
-        }
-
-        /// fix alpha channel
-        for (int a = 0; a < rttsize * rttsize; a++) {
-            pixels[a * 4 + 3] = 255;
-        }
+        /// get raw texture
+        GLubyte* pixels = getLMPixels(i);
 
         /// write file
         char filename[256];
@@ -928,7 +953,6 @@ void gles20::saveLMs() {
 
         /// delete arrays
         delete[] pixels;
-        delete[] pixels2;
     }
 #endif
 }

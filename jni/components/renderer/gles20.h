@@ -160,6 +160,21 @@ public:
     void renderModel(model* m);
 
     /**
+     * @brief renderSubModel renders model into scene
+     * @param m is instance of model to render
+     * @param physic is physical model instance
+     * @param gamma is requested render gamma
+     */
+    void renderSubModel(model* mod, model3d *m);
+
+    /**
+     * @brief getLMPixels get raw pixels of lightmap
+     * @param i is index of lightmap
+     * @return raw pixels
+     */
+    GLubyte* getLMPixels(int i);
+
+    /**
      * @brief prepareLM prepare rendering of lightmaps
      * @param count is amount of lightmaps
      */
@@ -172,18 +187,15 @@ public:
     void renderLMLight(shader* lightrenderer);
 
     /**
-     * @brief renderLMLight render light into lightmap
-     * @param lightrenderer is shader to use
+     * @brief resetLM clear lightmaps
+     * @param count is amount of lightmaps
      */
-    void saveLMs();
+    void resetLM(int count);
 
     /**
-     * @brief renderSubModel renders model into scene
-     * @param m is instance of model to render
-     * @param physic is physical model instance
-     * @param gamma is requested render gamma
+     * @brief saveLMs save lightmap into file
      */
-    void renderSubModel(model* mod, model3d *m);
+    void saveLMs();
 
     /**
      * @brief renderText renders text in GUI mode

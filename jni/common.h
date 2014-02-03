@@ -152,6 +152,7 @@ extern int lastkey;                                 ///< Last pressed key keycod
 extern shader* overshader;                          ///< Shader to be applied
 extern bool matrixLock;                             ///< Lock for replacing car matrices
 extern bool renderLightmap;                         ///< Render lightmap mode enability
+const int rttsize = 2048;                           ///< RTT texture size
 
 extern physics *physic;     ///< Physical engine instance
 extern renderer *xrenderer; ///< Renderer instance

@@ -9,6 +9,25 @@
 
 #include "stdafx.h"
 
+#define LIGHTMAP_PER_LIGHT
+
+struct LMPixel {
+    float x;
+    float y;
+    float intensity;
+};
+
+struct LightParam {
+    int begin;
+    int len;
+    float r;
+    float g;
+    float b;
+};
+
+std::vector<LMPixel> *outputVBO;
+std::vector<LightParam> *lightInfo;
+
 /**
  * @brief display updates display
  */
@@ -16,7 +35,7 @@ void display(void) {
 
     if (syntaxList->empty()) {
         if (trackdata == 0) {
-            syntaxList = getList("RACE1");
+            syntaxList = getList("RACE2");
         } else {
             xrenderer->prepareLM(trackdata->getLMCount());
             for (int i = 0; i < trackdata->edgesCount; i++) {
@@ -27,8 +46,8 @@ void display(void) {
                 std::vector<char*> *lights = getListEx(param, "lights.ini");
                 char* shadername = getConfigStr("shader", lights);
 
-                /// light is enabled
-                if (strlen(shadername) > 0) {
+                /// light is enabled and it is not able to dynamicly disable it
+                if ((strlen(shadername) > 0)  && (getConfig("blink", lights) == 0)) {
                     shader* lightShader = getShader(shadername);
                     xrenderer->light.u_light_diffuse = glm::vec4(getConfig("R", lights), getConfig("G", lights), getConfig("B", lights), 0);
                     xrenderer->light.u_light_cut = cos(getConfig("cut", lights) * 3.14 / 180.0);
@@ -47,8 +66,94 @@ void display(void) {
                 }
                 delete shadername;
             }
-
             xrenderer->saveLMs();
+
+            /// dynamicly controlable lights
+            outputVBO = new std::vector<LMPixel>[trackdata->getLMCount()];
+            lightInfo = new std::vector<LightParam>[trackdata->getLMCount()];
+            int* count = new int[trackdata->getLMCount()];
+            for (int i = 0; i < trackdata->getLMCount(); i++) {
+                count[i] = 0;
+            }
+            for (int i = 0; i < trackdata->edgesCount; i++) {
+
+                /// get light parameters
+                char param[128];
+                sprintf(param, "LIGHT%d", i);
+                std::vector<char*> *lights = getListEx(param, "lights.ini");
+                char* shadername = getConfigStr("shader", lights);
+
+                /// light is enabled and it is able to dynamicly disable it
+                if ((strlen(shadername) > 0)  && (getConfig("blink", lights) > 0)) {
+                    shader* lightShader = getShader(shadername);
+                    xrenderer->light.u_light_diffuse = glm::vec4(getConfig("R", lights), getConfig("G", lights), getConfig("B", lights), 0);
+                    xrenderer->light.u_light_cut = cos(getConfig("cut", lights) * 3.14 / 180.0);
+                    xrenderer->light.u_light_spot_eff = getConfig("spot", lights);
+                    xrenderer->light.u_light_att = glm::vec4(getConfig("att0", lights), getConfig("att1", lights), getConfig("att2", lights), 0);
+                    xrenderer->light.u_near = getConfig("near", lights);
+
+                    /// apply all lights
+                    for (unsigned int x = 0; x < trackdata->edges[i].size() / 2; x++) {
+
+                        /// get power color
+                        int highIndex = 0;
+                        float highVal = getConfig("R", lights);
+                        if (highVal < getConfig("G", lights)) {
+                            highIndex = 1;
+                            highVal = getConfig("G", lights);
+                        }
+                        if (highVal < getConfig("B", lights)) {
+                            highIndex = 2;
+                            highVal = getConfig("B", lights);
+                        }
+                        xrenderer->resetLM(trackdata->getLMCount());
+
+                        edge e = trackdata->edges[i][x];
+                        xrenderer->light.u_light = glm::vec4(e.bx, e.by, e.bz, 1);
+                        xrenderer->light.u_light_dir = glm::vec4(e.bx - e.ax, e.by - e.ay, e.bz - e.az, 0);
+                        xrenderer->renderLMLight(lightShader);
+                        printf("%d/%d\n", i, x);
+
+                        /// get texels
+                        for (int y = 0; y < trackdata->getLMCount(); y++) {
+                            int oldCount = count[y];
+                            GLubyte* pixels = xrenderer->getLMPixels(y);
+                            for (int a = 0; a < rttsize; a++) {
+                                for (int b = 0; b < rttsize; b++) {
+                                    int index = (b * rttsize + a) * 4 + highIndex;
+                                    if (pixels[index] > 0) {
+                                        outputVBO[y].push_back({a / (float)rttsize, b / (float)rttsize, pixels[index] / 255.0f / highVal});
+                                        count[y]++;
+                                    }
+                                }
+                            }
+
+
+                            /// add info about light
+                            lightInfo[y].push_back({oldCount, count[y] - oldCount, getConfig("R", lights), getConfig("G", lights), getConfig("B", lights)});
+                        }
+                    }
+                }
+                delete shadername;
+            }
+
+            /// write data
+            FILE* file = fopen(prefix("lights.vbo"), "w");
+            fprintf(file,"%d\n", trackdata->getLMCount());
+            fprintf(file,"%d\n", lightInfo[0].size());
+            for (unsigned int i = 0; i < lightInfo[0].size(); i++) {
+                for (int y = 0; y < trackdata->getLMCount(); y++) {
+                    fprintf(file,"%d %d %f %f %f\n", lightInfo[y][i].begin, lightInfo[y][i].len, lightInfo[y][i].r, lightInfo[y][i].g, lightInfo[y][i].b);
+                }
+            }
+            for (int y = 0; y < trackdata->getLMCount(); y++) {
+                fprintf(file,"%d\n", outputVBO[y].size());
+                for (unsigned int i = 0; i < outputVBO[y].size(); i++) {
+                    fprintf(file,"%f %f %f\n", outputVBO[y][i].x, outputVBO[y][i].y, outputVBO[y][i].intensity);
+                }
+            }
+            fclose(file);
+
             printf("OK\n");
             exit(0);
         }

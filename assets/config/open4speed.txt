@@ -85,7 +85,7 @@ END
 
 INIT
 esc NONE
-debug 1
+debug 0
 addImage gfx/logo.png
 getCfg 5
 detail

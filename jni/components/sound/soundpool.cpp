@@ -54,11 +54,9 @@ void soundpool::close() {
  */
 void soundpool::play(int index) {
 #ifdef ANDROID
-    if (index == 0) {
-        jclass clazz = instance->FindClass("com/lvonasek/o4s/Sounds");
-        jmethodID method = instance->GetStaticMethodID(clazz, "soundPlay", "(II)V");
-        instance->CallStaticVoidMethod(clazz, method, id, (int)looping);
-    }
+    jclass clazz = instance->FindClass("com/lvonasek/o4s/Sounds");
+    jmethodID method = instance->GetStaticMethodID(clazz, "soundPlay", "(II)V");
+    instance->CallStaticVoidMethod(clazz, method, id * 8 + index, (int)looping);
 #endif
 }
 
@@ -69,11 +67,9 @@ void soundpool::play(int index) {
  */
 void soundpool::setFrequency(int index, float hz) {
 #ifdef ANDROID
-    if (index == 0) {
-        jclass clazz = instance->FindClass("com/lvonasek/o4s/Sounds");
-        jmethodID method = instance->GetStaticMethodID(clazz, "soundFreq", "(IF)V");
-        instance->CallStaticVoidMethod(clazz, method, id, (float)(hz/50000.0+0.2));
-    }
+    jclass clazz = instance->FindClass("com/lvonasek/o4s/Sounds");
+    jmethodID method = instance->GetStaticMethodID(clazz, "soundFreq", "(IF)V");
+    instance->CallStaticVoidMethod(clazz, method, id * 8 + index, (float)(hz/50000.0+0.2));
 #endif
 }
 
@@ -93,11 +89,9 @@ void soundpool::setPan(int index, float pan) {
  */
 void soundpool::setVolume(int index, float volume) {
 #ifdef ANDROID
-    if (index == 0) {
-        jclass clazz = instance->FindClass("com/lvonasek/o4s/Sounds");
-        jmethodID method = instance->GetStaticMethodID(clazz, "soundVolume", "(IF)V");
-        instance->CallStaticVoidMethod(clazz, method, id, volume);
-    }
+    jclass clazz = instance->FindClass("com/lvonasek/o4s/Sounds");
+    jmethodID method = instance->GetStaticMethodID(clazz, "soundVolume", "(IF)V");
+    instance->CallStaticVoidMethod(clazz, method, id * 8 + index, volume);
 #endif
 }
 
@@ -107,10 +101,8 @@ void soundpool::setVolume(int index, float volume) {
  */
 void soundpool::stop(int index) {
 #ifdef ANDROID
-    if (index == 0) {
-        jclass clazz = instance->FindClass("com/lvonasek/o4s/Sounds");
-        jmethodID method = instance->GetStaticMethodID(clazz, "soundStop", "(I)V");
-        instance->CallStaticVoidMethod(clazz, method, id);
-    }
+    jclass clazz = instance->FindClass("com/lvonasek/o4s/Sounds");
+    jmethodID method = instance->GetStaticMethodID(clazz, "soundStop", "(I)V");
+    instance->CallStaticVoidMethod(clazz, method, id * 8 + index);
 #endif
 }

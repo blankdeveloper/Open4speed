@@ -69,10 +69,13 @@ public class Sounds {
             try {
                 //unzip file(Android java access)
                 AssetFileDescriptor afd = O4SActivity.mO4SActivity.getAssets().openFd(filename);
-                //get id
-                Integer id = snd.load(afd, 1);
-                //add into list of sounds
-                list.add(new Sound(id, 1, 0));
+                //use 8 channels per sample - change of channels amount have to be done in C++ too
+                for (int i = 0; i < 8; i++) {
+                    //get id
+                    Integer id = snd.load(afd, 1);
+                    //add into list of sounds
+                    list.add(new Sound(id, 1, 0));
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

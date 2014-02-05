@@ -283,7 +283,7 @@ void displayScene() {
         /// find nearest light
         xrenderer->light.u_nearest1 = glm::vec4(99999,99999,99999,99999);
         glm::vec4 carPos = glm::vec4(allCar[i]->transform->value[12], allCar[i]->transform->value[13], allCar[i]->transform->value[14], 1);
-        for (int j = !lamp[xrenderer->frame % 100]; j < trackdata->edgesCount; j++) {
+        for (int j = 1; j < trackdata->edgesCount; j++) {
             for (unsigned int x = 0; x < trackdata->edges[j].size() / 2; x++) {
                 edge e = trackdata->edges[j][x];
                 glm::vec4 pos = glm::vec4(e.bx, e.by, e.bz, 1);
@@ -333,7 +333,7 @@ void displayScene() {
     xrenderer->enable[0] = true;
 
     /// render smoke effects
-    /*if (water == 0) {
+    if (water == 0) {
         water = getModel("gfx/water.o4s", false);
         for (int i = 0; i < effLen; i++) {
             eff[i] = *(new Dynamic());
@@ -347,7 +347,7 @@ void displayScene() {
             water->models[0].texture2D->setFrame(eff[k].frame);
             xrenderer->renderDynamic(eff[k].vertices, eff[k].coords, water->models[0].material, water->models[0].texture2D, eff[k].count / 3);
         }
-    }*/
+    }
 
     // render RTT
     xrenderer->setRTT(&xrenderer->rtt[xrenderer->oddFrame], 1);
@@ -365,7 +365,7 @@ void displayScene() {
 
 
     // update water
-    /*eff[currentFrame].count = 0;
+    eff[currentFrame].count = 0;
     for (int i = carCount - 1; i >= 0; i--) {
         for (int j = 1; j <= 4; j++) {
             if (active) {
@@ -399,7 +399,7 @@ void displayScene() {
         if (currentFrame >= effLen) {
             currentFrame = 0;
         }
-    }*/
+    }
 }
 
 /**

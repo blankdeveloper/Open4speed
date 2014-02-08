@@ -18,7 +18,7 @@
 class pxxloader : public texture {
 public:
 
-    std::vector<pngloader*> anim;   ///< Animation images
+    std::vector<gltexture*> anim;   ///< Animation images
     unsigned int currentFrame;      ///< Current image
     unsigned int currentMultiFrame; ///< Replying frames state
     unsigned int multiFrame;        ///< Replying frames amount

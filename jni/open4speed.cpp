@@ -354,7 +354,7 @@ int main(int argc, char** argv) {
         glutInitWindowSize(960,640);
         glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
         glutCreateWindow("Open4speed");
-        glutFullScreen();
+        //glutFullScreen();
     }
 
     /// set handlers

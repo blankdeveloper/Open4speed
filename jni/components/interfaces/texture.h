@@ -24,6 +24,13 @@ public:
     char texturename[256];  ///< Texture filename
     unsigned int textureID; ///< Texture id
 
+
+    bool animated;                  ///< True if it is texture sequence
+    std::vector<texture*> anim;     ///< Animation images
+    unsigned int currentFrame;      ///< Current image
+    unsigned int currentMultiFrame; ///< Replying frames state
+    unsigned int multiFrame;        ///< Replying frames amount
+
     /**
      * @brief destruct removes texture from memory is there is no more instance
      */

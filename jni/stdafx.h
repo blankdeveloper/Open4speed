@@ -62,12 +62,13 @@ extern zip* APKArchive;             ///< APK archive instance
 #include "components/input/keyboard.h"
 
 #include "utils/io.h"
+#include "components/texture/rgb.h"
+#include "components/model/modelo4s.h"
+#include "components/renderer/opengl/gles20.h"
+#include "components/renderer/opengl/glsl.h"
+#include "components/renderer/opengl/gltexture.h"
 #include "components/texture/pngloader.h"
 #include "components/texture/pxxloader.h"
-#include "components/texture/rgb.h"
-#include "components/shader/glsl.h"
-#include "components/model/modelo4s.h"
-#include "components/renderer/gles20.h"
 
 #include "utils/engine.h"
 #include "utils/math.h"

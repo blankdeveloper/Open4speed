@@ -21,24 +21,32 @@ void rgb::pointerDecrease() {
 
 /**
  * @brief rgb creates texture from color
+ * @param width is image width
+ * @param height is image height
  * @param r is red color value
  * @param g is green color value
  * @param b is blue color value
  * @param alpha is amount of blending
  */
-rgb::rgb(float r, float g, float b, float alpha) {
+rgb::rgb(int width, int height, float r, float g, float b, float alpha) {
     /// define variables for texture
+    int index = 0;
     int sizeX;
     int sizeY;
     char* data;
 
     /// create color pixel
-    sizeX = sizeY = 1;
-    data = new char[(int)1 * 4];
-    data[0] = (int)(255 * r);
-    data[1] = (int)(255 * g);
-    data[2] = (int)(255 * b);
-    data[3] = (int)(255 * 1);
+    sizeX = width;
+    sizeY = height;
+    data = new char[(int)sizeX * sizeY * 4];
+    for (int x = 0; x < sizeX; x++)
+        for (int y = 0; y < sizeY; y++) {
+            data[0 + index] = (int)(255 * r);
+            data[1 + index] = (int)(255 * g);
+            data[2 + index] = (int)(255 * b);
+            data[3 + index] = (int)(255 * 1);
+            index += 4;
+        }
 
     /// create texture
     this->alpha = alpha;
@@ -60,8 +68,8 @@ rgb::rgb(float r, float g, float b, float alpha) {
 
     instanceCount = 1;
     texturename[0] = '\0';
-    twidth = 1;
-    theight = 1;
+    twidth = width;
+    theight = height;
 }
 
 /**

@@ -28,7 +28,7 @@ void pxxloader::pointerDecrease() {
  * @param alpha is amount of blending
  */
 pxxloader::pxxloader(const char* filename, float alpha) {
-    anim = *(new std::vector<pngloader*>());
+    /*anim = *(new std::vector<pngloader*>());
     currentFrame = 0;
     currentMultiFrame = 0;
 
@@ -53,7 +53,7 @@ pxxloader::pxxloader(const char* filename, float alpha) {
     if (anim.size() < 10)
         multiFrame = 3;
     if (multiFrame < 1)
-        multiFrame = 1;
+        multiFrame = 1;*/
 }
 
 /**

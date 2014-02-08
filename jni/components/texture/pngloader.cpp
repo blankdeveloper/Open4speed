@@ -9,21 +9,6 @@
 
 #include "stdafx.h"
 
-/**
- * @brief destruct removes texture from memory is there is no more instance
- */
-void pngloader::pointerDecrease() {
-  instanceCount--;
-  if (instanceCount == 0) {
-    glDeleteTextures(1, &textureID);
-    for (unsigned int i = 0; i < textures->size(); i++) {
-        if (strcmp(texturename, (*textures)[i]->texturename) == 0) {
-            (*textures).erase(textures->begin() + i);
-        }
-    }
-  }
-}
-
 #ifdef ZIP_ARCHIVE
 zip_file* file;
 
@@ -37,46 +22,13 @@ void png_read(png_structp png_ptr, png_bytep data, png_size_t length) {
 }
 #endif
 
-char* extList;
-
-int isExtensionSupported(const char *extension) {
-
-  const char *start;
-  const char *where, *terminator;
-
-  /* Extension names should not have spaces. */
-  where = strchr(extension, ' ');
-  if ( where || *extension == '\0' )
-    return 0;
-
-  /* It takes a bit of care to be fool-proof about parsing the
-     OpenGL extensions string. Don't be fooled by sub-strings,
-     etc. */
-  for ( start = extList; ; ) {
-    where = strstr( start, extension );
-
-    if ( !where )
-      break;
-
-    terminator = where + strlen( extension );
-
-    if ( where == start || *(where - 1) == ' ' )
-      if ( *terminator == ' ' || *terminator == '\0' )
-        return 1;
-
-    start = terminator;
-  }
-
-  return 0;
-}
-
 /**
  * @brief pngloader loads texture from png file
  * @param filename is name of file
  * @param alpha is amount of blending
  */
-pngloader::pngloader(const char* filename, float alpha) {
-  //extList = (char*)glGetString(GL_EXTENSIONS);
+Texture* loadPNG(const char* filename) {
+  Texture* texture = new Texture();
   unsigned int sig_read = 0;
 #ifdef ZIP_ARCHIVE
   file = zip_fopen(APKArchive, prefix(filename), 0);
@@ -96,21 +48,22 @@ pngloader::pngloader(const char* filename, float alpha) {
   png_get_IHDR(png_ptr, info_ptr, &width, &height, &bit_depth, &color_type, &interlace_type, NULL, NULL);
 
   /// get PNG type
+  texture->hasAlpha = true;
   switch (color_type) {
       case PNG_COLOR_TYPE_RGBA:
-          alpha = true;
+          texture->hasAlpha = true;
           break;
       case PNG_COLOR_TYPE_RGB:
-          alpha = false;
+          texture->hasAlpha = false;
           break;
   }
 
   /// load PNG
   unsigned int row_bytes = png_get_rowbytes(png_ptr, info_ptr);
-  GLubyte *outData = new GLubyte[row_bytes * height];
+  texture->data = new char[row_bytes * height];
   png_bytepp row_pointers = png_get_rows(png_ptr, info_ptr);
   for (unsigned int i = 0; i < height; i++) {
-      memcpy(outData+(row_bytes * (height-1-i)), row_pointers[i], row_bytes);
+      memcpy(texture->data+(row_bytes * (height-1-i)), row_pointers[i], row_bytes);
   }
 
   /* Clean up after the read,
@@ -122,69 +75,10 @@ pngloader::pngloader(const char* filename, float alpha) {
   fclose(fp);
 #endif
 
-  /// set texture into OpenGL
-  transparent = alpha;
-  glGenTextures(1, &textureID);
-  glEnable(GL_TEXTURE_2D);
-  glActiveTexture(GL_TEXTURE0);
-  glBindTexture(GL_TEXTURE_2D, textureID);
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-  glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 
-/*
-#ifdef ANDROID
-  if (isExtensionSupported("GL_IMG_texture_compression_pvrtc")) {
-      //Use PVR compressed textures
-      if (alpha) {
-          glTexImage2D(GL_TEXTURE_2D, 0, GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, outData);
-      } else {
-          glTexImage2D(GL_TEXTURE_2D, 0, GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, outData);
-      }
-  } else if (isExtensionSupported("GL_AMD_compressed_ATC_texture")) {
-      //Load ATI Textures
-      if (alpha) {
-          glTexImage2D(GL_TEXTURE_2D, 0, GL_ATC_RGBA_EXPLICIT_ALPHA_AMD, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, outData);
-      } else {
-          glTexImage2D(GL_TEXTURE_2D, 0, GL_ATC_RGBA_EXPLICIT_ALPHA_AMD, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, outData);
-      }
-  } else
-#endif
-  if (isExtensionSupported("GL_EXT_texture_compression_s3tc")) {
-      //Use DTX Textures
-      if (alpha) {
-          glTexImage2D(GL_TEXTURE_2D, 0, GL_COMPRESSED_RGBA_S3TC_DXT1_EXT, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, outData);
-      } else {
-          glTexImage2D(GL_TEXTURE_2D, 0, GL_COMPRESSED_RGBA_S3TC_DXT1_EXT, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, outData);
-      }
-  } else {*/
-      //Handle no texture compression founded.
-      if (alpha) {
-          glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, outData);
-      } else {
-          glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, outData);
-      }
-/*      printf("Uncompressed texture!\n");
-  }*/
-
-  twidth = width;
-  theight = height;
-  delete[] outData;
-}
-
-/**
- * @brief apply applies current texture
- */
-void pngloader::apply() {
-    glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, textureID);
-}
-
-/**
- * @brief setFrame set frame of animation
- * @param frame is index of frame
- */
-void pngloader::setFrame(int frame) {
-
+  texture->width = width;
+  texture->height = height;
+  return texture;
 }
 
 /**

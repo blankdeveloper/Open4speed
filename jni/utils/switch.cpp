@@ -101,7 +101,7 @@ shader* getShader(const char* name) {
         shaders->push_back(instance);
         return instance;
     }
-    loge("Renderer incompatible shader", "");
+    loge("Renderer incompatible shader:", name);
     return 0;
 }
 
@@ -140,20 +140,39 @@ texture* getTexture(const char* filename, float alpha) {
 
     /// create new instance
     logi("Load texture:", filename);
-    if (strcmp(getExtension(filename), "png") == 0) {
-      texture* instance = new pngloader(filename, alpha);
-      instance->instanceCount = 1;
-      strcpy(instance->texturename, filename);
-      textures->push_back(instance);
-      return instance;
-    } else if (getExtension(filename)[0] == 'p') {
-        texture* instance = new pxxloader(filename, alpha);
-        instance->instanceCount = 1;
-        strcpy(instance->texturename, filename);
-        textures->push_back(instance);
-        return instance;
+    if (strcmp(screenRenderer, "glsl") == 0) {
+        if (strcmp(getExtension(filename), "png") == 0) {
+          texture* instance = new gltexture(*loadPNG(filename), alpha);
+          instance->instanceCount = 1;
+          strcpy(instance->texturename, filename);
+          textures->push_back(instance);
+          return instance;
+        } else if (getExtension(filename)[0] == 'p') {
+
+            /// get animation frame count
+            char* ext = getExtension(filename);
+            int count = (ext[1] - '0') * 10 + ext[2] - '0';
+            char file[strlen(filename)];
+            strcpy(file, filename);
+
+            /// load all sequence images
+            std::vector<texture*> anim = *(new std::vector<texture*>());
+            for (int i = 0; i <= count; i++) {
+                file[strlen(filename) - 1] = i % 10 + '0';
+                file[strlen(filename) - 2] = i / 10 + '0';
+                anim.push_back(new gltexture(*loadPNG(file), alpha));
+                anim[anim.size() - 1]->instanceCount = 1;
+                anim[anim.size() - 1]->texturename[0] = '\0';
+            }
+
+            texture* instance = new gltexture(anim, alpha);
+            instance->instanceCount = 1;
+            strcpy(instance->texturename, filename);
+            textures->push_back(instance);
+            return instance;
+        }
     }
 
-    logi("File is not supported:",filename);
+    logi("Renderer incompatible texture:",filename);
     return gray;
 }

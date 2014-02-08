@@ -13,34 +13,11 @@
 #include "stdafx.h"
 
 /**
- * @brief The pngloader class is png texture loader
+ * @brief bmp24 loads texture from png file
+ * @param filename is name of file
+ * @return texture instance
  */
-class pngloader : public texture {
-public:
-
-    /**
-     * @brief destruct removes texture from memory is there is no more instance
-     */
-    void pointerDecrease();
-
-    /**
-     * @brief bmp24 loads texture from png file
-     * @param filename is name of file
-     * @param alpha is amount of blending
-     */
-    pngloader(const char* filename, float alpha);
-
-    /**
-     * @brief apply applies current texture
-     */
-    void apply();
-
-    /**
-     * @brief setFrame set frame of animation
-     * @param frame is index of frame
-     */
-    void setFrame(int frame);
-};
+Texture* loadPNG(const char* filename);
 
 /**
  * @brief writeImage writes image into file

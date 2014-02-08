@@ -25,12 +25,14 @@ public:
 
     /**
      * @brief rgb creates texture from color
+     * @param width is image width
+     * @param height is image height
      * @param r is red color value
      * @param g is green color value
      * @param b is blue color value
      * @param alpha is amount of blending
      */
-    rgb(float r, float g, float b, float alpha);
+    rgb(int width, int height, float r, float g, float b, float alpha);
 
     /**
      * @brief apply applies current texture

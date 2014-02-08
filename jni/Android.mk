@@ -262,13 +262,13 @@ components/input/keyboard.cpp \
 components/input/airacer.cpp \
 components/input/aitraffic.cpp \
 components/interfaces/model.cpp \
-components/renderer/gles20.cpp \
+components/renderer/opengl/gles20.cpp \
+components/renderer/opengl/glsl.cpp \
+components/renderer/opengl/gltexture.cpp \
 components/texture/pngloader.cpp \
-components/texture/pxxloader.cpp \
 components/texture/rgb.cpp \
 components/model/modelo4s.cpp \
 components/sound/soundpool.cpp \
-components/shader/glsl.cpp \
 utils/switch.cpp \
 utils/math.cpp \
 utils/io.cpp \

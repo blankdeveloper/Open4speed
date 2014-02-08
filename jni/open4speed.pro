@@ -25,16 +25,16 @@ SOURCES += \
     utils/math.cpp \
     utils/io.cpp \
     utils/engine.cpp \
-    components/renderer/gles20.cpp \
+    components/renderer/opengl/gles20.cpp \
+    components/renderer/opengl/glsl.cpp \
     components/sound/fmodapi.cpp \
     car.cpp \
     components/texture/pngloader.cpp \
-    components/shader/glsl.cpp \
-    components/texture/pxxloader.cpp \
     common.cpp \
     components/sound/soundpool.cpp \
     utils/scripting.cpp \
-    components/interfaces/model.cpp
+    components/interfaces/model.cpp \
+    components/renderer/opengl/gltexture.cpp
 HEADERS += \
     components/input/keyboard.h \
     components/interfaces/input.h \
@@ -52,15 +52,15 @@ HEADERS += \
     utils/math.h \
     utils/io.h \
     utils/engine.h \
-    components/renderer/gles20.h \
+    components/renderer/opengl/gles20.h \
+    components/renderer/opengl/glsl.h \
     components/sound/fmodapi.h \
     car.h \
     stdafx.h \
     components/texture/pngloader.h \
     components/interfaces/shader.h \
-    components/shader/glsl.h \
-    components/texture/pxxloader.h \
     common.h \
     components/sound/soundpool.h \
-    utils/scripting.h
+    utils/scripting.h \
+    components/renderer/opengl/gltexture.h
 INCLUDEPATH += ../support ../support/fmodapi-4.44.08 /usr/include/bullet

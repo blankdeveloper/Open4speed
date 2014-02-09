@@ -2,7 +2,7 @@
 /**
  * \file       pngloader.cpp
  * \author     Vonasek Lubos
- * \date       2014/01/05
+ * \date       2014/02/09
  * \brief      Loading and storing textures from PNG
 */
 //----------------------------------------------------------------------------------------
@@ -26,6 +26,7 @@ void png_read(png_structp png_ptr, png_bytep data, png_size_t length) {
  * @brief pngloader loads texture from png file
  * @param filename is name of file
  * @param alpha is amount of blending
+ * @return texture instance
  */
 Texture* loadPNG(const char* filename) {
   Texture* texture = new Texture();

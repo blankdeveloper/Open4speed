@@ -381,11 +381,10 @@
  ../support/bullet-2.81-rev2613/src/BulletDynamics/Vehicle/btRaycastVehicle.h \
  components/sound/soundpool.h components/input/airacer.h \
  components/input/aitraffic.h components/input/keyboard.h utils/io.h \
- components/texture/rgb.h components/model/modelo4s.h \
- components/renderer/opengl/gles20.h components/renderer/opengl/glsl.h \
- components/renderer/opengl/gltexture.h components/texture/pngloader.h \
- components/texture/pxxloader.h utils/engine.h utils/math.h \
- utils/switch.h common.h utils/scripting.h
+ components/model/modelo4s.h components/renderer/opengl/gles20.h \
+ components/renderer/opengl/glsl.h components/renderer/opengl/gltexture.h \
+ components/texture/pngloader.h components/texture/rgb.h utils/engine.h \
+ utils/math.h utils/switch.h common.h utils/scripting.h
 
 stdafx.h:
 
@@ -1201,8 +1200,6 @@ components/input/keyboard.h:
 
 utils/io.h:
 
-components/texture/rgb.h:
-
 components/model/modelo4s.h:
 
 components/renderer/opengl/gles20.h:
@@ -1213,7 +1210,7 @@ components/renderer/opengl/gltexture.h:
 
 components/texture/pngloader.h:
 
-components/texture/pxxloader.h:
+components/texture/rgb.h:
 
 utils/engine.h:
 

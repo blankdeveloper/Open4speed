@@ -2,7 +2,7 @@
 /**
  * \file       gles20.cpp
  * \author     Vonasek Lubos
- * \date       2014/01/05
+ * \date       2014/02/09
  * \brief      GL renderer draws geometry and other things on screen
 */
 //----------------------------------------------------------------------------------------
@@ -150,6 +150,7 @@ gles20::gles20() {
     gui_shader = getShader("gui");
     scene_shader = getShader("scene");
     shadowmap = getShader("shadowmap");
+    gray = new gltexture(*createRGB(1, 1, 0.5, 0.5, 0.5), 1.0);
 
     //find ideal texture resolution
     int resolution = 2;

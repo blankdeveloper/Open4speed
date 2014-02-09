@@ -20,7 +20,7 @@ std::vector<char*> *trackList;                                  ///< List of all
 std::vector<char*> *syntaxList;                                 ///< List of syntaxes to do
 std::vector<shader*> *shaders = new std::vector<shader*>();     ///< Shaders storage
 std::vector<texture*> *textures = new std::vector<texture*>();  ///< Textures storage
-texture *gray = new rgb(1, 1, 0.5, 0.5, 0.5, 1.0);              ///< Gray color for meshes without material
+texture *gray;                                                  ///< Gray color for meshes without material
 
 /**
  * @brief The engine configs

@@ -42,9 +42,10 @@ extern zip* APKArchive;             ///< APK archive instance
 #include <GL/glext.h>
 #endif
 
-#include "components/interfaces/input.h"
 #include "components/interfaces/texture.h"
 #include "components/interfaces/shader.h"
+#include "components/interfaces/fbo.h"
+#include "components/interfaces/input.h"
 #include "components/interfaces/model.h"
 #include "components/interfaces/sound.h"
 #include "car.h"
@@ -63,9 +64,10 @@ extern zip* APKArchive;             ///< APK archive instance
 
 #include "utils/io.h"
 #include "components/model/modelo4s.h"
+#include "components/renderer/opengl/gltexture.h"
+#include "components/renderer/opengl/glfbo.h"
 #include "components/renderer/opengl/gles20.h"
 #include "components/renderer/opengl/glsl.h"
-#include "components/renderer/opengl/gltexture.h"
 #include "components/texture/pngloader.h"
 #include "components/texture/rgb.h"
 

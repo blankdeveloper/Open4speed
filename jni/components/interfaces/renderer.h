@@ -13,19 +13,6 @@
 #include "stdafx.h"
 
 /**
- * @brief The RTT struct
- */
-struct RTT {
-    GLuint rendertexture;        ///< Render to texture texture
-    GLuint rendertexture2;       ///< Render to texture texture2
-    GLuint rboID;                ///< Render buffer object id
-    GLuint fboID;                ///< Frame buffer object id
-    GLuint width;                ///< Image width
-    GLuint height;               ///< Image height
-    GLuint res;                  ///< Resolution of texture
-};
-
-/**
  * @brief The Light struct
  */
 struct Light {
@@ -48,8 +35,11 @@ public:
     bool enable[10];            ///< Enabled filter
     int frame;                  ///< Frame index
     bool oddFrame;              ///< Odd frame info
+    fbo* rtt[2];                ///< Screen-space framebuffer
     Light light;                ///< One light information(for lightmap rendering)
-    RTT rtt[2];                 ///< Screen-space framebuffer
+    texture *glslfont;          ///< Font texture
+    shader* gui_shader;         ///< GUI shader
+    shader* scene_shader;       ///< Scene shader
     int overmode;               ///< Special mode
 
     /**
@@ -222,12 +212,6 @@ public:
      * @param text is button text
      */
     virtual void renderText(float x, float y, float layer, const char* text) = 0;
-
-    /**
-     * @brief setMode sets rendering mode
-     * @param mode is mode index
-     */
-    virtual void setRTT(RTT *r, int mode) = 0;
 };
 
 #endif // RENDERER_H

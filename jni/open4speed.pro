@@ -34,7 +34,8 @@ SOURCES += \
     components/sound/soundpool.cpp \
     utils/scripting.cpp \
     components/interfaces/model.cpp \
-    components/renderer/opengl/gltexture.cpp
+    components/renderer/opengl/gltexture.cpp \
+    components/renderer/opengl/glfbo.cpp
 HEADERS += \
     components/input/keyboard.h \
     components/interfaces/input.h \
@@ -62,5 +63,7 @@ HEADERS += \
     common.h \
     components/sound/soundpool.h \
     utils/scripting.h \
-    components/renderer/opengl/gltexture.h
+    components/renderer/opengl/gltexture.h \
+    components/renderer/opengl/glfbo.h \
+    components/interfaces/fbo.h
 INCLUDEPATH += ../support ../support/fmodapi-4.44.08 /usr/include/bullet

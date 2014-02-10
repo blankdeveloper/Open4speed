@@ -244,10 +244,11 @@
  /opt/android-ndk-r9b/platforms/android-14/arch-mips/usr/include/GLES2/gl2platform.h \
  /opt/android-ndk-r9b/platforms/android-14/arch-mips/usr/include/KHR/khrplatform.h \
  /opt/android-ndk-r9b/platforms/android-14/arch-mips/usr/include/GLES2/gl2ext.h \
- components/interfaces/input.h components/interfaces/texture.h \
- components/interfaces/shader.h components/interfaces/model.h \
- components/interfaces/sound.h car.h components/interfaces/physics.h \
- components/interfaces/renderer.h components/physics/bullet.h \
+ components/interfaces/texture.h components/interfaces/shader.h \
+ components/interfaces/fbo.h components/interfaces/input.h \
+ components/interfaces/model.h components/interfaces/sound.h car.h \
+ components/interfaces/physics.h components/interfaces/renderer.h \
+ components/physics/bullet.h \
  ../support/bullet-2.81-rev2613/src/btBulletDynamicsCommon.h \
  ../support/bullet-2.81-rev2613/src/btBulletCollisionCommon.h \
  ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btCollisionWorld.h \
@@ -381,10 +382,11 @@
  ../support/bullet-2.81-rev2613/src/BulletDynamics/Vehicle/btRaycastVehicle.h \
  components/sound/soundpool.h components/input/airacer.h \
  components/input/aitraffic.h components/input/keyboard.h utils/io.h \
- components/model/modelo4s.h components/renderer/opengl/gles20.h \
- components/renderer/opengl/glsl.h components/renderer/opengl/gltexture.h \
- components/texture/pngloader.h components/texture/rgb.h utils/engine.h \
- utils/math.h utils/switch.h common.h utils/scripting.h \
+ components/model/modelo4s.h components/renderer/opengl/gltexture.h \
+ components/renderer/opengl/glfbo.h components/renderer/opengl/gles20.h \
+ components/renderer/opengl/glsl.h components/texture/pngloader.h \
+ components/texture/rgb.h utils/engine.h utils/math.h utils/switch.h \
+ common.h utils/scripting.h \
  /opt/android-ndk-r9b/platforms/android-14/arch-mips/usr/include/android/log.h
 
 stdafx.h:
@@ -911,11 +913,13 @@ stdafx.h:
 
 /opt/android-ndk-r9b/platforms/android-14/arch-mips/usr/include/GLES2/gl2ext.h:
 
-components/interfaces/input.h:
-
 components/interfaces/texture.h:
 
 components/interfaces/shader.h:
+
+components/interfaces/fbo.h:
+
+components/interfaces/input.h:
 
 components/interfaces/model.h:
 
@@ -1203,11 +1207,13 @@ utils/io.h:
 
 components/model/modelo4s.h:
 
+components/renderer/opengl/gltexture.h:
+
+components/renderer/opengl/glfbo.h:
+
 components/renderer/opengl/gles20.h:
 
 components/renderer/opengl/glsl.h:
-
-components/renderer/opengl/gltexture.h:
 
 components/texture/pngloader.h:
 

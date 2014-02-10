@@ -34,9 +34,9 @@ void displayMenu() {
     /// Render background
     if (background >= 0) {
         if (!race) {
-            xrenderer->setRTT(&xrenderer->rtt[xrenderer->oddFrame], 0);
-            xrenderer->clear(true);
-            xrenderer->setRTT(&xrenderer->rtt[xrenderer->oddFrame], 1);
+            xrenderer->rtt[xrenderer->oddFrame]->bindFBO();
+            xrenderer->rtt[xrenderer->oddFrame]->clear(false);
+            xrenderer->rtt[xrenderer->oddFrame]->drawOnScreen(xrenderer->scene_shader);
         }
         xrenderer->renderImage(0, 0, 100, 100, 1, (*images)[background]);
     }
@@ -224,7 +224,8 @@ void displayScene() {
     rot = rot % 360000;
     allCar[cameraCar]->rot = rot / 1000.0f;
 
-    xrenderer->setRTT(&xrenderer->rtt[xrenderer->oddFrame], 0);
+    xrenderer->rtt[xrenderer->oddFrame]->bindFBO();
+    xrenderer->rtt[xrenderer->oddFrame]->clear(true);
 
     xrenderer->oddFrame = !xrenderer->oddFrame;
     xrenderer->frame++;
@@ -350,7 +351,7 @@ void displayScene() {
     }
 
     // render RTT
-    xrenderer->setRTT(&xrenderer->rtt[xrenderer->oddFrame], 1);
+    xrenderer->rtt[xrenderer->oddFrame]->drawOnScreen(xrenderer->scene_shader);
 
     /// render GPS arrow
     /*xrenderer->pushMatrix();
@@ -474,11 +475,14 @@ void loadScene(std::vector<char*> *atributes) {
 
     /// load lightmaps
     if (!renderLightmap) {
-        for (unsigned int i = 0; i < trackdata->models.size(); i++) {
+        glfbo* lms = new glfbo[trackdata->getLMCount()];
+        for (int i = 0; i < trackdata->getLMCount(); i++) {
             char filename[256];
-            sprintf(filename, getConfigStr("lightmap", atributes), trackdata->models[i].lmIndex);
-            //sprintf(filename, "lightmap%d.png", trackdata->models[i].lmIndex);
-            trackdata->models[i].lightmap = getTexture(filename, 1.0);
+            sprintf(filename, getConfigStr("lightmap", atributes), i);
+            lms[i] = *new glfbo(*loadPNG(filename));
+        }
+        for (unsigned int i = 0; i < trackdata->models.size(); i++) {
+            trackdata->models[i].lightmap = &lms[trackdata->models[i].lmIndex];
         }
     }
 }

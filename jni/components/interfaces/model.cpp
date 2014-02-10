@@ -26,7 +26,7 @@ model::~model() {
         delete[] models[i].triangleCount;
         models[i].texture2D->pointerDecrease();
         if (models[i].usingLightmaps) {
-            models[i].lightmap->pointerDecrease();
+            //models[i].lightmap->pointerDecrease();
         }
     }
     models.clear();

@@ -205,12 +205,6 @@ public:
      * @param text is button text
      */
     void renderText(float x, float y, float layer, const char* text);
-
-    /**
-     * @brief setMode sets rendering mode
-     * @param mode is mode index
-     */
-    void setRTT(RTT *r, int mode);
 };
 
 #endif // GLES20_H

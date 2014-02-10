@@ -18,16 +18,13 @@ float camY;                     ///< Camera position y
 float camZ;                     ///< Camera position z
 
 int lmFilter = -1;              ///< Filtering of objects to render
-texture *glslfont = 0;          ///< Font texture
-shader* gui_shader = 0;         ///< GUI shader
-shader* scene_shader = 0;       ///< Scene shader
 shader* shadowmap = 0;          ///< Shadowmap shader
 
 /**
  * Lightmap RTTs
  */
-RTT cube[6];                    ///< Cubemap framebuffer
-RTT* lm;                        ///< Lightmap framebuffer
+glfbo* cube;                      ///< Cubemap framebuffer
+glfbo* lm;                        ///< Lightmap framebuffer
 
 /**
  * GUI projection matrix
@@ -79,49 +76,6 @@ bool lamp[] = {0,0,0,0,1,0,1,1,0,1,
                1,1,1,1,1,0,0,1,0,1};
 
 /**
- * @brief initRTT inits framebuffer and renderbuffer
- * @param rtt is structure of framebuffer and renderbuffer together
- */
-void initRTT(RTT *rtt) {
-
-    //create frame buffer
-    glGenFramebuffers(1, &rtt->fboID);
-    glBindFramebuffer(GL_FRAMEBUFFER, rtt->fboID);
-    glGenTextures(1, &rtt->rendertexture);
-    glBindTexture(GL_TEXTURE_2D, rtt->rendertexture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, rtt->res, rtt->res, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rtt->rendertexture, 0);
-
-    //create texture for depth buffer
-    if (renderLightmap) {
-        glGenTextures(1, &rtt->rendertexture2);
-        glBindTexture(GL_TEXTURE_2D, rtt->rendertexture2);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, rtt->res, rtt->res, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, rtt->rendertexture2, 0);
-    }
-    //create render buffer
-    else {
-        glGenRenderbuffers(1, &rtt->rboID);
-        glBindRenderbuffer(GL_RENDERBUFFER, rtt->rboID);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, rtt->res, rtt->res);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rtt->rboID);
-    }
-
-
-    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-        exit(1);
-
-    //clear
-    glViewport (0, 0, rtt->width, rtt->height);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-}
-
-/**
  * @brief gles20 constructor
  */
 gles20::gles20() {
@@ -137,6 +91,7 @@ gles20::gles20() {
     overshader = 0;
     frame = 0;
     oddFrame = true;
+    glslfont = getTexture(fontTexture, 1);
 
     /// set open-gl
     if (renderLightmap)
@@ -160,11 +115,7 @@ gles20::gles20() {
 
     //create render texture
     for (int i = 0; i < 2; i++) {
-        rtt[i] = *(new RTT());
-        rtt[i].res = resolution;
-        rtt[i].width = screen_width * antialiasing;
-        rtt[i].height = screen_height * antialiasing;
-        initRTT(&rtt[i]);
+        rtt[i] = new glfbo(screen_width * antialiasing, screen_height * antialiasing, renderLightmap);
     }
 
     //set viewport
@@ -571,14 +522,13 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     /// apply lightmap
     if (m->lightmap != 0) {
         glActiveTexture( GL_TEXTURE3 );
-        m->lightmap->setFrame(!lamp[frame % 100]);
-        m->lightmap->apply();
+        m->lightmap->bindTexture();
     }
 
     /// previous screen
     if (!renderLightmap) {
         glActiveTexture( GL_TEXTURE1 );
-        glBindTexture(GL_TEXTURE_2D, rtt[oddFrame].rendertexture);
+        rtt[oddFrame]->bindTexture();
     }
     glActiveTexture( GL_TEXTURE0 );
 
@@ -590,12 +540,12 @@ void gles20::renderSubModel(model* mod, model3d *m) {
 
     /// set uniforms
     current->uniformFloat("u_Time", frame / 1000.0f);
-    current->uniformFloat("u_res", 1 / (float)rtt[oddFrame].res);
+    current->uniformFloat("u_res", 1 / (float)rtt[oddFrame]->res);
     current->uniformFloat("u_width", 1 / (float)screen_width);
     current->uniformFloat("u_height", 1 / (float)screen_height);
     current->uniformFloat4("camera", camX, camY, camZ, 1);
     current->uniformFloat("u_test", testUniform);
-    current->uniformFloat("u_view", rtt[oddFrame].height / (float)rtt[oddFrame].res);
+    current->uniformFloat("u_view", rtt[oddFrame]->height / (float)rtt[oddFrame]->res);
     current->uniformFloat4("u_kA", m->colora[0], m->colora[1], m->colora[2], 1);
     current->uniformFloat4("u_kD", m->colord[0], m->colord[1], m->colord[2], 1);
     current->uniformFloat4("u_kS", m->colors[0], m->colors[1], m->colors[2], 1);
@@ -688,11 +638,6 @@ void gles20::renderSubModel(model* mod, model3d *m) {
  */
 void gles20::renderText(float x, float y, float layer, const char* text) {
     int minus = 0;
-
-    /// load font
-    if (glslfont == 0) {
-        glslfont = getTexture(fontTexture, 1);
-    }
 
     /// set OpenGL
     glDisable(GL_DEPTH_TEST);
@@ -836,22 +781,15 @@ GLubyte* gles20::getLMPixels(int i) {
 void gles20::prepareLM(int count) {
 
     /// set cube framebuffers
+    cube = new glfbo[count];
     for (int i = 0; i < 6; i++) {
-        cube[i] = *(new RTT());
-        cube[i].res = rttsize;
-        cube[i].width = cube[i].res;
-        cube[i].height = cube[i].res;
-        initRTT(&cube[i]);
+        cube[i] = *(new glfbo(rttsize, rttsize, true));
     }
 
     /// set lightmaps framebuffers
-    lm = new RTT[count];
+    lm = new glfbo[count];
     for (int i = 0; i < count; i++) {
-        lm[i] = *(new RTT());
-        lm[i].res = rttsize;
-        lm[i].width = lm[i].res;
-        lm[i].height = lm[i].res;
-        initRTT(&lm[i]);
+        lm[i] = *(new glfbo(rttsize, rttsize, false));
     }
     resetLM(count);
 }
@@ -901,7 +839,8 @@ void gles20::renderLMLight(shader* lightrenderer) {
             /// render shadowmap
             if (i == 0) {
                 renderShadowMap = true;
-                setRTT(&cube[v], 0);
+                cube[v].bindFBO();
+                cube[v].clear(true);
                 overshader = shadowmap;
                 renderModel(trackdata);
                 overshader = 0;
@@ -912,11 +851,12 @@ void gles20::renderLMLight(shader* lightrenderer) {
             light.u_light = view_matrix * pos;
             light.u_light_dir = view_matrix * dir;
             lmFilter = i;
-            setRTT(&lm[i], 2);
+            lm[i].bindFBO();
+            lm[i].clear(false);
             overmode = 1;
             overshader = lightrenderer;
             glActiveTexture( GL_TEXTURE2 );
-            glBindTexture(GL_TEXTURE_2D, cube[v].rendertexture2);
+            cube[v].bindTexture();
             glActiveTexture( GL_TEXTURE0 );
             renderModel(trackdata);
             overmode = 0;
@@ -932,7 +872,8 @@ void gles20::renderLMLight(shader* lightrenderer) {
  */
 void gles20::resetLM(int count) {
     for (int i = 0; i < count; i++) {
-        setRTT(&lm[i], 0);
+        lm[i].bindFBO();
+        lm[i].clear(true);
     }
 }
 
@@ -956,60 +897,4 @@ void gles20::saveLMs() {
         delete[] pixels;
     }
 #endif
-}
-
-/**
- * @brief setMode sets rendering mode
- * @param mode is mode index
- */
-void gles20::setRTT(RTT *r, int mode) {
-
-    /// prepare empty framebuffer
-    if (mode == 0) {
-        glBindFramebuffer(GL_FRAMEBUFFER, r->fboID);
-        glViewport (0, 0, r->width, r->height);
-        clear(true);
-    }
-
-    /// render texture to screen
-    if (mode == 1) {
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glViewport (0, 0, (GLsizei) screen_width, (GLsizei) screen_height);
-        scene_shader->bind();
-
-        /// indicies
-        GLubyte indices[] = {3,0,1,3,1,2};
-
-        /// vertices
-        GLfloat vertices[] = {
-            -1, -1, 0,
-            +1, -1, 0,
-            +1, +1, 0,
-            -1, +1, 0
-        };
-
-        /// coords
-        GLfloat coords[] = {0, 0,
-                            r->width / (float)r->res, 0,
-                            r->width / (float)r->res, r->height / (float)r->res,
-                            0, r->height / (float)r->res
-        };
-
-        /// texture
-        glBindTexture(GL_TEXTURE_2D, r->rendertexture);
-        scene_shader->attrib(vertices, coords);
-        scene_shader->uniformFloat("u_res", 1 / (float)r->res);
-
-        /// render
-        glDisable(GL_DEPTH_TEST);
-        glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLubyte), GL_UNSIGNED_BYTE, indices);
-        scene_shader->unbind();
-    }
-
-    /// prepare framebuffer
-    if (mode == 2) {
-        glBindFramebuffer(GL_FRAMEBUFFER, r->fboID);
-        glViewport (0, 0, r->width, r->height);
-        clear(false);
-    }
 }

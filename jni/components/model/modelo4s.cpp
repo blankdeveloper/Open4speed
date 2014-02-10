@@ -80,7 +80,7 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
 #else
     FILE* file = fopen(prefix(filename), "r");
 #endif
-    char line[1024];
+    char* line = new char[1024];
 
     /// get model dimensions
     gets(line, file);
@@ -336,6 +336,7 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
         }
     }
 
+    delete[] line;
 #ifdef ZIP_ARCHIVE
     zip_fclose(file);
 #else

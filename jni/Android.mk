@@ -265,6 +265,7 @@ components/interfaces/model.cpp \
 components/renderer/opengl/gles20.cpp \
 components/renderer/opengl/glsl.cpp \
 components/renderer/opengl/gltexture.cpp \
+components/renderer/opengl/glfbo.cpp \
 components/texture/pngloader.cpp \
 components/texture/rgb.cpp \
 components/model/modelo4s.cpp \

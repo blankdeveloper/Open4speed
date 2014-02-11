@@ -244,10 +244,10 @@
  /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h \
  /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h \
  components/interfaces/texture.h components/interfaces/shader.h \
- components/interfaces/fbo.h components/interfaces/input.h \
- components/interfaces/model.h components/interfaces/sound.h car.h \
- components/interfaces/physics.h components/interfaces/renderer.h \
- components/physics/bullet.h \
+ components/interfaces/fbo.h components/interfaces/vbo.h \
+ components/interfaces/input.h components/interfaces/model.h \
+ components/interfaces/sound.h car.h components/interfaces/physics.h \
+ components/interfaces/renderer.h components/physics/bullet.h \
  ../support/bullet-2.81-rev2613/src/btBulletDynamicsCommon.h \
  ../support/bullet-2.81-rev2613/src/btBulletCollisionCommon.h \
  ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btCollisionWorld.h \
@@ -381,7 +381,8 @@
  ../support/bullet-2.81-rev2613/src/BulletDynamics/Vehicle/btRaycastVehicle.h \
  components/sound/soundpool.h components/input/airacer.h \
  components/input/aitraffic.h components/input/keyboard.h utils/io.h \
- components/model/modelo4s.h components/renderer/opengl/gltexture.h \
+ components/renderer/opengl/glvbo.h components/model/modelo4s.h \
+ components/renderer/opengl/gltexture.h \
  components/renderer/opengl/glfbo.h components/renderer/opengl/gles20.h \
  components/renderer/opengl/glsl.h components/texture/pngloader.h \
  components/texture/rgb.h utils/engine.h utils/math.h utils/switch.h \
@@ -916,6 +917,8 @@ components/interfaces/shader.h:
 
 components/interfaces/fbo.h:
 
+components/interfaces/vbo.h:
+
 components/interfaces/input.h:
 
 components/interfaces/model.h:
@@ -1201,6 +1204,8 @@ components/input/aitraffic.h:
 components/input/keyboard.h:
 
 utils/io.h:
+
+components/renderer/opengl/glvbo.h:
 
 components/model/modelo4s.h:
 

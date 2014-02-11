@@ -45,6 +45,7 @@ extern zip* APKArchive;             ///< APK archive instance
 #include "components/interfaces/texture.h"
 #include "components/interfaces/shader.h"
 #include "components/interfaces/fbo.h"
+#include "components/interfaces/vbo.h"
 #include "components/interfaces/input.h"
 #include "components/interfaces/model.h"
 #include "components/interfaces/sound.h"
@@ -63,6 +64,7 @@ extern zip* APKArchive;             ///< APK archive instance
 #include "components/input/keyboard.h"
 
 #include "utils/io.h"
+#include "components/renderer/opengl/glvbo.h"
 #include "components/model/modelo4s.h"
 #include "components/renderer/opengl/gltexture.h"
 #include "components/renderer/opengl/glfbo.h"

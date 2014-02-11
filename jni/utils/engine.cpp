@@ -475,14 +475,10 @@ void loadScene(std::vector<char*> *atributes) {
 
     /// load lightmaps
     if (!renderLightmap) {
-        glfbo* lms = new glfbo[trackdata->getLMCount()];
         for (int i = 0; i < trackdata->getLMCount(); i++) {
             char filename[256];
             sprintf(filename, getConfigStr("lightmap", atributes), i);
-            lms[i] = *new glfbo(*loadPNG(filename));
-        }
-        for (unsigned int i = 0; i < trackdata->models.size(); i++) {
-            trackdata->models[i].lightmap = &lms[trackdata->models[i].lmIndex];
+            trackdata->lightmaps.push_back(getFBO(*loadPNG(filename)));
         }
     }
 }

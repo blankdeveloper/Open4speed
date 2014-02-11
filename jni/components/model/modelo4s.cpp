@@ -2,7 +2,7 @@
 /**
  * \file       modelo4s.cpp
  * \author     Vonasek Lubos
- * \date       2014/01/05
+ * \date       2014/02/11
  * \brief      Class for loading models into OpenGL list, it parse full model file, apply
  *             textures, materials and blending.
 */
@@ -135,7 +135,6 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
                    &texturePath[0], &colora[0], &colora[1], &colora[2], &colord[0], &colord[1], &colord[2],
                    &colors[0], &colors[1], &colors[2], &alpha, &material[0]);
         }
-        m->lightmap = 0;
 
         /// get model size
         m->reg->size = m->reg->maxX - m->reg->minX;
@@ -300,14 +299,7 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
 
         /// store model in VBO
         int size = sizeof(GLfloat)*m->triangleCount[cutX * cutY] * 3;
-        glGenBuffers(1, &m->vbo);
-        glBindBuffer(GL_ARRAY_BUFFER, m->vbo);
-        glBufferData(GL_ARRAY_BUFFER, size * 10, NULL, GL_STATIC_DRAW);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, size * 3, m->vertices);
-        glBufferSubData(GL_ARRAY_BUFFER, size * 3, size * 3, m->normals);
-        glBufferSubData(GL_ARRAY_BUFFER, size * 6, size * 2, m->coords);
-        glBufferSubData(GL_ARRAY_BUFFER, size * 8, size * 2, m->tid);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        m->vboData = getVBO(size, m->vertices, m->normals, m->coords, m->tid);
         models.push_back(*m);
     }
 

@@ -504,7 +504,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     }
 
     /// set shader and VBO
-    glBindBuffer(GL_ARRAY_BUFFER, m->vbo);
+    m->vboData->bind();
     shader* current = m->material;
     if (overshader != 0) {
         current = overshader;
@@ -520,9 +520,9 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     current->uniformMatrix("u_MatrixScl",glm::value_ptr(matrixScl));
 
     /// apply lightmap
-    if (m->lightmap != 0) {
+    if (!mod->lightmaps.empty()) {
         glActiveTexture( GL_TEXTURE3 );
-        m->lightmap->bindTexture();
+        mod->lightmaps[m->lmIndex]->bindTexture();
     }
 
     /// previous screen
@@ -621,7 +621,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         int r = m->triangleCount[mod->cutX * mod->cutY] * 3;
         glDrawArrays(GL_TRIANGLES, l, r - l);
     }
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    m->vboData->unbind();
 
     //unbind shader
     glUseProgram(0);
@@ -714,7 +714,7 @@ GLubyte* gles20::getLMPixels(int i) {
 
     /// get pixels
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glBindTexture(GL_TEXTURE_2D, lm[i].rendertexture);
+    lm[i].bindTexture();
     glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
     glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels2);
 

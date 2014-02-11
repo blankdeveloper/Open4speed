@@ -2,7 +2,7 @@
 /**
  * \file       fbo.h
  * \author     Vonasek Lubos
- * \date       2014/02/10
+ * \date       2014/02/11
  * \brief      Framebuffer object interface
 */
 //----------------------------------------------------------------------------------------
@@ -36,6 +36,11 @@ public:
      * @param colors true to clear both, false to clear only depth buffer
      */
     virtual void clear(bool colors) = 0;
+
+    /**
+     * @brief destroy removes all data from memory
+     */
+    virtual void destroy() = 0;
 
     /**
      * @brief drawOnScreen draws FBO on screen

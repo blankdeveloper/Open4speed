@@ -9,6 +9,7 @@
 
 #include "stdafx.h"
 
+
 /**
  * @brief glfbo is an empty constructor
  */
@@ -30,10 +31,15 @@ glfbo::glfbo(Texture texture) {
         height = texture.height;
 
         //create frame buffer
-        glGenFramebuffers(1, &fboID);
-        glBindFramebuffer(GL_FRAMEBUFFER, fboID);
-        glGenTextures(1, &rendertexture);
-        glBindTexture(GL_TEXTURE_2D, rendertexture);
+        fboID = new GLuint[1];
+        rboID = new GLuint[1];
+        rendertexture = new GLuint[1];
+        rendertexture2 = new GLuint[1];
+
+        glGenFramebuffers(1, fboID);
+        glBindFramebuffer(GL_FRAMEBUFFER, fboID[0]);
+        glGenTextures(1, rendertexture);
+        glBindTexture(GL_TEXTURE_2D, rendertexture[0]);
         glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
         glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
         if (texture.hasAlpha) {
@@ -41,7 +47,7 @@ glfbo::glfbo(Texture texture) {
         } else {
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture.width, texture.height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture.data);
         }
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rendertexture, 0);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rendertexture[0], 0);
 
         if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
             exit(1);
@@ -69,30 +75,36 @@ glfbo::glfbo(int width, int height, bool depthbuffer) {
     }
 
     //create frame buffer
-    glGenFramebuffers(1, &fboID);
-    glBindFramebuffer(GL_FRAMEBUFFER, fboID);
-    glGenTextures(1, &rendertexture);
-    glBindTexture(GL_TEXTURE_2D, rendertexture);
+    fboID = new GLuint[1];
+    rboID = new GLuint[1];
+    rendertexture = new GLuint[1];
+    rendertexture2 = new GLuint[1];
+
+    glGenFramebuffers(1, fboID);
+    glBindFramebuffer(GL_FRAMEBUFFER, fboID[0]);
+    glGenTextures(1, rendertexture);
+    glBindTexture(GL_TEXTURE_2D, rendertexture[0]);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, res, res, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rendertexture, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rendertexture[0], 0);
 
     //create texture for depth buffer
+    this->depth = depthbuffer;
     if (depthbuffer) {
-        glGenTextures(1, &rendertexture2);
-        glBindTexture(GL_TEXTURE_2D, rendertexture2);
+        glGenTextures(1, rendertexture2);
+        glBindTexture(GL_TEXTURE_2D, rendertexture2[0]);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, res, res, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, rendertexture2, 0);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, rendertexture2[0], 0);
     }
     //create render buffer
     else {
-        glGenRenderbuffers(1, &rboID);
-        glBindRenderbuffer(GL_RENDERBUFFER, rboID);
+        glGenRenderbuffers(1, rboID);
+        glBindRenderbuffer(GL_RENDERBUFFER, rboID[0]);
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, res, res);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboID);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
     }
 
 
@@ -109,7 +121,7 @@ glfbo::glfbo(int width, int height, bool depthbuffer) {
  * @brief bind binds FBO
  */
 void glfbo::bindFBO() {
-    glBindFramebuffer(GL_FRAMEBUFFER, fboID);
+    glBindFramebuffer(GL_FRAMEBUFFER, fboID[0]);
     glViewport (0, 0, width, height);
 }
 
@@ -117,7 +129,7 @@ void glfbo::bindFBO() {
  * @brief bind binds texture
  */
 void glfbo::bindTexture() {
-    glBindTexture(GL_TEXTURE_2D, rendertexture);
+    glBindTexture(GL_TEXTURE_2D, rendertexture[0]);
 }
 
 /**
@@ -130,6 +142,19 @@ void glfbo::clear(bool colors) {
     } else {
         glClear(GL_DEPTH_BUFFER_BIT);
     }
+}
+
+/**
+ * @brief destroy removes all data from memory
+ */
+void glfbo::destroy() {
+    glDeleteTextures(1, rendertexture);
+    if (depth) {
+        glDeleteTextures(1, rendertexture2);
+    } else {
+        glDeleteRenderbuffers(1, rboID);
+    }
+    glDeleteFramebuffers(1, fboID);
 }
 
 /**
@@ -160,7 +185,7 @@ void glfbo::drawOnScreen(shader* screen_shader) {
     };
 
     /// texture
-    glBindTexture(GL_TEXTURE_2D, rendertexture);
+    glBindTexture(GL_TEXTURE_2D, rendertexture[0]);
     screen_shader->attrib(vertices, coords);
     screen_shader->uniformFloat("u_res", 1 / (float)res);
 

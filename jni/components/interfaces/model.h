@@ -51,7 +51,6 @@ struct model3d {
     bool dynamic;       ///< True if object is dynamic
     int dynamicID;      ///< ID of the last dynamic update
     int lmIndex;        ///< index of lightmap
-    fbo* lightmap;      ///< lightmap texture
     region *reg;        ///< AABB of the object
     int* triangleCount; ///< Amount of triangles
     texture* texture2D; ///< Object texture
@@ -59,8 +58,8 @@ struct model3d {
     float* normals;     ///< Object normals
     float* coords;      ///< Object texture coordinates
     float* tid;         ///< Object lightmap coordinates
-    GLuint vbo;         ///< VBO for current object
     float x,y,z;        ///< Object translation
+    vbo* vboData;       ///< VBO of model
 };
 
 /**
@@ -79,6 +78,7 @@ public:
     std::vector<model3d> models;               ///< All parts of model
     float minx, miny, minz, maxx, maxy, maxz;  ///< Extremes of current model
     float width, aplitude, height, size;       ///< Dimensions of current model
+    std::vector<fbo*> lightmaps;               ///< List of lightmaps
 
     /**
      * @brief getLMCount get amount of lightmaps

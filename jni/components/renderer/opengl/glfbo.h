@@ -16,10 +16,11 @@
 class glfbo : public fbo
 {
 public:
-    GLuint rendertexture;        ///< Render to texture texture
-    GLuint rendertexture2;       ///< Render to texture texture2
-    GLuint rboID;                ///< Render buffer object id
-    GLuint fboID;                ///< Frame buffer object id
+    GLuint* rendertexture;        ///< Render to texture texture
+    GLuint* rendertexture2;       ///< Render to texture texture2
+    GLuint* rboID;                ///< Render buffer object id
+    GLuint* fboID;                ///< Frame buffer object id
+    bool depth;
 
     /**
      * @brief glfbo is an empty constructor
@@ -56,6 +57,11 @@ public:
      * @param colors true to clear both, false to clear only depth buffer
      */
     void clear(bool colors);
+
+    /**
+     * @brief destroy removes all data from memory
+     */
+    void destroy();
 
     /**
      * @brief drawOnScreen draws FBO on screen

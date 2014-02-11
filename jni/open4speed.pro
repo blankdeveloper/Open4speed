@@ -35,7 +35,8 @@ SOURCES += \
     utils/scripting.cpp \
     components/interfaces/model.cpp \
     components/renderer/opengl/gltexture.cpp \
-    components/renderer/opengl/glfbo.cpp
+    components/renderer/opengl/glfbo.cpp \
+    components/renderer/opengl/glvbo.cpp
 HEADERS += \
     components/input/keyboard.h \
     components/interfaces/input.h \
@@ -65,5 +66,7 @@ HEADERS += \
     utils/scripting.h \
     components/renderer/opengl/gltexture.h \
     components/renderer/opengl/glfbo.h \
-    components/interfaces/fbo.h
+    components/interfaces/fbo.h \
+    components/interfaces/vbo.h \
+    components/renderer/opengl/glvbo.h
 INCLUDEPATH += ../support ../support/fmodapi-4.44.08 /usr/include/bullet

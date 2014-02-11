@@ -11,6 +11,21 @@
 #include "stdafx.h"
 
 /**
+ * @brief getFBO creates framebuffer from raster data
+ * @param texture is texture raster instance
+ */
+fbo* getFBO(Texture texture) {
+
+    /// create VBO
+    if (strcmp(screenRenderer, "glsl") == 0) {
+        fbo* instance = new glfbo(texture);
+        return instance;
+    }
+    loge("Renderer incompatible FBO", "");
+    return 0;
+}
+
+/**
  * @brief getInput gets input controller
  * @return input controller
  */
@@ -175,4 +190,23 @@ texture* getTexture(const char* filename, float alpha) {
 
     logi("Renderer incompatible texture:",filename);
     return gray;
+}
+
+/**
+ * @brief glvbo creates VBO from data
+ * @param size is amount of vertices
+ * @param vertices is vertices array
+ * @param normals is normals array
+ * @param coords is texture coords array
+ * @param tid is special array for lightmaps
+ */
+vbo* getVBO(int size, float* vertices, float* normals, float* coords, float* tid) {
+
+    /// create VBO
+    if (strcmp(screenRenderer, "glsl") == 0) {
+        vbo* instance = new glvbo(size, vertices, normals, coords, tid);
+        return instance;
+    }
+    loge("Renderer incompatible VBO", "");
+    return 0;
 }

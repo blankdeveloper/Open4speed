@@ -14,6 +14,12 @@
 #include "stdafx.h"
 
 /**
+ * @brief getFBO creates framebuffer from raster data
+ * @param texture is texture raster instance
+ */
+fbo* getFBO(Texture texture);
+
+/**
  * @brief getInput gets input controller
  * @return input controller
  */
@@ -62,5 +68,16 @@ sound* getSound(const char* filename, bool loop, int channels);
  * @return texture instance
  */
 texture* getTexture(const char* filename, float alpha);
+
+
+/**
+ * @brief getVBO creates VBO from data
+ * @param size is amount of vertices
+ * @param vertices is vertices array
+ * @param normals is normals array
+ * @param coords is texture coords array
+ * @param tid is special array for lightmaps
+ */
+vbo* getVBO(int size, float* vertices, float* normals, float* coords, float* tid);
 
 #endif // SWITCH_H

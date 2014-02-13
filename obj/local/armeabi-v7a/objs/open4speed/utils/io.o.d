@@ -1,174 +1,174 @@
 /home/lubos/Plocha/Open4speed/obj/local/armeabi-v7a/objs/open4speed/utils/io.o: \
  utils/io.cpp stdafx.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/cstring \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_prolog.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_cprolog.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/features.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_stlport_version.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/user_config.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/compat.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/host.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/_system.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/_android.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/_gcc.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/stl_confix.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/_native_headers.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/debug/_debug.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_cstring.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/string.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/string.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/cdefs.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/android/api-level.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stddef.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/malloc.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/using/cstring \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_epilog.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_config_compat_post.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/iostream \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ioserr.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_iosfwd.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/char_traits.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_cstddef.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/types.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/stdint.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/_types.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/machine/_types.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/linux/posix_types.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/linux/stddef.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/linux/compiler.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/asm/posix_types.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/asm/types.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/linux/types.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/machine/kernel.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/sysmacros.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_construct.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_new.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/../../gabi++/include/new \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/cstddef \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/../../gabi++/include/cstddef \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/exception \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/../../gabi++/include/exception \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/../../gabi++/include/gabixx_config.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_cstdio.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stdio.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/stdio.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stdarg.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_iterator_base.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ptrs_specialize.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/type_traits.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/type_manips.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_move_construct_fwk.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_cwchar.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/wchar.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/limits.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/limits.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/limits.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/linux/limits.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/machine/internal_types.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/machine/limits.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/syslimits.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/asm/page.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/time.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/time.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/time.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/linux/time.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/asm/siginfo.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/asm-generic/siginfo.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/_wchar_limits.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_mbstate_t.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_istream.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ios.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ios_base.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_stdexcept_base.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_exception.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_pair.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_locale.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_cstdlib.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stdlib.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/stdlib.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/alloca.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/strings.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/memory.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_cmath.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/math.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/math.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_threads.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/pthread.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/pthread.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/signal.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/signal.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/asm/signal.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/asm-generic/signal.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/asm/sigcontext.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sched.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_threads.c \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ctime.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_string_fwd.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_string.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_alloc.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_algobase.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/climits \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_algobase.c \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_function_base.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_iterator.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_alloc.c \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_uninitialized.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_string_base.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_string_npos.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_string_operators.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_string.c \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ctraits_fns.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_function.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_function_adaptors.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_range_errors.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_facets_fwd.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ctype.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/c_locale.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_numpunct.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ios.c \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_streambuf.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_streambuf.c \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ostream.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ostreambuf_iterator.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ostream.c \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_num_put.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_iostream_string.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_num_put.c \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_limits.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/cfloat \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/float.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_limits.c \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_istreambuf_iterator.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_istream.c \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_num_get.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_num_get.c \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stack \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_stack.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_deque.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_deque.c \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_relops_cont.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/unistd.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/select.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/sysconf.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/linux/capability.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/pathconf.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/vector \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_vector.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_vector.c \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_bvector.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstring \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_prolog.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_cprolog.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/features.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_stlport_version.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/user_config.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/compat.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/host.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/_system.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/_android.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/cdefs.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/android/api-level.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/_gcc.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/stl_confix.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/_native_headers.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/debug/_debug.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_cstring.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/string.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/string.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stddef.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/malloc.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/using/cstring \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_epilog.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_config_compat_post.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/iostream \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ioserr.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_iosfwd.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/char_traits.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_cstddef.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/types.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/stdint.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/_types.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/machine/_types.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/linux/posix_types.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/linux/stddef.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/linux/compiler.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/asm/posix_types.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/asm/types.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/linux/types.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/machine/kernel.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/sysmacros.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_construct.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_new.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/../../gabi++/include/new \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstddef \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/../../gabi++/include/cstddef \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/exception \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/../../gabi++/include/exception \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/../../gabi++/include/gabixx_config.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_cstdio.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stdio.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/stdio.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stdarg.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_iterator_base.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ptrs_specialize.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/type_traits.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/type_manips.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_move_construct_fwk.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_cwchar.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/wchar.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/limits.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/limits.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/limits.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/linux/limits.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/machine/internal_types.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/machine/limits.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/syslimits.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/asm/page.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/time.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/time.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/time.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/linux/time.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/asm/siginfo.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/asm-generic/siginfo.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/_wchar_limits.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_mbstate_t.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_istream.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ios.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ios_base.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_stdexcept_base.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_exception.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_pair.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_locale.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_cstdlib.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stdlib.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/stdlib.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/alloca.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/strings.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/memory.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_cmath.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/math.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/math.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_threads.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/pthread.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/pthread.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/signal.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/signal.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/asm/signal.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/asm-generic/signal.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/asm/sigcontext.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sched.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_threads.c \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ctime.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_string_fwd.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_string.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_alloc.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_algobase.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/climits \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_algobase.c \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_function_base.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_iterator.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_alloc.c \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_uninitialized.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_string_base.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_string_npos.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_string_operators.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_string.c \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ctraits_fns.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_function.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_function_adaptors.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_range_errors.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_facets_fwd.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ctype.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/c_locale.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_numpunct.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ios.c \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_streambuf.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_streambuf.c \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ostream.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ostreambuf_iterator.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ostream.c \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_num_put.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_iostream_string.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_num_put.c \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_limits.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cfloat \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/float.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_limits.c \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_istreambuf_iterator.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_istream.c \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_num_get.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_num_get.c \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stack \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_stack.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_deque.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_deque.c \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_relops_cont.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/unistd.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/select.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/sysconf.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/linux/capability.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/pathconf.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/vector \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_vector.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_vector.c \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_bvector.h \
  ../support/glm/glm.hpp ../support/glm/core/_fixes.hpp \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/cmath \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/limits \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/cstdio \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cmath \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/limits \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstdio \
  ../support/glm/core/setup.hpp ../support/glm/./core/_detail.hpp \
  ../support/glm/./core/setup.hpp \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/cassert \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/assert.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/assert.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cassert \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/assert.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/assert.h \
  ../support/glm/./core/_vectorize.hpp ../support/glm/./core/type.hpp \
  ../support/glm/./core/type_half.hpp \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/cstdlib \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstdlib \
  ../support/glm/./core/type_half.inl ../support/glm/./core/_detail.hpp \
  ../support/glm/./core/type_float.hpp ../support/glm/./core/type_int.hpp \
  ../support/glm/./core/type_gentype.hpp \
@@ -232,22 +232,21 @@
  ../support/glm/gtc/../gtc/quaternion.inl ../support/glm/gtc/type_ptr.inl \
  ../support/libpng-1.6.3/png.h ../support/libpng-1.6.3/pnglibconf.h \
  ../support/libpng-1.6.3/pngconf.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/setjmp.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/setjmp.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/machine/setjmp.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/setjmp.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/setjmp.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/machine/setjmp.h \
  ../support/libzip-0.11.1/lib/zip.h \
  ../support/libzip-0.11.1/lib/zipconf.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/inttypes.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/jni.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h \
- components/interfaces/texture.h components/interfaces/shader.h \
- components/interfaces/fbo.h components/interfaces/vbo.h \
- components/interfaces/input.h components/interfaces/model.h \
- components/interfaces/sound.h car.h components/interfaces/physics.h \
- components/interfaces/renderer.h components/physics/bullet.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/inttypes.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/jni.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h \
+ interfaces/texture.h interfaces/shader.h interfaces/fbo.h \
+ interfaces/vbo.h interfaces/input.h interfaces/model.h \
+ interfaces/sound.h car.h interfaces/physics.h interfaces/renderer.h \
+ physics/bullet.h \
  ../support/bullet-2.81-rev2613/src/btBulletDynamicsCommon.h \
  ../support/bullet-2.81-rev2613/src/btBulletCollisionCommon.h \
  ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btCollisionWorld.h \
@@ -265,7 +264,7 @@
  ../support/bullet-2.81-rev2613/src/LinearMath/btTransform.h \
  ../support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h \
  ../support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h \
- /opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/new \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/new \
  ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btCollisionDispatcher.h \
  ../support/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btDispatcher.h \
  ../support/bullet-2.81-rev2613/src/LinearMath/btScalar.h \
@@ -379,341 +378,339 @@
  ../support/bullet-2.81-rev2613/src/BulletDynamics/Dynamics/btActionInterface.h \
  ../support/bullet-2.81-rev2613/src/BulletDynamics/Dynamics/btRigidBody.h \
  ../support/bullet-2.81-rev2613/src/BulletDynamics/Vehicle/btRaycastVehicle.h \
- components/sound/soundpool.h components/input/airacer.h \
- components/input/aitraffic.h components/input/keyboard.h utils/io.h \
- components/renderer/opengl/glvbo.h components/model/modelo4s.h \
- components/renderer/opengl/gltexture.h \
- components/renderer/opengl/glfbo.h components/renderer/opengl/gles20.h \
- components/renderer/opengl/glsl.h components/texture/pngloader.h \
- components/texture/rgb.h utils/engine.h utils/math.h utils/switch.h \
- common.h utils/scripting.h \
- /opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/android/log.h
+ sound/soundpool.h input/airacer.h input/aitraffic.h input/keyboard.h \
+ utils/io.h renderers/opengl/glvbo.h loaders/modelo4s.h \
+ renderers/opengl/gltexture.h renderers/opengl/glfbo.h \
+ renderers/opengl/gles20.h renderers/opengl/glsl.h loaders//pngloader.h \
+ loaders//rgb.h utils/engine.h utils/math.h utils/switch.h common.h \
+ utils/scripting.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/android/log.h
 
 stdafx.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/cstring:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstring:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_prolog.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_prolog.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_cprolog.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_cprolog.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/features.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/features.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_stlport_version.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_stlport_version.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/user_config.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/user_config.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/compat.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/compat.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/host.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/host.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/_system.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/_system.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/_android.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/_android.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/_gcc.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/cdefs.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/stl_confix.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/config/_native_headers.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/android/api-level.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/debug/_debug.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/_gcc.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_cstring.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/stl_confix.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/string.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/config/_native_headers.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/string.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/debug/_debug.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/cdefs.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_cstring.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/string.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/android/api-level.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/string.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stddef.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stddef.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/malloc.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/malloc.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/using/cstring:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/using/cstring:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_epilog.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_epilog.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_config_compat_post.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_config_compat_post.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/iostream:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/iostream:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ioserr.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ioserr.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_iosfwd.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_iosfwd.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/char_traits.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/char_traits.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_cstddef.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_cstddef.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/types.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/types.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/stdint.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/stdint.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/_types.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/_types.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/machine/_types.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/machine/_types.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/linux/posix_types.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/linux/posix_types.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/linux/stddef.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/linux/stddef.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/linux/compiler.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/linux/compiler.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/asm/posix_types.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/asm/posix_types.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/asm/types.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/asm/types.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/linux/types.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/linux/types.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/machine/kernel.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/machine/kernel.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/sysmacros.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/sysmacros.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_construct.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_construct.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_new.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_new.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/../../gabi++/include/new:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/../../gabi++/include/new:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/cstddef:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstddef:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/../../gabi++/include/cstddef:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/../../gabi++/include/cstddef:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/exception:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/exception:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/../../gabi++/include/exception:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/../../gabi++/include/exception:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/../../gabi++/include/gabixx_config.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/../../gabi++/include/gabixx_config.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_cstdio.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_cstdio.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stdio.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stdio.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/stdio.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/stdio.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stdarg.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stdarg.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_iterator_base.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_iterator_base.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ptrs_specialize.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ptrs_specialize.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/type_traits.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/type_traits.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/type_manips.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/type_manips.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_move_construct_fwk.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_move_construct_fwk.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_cwchar.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_cwchar.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/wchar.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/wchar.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/limits.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/limits.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/limits.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/limits.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/limits.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/limits.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/linux/limits.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/linux/limits.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/machine/internal_types.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/machine/internal_types.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/machine/limits.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/machine/limits.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/syslimits.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/syslimits.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/asm/page.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/asm/page.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/time.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/time.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/time.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/time.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/time.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/time.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/linux/time.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/linux/time.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/asm/siginfo.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/asm/siginfo.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/asm-generic/siginfo.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/asm-generic/siginfo.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/_wchar_limits.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/_wchar_limits.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_mbstate_t.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_mbstate_t.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_istream.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_istream.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ios.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ios.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ios_base.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ios_base.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_stdexcept_base.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_stdexcept_base.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_exception.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_exception.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_pair.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_pair.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_locale.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_locale.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_cstdlib.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_cstdlib.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stdlib.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stdlib.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/stdlib.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/stdlib.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/alloca.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/alloca.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/strings.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/strings.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/memory.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/memory.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_cmath.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_cmath.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/math.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/math.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/math.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/math.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_threads.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_threads.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/pthread.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/pthread.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/pthread.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/pthread.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/signal.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/signal.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/signal.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/signal.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/asm/signal.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/asm/signal.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/asm-generic/signal.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/asm-generic/signal.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/asm/sigcontext.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/asm/sigcontext.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sched.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sched.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_threads.c:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_threads.c:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ctime.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ctime.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_string_fwd.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_string_fwd.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_string.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_string.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_alloc.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_alloc.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_algobase.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_algobase.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/climits:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/climits:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_algobase.c:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_algobase.c:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_function_base.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_function_base.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_iterator.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_iterator.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_alloc.c:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_alloc.c:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_uninitialized.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_uninitialized.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_string_base.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_string_base.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_string_npos.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_string_npos.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_string_operators.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_string_operators.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_string.c:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_string.c:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ctraits_fns.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ctraits_fns.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_function.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_function.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_function_adaptors.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_function_adaptors.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_range_errors.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_range_errors.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_facets_fwd.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_facets_fwd.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ctype.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ctype.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/c_locale.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/c_locale.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_numpunct.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_numpunct.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ios.c:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ios.c:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_streambuf.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_streambuf.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_streambuf.c:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_streambuf.c:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ostream.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ostream.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ostreambuf_iterator.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ostreambuf_iterator.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_ostream.c:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_ostream.c:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_num_put.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_num_put.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_iostream_string.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_iostream_string.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_num_put.c:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_num_put.c:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_limits.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_limits.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/cfloat:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cfloat:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/float.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/float.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_limits.c:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_limits.c:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_istreambuf_iterator.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_istreambuf_iterator.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_istream.c:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_istream.c:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_num_get.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_num_get.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_num_get.c:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_num_get.c:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stack:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stack:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_stack.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_stack.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_deque.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_deque.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_deque.c:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_deque.c:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_relops_cont.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_relops_cont.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/unistd.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/unistd.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/select.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/select.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/sys/sysconf.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/sysconf.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/linux/capability.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/linux/capability.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/pathconf.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/pathconf.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/vector:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/vector:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_vector.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_vector.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_vector.c:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_vector.c:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/stl/_bvector.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_bvector.h:
 
 ../support/glm/glm.hpp:
 
 ../support/glm/core/_fixes.hpp:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/cmath:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cmath:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/limits:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/limits:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/cstdio:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstdio:
 
 ../support/glm/core/setup.hpp:
 
@@ -721,11 +718,11 @@ stdafx.h:
 
 ../support/glm/./core/setup.hpp:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/cassert:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cassert:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/assert.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/assert.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/assert.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/assert.h:
 
 ../support/glm/./core/_vectorize.hpp:
 
@@ -733,7 +730,7 @@ stdafx.h:
 
 ../support/glm/./core/type_half.hpp:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/cstdlib:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstdlib:
 
 ../support/glm/./core/type_half.inl:
 
@@ -889,49 +886,49 @@ stdafx.h:
 
 ../support/libpng-1.6.3/pngconf.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/setjmp.h:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/setjmp.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/../include/setjmp.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/../include/setjmp.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/machine/setjmp.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/machine/setjmp.h:
 
 ../support/libzip-0.11.1/lib/zip.h:
 
 ../support/libzip-0.11.1/lib/zipconf.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/inttypes.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/inttypes.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/jni.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/jni.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h:
 
-components/interfaces/texture.h:
+interfaces/texture.h:
 
-components/interfaces/shader.h:
+interfaces/shader.h:
 
-components/interfaces/fbo.h:
+interfaces/fbo.h:
 
-components/interfaces/vbo.h:
+interfaces/vbo.h:
 
-components/interfaces/input.h:
+interfaces/input.h:
 
-components/interfaces/model.h:
+interfaces/model.h:
 
-components/interfaces/sound.h:
+interfaces/sound.h:
 
 car.h:
 
-components/interfaces/physics.h:
+interfaces/physics.h:
 
-components/interfaces/renderer.h:
+interfaces/renderer.h:
 
-components/physics/bullet.h:
+physics/bullet.h:
 
 ../support/bullet-2.81-rev2613/src/btBulletDynamicsCommon.h:
 
@@ -967,7 +964,7 @@ components/physics/bullet.h:
 
 ../support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h:
 
-/opt/android-ndk-r9b/sources/cxx-stl/stlport/stlport/new:
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/new:
 
 ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btCollisionDispatcher.h:
 
@@ -1195,31 +1192,31 @@ components/physics/bullet.h:
 
 ../support/bullet-2.81-rev2613/src/BulletDynamics/Vehicle/btRaycastVehicle.h:
 
-components/sound/soundpool.h:
+sound/soundpool.h:
 
-components/input/airacer.h:
+input/airacer.h:
 
-components/input/aitraffic.h:
+input/aitraffic.h:
 
-components/input/keyboard.h:
+input/keyboard.h:
 
 utils/io.h:
 
-components/renderer/opengl/glvbo.h:
+renderers/opengl/glvbo.h:
 
-components/model/modelo4s.h:
+loaders/modelo4s.h:
 
-components/renderer/opengl/gltexture.h:
+renderers/opengl/gltexture.h:
 
-components/renderer/opengl/glfbo.h:
+renderers/opengl/glfbo.h:
 
-components/renderer/opengl/gles20.h:
+renderers/opengl/gles20.h:
 
-components/renderer/opengl/glsl.h:
+renderers/opengl/glsl.h:
 
-components/texture/pngloader.h:
+loaders//pngloader.h:
 
-components/texture/rgb.h:
+loaders//rgb.h:
 
 utils/engine.h:
 
@@ -1231,4 +1228,4 @@ common.h:
 
 utils/scripting.h:
 
-/opt/android-ndk-r9b/platforms/android-14/arch-arm/usr/include/android/log.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/android/log.h:

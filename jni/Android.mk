@@ -257,26 +257,26 @@ $(LOCAL_PATH)/../support
 LOCAL_SRC_FILES := \
 open4speed.cpp \
 car.cpp \
-components/physics/bullet.cpp \
-components/input/keyboard.cpp \
-components/input/airacer.cpp \
-components/input/aitraffic.cpp \
-components/interfaces/model.cpp \
-components/renderer/opengl/gles20.cpp \
-components/renderer/opengl/glsl.cpp \
-components/renderer/opengl/gltexture.cpp \
-components/renderer/opengl/glfbo.cpp \
-components/renderer/opengl/glvbo.cpp \
-components/texture/pngloader.cpp \
-components/texture/rgb.cpp \
-components/model/modelo4s.cpp \
-components/sound/soundpool.cpp \
+common.cpp \
+physics/bullet.cpp \
+input/keyboard.cpp \
+input/airacer.cpp \
+input/aitraffic.cpp \
+interfaces/model.cpp \
+renderers/opengl/gles20.cpp \
+renderers/opengl/glsl.cpp \
+renderers/opengl/gltexture.cpp \
+renderers/opengl/glfbo.cpp \
+renderers/opengl/glvbo.cpp \
+loaders/modelo4s.cpp \
+loaders/pngloader.cpp \
+loaders/rgb.cpp \
+sound/soundpool.cpp \
 utils/switch.cpp \
 utils/math.cpp \
 utils/io.cpp \
 utils/engine.cpp \
-utils/scripting.cpp \
-common.cpp
+utils/scripting.cpp
 LOCAL_LDLIBS := -lGLESv2 -ldl -llog -landroid -lz
 
 LOCAL_STATIC_LIBRARIES := libpng \ libbullet \ libzip

@@ -14,56 +14,58 @@ CONFIG += console
 CONFIG -= app_bundle
 TEMPLATE = app
 SOURCES += \
-    components/input/keyboard.cpp \
-    components/physics/bullet.cpp \
-    components/input/airacer.cpp \
-    components/input/aitraffic.cpp \
+    input/keyboard.cpp \
+    physics/bullet.cpp \
+    input/airacer.cpp \
+    input/aitraffic.cpp \
     LMgenerator.cpp \
-    components/texture/rgb.cpp \
-    components/model/modelo4s.cpp \
+    loaders/rgb.cpp \
+    loaders/modelo4s.cpp \
     utils/switch.cpp \
     utils/math.cpp \
     utils/io.cpp \
     utils/engine.cpp \
-    components/renderer/opengl/gles20.cpp \
-    components/renderer/opengl/glsl.cpp \
-    components/renderer/opengl/gltexture.cpp \
-    components/sound/fmodapi.cpp \
+    renderers/opengl/gles20.cpp \
+    renderers/opengl/glsl.cpp \
+    renderers/opengl/gltexture.cpp \
+    sound/fmodapi.cpp \
     car.cpp \
-    components/texture/pngloader.cpp \
+    loaders/pngloader.cpp \
     common.cpp \
-    components/sound/soundpool.cpp \
+    sound/soundpool.cpp \
     utils/scripting.cpp \
-    components/interfaces/model.cpp \
-    components/renderer/opengl/glfbo.cpp
+    interfaces/model.cpp \
+    renderers/opengl/glfbo.cpp \
+    renderers/opengl/glvbo.cpp
 HEADERS += \
-    components/input/keyboard.h \
-    components/interfaces/input.h \
-    components/interfaces/physics.h \
-    components/physics/bullet.h \
-    components/input/airacer.h \
-    components/input/aitraffic.h \
-    components/interfaces/renderer.h \
-    components/interfaces/texture.h \
-    components/texture/rgb.h \
-    components/interfaces/model.h \
-    components/model/modelo4s.h \
-    components/interfaces/sound.h \
+    input/keyboard.h \
+    interfaces/input.h \
+    interfaces/physics.h \
+    physics/bullet.h \
+    input/airacer.h \
+    input/aitraffic.h \
+    interfaces/renderer.h \
+    interfaces/texture.h \
+    loaders/rgb.h \
+    interfaces/model.h \
+    loaders/modelo4s.h \
+    interfaces/sound.h \
     utils/switch.h \
     utils/math.h \
     utils/io.h \
     utils/engine.h \
-    components/renderer/opengl/gles20.h \
-    components/renderer/opengl/glsl.h \
-    components/renderer/opengl/gltexture.h \
-    components/sound/fmodapi.h \
+    renderers/opengl/gles20.h \
+    renderers/opengl/glsl.h \
+    renderers/opengl/gltexture.h \
+    sound/fmodapi.h \
     car.h \
     stdafx.h \
-    components/texture/pngloader.h \
-    components/interfaces/shader.h \
+    loaders/pngloader.h \
+    interfaces/shader.h \
     common.h \
-    components/sound/soundpool.h \
+    sound/soundpool.h \
     utils/scripting.h \
-    components/interfaces/fbo.h \
-    components/renderer/opengl/glfbo.h
+    interfaces/fbo.h \
+    renderers/opengl/glfbo.h \
+    renderers/opengl/glvbo.h
 INCLUDEPATH += ../support ../support/fmodapi-4.44.08 /usr/include/bullet

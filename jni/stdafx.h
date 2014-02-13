@@ -2,7 +2,7 @@
 /**
  * \file       stdafx.h
  * \author     Vonasek Lubos
- * \date       2014/01/05
+ * \date       2014/02/13
  * \brief      Includition of common header files
 */
 //----------------------------------------------------------------------------------------
@@ -42,36 +42,36 @@ extern zip* APKArchive;             ///< APK archive instance
 #include <GL/glext.h>
 #endif
 
-#include "components/interfaces/texture.h"
-#include "components/interfaces/shader.h"
-#include "components/interfaces/fbo.h"
-#include "components/interfaces/vbo.h"
-#include "components/interfaces/input.h"
-#include "components/interfaces/model.h"
-#include "components/interfaces/sound.h"
+#include "interfaces/texture.h"
+#include "interfaces/shader.h"
+#include "interfaces/fbo.h"
+#include "interfaces/vbo.h"
+#include "interfaces/input.h"
+#include "interfaces/model.h"
+#include "interfaces/sound.h"
 #include "car.h"
-#include "components/interfaces/physics.h"
-#include "components/interfaces/renderer.h"
-#include "components/physics/bullet.h"
+#include "interfaces/physics.h"
+#include "interfaces/renderer.h"
+#include "physics/bullet.h"
 
 #ifndef ANDROID
-#include "components/sound/fmodapi.h"
+#include "sound/fmodapi.h"
 #endif
-#include "components/sound/soundpool.h"
+#include "sound/soundpool.h"
 
-#include "components/input/airacer.h"
-#include "components/input/aitraffic.h"
-#include "components/input/keyboard.h"
+#include "input/airacer.h"
+#include "input/aitraffic.h"
+#include "input/keyboard.h"
 
 #include "utils/io.h"
-#include "components/renderer/opengl/glvbo.h"
-#include "components/model/modelo4s.h"
-#include "components/renderer/opengl/gltexture.h"
-#include "components/renderer/opengl/glfbo.h"
-#include "components/renderer/opengl/gles20.h"
-#include "components/renderer/opengl/glsl.h"
-#include "components/texture/pngloader.h"
-#include "components/texture/rgb.h"
+#include "renderers/opengl/glvbo.h"
+#include "loaders/modelo4s.h"
+#include "renderers/opengl/gltexture.h"
+#include "renderers/opengl/glfbo.h"
+#include "renderers/opengl/gles20.h"
+#include "renderers/opengl/glsl.h"
+#include "loaders//pngloader.h"
+#include "loaders//rgb.h"
 
 #include "utils/engine.h"
 #include "utils/math.h"

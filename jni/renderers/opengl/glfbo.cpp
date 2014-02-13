@@ -35,6 +35,8 @@ glfbo::glfbo(Texture texture) {
         rboID = new GLuint[1];
         rendertexture = new GLuint[1];
         rendertexture2 = new GLuint[1];
+        depth = false;
+        rb = false;
 
         glGenFramebuffers(1, fboID);
         glBindFramebuffer(GL_FRAMEBUFFER, fboID[0]);
@@ -91,6 +93,7 @@ glfbo::glfbo(int width, int height, bool depthbuffer) {
 
     //create texture for depth buffer
     this->depth = depthbuffer;
+    rb = !depthbuffer;
     if (depthbuffer) {
         glGenTextures(1, rendertexture2);
         glBindTexture(GL_TEXTURE_2D, rendertexture2[0]);
@@ -151,7 +154,8 @@ void glfbo::destroy() {
     glDeleteTextures(1, rendertexture);
     if (depth) {
         glDeleteTextures(1, rendertexture2);
-    } else {
+    }
+    if (rb) {
         glDeleteRenderbuffers(1, rboID);
     }
     glDeleteFramebuffers(1, fboID);

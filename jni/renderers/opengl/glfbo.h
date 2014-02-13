@@ -16,11 +16,11 @@
 class glfbo : public fbo
 {
 public:
-    GLuint* rendertexture;        ///< Render to texture texture
-    GLuint* rendertexture2;       ///< Render to texture texture2
+    GLuint* rendertexture;        ///< Texture for color buffer
+    GLuint* rendertexture2;       ///< Texture for depth buffer
     GLuint* rboID;                ///< Render buffer object id
     GLuint* fboID;                ///< Frame buffer object id
-    bool depth;
+    bool depth, rb;               ///< Info about buffers usage
 
     /**
      * @brief glfbo is an empty constructor

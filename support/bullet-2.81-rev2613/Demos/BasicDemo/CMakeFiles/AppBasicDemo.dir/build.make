@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/flags.make
 
 Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/main.o: Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/flags.make
 Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/main.o: Demos/BasicDemo/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/main.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppBasicDemo.dir/main.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo/main.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppBasicDemo.dir/main.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo/main.cpp
 
 Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/main.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppBasicDemo.dir/main.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo/main.cpp > CMakeFiles/AppBasicDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo/main.cpp > CMakeFiles/AppBasicDemo.dir/main.i
 
 Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/main.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppBasicDemo.dir/main.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo/main.cpp -o CMakeFiles/AppBasicDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo/main.cpp -o CMakeFiles/AppBasicDemo.dir/main.s
 
 Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/main.o.requires:
 .PHONY : Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/main.o.requires
@@ -74,17 +74,17 @@ Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/main.o.provides.build: Demos/BasicDe
 
 Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/BasicDemo.o: Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/flags.make
 Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/BasicDemo.o: Demos/BasicDemo/BasicDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/BasicDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppBasicDemo.dir/BasicDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo/BasicDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppBasicDemo.dir/BasicDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo/BasicDemo.cpp
 
 Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/BasicDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppBasicDemo.dir/BasicDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo/BasicDemo.cpp > CMakeFiles/AppBasicDemo.dir/BasicDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo/BasicDemo.cpp > CMakeFiles/AppBasicDemo.dir/BasicDemo.i
 
 Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/BasicDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppBasicDemo.dir/BasicDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo/BasicDemo.cpp -o CMakeFiles/AppBasicDemo.dir/BasicDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo/BasicDemo.cpp -o CMakeFiles/AppBasicDemo.dir/BasicDemo.s
 
 Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/BasicDemo.o.requires:
 .PHONY : Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/BasicDemo.o.requires
@@ -115,7 +115,7 @@ Demos/BasicDemo/AppBasicDemo: /usr/lib/i386-linux-gnu/libGL.so
 Demos/BasicDemo/AppBasicDemo: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/BasicDemo/AppBasicDemo: Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppBasicDemo"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppBasicDemo.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppBasicDemo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/build: Demos/BasicDemo/AppBasicDemo
@@ -126,10 +126,10 @@ Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/requires: Demos/BasicDemo/CMakeFiles
 .PHONY : Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/requires
 
 Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppBasicDemo.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppBasicDemo.dir/cmake_clean.cmake
 .PHONY : Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/clean
 
 Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/depend
 

@@ -6,27 +6,27 @@
 
 #IncludeRegexTransform: 
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/DoublePrecisionDemo.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/DoublePrecisionDemo.cpp
 GL_Simplex1to4.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/GL_Simplex1to4.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/GL_Simplex1to4.h
 btBulletCollisionCommon.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/btBulletCollisionCommon.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/btBulletCollisionCommon.h
 LinearMath/btIDebugDraw.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/LinearMath/btIDebugDraw.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/LinearMath/btIDebugDraw.h
 GLDebugFont.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/GLDebugFont.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/GLDebugFont.h
 GL_ShapeDrawer.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/GL_ShapeDrawer.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/GL_ShapeDrawer.h
 DoublePrecisionDemo.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/DoublePrecisionDemo.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/DoublePrecisionDemo.h
 GlutStuff.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/GlutStuff.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/GlutStuff.h
 GLDebugDrawer.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/GLDebugDrawer.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/GLDebugDrawer.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/DoublePrecisionDemo.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/DoublePrecisionDemo.h
 GlutDemoApplication.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/GlutDemoApplication.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DoublePrecisionDemo/GlutDemoApplication.h
 
 Demos/OpenGL/DemoApplication.h
 GlutStuff.h

@@ -6,25 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/btBulletXmlWorldImporter.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/btBulletXmlWorldImporter.cpp
 btBulletXmlWorldImporter.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/btBulletXmlWorldImporter.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/btBulletXmlWorldImporter.h
 tinyxml.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinyxml.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinyxml.h
 btBulletDynamicsCommon.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/btBulletDynamicsCommon.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/btBulletDynamicsCommon.h
 string_split.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/string_split.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/string_split.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/btBulletXmlWorldImporter.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/btBulletXmlWorldImporter.h
 LinearMath/btScalar.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/LinearMath/btScalar.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/LinearMath/btScalar.h
 LinearMath/btAlignedObjectArray.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/LinearMath/btAlignedObjectArray.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/LinearMath/btAlignedObjectArray.h
 btWorldImporter.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/btWorldImporter.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/btWorldImporter.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/string_split.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/string_split.cpp
 assert.h
 -
 stdio.h
@@ -34,27 +34,27 @@ stdlib.h
 string.h
 -
 string_split.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/string_split.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/string_split.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/string_split.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/string_split.h
 cstring
 -
 LinearMath/btAlignedObjectArray.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/LinearMath/btAlignedObjectArray.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/LinearMath/btAlignedObjectArray.h
 string
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinystr.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinystr.cpp
 tinystr.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinystr.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinystr.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinystr.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinystr.h
 assert.h
 -
 string.h
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinyxml.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinyxml.cpp
 ctype.h
 -
 sstream
@@ -62,9 +62,9 @@ sstream
 iostream
 -
 tinyxml.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinyxml.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinyxml.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinyxml.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinyxml.h
 ctype.h
 -
 stdio.h
@@ -82,19 +82,19 @@ iostream
 sstream
 -
 tinystr.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinystr.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinystr.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinyxmlerror.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinyxmlerror.cpp
 tinyxml.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinyxml.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinyxml.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinyxmlparser.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinyxmlparser.cpp
 ctype.h
 -
 stddef.h
 -
 tinyxml.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinyxml.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/tinyxml.h
 windows.h
 -
 

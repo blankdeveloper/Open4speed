@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/depend.make
@@ -51,17 +51,17 @@ include Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/flags.make
 
 Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/btGImpactConvexDecompositionShape.o: Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/flags.make
 Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/btGImpactConvexDecompositionShape.o: Extras/GIMPACTUtils/btGImpactConvexDecompositionShape.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/btGImpactConvexDecompositionShape.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/GIMPACTUtils.dir/btGImpactConvexDecompositionShape.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/btGImpactConvexDecompositionShape.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/GIMPACTUtils.dir/btGImpactConvexDecompositionShape.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/btGImpactConvexDecompositionShape.cpp
 
 Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/btGImpactConvexDecompositionShape.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GIMPACTUtils.dir/btGImpactConvexDecompositionShape.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/btGImpactConvexDecompositionShape.cpp > CMakeFiles/GIMPACTUtils.dir/btGImpactConvexDecompositionShape.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/btGImpactConvexDecompositionShape.cpp > CMakeFiles/GIMPACTUtils.dir/btGImpactConvexDecompositionShape.i
 
 Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/btGImpactConvexDecompositionShape.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GIMPACTUtils.dir/btGImpactConvexDecompositionShape.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/btGImpactConvexDecompositionShape.cpp -o CMakeFiles/GIMPACTUtils.dir/btGImpactConvexDecompositionShape.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/btGImpactConvexDecompositionShape.cpp -o CMakeFiles/GIMPACTUtils.dir/btGImpactConvexDecompositionShape.s
 
 Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/btGImpactConvexDecompositionShape.o.requires:
 .PHONY : Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/btGImpactConvexDecompositionShape.o.requires
@@ -83,8 +83,8 @@ Extras/GIMPACTUtils/libGIMPACTUtils.a: Extras/GIMPACTUtils/CMakeFiles/GIMPACTUti
 Extras/GIMPACTUtils/libGIMPACTUtils.a: Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/build.make
 Extras/GIMPACTUtils/libGIMPACTUtils.a: Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library libGIMPACTUtils.a"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils && $(CMAKE_COMMAND) -P CMakeFiles/GIMPACTUtils.dir/cmake_clean_target.cmake
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/GIMPACTUtils.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils && $(CMAKE_COMMAND) -P CMakeFiles/GIMPACTUtils.dir/cmake_clean_target.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/GIMPACTUtils.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/build: Extras/GIMPACTUtils/libGIMPACTUtils.a
@@ -94,10 +94,10 @@ Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/requires: Extras/GIMPACTUtils/CM
 .PHONY : Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/requires
 
 Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils && $(CMAKE_COMMAND) -P CMakeFiles/GIMPACTUtils.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils && $(CMAKE_COMMAND) -P CMakeFiles/GIMPACTUtils.dir/cmake_clean.cmake
 .PHONY : Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/clean
 
 Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/depend
 

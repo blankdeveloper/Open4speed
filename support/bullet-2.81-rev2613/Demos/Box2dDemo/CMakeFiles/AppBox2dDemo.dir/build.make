@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/flags.make
 
 Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/main.o: Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/flags.make
 Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/main.o: Demos/Box2dDemo/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/main.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppBox2dDemo.dir/main.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo/main.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppBox2dDemo.dir/main.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo/main.cpp
 
 Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/main.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppBox2dDemo.dir/main.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo/main.cpp > CMakeFiles/AppBox2dDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo/main.cpp > CMakeFiles/AppBox2dDemo.dir/main.i
 
 Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/main.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppBox2dDemo.dir/main.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo/main.cpp -o CMakeFiles/AppBox2dDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo/main.cpp -o CMakeFiles/AppBox2dDemo.dir/main.s
 
 Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/main.o.requires:
 .PHONY : Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/main.o.requires
@@ -74,17 +74,17 @@ Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/main.o.provides.build: Demos/Box2dDe
 
 Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/Box2dDemo.o: Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/flags.make
 Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/Box2dDemo.o: Demos/Box2dDemo/Box2dDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/Box2dDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppBox2dDemo.dir/Box2dDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo/Box2dDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppBox2dDemo.dir/Box2dDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo/Box2dDemo.cpp
 
 Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/Box2dDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppBox2dDemo.dir/Box2dDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo/Box2dDemo.cpp > CMakeFiles/AppBox2dDemo.dir/Box2dDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo/Box2dDemo.cpp > CMakeFiles/AppBox2dDemo.dir/Box2dDemo.i
 
 Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/Box2dDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppBox2dDemo.dir/Box2dDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo/Box2dDemo.cpp -o CMakeFiles/AppBox2dDemo.dir/Box2dDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo/Box2dDemo.cpp -o CMakeFiles/AppBox2dDemo.dir/Box2dDemo.s
 
 Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/Box2dDemo.o.requires:
 .PHONY : Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/Box2dDemo.o.requires
@@ -115,7 +115,7 @@ Demos/Box2dDemo/AppBox2dDemo: /usr/lib/i386-linux-gnu/libGL.so
 Demos/Box2dDemo/AppBox2dDemo: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/Box2dDemo/AppBox2dDemo: Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppBox2dDemo"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppBox2dDemo.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppBox2dDemo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/build: Demos/Box2dDemo/AppBox2dDemo
@@ -126,10 +126,10 @@ Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/requires: Demos/Box2dDemo/CMakeFiles
 .PHONY : Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/requires
 
 Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppBox2dDemo.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppBox2dDemo.dir/cmake_clean.cmake
 .PHONY : Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/clean
 
 Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/depend
 

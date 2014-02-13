@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/fl
 
 Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/CollisionInterfaceDemo.o: Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/flags.make
 Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/CollisionInterfaceDemo.o: Demos/CollisionInterfaceDemo/CollisionInterfaceDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/CollisionInterfaceDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCollisionInterfaceDemo.dir/CollisionInterfaceDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo/CollisionInterfaceDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCollisionInterfaceDemo.dir/CollisionInterfaceDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo/CollisionInterfaceDemo.cpp
 
 Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/CollisionInterfaceDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppCollisionInterfaceDemo.dir/CollisionInterfaceDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo/CollisionInterfaceDemo.cpp > CMakeFiles/AppCollisionInterfaceDemo.dir/CollisionInterfaceDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo/CollisionInterfaceDemo.cpp > CMakeFiles/AppCollisionInterfaceDemo.dir/CollisionInterfaceDemo.i
 
 Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/CollisionInterfaceDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppCollisionInterfaceDemo.dir/CollisionInterfaceDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo/CollisionInterfaceDemo.cpp -o CMakeFiles/AppCollisionInterfaceDemo.dir/CollisionInterfaceDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo/CollisionInterfaceDemo.cpp -o CMakeFiles/AppCollisionInterfaceDemo.dir/CollisionInterfaceDemo.s
 
 Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/CollisionInterfaceDemo.o.requires:
 .PHONY : Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/CollisionInterfaceDemo.o.requires
@@ -74,17 +74,17 @@ Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/CollisionI
 
 Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/main.o: Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/flags.make
 Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/main.o: Demos/CollisionInterfaceDemo/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/main.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCollisionInterfaceDemo.dir/main.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo/main.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCollisionInterfaceDemo.dir/main.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo/main.cpp
 
 Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/main.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppCollisionInterfaceDemo.dir/main.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo/main.cpp > CMakeFiles/AppCollisionInterfaceDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo/main.cpp > CMakeFiles/AppCollisionInterfaceDemo.dir/main.i
 
 Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/main.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppCollisionInterfaceDemo.dir/main.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo/main.cpp -o CMakeFiles/AppCollisionInterfaceDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo/main.cpp -o CMakeFiles/AppCollisionInterfaceDemo.dir/main.s
 
 Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/main.o.requires:
 .PHONY : Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/main.o.requires
@@ -115,7 +115,7 @@ Demos/CollisionInterfaceDemo/AppCollisionInterfaceDemo: /usr/lib/i386-linux-gnu/
 Demos/CollisionInterfaceDemo/AppCollisionInterfaceDemo: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/CollisionInterfaceDemo/AppCollisionInterfaceDemo: Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppCollisionInterfaceDemo"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppCollisionInterfaceDemo.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppCollisionInterfaceDemo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/build: Demos/CollisionInterfaceDemo/AppCollisionInterfaceDemo
@@ -126,10 +126,10 @@ Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/requires: 
 .PHONY : Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/requires
 
 Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppCollisionInterfaceDemo.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppCollisionInterfaceDemo.dir/cmake_clean.cmake
 .PHONY : Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/clean
 
 Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/depend
 

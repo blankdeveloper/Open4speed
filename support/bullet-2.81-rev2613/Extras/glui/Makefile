@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -110,14 +110,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/CMakeFiles/progress.marks
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/glui/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/CMakeFiles/progress.marks
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/glui/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/glui/clean
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/glui/clean
 .PHONY : clean
 
 # The main clean target
@@ -126,22 +126,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/glui/preinstall
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/glui/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/glui/preinstall
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/glui/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 Extras/glui/CMakeFiles/GLUI.dir/rule:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/glui/CMakeFiles/GLUI.dir/rule
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/glui/CMakeFiles/GLUI.dir/rule
 .PHONY : Extras/glui/CMakeFiles/GLUI.dir/rule
 
 # Convenience name for target.
@@ -150,487 +150,487 @@ GLUI: Extras/glui/CMakeFiles/GLUI.dir/rule
 
 # fast build rule for target.
 GLUI/fast:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/build
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/build
 .PHONY : GLUI/fast
 
 # target to build an object file
 algebra3.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/algebra3.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/algebra3.o
 .PHONY : algebra3.o
 
 # target to preprocess a source file
 algebra3.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/algebra3.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/algebra3.i
 .PHONY : algebra3.i
 
 # target to generate assembly for a file
 algebra3.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/algebra3.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/algebra3.s
 .PHONY : algebra3.s
 
 # target to build an object file
 arcball.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/arcball.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/arcball.o
 .PHONY : arcball.o
 
 # target to preprocess a source file
 arcball.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/arcball.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/arcball.i
 .PHONY : arcball.i
 
 # target to generate assembly for a file
 arcball.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/arcball.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/arcball.s
 .PHONY : arcball.s
 
 # target to build an object file
 glui.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui.o
 .PHONY : glui.o
 
 # target to preprocess a source file
 glui.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui.i
 .PHONY : glui.i
 
 # target to generate assembly for a file
 glui.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui.s
 .PHONY : glui.s
 
 # target to build an object file
 glui_add_controls.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_add_controls.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_add_controls.o
 .PHONY : glui_add_controls.o
 
 # target to preprocess a source file
 glui_add_controls.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_add_controls.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_add_controls.i
 .PHONY : glui_add_controls.i
 
 # target to generate assembly for a file
 glui_add_controls.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_add_controls.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_add_controls.s
 .PHONY : glui_add_controls.s
 
 # target to build an object file
 glui_bitmap_img_data.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_bitmap_img_data.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_bitmap_img_data.o
 .PHONY : glui_bitmap_img_data.o
 
 # target to preprocess a source file
 glui_bitmap_img_data.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_bitmap_img_data.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_bitmap_img_data.i
 .PHONY : glui_bitmap_img_data.i
 
 # target to generate assembly for a file
 glui_bitmap_img_data.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_bitmap_img_data.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_bitmap_img_data.s
 .PHONY : glui_bitmap_img_data.s
 
 # target to build an object file
 glui_bitmaps.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_bitmaps.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_bitmaps.o
 .PHONY : glui_bitmaps.o
 
 # target to preprocess a source file
 glui_bitmaps.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_bitmaps.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_bitmaps.i
 .PHONY : glui_bitmaps.i
 
 # target to generate assembly for a file
 glui_bitmaps.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_bitmaps.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_bitmaps.s
 .PHONY : glui_bitmaps.s
 
 # target to build an object file
 glui_button.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_button.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_button.o
 .PHONY : glui_button.o
 
 # target to preprocess a source file
 glui_button.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_button.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_button.i
 .PHONY : glui_button.i
 
 # target to generate assembly for a file
 glui_button.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_button.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_button.s
 .PHONY : glui_button.s
 
 # target to build an object file
 glui_checkbox.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_checkbox.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_checkbox.o
 .PHONY : glui_checkbox.o
 
 # target to preprocess a source file
 glui_checkbox.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_checkbox.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_checkbox.i
 .PHONY : glui_checkbox.i
 
 # target to generate assembly for a file
 glui_checkbox.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_checkbox.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_checkbox.s
 .PHONY : glui_checkbox.s
 
 # target to build an object file
 glui_column.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_column.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_column.o
 .PHONY : glui_column.o
 
 # target to preprocess a source file
 glui_column.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_column.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_column.i
 .PHONY : glui_column.i
 
 # target to generate assembly for a file
 glui_column.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_column.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_column.s
 .PHONY : glui_column.s
 
 # target to build an object file
 glui_commandline.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_commandline.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_commandline.o
 .PHONY : glui_commandline.o
 
 # target to preprocess a source file
 glui_commandline.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_commandline.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_commandline.i
 .PHONY : glui_commandline.i
 
 # target to generate assembly for a file
 glui_commandline.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_commandline.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_commandline.s
 .PHONY : glui_commandline.s
 
 # target to build an object file
 glui_control.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_control.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_control.o
 .PHONY : glui_control.o
 
 # target to preprocess a source file
 glui_control.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_control.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_control.i
 .PHONY : glui_control.i
 
 # target to generate assembly for a file
 glui_control.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_control.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_control.s
 .PHONY : glui_control.s
 
 # target to build an object file
 glui_edittext.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_edittext.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_edittext.o
 .PHONY : glui_edittext.o
 
 # target to preprocess a source file
 glui_edittext.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_edittext.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_edittext.i
 .PHONY : glui_edittext.i
 
 # target to generate assembly for a file
 glui_edittext.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_edittext.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_edittext.s
 .PHONY : glui_edittext.s
 
 # target to build an object file
 glui_filebrowser.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_filebrowser.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_filebrowser.o
 .PHONY : glui_filebrowser.o
 
 # target to preprocess a source file
 glui_filebrowser.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_filebrowser.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_filebrowser.i
 .PHONY : glui_filebrowser.i
 
 # target to generate assembly for a file
 glui_filebrowser.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_filebrowser.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_filebrowser.s
 .PHONY : glui_filebrowser.s
 
 # target to build an object file
 glui_list.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_list.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_list.o
 .PHONY : glui_list.o
 
 # target to preprocess a source file
 glui_list.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_list.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_list.i
 .PHONY : glui_list.i
 
 # target to generate assembly for a file
 glui_list.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_list.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_list.s
 .PHONY : glui_list.s
 
 # target to build an object file
 glui_listbox.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_listbox.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_listbox.o
 .PHONY : glui_listbox.o
 
 # target to preprocess a source file
 glui_listbox.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_listbox.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_listbox.i
 .PHONY : glui_listbox.i
 
 # target to generate assembly for a file
 glui_listbox.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_listbox.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_listbox.s
 .PHONY : glui_listbox.s
 
 # target to build an object file
 glui_mouse_iaction.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_mouse_iaction.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_mouse_iaction.o
 .PHONY : glui_mouse_iaction.o
 
 # target to preprocess a source file
 glui_mouse_iaction.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_mouse_iaction.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_mouse_iaction.i
 .PHONY : glui_mouse_iaction.i
 
 # target to generate assembly for a file
 glui_mouse_iaction.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_mouse_iaction.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_mouse_iaction.s
 .PHONY : glui_mouse_iaction.s
 
 # target to build an object file
 glui_node.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_node.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_node.o
 .PHONY : glui_node.o
 
 # target to preprocess a source file
 glui_node.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_node.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_node.i
 .PHONY : glui_node.i
 
 # target to generate assembly for a file
 glui_node.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_node.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_node.s
 .PHONY : glui_node.s
 
 # target to build an object file
 glui_panel.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_panel.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_panel.o
 .PHONY : glui_panel.o
 
 # target to preprocess a source file
 glui_panel.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_panel.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_panel.i
 .PHONY : glui_panel.i
 
 # target to generate assembly for a file
 glui_panel.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_panel.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_panel.s
 .PHONY : glui_panel.s
 
 # target to build an object file
 glui_radio.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_radio.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_radio.o
 .PHONY : glui_radio.o
 
 # target to preprocess a source file
 glui_radio.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_radio.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_radio.i
 .PHONY : glui_radio.i
 
 # target to generate assembly for a file
 glui_radio.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_radio.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_radio.s
 .PHONY : glui_radio.s
 
 # target to build an object file
 glui_rollout.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_rollout.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_rollout.o
 .PHONY : glui_rollout.o
 
 # target to preprocess a source file
 glui_rollout.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_rollout.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_rollout.i
 .PHONY : glui_rollout.i
 
 # target to generate assembly for a file
 glui_rollout.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_rollout.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_rollout.s
 .PHONY : glui_rollout.s
 
 # target to build an object file
 glui_rotation.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_rotation.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_rotation.o
 .PHONY : glui_rotation.o
 
 # target to preprocess a source file
 glui_rotation.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_rotation.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_rotation.i
 .PHONY : glui_rotation.i
 
 # target to generate assembly for a file
 glui_rotation.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_rotation.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_rotation.s
 .PHONY : glui_rotation.s
 
 # target to build an object file
 glui_scrollbar.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_scrollbar.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_scrollbar.o
 .PHONY : glui_scrollbar.o
 
 # target to preprocess a source file
 glui_scrollbar.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_scrollbar.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_scrollbar.i
 .PHONY : glui_scrollbar.i
 
 # target to generate assembly for a file
 glui_scrollbar.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_scrollbar.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_scrollbar.s
 .PHONY : glui_scrollbar.s
 
 # target to build an object file
 glui_separator.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_separator.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_separator.o
 .PHONY : glui_separator.o
 
 # target to preprocess a source file
 glui_separator.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_separator.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_separator.i
 .PHONY : glui_separator.i
 
 # target to generate assembly for a file
 glui_separator.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_separator.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_separator.s
 .PHONY : glui_separator.s
 
 # target to build an object file
 glui_spinner.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_spinner.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_spinner.o
 .PHONY : glui_spinner.o
 
 # target to preprocess a source file
 glui_spinner.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_spinner.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_spinner.i
 .PHONY : glui_spinner.i
 
 # target to generate assembly for a file
 glui_spinner.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_spinner.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_spinner.s
 .PHONY : glui_spinner.s
 
 # target to build an object file
 glui_statictext.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_statictext.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_statictext.o
 .PHONY : glui_statictext.o
 
 # target to preprocess a source file
 glui_statictext.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_statictext.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_statictext.i
 .PHONY : glui_statictext.i
 
 # target to generate assembly for a file
 glui_statictext.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_statictext.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_statictext.s
 .PHONY : glui_statictext.s
 
 # target to build an object file
 glui_string.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_string.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_string.o
 .PHONY : glui_string.o
 
 # target to preprocess a source file
 glui_string.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_string.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_string.i
 .PHONY : glui_string.i
 
 # target to generate assembly for a file
 glui_string.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_string.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_string.s
 .PHONY : glui_string.s
 
 # target to build an object file
 glui_textbox.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_textbox.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_textbox.o
 .PHONY : glui_textbox.o
 
 # target to preprocess a source file
 glui_textbox.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_textbox.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_textbox.i
 .PHONY : glui_textbox.i
 
 # target to generate assembly for a file
 glui_textbox.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_textbox.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_textbox.s
 .PHONY : glui_textbox.s
 
 # target to build an object file
 glui_translation.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_translation.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_translation.o
 .PHONY : glui_translation.o
 
 # target to preprocess a source file
 glui_translation.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_translation.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_translation.i
 .PHONY : glui_translation.i
 
 # target to generate assembly for a file
 glui_translation.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_translation.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_translation.s
 .PHONY : glui_translation.s
 
 # target to build an object file
 glui_tree.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_tree.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_tree.o
 .PHONY : glui_tree.o
 
 # target to preprocess a source file
 glui_tree.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_tree.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_tree.i
 .PHONY : glui_tree.i
 
 # target to generate assembly for a file
 glui_tree.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_tree.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_tree.s
 .PHONY : glui_tree.s
 
 # target to build an object file
 glui_treepanel.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_treepanel.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_treepanel.o
 .PHONY : glui_treepanel.o
 
 # target to preprocess a source file
 glui_treepanel.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_treepanel.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_treepanel.i
 .PHONY : glui_treepanel.i
 
 # target to generate assembly for a file
 glui_treepanel.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_treepanel.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_treepanel.s
 .PHONY : glui_treepanel.s
 
 # target to build an object file
 glui_window.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_window.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_window.o
 .PHONY : glui_window.o
 
 # target to preprocess a source file
 glui_window.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_window.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_window.i
 .PHONY : glui_window.i
 
 # target to generate assembly for a file
 glui_window.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_window.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/glui_window.s
 .PHONY : glui_window.s
 
 # target to build an object file
 quaternion.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/quaternion.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/quaternion.o
 .PHONY : quaternion.o
 
 # target to preprocess a source file
 quaternion.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/quaternion.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/quaternion.i
 .PHONY : quaternion.i
 
 # target to generate assembly for a file
 quaternion.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/quaternion.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/quaternion.s
 .PHONY : quaternion.s
 
 # Help Target
@@ -753,6 +753,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

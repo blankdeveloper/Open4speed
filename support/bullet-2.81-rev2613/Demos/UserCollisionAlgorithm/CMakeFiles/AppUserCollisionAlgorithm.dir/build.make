@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/fl
 
 Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/UserCollisionAlgorithm.o: Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/flags.make
 Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/UserCollisionAlgorithm.o: Demos/UserCollisionAlgorithm/UserCollisionAlgorithm.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/UserCollisionAlgorithm.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppUserCollisionAlgorithm.dir/UserCollisionAlgorithm.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/UserCollisionAlgorithm.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppUserCollisionAlgorithm.dir/UserCollisionAlgorithm.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/UserCollisionAlgorithm.cpp
 
 Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/UserCollisionAlgorithm.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppUserCollisionAlgorithm.dir/UserCollisionAlgorithm.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/UserCollisionAlgorithm.cpp > CMakeFiles/AppUserCollisionAlgorithm.dir/UserCollisionAlgorithm.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/UserCollisionAlgorithm.cpp > CMakeFiles/AppUserCollisionAlgorithm.dir/UserCollisionAlgorithm.i
 
 Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/UserCollisionAlgorithm.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppUserCollisionAlgorithm.dir/UserCollisionAlgorithm.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/UserCollisionAlgorithm.cpp -o CMakeFiles/AppUserCollisionAlgorithm.dir/UserCollisionAlgorithm.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/UserCollisionAlgorithm.cpp -o CMakeFiles/AppUserCollisionAlgorithm.dir/UserCollisionAlgorithm.s
 
 Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/UserCollisionAlgorithm.o.requires:
 .PHONY : Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/UserCollisionAlgorithm.o.requires
@@ -90,7 +90,7 @@ Demos/UserCollisionAlgorithm/AppUserCollisionAlgorithm: /usr/lib/i386-linux-gnu/
 Demos/UserCollisionAlgorithm/AppUserCollisionAlgorithm: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/UserCollisionAlgorithm/AppUserCollisionAlgorithm: Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppUserCollisionAlgorithm"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppUserCollisionAlgorithm.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppUserCollisionAlgorithm.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/build: Demos/UserCollisionAlgorithm/AppUserCollisionAlgorithm
@@ -100,10 +100,10 @@ Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/requires: 
 .PHONY : Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/requires
 
 Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm && $(CMAKE_COMMAND) -P CMakeFiles/AppUserCollisionAlgorithm.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm && $(CMAKE_COMMAND) -P CMakeFiles/AppUserCollisionAlgorithm.dir/cmake_clean.cmake
 .PHONY : Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/clean
 
 Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/depend
 

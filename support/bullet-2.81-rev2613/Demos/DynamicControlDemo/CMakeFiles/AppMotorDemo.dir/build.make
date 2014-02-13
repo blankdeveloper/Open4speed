@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/flags.make
 
 Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/MotorDemo.o: Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/flags.make
 Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/MotorDemo.o: Demos/DynamicControlDemo/MotorDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/MotorDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppMotorDemo.dir/MotorDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/MotorDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppMotorDemo.dir/MotorDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/MotorDemo.cpp
 
 Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/MotorDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppMotorDemo.dir/MotorDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/MotorDemo.cpp > CMakeFiles/AppMotorDemo.dir/MotorDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/MotorDemo.cpp > CMakeFiles/AppMotorDemo.dir/MotorDemo.i
 
 Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/MotorDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppMotorDemo.dir/MotorDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/MotorDemo.cpp -o CMakeFiles/AppMotorDemo.dir/MotorDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/MotorDemo.cpp -o CMakeFiles/AppMotorDemo.dir/MotorDemo.s
 
 Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/MotorDemo.o.requires:
 .PHONY : Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/MotorDemo.o.requires
@@ -74,17 +74,17 @@ Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/MotorDemo.o.provides.build:
 
 Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/main.o: Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/flags.make
 Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/main.o: Demos/DynamicControlDemo/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/main.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppMotorDemo.dir/main.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/main.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppMotorDemo.dir/main.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/main.cpp
 
 Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/main.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppMotorDemo.dir/main.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/main.cpp > CMakeFiles/AppMotorDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/main.cpp > CMakeFiles/AppMotorDemo.dir/main.i
 
 Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/main.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppMotorDemo.dir/main.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/main.cpp -o CMakeFiles/AppMotorDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/main.cpp -o CMakeFiles/AppMotorDemo.dir/main.s
 
 Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/main.o.requires:
 .PHONY : Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/main.o.requires
@@ -115,7 +115,7 @@ Demos/DynamicControlDemo/AppMotorDemo: /usr/lib/i386-linux-gnu/libGL.so
 Demos/DynamicControlDemo/AppMotorDemo: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/DynamicControlDemo/AppMotorDemo: Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppMotorDemo"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppMotorDemo.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppMotorDemo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/build: Demos/DynamicControlDemo/AppMotorDemo
@@ -126,10 +126,10 @@ Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/requires: Demos/DynamicCont
 .PHONY : Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/requires
 
 Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppMotorDemo.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppMotorDemo.dir/cmake_clean.cmake
 .PHONY : Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/clean
 
 Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/depend
 

@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.cpp
 btAlignedAllocator.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h
 malloc.h
 -
 stdlib.h
@@ -16,15 +16,15 @@ stdlib.h
 stdio.h
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h
 btScalar.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btScalar.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btScalar.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h
 btScalar.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btScalar.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btScalar.h
 btAlignedAllocator.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h
 memory.h
 -
 string.h
@@ -32,95 +32,95 @@ string.h
 new
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btConvexHull.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btConvexHull.cpp
 string.h
 -
 btConvexHull.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btConvexHull.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btConvexHull.h
 btAlignedObjectArray.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h
 btMinMax.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h
 btVector3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btConvexHull.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btConvexHull.h
 btVector3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
 btAlignedObjectArray.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btConvexHullComputer.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btConvexHullComputer.cpp
 string.h
 -
 btConvexHullComputer.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btConvexHullComputer.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btConvexHullComputer.h
 btAlignedObjectArray.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h
 btMinMax.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h
 btVector3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
 stdint.h
 -
 stdio.h
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btConvexHullComputer.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btConvexHullComputer.h
 btVector3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
 btAlignedObjectArray.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btGeometryUtil.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btGeometryUtil.cpp
 btGeometryUtil.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btGeometryUtil.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btGeometryUtil.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btGeometryUtil.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btGeometryUtil.h
 btVector3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
 btAlignedObjectArray.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btMatrix3x3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btMatrix3x3.h
 btVector3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
 btQuaternion.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btQuaternion.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btQuaternion.h
 stdio.h
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h
 btScalar.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btScalar.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btScalar.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btPolarDecomposition.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btPolarDecomposition.cpp
 btPolarDecomposition.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btPolarDecomposition.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btPolarDecomposition.h
 btMinMax.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btPolarDecomposition.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btPolarDecomposition.h
 btMatrix3x3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btMatrix3x3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btMatrix3x3.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btQuadWord.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btQuadWord.h
 btScalar.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btScalar.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btScalar.h
 btMinMax.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h
 altivec.h
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btQuaternion.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btQuaternion.h
 btVector3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
 btQuadWord.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btQuadWord.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btQuadWord.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btQuickprof.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btQuickprof.cpp
 btQuickprof.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btQuickprof.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btQuickprof.h
 sys/sys_time.h
 -
 sys/time_util.h
@@ -140,17 +140,17 @@ sys/time.h
 stdio.h
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btQuickprof.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btQuickprof.h
 stdio.h
 -
 btScalar.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btScalar.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btScalar.h
 btAlignedAllocator.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h
 new
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btScalar.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btScalar.h
 math.h
 -
 stdlib.h
@@ -190,11 +190,11 @@ assert.h
 arm_neon.h
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btSerializer.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btSerializer.cpp
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btVector3.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btVector3.cpp
 btVector3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
 stdint.h
 -
 emmintrin.h
@@ -202,11 +202,11 @@ emmintrin.h
 arm_neon.h
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btVector3.h
 btScalar.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btScalar.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btScalar.h
 btMinMax.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h
 btAlignedAllocator.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h
 

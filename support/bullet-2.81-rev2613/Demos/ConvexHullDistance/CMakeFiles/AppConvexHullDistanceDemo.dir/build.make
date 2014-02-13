@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/flags.
 
 Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/ConvexHullDistanceDemo.o: Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/flags.make
 Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/ConvexHullDistanceDemo.o: Demos/ConvexHullDistance/ConvexHullDistanceDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/ConvexHullDistanceDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConvexHullDistance && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppConvexHullDistanceDemo.dir/ConvexHullDistanceDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConvexHullDistance/ConvexHullDistanceDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConvexHullDistance && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppConvexHullDistanceDemo.dir/ConvexHullDistanceDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConvexHullDistance/ConvexHullDistanceDemo.cpp
 
 Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/ConvexHullDistanceDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppConvexHullDistanceDemo.dir/ConvexHullDistanceDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConvexHullDistance && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConvexHullDistance/ConvexHullDistanceDemo.cpp > CMakeFiles/AppConvexHullDistanceDemo.dir/ConvexHullDistanceDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConvexHullDistance && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConvexHullDistance/ConvexHullDistanceDemo.cpp > CMakeFiles/AppConvexHullDistanceDemo.dir/ConvexHullDistanceDemo.i
 
 Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/ConvexHullDistanceDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppConvexHullDistanceDemo.dir/ConvexHullDistanceDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConvexHullDistance && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConvexHullDistance/ConvexHullDistanceDemo.cpp -o CMakeFiles/AppConvexHullDistanceDemo.dir/ConvexHullDistanceDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConvexHullDistance && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConvexHullDistance/ConvexHullDistanceDemo.cpp -o CMakeFiles/AppConvexHullDistanceDemo.dir/ConvexHullDistanceDemo.s
 
 Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/ConvexHullDistanceDemo.o.requires:
 .PHONY : Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/ConvexHullDistanceDemo.o.requires
@@ -90,7 +90,7 @@ Demos/ConvexHullDistance/AppConvexHullDistanceDemo: /usr/lib/i386-linux-gnu/libG
 Demos/ConvexHullDistance/AppConvexHullDistanceDemo: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/ConvexHullDistance/AppConvexHullDistanceDemo: Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppConvexHullDistanceDemo"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConvexHullDistance && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppConvexHullDistanceDemo.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConvexHullDistance && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppConvexHullDistanceDemo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/build: Demos/ConvexHullDistance/AppConvexHullDistanceDemo
@@ -100,10 +100,10 @@ Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/requires: Demo
 .PHONY : Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/requires
 
 Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConvexHullDistance && $(CMAKE_COMMAND) -P CMakeFiles/AppConvexHullDistanceDemo.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConvexHullDistance && $(CMAKE_COMMAND) -P CMakeFiles/AppConvexHullDistanceDemo.dir/cmake_clean.cmake
 .PHONY : Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/clean
 
 Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConvexHullDistance /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConvexHullDistance /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConvexHullDistance /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConvexHullDistance /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/depend
 

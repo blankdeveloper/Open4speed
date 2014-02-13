@@ -6,35 +6,35 @@
 
 #IncludeRegexTransform: 
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexBuilder.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexBuilder.cpp
 float_math.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
 ConvexBuilder.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexBuilder.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexBuilder.h
 meshvolume.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/meshvolume.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/meshvolume.h
 bestfit.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfit.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfit.h
 assert.h
 -
 cd_hull.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_hull.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_hull.h
 fitsphere.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/fitsphere.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/fitsphere.h
 bestfitobb.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfitobb.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfitobb.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexBuilder.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexBuilder.h
 ConvexDecomposition.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexDecomposition.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexDecomposition.h
 vlookup.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/vlookup.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/vlookup.h
 LinearMath/btAlignedObjectArray.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/LinearMath/btAlignedObjectArray.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/LinearMath/btAlignedObjectArray.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexDecomposition.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexDecomposition.cpp
 float_math.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
 stdio.h
 -
 stdlib.h
@@ -44,31 +44,31 @@ string.h
 assert.h
 -
 ConvexDecomposition.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexDecomposition.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexDecomposition.h
 cd_vector.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_vector.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_vector.h
 cd_hull.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_hull.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_hull.h
 bestfit.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfit.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfit.h
 planetri.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/planetri.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/planetri.h
 vlookup.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/vlookup.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/vlookup.h
 splitplane.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/splitplane.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/splitplane.h
 meshvolume.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/meshvolume.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/meshvolume.h
 concavity.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/concavity.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/concavity.h
 bestfitobb.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfitobb.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfitobb.h
 float_math.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
 fitsphere.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/fitsphere.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/fitsphere.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexDecomposition.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexDecomposition.h
 memory.h
 -
 string.h
@@ -76,11 +76,11 @@ string.h
 stdio.h
 -
 LinearMath/btAlignedObjectArray.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/LinearMath/btAlignedObjectArray.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/LinearMath/btAlignedObjectArray.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfit.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfit.cpp
 float_math.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
 stdio.h
 -
 stdlib.h
@@ -92,13 +92,13 @@ assert.h
 math.h
 -
 bestfit.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfit.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfit.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfit.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfit.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfitobb.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfitobb.cpp
 float_math.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
 stdio.h
 -
 stdlib.h
@@ -110,15 +110,15 @@ math.h
 assert.h
 -
 bestfitobb.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfitobb.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfitobb.h
 float_math.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfitobb.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfitobb.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_hull.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_hull.cpp
 float_math.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
 stdio.h
 -
 stdlib.h
@@ -132,11 +132,11 @@ math.h
 float.h
 -
 cd_hull.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_hull.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_hull.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_hull.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_hull.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_vector.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_vector.h
 math.h
 -
 float.h
@@ -144,7 +144,7 @@ float.h
 vector
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_wavefront.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_wavefront.cpp
 stdio.h
 -
 stdlib.h
@@ -156,17 +156,17 @@ assert.h
 ctype.h
 -
 float_math.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
 cd_wavefront.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_wavefront.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_wavefront.h
 vector
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_wavefront.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_wavefront.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/concavity.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/concavity.cpp
 float_math.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
 stdio.h
 -
 stdlib.h
@@ -178,25 +178,25 @@ assert.h
 vector
 -
 concavity.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/concavity.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/concavity.h
 raytri.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/raytri.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/raytri.h
 bestfit.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfit.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfit.h
 cd_hull.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_hull.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_hull.h
 meshvolume.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/meshvolume.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/meshvolume.h
 cd_vector.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_vector.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_vector.h
 splitplane.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/splitplane.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/splitplane.h
 ConvexDecomposition.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexDecomposition.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexDecomposition.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/concavity.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/concavity.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/fitsphere.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/fitsphere.cpp
 stdio.h
 -
 stdlib.h
@@ -208,13 +208,13 @@ assert.h
 math.h
 -
 fitsphere.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/fitsphere.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/fitsphere.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/fitsphere.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/fitsphere.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.cpp
 float_math.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
 stdio.h
 -
 stdlib.h
@@ -226,19 +226,19 @@ assert.h
 math.h
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/meshvolume.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/meshvolume.cpp
 float_math.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
 meshvolume.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/meshvolume.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/meshvolume.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/meshvolume.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/meshvolume.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/planetri.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/planetri.cpp
 float_math.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
 stdio.h
 -
 stdlib.h
@@ -248,13 +248,13 @@ string.h
 assert.h
 -
 planetri.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/planetri.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/planetri.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/planetri.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/planetri.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/raytri.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/raytri.cpp
 float_math.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
 stdio.h
 -
 stdlib.h
@@ -266,13 +266,13 @@ assert.h
 math.h
 -
 raytri.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/raytri.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/raytri.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/raytri.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/raytri.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/splitplane.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/splitplane.cpp
 float_math.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
 stdio.h
 -
 stdlib.h
@@ -286,29 +286,29 @@ float.h
 math.h
 -
 splitplane.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/splitplane.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/splitplane.h
 ConvexDecomposition.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexDecomposition.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/ConvexDecomposition.h
 cd_vector.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_vector.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_vector.h
 cd_hull.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_hull.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_hull.h
 cd_wavefront.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_wavefront.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/cd_wavefront.h
 bestfit.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfit.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/bestfit.h
 planetri.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/planetri.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/planetri.h
 vlookup.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/vlookup.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/vlookup.h
 meshvolume.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/meshvolume.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/meshvolume.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/splitplane.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/splitplane.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/vlookup.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/vlookup.cpp
 float_math.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/float_math.h
 stdio.h
 -
 stdlib.h
@@ -324,9 +324,9 @@ map
 set
 -
 vlookup.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/vlookup.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/vlookup.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/vlookup.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/vlookup.h
 
 src/LinearMath/btAlignedAllocator.h
 btScalar.h

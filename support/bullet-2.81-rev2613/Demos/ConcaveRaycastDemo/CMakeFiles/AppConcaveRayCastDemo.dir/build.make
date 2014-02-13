@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/flags.make
 
 Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/ConcaveRaycastDemo.o: Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/flags.make
 Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/ConcaveRaycastDemo.o: Demos/ConcaveRaycastDemo/ConcaveRaycastDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/ConcaveRaycastDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppConcaveRayCastDemo.dir/ConcaveRaycastDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/ConcaveRaycastDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppConcaveRayCastDemo.dir/ConcaveRaycastDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/ConcaveRaycastDemo.cpp
 
 Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/ConcaveRaycastDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppConcaveRayCastDemo.dir/ConcaveRaycastDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/ConcaveRaycastDemo.cpp > CMakeFiles/AppConcaveRayCastDemo.dir/ConcaveRaycastDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/ConcaveRaycastDemo.cpp > CMakeFiles/AppConcaveRayCastDemo.dir/ConcaveRaycastDemo.i
 
 Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/ConcaveRaycastDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppConcaveRayCastDemo.dir/ConcaveRaycastDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/ConcaveRaycastDemo.cpp -o CMakeFiles/AppConcaveRayCastDemo.dir/ConcaveRaycastDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/ConcaveRaycastDemo.cpp -o CMakeFiles/AppConcaveRayCastDemo.dir/ConcaveRaycastDemo.s
 
 Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/ConcaveRaycastDemo.o.requires:
 .PHONY : Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/ConcaveRaycastDemo.o.requires
@@ -74,17 +74,17 @@ Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/ConcaveRaycastDemo
 
 Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/main.o: Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/flags.make
 Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/main.o: Demos/ConcaveRaycastDemo/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/main.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppConcaveRayCastDemo.dir/main.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/main.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppConcaveRayCastDemo.dir/main.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/main.cpp
 
 Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/main.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppConcaveRayCastDemo.dir/main.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/main.cpp > CMakeFiles/AppConcaveRayCastDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/main.cpp > CMakeFiles/AppConcaveRayCastDemo.dir/main.i
 
 Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/main.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppConcaveRayCastDemo.dir/main.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/main.cpp -o CMakeFiles/AppConcaveRayCastDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/main.cpp -o CMakeFiles/AppConcaveRayCastDemo.dir/main.s
 
 Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/main.o.requires:
 .PHONY : Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/main.o.requires
@@ -115,7 +115,7 @@ Demos/ConcaveRaycastDemo/AppConcaveRayCastDemo: /usr/lib/i386-linux-gnu/libGL.so
 Demos/ConcaveRaycastDemo/AppConcaveRayCastDemo: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/ConcaveRaycastDemo/AppConcaveRayCastDemo: Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppConcaveRayCastDemo"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppConcaveRayCastDemo.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppConcaveRayCastDemo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/build: Demos/ConcaveRaycastDemo/AppConcaveRayCastDemo
@@ -126,10 +126,10 @@ Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/requires: Demos/Co
 .PHONY : Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/requires
 
 Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppConcaveRayCastDemo.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppConcaveRayCastDemo.dir/cmake_clean.cmake
 .PHONY : Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/clean
 
 Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/depend
 

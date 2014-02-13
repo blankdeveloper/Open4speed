@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/flags.make
 
 Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/main.o: Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/flags.make
 Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/main.o: Demos/SerializeDemo/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/main.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppSerializeDemo.dir/main.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo/main.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppSerializeDemo.dir/main.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo/main.cpp
 
 Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/main.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppSerializeDemo.dir/main.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo/main.cpp > CMakeFiles/AppSerializeDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo/main.cpp > CMakeFiles/AppSerializeDemo.dir/main.i
 
 Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/main.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppSerializeDemo.dir/main.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo/main.cpp -o CMakeFiles/AppSerializeDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo/main.cpp -o CMakeFiles/AppSerializeDemo.dir/main.s
 
 Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/main.o.requires:
 .PHONY : Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/main.o.requires
@@ -74,17 +74,17 @@ Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/main.o.provides.build: Demos
 
 Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/SerializeDemo.o: Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/flags.make
 Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/SerializeDemo.o: Demos/SerializeDemo/SerializeDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/SerializeDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppSerializeDemo.dir/SerializeDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo/SerializeDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppSerializeDemo.dir/SerializeDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo/SerializeDemo.cpp
 
 Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/SerializeDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppSerializeDemo.dir/SerializeDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo/SerializeDemo.cpp > CMakeFiles/AppSerializeDemo.dir/SerializeDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo/SerializeDemo.cpp > CMakeFiles/AppSerializeDemo.dir/SerializeDemo.i
 
 Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/SerializeDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppSerializeDemo.dir/SerializeDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo/SerializeDemo.cpp -o CMakeFiles/AppSerializeDemo.dir/SerializeDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo/SerializeDemo.cpp -o CMakeFiles/AppSerializeDemo.dir/SerializeDemo.s
 
 Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/SerializeDemo.o.requires:
 .PHONY : Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/SerializeDemo.o.requires
@@ -118,8 +118,8 @@ Demos/SerializeDemo/AppSerializeDemo: /usr/lib/i386-linux-gnu/libGL.so
 Demos/SerializeDemo/AppSerializeDemo: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/SerializeDemo/AppSerializeDemo: Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppSerializeDemo"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppSerializeDemo.dir/link.txt --verbose=$(VERBOSE)
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo && /usr/bin/cmake -E copy_if_different /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo/testFile.bullet /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo/testFile.bullet
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppSerializeDemo.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo && /usr/bin/cmake -E copy_if_different /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo/testFile.bullet /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo/testFile.bullet
 
 # Rule to build all files generated by this target.
 Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/build: Demos/SerializeDemo/AppSerializeDemo
@@ -130,10 +130,10 @@ Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/requires: Demos/SerializeDem
 .PHONY : Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/requires
 
 Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppSerializeDemo.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppSerializeDemo.dir/cmake_clean.cmake
 .PHONY : Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/clean
 
 Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/depend
 

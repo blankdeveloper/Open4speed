@@ -6,71 +6,71 @@
 
 #IncludeRegexTransform: 
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/../BulletFileLoader/bChunk.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/bChunk.h
 stdint.h
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/../BulletFileLoader/bCommon.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/bCommon.h
 assert.h
 -
 LinearMath/btAlignedObjectArray.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/../BulletFileLoader/LinearMath/btAlignedObjectArray.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/LinearMath/btAlignedObjectArray.h
 LinearMath/btHashMap.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/../BulletFileLoader/LinearMath/btHashMap.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/LinearMath/btHashMap.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/../BulletFileLoader/bDefines.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/bDefines.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/../BulletFileLoader/bFile.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/bFile.h
 bCommon.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/../BulletFileLoader/bCommon.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/bCommon.h
 bChunk.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/../BulletFileLoader/bChunk.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/bChunk.h
 stdio.h
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/../BulletFileLoader/btBulletFile.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/btBulletFile.h
 bFile.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/../BulletFileLoader/bFile.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/bFile.h
 LinearMath/btAlignedObjectArray.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/../BulletFileLoader/LinearMath/btAlignedObjectArray.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/LinearMath/btAlignedObjectArray.h
 bDefines.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/../BulletFileLoader/bDefines.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/bDefines.h
 LinearMath/btSerializer.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/../BulletFileLoader/LinearMath/btSerializer.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/LinearMath/btSerializer.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btBulletWorldImporter.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btBulletWorldImporter.cpp
 btBulletWorldImporter.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btBulletWorldImporter.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btBulletWorldImporter.h
 ../BulletFileLoader/btBulletFile.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/../BulletFileLoader/btBulletFile.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/btBulletFile.h
 btBulletDynamicsCommon.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btBulletDynamicsCommon.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btBulletDynamicsCommon.h
 BulletCollision/Gimpact/btGImpactShape.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/BulletCollision/Gimpact/btGImpactShape.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/BulletCollision/Gimpact/btGImpactShape.h
 BulletCollision/CollisionDispatch/btInternalEdgeUtility.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/BulletCollision/CollisionDispatch/btInternalEdgeUtility.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/BulletCollision/CollisionDispatch/btInternalEdgeUtility.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btBulletWorldImporter.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btBulletWorldImporter.h
 btWorldImporter.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btWorldImporter.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btWorldImporter.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btWorldImporter.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btWorldImporter.cpp
 btWorldImporter.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btWorldImporter.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btWorldImporter.h
 btBulletDynamicsCommon.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btBulletDynamicsCommon.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btBulletDynamicsCommon.h
 BulletCollision/Gimpact/btGImpactShape.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/BulletCollision/Gimpact/btGImpactShape.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/BulletCollision/Gimpact/btGImpactShape.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btWorldImporter.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/btWorldImporter.h
 LinearMath/btTransform.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/LinearMath/btTransform.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/LinearMath/btTransform.h
 LinearMath/btVector3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/LinearMath/btVector3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/LinearMath/btVector3.h
 LinearMath/btAlignedObjectArray.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/LinearMath/btAlignedObjectArray.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/LinearMath/btAlignedObjectArray.h
 LinearMath/btHashMap.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/LinearMath/btHashMap.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/LinearMath/btHashMap.h
 
 src/BulletCollision/BroadphaseCollision/btAxisSweep3.h
 LinearMath/btVector3.h

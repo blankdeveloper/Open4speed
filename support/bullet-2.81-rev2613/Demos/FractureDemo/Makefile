@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -110,14 +110,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/FractureDemo/CMakeFiles/progress.marks
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/FractureDemo/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/FractureDemo/CMakeFiles/progress.marks
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/FractureDemo/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/FractureDemo/clean
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/FractureDemo/clean
 .PHONY : clean
 
 # The main clean target
@@ -126,22 +126,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/FractureDemo/preinstall
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/FractureDemo/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/FractureDemo/preinstall
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/FractureDemo/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/rule:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/rule
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/rule
 .PHONY : Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/rule
 
 # Convenience name for target.
@@ -150,67 +150,67 @@ AppFractureDemo: Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/rule
 
 # fast build rule for target.
 AppFractureDemo/fast:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build
 .PHONY : AppFractureDemo/fast
 
 # target to build an object file
 FractureDemo.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/FractureDemo.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/FractureDemo.o
 .PHONY : FractureDemo.o
 
 # target to preprocess a source file
 FractureDemo.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/FractureDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/FractureDemo.i
 .PHONY : FractureDemo.i
 
 # target to generate assembly for a file
 FractureDemo.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/FractureDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/FractureDemo.s
 .PHONY : FractureDemo.s
 
 # target to build an object file
 btFractureBody.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/btFractureBody.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/btFractureBody.o
 .PHONY : btFractureBody.o
 
 # target to preprocess a source file
 btFractureBody.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/btFractureBody.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/btFractureBody.i
 .PHONY : btFractureBody.i
 
 # target to generate assembly for a file
 btFractureBody.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/btFractureBody.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/btFractureBody.s
 .PHONY : btFractureBody.s
 
 # target to build an object file
 btFractureDynamicsWorld.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/btFractureDynamicsWorld.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/btFractureDynamicsWorld.o
 .PHONY : btFractureDynamicsWorld.o
 
 # target to preprocess a source file
 btFractureDynamicsWorld.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/btFractureDynamicsWorld.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/btFractureDynamicsWorld.i
 .PHONY : btFractureDynamicsWorld.i
 
 # target to generate assembly for a file
 btFractureDynamicsWorld.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/btFractureDynamicsWorld.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/btFractureDynamicsWorld.s
 .PHONY : btFractureDynamicsWorld.s
 
 # target to build an object file
 main.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/main.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/main.o
 .PHONY : main.o
 
 # target to preprocess a source file
 main.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/main.i
 .PHONY : main.i
 
 # target to generate assembly for a file
 main.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/main.s
 .PHONY : main.s
 
 # Help Target
@@ -249,6 +249,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

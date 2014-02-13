@@ -6,25 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SimplexDemo/SimplexDemo.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SimplexDemo/SimplexDemo.cpp
 GL_Simplex1to4.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SimplexDemo/GL_Simplex1to4.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SimplexDemo/GL_Simplex1to4.h
 LinearMath/btQuaternion.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SimplexDemo/LinearMath/btQuaternion.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SimplexDemo/LinearMath/btQuaternion.h
 LinearMath/btTransform.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SimplexDemo/LinearMath/btTransform.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SimplexDemo/LinearMath/btTransform.h
 GL_ShapeDrawer.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SimplexDemo/GL_ShapeDrawer.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SimplexDemo/GL_ShapeDrawer.h
 BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SimplexDemo/BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SimplexDemo/BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h
 SimplexDemo.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SimplexDemo/SimplexDemo.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SimplexDemo/SimplexDemo.h
 GlutStuff.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SimplexDemo/GlutStuff.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SimplexDemo/GlutStuff.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SimplexDemo/SimplexDemo.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SimplexDemo/SimplexDemo.h
 GlutDemoApplication.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SimplexDemo/GlutDemoApplication.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SimplexDemo/GlutDemoApplication.h
 
 Demos/OpenGL/DemoApplication.h
 GlutStuff.h

@@ -47,10 +47,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 #=============================================================================
 # Directory level rules for directory Demos
@@ -259,7 +259,7 @@ Demos/HelloWorld/CMakeFiles/AppHelloWorld.dir/all: src/BulletCollision/CMakeFile
 Demos/HelloWorld/CMakeFiles/AppHelloWorld.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/HelloWorld/CMakeFiles/AppHelloWorld.dir/build.make Demos/HelloWorld/CMakeFiles/AppHelloWorld.dir/depend
 	$(MAKE) -f Demos/HelloWorld/CMakeFiles/AppHelloWorld.dir/build.make Demos/HelloWorld/CMakeFiles/AppHelloWorld.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 
 	@echo "Built target AppHelloWorld"
 .PHONY : Demos/HelloWorld/CMakeFiles/AppHelloWorld.dir/all
 
@@ -269,9 +269,9 @@ all: Demos/HelloWorld/CMakeFiles/AppHelloWorld.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/HelloWorld/CMakeFiles/AppHelloWorld.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 40
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 40
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/HelloWorld/CMakeFiles/AppHelloWorld.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/HelloWorld/CMakeFiles/AppHelloWorld.dir/rule
 
 # Convenience name for target.
@@ -309,7 +309,7 @@ Demos/OpenGL/preinstall:
 Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/all:
 	$(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/depend
 	$(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  97 98 99 100
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  97 98 99 100
 	@echo "Built target OpenGLSupport"
 .PHONY : Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/all
 
@@ -319,9 +319,9 @@ all: Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/rule
 
 # Convenience name for target.
@@ -359,8 +359,8 @@ Demos/AllBulletDemos/preinstall:
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/all: Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/all
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/all: Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/all
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/all: Extras/Serialize/BulletWorldImporter/CMakeFiles/BulletWorldImporter.dir/all
-Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/all: Extras/HACD/CMakeFiles/HACD.dir/all
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/all: Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/all
+Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/all: Extras/HACD/CMakeFiles/HACD.dir/all
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/all: Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/all
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/all: Extras/glui/CMakeFiles/GLUI.dir/all
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/all: src/BulletSoftBody/CMakeFiles/BulletSoftBody.dir/all
@@ -369,7 +369,7 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/all: src/BulletCollision/C
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/build.make Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/depend
 	$(MAKE) -f Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/build.make Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  1 2 3 4 5 6 7
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  1 2 3 4 5 6 7
 	@echo "Built target AppAllBulletDemos"
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/all
 
@@ -379,9 +379,9 @@ all: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 73
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 73
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/rule
 
 # Convenience name for target.
@@ -419,14 +419,14 @@ Demos/ConvexDecompositionDemo/preinstall:
 Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/all: Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/all
 Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/all: Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/all
 Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/all: Extras/Serialize/BulletWorldImporter/CMakeFiles/BulletWorldImporter.dir/all
-Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/all: Extras/HACD/CMakeFiles/HACD.dir/all
 Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/all: Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/all
+Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/all: Extras/HACD/CMakeFiles/HACD.dir/all
 Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/all: src/BulletDynamics/CMakeFiles/BulletDynamics.dir/all
 Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/all: src/BulletCollision/CMakeFiles/BulletCollision.dir/all
 Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/build.make Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/depend
 	$(MAKE) -f Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/build.make Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  18
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  18
 	@echo "Built target AppConvexDecompositionDemo"
 .PHONY : Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/all
 
@@ -436,9 +436,9 @@ all: Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 54
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 54
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/ConvexDecompositionDemo/CMakeFiles/AppConvexDecompositionDemo.dir/rule
 
 # Convenience name for target.
@@ -479,7 +479,7 @@ Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/all: src/BulletCollision/C
 Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/build.make Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/depend
 	$(MAKE) -f Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/build.make Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 
 	@echo "Built target AppCcdPhysicsDemo"
 .PHONY : Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/all
 
@@ -489,9 +489,9 @@ all: Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 44
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 44
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/rule
 
 # Convenience name for target.
@@ -536,7 +536,7 @@ Demos/BulletXmlImportDemo/CMakeFiles/AppBulletXmlImportDemo.dir/all: src/BulletC
 Demos/BulletXmlImportDemo/CMakeFiles/AppBulletXmlImportDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/BulletXmlImportDemo/CMakeFiles/AppBulletXmlImportDemo.dir/build.make Demos/BulletXmlImportDemo/CMakeFiles/AppBulletXmlImportDemo.dir/depend
 	$(MAKE) -f Demos/BulletXmlImportDemo/CMakeFiles/AppBulletXmlImportDemo.dir/build.make Demos/BulletXmlImportDemo/CMakeFiles/AppBulletXmlImportDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  11
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  11
 	@echo "Built target AppBulletXmlImportDemo"
 .PHONY : Demos/BulletXmlImportDemo/CMakeFiles/AppBulletXmlImportDemo.dir/all
 
@@ -546,9 +546,9 @@ all: Demos/BulletXmlImportDemo/CMakeFiles/AppBulletXmlImportDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/BulletXmlImportDemo/CMakeFiles/AppBulletXmlImportDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 52
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 52
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/BulletXmlImportDemo/CMakeFiles/AppBulletXmlImportDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/BulletXmlImportDemo/CMakeFiles/AppBulletXmlImportDemo.dir/rule
 
 # Convenience name for target.
@@ -591,7 +591,7 @@ Demos/ConstraintDemo/CMakeFiles/AppConstraintDemo.dir/all: src/BulletCollision/C
 Demos/ConstraintDemo/CMakeFiles/AppConstraintDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/ConstraintDemo/CMakeFiles/AppConstraintDemo.dir/build.make Demos/ConstraintDemo/CMakeFiles/AppConstraintDemo.dir/depend
 	$(MAKE) -f Demos/ConstraintDemo/CMakeFiles/AppConstraintDemo.dir/build.make Demos/ConstraintDemo/CMakeFiles/AppConstraintDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  17
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  17
 	@echo "Built target AppConstraintDemo"
 .PHONY : Demos/ConstraintDemo/CMakeFiles/AppConstraintDemo.dir/all
 
@@ -601,9 +601,9 @@ all: Demos/ConstraintDemo/CMakeFiles/AppConstraintDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/ConstraintDemo/CMakeFiles/AppConstraintDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 48
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 48
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/ConstraintDemo/CMakeFiles/AppConstraintDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/ConstraintDemo/CMakeFiles/AppConstraintDemo.dir/rule
 
 # Convenience name for target.
@@ -644,7 +644,7 @@ Demos/SliderConstraintDemo/CMakeFiles/AppSliderConstraintDemo.dir/all: src/Bulle
 Demos/SliderConstraintDemo/CMakeFiles/AppSliderConstraintDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/SliderConstraintDemo/CMakeFiles/AppSliderConstraintDemo.dir/build.make Demos/SliderConstraintDemo/CMakeFiles/AppSliderConstraintDemo.dir/depend
 	$(MAKE) -f Demos/SliderConstraintDemo/CMakeFiles/AppSliderConstraintDemo.dir/build.make Demos/SliderConstraintDemo/CMakeFiles/AppSliderConstraintDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  30
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  30
 	@echo "Built target AppSliderConstraintDemo"
 .PHONY : Demos/SliderConstraintDemo/CMakeFiles/AppSliderConstraintDemo.dir/all
 
@@ -654,9 +654,9 @@ all: Demos/SliderConstraintDemo/CMakeFiles/AppSliderConstraintDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/SliderConstraintDemo/CMakeFiles/AppSliderConstraintDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/SliderConstraintDemo/CMakeFiles/AppSliderConstraintDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/SliderConstraintDemo/CMakeFiles/AppSliderConstraintDemo.dir/rule
 
 # Convenience name for target.
@@ -697,7 +697,7 @@ Demos/GenericJointDemo/CMakeFiles/AppGenericJointDemo.dir/all: src/BulletCollisi
 Demos/GenericJointDemo/CMakeFiles/AppGenericJointDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/GenericJointDemo/CMakeFiles/AppGenericJointDemo.dir/build.make Demos/GenericJointDemo/CMakeFiles/AppGenericJointDemo.dir/depend
 	$(MAKE) -f Demos/GenericJointDemo/CMakeFiles/AppGenericJointDemo.dir/build.make Demos/GenericJointDemo/CMakeFiles/AppGenericJointDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  21
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  21
 	@echo "Built target AppGenericJointDemo"
 .PHONY : Demos/GenericJointDemo/CMakeFiles/AppGenericJointDemo.dir/all
 
@@ -707,9 +707,9 @@ all: Demos/GenericJointDemo/CMakeFiles/AppGenericJointDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/GenericJointDemo/CMakeFiles/AppGenericJointDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/GenericJointDemo/CMakeFiles/AppGenericJointDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/GenericJointDemo/CMakeFiles/AppGenericJointDemo.dir/rule
 
 # Convenience name for target.
@@ -750,7 +750,7 @@ Demos/Raytracer/CMakeFiles/AppRaytracer.dir/all: src/BulletCollision/CMakeFiles/
 Demos/Raytracer/CMakeFiles/AppRaytracer.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/Raytracer/CMakeFiles/AppRaytracer.dir/build.make Demos/Raytracer/CMakeFiles/AppRaytracer.dir/depend
 	$(MAKE) -f Demos/Raytracer/CMakeFiles/AppRaytracer.dir/build.make Demos/Raytracer/CMakeFiles/AppRaytracer.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 
 	@echo "Built target AppRaytracer"
 .PHONY : Demos/Raytracer/CMakeFiles/AppRaytracer.dir/all
 
@@ -760,9 +760,9 @@ all: Demos/Raytracer/CMakeFiles/AppRaytracer.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/Raytracer/CMakeFiles/AppRaytracer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 44
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 44
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/Raytracer/CMakeFiles/AppRaytracer.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/Raytracer/CMakeFiles/AppRaytracer.dir/rule
 
 # Convenience name for target.
@@ -803,7 +803,7 @@ Demos/RagdollDemo/CMakeFiles/AppRagdollDemo.dir/all: src/BulletCollision/CMakeFi
 Demos/RagdollDemo/CMakeFiles/AppRagdollDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/RagdollDemo/CMakeFiles/AppRagdollDemo.dir/build.make Demos/RagdollDemo/CMakeFiles/AppRagdollDemo.dir/depend
 	$(MAKE) -f Demos/RagdollDemo/CMakeFiles/AppRagdollDemo.dir/build.make Demos/RagdollDemo/CMakeFiles/AppRagdollDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  26
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  26
 	@echo "Built target AppRagdollDemo"
 .PHONY : Demos/RagdollDemo/CMakeFiles/AppRagdollDemo.dir/all
 
@@ -813,9 +813,9 @@ all: Demos/RagdollDemo/CMakeFiles/AppRagdollDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/RagdollDemo/CMakeFiles/AppRagdollDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/RagdollDemo/CMakeFiles/AppRagdollDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/RagdollDemo/CMakeFiles/AppRagdollDemo.dir/rule
 
 # Convenience name for target.
@@ -856,7 +856,7 @@ Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/all: src/BulletCollision/CMake
 Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/build.make Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/depend
 	$(MAKE) -f Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/build.make Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  19
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  19
 	@echo "Built target AppForkLiftDemo"
 .PHONY : Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/all
 
@@ -866,9 +866,9 @@ all: Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/rule
 
 # Convenience name for target.
@@ -909,7 +909,7 @@ Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/all: src/BulletCollision/CMakeFiles/
 Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/build.make Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/depend
 	$(MAKE) -f Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/build.make Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 
 	@echo "Built target AppBasicDemo"
 .PHONY : Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/all
 
@@ -919,9 +919,9 @@ all: Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 44
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 44
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/BasicDemo/CMakeFiles/AppBasicDemo.dir/rule
 
 # Convenience name for target.
@@ -962,7 +962,7 @@ Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/all: src/BulletC
 Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build.make Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/depend
 	$(MAKE) -f Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build.make Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  28
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  28
 	@echo "Built target AppRollingFrictionDemo"
 .PHONY : Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/all
 
@@ -972,9 +972,9 @@ all: Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/rule
 
 # Convenience name for target.
@@ -1015,7 +1015,7 @@ Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/all: src/BulletCollision/CMakeFi
 Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build.make Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/depend
 	$(MAKE) -f Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build.make Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  27
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  27
 	@echo "Built target AppRaytestDemo"
 .PHONY : Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/all
 
@@ -1025,9 +1025,9 @@ all: Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/rule
 
 # Convenience name for target.
@@ -1068,7 +1068,7 @@ Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/all: src/BulletC
 Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/build.make Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/depend
 	$(MAKE) -f Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/build.make Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  32
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  32
 	@echo "Built target AppVoronoiFractureDemo"
 .PHONY : Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/all
 
@@ -1078,9 +1078,9 @@ all: Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/rule
 
 # Convenience name for target.
@@ -1123,7 +1123,7 @@ Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/all: src/BulletCollision/C
 Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/build.make Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/depend
 	$(MAKE) -f Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/build.make Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  22
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  22
 	@echo "Built target AppGyroscopicDemo"
 .PHONY : Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/all
 
@@ -1133,9 +1133,9 @@ all: Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 48
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 48
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/rule
 
 # Convenience name for target.
@@ -1176,7 +1176,7 @@ Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/all: src/BulletCollision/CMake
 Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/depend
 	$(MAKE) -f Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build.make Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  20
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  20
 	@echo "Built target AppFractureDemo"
 .PHONY : Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/all
 
@@ -1186,9 +1186,9 @@ all: Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/FractureDemo/CMakeFiles/AppFractureDemo.dir/rule
 
 # Convenience name for target.
@@ -1229,7 +1229,7 @@ Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/all: src/BulletCollision/CMakeFiles/
 Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/build.make Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/depend
 	$(MAKE) -f Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/build.make Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  9
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  9
 	@echo "Built target AppBox2dDemo"
 .PHONY : Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/all
 
@@ -1239,9 +1239,9 @@ all: Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/Box2dDemo/CMakeFiles/AppBox2dDemo.dir/rule
 
 # Convenience name for target.
@@ -1282,7 +1282,7 @@ Demos/BspDemo/CMakeFiles/AppBspPhysicsDemo.dir/all: src/BulletCollision/CMakeFil
 Demos/BspDemo/CMakeFiles/AppBspPhysicsDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/BspDemo/CMakeFiles/AppBspPhysicsDemo.dir/build.make Demos/BspDemo/CMakeFiles/AppBspPhysicsDemo.dir/depend
 	$(MAKE) -f Demos/BspDemo/CMakeFiles/AppBspPhysicsDemo.dir/build.make Demos/BspDemo/CMakeFiles/AppBspPhysicsDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  10
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  10
 	@echo "Built target AppBspPhysicsDemo"
 .PHONY : Demos/BspDemo/CMakeFiles/AppBspPhysicsDemo.dir/all
 
@@ -1292,9 +1292,9 @@ all: Demos/BspDemo/CMakeFiles/AppBspPhysicsDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/BspDemo/CMakeFiles/AppBspPhysicsDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/BspDemo/CMakeFiles/AppBspPhysicsDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/BspDemo/CMakeFiles/AppBspPhysicsDemo.dir/rule
 
 # Convenience name for target.
@@ -1335,7 +1335,7 @@ Demos/MovingConcaveDemo/CMakeFiles/AppMovingConcaveDemo.dir/all: src/BulletColli
 Demos/MovingConcaveDemo/CMakeFiles/AppMovingConcaveDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/MovingConcaveDemo/CMakeFiles/AppMovingConcaveDemo.dir/build.make Demos/MovingConcaveDemo/CMakeFiles/AppMovingConcaveDemo.dir/depend
 	$(MAKE) -f Demos/MovingConcaveDemo/CMakeFiles/AppMovingConcaveDemo.dir/build.make Demos/MovingConcaveDemo/CMakeFiles/AppMovingConcaveDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  25
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  25
 	@echo "Built target AppMovingConcaveDemo"
 .PHONY : Demos/MovingConcaveDemo/CMakeFiles/AppMovingConcaveDemo.dir/all
 
@@ -1345,9 +1345,9 @@ all: Demos/MovingConcaveDemo/CMakeFiles/AppMovingConcaveDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/MovingConcaveDemo/CMakeFiles/AppMovingConcaveDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/MovingConcaveDemo/CMakeFiles/AppMovingConcaveDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/MovingConcaveDemo/CMakeFiles/AppMovingConcaveDemo.dir/rule
 
 # Convenience name for target.
@@ -1388,7 +1388,7 @@ Demos/VehicleDemo/CMakeFiles/AppVehicleDemo.dir/all: src/BulletCollision/CMakeFi
 Demos/VehicleDemo/CMakeFiles/AppVehicleDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/VehicleDemo/CMakeFiles/AppVehicleDemo.dir/build.make Demos/VehicleDemo/CMakeFiles/AppVehicleDemo.dir/depend
 	$(MAKE) -f Demos/VehicleDemo/CMakeFiles/AppVehicleDemo.dir/build.make Demos/VehicleDemo/CMakeFiles/AppVehicleDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 
 	@echo "Built target AppVehicleDemo"
 .PHONY : Demos/VehicleDemo/CMakeFiles/AppVehicleDemo.dir/all
 
@@ -1398,9 +1398,9 @@ all: Demos/VehicleDemo/CMakeFiles/AppVehicleDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/VehicleDemo/CMakeFiles/AppVehicleDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 44
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 44
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/VehicleDemo/CMakeFiles/AppVehicleDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/VehicleDemo/CMakeFiles/AppVehicleDemo.dir/rule
 
 # Convenience name for target.
@@ -1441,7 +1441,7 @@ Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/all: src/B
 Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/build.make Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/depend
 	$(MAKE) -f Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/build.make Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  31
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  31
 	@echo "Built target AppUserCollisionAlgorithm"
 .PHONY : Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/all
 
@@ -1451,9 +1451,9 @@ all: Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/UserCollisionAlgorithm/CMakeFiles/AppUserCollisionAlgorithm.dir/rule
 
 # Convenience name for target.
@@ -1494,7 +1494,7 @@ Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/all: src/BulletCollision/CMa
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/build.make Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/depend
 	$(MAKE) -f Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/build.make Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  12 13
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  12 13
 	@echo "Built target AppCharacterDemo"
 .PHONY : Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/all
 
@@ -1504,9 +1504,9 @@ all: Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 46
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 46
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/rule
 
 # Convenience name for target.
@@ -1548,7 +1548,7 @@ Demos/SoftDemo/CMakeFiles/AppSoftBodyDemo.dir/all: src/BulletCollision/CMakeFile
 Demos/SoftDemo/CMakeFiles/AppSoftBodyDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/SoftDemo/CMakeFiles/AppSoftBodyDemo.dir/build.make Demos/SoftDemo/CMakeFiles/AppSoftBodyDemo.dir/depend
 	$(MAKE) -f Demos/SoftDemo/CMakeFiles/AppSoftBodyDemo.dir/build.make Demos/SoftDemo/CMakeFiles/AppSoftBodyDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 
 	@echo "Built target AppSoftBodyDemo"
 .PHONY : Demos/SoftDemo/CMakeFiles/AppSoftBodyDemo.dir/all
 
@@ -1558,9 +1558,9 @@ all: Demos/SoftDemo/CMakeFiles/AppSoftBodyDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/SoftDemo/CMakeFiles/AppSoftBodyDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 46
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 46
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/SoftDemo/CMakeFiles/AppSoftBodyDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/SoftDemo/CMakeFiles/AppSoftBodyDemo.dir/rule
 
 # Convenience name for target.
@@ -1601,7 +1601,7 @@ Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/all: src/B
 Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/build.make Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/depend
 	$(MAKE) -f Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/build.make Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  14
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  14
 	@echo "Built target AppCollisionInterfaceDemo"
 .PHONY : Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/all
 
@@ -1611,9 +1611,9 @@ all: Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/CollisionInterfaceDemo/CMakeFiles/AppCollisionInterfaceDemo.dir/rule
 
 # Convenience name for target.
@@ -1654,7 +1654,7 @@ Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/all: src/Bul
 Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/build.make Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/depend
 	$(MAKE) -f Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/build.make Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  15
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  15
 	@echo "Built target AppConcaveConvexCastDemo"
 .PHONY : Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/all
 
@@ -1664,9 +1664,9 @@ all: Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/rule
 
 # Convenience name for target.
@@ -1707,7 +1707,7 @@ Demos/SimplexDemo/CMakeFiles/AppSimplexDemo.dir/all: src/BulletCollision/CMakeFi
 Demos/SimplexDemo/CMakeFiles/AppSimplexDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/SimplexDemo/CMakeFiles/AppSimplexDemo.dir/build.make Demos/SimplexDemo/CMakeFiles/AppSimplexDemo.dir/depend
 	$(MAKE) -f Demos/SimplexDemo/CMakeFiles/AppSimplexDemo.dir/build.make Demos/SimplexDemo/CMakeFiles/AppSimplexDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 
 	@echo "Built target AppSimplexDemo"
 .PHONY : Demos/SimplexDemo/CMakeFiles/AppSimplexDemo.dir/all
 
@@ -1717,9 +1717,9 @@ all: Demos/SimplexDemo/CMakeFiles/AppSimplexDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/SimplexDemo/CMakeFiles/AppSimplexDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 44
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 44
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/SimplexDemo/CMakeFiles/AppSimplexDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/SimplexDemo/CMakeFiles/AppSimplexDemo.dir/rule
 
 # Convenience name for target.
@@ -1760,7 +1760,7 @@ Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/all: src/BulletCollision/CM
 Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/build.make Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/depend
 	$(MAKE) -f Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/build.make Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 
 	@echo "Built target AppMotorDemo"
 .PHONY : Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/all
 
@@ -1770,9 +1770,9 @@ all: Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 44
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 44
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/DynamicControlDemo/CMakeFiles/AppMotorDemo.dir/rule
 
 # Convenience name for target.
@@ -1813,7 +1813,7 @@ Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/all: src/Bulle
 Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/build.make Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/depend
 	$(MAKE) -f Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/build.make Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 
 	@echo "Built target AppConvexHullDistanceDemo"
 .PHONY : Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/all
 
@@ -1823,9 +1823,9 @@ all: Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 44
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 44
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/ConvexHullDistance/CMakeFiles/AppConvexHullDistanceDemo.dir/rule
 
 # Convenience name for target.
@@ -1866,7 +1866,7 @@ Demos/DoublePrecisionDemo/CMakeFiles/AppDoublePrecisionDemo.dir/all: src/BulletC
 Demos/DoublePrecisionDemo/CMakeFiles/AppDoublePrecisionDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/DoublePrecisionDemo/CMakeFiles/AppDoublePrecisionDemo.dir/build.make Demos/DoublePrecisionDemo/CMakeFiles/AppDoublePrecisionDemo.dir/depend
 	$(MAKE) -f Demos/DoublePrecisionDemo/CMakeFiles/AppDoublePrecisionDemo.dir/build.make Demos/DoublePrecisionDemo/CMakeFiles/AppDoublePrecisionDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 
 	@echo "Built target AppDoublePrecisionDemo"
 .PHONY : Demos/DoublePrecisionDemo/CMakeFiles/AppDoublePrecisionDemo.dir/all
 
@@ -1876,9 +1876,9 @@ all: Demos/DoublePrecisionDemo/CMakeFiles/AppDoublePrecisionDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/DoublePrecisionDemo/CMakeFiles/AppDoublePrecisionDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 44
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 44
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/DoublePrecisionDemo/CMakeFiles/AppDoublePrecisionDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/DoublePrecisionDemo/CMakeFiles/AppDoublePrecisionDemo.dir/rule
 
 # Convenience name for target.
@@ -1921,7 +1921,7 @@ Demos/ConcaveDemo/CMakeFiles/AppConcaveDemo.dir/all: src/BulletCollision/CMakeFi
 Demos/ConcaveDemo/CMakeFiles/AppConcaveDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/ConcaveDemo/CMakeFiles/AppConcaveDemo.dir/build.make Demos/ConcaveDemo/CMakeFiles/AppConcaveDemo.dir/depend
 	$(MAKE) -f Demos/ConcaveDemo/CMakeFiles/AppConcaveDemo.dir/build.make Demos/ConcaveDemo/CMakeFiles/AppConcaveDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 
 	@echo "Built target AppConcaveDemo"
 .PHONY : Demos/ConcaveDemo/CMakeFiles/AppConcaveDemo.dir/all
 
@@ -1931,9 +1931,9 @@ all: Demos/ConcaveDemo/CMakeFiles/AppConcaveDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/ConcaveDemo/CMakeFiles/AppConcaveDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 47
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 47
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/ConcaveDemo/CMakeFiles/AppConcaveDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/ConcaveDemo/CMakeFiles/AppConcaveDemo.dir/rule
 
 # Convenience name for target.
@@ -1974,7 +1974,7 @@ Demos/CollisionDemo/CMakeFiles/AppCollisionDemo.dir/all: src/BulletCollision/CMa
 Demos/CollisionDemo/CMakeFiles/AppCollisionDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/CollisionDemo/CMakeFiles/AppCollisionDemo.dir/build.make Demos/CollisionDemo/CMakeFiles/AppCollisionDemo.dir/depend
 	$(MAKE) -f Demos/CollisionDemo/CMakeFiles/AppCollisionDemo.dir/build.make Demos/CollisionDemo/CMakeFiles/AppCollisionDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 
 	@echo "Built target AppCollisionDemo"
 .PHONY : Demos/CollisionDemo/CMakeFiles/AppCollisionDemo.dir/all
 
@@ -1984,9 +1984,9 @@ all: Demos/CollisionDemo/CMakeFiles/AppCollisionDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/CollisionDemo/CMakeFiles/AppCollisionDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 44
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 44
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/CollisionDemo/CMakeFiles/AppCollisionDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/CollisionDemo/CMakeFiles/AppCollisionDemo.dir/rule
 
 # Convenience name for target.
@@ -2027,7 +2027,7 @@ Demos/ContinuousConvexCollision/CMakeFiles/AppContinuousConvexCollisionDemo.dir/
 Demos/ContinuousConvexCollision/CMakeFiles/AppContinuousConvexCollisionDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/ContinuousConvexCollision/CMakeFiles/AppContinuousConvexCollisionDemo.dir/build.make Demos/ContinuousConvexCollision/CMakeFiles/AppContinuousConvexCollisionDemo.dir/depend
 	$(MAKE) -f Demos/ContinuousConvexCollision/CMakeFiles/AppContinuousConvexCollisionDemo.dir/build.make Demos/ContinuousConvexCollision/CMakeFiles/AppContinuousConvexCollisionDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 
 	@echo "Built target AppContinuousConvexCollisionDemo"
 .PHONY : Demos/ContinuousConvexCollision/CMakeFiles/AppContinuousConvexCollisionDemo.dir/all
 
@@ -2037,9 +2037,9 @@ all: Demos/ContinuousConvexCollision/CMakeFiles/AppContinuousConvexCollisionDemo
 
 # Build rule for subdir invocation for target.
 Demos/ContinuousConvexCollision/CMakeFiles/AppContinuousConvexCollisionDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 44
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 44
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/ContinuousConvexCollision/CMakeFiles/AppContinuousConvexCollisionDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/ContinuousConvexCollision/CMakeFiles/AppContinuousConvexCollisionDemo.dir/rule
 
 # Convenience name for target.
@@ -2080,7 +2080,7 @@ Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/all: src/BulletCol
 Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/build.make Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/depend
 	$(MAKE) -f Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/build.make Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  16
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  16
 	@echo "Built target AppConcaveRayCastDemo"
 .PHONY : Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/all
 
@@ -2090,9 +2090,9 @@ all: Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/ConcaveRaycastDemo/CMakeFiles/AppConcaveRayCastDemo.dir/rule
 
 # Convenience name for target.
@@ -2133,7 +2133,7 @@ Demos/GjkConvexCastDemo/CMakeFiles/AppLinearConvexCastDemo.dir/all: src/BulletCo
 Demos/GjkConvexCastDemo/CMakeFiles/AppLinearConvexCastDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/GjkConvexCastDemo/CMakeFiles/AppLinearConvexCastDemo.dir/build.make Demos/GjkConvexCastDemo/CMakeFiles/AppLinearConvexCastDemo.dir/depend
 	$(MAKE) -f Demos/GjkConvexCastDemo/CMakeFiles/AppLinearConvexCastDemo.dir/build.make Demos/GjkConvexCastDemo/CMakeFiles/AppLinearConvexCastDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  24
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  24
 	@echo "Built target AppLinearConvexCastDemo"
 .PHONY : Demos/GjkConvexCastDemo/CMakeFiles/AppLinearConvexCastDemo.dir/all
 
@@ -2143,9 +2143,9 @@ all: Demos/GjkConvexCastDemo/CMakeFiles/AppLinearConvexCastDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/GjkConvexCastDemo/CMakeFiles/AppLinearConvexCastDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/GjkConvexCastDemo/CMakeFiles/AppLinearConvexCastDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/GjkConvexCastDemo/CMakeFiles/AppLinearConvexCastDemo.dir/rule
 
 # Convenience name for target.
@@ -2186,7 +2186,7 @@ Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/all: src/BulletColli
 Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/build.make Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/depend
 	$(MAKE) -f Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/build.make Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 
 	@echo "Built target AppMultiMaterialDemo"
 .PHONY : Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/all
 
@@ -2196,9 +2196,9 @@ all: Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 44
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 44
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/rule
 
 # Convenience name for target.
@@ -2242,7 +2242,7 @@ Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/all: src/BulletCollision/CMa
 Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/build.make Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/depend
 	$(MAKE) -f Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/build.make Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  29
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  29
 	@echo "Built target AppSerializeDemo"
 .PHONY : Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/all
 
@@ -2252,9 +2252,9 @@ all: Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 50
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 50
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/SerializeDemo/CMakeFiles/AppSerializeDemo.dir/rule
 
 # Convenience name for target.
@@ -2295,7 +2295,7 @@ Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/all: src/BulletCollisi
 Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/build.make Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/depend
 	$(MAKE) -f Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/build.make Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  23
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  23
 	@echo "Built target AppInternalEdgeDemo"
 .PHONY : Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/all
 
@@ -2305,9 +2305,9 @@ all: Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/rule
 
 # Convenience name for target.
@@ -2348,7 +2348,7 @@ Demos/Benchmarks/CMakeFiles/AppBenchmarks.dir/all: src/BulletCollision/CMakeFile
 Demos/Benchmarks/CMakeFiles/AppBenchmarks.dir/all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 	$(MAKE) -f Demos/Benchmarks/CMakeFiles/AppBenchmarks.dir/build.make Demos/Benchmarks/CMakeFiles/AppBenchmarks.dir/depend
 	$(MAKE) -f Demos/Benchmarks/CMakeFiles/AppBenchmarks.dir/build.make Demos/Benchmarks/CMakeFiles/AppBenchmarks.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  8
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  8
 	@echo "Built target AppBenchmarks"
 .PHONY : Demos/Benchmarks/CMakeFiles/AppBenchmarks.dir/all
 
@@ -2358,9 +2358,9 @@ all: Demos/Benchmarks/CMakeFiles/AppBenchmarks.dir/all
 
 # Build rule for subdir invocation for target.
 Demos/Benchmarks/CMakeFiles/AppBenchmarks.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 Demos/Benchmarks/CMakeFiles/AppBenchmarks.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Demos/Benchmarks/CMakeFiles/AppBenchmarks.dir/rule
 
 # Convenience name for target.
@@ -2419,7 +2419,7 @@ Extras/ConvexDecomposition/preinstall:
 Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/all:
 	$(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/depend
 	$(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  77 78 79 80 81
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  77 78 79 80 81
 	@echo "Built target ConvexDecomposition"
 .PHONY : Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/all
 
@@ -2429,9 +2429,9 @@ all: Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/all
 
 # Build rule for subdir invocation for target.
 Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/rule
 
 # Convenience name for target.
@@ -2469,7 +2469,7 @@ Extras/HACD/preinstall:
 Extras/HACD/CMakeFiles/HACD.dir/all:
 	$(MAKE) -f Extras/HACD/CMakeFiles/HACD.dir/build.make Extras/HACD/CMakeFiles/HACD.dir/depend
 	$(MAKE) -f Extras/HACD/CMakeFiles/HACD.dir/build.make Extras/HACD/CMakeFiles/HACD.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  93
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  93
 	@echo "Built target HACD"
 .PHONY : Extras/HACD/CMakeFiles/HACD.dir/all
 
@@ -2479,9 +2479,9 @@ all: Extras/HACD/CMakeFiles/HACD.dir/all
 
 # Build rule for subdir invocation for target.
 Extras/HACD/CMakeFiles/HACD.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 Extras/HACD/CMakeFiles/HACD.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Extras/HACD/CMakeFiles/HACD.dir/rule
 
 # Convenience name for target.
@@ -2519,7 +2519,7 @@ Extras/GIMPACTUtils/preinstall:
 Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/all:
 	$(MAKE) -f Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/build.make Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/depend
 	$(MAKE) -f Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/build.make Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 
 	@echo "Built target GIMPACTUtils"
 .PHONY : Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/all
 
@@ -2529,9 +2529,9 @@ all: Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/all
 
 # Build rule for subdir invocation for target.
 Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Extras/GIMPACTUtils/CMakeFiles/GIMPACTUtils.dir/rule
 
 # Convenience name for target.
@@ -2569,7 +2569,7 @@ Extras/glui/preinstall:
 Extras/glui/CMakeFiles/GLUI.dir/all:
 	$(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/depend
 	$(MAKE) -f Extras/glui/CMakeFiles/GLUI.dir/build.make Extras/glui/CMakeFiles/GLUI.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  82 83 84 85 86 87 88 89 90 91 92
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  82 83 84 85 86 87 88 89 90 91 92
 	@echo "Built target GLUI"
 .PHONY : Extras/glui/CMakeFiles/GLUI.dir/all
 
@@ -2579,9 +2579,9 @@ all: Extras/glui/CMakeFiles/GLUI.dir/all
 
 # Build rule for subdir invocation for target.
 Extras/glui/CMakeFiles/GLUI.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 11
 	$(MAKE) -f CMakeFiles/Makefile2 Extras/glui/CMakeFiles/GLUI.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Extras/glui/CMakeFiles/GLUI.dir/rule
 
 # Convenience name for target.
@@ -2619,7 +2619,7 @@ Extras/Serialize/BulletFileLoader/preinstall:
 Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/all:
 	$(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/depend
 	$(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  70 71
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  70 71
 	@echo "Built target BulletFileLoader"
 .PHONY : Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/all
 
@@ -2629,9 +2629,9 @@ all: Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/all
 
 # Build rule for subdir invocation for target.
 Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/rule
 
 # Convenience name for target.
@@ -2669,7 +2669,7 @@ Extras/Serialize/BulletXmlWorldImporter/preinstall:
 Extras/Serialize/BulletXmlWorldImporter/CMakeFiles/BulletXmlWorldImporter.dir/all:
 	$(MAKE) -f Extras/Serialize/BulletXmlWorldImporter/CMakeFiles/BulletXmlWorldImporter.dir/build.make Extras/Serialize/BulletXmlWorldImporter/CMakeFiles/BulletXmlWorldImporter.dir/depend
 	$(MAKE) -f Extras/Serialize/BulletXmlWorldImporter/CMakeFiles/BulletXmlWorldImporter.dir/build.make Extras/Serialize/BulletXmlWorldImporter/CMakeFiles/BulletXmlWorldImporter.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  75 76
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  75 76
 	@echo "Built target BulletXmlWorldImporter"
 .PHONY : Extras/Serialize/BulletXmlWorldImporter/CMakeFiles/BulletXmlWorldImporter.dir/all
 
@@ -2679,9 +2679,9 @@ all: Extras/Serialize/BulletXmlWorldImporter/CMakeFiles/BulletXmlWorldImporter.d
 
 # Build rule for subdir invocation for target.
 Extras/Serialize/BulletXmlWorldImporter/CMakeFiles/BulletXmlWorldImporter.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 Extras/Serialize/BulletXmlWorldImporter/CMakeFiles/BulletXmlWorldImporter.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Extras/Serialize/BulletXmlWorldImporter/CMakeFiles/BulletXmlWorldImporter.dir/rule
 
 # Convenience name for target.
@@ -2719,7 +2719,7 @@ Extras/Serialize/BulletWorldImporter/preinstall:
 Extras/Serialize/BulletWorldImporter/CMakeFiles/BulletWorldImporter.dir/all:
 	$(MAKE) -f Extras/Serialize/BulletWorldImporter/CMakeFiles/BulletWorldImporter.dir/build.make Extras/Serialize/BulletWorldImporter/CMakeFiles/BulletWorldImporter.dir/depend
 	$(MAKE) -f Extras/Serialize/BulletWorldImporter/CMakeFiles/BulletWorldImporter.dir/build.make Extras/Serialize/BulletWorldImporter/CMakeFiles/BulletWorldImporter.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  74
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  74
 	@echo "Built target BulletWorldImporter"
 .PHONY : Extras/Serialize/BulletWorldImporter/CMakeFiles/BulletWorldImporter.dir/all
 
@@ -2729,9 +2729,9 @@ all: Extras/Serialize/BulletWorldImporter/CMakeFiles/BulletWorldImporter.dir/all
 
 # Build rule for subdir invocation for target.
 Extras/Serialize/BulletWorldImporter/CMakeFiles/BulletWorldImporter.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 Extras/Serialize/BulletWorldImporter/CMakeFiles/BulletWorldImporter.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : Extras/Serialize/BulletWorldImporter/CMakeFiles/BulletWorldImporter.dir/rule
 
 # Convenience name for target.
@@ -2769,7 +2769,7 @@ src/BulletSoftBody/preinstall:
 src/BulletSoftBody/CMakeFiles/BulletSoftBody.dir/all:
 	$(MAKE) -f src/BulletSoftBody/CMakeFiles/BulletSoftBody.dir/build.make src/BulletSoftBody/CMakeFiles/BulletSoftBody.dir/depend
 	$(MAKE) -f src/BulletSoftBody/CMakeFiles/BulletSoftBody.dir/build.make src/BulletSoftBody/CMakeFiles/BulletSoftBody.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  72 73
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  72 73
 	@echo "Built target BulletSoftBody"
 .PHONY : src/BulletSoftBody/CMakeFiles/BulletSoftBody.dir/all
 
@@ -2779,9 +2779,9 @@ all: src/BulletSoftBody/CMakeFiles/BulletSoftBody.dir/all
 
 # Build rule for subdir invocation for target.
 src/BulletSoftBody/CMakeFiles/BulletSoftBody.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 src/BulletSoftBody/CMakeFiles/BulletSoftBody.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : src/BulletSoftBody/CMakeFiles/BulletSoftBody.dir/rule
 
 # Convenience name for target.
@@ -2819,7 +2819,7 @@ src/BulletCollision/preinstall:
 src/BulletCollision/CMakeFiles/BulletCollision.dir/all:
 	$(MAKE) -f src/BulletCollision/CMakeFiles/BulletCollision.dir/build.make src/BulletCollision/CMakeFiles/BulletCollision.dir/depend
 	$(MAKE) -f src/BulletCollision/CMakeFiles/BulletCollision.dir/build.make src/BulletCollision/CMakeFiles/BulletCollision.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63
 	@echo "Built target BulletCollision"
 .PHONY : src/BulletCollision/CMakeFiles/BulletCollision.dir/all
 
@@ -2829,9 +2829,9 @@ all: src/BulletCollision/CMakeFiles/BulletCollision.dir/all
 
 # Build rule for subdir invocation for target.
 src/BulletCollision/CMakeFiles/BulletCollision.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 31
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 31
 	$(MAKE) -f CMakeFiles/Makefile2 src/BulletCollision/CMakeFiles/BulletCollision.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : src/BulletCollision/CMakeFiles/BulletCollision.dir/rule
 
 # Convenience name for target.
@@ -2869,7 +2869,7 @@ src/BulletDynamics/preinstall:
 src/BulletDynamics/CMakeFiles/BulletDynamics.dir/all:
 	$(MAKE) -f src/BulletDynamics/CMakeFiles/BulletDynamics.dir/build.make src/BulletDynamics/CMakeFiles/BulletDynamics.dir/depend
 	$(MAKE) -f src/BulletDynamics/CMakeFiles/BulletDynamics.dir/build.make src/BulletDynamics/CMakeFiles/BulletDynamics.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  64 65 66 67 68 69
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  64 65 66 67 68 69
 	@echo "Built target BulletDynamics"
 .PHONY : src/BulletDynamics/CMakeFiles/BulletDynamics.dir/all
 
@@ -2879,9 +2879,9 @@ all: src/BulletDynamics/CMakeFiles/BulletDynamics.dir/all
 
 # Build rule for subdir invocation for target.
 src/BulletDynamics/CMakeFiles/BulletDynamics.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 src/BulletDynamics/CMakeFiles/BulletDynamics.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : src/BulletDynamics/CMakeFiles/BulletDynamics.dir/rule
 
 # Convenience name for target.
@@ -2919,7 +2919,7 @@ src/LinearMath/preinstall:
 src/LinearMath/CMakeFiles/LinearMath.dir/all:
 	$(MAKE) -f src/LinearMath/CMakeFiles/LinearMath.dir/build.make src/LinearMath/CMakeFiles/LinearMath.dir/depend
 	$(MAKE) -f src/LinearMath/CMakeFiles/LinearMath.dir/build.make src/LinearMath/CMakeFiles/LinearMath.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles  94 95 96
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles  94 95 96
 	@echo "Built target LinearMath"
 .PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/all
 
@@ -2929,9 +2929,9 @@ all: src/LinearMath/CMakeFiles/LinearMath.dir/all
 
 # Build rule for subdir invocation for target.
 src/LinearMath/CMakeFiles/LinearMath.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 src/LinearMath/CMakeFiles/LinearMath.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : src/LinearMath/CMakeFiles/LinearMath.dir/rule
 
 # Convenience name for target.

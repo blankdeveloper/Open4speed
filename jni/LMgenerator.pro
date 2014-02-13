@@ -68,4 +68,4 @@ HEADERS += \
     interfaces/fbo.h \
     renderers/opengl/glfbo.h \
     renderers/opengl/glvbo.h
-INCLUDEPATH += ../support ../support/fmodapi-4.44.08 /usr/include/bullet
+INCLUDEPATH += ../support ../support/fmodapi-4.44.08 ../support/bullet-2.81-rev2613/src

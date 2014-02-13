@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/flags.make
 
 Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/InternalEdgeDemo.o: Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/flags.make
 Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/InternalEdgeDemo.o: Demos/InternalEdgeDemo/InternalEdgeDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/InternalEdgeDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppInternalEdgeDemo.dir/InternalEdgeDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo/InternalEdgeDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppInternalEdgeDemo.dir/InternalEdgeDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo/InternalEdgeDemo.cpp
 
 Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/InternalEdgeDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppInternalEdgeDemo.dir/InternalEdgeDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo/InternalEdgeDemo.cpp > CMakeFiles/AppInternalEdgeDemo.dir/InternalEdgeDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo/InternalEdgeDemo.cpp > CMakeFiles/AppInternalEdgeDemo.dir/InternalEdgeDemo.i
 
 Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/InternalEdgeDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppInternalEdgeDemo.dir/InternalEdgeDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo/InternalEdgeDemo.cpp -o CMakeFiles/AppInternalEdgeDemo.dir/InternalEdgeDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo/InternalEdgeDemo.cpp -o CMakeFiles/AppInternalEdgeDemo.dir/InternalEdgeDemo.s
 
 Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/InternalEdgeDemo.o.requires:
 .PHONY : Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/InternalEdgeDemo.o.requires
@@ -74,17 +74,17 @@ Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/InternalEdgeDemo.o.pro
 
 Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/main.o: Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/flags.make
 Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/main.o: Demos/InternalEdgeDemo/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/main.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppInternalEdgeDemo.dir/main.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo/main.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppInternalEdgeDemo.dir/main.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo/main.cpp
 
 Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/main.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppInternalEdgeDemo.dir/main.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo/main.cpp > CMakeFiles/AppInternalEdgeDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo/main.cpp > CMakeFiles/AppInternalEdgeDemo.dir/main.i
 
 Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/main.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppInternalEdgeDemo.dir/main.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo/main.cpp -o CMakeFiles/AppInternalEdgeDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo/main.cpp -o CMakeFiles/AppInternalEdgeDemo.dir/main.s
 
 Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/main.o.requires:
 .PHONY : Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/main.o.requires
@@ -115,7 +115,7 @@ Demos/InternalEdgeDemo/AppInternalEdgeDemo: /usr/lib/i386-linux-gnu/libGL.so
 Demos/InternalEdgeDemo/AppInternalEdgeDemo: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/InternalEdgeDemo/AppInternalEdgeDemo: Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppInternalEdgeDemo"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppInternalEdgeDemo.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppInternalEdgeDemo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/build: Demos/InternalEdgeDemo/AppInternalEdgeDemo
@@ -126,10 +126,10 @@ Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/requires: Demos/Intern
 .PHONY : Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/requires
 
 Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppInternalEdgeDemo.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppInternalEdgeDemo.dir/cmake_clean.cmake
 .PHONY : Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/clean
 
 Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/InternalEdgeDemo/CMakeFiles/AppInternalEdgeDemo.dir/depend
 

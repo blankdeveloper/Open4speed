@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/flags.make
 
 Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/main.o: Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/flags.make
 Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/main.o: Demos/CcdPhysicsDemo/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/main.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCcdPhysicsDemo.dir/main.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/main.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCcdPhysicsDemo.dir/main.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/main.cpp
 
 Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/main.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppCcdPhysicsDemo.dir/main.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/main.cpp > CMakeFiles/AppCcdPhysicsDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/main.cpp > CMakeFiles/AppCcdPhysicsDemo.dir/main.i
 
 Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/main.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppCcdPhysicsDemo.dir/main.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/main.cpp -o CMakeFiles/AppCcdPhysicsDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/main.cpp -o CMakeFiles/AppCcdPhysicsDemo.dir/main.s
 
 Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/main.o.requires:
 .PHONY : Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/main.o.requires
@@ -74,17 +74,17 @@ Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/main.o.provides.build: Dem
 
 Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/CcdPhysicsDemo.o: Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/flags.make
 Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/CcdPhysicsDemo.o: Demos/CcdPhysicsDemo/CcdPhysicsDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/CcdPhysicsDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCcdPhysicsDemo.dir/CcdPhysicsDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/CcdPhysicsDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCcdPhysicsDemo.dir/CcdPhysicsDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/CcdPhysicsDemo.cpp
 
 Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/CcdPhysicsDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppCcdPhysicsDemo.dir/CcdPhysicsDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/CcdPhysicsDemo.cpp > CMakeFiles/AppCcdPhysicsDemo.dir/CcdPhysicsDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/CcdPhysicsDemo.cpp > CMakeFiles/AppCcdPhysicsDemo.dir/CcdPhysicsDemo.i
 
 Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/CcdPhysicsDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppCcdPhysicsDemo.dir/CcdPhysicsDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/CcdPhysicsDemo.cpp -o CMakeFiles/AppCcdPhysicsDemo.dir/CcdPhysicsDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/CcdPhysicsDemo.cpp -o CMakeFiles/AppCcdPhysicsDemo.dir/CcdPhysicsDemo.s
 
 Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/CcdPhysicsDemo.o.requires:
 .PHONY : Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/CcdPhysicsDemo.o.requires
@@ -115,7 +115,7 @@ Demos/CcdPhysicsDemo/AppCcdPhysicsDemo: /usr/lib/i386-linux-gnu/libGL.so
 Demos/CcdPhysicsDemo/AppCcdPhysicsDemo: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/CcdPhysicsDemo/AppCcdPhysicsDemo: Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppCcdPhysicsDemo"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppCcdPhysicsDemo.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppCcdPhysicsDemo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/build: Demos/CcdPhysicsDemo/AppCcdPhysicsDemo
@@ -126,10 +126,10 @@ Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/requires: Demos/CcdPhysics
 .PHONY : Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/requires
 
 Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppCcdPhysicsDemo.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppCcdPhysicsDemo.dir/cmake_clean.cmake
 .PHONY : Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/clean
 
 Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/CcdPhysicsDemo/CMakeFiles/AppCcdPhysicsDemo.dir/depend
 

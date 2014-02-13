@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
 windows.h
 -
 GL/freeglut.h
@@ -32,15 +32,15 @@ string
 vector
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/algebra3.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/algebra3.cpp
 algebra3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/algebra3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/algebra3.h
 glui_internal.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
 cmath
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/algebra3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/algebra3.h
 cmath
 -
 cstdio
@@ -48,73 +48,73 @@ cstdio
 cstdlib
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/arcball.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/arcball.cpp
 arcball.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/arcball.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/arcball.h
 cstdio
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/arcball.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/arcball.h
 glui_internal.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
 algebra3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/algebra3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/algebra3.h
 quaternion.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/quaternion.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/quaternion.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_add_controls.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_add_controls.cpp
 GL/glui.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
 glui_internal.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_bitmap_img_data.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_bitmap_img_data.cpp
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_bitmaps.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_bitmaps.cpp
 GL/glui.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
 glui_internal.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
 cassert
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_button.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_button.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_checkbox.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_checkbox.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_column.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_column.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_commandline.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_commandline.cpp
 GL/glui.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
 glui_internal.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_control.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_control.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_edittext.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_edittext.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 cassert
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_filebrowser.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_filebrowser.cpp
 GL/glui.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
 glui_internal.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
 sys/types.h
 -
 dirent.h
@@ -126,133 +126,133 @@ windows.h
 sys/stat.h
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
 cstdio
 -
 cmath
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 GL/glui.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
 glui_internal.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_list.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_list.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 cmath
 -
 sys/timeb.h
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_listbox.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_listbox.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_mouse_iaction.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_mouse_iaction.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_node.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_node.cpp
 GL/glui.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
 glui_internal.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_panel.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_panel.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_radio.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_radio.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 cassert
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_rollout.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_rollout.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_rotation.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_rotation.cpp
 GL/glui.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
 arcball.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/arcball.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/arcball.h
 algebra3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/algebra3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/algebra3.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_scrollbar.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_scrollbar.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 cmath
 -
 cassert
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_separator.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_separator.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_spinner.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_spinner.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 cmath
 -
 cassert
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_statictext.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_statictext.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_string.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_string.cpp
 GL/glui.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
 stdarg.h
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_textbox.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_textbox.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 cmath
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_translation.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_translation.cpp
 GL/glui.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
 glui_internal.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
 algebra3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/algebra3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/algebra3.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_tree.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_tree.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_treepanel.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_treepanel.cpp
 GL/glui.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_window.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_window.cpp
 GL/glui.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/GL/glui.h
 glui_internal.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/quaternion.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/quaternion.cpp
 glui_internal_control.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal_control.h
 quaternion.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/quaternion.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/quaternion.h
 cmath
 -
 glui_internal.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/glui_internal.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/quaternion.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/quaternion.h
 algebra3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/glui/algebra3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/glui/algebra3.h
 cstdio
 -
 

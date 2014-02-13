@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -110,14 +110,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/RaytestDemo/CMakeFiles/progress.marks
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RaytestDemo/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/RaytestDemo/CMakeFiles/progress.marks
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RaytestDemo/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RaytestDemo/clean
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RaytestDemo/clean
 .PHONY : clean
 
 # The main clean target
@@ -126,22 +126,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RaytestDemo/preinstall
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RaytestDemo/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RaytestDemo/preinstall
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RaytestDemo/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/rule:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/rule
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/rule
 .PHONY : Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/rule
 
 # Convenience name for target.
@@ -150,37 +150,37 @@ AppRaytestDemo: Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/rule
 
 # fast build rule for target.
 AppRaytestDemo/fast:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build.make Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build.make Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build
 .PHONY : AppRaytestDemo/fast
 
 # target to build an object file
 RaytestDemo.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build.make Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/RaytestDemo.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build.make Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/RaytestDemo.o
 .PHONY : RaytestDemo.o
 
 # target to preprocess a source file
 RaytestDemo.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build.make Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/RaytestDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build.make Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/RaytestDemo.i
 .PHONY : RaytestDemo.i
 
 # target to generate assembly for a file
 RaytestDemo.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build.make Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/RaytestDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build.make Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/RaytestDemo.s
 .PHONY : RaytestDemo.s
 
 # target to build an object file
 main.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build.make Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/main.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build.make Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/main.o
 .PHONY : main.o
 
 # target to preprocess a source file
 main.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build.make Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build.make Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/main.i
 .PHONY : main.i
 
 # target to generate assembly for a file
 main.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build.make Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/build.make Demos/RaytestDemo/CMakeFiles/AppRaytestDemo.dir/main.s
 .PHONY : main.s
 
 # Help Target
@@ -213,6 +213,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

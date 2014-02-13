@@ -1,4 +1,4 @@
-# Install script for directory: /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+# Install script for directory: /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -41,14 +41,14 @@ IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
   IF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   ENDIF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
-FILE(INSTALL DESTINATION "/usr/local/lib/pkgconfig" TYPE FILE FILES "/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/bullet.pc")
+FILE(INSTALL DESTINATION "/usr/local/lib/pkgconfig" TYPE FILE FILES "/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/bullet.pc")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/cmake_install.cmake")
-  INCLUDE("/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/cmake_install.cmake")
-  INCLUDE("/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/src/cmake_install.cmake")
+  INCLUDE("/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/cmake_install.cmake")
+  INCLUDE("/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/cmake_install.cmake")
+  INCLUDE("/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/src/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 
@@ -58,7 +58,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)

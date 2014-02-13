@@ -1,4 +1,4 @@
-# Install script for directory: /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize
+# Install script for directory: /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,9 +34,9 @@ ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/cmake_install.cmake")
-  INCLUDE("/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/cmake_install.cmake")
-  INCLUDE("/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/cmake_install.cmake")
+  INCLUDE("/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/cmake_install.cmake")
+  INCLUDE("/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletXmlWorldImporter/cmake_install.cmake")
+  INCLUDE("/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletWorldImporter/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 

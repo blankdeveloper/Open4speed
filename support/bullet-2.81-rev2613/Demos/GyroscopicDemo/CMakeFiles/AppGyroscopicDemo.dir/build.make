@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/flags.make
 
 Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/GyroscopicDemo.o: Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/flags.make
 Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/GyroscopicDemo.o: Demos/GyroscopicDemo/GyroscopicDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/GyroscopicDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppGyroscopicDemo.dir/GyroscopicDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo/GyroscopicDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppGyroscopicDemo.dir/GyroscopicDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo/GyroscopicDemo.cpp
 
 Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/GyroscopicDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppGyroscopicDemo.dir/GyroscopicDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo/GyroscopicDemo.cpp > CMakeFiles/AppGyroscopicDemo.dir/GyroscopicDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo/GyroscopicDemo.cpp > CMakeFiles/AppGyroscopicDemo.dir/GyroscopicDemo.i
 
 Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/GyroscopicDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppGyroscopicDemo.dir/GyroscopicDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo/GyroscopicDemo.cpp -o CMakeFiles/AppGyroscopicDemo.dir/GyroscopicDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo/GyroscopicDemo.cpp -o CMakeFiles/AppGyroscopicDemo.dir/GyroscopicDemo.s
 
 Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/GyroscopicDemo.o.requires:
 .PHONY : Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/GyroscopicDemo.o.requires
@@ -74,17 +74,17 @@ Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/GyroscopicDemo.o.provides.
 
 Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/main.o: Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/flags.make
 Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/main.o: Demos/GyroscopicDemo/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/main.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppGyroscopicDemo.dir/main.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo/main.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppGyroscopicDemo.dir/main.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo/main.cpp
 
 Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/main.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppGyroscopicDemo.dir/main.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo/main.cpp > CMakeFiles/AppGyroscopicDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo/main.cpp > CMakeFiles/AppGyroscopicDemo.dir/main.i
 
 Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/main.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppGyroscopicDemo.dir/main.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo/main.cpp -o CMakeFiles/AppGyroscopicDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo/main.cpp -o CMakeFiles/AppGyroscopicDemo.dir/main.s
 
 Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/main.o.requires:
 .PHONY : Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/main.o.requires
@@ -117,7 +117,7 @@ Demos/GyroscopicDemo/AppGyroscopicDemo: /usr/lib/i386-linux-gnu/libGL.so
 Demos/GyroscopicDemo/AppGyroscopicDemo: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/GyroscopicDemo/AppGyroscopicDemo: Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppGyroscopicDemo"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppGyroscopicDemo.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppGyroscopicDemo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/build: Demos/GyroscopicDemo/AppGyroscopicDemo
@@ -128,10 +128,10 @@ Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/requires: Demos/Gyroscopic
 .PHONY : Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/requires
 
 Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppGyroscopicDemo.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppGyroscopicDemo.dir/cmake_clean.cmake
 .PHONY : Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/clean
 
 Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/GyroscopicDemo/CMakeFiles/AppGyroscopicDemo.dir/depend
 

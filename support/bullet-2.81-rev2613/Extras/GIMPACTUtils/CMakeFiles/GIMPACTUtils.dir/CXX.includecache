@@ -6,17 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/btGImpactConvexDecompositionShape.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/btGImpactConvexDecompositionShape.cpp
 btGImpactConvexDecompositionShape.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/btGImpactConvexDecompositionShape.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/btGImpactConvexDecompositionShape.h
 BulletCollision/CollisionShapes/btConvexHullShape.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/BulletCollision/CollisionShapes/btConvexHullShape.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/BulletCollision/CollisionShapes/btConvexHullShape.h
 ConvexBuilder.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/ConvexBuilder.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/ConvexBuilder.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/btGImpactConvexDecompositionShape.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/btGImpactConvexDecompositionShape.h
 BulletCollision/Gimpact/btGImpactShape.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/BulletCollision/Gimpact/btGImpactShape.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/GIMPACTUtils/BulletCollision/Gimpact/btGImpactShape.h
 
 Extras/ConvexDecomposition/ConvexBuilder.h
 ConvexDecomposition.h

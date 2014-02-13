@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/flags.make
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/DynamicCharacterController.o: Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/flags.make
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/DynamicCharacterController.o: Demos/CharacterDemo/DynamicCharacterController.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/DynamicCharacterController.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCharacterDemo.dir/DynamicCharacterController.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo/DynamicCharacterController.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCharacterDemo.dir/DynamicCharacterController.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo/DynamicCharacterController.cpp
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/DynamicCharacterController.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppCharacterDemo.dir/DynamicCharacterController.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo/DynamicCharacterController.cpp > CMakeFiles/AppCharacterDemo.dir/DynamicCharacterController.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo/DynamicCharacterController.cpp > CMakeFiles/AppCharacterDemo.dir/DynamicCharacterController.i
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/DynamicCharacterController.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppCharacterDemo.dir/DynamicCharacterController.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo/DynamicCharacterController.cpp -o CMakeFiles/AppCharacterDemo.dir/DynamicCharacterController.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo/DynamicCharacterController.cpp -o CMakeFiles/AppCharacterDemo.dir/DynamicCharacterController.s
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/DynamicCharacterController.o.requires:
 .PHONY : Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/DynamicCharacterController.o.requires
@@ -74,17 +74,17 @@ Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/DynamicCharacterController.o
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/CharacterDemo.o: Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/flags.make
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/CharacterDemo.o: Demos/CharacterDemo/CharacterDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/CharacterDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCharacterDemo.dir/CharacterDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo/CharacterDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCharacterDemo.dir/CharacterDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo/CharacterDemo.cpp
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/CharacterDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppCharacterDemo.dir/CharacterDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo/CharacterDemo.cpp > CMakeFiles/AppCharacterDemo.dir/CharacterDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo/CharacterDemo.cpp > CMakeFiles/AppCharacterDemo.dir/CharacterDemo.i
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/CharacterDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppCharacterDemo.dir/CharacterDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo/CharacterDemo.cpp -o CMakeFiles/AppCharacterDemo.dir/CharacterDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo/CharacterDemo.cpp -o CMakeFiles/AppCharacterDemo.dir/CharacterDemo.s
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/CharacterDemo.o.requires:
 .PHONY : Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/CharacterDemo.o.requires
@@ -97,17 +97,17 @@ Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/CharacterDemo.o.provides.bui
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspConverter.o: Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/flags.make
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspConverter.o: Demos/BspDemo/BspConverter.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspConverter.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspConverter.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspConverter.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.cpp
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspConverter.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspConverter.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.cpp > CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspConverter.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.cpp > CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspConverter.i
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspConverter.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspConverter.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.cpp -o CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspConverter.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.cpp -o CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspConverter.s
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspConverter.o.requires:
 .PHONY : Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspConverter.o.requires
@@ -120,17 +120,17 @@ Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspConverter.o.pr
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspLoader.o: Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/flags.make
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspLoader.o: Demos/BspDemo/BspLoader.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspLoader.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspLoader.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspLoader.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.cpp
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspLoader.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspLoader.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.cpp > CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspLoader.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.cpp > CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspLoader.i
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspLoader.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspLoader.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.cpp -o CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspLoader.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.cpp -o CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspLoader.s
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspLoader.o.requires:
 .PHONY : Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspLoader.o.requires
@@ -143,17 +143,17 @@ Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/__/BspDemo/BspLoader.o.provi
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/main.o: Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/flags.make
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/main.o: Demos/CharacterDemo/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/main.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCharacterDemo.dir/main.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo/main.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppCharacterDemo.dir/main.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo/main.cpp
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/main.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppCharacterDemo.dir/main.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo/main.cpp > CMakeFiles/AppCharacterDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo/main.cpp > CMakeFiles/AppCharacterDemo.dir/main.i
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/main.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppCharacterDemo.dir/main.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo/main.cpp -o CMakeFiles/AppCharacterDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo/main.cpp -o CMakeFiles/AppCharacterDemo.dir/main.s
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/main.o.requires:
 .PHONY : Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/main.o.requires
@@ -190,8 +190,8 @@ Demos/CharacterDemo/AppCharacterDemo: /usr/lib/i386-linux-gnu/libGL.so
 Demos/CharacterDemo/AppCharacterDemo: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/CharacterDemo/AppCharacterDemo: Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppCharacterDemo"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppCharacterDemo.dir/link.txt --verbose=$(VERBOSE)
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/cmake -E copy_if_different /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/BspDemo.bsp /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppCharacterDemo.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && /usr/bin/cmake -E copy_if_different /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/BspDemo.bsp /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo
 
 # Rule to build all files generated by this target.
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/build: Demos/CharacterDemo/AppCharacterDemo
@@ -205,10 +205,10 @@ Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/requires: Demos/CharacterDem
 .PHONY : Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/requires
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppCharacterDemo.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppCharacterDemo.dir/cmake_clean.cmake
 .PHONY : Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/clean
 
 Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/CharacterDemo/CMakeFiles/AppCharacterDemo.dir/depend
 

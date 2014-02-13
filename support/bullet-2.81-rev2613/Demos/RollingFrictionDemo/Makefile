@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -110,14 +110,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/RollingFrictionDemo/CMakeFiles/progress.marks
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RollingFrictionDemo/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/RollingFrictionDemo/CMakeFiles/progress.marks
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RollingFrictionDemo/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RollingFrictionDemo/clean
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RollingFrictionDemo/clean
 .PHONY : clean
 
 # The main clean target
@@ -126,22 +126,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RollingFrictionDemo/preinstall
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RollingFrictionDemo/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RollingFrictionDemo/preinstall
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RollingFrictionDemo/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/rule:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/rule
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/rule
 .PHONY : Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/rule
 
 # Convenience name for target.
@@ -150,37 +150,37 @@ AppRollingFrictionDemo: Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionD
 
 # fast build rule for target.
 AppRollingFrictionDemo/fast:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build.make Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build.make Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build
 .PHONY : AppRollingFrictionDemo/fast
 
 # target to build an object file
 RollingFrictionDemo.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build.make Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/RollingFrictionDemo.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build.make Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/RollingFrictionDemo.o
 .PHONY : RollingFrictionDemo.o
 
 # target to preprocess a source file
 RollingFrictionDemo.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build.make Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/RollingFrictionDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build.make Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/RollingFrictionDemo.i
 .PHONY : RollingFrictionDemo.i
 
 # target to generate assembly for a file
 RollingFrictionDemo.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build.make Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/RollingFrictionDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build.make Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/RollingFrictionDemo.s
 .PHONY : RollingFrictionDemo.s
 
 # target to build an object file
 main.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build.make Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/main.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build.make Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/main.o
 .PHONY : main.o
 
 # target to preprocess a source file
 main.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build.make Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build.make Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/main.i
 .PHONY : main.i
 
 # target to generate assembly for a file
 main.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build.make Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/build.make Demos/RollingFrictionDemo/CMakeFiles/AppRollingFrictionDemo.dir/main.s
 .PHONY : main.s
 
 # Help Target
@@ -213,6 +213,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/Main.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/Main.o: Demos/AllBulletDemos/Main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/Main.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/Main.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos/Main.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/Main.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos/Main.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/Main.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/Main.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos/Main.cpp > CMakeFiles/AppAllBulletDemos.dir/Main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos/Main.cpp > CMakeFiles/AppAllBulletDemos.dir/Main.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/Main.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/Main.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos/Main.cpp -o CMakeFiles/AppAllBulletDemos.dir/Main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos/Main.cpp -o CMakeFiles/AppAllBulletDemos.dir/Main.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/Main.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/Main.o.requires
@@ -74,17 +74,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/Main.o.provides.build: Dem
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/DemoEntries.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/DemoEntries.o: Demos/AllBulletDemos/DemoEntries.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/DemoEntries.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/DemoEntries.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos/DemoEntries.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/DemoEntries.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos/DemoEntries.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/DemoEntries.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/DemoEntries.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos/DemoEntries.cpp > CMakeFiles/AppAllBulletDemos.dir/DemoEntries.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos/DemoEntries.cpp > CMakeFiles/AppAllBulletDemos.dir/DemoEntries.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/DemoEntries.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/DemoEntries.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos/DemoEntries.cpp -o CMakeFiles/AppAllBulletDemos.dir/DemoEntries.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos/DemoEntries.cpp -o CMakeFiles/AppAllBulletDemos.dir/DemoEntries.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/DemoEntries.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/DemoEntries.o.requires
@@ -97,17 +97,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/DemoEntries.o.provides.bui
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/CcdPhysicsDemo/CcdPhysicsDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/CcdPhysicsDemo/CcdPhysicsDemo.o: Demos/CcdPhysicsDemo/CcdPhysicsDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/CcdPhysicsDemo/CcdPhysicsDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/CcdPhysicsDemo/CcdPhysicsDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/CcdPhysicsDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/CcdPhysicsDemo/CcdPhysicsDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/CcdPhysicsDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/CcdPhysicsDemo/CcdPhysicsDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/CcdPhysicsDemo/CcdPhysicsDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/CcdPhysicsDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/CcdPhysicsDemo/CcdPhysicsDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/CcdPhysicsDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/CcdPhysicsDemo/CcdPhysicsDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/CcdPhysicsDemo/CcdPhysicsDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/CcdPhysicsDemo/CcdPhysicsDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/CcdPhysicsDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/CcdPhysicsDemo/CcdPhysicsDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/CcdPhysicsDemo/CcdPhysicsDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/CcdPhysicsDemo/CcdPhysicsDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/CcdPhysicsDemo/CcdPhysicsDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/CcdPhysicsDemo/CcdPhysicsDemo.o.requires
@@ -120,17 +120,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/CcdPhysicsDemo/CcdPhysi
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BasicDemo/BasicDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BasicDemo/BasicDemo.o: Demos/BasicDemo/BasicDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BasicDemo/BasicDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/BasicDemo/BasicDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo/BasicDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/BasicDemo/BasicDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo/BasicDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BasicDemo/BasicDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/BasicDemo/BasicDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo/BasicDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/BasicDemo/BasicDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo/BasicDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/BasicDemo/BasicDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BasicDemo/BasicDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/BasicDemo/BasicDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BasicDemo/BasicDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/BasicDemo/BasicDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BasicDemo/BasicDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/BasicDemo/BasicDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BasicDemo/BasicDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BasicDemo/BasicDemo.o.requires
@@ -143,17 +143,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BasicDemo/BasicDemo.o.p
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspDemo.o: Demos/BspDemo/BspDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspDemo.o.requires
@@ -166,17 +166,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspDemo.o.provi
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspConverter.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspConverter.o: Demos/BspDemo/BspConverter.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspConverter.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspConverter.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspConverter.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspConverter.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspConverter.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.cpp > CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspConverter.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.cpp > CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspConverter.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspConverter.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspConverter.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspConverter.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspConverter.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspConverter.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspConverter.o.requires
@@ -189,17 +189,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspConverter.o.
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspLoader.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspLoader.o: Demos/BspDemo/BspLoader.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspLoader.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspLoader.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspLoader.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspLoader.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspLoader.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.cpp > CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspLoader.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.cpp > CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspLoader.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspLoader.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspLoader.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspLoader.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspLoader.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspLoader.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspLoader.o.requires
@@ -212,17 +212,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/BspDemo/BspLoader.o.pro
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/DynamicControlDemo/MotorDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/DynamicControlDemo/MotorDemo.o: Demos/DynamicControlDemo/MotorDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/DynamicControlDemo/MotorDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/DynamicControlDemo/MotorDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/MotorDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/DynamicControlDemo/MotorDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/MotorDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/DynamicControlDemo/MotorDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/DynamicControlDemo/MotorDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/MotorDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/DynamicControlDemo/MotorDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/MotorDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/DynamicControlDemo/MotorDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/DynamicControlDemo/MotorDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/DynamicControlDemo/MotorDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/MotorDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/DynamicControlDemo/MotorDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/DynamicControlDemo/MotorDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/DynamicControlDemo/MotorDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/DynamicControlDemo/MotorDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/DynamicControlDemo/MotorDemo.o.requires
@@ -235,17 +235,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/DynamicControlDemo/Moto
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveDemo/ConcavePhysicsDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveDemo/ConcavePhysicsDemo.o: Demos/ConcaveDemo/ConcavePhysicsDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveDemo/ConcavePhysicsDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/ConcaveDemo/ConcavePhysicsDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveDemo/ConcavePhysicsDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/ConcaveDemo/ConcavePhysicsDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveDemo/ConcavePhysicsDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveDemo/ConcavePhysicsDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/ConcaveDemo/ConcavePhysicsDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveDemo/ConcavePhysicsDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/ConcaveDemo/ConcavePhysicsDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveDemo/ConcavePhysicsDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/ConcaveDemo/ConcavePhysicsDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveDemo/ConcavePhysicsDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/ConcaveDemo/ConcavePhysicsDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveDemo/ConcavePhysicsDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/ConcaveDemo/ConcavePhysicsDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveDemo/ConcavePhysicsDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/ConcaveDemo/ConcavePhysicsDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveDemo/ConcavePhysicsDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveDemo/ConcavePhysicsDemo.o.requires
@@ -258,17 +258,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveDemo/ConcavePhys
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveRaycastDemo/ConcaveRaycastDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveRaycastDemo/ConcaveRaycastDemo.o: Demos/ConcaveRaycastDemo/ConcaveRaycastDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveRaycastDemo/ConcaveRaycastDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/ConcaveRaycastDemo/ConcaveRaycastDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/ConcaveRaycastDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/ConcaveRaycastDemo/ConcaveRaycastDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/ConcaveRaycastDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveRaycastDemo/ConcaveRaycastDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/ConcaveRaycastDemo/ConcaveRaycastDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/ConcaveRaycastDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/ConcaveRaycastDemo/ConcaveRaycastDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/ConcaveRaycastDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/ConcaveRaycastDemo/ConcaveRaycastDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveRaycastDemo/ConcaveRaycastDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/ConcaveRaycastDemo/ConcaveRaycastDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/ConcaveRaycastDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/ConcaveRaycastDemo/ConcaveRaycastDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveRaycastDemo/ConcaveRaycastDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/ConcaveRaycastDemo/ConcaveRaycastDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveRaycastDemo/ConcaveRaycastDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveRaycastDemo/ConcaveRaycastDemo.o.requires
@@ -281,17 +281,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveRaycastDemo/Conc
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveConvexcastDemo/ConcaveConvexcastDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveConvexcastDemo/ConcaveConvexcastDemo.o: Demos/ConcaveConvexcastDemo/ConcaveConvexcastDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveConvexcastDemo/ConcaveConvexcastDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/ConcaveConvexcastDemo/ConcaveConvexcastDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/ConcaveConvexcastDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/ConcaveConvexcastDemo/ConcaveConvexcastDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/ConcaveConvexcastDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveConvexcastDemo/ConcaveConvexcastDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/ConcaveConvexcastDemo/ConcaveConvexcastDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/ConcaveConvexcastDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/ConcaveConvexcastDemo/ConcaveConvexcastDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/ConcaveConvexcastDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/ConcaveConvexcastDemo/ConcaveConvexcastDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveConvexcastDemo/ConcaveConvexcastDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/ConcaveConvexcastDemo/ConcaveConvexcastDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/ConcaveConvexcastDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/ConcaveConvexcastDemo/ConcaveConvexcastDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/ConcaveConvexcastDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/ConcaveConvexcastDemo/ConcaveConvexcastDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveConvexcastDemo/ConcaveConvexcastDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveConvexcastDemo/ConcaveConvexcastDemo.o.requires
@@ -304,17 +304,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConcaveConvexcastDemo/C
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConvexDecompositionDemo/ConvexDecompositionDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConvexDecompositionDemo/ConvexDecompositionDemo.o: Demos/ConvexDecompositionDemo/ConvexDecompositionDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConvexDecompositionDemo/ConvexDecompositionDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/ConvexDecompositionDemo/ConvexDecompositionDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConvexDecompositionDemo/ConvexDecompositionDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/ConvexDecompositionDemo/ConvexDecompositionDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConvexDecompositionDemo/ConvexDecompositionDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConvexDecompositionDemo/ConvexDecompositionDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/ConvexDecompositionDemo/ConvexDecompositionDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConvexDecompositionDemo/ConvexDecompositionDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/ConvexDecompositionDemo/ConvexDecompositionDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConvexDecompositionDemo/ConvexDecompositionDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/ConvexDecompositionDemo/ConvexDecompositionDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConvexDecompositionDemo/ConvexDecompositionDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/ConvexDecompositionDemo/ConvexDecompositionDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConvexDecompositionDemo/ConvexDecompositionDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/ConvexDecompositionDemo/ConvexDecompositionDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConvexDecompositionDemo/ConvexDecompositionDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/ConvexDecompositionDemo/ConvexDecompositionDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConvexDecompositionDemo/ConvexDecompositionDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConvexDecompositionDemo/ConvexDecompositionDemo.o.requires
@@ -327,17 +327,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConvexDecompositionDemo
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/SliderConstraintDemo/SliderConstraintDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/SliderConstraintDemo/SliderConstraintDemo.o: Demos/SliderConstraintDemo/SliderConstraintDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/SliderConstraintDemo/SliderConstraintDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/SliderConstraintDemo/SliderConstraintDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SliderConstraintDemo/SliderConstraintDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/SliderConstraintDemo/SliderConstraintDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SliderConstraintDemo/SliderConstraintDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/SliderConstraintDemo/SliderConstraintDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/SliderConstraintDemo/SliderConstraintDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SliderConstraintDemo/SliderConstraintDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/SliderConstraintDemo/SliderConstraintDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SliderConstraintDemo/SliderConstraintDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/SliderConstraintDemo/SliderConstraintDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/SliderConstraintDemo/SliderConstraintDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/SliderConstraintDemo/SliderConstraintDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SliderConstraintDemo/SliderConstraintDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/SliderConstraintDemo/SliderConstraintDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SliderConstraintDemo/SliderConstraintDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/SliderConstraintDemo/SliderConstraintDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/SliderConstraintDemo/SliderConstraintDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/SliderConstraintDemo/SliderConstraintDemo.o.requires
@@ -350,17 +350,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/SliderConstraintDemo/Sl
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/RagdollDemo/RagdollDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/RagdollDemo/RagdollDemo.o: Demos/RagdollDemo/RagdollDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_14)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/RagdollDemo/RagdollDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/RagdollDemo/RagdollDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/RagdollDemo/RagdollDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/RagdollDemo/RagdollDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/RagdollDemo/RagdollDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/RagdollDemo/RagdollDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/RagdollDemo/RagdollDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/RagdollDemo/RagdollDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/RagdollDemo/RagdollDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/RagdollDemo/RagdollDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/RagdollDemo/RagdollDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/RagdollDemo/RagdollDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/RagdollDemo/RagdollDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/RagdollDemo/RagdollDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/RagdollDemo/RagdollDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/RagdollDemo/RagdollDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/RagdollDemo/RagdollDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/RagdollDemo/RagdollDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/RagdollDemo/RagdollDemo.o.requires
@@ -373,17 +373,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/RagdollDemo/RagdollDemo
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/GimpactTestDemo/GimpactTestDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/GimpactTestDemo/GimpactTestDemo.o: Demos/GimpactTestDemo/GimpactTestDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_15)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_15)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/GimpactTestDemo/GimpactTestDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/GimpactTestDemo/GimpactTestDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GimpactTestDemo/GimpactTestDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/GimpactTestDemo/GimpactTestDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GimpactTestDemo/GimpactTestDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/GimpactTestDemo/GimpactTestDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/GimpactTestDemo/GimpactTestDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GimpactTestDemo/GimpactTestDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/GimpactTestDemo/GimpactTestDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GimpactTestDemo/GimpactTestDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/GimpactTestDemo/GimpactTestDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/GimpactTestDemo/GimpactTestDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/GimpactTestDemo/GimpactTestDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GimpactTestDemo/GimpactTestDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/GimpactTestDemo/GimpactTestDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GimpactTestDemo/GimpactTestDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/GimpactTestDemo/GimpactTestDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/GimpactTestDemo/GimpactTestDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/GimpactTestDemo/GimpactTestDemo.o.requires
@@ -396,17 +396,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/GimpactTestDemo/Gimpact
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Raytracer/Raytracer.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Raytracer/Raytracer.o: Demos/Raytracer/Raytracer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_16)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_16)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Raytracer/Raytracer.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/Raytracer/Raytracer.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Raytracer/Raytracer.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/Raytracer/Raytracer.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Raytracer/Raytracer.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Raytracer/Raytracer.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/Raytracer/Raytracer.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Raytracer/Raytracer.cpp > CMakeFiles/AppAllBulletDemos.dir/__/Raytracer/Raytracer.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Raytracer/Raytracer.cpp > CMakeFiles/AppAllBulletDemos.dir/__/Raytracer/Raytracer.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Raytracer/Raytracer.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/Raytracer/Raytracer.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Raytracer/Raytracer.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/Raytracer/Raytracer.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Raytracer/Raytracer.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/Raytracer/Raytracer.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Raytracer/Raytracer.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Raytracer/Raytracer.o.requires
@@ -419,17 +419,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Raytracer/Raytracer.o.p
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/GjkConvexCastDemo/LinearConvexCastDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/GjkConvexCastDemo/LinearConvexCastDemo.o: Demos/GjkConvexCastDemo/LinearConvexCastDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_17)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_17)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/GjkConvexCastDemo/LinearConvexCastDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/GjkConvexCastDemo/LinearConvexCastDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GjkConvexCastDemo/LinearConvexCastDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/GjkConvexCastDemo/LinearConvexCastDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GjkConvexCastDemo/LinearConvexCastDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/GjkConvexCastDemo/LinearConvexCastDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/GjkConvexCastDemo/LinearConvexCastDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GjkConvexCastDemo/LinearConvexCastDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/GjkConvexCastDemo/LinearConvexCastDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GjkConvexCastDemo/LinearConvexCastDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/GjkConvexCastDemo/LinearConvexCastDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/GjkConvexCastDemo/LinearConvexCastDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/GjkConvexCastDemo/LinearConvexCastDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/GjkConvexCastDemo/LinearConvexCastDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/GjkConvexCastDemo/LinearConvexCastDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/GjkConvexCastDemo/LinearConvexCastDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/GjkConvexCastDemo/LinearConvexCastDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/GjkConvexCastDemo/LinearConvexCastDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/GjkConvexCastDemo/LinearConvexCastDemo.o.requires
@@ -442,17 +442,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/GjkConvexCastDemo/Linea
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ForkLiftDemo/ForkLiftDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ForkLiftDemo/ForkLiftDemo.o: Demos/ForkLiftDemo/ForkLiftDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_18)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_18)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ForkLiftDemo/ForkLiftDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/ForkLiftDemo/ForkLiftDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/ForkLiftDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/ForkLiftDemo/ForkLiftDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/ForkLiftDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ForkLiftDemo/ForkLiftDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/ForkLiftDemo/ForkLiftDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/ForkLiftDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/ForkLiftDemo/ForkLiftDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/ForkLiftDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/ForkLiftDemo/ForkLiftDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ForkLiftDemo/ForkLiftDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/ForkLiftDemo/ForkLiftDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/ForkLiftDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/ForkLiftDemo/ForkLiftDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/ForkLiftDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/ForkLiftDemo/ForkLiftDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ForkLiftDemo/ForkLiftDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ForkLiftDemo/ForkLiftDemo.o.requires
@@ -465,17 +465,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ForkLiftDemo/ForkLiftDe
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/SoftDemo/SoftDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/SoftDemo/SoftDemo.o: Demos/SoftDemo/SoftDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_19)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_19)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/SoftDemo/SoftDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/SoftDemo/SoftDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SoftDemo/SoftDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/SoftDemo/SoftDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SoftDemo/SoftDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/SoftDemo/SoftDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/SoftDemo/SoftDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SoftDemo/SoftDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/SoftDemo/SoftDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SoftDemo/SoftDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/SoftDemo/SoftDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/SoftDemo/SoftDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/SoftDemo/SoftDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SoftDemo/SoftDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/SoftDemo/SoftDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SoftDemo/SoftDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/SoftDemo/SoftDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/SoftDemo/SoftDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/SoftDemo/SoftDemo.o.requires
@@ -488,17 +488,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/SoftDemo/SoftDemo.o.pro
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConstraintDemo/ConstraintDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConstraintDemo/ConstraintDemo.o: Demos/ConstraintDemo/ConstraintDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_20)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_20)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConstraintDemo/ConstraintDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/ConstraintDemo/ConstraintDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConstraintDemo/ConstraintDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/ConstraintDemo/ConstraintDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConstraintDemo/ConstraintDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConstraintDemo/ConstraintDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/ConstraintDemo/ConstraintDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConstraintDemo/ConstraintDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/ConstraintDemo/ConstraintDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConstraintDemo/ConstraintDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/ConstraintDemo/ConstraintDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConstraintDemo/ConstraintDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/ConstraintDemo/ConstraintDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConstraintDemo/ConstraintDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/ConstraintDemo/ConstraintDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConstraintDemo/ConstraintDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/ConstraintDemo/ConstraintDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConstraintDemo/ConstraintDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConstraintDemo/ConstraintDemo.o.requires
@@ -511,17 +511,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/ConstraintDemo/Constrai
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Benchmarks/BenchmarkDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Benchmarks/BenchmarkDemo.o: Demos/Benchmarks/BenchmarkDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_21)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_21)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Benchmarks/BenchmarkDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/Benchmarks/BenchmarkDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Benchmarks/BenchmarkDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/Benchmarks/BenchmarkDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Benchmarks/BenchmarkDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Benchmarks/BenchmarkDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/Benchmarks/BenchmarkDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Benchmarks/BenchmarkDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/Benchmarks/BenchmarkDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Benchmarks/BenchmarkDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/Benchmarks/BenchmarkDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Benchmarks/BenchmarkDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/Benchmarks/BenchmarkDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Benchmarks/BenchmarkDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/Benchmarks/BenchmarkDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Benchmarks/BenchmarkDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/Benchmarks/BenchmarkDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Benchmarks/BenchmarkDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Benchmarks/BenchmarkDemo.o.requires
@@ -534,17 +534,17 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Benchmarks/BenchmarkDem
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Box2dDemo/Box2dDemo.o: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/flags.make
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Box2dDemo/Box2dDemo.o: Demos/Box2dDemo/Box2dDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_22)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_22)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Box2dDemo/Box2dDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/Box2dDemo/Box2dDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo/Box2dDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppAllBulletDemos.dir/__/Box2dDemo/Box2dDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo/Box2dDemo.cpp
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Box2dDemo/Box2dDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppAllBulletDemos.dir/__/Box2dDemo/Box2dDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo/Box2dDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/Box2dDemo/Box2dDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo/Box2dDemo.cpp > CMakeFiles/AppAllBulletDemos.dir/__/Box2dDemo/Box2dDemo.i
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Box2dDemo/Box2dDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppAllBulletDemos.dir/__/Box2dDemo/Box2dDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/Box2dDemo/Box2dDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/Box2dDemo/Box2dDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/Box2dDemo/Box2dDemo.cpp -o CMakeFiles/AppAllBulletDemos.dir/__/Box2dDemo/Box2dDemo.s
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Box2dDemo/Box2dDemo.o.requires:
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/__/Box2dDemo/Box2dDemo.o.requires
@@ -622,9 +622,9 @@ Demos/AllBulletDemos/AppAllBulletDemos: /usr/lib/i386-linux-gnu/libGL.so
 Demos/AllBulletDemos/AppAllBulletDemos: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/AllBulletDemos/AppAllBulletDemos: Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppAllBulletDemos"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppAllBulletDemos.dir/link.txt --verbose=$(VERBOSE)
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/cmake -E copy_if_different /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/SerializeDemo/testFile.bullet /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos/testFile.bullet
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/cmake -E copy_if_different /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/file.obj /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppAllBulletDemos.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/cmake -E copy_if_different /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/SerializeDemo/testFile.bullet /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos/testFile.bullet
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && /usr/bin/cmake -E copy_if_different /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/file.obj /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos
 
 # Rule to build all files generated by this target.
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/build: Demos/AllBulletDemos/AppAllBulletDemos
@@ -655,10 +655,10 @@ Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/requires: Demos/AllBulletD
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/requires
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos && $(CMAKE_COMMAND) -P CMakeFiles/AppAllBulletDemos.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos && $(CMAKE_COMMAND) -P CMakeFiles/AppAllBulletDemos.dir/cmake_clean.cmake
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/clean
 
 Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/AllBulletDemos/CMakeFiles/AppAllBulletDemos.dir/depend
 

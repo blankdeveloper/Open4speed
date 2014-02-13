@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/flags.ma
 
 Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/main.o: Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/flags.make
 Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/main.o: Demos/VoronoiFractureDemo/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/main.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppVoronoiFractureDemo.dir/main.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo/main.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppVoronoiFractureDemo.dir/main.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo/main.cpp
 
 Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/main.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppVoronoiFractureDemo.dir/main.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo/main.cpp > CMakeFiles/AppVoronoiFractureDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo/main.cpp > CMakeFiles/AppVoronoiFractureDemo.dir/main.i
 
 Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/main.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppVoronoiFractureDemo.dir/main.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo/main.cpp -o CMakeFiles/AppVoronoiFractureDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo/main.cpp -o CMakeFiles/AppVoronoiFractureDemo.dir/main.s
 
 Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/main.o.requires:
 .PHONY : Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/main.o.requires
@@ -74,17 +74,17 @@ Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/main.o.provides.
 
 Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/VoronoiFractureDemo.o: Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/flags.make
 Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/VoronoiFractureDemo.o: Demos/VoronoiFractureDemo/VoronoiFractureDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/VoronoiFractureDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppVoronoiFractureDemo.dir/VoronoiFractureDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo/VoronoiFractureDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppVoronoiFractureDemo.dir/VoronoiFractureDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo/VoronoiFractureDemo.cpp
 
 Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/VoronoiFractureDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppVoronoiFractureDemo.dir/VoronoiFractureDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo/VoronoiFractureDemo.cpp > CMakeFiles/AppVoronoiFractureDemo.dir/VoronoiFractureDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo/VoronoiFractureDemo.cpp > CMakeFiles/AppVoronoiFractureDemo.dir/VoronoiFractureDemo.i
 
 Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/VoronoiFractureDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppVoronoiFractureDemo.dir/VoronoiFractureDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo/VoronoiFractureDemo.cpp -o CMakeFiles/AppVoronoiFractureDemo.dir/VoronoiFractureDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo/VoronoiFractureDemo.cpp -o CMakeFiles/AppVoronoiFractureDemo.dir/VoronoiFractureDemo.s
 
 Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/VoronoiFractureDemo.o.requires:
 .PHONY : Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/VoronoiFractureDemo.o.requires
@@ -115,7 +115,7 @@ Demos/VoronoiFractureDemo/AppVoronoiFractureDemo: /usr/lib/i386-linux-gnu/libGL.
 Demos/VoronoiFractureDemo/AppVoronoiFractureDemo: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/VoronoiFractureDemo/AppVoronoiFractureDemo: Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppVoronoiFractureDemo"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppVoronoiFractureDemo.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppVoronoiFractureDemo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/build: Demos/VoronoiFractureDemo/AppVoronoiFractureDemo
@@ -126,10 +126,10 @@ Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/requires: Demos/
 .PHONY : Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/requires
 
 Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppVoronoiFractureDemo.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppVoronoiFractureDemo.dir/cmake_clean.cmake
 .PHONY : Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/clean
 
 Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/VoronoiFractureDemo/CMakeFiles/AppVoronoiFractureDemo.dir/depend
 

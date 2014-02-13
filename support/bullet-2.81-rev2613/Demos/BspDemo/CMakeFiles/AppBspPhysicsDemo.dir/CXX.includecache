@@ -6,75 +6,75 @@
 
 #IncludeRegexTransform: 
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.cpp
 BspConverter.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.h
 BspLoader.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.h
 LinearMath/btVector3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/LinearMath/btVector3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/LinearMath/btVector3.h
 LinearMath/btGeometryUtil.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/LinearMath/btGeometryUtil.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/LinearMath/btGeometryUtil.h
 stdio.h
 -
 string.h
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.h
 LinearMath/btVector3.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/LinearMath/btVector3.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/LinearMath/btVector3.h
 LinearMath/btAlignedObjectArray.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/LinearMath/btAlignedObjectArray.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/LinearMath/btAlignedObjectArray.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspDemo.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspDemo.cpp
 btBulletDynamicsCommon.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/btBulletDynamicsCommon.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/btBulletDynamicsCommon.h
 LinearMath/btQuickprof.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/LinearMath/btQuickprof.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/LinearMath/btQuickprof.h
 LinearMath/btIDebugDraw.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/LinearMath/btIDebugDraw.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/LinearMath/btIDebugDraw.h
 GLDebugDrawer.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/GLDebugDrawer.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/GLDebugDrawer.h
 BspLoader.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.h
 BspConverter.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspConverter.h
 stdio.h
 -
 BspDemo.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspDemo.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspDemo.h
 GL_ShapeDrawer.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/GL_ShapeDrawer.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/GL_ShapeDrawer.h
 GlutStuff.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/GlutStuff.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/GlutStuff.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspDemo.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspDemo.h
 GlutDemoApplication.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/GlutDemoApplication.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/GlutDemoApplication.h
 LinearMath/btAlignedObjectArray.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/LinearMath/btAlignedObjectArray.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/LinearMath/btAlignedObjectArray.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.cpp
 BspLoader.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.h
 stdio.h
 -
 string.h
 -
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspLoader.h
 LinearMath/btAlignedObjectArray.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/LinearMath/btAlignedObjectArray.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/LinearMath/btAlignedObjectArray.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/main.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/main.cpp
 BspDemo.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/BspDemo.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/BspDemo.h
 GlutStuff.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/GlutStuff.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/GlutStuff.h
 GLDebugDrawer.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/GLDebugDrawer.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/GLDebugDrawer.h
 btBulletDynamicsCommon.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/BspDemo/btBulletDynamicsCommon.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/BspDemo/btBulletDynamicsCommon.h
 
 Demos/OpenGL/DemoApplication.h
 GlutStuff.h

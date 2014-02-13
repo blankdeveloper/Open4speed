@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -110,14 +110,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/OpenGL/CMakeFiles/progress.marks
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/OpenGL/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/OpenGL/CMakeFiles/progress.marks
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/OpenGL/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/OpenGL/clean
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/OpenGL/clean
 .PHONY : clean
 
 # The main clean target
@@ -126,22 +126,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/OpenGL/preinstall
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/OpenGL/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/OpenGL/preinstall
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/OpenGL/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/rule:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/rule
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/rule
 .PHONY : Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/rule
 
 # Convenience name for target.
@@ -150,187 +150,187 @@ OpenGLSupport: Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/rule
 
 # fast build rule for target.
 OpenGLSupport/fast:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build
 .PHONY : OpenGLSupport/fast
 
 # target to build an object file
 DemoApplication.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/DemoApplication.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/DemoApplication.o
 .PHONY : DemoApplication.o
 
 # target to preprocess a source file
 DemoApplication.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/DemoApplication.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/DemoApplication.i
 .PHONY : DemoApplication.i
 
 # target to generate assembly for a file
 DemoApplication.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/DemoApplication.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/DemoApplication.s
 .PHONY : DemoApplication.s
 
 # target to build an object file
 GLDebugDrawer.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GLDebugDrawer.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GLDebugDrawer.o
 .PHONY : GLDebugDrawer.o
 
 # target to preprocess a source file
 GLDebugDrawer.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GLDebugDrawer.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GLDebugDrawer.i
 .PHONY : GLDebugDrawer.i
 
 # target to generate assembly for a file
 GLDebugDrawer.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GLDebugDrawer.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GLDebugDrawer.s
 .PHONY : GLDebugDrawer.s
 
 # target to build an object file
 GLDebugFont.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GLDebugFont.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GLDebugFont.o
 .PHONY : GLDebugFont.o
 
 # target to preprocess a source file
 GLDebugFont.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GLDebugFont.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GLDebugFont.i
 .PHONY : GLDebugFont.i
 
 # target to generate assembly for a file
 GLDebugFont.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GLDebugFont.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GLDebugFont.s
 .PHONY : GLDebugFont.s
 
 # target to build an object file
 GL_DialogDynamicsWorld.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_DialogDynamicsWorld.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_DialogDynamicsWorld.o
 .PHONY : GL_DialogDynamicsWorld.o
 
 # target to preprocess a source file
 GL_DialogDynamicsWorld.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_DialogDynamicsWorld.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_DialogDynamicsWorld.i
 .PHONY : GL_DialogDynamicsWorld.i
 
 # target to generate assembly for a file
 GL_DialogDynamicsWorld.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_DialogDynamicsWorld.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_DialogDynamicsWorld.s
 .PHONY : GL_DialogDynamicsWorld.s
 
 # target to build an object file
 GL_DialogWindow.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_DialogWindow.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_DialogWindow.o
 .PHONY : GL_DialogWindow.o
 
 # target to preprocess a source file
 GL_DialogWindow.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_DialogWindow.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_DialogWindow.i
 .PHONY : GL_DialogWindow.i
 
 # target to generate assembly for a file
 GL_DialogWindow.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_DialogWindow.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_DialogWindow.s
 .PHONY : GL_DialogWindow.s
 
 # target to build an object file
 GL_ShapeDrawer.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_ShapeDrawer.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_ShapeDrawer.o
 .PHONY : GL_ShapeDrawer.o
 
 # target to preprocess a source file
 GL_ShapeDrawer.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_ShapeDrawer.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_ShapeDrawer.i
 .PHONY : GL_ShapeDrawer.i
 
 # target to generate assembly for a file
 GL_ShapeDrawer.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_ShapeDrawer.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_ShapeDrawer.s
 .PHONY : GL_ShapeDrawer.s
 
 # target to build an object file
 GL_Simplex1to4.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_Simplex1to4.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_Simplex1to4.o
 .PHONY : GL_Simplex1to4.o
 
 # target to preprocess a source file
 GL_Simplex1to4.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_Simplex1to4.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_Simplex1to4.i
 .PHONY : GL_Simplex1to4.i
 
 # target to generate assembly for a file
 GL_Simplex1to4.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_Simplex1to4.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GL_Simplex1to4.s
 .PHONY : GL_Simplex1to4.s
 
 # target to build an object file
 GlutDemoApplication.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GlutDemoApplication.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GlutDemoApplication.o
 .PHONY : GlutDemoApplication.o
 
 # target to preprocess a source file
 GlutDemoApplication.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GlutDemoApplication.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GlutDemoApplication.i
 .PHONY : GlutDemoApplication.i
 
 # target to generate assembly for a file
 GlutDemoApplication.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GlutDemoApplication.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GlutDemoApplication.s
 .PHONY : GlutDemoApplication.s
 
 # target to build an object file
 GlutStuff.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GlutStuff.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GlutStuff.o
 .PHONY : GlutStuff.o
 
 # target to preprocess a source file
 GlutStuff.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GlutStuff.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GlutStuff.i
 .PHONY : GlutStuff.i
 
 # target to generate assembly for a file
 GlutStuff.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GlutStuff.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/GlutStuff.s
 .PHONY : GlutStuff.s
 
 # target to build an object file
 RenderTexture.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/RenderTexture.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/RenderTexture.o
 .PHONY : RenderTexture.o
 
 # target to preprocess a source file
 RenderTexture.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/RenderTexture.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/RenderTexture.i
 .PHONY : RenderTexture.i
 
 # target to generate assembly for a file
 RenderTexture.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/RenderTexture.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/RenderTexture.s
 .PHONY : RenderTexture.s
 
 # target to build an object file
 Win32DemoApplication.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/Win32DemoApplication.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/Win32DemoApplication.o
 .PHONY : Win32DemoApplication.o
 
 # target to preprocess a source file
 Win32DemoApplication.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/Win32DemoApplication.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/Win32DemoApplication.i
 .PHONY : Win32DemoApplication.i
 
 # target to generate assembly for a file
 Win32DemoApplication.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/Win32DemoApplication.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/Win32DemoApplication.s
 .PHONY : Win32DemoApplication.s
 
 # target to build an object file
 stb_image.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/stb_image.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/stb_image.o
 .PHONY : stb_image.o
 
 # target to preprocess a source file
 stb_image.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/stb_image.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/stb_image.i
 .PHONY : stb_image.i
 
 # target to generate assembly for a file
 stb_image.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/stb_image.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/build.make Demos/OpenGL/CMakeFiles/OpenGLSupport.dir/stb_image.s
 .PHONY : stb_image.s
 
 # Help Target
@@ -393,6 +393,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -110,14 +110,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/CMakeFiles/progress.marks
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/Serialize/BulletFileLoader/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/Serialize/BulletFileLoader/CMakeFiles/progress.marks
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/Serialize/BulletFileLoader/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/Serialize/BulletFileLoader/clean
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/Serialize/BulletFileLoader/clean
 .PHONY : clean
 
 # The main clean target
@@ -126,22 +126,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/Serialize/BulletFileLoader/preinstall
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/Serialize/BulletFileLoader/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/Serialize/BulletFileLoader/preinstall
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/Serialize/BulletFileLoader/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/rule:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/rule
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/rule
 .PHONY : Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/rule
 
 # Convenience name for target.
@@ -150,67 +150,67 @@ BulletFileLoader: Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.
 
 # fast build rule for target.
 BulletFileLoader/fast:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build
 .PHONY : BulletFileLoader/fast
 
 # target to build an object file
 bChunk.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bChunk.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bChunk.o
 .PHONY : bChunk.o
 
 # target to preprocess a source file
 bChunk.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bChunk.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bChunk.i
 .PHONY : bChunk.i
 
 # target to generate assembly for a file
 bChunk.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bChunk.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bChunk.s
 .PHONY : bChunk.s
 
 # target to build an object file
 bDNA.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bDNA.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bDNA.o
 .PHONY : bDNA.o
 
 # target to preprocess a source file
 bDNA.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bDNA.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bDNA.i
 .PHONY : bDNA.i
 
 # target to generate assembly for a file
 bDNA.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bDNA.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bDNA.s
 .PHONY : bDNA.s
 
 # target to build an object file
 bFile.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bFile.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bFile.o
 .PHONY : bFile.o
 
 # target to preprocess a source file
 bFile.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bFile.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bFile.i
 .PHONY : bFile.i
 
 # target to generate assembly for a file
 bFile.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bFile.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/bFile.s
 .PHONY : bFile.s
 
 # target to build an object file
 btBulletFile.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/btBulletFile.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/btBulletFile.o
 .PHONY : btBulletFile.o
 
 # target to preprocess a source file
 btBulletFile.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/btBulletFile.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/btBulletFile.i
 .PHONY : btBulletFile.i
 
 # target to generate assembly for a file
 btBulletFile.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/btBulletFile.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/build.make Extras/Serialize/BulletFileLoader/CMakeFiles/BulletFileLoader.dir/btBulletFile.s
 .PHONY : btBulletFile.s
 
 # Help Target
@@ -249,6 +249,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

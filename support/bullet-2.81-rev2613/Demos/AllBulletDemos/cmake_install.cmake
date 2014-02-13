@@ -1,4 +1,4 @@
-# Install script for directory: /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/AllBulletDemos
+# Install script for directory: /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/AllBulletDemos
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

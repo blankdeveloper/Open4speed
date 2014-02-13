@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/flag
 
 Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/ConcaveConvexcastDemo.o: Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/flags.make
 Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/ConcaveConvexcastDemo.o: Demos/ConcaveConvexcastDemo/ConcaveConvexcastDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/ConcaveConvexcastDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppConcaveConvexCastDemo.dir/ConcaveConvexcastDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/ConcaveConvexcastDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppConcaveConvexCastDemo.dir/ConcaveConvexcastDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/ConcaveConvexcastDemo.cpp
 
 Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/ConcaveConvexcastDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppConcaveConvexCastDemo.dir/ConcaveConvexcastDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/ConcaveConvexcastDemo.cpp > CMakeFiles/AppConcaveConvexCastDemo.dir/ConcaveConvexcastDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/ConcaveConvexcastDemo.cpp > CMakeFiles/AppConcaveConvexCastDemo.dir/ConcaveConvexcastDemo.i
 
 Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/ConcaveConvexcastDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppConcaveConvexCastDemo.dir/ConcaveConvexcastDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/ConcaveConvexcastDemo.cpp -o CMakeFiles/AppConcaveConvexCastDemo.dir/ConcaveConvexcastDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/ConcaveConvexcastDemo.cpp -o CMakeFiles/AppConcaveConvexCastDemo.dir/ConcaveConvexcastDemo.s
 
 Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/ConcaveConvexcastDemo.o.requires:
 .PHONY : Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/ConcaveConvexcastDemo.o.requires
@@ -74,17 +74,17 @@ Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/ConcaveConve
 
 Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/main.o: Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/flags.make
 Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/main.o: Demos/ConcaveConvexcastDemo/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/main.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppConcaveConvexCastDemo.dir/main.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/main.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppConcaveConvexCastDemo.dir/main.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/main.cpp
 
 Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/main.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppConcaveConvexCastDemo.dir/main.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/main.cpp > CMakeFiles/AppConcaveConvexCastDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/main.cpp > CMakeFiles/AppConcaveConvexCastDemo.dir/main.i
 
 Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/main.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppConcaveConvexCastDemo.dir/main.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/main.cpp -o CMakeFiles/AppConcaveConvexCastDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/main.cpp -o CMakeFiles/AppConcaveConvexCastDemo.dir/main.s
 
 Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/main.o.requires:
 .PHONY : Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/main.o.requires
@@ -115,7 +115,7 @@ Demos/ConcaveConvexcastDemo/AppConcaveConvexCastDemo: /usr/lib/i386-linux-gnu/li
 Demos/ConcaveConvexcastDemo/AppConcaveConvexCastDemo: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/ConcaveConvexcastDemo/AppConcaveConvexCastDemo: Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppConcaveConvexCastDemo"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppConcaveConvexCastDemo.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppConcaveConvexCastDemo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/build: Demos/ConcaveConvexcastDemo/AppConcaveConvexCastDemo
@@ -126,10 +126,10 @@ Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/requires: De
 .PHONY : Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/requires
 
 Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppConcaveConvexCastDemo.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppConcaveConvexCastDemo.dir/cmake_clean.cmake
 .PHONY : Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/clean
 
 Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/ConcaveConvexcastDemo/CMakeFiles/AppConcaveConvexCastDemo.dir/depend
 

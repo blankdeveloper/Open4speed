@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/flags.make
 
 Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/ForkLiftDemo.o: Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/flags.make
 Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/ForkLiftDemo.o: Demos/ForkLiftDemo/ForkLiftDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/ForkLiftDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppForkLiftDemo.dir/ForkLiftDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/ForkLiftDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppForkLiftDemo.dir/ForkLiftDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/ForkLiftDemo.cpp
 
 Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/ForkLiftDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppForkLiftDemo.dir/ForkLiftDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/ForkLiftDemo.cpp > CMakeFiles/AppForkLiftDemo.dir/ForkLiftDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/ForkLiftDemo.cpp > CMakeFiles/AppForkLiftDemo.dir/ForkLiftDemo.i
 
 Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/ForkLiftDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppForkLiftDemo.dir/ForkLiftDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/ForkLiftDemo.cpp -o CMakeFiles/AppForkLiftDemo.dir/ForkLiftDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/ForkLiftDemo.cpp -o CMakeFiles/AppForkLiftDemo.dir/ForkLiftDemo.s
 
 Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/ForkLiftDemo.o.requires:
 .PHONY : Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/ForkLiftDemo.o.requires
@@ -74,17 +74,17 @@ Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/ForkLiftDemo.o.provides.build:
 
 Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/main.o: Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/flags.make
 Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/main.o: Demos/ForkLiftDemo/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/main.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppForkLiftDemo.dir/main.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/main.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppForkLiftDemo.dir/main.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/main.cpp
 
 Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/main.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppForkLiftDemo.dir/main.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/main.cpp > CMakeFiles/AppForkLiftDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/main.cpp > CMakeFiles/AppForkLiftDemo.dir/main.i
 
 Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/main.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppForkLiftDemo.dir/main.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/main.cpp -o CMakeFiles/AppForkLiftDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/main.cpp -o CMakeFiles/AppForkLiftDemo.dir/main.s
 
 Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/main.o.requires:
 .PHONY : Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/main.o.requires
@@ -115,7 +115,7 @@ Demos/ForkLiftDemo/AppForkLiftDemo: /usr/lib/i386-linux-gnu/libGL.so
 Demos/ForkLiftDemo/AppForkLiftDemo: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/ForkLiftDemo/AppForkLiftDemo: Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppForkLiftDemo"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppForkLiftDemo.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppForkLiftDemo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/build: Demos/ForkLiftDemo/AppForkLiftDemo
@@ -126,10 +126,10 @@ Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/requires: Demos/ForkLiftDemo/C
 .PHONY : Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/requires
 
 Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppForkLiftDemo.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppForkLiftDemo.dir/cmake_clean.cmake
 .PHONY : Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/clean
 
 Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/ForkLiftDemo/CMakeFiles/AppForkLiftDemo.dir/depend
 

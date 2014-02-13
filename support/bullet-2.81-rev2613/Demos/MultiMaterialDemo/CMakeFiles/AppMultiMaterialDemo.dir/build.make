@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # Include any dependencies generated for this target.
 include Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/depend.make
@@ -51,17 +51,17 @@ include Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/flags.make
 
 Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/MultiMaterialDemo.o: Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/flags.make
 Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/MultiMaterialDemo.o: Demos/MultiMaterialDemo/MultiMaterialDemo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/MultiMaterialDemo.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppMultiMaterialDemo.dir/MultiMaterialDemo.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo/MultiMaterialDemo.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppMultiMaterialDemo.dir/MultiMaterialDemo.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo/MultiMaterialDemo.cpp
 
 Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/MultiMaterialDemo.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppMultiMaterialDemo.dir/MultiMaterialDemo.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo/MultiMaterialDemo.cpp > CMakeFiles/AppMultiMaterialDemo.dir/MultiMaterialDemo.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo/MultiMaterialDemo.cpp > CMakeFiles/AppMultiMaterialDemo.dir/MultiMaterialDemo.i
 
 Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/MultiMaterialDemo.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppMultiMaterialDemo.dir/MultiMaterialDemo.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo/MultiMaterialDemo.cpp -o CMakeFiles/AppMultiMaterialDemo.dir/MultiMaterialDemo.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo/MultiMaterialDemo.cpp -o CMakeFiles/AppMultiMaterialDemo.dir/MultiMaterialDemo.s
 
 Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/MultiMaterialDemo.o.requires:
 .PHONY : Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/MultiMaterialDemo.o.requires
@@ -74,17 +74,17 @@ Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/MultiMaterialDemo.o.
 
 Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/main.o: Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/flags.make
 Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/main.o: Demos/MultiMaterialDemo/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/main.o"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppMultiMaterialDemo.dir/main.o -c /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo/main.cpp
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/AppMultiMaterialDemo.dir/main.o -c /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo/main.cpp
 
 Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/main.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AppMultiMaterialDemo.dir/main.i"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo/main.cpp > CMakeFiles/AppMultiMaterialDemo.dir/main.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo/main.cpp > CMakeFiles/AppMultiMaterialDemo.dir/main.i
 
 Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/main.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AppMultiMaterialDemo.dir/main.s"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo/main.cpp -o CMakeFiles/AppMultiMaterialDemo.dir/main.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo/main.cpp -o CMakeFiles/AppMultiMaterialDemo.dir/main.s
 
 Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/main.o.requires:
 .PHONY : Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/main.o.requires
@@ -115,7 +115,7 @@ Demos/MultiMaterialDemo/AppMultiMaterialDemo: /usr/lib/i386-linux-gnu/libGL.so
 Demos/MultiMaterialDemo/AppMultiMaterialDemo: /usr/lib/i386-linux-gnu/libGLU.so
 Demos/MultiMaterialDemo/AppMultiMaterialDemo: Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable AppMultiMaterialDemo"
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppMultiMaterialDemo.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AppMultiMaterialDemo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/build: Demos/MultiMaterialDemo/AppMultiMaterialDemo
@@ -126,10 +126,10 @@ Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/requires: Demos/Mult
 .PHONY : Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/requires
 
 Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppMultiMaterialDemo.dir/cmake_clean.cmake
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo && $(CMAKE_COMMAND) -P CMakeFiles/AppMultiMaterialDemo.dir/cmake_clean.cmake
 .PHONY : Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/clean
 
 Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Demos/MultiMaterialDemo/CMakeFiles/AppMultiMaterialDemo.dir/depend
 

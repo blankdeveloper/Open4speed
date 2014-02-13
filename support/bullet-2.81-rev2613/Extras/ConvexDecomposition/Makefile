@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_SOURCE_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613
+CMAKE_BINARY_DIR = /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -110,14 +110,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/CMakeFiles/progress.marks
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/ConvexDecomposition/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/CMakeFiles 0
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Extras/ConvexDecomposition/CMakeFiles/progress.marks
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/ConvexDecomposition/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/ConvexDecomposition/clean
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/ConvexDecomposition/clean
 .PHONY : clean
 
 # The main clean target
@@ -126,22 +126,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/ConvexDecomposition/preinstall
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/ConvexDecomposition/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/ConvexDecomposition/preinstall
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/ConvexDecomposition/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/rule:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/rule
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f CMakeFiles/Makefile2 Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/rule
 .PHONY : Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/rule
 
 # Convenience name for target.
@@ -150,217 +150,217 @@ ConvexDecomposition: Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.d
 
 # fast build rule for target.
 ConvexDecomposition/fast:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build
 .PHONY : ConvexDecomposition/fast
 
 # target to build an object file
 ConvexBuilder.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/ConvexBuilder.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/ConvexBuilder.o
 .PHONY : ConvexBuilder.o
 
 # target to preprocess a source file
 ConvexBuilder.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/ConvexBuilder.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/ConvexBuilder.i
 .PHONY : ConvexBuilder.i
 
 # target to generate assembly for a file
 ConvexBuilder.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/ConvexBuilder.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/ConvexBuilder.s
 .PHONY : ConvexBuilder.s
 
 # target to build an object file
 ConvexDecomposition.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/ConvexDecomposition.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/ConvexDecomposition.o
 .PHONY : ConvexDecomposition.o
 
 # target to preprocess a source file
 ConvexDecomposition.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/ConvexDecomposition.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/ConvexDecomposition.i
 .PHONY : ConvexDecomposition.i
 
 # target to generate assembly for a file
 ConvexDecomposition.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/ConvexDecomposition.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/ConvexDecomposition.s
 .PHONY : ConvexDecomposition.s
 
 # target to build an object file
 bestfit.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/bestfit.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/bestfit.o
 .PHONY : bestfit.o
 
 # target to preprocess a source file
 bestfit.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/bestfit.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/bestfit.i
 .PHONY : bestfit.i
 
 # target to generate assembly for a file
 bestfit.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/bestfit.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/bestfit.s
 .PHONY : bestfit.s
 
 # target to build an object file
 bestfitobb.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/bestfitobb.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/bestfitobb.o
 .PHONY : bestfitobb.o
 
 # target to preprocess a source file
 bestfitobb.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/bestfitobb.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/bestfitobb.i
 .PHONY : bestfitobb.i
 
 # target to generate assembly for a file
 bestfitobb.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/bestfitobb.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/bestfitobb.s
 .PHONY : bestfitobb.s
 
 # target to build an object file
 cd_hull.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/cd_hull.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/cd_hull.o
 .PHONY : cd_hull.o
 
 # target to preprocess a source file
 cd_hull.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/cd_hull.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/cd_hull.i
 .PHONY : cd_hull.i
 
 # target to generate assembly for a file
 cd_hull.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/cd_hull.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/cd_hull.s
 .PHONY : cd_hull.s
 
 # target to build an object file
 cd_wavefront.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/cd_wavefront.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/cd_wavefront.o
 .PHONY : cd_wavefront.o
 
 # target to preprocess a source file
 cd_wavefront.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/cd_wavefront.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/cd_wavefront.i
 .PHONY : cd_wavefront.i
 
 # target to generate assembly for a file
 cd_wavefront.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/cd_wavefront.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/cd_wavefront.s
 .PHONY : cd_wavefront.s
 
 # target to build an object file
 concavity.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/concavity.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/concavity.o
 .PHONY : concavity.o
 
 # target to preprocess a source file
 concavity.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/concavity.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/concavity.i
 .PHONY : concavity.i
 
 # target to generate assembly for a file
 concavity.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/concavity.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/concavity.s
 .PHONY : concavity.s
 
 # target to build an object file
 fitsphere.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/fitsphere.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/fitsphere.o
 .PHONY : fitsphere.o
 
 # target to preprocess a source file
 fitsphere.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/fitsphere.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/fitsphere.i
 .PHONY : fitsphere.i
 
 # target to generate assembly for a file
 fitsphere.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/fitsphere.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/fitsphere.s
 .PHONY : fitsphere.s
 
 # target to build an object file
 float_math.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/float_math.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/float_math.o
 .PHONY : float_math.o
 
 # target to preprocess a source file
 float_math.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/float_math.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/float_math.i
 .PHONY : float_math.i
 
 # target to generate assembly for a file
 float_math.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/float_math.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/float_math.s
 .PHONY : float_math.s
 
 # target to build an object file
 meshvolume.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/meshvolume.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/meshvolume.o
 .PHONY : meshvolume.o
 
 # target to preprocess a source file
 meshvolume.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/meshvolume.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/meshvolume.i
 .PHONY : meshvolume.i
 
 # target to generate assembly for a file
 meshvolume.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/meshvolume.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/meshvolume.s
 .PHONY : meshvolume.s
 
 # target to build an object file
 planetri.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/planetri.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/planetri.o
 .PHONY : planetri.o
 
 # target to preprocess a source file
 planetri.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/planetri.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/planetri.i
 .PHONY : planetri.i
 
 # target to generate assembly for a file
 planetri.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/planetri.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/planetri.s
 .PHONY : planetri.s
 
 # target to build an object file
 raytri.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/raytri.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/raytri.o
 .PHONY : raytri.o
 
 # target to preprocess a source file
 raytri.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/raytri.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/raytri.i
 .PHONY : raytri.i
 
 # target to generate assembly for a file
 raytri.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/raytri.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/raytri.s
 .PHONY : raytri.s
 
 # target to build an object file
 splitplane.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/splitplane.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/splitplane.o
 .PHONY : splitplane.o
 
 # target to preprocess a source file
 splitplane.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/splitplane.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/splitplane.i
 .PHONY : splitplane.i
 
 # target to generate assembly for a file
 splitplane.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/splitplane.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/splitplane.s
 .PHONY : splitplane.s
 
 # target to build an object file
 vlookup.o:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/vlookup.o
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/vlookup.o
 .PHONY : vlookup.o
 
 # target to preprocess a source file
 vlookup.i:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/vlookup.i
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/vlookup.i
 .PHONY : vlookup.i
 
 # target to generate assembly for a file
 vlookup.s:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/vlookup.s
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(MAKE) -f Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/build.make Extras/ConvexDecomposition/CMakeFiles/ConvexDecomposition.dir/vlookup.s
 .PHONY : vlookup.s
 
 # Help Target
@@ -429,6 +429,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -6,25 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/UserCollisionAlgorithm.cpp
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/UserCollisionAlgorithm.cpp
 btBulletDynamicsCommon.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/btBulletDynamicsCommon.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/btBulletDynamicsCommon.h
 LinearMath/btIDebugDraw.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/LinearMath/btIDebugDraw.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/LinearMath/btIDebugDraw.h
 GLDebugDrawer.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/GLDebugDrawer.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/GLDebugDrawer.h
 UserCollisionAlgorithm.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/UserCollisionAlgorithm.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/UserCollisionAlgorithm.h
 GL_ShapeDrawer.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/GL_ShapeDrawer.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/GL_ShapeDrawer.h
 GlutStuff.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/GlutStuff.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/GlutStuff.h
 BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.h
 
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/UserCollisionAlgorithm.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/UserCollisionAlgorithm.h
 GlutDemoApplication.h
-/home/lubos/Plocha/Skola/SVP/open4speedHD/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/GlutDemoApplication.h
+/home/lubos/Plocha/Open4speed/support/bullet-2.81-rev2613/Demos/UserCollisionAlgorithm/GlutDemoApplication.h
 
 Demos/OpenGL/DemoApplication.h
 GlutStuff.h

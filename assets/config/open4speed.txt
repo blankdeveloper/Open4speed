@@ -101,21 +101,6 @@ addImage gfx/HUD2.png
 addImage gfx/HUD3.png
 addImage gfx/indicator.png
 addImage gfx/lock.png
-addImage gfx/tracks/track1.png
-addImage gfx/tracks/track7r.png
-addImage gfx/tracks/track2.png
-addImage gfx/tracks/track6r.png
-addImage gfx/tracks/track3.png
-addImage gfx/tracks/track4r.png
-addImage gfx/tracks/track1r.png
-addImage gfx/tracks/track7.png
-addImage gfx/tracks/track3r.png
-addImage gfx/tracks/track2r.png
-addImage gfx/tracks/track4.png
-addImage gfx/tracks/track5.png
-addImage gfx/tracks/track5r.png
-addImage gfx/tracks/track6.png
-addImage gfx/tracks/track8.png
 initSound
 set 0
 //musicPlay

@@ -68,6 +68,22 @@ std::vector<char*>* getList(const char* tag);
  */
 std::vector<char*>* getListEx(const char* tag, const char* filename);
 
+#ifdef ZIP_ARCHIVE
+/**
+ * @brief gets custom implementation of syntax fgets
+ * @param line is data to read
+ * @param file is input stream
+ */
+void gets(char* line, zip_file* file);
+#endif
+
+/**
+ * @brief gets custom implementation of syntax fgets
+ * @param line is data to read
+ * @param file is input stream
+ */
+void gets(char* line, FILE* file);
+
 /**
  * @brief getTag gets indexed tag
  * @param index is index of tag
@@ -103,5 +119,12 @@ char* prefix(const char* filename);
 * @return prefixed file name
 */
 char* prefixEx(const char* filename);
+
+/**
+ * @brief scandec read number from chars
+ * @param line is chars to read
+ * @return number as int
+ */
+int scandec(char* line);
 
 #endif // IO_H

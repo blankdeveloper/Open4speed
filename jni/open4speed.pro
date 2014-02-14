@@ -36,7 +36,8 @@ SOURCES += \
     interfaces/model.cpp \
     renderers/opengl/gltexture.cpp \
     renderers/opengl/glfbo.cpp \
-    renderers/opengl/glvbo.cpp
+    renderers/opengl/glvbo.cpp \
+    loaders/dynamiclight.cpp
 HEADERS += \
     input/keyboard.h \
     interfaces/input.h \
@@ -68,5 +69,6 @@ HEADERS += \
     renderers/opengl/glfbo.h \
     interfaces/fbo.h \
     interfaces/vbo.h \
-    renderers/opengl/glvbo.h
+    renderers/opengl/glvbo.h \
+    loaders/dynamiclight.h
 INCLUDEPATH += ../support ../support/fmodapi-4.44.08 ../support/bullet-2.81-rev2613/src

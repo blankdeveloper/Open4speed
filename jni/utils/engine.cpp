@@ -23,6 +23,19 @@ model* arrow = 0;                            ///< GPS arrow model
 model* water = 0;
 
 /**
+  * Enabling and disabling lamps in time
+  */
+bool lamp[] = {0,0,0,0,1,0,1,1,0,1,
+               1,1,1,1,1,1,1,1,1,1,
+               1,1,1,1,1,1,1,1,1,1,
+               1,1,1,1,1,1,1,1,1,1,
+               1,1,1,1,1,1,1,1,0,0,
+               1,1,1,1,1,1,1,1,1,1,
+               1,1,1,1,1,1,1,1,1,1,
+               1,1,1,1,1,1,1,1,1,1,
+               1,1,1,1,1,1,1,1,1,1,
+               1,1,1,1,1,0,0,1,0,1};
+/**
  * @brief displayMenu displaies menu
  * @param gui is instance of menu
  * @param renderer is instance of renderer
@@ -480,6 +493,7 @@ void loadScene(std::vector<char*> *atributes) {
             sprintf(filename, getConfigStr("lightmap", atributes), i);
             trackdata->lightmaps.push_back(getFBO(*loadPNG(filename)));
         }
+        trackdata->dynamicLight = new DynamicLight(getConfigStr("dynamicLight", atributes));
     }
 }
 

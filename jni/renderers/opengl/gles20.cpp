@@ -2,7 +2,7 @@
 /**
  * \file       gles20.cpp
  * \author     Vonasek Lubos
- * \date       2014/02/09
+ * \date       2014/02/14
  * \brief      GL renderer draws geometry and other things on screen
 */
 //----------------------------------------------------------------------------------------
@@ -61,19 +61,6 @@ glm::mat4x4 view_matrix;                                                   ///< 
 glm::mat4x4 matrix_result;                                                 ///< Temp matrix for calculations
 std::stack<glm::mat4x4> matrixBuffer = *(new std::stack<glm::mat4x4>());   ///< Matrix stack
 
-/**
-  * Enabling and disabling lamps in time
-  */
-bool lamp[] = {0,0,0,0,1,0,1,1,0,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,0,0,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,0,0,1,0,1};
 
 /**
  * @brief gles20 constructor

@@ -9,6 +9,7 @@
 
 #include "stdafx.h"
 
+char* string1 = new char[255];
 char character[1];  ///< temp char
 
 #ifdef ZIP_ARCHIVE
@@ -258,7 +259,40 @@ std::vector<char*>* getListEx(const char* tag, const char* filename) {
    return getFullList(file);
 }
 
-char* string1 = new char[255];
+#ifdef ZIP_ARCHIVE
+/**
+ * @brief gets custom implementation of syntax fgets
+ * @param line is data to read
+ * @param file is input stream
+ */
+void gets(char* line, zip_file* file) {
+    for (int i = 0; i < 1020; i++) {
+        zip_fread(file, character, 1);
+        line[i] = character[0];
+        if (line[i] == '\n') {
+            line[i + 1] = '\000';
+            return;
+        }
+    }
+}
+#endif
+
+/**
+ * @brief gets custom implementation of syntax fgets
+ * @param line is data to read
+ * @param file is input stream
+ */
+void gets(char* line, FILE* file) {
+    for (int i = 0; i < 1020; i++) {
+        fread(character, 1, 1, file);
+        line[i] = character[0];
+        if ((line[i] == 10) || (line[i] == 13)) {
+            line[i] = '\n';
+            line[i + 1] = '\000';
+            return;
+        }
+    }
+}
 
 /**
 * @brief getTag gets indexed tag
@@ -316,4 +350,21 @@ char* prefixEx(const char* filename) {
     strcpy(string, configPath);
     strcat(string, filename);
     return string;
+}
+
+/**
+ * @brief scandec read number from chars
+ * @param line is chars to read
+ * @return number as int
+ */
+int scandec(char* line) {
+    int number = 0;
+    for (int i = 0; i < 1024; i++) {
+        if (line[i] != 10) {
+            number = number * 10 + line[i] - '0';
+        } else {
+            return number;
+        }
+    }
+    return number;
 }

@@ -2,68 +2,13 @@
 /**
  * \file       modelo4s.cpp
  * \author     Vonasek Lubos
- * \date       2014/02/11
+ * \date       2014/02/14
  * \brief      Class for loading models into OpenGL list, it parse full model file, apply
  *             textures, materials and blending.
 */
 //----------------------------------------------------------------------------------------
 
 #include "stdafx.h"
-
-/**
- * @brief scandec read number from chars
- * @param line is chars to read
- * @return number as int
- */
-int scandec(char* line) {
-    int number = 0;
-    for (int i = 0; i < 1024; i++) {
-        if (line[i] != 10) {
-            number = number * 10 + line[i] - '0';
-        } else {
-            return number;
-        }
-    }
-    return number;
-}
-
-char c[1];  ///< temp char
-
-#ifdef ZIP_ARCHIVE
-/**
- * @brief gets custom implementation of syntax fgets
- * @param line is data to read
- * @param file is input stream
- */
-void gets(char* line, zip_file* file) {
-    for (int i = 0; i < 1020; i++) {
-        zip_fread(file, c, 1);
-        line[i] = c[0];
-        if (line[i] == '\n') {
-            line[i + 1] = '\000';
-            return;
-        }
-    }
-}
-#endif
-
-/**
- * @brief gets custom implementation of syntax fgets
- * @param line is data to read
- * @param file is input stream
- */
-void gets(char* line, FILE* file) {
-    for (int i = 0; i < 1020; i++) {
-        fread(c, 1, 1, file);
-        line[i] = c[0];
-        if ((line[i] == 10) || (line[i] == 13)) {
-            line[i] = '\n';
-            line[i + 1] = '\000';
-            return;
-        }
-    }
-}
-
 
 /**
  * @brief Constructor for loading model from file

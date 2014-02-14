@@ -31,4 +31,5 @@ model::~model() {
     }
     lightmaps.clear();
     models.clear();
+    //delete dynamicLight;
 }

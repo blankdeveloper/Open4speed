@@ -2,7 +2,7 @@
 /**
  * \file       stdafx.h
  * \author     Vonasek Lubos
- * \date       2014/02/13
+ * \date       2014/02/14
  * \brief      Includition of common header files
 */
 //----------------------------------------------------------------------------------------
@@ -47,6 +47,7 @@ extern zip* APKArchive;             ///< APK archive instance
 #include "interfaces/fbo.h"
 #include "interfaces/vbo.h"
 #include "interfaces/input.h"
+#include "loaders/dynamiclight.h"
 #include "interfaces/model.h"
 #include "interfaces/sound.h"
 #include "car.h"

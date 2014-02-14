@@ -79,6 +79,7 @@ public:
     float minx, miny, minz, maxx, maxy, maxz;  ///< Extremes of current model
     float width, aplitude, height, size;       ///< Dimensions of current model
     std::vector<fbo*> lightmaps;               ///< List of lightmaps
+    DynamicLight *dynamicLight;                ///< Dynamic lights in lightmaps
 
     /**
      * @brief getLMCount get amount of lightmaps

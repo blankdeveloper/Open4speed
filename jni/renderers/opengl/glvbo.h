@@ -39,6 +39,16 @@ public:
     void destroy();
 
     /**
+     * @brief render renders vbo
+     * @param sh is shader for rendering
+     * @param begin is index of first vector/triangle
+     * @param len is length of data to renderer
+     * @param size is length of full VBO
+     * @param triangles is true when rendering triangles
+     */
+    void render(shader* sh, int begin, int len, int size, bool triangles);
+
+    /**
      * @brief unbind unbinds VBO
      */
     void unbind();

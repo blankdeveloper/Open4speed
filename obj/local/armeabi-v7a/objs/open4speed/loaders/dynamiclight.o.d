@@ -86,13 +86,12 @@
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_relops_cont.h \
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_epilog.h \
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_config_compat_post.h \
- interfaces/vbo.h utils/io.h \
+ interfaces/vbo.h interfaces/shader.h utils/io.h \
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstring \
- utils/switch.h interfaces/fbo.h interfaces/shader.h interfaces/input.h \
- interfaces/model.h interfaces/texture.h interfaces/physics.h car.h \
- interfaces/input.h interfaces/model.h interfaces/sound.h \
- interfaces/renderer.h ../support/glm/glm.hpp \
- ../support/glm/core/_fixes.hpp \
+ utils/switch.h interfaces/fbo.h interfaces/input.h interfaces/model.h \
+ interfaces/texture.h interfaces/physics.h car.h interfaces/input.h \
+ interfaces/model.h interfaces/sound.h interfaces/renderer.h \
+ ../support/glm/glm.hpp ../support/glm/core/_fixes.hpp \
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cmath \
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cfloat \
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/float.h \
@@ -342,6 +341,8 @@ loaders/dynamiclight.h:
 
 interfaces/vbo.h:
 
+interfaces/shader.h:
+
 utils/io.h:
 
 /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstring:
@@ -349,8 +350,6 @@ utils/io.h:
 utils/switch.h:
 
 interfaces/fbo.h:
-
-interfaces/shader.h:
 
 interfaces/input.h:
 

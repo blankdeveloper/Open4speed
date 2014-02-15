@@ -68,6 +68,24 @@ void glvbo::destroy() {
 }
 
 /**
+ * @brief render renders vbo
+ * @param sh is shader for rendering
+ * @param begin is index of first vector/triangle
+ * @param len is length of data to renderer
+ * @param triangles is true when rendering triangles
+ */
+void glvbo::render(shader* sh, int begin, int len, int size, bool triangles) {
+
+    if (triangles) {
+        sh->attrib(sizeof(GLfloat) * size * 3);
+        glDrawArrays(GL_TRIANGLES, begin * 3, len * 3);
+    } else {
+        sh->attrib(sizeof(GLfloat) * size);
+        glDrawArrays(GL_POINTS, begin, len);
+    }
+}
+
+/**
  * @brief unbind unbinds VBO
  */
 void glvbo::unbind() {

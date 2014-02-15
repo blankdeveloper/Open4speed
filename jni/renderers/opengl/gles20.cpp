@@ -609,23 +609,23 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     if (yp >= mod->cutY)
         yp = mod->cutY - 1;
 
-    current->attrib(sizeof(GLfloat) * m->triangleCount[mod->cutX * mod->cutY] * 3);
+    int len = m->triangleCount[mod->cutX * mod->cutY];
 
     /// standart vertices
     if (mod->cutX * mod->cutY == 1) {
-        glDrawArrays(GL_TRIANGLES, 0, m->triangleCount[mod->cutX * mod->cutY] * 3);
+        m->vboData->render(current, 0, m->triangleCount[mod->cutX * mod->cutY], len, true);
     }
 
     /// culled vertices
     else {
         for (int i = ym; i <= yp; i++) {
-            int l = m->triangleCount[i * mod->cutX + xm] * 3;
-            int r = m->triangleCount[i * mod->cutX + xp + 1] * 3;
-            glDrawArrays(GL_TRIANGLES, l, r - l);
+            int l = m->triangleCount[i * mod->cutX + xm];
+            int r = m->triangleCount[i * mod->cutX + xp + 1];
+            m->vboData->render(current, l, r - l, len, true);
         }
-        int l = m->triangleCount[(mod->cutX - 1) * mod->cutY] * 3;
-        int r = m->triangleCount[mod->cutX * mod->cutY] * 3;
-        glDrawArrays(GL_TRIANGLES, l, r - l);
+        int l = m->triangleCount[(mod->cutX - 1) * mod->cutY];
+        int r = m->triangleCount[mod->cutX * mod->cutY];
+        m->vboData->render(current, l, r - l, len, true);
     }
     m->vboData->unbind();
 

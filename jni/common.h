@@ -10,12 +10,29 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-#include "stdafx.h"
+#ifdef ANDROID
+#include <jni.h>
+#include <zip.h>
+extern JNIEnv* instance;            ///< JNI instance
+extern zip* APKArchive;             ///< APK archive instance
+#endif
+#include <zip.h>
+#include "interfaces/model.h"
+#include "interfaces/physics.h"
+#include "interfaces/renderer.h"
+#include "interfaces/shader.h"
+#include "interfaces/sound.h"
+#include "interfaces/texture.h"
+#include "utils/engine.h"
+#include "car.h"
 
 /**
  * @brief renderLightmap render lightmaps and exit when it is true
  */
 extern bool renderLightmap;
+
+extern glm::mat4x4 view_matrix;
+extern bool lamp[];
 
 /**
  * @brief The game resources
@@ -123,6 +140,8 @@ extern bool updated;                                                ///< Informa
 /**
  * The scene
  */
+
+extern float cameraDistance;                        ///< Camera distance level
 extern int timeout;                                 ///< Timeout clock
 extern int playerCar;                               ///< Index of player car
 extern float antialiasing;                          ///< antialiasing level

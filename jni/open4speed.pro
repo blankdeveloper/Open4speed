@@ -59,7 +59,6 @@ HEADERS += \
     renderers/opengl/glsl.h \
     sound/fmodapi.h \
     car.h \
-    stdafx.h \
     loaders/pngloader.h \
     interfaces/shader.h \
     common.h \

@@ -2,7 +2,7 @@
 /**
  * \file       texture.h
  * \author     Vonasek Lubos
-* \date       2014/01/05
+ * \date       2014/01/05
  * \brief      Loading and storing textures
 */
 //----------------------------------------------------------------------------------------
@@ -10,7 +10,14 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include "stdafx.h"
+#include <vector>
+
+struct Texture {
+    int width;
+    int height;
+    char* data;
+    bool hasAlpha;
+};
 
 /**
  * @brief The texture interface

@@ -11,7 +11,7 @@
 #ifndef MODELO4S_H
 #define MODELO4S_H
 
-#include "stdafx.h"
+#include "interfaces/model.h"
 
 /**
  * @brief The model loader from o4s file

@@ -7,7 +7,10 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include <cstring>
+#include "renderers/opengl/gles20.h"
+#include "renderers/opengl/gltexture.h"
+#include "common.h"
 
 /**
  * @brief destruct removes texture from memory is there is no more instance

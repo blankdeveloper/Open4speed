@@ -10,7 +10,7 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include "stdafx.h"
+#include <vector>
 
 /**
  * @brief The button struct

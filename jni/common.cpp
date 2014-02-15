@@ -7,7 +7,23 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include "utils/io.h"
+#include "common.h"
+
+/**
+  * Enabling and disabling lamps in time
+  */
+bool lamp[] = {0,0,0,0,1,0,1,1,0,1,
+               1,1,1,1,1,1,1,1,1,1,
+               1,1,1,1,1,1,1,1,1,1,
+               1,1,1,1,1,1,1,1,1,1,
+               1,1,1,1,1,1,1,1,0,0,
+               1,1,1,1,1,1,1,1,1,1,
+               1,1,1,1,1,1,1,1,1,1,
+               1,1,1,1,1,1,1,1,1,1,
+               1,1,1,1,1,1,1,1,1,1,
+               1,1,1,1,1,0,0,1,0,1};
+glm::mat4x4 view_matrix;                                                   ///< View matrix
 
 /**
  * @brief The game resources
@@ -21,6 +37,11 @@ std::vector<char*> *syntaxList;                                 ///< List of syn
 std::vector<shader*> *shaders = new std::vector<shader*>();     ///< Shaders storage
 std::vector<texture*> *textures = new std::vector<texture*>();  ///< Textures storage
 texture *gray;                                                  ///< Gray color for meshes without material
+
+#ifdef ANDROID
+JNIEnv* instance;            ///< JNI instance
+zip* APKArchive;             ///< APK archive instance
+#endif
 
 /**
  * @brief The engine configs
@@ -115,6 +136,8 @@ bool updated;                                                ///< Information ab
 /**
  * The scene
  */
+
+float cameraDistance;           ///< Camera distance level
 int timeout = 0;                ///< Timeout clock
 int playerCar;                  ///< Index of player car
 float antialiasing = 0.5f;      ///< antialiasing level

@@ -7,7 +7,8 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include "renderers/opengl/glsl.h"
+#include "utils/io.h"
 
 #ifdef ANDROID
 const char* header = "#version 100\nprecision mediump float;\n";    ///< Shader header

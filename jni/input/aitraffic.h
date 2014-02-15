@@ -10,7 +10,7 @@
 #ifndef AITRAFFIC_H
 #define AITRAFFIC_H
 
-#include "stdafx.h"
+#include "interfaces/input.h"
 
 /**
  * @brief The AI for traffic class

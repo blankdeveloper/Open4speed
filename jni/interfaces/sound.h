@@ -10,7 +10,6 @@
 #ifndef SOUND_H
 #define SOUND_H
 
-#include "stdafx.h"
 
 /**
  * @brief The sound interface

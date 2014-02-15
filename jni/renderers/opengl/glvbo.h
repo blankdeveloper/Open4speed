@@ -10,13 +10,13 @@
 #ifndef GLVBO_H
 #define GLVBO_H
 
-#include "stdafx.h"
+#include "interfaces/vbo.h"
 
 class glvbo : public vbo
 {
 public:
 
-    GLuint instance;         ///< VBO for current object
+    unsigned int instance;         ///< VBO for current object
 
     /**
      * @brief glvbo creates VBO from data

@@ -7,7 +7,9 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include "input/aitraffic.h"
+#include "utils/math.h"
+#include "common.h"
 
 /**
  * @brief getBrake Get brakes state

@@ -10,7 +10,13 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include "stdafx.h"
+#ifndef ANDROID
+#include <GL/freeglut.h>
+#endif
+#include <glm/glm.hpp>
+#include "interfaces/fbo.h"
+#include "interfaces/model.h"
+#include "interfaces/texture.h"
 
 /**
  * @brief The Light struct
@@ -54,9 +60,9 @@ public:
      * @param upy is up vector coordinate
      * @param upz is up vector coordinate
      */
-    virtual void lookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
-                        GLfloat centerx, GLfloat centery, GLfloat centerz,
-                        GLfloat upx, GLfloat upy, GLfloat upz) = 0;
+    virtual void lookAt(float eyex, float eyey, float eyez,
+                        float centerx, float centery, float centerz,
+                        float upx, float upy, float upz) = 0;
 
     /**
      * @brief lookAt implements GLUlookAt without up vector
@@ -67,8 +73,8 @@ public:
      * @param centery is camera center coordinate
      * @param centerz is camera center coordinate
      */
-    virtual void lookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
-                        GLfloat centerx, GLfloat centery, GLfloat centerz) = 0;
+    virtual void lookAt(float eyex, float eyey, float eyez,
+                        float centerx, float centery, float centerz) = 0;
 
     /**
      * @brief perspective implements GLUPerspective
@@ -77,13 +83,19 @@ public:
      * @param zNear is near cutting plate
      * @param zFar is far cutting plane
      */
-    virtual void perspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zFar) = 0;
+    virtual void perspective(float fovy, float aspect, float zNear, float zFar) = 0;
 
     /**
      * @brief clear clears fragmet/depth buffer
      * @param colors true to clear both, false to clear only depth buffer
      */
     virtual void clear(bool colors) = 0;
+
+    /**
+     * @brief getGrayTexture provides texture for polygons without texture
+     * @return gray texture
+     */
+    virtual texture* getGrayTexture() = 0;
 
     /**
      * @brief multMatrix multiplies with matrix
@@ -145,7 +157,7 @@ public:
      */
     virtual void renderButton(float x, float y, float w, float h, float layer, texture* button, const char* text) = 0;
 
-    virtual void renderDynamic(GLfloat *vertices, GLfloat *coords, shader* sh, texture* txt, int triangleCount) = 0;
+    virtual void renderDynamic(float *vertices, float *coords, shader* sh, texture* txt, int triangleCount) = 0;
 
     /**
      * @brief renderImage renders image in GUI mode
@@ -179,7 +191,7 @@ public:
      * @param i is index of lightmap
      * @return raw pixels
      */
-    virtual GLubyte* getLMPixels(int i) = 0;
+    virtual char* getLMPixels(int i) = 0;
 
     /**
      * @brief prepareLM prepare rendering of lightmaps

@@ -10,7 +10,7 @@
 #ifndef PNGLOADER_H
 #define PNGLOADER_H
 
-#include "stdafx.h"
+#include "interfaces/texture.h"
 
 /**
  * @brief bmp24 loads texture from png file
@@ -27,6 +27,6 @@ Texture* loadPNG(const char* filename);
  * @param buffer is image data
  * @return 0 if successed
  */
-int writeImage(char* filename, int width, int height, GLubyte *buffer);
+int writeImage(char* filename, int width, int height, char *buffer);
 
 #endif // PNGLOADER_H

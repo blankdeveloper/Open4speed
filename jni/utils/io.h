@@ -10,14 +10,16 @@
 #ifndef IO_H
 #define IO_H
 
-#include "stdafx.h"
+#include <cstring>
+#include <stdio.h>
+#include <vector>
 
 /**
  * @brief exists checks if file exist
  * @param filename is name of file to check
  * @return true if file exists
  */
-bool exists(const char * filename);
+bool exists(const char *filename);
 
 /**
  * @brief getConfig gets config value from file

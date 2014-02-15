@@ -10,7 +10,7 @@
 #ifndef RGB_H
 #define RGB_H
 
-#include "stdafx.h"
+#include "interfaces/texture.h"
 
 /**
  * @brief rgb creates texture from color

@@ -7,7 +7,10 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include <png.h>
+#include <stdlib.h>
+#include "interfaces/texture.h"
+#include "utils/io.h"
 
 #ifdef ZIP_ARCHIVE
 zip_file* file;
@@ -90,7 +93,7 @@ Texture* loadPNG(const char* filename) {
  * @param buffer is image data
  * @return 0 if successed
  */
-int writeImage(char* filename, int width, int height, GLubyte *buffer) {
+int writeImage(char* filename, int width, int height, char *buffer) {
     // Open file for writing (binary mode)
     FILE *fp = fopen(filename, "wb");
 

@@ -10,9 +10,7 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
-#include "stdafx.h"
-
-extern float cameraDistance;    ///< Camera distance level
+#include "interfaces/input.h"
 
 /// Key pressed
 /**

@@ -7,7 +7,8 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include <math.h>
+#include "utils/math.h"
 
 /**
  * @brief absf gets absolute value of float number

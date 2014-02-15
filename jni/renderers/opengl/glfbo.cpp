@@ -7,8 +7,12 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
-
+#ifdef ANDROID
+#include <jni.h>
+#endif
+#include "renderers/opengl/glfbo.h"
+#include "utils/math.h"
+#include "common.h"
 
 /**
  * @brief glfbo is an empty constructor
@@ -197,4 +201,11 @@ void glfbo::drawOnScreen(shader* screen_shader) {
     glDisable(GL_DEPTH_TEST);
     glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLubyte), GL_UNSIGNED_BYTE, indices);
     screen_shader->unbind();
+}
+
+/**
+ * @brief unbindFBO unbinds FBO
+ */
+void glfbo::unbindFBO() {
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

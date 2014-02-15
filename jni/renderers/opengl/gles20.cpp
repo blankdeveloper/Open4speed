@@ -7,7 +7,19 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <stack>
+#include "loaders/pngloader.h"
+#include "loaders/rgb.h"
+#include "renderers/opengl/gles20.h"
+#include "renderers/opengl/glfbo.h"
+#include "renderers/opengl/gltexture.h"
+#include "utils/io.h"
+#include "utils/math.h"
+#include "utils/switch.h"
+#include "common.h"
+
 
 GLushort dynindices[4095];      ///< Indicies for dynamic rendering
 
@@ -57,7 +69,6 @@ glm::mat4 matScale = glm::mat4(0.5f, 0.0f, 0.0f, 0.0f,
 glm::mat4x4 matrix;                                                        ///< Matrix for dynamic rendering
 glm::mat4x4 matrixScl;                                                     ///< Matrix for shadow mapping
 glm::mat4x4 scene_projection_matrix;                                       ///< Scene projection matrix
-glm::mat4x4 view_matrix;                                                   ///< View matrix
 glm::mat4x4 matrix_result;                                                 ///< Temp matrix for calculations
 std::stack<glm::mat4x4> matrixBuffer = *(new std::stack<glm::mat4x4>());   ///< Matrix stack
 
@@ -201,6 +212,14 @@ void gles20::clear(bool colors) {
     } else {
         glClear(GL_DEPTH_BUFFER_BIT);
     }
+}
+
+/**
+ * @brief getGrayTexture provides texture for polygons without texture
+ * @return gray texture
+ */
+texture* gles20::getGrayTexture() {
+    return gray;
 }
 
 /**
@@ -611,7 +630,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     m->vboData->unbind();
 
     //unbind shader
-    glUseProgram(0);
+    current->unbind();
     glDepthMask(true);
     glDisable(GL_BLEND);
 }
@@ -692,7 +711,7 @@ void gles20::renderText(float x, float y, float layer, const char* text) {
  * @param i is index of lightmap
  * @return raw pixels
  */
-GLubyte* gles20::getLMPixels(int i) {
+char* gles20::getLMPixels(int i) {
 
     GLubyte* pixels = new GLubyte[rttsize * rttsize * 4];
 
@@ -700,7 +719,7 @@ GLubyte* gles20::getLMPixels(int i) {
     GLubyte* pixels2 = new GLubyte[rttsize * rttsize * 4];
 
     /// get pixels
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    rtt[0]->unbindFBO();
     lm[i].bindTexture();
     glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
     glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels2);
@@ -758,7 +777,7 @@ GLubyte* gles20::getLMPixels(int i) {
     }
     delete[] pixels2;
 #endif
-    return pixels;
+    return (char*)pixels;
 }
 
 /**
@@ -873,7 +892,7 @@ void gles20::saveLMs() {
     for (int i = 0; i < trackdata->getLMCount(); i++) {
 
         /// get raw texture
-        GLubyte* pixels = getLMPixels(i);
+        char* pixels = getLMPixels(i);
 
         /// write file
         char filename[256];

@@ -7,7 +7,9 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include "input/airacer.h"
+#include "utils/math.h"
+#include "common.h"
 
 /**
  * @brief airacer Creates new control instance

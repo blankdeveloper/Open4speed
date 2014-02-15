@@ -8,7 +8,22 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include "input/keyboard.h"
+#include "loaders/modelo4s.h"
+#include "loaders/pngloader.h"
+#include "physics/bullet.h"
+#include "renderers/opengl/gles20.h"
+#include "renderers/opengl/glfbo.h"
+#include "renderers/opengl/glsl.h"
+#include "renderers/opengl/gltexture.h"
+#include "renderers/opengl/glvbo.h"
+#ifndef ANDROID
+#include "sound/fmodapi.h"
+#endif
+#include "sound/soundpool.h"
+#include "utils/io.h"
+#include "utils/switch.h"
+#include "common.h"
 
 /**
  * @brief getFBO creates framebuffer from raster data

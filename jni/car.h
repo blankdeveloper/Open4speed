@@ -11,7 +11,9 @@
 #ifndef CAR_H
 #define CAR_H
 
-#include "stdafx.h"
+#include "interfaces/input.h"
+#include "interfaces/model.h"
+#include "interfaces/sound.h"
 
 /**
  * @brief The gear struct

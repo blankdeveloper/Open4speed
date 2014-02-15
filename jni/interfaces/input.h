@@ -10,8 +10,6 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include "stdafx.h"
-
 /**
  * @brief The input interface
  */

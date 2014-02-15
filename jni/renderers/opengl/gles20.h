@@ -11,10 +11,16 @@
 #ifndef GLES20_H
 #define GLES20_H
 
-#include "stdafx.h"
 
-extern glm::mat4x4 view_matrix;
-extern bool lamp[];
+#ifdef ANDROID
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
+#else
+#define GL_GLEXT_PROTOTYPES
+#include <GL/gl.h>
+#include <GL/glext.h>
+#endif
+#include "interfaces/renderer.h"
 
 /**
  * @brief The gles20 class is implementation of OpenGL ES 2.0
@@ -69,6 +75,12 @@ public:
      * @param colors true to clear both, false to clear only depth buffer
      */
     void clear(bool colors);
+
+    /**
+     * @brief getGrayTexture provides texture for polygons without texture
+     * @return gray texture
+     */
+    texture* getGrayTexture();
 
     /**
      * @brief multMatrix multiplies with matrix
@@ -172,7 +184,7 @@ public:
      * @param i is index of lightmap
      * @return raw pixels
      */
-    GLubyte* getLMPixels(int i);
+    char* getLMPixels(int i);
 
     /**
      * @brief prepareLM prepare rendering of lightmaps

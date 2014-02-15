@@ -19,6 +19,7 @@ SOURCES += \
     input/airacer.cpp \
     input/aitraffic.cpp \
     LMgenerator.cpp \
+    loaders/dynamiclight.cpp \
     loaders/rgb.cpp \
     loaders/modelo4s.cpp \
     utils/switch.cpp \
@@ -46,6 +47,7 @@ HEADERS += \
     input/aitraffic.h \
     interfaces/renderer.h \
     interfaces/texture.h \
+    loaders/dynamiclight.h \
     loaders/rgb.h \
     interfaces/model.h \
     loaders/modelo4s.h \

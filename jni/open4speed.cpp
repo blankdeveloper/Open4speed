@@ -7,7 +7,16 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#ifdef ANDROID
+#include <GLES2/gl2.h>
+#endif
+#include "input/keyboard.h"
+#include "utils/engine.h"
+#include "utils/io.h"
+#include "utils/math.h"
+#include "utils/scripting.h"
+#include "utils/switch.h"
+#include "common.h"
 
 /**
  * Counters variables
@@ -18,7 +27,6 @@ float frameTime = 0;                ///< Time per frame
 int lastFPS = 0;                    ///< Viewed FPS
 int fps = 0;                        ///< Actual FPS
 int timestamp = 0;                  ///< Timestamp for updating FPS
-GLuint id[2] = {0,1};               ///< GL Query ids
 
 /**
  * @brief display updates display
@@ -32,15 +40,6 @@ void display(void) {
 
     /// update menu
     updateMenu();
-
-#ifndef ANDROID
-    /// start timer
-    if (strcmp(screenRenderer, "glsl") == 0) {
-        glGenQueries(2,id);
-        glBeginQuery(GL_TIME_ELAPSED, id[0]);
-        glBeginQuery(GL_SAMPLES_PASSED, id[1]);
-    }
-#endif
 
     /// display scene
     if (race) {
@@ -86,24 +85,6 @@ void display(void) {
     }
 
 #ifndef ANDROID
-    /// stop timer
-    GLint gpu_time = 0;
-    GLint fragment_count = 0;
-    if (strcmp(screenRenderer, "glsl") == 0) {
-        glEndQuery(GL_SAMPLES_PASSED);
-        glEndQuery(GL_TIME_ELAPSED);
-
-        /// get scene counters
-        glGetQueryObjectiv(id[0], GL_QUERY_RESULT, &gpu_time);
-        glGetQueryObjectiv(id[1], GL_QUERY_RESULT, &fragment_count);
-    }
-    if (strcmp(screenRenderer, "glsl") == 0) {
-        /// print counters
-        char text[200];
-        sprintf(text, "GPU time: %dk, fragments: %dk", gpu_time / 1000, fragment_count / 1000);
-        xrenderer->renderText(0, 0, 1, text);
-    }
-
     /// check if there is an error
     int i = glGetError();
     if (i != 0) {
@@ -295,7 +276,7 @@ void idle(int v) {
  * @param h is new window hegiht
  */
 void reshape (int w, int h) {
-   aspect = (GLfloat) w/(GLfloat) h;
+   aspect = (float) w/(float) h;
    screen_width = w;
    screen_height = h;
    xrenderer = getRenderer();
@@ -382,9 +363,6 @@ int main(int argc, char** argv) {
 }
 
 #ifdef ANDROID
-JNIEnv* instance;            ///< JNI instance
-zip* APKArchive;             ///< APK archive instance
-
 /**
  * Java native methods
  */

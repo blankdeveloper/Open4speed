@@ -7,7 +7,8 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include "sound/soundpool.h"
+#include "common.h"
 
 int samplesCount = 0;   ///< Amount of samples
 

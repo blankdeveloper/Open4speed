@@ -11,7 +11,7 @@
 #ifndef FBO_H
 #define FBO_H
 
-#include "stdafx.h"
+#include "interfaces/shader.h"
 
 class fbo
 {
@@ -22,12 +22,12 @@ public:
     unsigned int height;               ///< Image height
 
     /**
-     * @brief bind binds FBO
+     * @brief bindFBO binds FBO
      */
     virtual void bindFBO() = 0;
 
     /**
-     * @brief bind binds texture
+     * @brief bindTexture binds texture
      */
     virtual void bindTexture() = 0;
 
@@ -47,5 +47,10 @@ public:
      * @param screen_shader is shader for screen drawing
      */
     virtual void drawOnScreen(shader* screen_shader) = 0;
+
+    /**
+     * @brief unbindFBO unbinds FBO
+     */
+    virtual void unbindFBO() = 0;
 };
 #endif // FBO_H

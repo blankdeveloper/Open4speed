@@ -7,7 +7,9 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include "loaders/dynamiclight.h"
+#include "utils/io.h"
+#include "utils/switch.h"
 
 /**
  * @brief DynamicLight is a destructor

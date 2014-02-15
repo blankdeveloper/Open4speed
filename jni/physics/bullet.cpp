@@ -8,7 +8,10 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include "physics/bullet.h"
+#include "utils/io.h"
+#include "utils/math.h"
+#include "common.h"
 
 float eyemat[16] = {
     1,0,0,0,

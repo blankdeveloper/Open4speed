@@ -11,7 +11,8 @@
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
-#include "stdafx.h"
+#include "interfaces/model.h"
+#include "car.h"
 
 /**
  * @brief The physics interface

@@ -11,7 +11,15 @@
 #ifndef SWITCH_H
 #define SWITCH_H
 
-#include "stdafx.h"
+#include "interfaces/fbo.h"
+#include "interfaces/input.h"
+#include "interfaces/model.h"
+#include "interfaces/physics.h"
+#include "interfaces/renderer.h"
+#include "interfaces/shader.h"
+#include "interfaces/sound.h"
+#include "interfaces/texture.h"
+#include "interfaces/vbo.h"
 
 /**
  * @brief getFBO creates framebuffer from raster data

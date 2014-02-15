@@ -10,7 +10,7 @@
 #ifndef FMODAPI_H
 #define FMODAPI_H
 
-#include "stdafx.h"
+#include "interfaces/sound.h"
 #include "fmod.hpp"
 
 /**

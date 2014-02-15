@@ -7,7 +7,13 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include "utils/engine.h"
+#include "utils/io.h"
+#include "utils/math.h"
+#include "utils/scripting.h"
+#include "utils/switch.h"
+#include "common.h"
+
 
 #define LIGHTMAP_PER_LIGHT
 
@@ -117,7 +123,7 @@ void display(void) {
                         /// get texels
                         for (int y = 0; y < trackdata->getLMCount(); y++) {
                             int oldCount = count[y];
-                            GLubyte* pixels = xrenderer->getLMPixels(y);
+                            char* pixels = xrenderer->getLMPixels(y);
                             for (int a = 0; a < rttsize; a++) {
                                 for (int b = 0; b < rttsize; b++) {
                                     int index = (b * rttsize + a) * 4 + highIndex;

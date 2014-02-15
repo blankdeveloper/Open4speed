@@ -10,6 +10,9 @@
 #ifndef GLSL_H
 #define GLSL_H
 
+#include "renderers/opengl/gles20.h"
+#include "interfaces/shader.h"
+
 class glsl : public shader
 {
 public:

@@ -7,10 +7,10 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include "input/keyboard.h"
+#include "common.h"
 
 bool keys[7];            ///< State of keyboard
-float cameraDistance;    ///< Camera distance level
 
 /// Key pressed
 /**

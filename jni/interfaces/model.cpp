@@ -7,7 +7,7 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include "interfaces/model.h"
 
 /**
  * @brief model destructor

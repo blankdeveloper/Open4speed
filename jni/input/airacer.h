@@ -10,7 +10,7 @@
 #ifndef AIRACER_H
 #define AIRACER_H
 
-#include "stdafx.h"
+#include "interfaces/input.h"
 
 /**
  * @brief The AI for racer class

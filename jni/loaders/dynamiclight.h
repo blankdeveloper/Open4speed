@@ -10,7 +10,8 @@
 #ifndef DYNAMICLIGHT_H
 #define DYNAMICLIGHT_H
 
-#include "stdafx.h"
+#include <vector>
+#include "interfaces/vbo.h"
 
 /**
  * @brief The VBOLightParam struct is struct to store light color and vbo pointers

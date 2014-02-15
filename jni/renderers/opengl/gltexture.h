@@ -11,20 +11,13 @@
 #ifndef GLTEXTURE_H
 #define GLTEXTURE_H
 
-#include "stdafx.h"
-
-struct Texture {
-    int width;
-    int height;
-    char* data;
-    bool hasAlpha;
-};
+#include "interfaces/texture.h"
 
 class gltexture : public texture {
 public:
 
     bool animated;                  ///< True if it is texture sequence
-    std::vector<texture*> anim;   ///< Animation images
+    std::vector<texture*> anim;     ///< Animation images
     unsigned int currentFrame;      ///< Current image
     unsigned int currentMultiFrame; ///< Replying frames state
     unsigned int multiFrame;        ///< Replying frames amount

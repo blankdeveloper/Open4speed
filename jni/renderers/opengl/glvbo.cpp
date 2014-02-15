@@ -7,8 +7,8 @@
 */
 //----------------------------------------------------------------------------------------
 
-
-#include "stdafx.h"
+#include "renderers/opengl/gles20.h"
+#include "renderers/opengl/glvbo.h"
 
 /**
  * @brief glvbo creates VBO from data

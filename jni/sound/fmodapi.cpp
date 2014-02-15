@@ -7,7 +7,8 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include "sound/fmodapi.h"
+#include "utils/io.h"
 
 FMOD::System *fmodsystem;          ///< Fmod sound system
 bool fmodinitialized = false;      ///< Fmod initialization
@@ -39,10 +40,6 @@ fmodapi::fmodapi(const char* filename, bool loop, int channels) {
         fmodsystem->createSound(prefix(filename), FMOD_SOFTWARE | FMOD_LOOP_NORMAL, 0, &sample);
     else
         fmodsystem->createSound(prefix(filename), FMOD_SOFTWARE, 0, &sample);
-    if (channels > 8) {
-        printf("Fmodapi: Too many channels");
-        exit(1);
-    }
 }
 
 /**

@@ -11,7 +11,7 @@
 #ifndef GLFBO_H
 #define GLFBO_H
 
-#include "stdafx.h"
+#include "renderers/opengl/gles20.h"
 
 class glfbo : public fbo
 {
@@ -68,6 +68,11 @@ public:
      * @param screen_shader is shader for screen drawing
      */
     void drawOnScreen(shader* screen_shader);
+
+    /**
+     * @brief unbindFBO unbinds FBO
+     */
+    void unbindFBO();
 };
 
 #endif // GLFBO_H

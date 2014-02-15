@@ -8,7 +8,11 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include "loaders/modelo4s.h"
+#include "utils/io.h"
+#include "utils/math.h"
+#include "utils/switch.h"
+#include "common.h"
 
 /**
  * @brief Constructor for loading model from file
@@ -55,9 +59,9 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
         m->reg = new region();
         m->triangleCount = new int[cutX * cutY + 1];
         m->usingLightmaps = lightmaps;
-        GLfloat *colora = new GLfloat[4];
-        GLfloat *colord = new GLfloat[4];
-        GLfloat *colors = new GLfloat[4];
+        float *colora = new float[4];
+        float *colord = new float[4];
+        float *colors = new float[4];
         colora[3] = 1;
         colord[3] = 1;
         colors[3] = 1;
@@ -96,7 +100,7 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
             m->texture2D = getTexture(texturePath, alpha);
         /// create color texture
         } else {
-            m->texture2D = new gltexture(*createRGB(1, 1, colord[0], colord[1], colord[2]), alpha);
+            m->texture2D = xrenderer->getGrayTexture();
         }
 
         int cursor = 0;
@@ -145,10 +149,10 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
             gets(line, file);
             m->triangleCount[j] = scandec(line);
         }
-        m->vertices = new GLfloat[m->triangleCount[cutX * cutY] * 3 * 3];
-        m->normals = new GLfloat[m->triangleCount[cutX * cutY] * 3 * 3];
-        m->coords = new GLfloat[m->triangleCount[cutX * cutY] * 3 * 2];
-        m->tid = new GLfloat[m->triangleCount[cutX * cutY] * 3 * 2];
+        m->vertices = new float[m->triangleCount[cutX * cutY] * 3 * 3];
+        m->normals = new float[m->triangleCount[cutX * cutY] * 3 * 3];
+        m->coords = new float[m->triangleCount[cutX * cutY] * 3 * 2];
+        m->tid = new float[m->triangleCount[cutX * cutY] * 3 * 2];
         for (int j = 0; j < m->triangleCount[cutX * cutY]; j++) {
             for (int k = 0; k < 6; k++) {
                 m->tid[j * 6 + 0 + k] = 4095 / 4096.0;
@@ -243,7 +247,7 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
         }
 
         /// store model in VBO
-        int size = sizeof(GLfloat)*m->triangleCount[cutX * cutY] * 3;
+        int size = sizeof(float)*m->triangleCount[cutX * cutY] * 3;
         m->vboData = getVBO(size, m->vertices, m->normals, m->coords, m->tid);
         models.push_back(*m);
     }

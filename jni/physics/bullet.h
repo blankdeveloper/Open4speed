@@ -11,9 +11,10 @@
 #ifndef BULLET_H
 #define BULLET_H
 
-#include "btBulletDynamicsCommon.h"
-#include "BulletDynamics/Vehicle/btRaycastVehicle.h"
-#include "stdafx.h"
+#include <BulletDynamics/Vehicle/btRaycastVehicle.h>
+#include <btBulletDynamicsCommon.h>
+#include "interfaces/model.h"
+#include "interfaces/physics.h"
 
 /**
  * @brief The bullet physics implementation class

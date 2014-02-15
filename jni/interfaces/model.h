@@ -10,7 +10,11 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include "stdafx.h"
+#include "interfaces/fbo.h"
+#include "interfaces/shader.h"
+#include "interfaces/texture.h"
+#include "interfaces/vbo.h"
+#include "loaders/dynamiclight.h"
 
 /**
  * @brief The edge struct

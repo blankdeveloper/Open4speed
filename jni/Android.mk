@@ -268,6 +268,7 @@ renderers/opengl/glsl.cpp \
 renderers/opengl/gltexture.cpp \
 renderers/opengl/glfbo.cpp \
 renderers/opengl/glvbo.cpp \
+loaders/dynamiclight.cpp \
 loaders/modelo4s.cpp \
 loaders/pngloader.cpp \
 loaders/rgb.cpp \

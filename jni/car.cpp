@@ -8,7 +8,11 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include "utils/io.h"
+#include "utils/math.h"
+#include "utils/switch.h"
+#include "car.h"
+#include "common.h"
 
 /**
  * @brief car is constructor which loads car model

@@ -10,7 +10,7 @@
 #ifndef SOUNDPOOL_H
 #define SOUNDPOOL_H
 
-#include "stdafx.h"
+#include "interfaces/sound.h"
 
 /**
  * @brief The soundpool class

@@ -7,7 +7,10 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include <unistd.h>
+#include "utils/io.h"
+#include "utils/switch.h"
+#include "common.h"
 
 /**
  * @brief scriptLoop is interpreting scripts in loop(it must be called periodically)

@@ -10,7 +10,8 @@
 #ifndef MATH_H
 #define MATH_H
 
-#include "stdafx.h"
+#include "interfaces/model.h"
+#include "car.h"
 
 /**
  * @brief absf gets absolute value of float number

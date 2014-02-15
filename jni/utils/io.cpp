@@ -7,7 +7,8 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include "utils/io.h"
+#include "common.h"
 
 char* string1 = new char[255];
 char character[1];  ///< temp char

@@ -7,7 +7,15 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
+#include "interfaces/model.h"
+#include "input/airacer.h"
+#include "input/aitraffic.h"
+#include "loaders/pngloader.h"
+#include "utils/engine.h"
+#include "utils/io.h"
+#include "utils/math.h"
+#include "utils/switch.h"
+#include "common.h"
 
 struct Dynamic {
     float* vertices;
@@ -22,19 +30,6 @@ Dynamic eff[effLen];
 model* arrow = 0;                            ///< GPS arrow model
 model* water = 0;
 
-/**
-  * Enabling and disabling lamps in time
-  */
-bool lamp[] = {0,0,0,0,1,0,1,1,0,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,0,0,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,0,0,1,0,1};
 /**
  * @brief displayMenu displaies menu
  * @param gui is instance of menu

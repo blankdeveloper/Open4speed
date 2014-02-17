@@ -13,6 +13,7 @@
 #include <cstring>
 #include <stdio.h>
 #include <vector>
+#include "common.h"
 
 /**
  * @brief exists checks if file exist

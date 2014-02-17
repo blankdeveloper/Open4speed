@@ -20,13 +20,32 @@
 #include <GL/gl.h>
 #include <GL/glext.h>
 #endif
+#include <stack>
+#include <vector>
+#include "interfaces/fbo.h"
 #include "interfaces/renderer.h"
+
 
 /**
  * @brief The gles20 class is implementation of OpenGL ES 2.0
  */
 class gles20 : public renderer {
 public:
+
+    fbo* cube;                            ///< Cubemap framebuffer
+    fbo* lm;                              ///< Lightmap framebuffer
+    float camX;                           ///< Camera position x
+    float camY;                           ///< Camera position y
+    float camZ;                           ///< Camera position z
+    glm::mat4x4 matrix;                   ///< Matrix for dynamic rendering
+    glm::mat4x4 matrixScl;                ///< Matrix for shadow mapping
+    glm::mat4x4 scene_projection_matrix;  ///< Scene projection matrix
+    glm::mat4x4 matrix_result;            ///< Temp matrix for calculations
+    std::stack<glm::mat4x4> matrixBuffer; ///< Matrix stack
+    GLushort dynindices[4095];            ///< Indicies for dynamic rendering
+    bool renderShadowMap;                 ///< Special state for rendering shadowmap
+    shader* shadowmap;                    ///< Shadowmap shader
+    int lmFilter;                         ///< Filtering of objects to render
 
     /**
      * @brief gles20 constructor

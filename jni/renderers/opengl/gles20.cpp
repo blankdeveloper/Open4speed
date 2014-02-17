@@ -20,28 +20,12 @@
 #include "utils/switch.h"
 #include "common.h"
 
-
-GLushort dynindices[4095];      ///< Indicies for dynamic rendering
-
-bool renderShadowMap = false;   ///< Special state for rendering shadowmap
-int culling = 300;              ///< View culling distance in meters
-float camX;                     ///< Camera position x
-float camY;                     ///< Camera position y
-float camZ;                     ///< Camera position z
-
-int lmFilter = -1;              ///< Filtering of objects to render
-shader* shadowmap = 0;          ///< Shadowmap shader
-
-/**
- * Lightmap RTTs
- */
-glfbo* cube;                      ///< Cubemap framebuffer
-glfbo* lm;                        ///< Lightmap framebuffer
+const int culling = 300;              ///< View culling distance in meters
 
 /**
  * GUI projection matrix
  */
-glm::mat4x4 gui_projection_matrix(
+const glm::mat4x4 gui_projection_matrix(
     (float)(1 / tan(45 * (3.1415926535 / 180))), 0, 0, 0,
     0, (float)(1 / tan(45 * (3.1415926535 / 180))), 0, 0,
     0, 0, -1, -1,
@@ -51,7 +35,7 @@ glm::mat4x4 gui_projection_matrix(
 /**
  * Eye matrix
  */
-glm::mat4x4 eye = glm::mat4x4(
+const glm::mat4x4 eye = glm::mat4x4(
             1,0,0,0,
             0,1,0,0,
             0,0,1,0,
@@ -61,17 +45,12 @@ glm::mat4x4 eye = glm::mat4x4(
 /**
  * Bias matrix to transform world coordinates into texture coordinates
  */
-glm::mat4 matScale = glm::mat4(0.5f, 0.0f, 0.0f, 0.0f,
-                               0.0f, 0.5f, 0.0f, 0.0f,
-                               0.0f, 0.0f, 0.5f, 0.0f,
-                               0.5f, 0.5f, 0.5f, 1.0f);
-
-glm::mat4x4 matrix;                                                        ///< Matrix for dynamic rendering
-glm::mat4x4 matrixScl;                                                     ///< Matrix for shadow mapping
-glm::mat4x4 scene_projection_matrix;                                       ///< Scene projection matrix
-glm::mat4x4 matrix_result;                                                 ///< Temp matrix for calculations
-std::stack<glm::mat4x4> matrixBuffer = *(new std::stack<glm::mat4x4>());   ///< Matrix stack
-
+const glm::mat4 matScale = glm::mat4(
+            0.5f, 0.0f, 0.0f, 0.0f,
+            0.0f, 0.5f, 0.0f, 0.0f,
+            0.0f, 0.0f, 0.5f, 0.0f,
+            0.5f, 0.5f, 0.5f, 1.0f
+);
 
 /**
  * @brief gles20 constructor
@@ -88,7 +67,9 @@ gles20::gles20() {
     overmode = 0;
     overshader = 0;
     frame = 0;
+    lmFilter = -1;
     oddFrame = true;
+    renderShadowMap = false;
     glslfont = getTexture(fontTexture, 1);
 
     /// set open-gl
@@ -510,7 +491,6 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     }
 
     /// set shader and VBO
-    m->vboData->bind();
     shader* current = m->material;
     if (overshader != 0) {
         current = overshader;
@@ -550,7 +530,6 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     current->uniformFloat("u_width", 1 / (float)screen_width);
     current->uniformFloat("u_height", 1 / (float)screen_height);
     current->uniformFloat4("camera", camX, camY, camZ, 1);
-    current->uniformFloat("u_test", testUniform);
     current->uniformFloat("u_view", rtt[oddFrame]->height / (float)rtt[oddFrame]->res);
     current->uniformFloat4("u_kA", m->colora[0], m->colora[1], m->colora[2], 1);
     current->uniformFloat4("u_kD", m->colord[0], m->colord[1], m->colord[2], 1);
@@ -613,7 +592,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
 
     /// standart vertices
     if (mod->cutX * mod->cutY == 1) {
-        m->vboData->render(current, 0, m->triangleCount[mod->cutX * mod->cutY], len, true);
+        m->vboData->render(current, 0, m->triangleCount[mod->cutX * mod->cutY], true);
     }
 
     /// culled vertices
@@ -621,13 +600,12 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         for (int i = ym; i <= yp; i++) {
             int l = m->triangleCount[i * mod->cutX + xm];
             int r = m->triangleCount[i * mod->cutX + xp + 1];
-            m->vboData->render(current, l, r - l, len, true);
+            m->vboData->render(current, l, r - l, true);
         }
         int l = m->triangleCount[(mod->cutX - 1) * mod->cutY];
         int r = m->triangleCount[mod->cutX * mod->cutY];
-        m->vboData->render(current, l, r - l, len, true);
+        m->vboData->render(current, l, r - l, true);
     }
-    m->vboData->unbind();
 
     //unbind shader
     current->unbind();

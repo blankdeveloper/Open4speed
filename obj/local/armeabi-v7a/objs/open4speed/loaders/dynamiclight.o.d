@@ -1,5 +1,6 @@
 /home/lubos/Plocha/Open4speed/obj/local/armeabi-v7a/objs/open4speed/loaders/dynamiclight.o: \
- loaders/dynamiclight.cpp loaders/dynamiclight.h \
+ loaders/dynamiclight.cpp interfaces/vbo.h interfaces/shader.h \
+ loaders/dynamiclight.h \
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/vector \
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_prolog.h \
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_cprolog.h \
@@ -86,12 +87,17 @@
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_relops_cont.h \
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_epilog.h \
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_config_compat_post.h \
- interfaces/vbo.h interfaces/shader.h utils/io.h \
- /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstring \
- utils/switch.h interfaces/fbo.h interfaces/input.h interfaces/model.h \
- interfaces/texture.h interfaces/physics.h car.h interfaces/input.h \
- interfaces/model.h interfaces/sound.h interfaces/renderer.h \
- ../support/glm/glm.hpp ../support/glm/core/_fixes.hpp \
+ renderers/opengl/gles20.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stack \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_stack.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_deque.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_deque.c \
+ interfaces/fbo.h interfaces/renderer.h ../support/glm/glm.hpp \
+ ../support/glm/core/_fixes.hpp \
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cmath \
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cfloat \
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/float.h \
@@ -163,7 +169,20 @@
  ../support/glm/./core/func_integer.inl \
  ../support/glm/./core/func_noise.hpp \
  ../support/glm/./core/func_noise.inl ../support/glm/./core/_swizzle.hpp \
- interfaces/sound.h
+ interfaces/model.h interfaces/texture.h utils/io.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstring common.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/jni.h \
+ ../support/libzip-0.11.1/lib/zip.h \
+ ../support/libzip-0.11.1/lib/zipconf.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/inttypes.h \
+ interfaces/model.h interfaces/physics.h car.h interfaces/input.h \
+ interfaces/sound.h interfaces/renderer.h interfaces/shader.h \
+ interfaces/texture.h utils/engine.h car.h utils/switch.h \
+ interfaces/input.h interfaces/physics.h interfaces/sound.h
+
+interfaces/vbo.h:
+
+interfaces/shader.h:
 
 loaders/dynamiclight.h:
 
@@ -339,33 +358,25 @@ loaders/dynamiclight.h:
 
 /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_config_compat_post.h:
 
-interfaces/vbo.h:
+renderers/opengl/gles20.h:
 
-interfaces/shader.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h:
 
-utils/io.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h:
 
-/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstring:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h:
 
-utils/switch.h:
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h:
+
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stack:
+
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_stack.h:
+
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_deque.h:
+
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_deque.c:
 
 interfaces/fbo.h:
-
-interfaces/input.h:
-
-interfaces/model.h:
-
-interfaces/texture.h:
-
-interfaces/physics.h:
-
-car.h:
-
-interfaces/input.h:
-
-interfaces/model.h:
-
-interfaces/sound.h:
 
 interfaces/renderer.h:
 
@@ -538,5 +549,49 @@ interfaces/renderer.h:
 ../support/glm/./core/func_noise.inl:
 
 ../support/glm/./core/_swizzle.hpp:
+
+interfaces/model.h:
+
+interfaces/texture.h:
+
+utils/io.h:
+
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstring:
+
+common.h:
+
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/jni.h:
+
+../support/libzip-0.11.1/lib/zip.h:
+
+../support/libzip-0.11.1/lib/zipconf.h:
+
+/opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/inttypes.h:
+
+interfaces/model.h:
+
+interfaces/physics.h:
+
+car.h:
+
+interfaces/input.h:
+
+interfaces/sound.h:
+
+interfaces/renderer.h:
+
+interfaces/shader.h:
+
+interfaces/texture.h:
+
+utils/engine.h:
+
+car.h:
+
+utils/switch.h:
+
+interfaces/input.h:
+
+interfaces/physics.h:
 
 interfaces/sound.h:

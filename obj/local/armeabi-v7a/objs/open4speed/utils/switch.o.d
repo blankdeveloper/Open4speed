@@ -230,6 +230,10 @@
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stack \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_stack.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_deque.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_deque.c \
  interfaces/renderer.h ../support/glm/glm.hpp \
  ../support/glm/core/_fixes.hpp \
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cmath \
@@ -303,14 +307,13 @@
  renderers/opengl/glfbo.h renderers/opengl/glsl.h \
  renderers/opengl/gltexture.h renderers/opengl/glvbo.h sound/soundpool.h \
  interfaces/sound.h utils/io.h \
- /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstring \
- utils/switch.h common.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstring common.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/jni.h \
  ../support/libzip-0.11.1/lib/zip.h \
  ../support/libzip-0.11.1/lib/zipconf.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/inttypes.h \
  interfaces/physics.h interfaces/renderer.h interfaces/shader.h \
- interfaces/texture.h utils/engine.h car.h
+ interfaces/texture.h utils/engine.h car.h utils/switch.h
 
 input/keyboard.h:
 
@@ -794,6 +797,14 @@ renderers/opengl/gles20.h:
 
 /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h:
 
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stack:
+
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_stack.h:
+
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_deque.h:
+
+/opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_deque.c:
+
 interfaces/renderer.h:
 
 ../support/glm/glm.hpp:
@@ -976,8 +987,6 @@ utils/io.h:
 
 /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstring:
 
-utils/switch.h:
-
 common.h:
 
 /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/jni.h:
@@ -999,3 +1008,5 @@ interfaces/texture.h:
 utils/engine.h:
 
 car.h:
+
+utils/switch.h:

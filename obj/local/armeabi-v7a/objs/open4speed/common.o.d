@@ -168,7 +168,7 @@
  ../support/glm/./core/func_integer.inl \
  ../support/glm/./core/func_noise.hpp \
  ../support/glm/./core/func_noise.inl ../support/glm/./core/_swizzle.hpp \
- interfaces/shader.h interfaces/texture.h utils/engine.h car.h
+ interfaces/shader.h interfaces/texture.h utils/engine.h car.h common.h
 
 utils/io.h:
 
@@ -557,3 +557,5 @@ interfaces/texture.h:
 utils/engine.h:
 
 car.h:
+
+common.h:

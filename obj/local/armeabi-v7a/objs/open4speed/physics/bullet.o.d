@@ -224,8 +224,7 @@
  /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/stl/_relops_cont.h \
  interfaces/vbo.h loaders/dynamiclight.h interfaces/physics.h car.h \
  interfaces/input.h interfaces/model.h interfaces/sound.h utils/io.h \
- /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstring \
- utils/math.h common.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstring common.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/jni.h \
  ../support/libzip-0.11.1/lib/zip.h \
  ../support/libzip-0.11.1/lib/zipconf.h \
@@ -300,7 +299,8 @@
  ../support/glm/./core/func_integer.inl \
  ../support/glm/./core/func_noise.hpp \
  ../support/glm/./core/func_noise.inl ../support/glm/./core/_swizzle.hpp \
- interfaces/shader.h interfaces/texture.h utils/engine.h car.h
+ interfaces/shader.h interfaces/texture.h utils/engine.h car.h \
+ utils/math.h
 
 physics/bullet.h:
 
@@ -770,8 +770,6 @@ utils/io.h:
 
 /opt/android-ndk-r9c/sources/cxx-stl/stlport/stlport/cstring:
 
-utils/math.h:
-
 common.h:
 
 /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/jni.h:
@@ -957,3 +955,5 @@ interfaces/texture.h:
 utils/engine.h:
 
 car.h:
+
+utils/math.h:

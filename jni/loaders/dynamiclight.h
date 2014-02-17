@@ -34,6 +34,7 @@ public:
 
     int lmCount;
     int lightCount;
+    shader* fboRenderer;
     std::vector<VBOLightParam*> lightParam;
     std::vector<vbo*> lightVBO;
 
@@ -47,6 +48,13 @@ public:
      * @param filename is path to file with dynamic light data
      */
     DynamicLight(char* filename);
+
+    /**
+     * @brief setLight update lightmaps by loaded data
+     * @param index is index of the light
+     * @param value is true for light on, false for light off
+     */
+    void setLight(int index, bool value);
 };
 
 #endif // DYNAMICLIGHT_H

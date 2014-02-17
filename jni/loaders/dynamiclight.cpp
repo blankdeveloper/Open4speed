@@ -7,9 +7,12 @@
 */
 //----------------------------------------------------------------------------------------
 
+#include "interfaces/vbo.h"
 #include "loaders/dynamiclight.h"
+#include "renderers/opengl/gles20.h"
 #include "utils/io.h"
 #include "utils/switch.h"
+#include "common.h"
 
 /**
  * @brief DynamicLight is a destructor
@@ -37,6 +40,7 @@ DynamicLight::DynamicLight(char* filename) {
     FILE* file = fopen(prefix(filename), "r");
 #endif
     char* line = new char[1024];
+    fboRenderer = getShader("lmPoints");
 
     /// get data size
     gets(line, file);
@@ -63,7 +67,7 @@ DynamicLight::DynamicLight(char* filename) {
             gets(line, file);
             sscanf(line, "%f %f %f", &vertices[j * 3 + 0], &vertices[j * 3 + 1], &vertices[j * 3 + 2]);
         }
-        lightVBO.push_back(getVBO(size, vertices, 0, 0, 0));
+        lightVBO.push_back(getVBO(sizeof(float)*size, vertices, 0, 0, 0));
         delete[] vertices;
     }
 
@@ -72,4 +76,38 @@ DynamicLight::DynamicLight(char* filename) {
 #else
     fclose(file);
 #endif
+}
+
+
+/**
+ * @brief setLight update lightmaps by loaded data
+ * @param index is index of the light
+ * @param value is true for light on, false for light off
+ */
+void DynamicLight::setLight(int index, bool value) {
+    /// light already has wanted value
+    int pIndex = index * lmCount;
+    if (lightParam[pIndex]->enabled == value) {
+        return;
+    }
+
+    glDisable(GL_DEPTH_TEST);
+    /*glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_ONE);
+    if (value)
+        glBlendEquation(GL_FUNC_ADD);
+    else
+        glBlendEquation(GL_FUNC_SUBTRACT);*/
+
+    for (int i = 0; i < lmCount; i++) {
+        trackdata->lightmaps[i]->bindFBO();
+        fboRenderer->bind();
+        fboRenderer->uniformFloat4("color", lightParam[pIndex + i]->r, lightParam[pIndex + i]->g, lightParam[pIndex + i]->b, 1.0f);
+        lightVBO[i]->render(fboRenderer, lightParam[pIndex + i]->begin, lightParam[pIndex + i]->len, false);
+        fboRenderer->unbind();
+        trackdata->lightmaps[i]->unbindFBO();
+        lightParam[pIndex + i]->enabled = value;
+    }
+    glDisable(GL_BLEND);
+    //glBlendEquation(GL_FUNC_ADD);
 }

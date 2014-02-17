@@ -16,10 +16,11 @@ char character[1];  ///< temp char
 #ifdef ZIP_ARCHIVE
 #ifdef ANDROID
 const char* configPath = "/data/data/com.lvonasek.o4s/";    ///< Path to game config
+const char* gamePath = "assets/";                           ///< Data path
 #else
-const char* configPath = "./";      ///< Path to game config
+const char* configPath = "./";                              ///< Path to game config
+const char* gamePath = "./";                                ///< Data path
 #endif
-const char* gamePath = "assets/";   ///< Data path
 
 /**
 * @brief getsEx gets config value from zip archive

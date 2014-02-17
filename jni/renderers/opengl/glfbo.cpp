@@ -208,4 +208,5 @@ void glfbo::drawOnScreen(shader* screen_shader) {
  */
 void glfbo::unbindFBO() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glViewport (0, 0, screen_width, screen_height);
 }

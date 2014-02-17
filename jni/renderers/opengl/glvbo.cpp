@@ -20,6 +20,7 @@
  */
 glvbo::glvbo(int size, float* vertices, float* normals, float* coords, float* tid) {
     /// count buffer size
+    this->size = size;
     int len = 0;
     if (vertices != 0)
         len += size * 3;
@@ -54,13 +55,6 @@ glvbo::glvbo(int size, float* vertices, float* normals, float* coords, float* ti
 }
 
 /**
- * @brief bind binds VBO
- */
-void glvbo::bind() {
-    glBindBuffer(GL_ARRAY_BUFFER, instance);
-}
-
-/**
  * @brief destroy removes all data from memory
  */
 void glvbo::destroy() {
@@ -74,20 +68,13 @@ void glvbo::destroy() {
  * @param len is length of data to renderer
  * @param triangles is true when rendering triangles
  */
-void glvbo::render(shader* sh, int begin, int len, int size, bool triangles) {
-
+void glvbo::render(shader* sh, int begin, int len, bool triangles) {
+    glBindBuffer(GL_ARRAY_BUFFER, instance);
+    sh->attrib(size);
     if (triangles) {
-        sh->attrib(sizeof(GLfloat) * size * 3);
         glDrawArrays(GL_TRIANGLES, begin * 3, len * 3);
     } else {
-        sh->attrib(sizeof(GLfloat) * size);
         glDrawArrays(GL_POINTS, begin, len);
     }
-}
-
-/**
- * @brief unbind unbinds VBO
- */
-void glvbo::unbind() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

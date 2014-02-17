@@ -45,8 +45,10 @@ public:
     Light light;                ///< One light information(for lightmap rendering)
     texture *glslfont;          ///< Font texture
     shader* gui_shader;         ///< GUI shader
+    shader* overshader;         ///< Shader to be applied over current shader
     shader* scene_shader;       ///< Scene shader
     int overmode;               ///< Special mode
+    glm::mat4x4 view_matrix;    ///< View matrix
 
     /**
      * @brief lookAt implements GLUlookAt

@@ -11,6 +11,7 @@
 #define COMMON_H
 
 #ifdef ANDROID
+#define ZIP_ARCHIVE
 #include <jni.h>
 #include <zip.h>
 extern JNIEnv* instance;            ///< JNI instance
@@ -30,8 +31,6 @@ extern zip* APKArchive;             ///< APK archive instance
  * @brief renderLightmap render lightmaps and exit when it is true
  */
 extern bool renderLightmap;
-
-extern glm::mat4x4 view_matrix;
 extern bool lamp[];
 
 /**
@@ -161,14 +160,12 @@ extern sound* engine;                               ///< Engine sound
 extern sound* noise;                                ///< N2O sound
 extern float *mat;                                  ///< Temp matrix
 extern char *string;                                ///< Temp string
-extern int testUniform;                             ///< Uniform for testing
 const int configSize = 32;                          ///< Amount of config variables
 extern int config[configSize];                      ///< Temporary config data
 extern std::vector<char*> *configText[configSize];  ///< Config texts
 extern float direction;                             ///< Camera direction
 extern float mtime;                                 ///< Time stamp
 extern int lastkey;                                 ///< Last pressed key keycode
-extern shader* overshader;                          ///< Shader to be applied
 extern bool matrixLock;                             ///< Lock for replacing car matrices
 extern bool renderLightmap;                         ///< Render lightmap mode enability
 const int rttsize = 2048;                           ///< RTT texture size

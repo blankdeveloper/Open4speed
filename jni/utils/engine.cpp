@@ -265,17 +265,10 @@ void displayScene() {
                                         mat[4], mat[5], mat[6], mat[7],
                                         mat[8], mat[9], mat[10], mat[11],
                                         mat[12], mat[13], mat[14], mat[15]);
-    xrenderer->light.u_light = view_matrix * bulletMat * glm::vec4(0, allCar[cameraCar]->skin->aplitude * 0.5f,
-                                                                   allCar[cameraCar]->skin->height * 0.6f, 1);
-    xrenderer->light.u_light_dir = view_matrix * bulletMat * glm::vec4(0, allCar[cameraCar]->skin->aplitude * 4.0f,
-                                                                       -allCar[cameraCar]->skin->height, 0);
-    xrenderer->popMatrix();
-
-    /// render skydome
-    xrenderer->pushMatrix();
-    xrenderer->translate(cameraX, 0, cameraZ);
-    xrenderer->scale(viewDistance * 0.9);
-    xrenderer->renderModel(skydome);
+    xrenderer->light.u_light = xrenderer->view_matrix * bulletMat * glm::vec4(0, allCar[cameraCar]->skin->aplitude * 0.5f,
+                                                                              allCar[cameraCar]->skin->height * 0.6f, 1);
+    xrenderer->light.u_light_dir = xrenderer->view_matrix * bulletMat * glm::vec4(0, allCar[cameraCar]->skin->aplitude * 4.0f,
+                                                                                  -allCar[cameraCar]->skin->height, 0);
     xrenderer->popMatrix();
 
     /// render track
@@ -284,6 +277,13 @@ void displayScene() {
     if (trackdata2 != 0) {
         xrenderer->renderModel(trackdata2);
     }
+
+    /// render skydome
+    xrenderer->pushMatrix();
+    xrenderer->translate(cameraX, 0, cameraZ);
+    xrenderer->scale(viewDistance * 0.9);
+    xrenderer->renderModel(skydome);
+    xrenderer->popMatrix();
 
     /// render cars
     xrenderer->enable[2] = false;
@@ -301,7 +301,7 @@ void displayScene() {
                 }
             }
         }
-        xrenderer->light.u_nearest1 = view_matrix * xrenderer->light.u_nearest1;
+        xrenderer->light.u_nearest1 = xrenderer->view_matrix * xrenderer->light.u_nearest1;
 
 
         ///render car skin
@@ -405,6 +405,9 @@ void displayScene() {
         }
         eff[currentFrame].frame = 0;
         currentFrame++;
+        bool v = lamp[(xrenderer->frame/2) % 100];
+        for (int l = 0; l < trackdata->dynamicLight->lightCount; l++)
+            trackdata->dynamicLight->setLight(l, v);
         if (currentFrame >= effLen) {
             currentFrame = 0;
         }
@@ -425,10 +428,10 @@ void loadScene(std::vector<char*> *atributes) {
     for (int i = 0; i < carCount; i++)
         delete allCar[i];
     delete trackdata;
+    delete skydome;
     if (trackdata2 != 0)
         delete trackdata2;
     trackdata2 = 0;
-    delete skydome;
     carCount = 0;
 
     /// load track
@@ -448,7 +451,7 @@ void loadScene(std::vector<char*> *atributes) {
     if (arrow == 0) {
         arrow = getModel("gfx/arrow.o4s", false);
     }
-    arrow->models[0].texture2D = skydome->models[1].texture2D;
+    //arrow->models[0].texture2D = skydome->models[1].texture2D;
 
     /// load player car
     allCar[0] = new car(getInput(), &e, (*carList)[playerCar], transmission);

@@ -23,7 +23,6 @@ bool lamp[] = {0,0,0,0,1,0,1,1,0,1,
                1,1,1,1,1,1,1,1,1,1,
                1,1,1,1,1,1,1,1,1,1,
                1,1,1,1,1,0,0,1,0,1};
-glm::mat4x4 view_matrix;                                                   ///< View matrix
 
 /**
  * @brief The game resources
@@ -156,8 +155,6 @@ sound* engine;                  ///< Engine sound
 sound* noise;                   ///< N2O sound
 float *mat = new float[16];     ///< Temp matrix
 char *string = new char[1024];  ///< Temp string
-int testUniform = 1;            ///< Uniform for testing
-shader* overshader;             ///< Shader to be applied
 bool matrixLock = 0;            ///< Lock for replacing car matrices
 bool renderLightmap = false;    ///< Render lightmap mode enability
 

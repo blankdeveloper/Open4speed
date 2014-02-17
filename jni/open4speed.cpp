@@ -292,7 +292,7 @@ int main(int argc, char** argv) {
 #ifdef ZIP_ARCHIVE
 #ifndef ANDROID
     /// open zip file with data
-    APKArchive = zip_open("../out/production/open4speedHD/open4speedHD.apk", 0, NULL);
+    APKArchive = zip_open("../out/production/Open4speed/Open4speed.apk", 0, NULL);
 #endif
 #endif
 

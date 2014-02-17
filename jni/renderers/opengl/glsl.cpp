@@ -118,7 +118,8 @@ void glsl::attrib(int size) {
     glVertexAttribPointer(attribute_v_vertex, 3, GL_FLOAT, GL_FALSE, 0, ( const GLvoid *) 0);
     if (attribute_v_normal != -1)
         glVertexAttribPointer(attribute_v_normal, 3, GL_FLOAT, GL_FALSE, 0, ( const GLvoid *) (size * 3));
-    glVertexAttribPointer(attribute_v_coord, 2, GL_FLOAT, GL_FALSE, 0, ( const GLvoid *) (size * 6));
+    if (attribute_v_coord != -1)
+        glVertexAttribPointer(attribute_v_coord, 2, GL_FLOAT, GL_FALSE, 0, ( const GLvoid *) (size * 6));
     if (attribute_v_tid != -1)
         glVertexAttribPointer(attribute_v_tid, 2, GL_FLOAT, GL_FALSE, 0, ( const GLvoid *) (size * 8));
 }

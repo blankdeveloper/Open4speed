@@ -74,7 +74,8 @@ void glvbo::render(shader* sh, int begin, int len, bool triangles) {
     if (triangles) {
         glDrawArrays(GL_TRIANGLES, begin * 3, len * 3);
     } else {
-        glDrawArrays(GL_POINTS, begin, len);
+        glLineWidth(1);
+        glDrawArrays(GL_LINES, begin, len);
     }
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

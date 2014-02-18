@@ -32,8 +32,8 @@
 class gles20 : public renderer {
 public:
 
-    fbo* cube;                            ///< Cubemap framebuffer
-    fbo* lm;                              ///< Lightmap framebuffer
+    std::vector<fbo*> cube;               ///< Cubemap framebuffer
+    std::vector<fbo*> lm;                 ///< Lightmap framebuffer
     float camX;                           ///< Camera position x
     float camY;                           ///< Camera position y
     float camZ;                           ///< Camera position z

@@ -7,13 +7,7 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "utils/engine.h"
-#include "utils/io.h"
-#include "utils/math.h"
-#include "utils/scripting.h"
-#include "utils/switch.h"
-#include "common.h"
-
+#include "stdafx.h"
 
 #define LIGHTMAP_PER_LIGHT
 
@@ -38,7 +32,6 @@ std::vector<LightParam> *lightInfo;
  * @brief display updates display
  */
 void display(void) {
-
     if (syntaxList->empty()) {
         if (trackdata == 0) {
             syntaxList = getList("RACE2");
@@ -120,17 +113,41 @@ void display(void) {
                         xrenderer->renderLMLight(lightShader);
                         printf("%d/%d\n", i, x);
 
-                        /// get texels
+                        /// get texel lines
                         for (int y = 0; y < trackdata->getLMCount(); y++) {
                             int oldCount = count[y];
-                            char* pixels = xrenderer->getLMPixels(y);
-                            for (int a = 0; a < rttsize; a++) {
-                                for (int b = 0; b < rttsize; b++) {
+                            GLubyte* pixels = xrenderer->getLMPixels(y);
+                            for (int b = 0; b < rttsize; b++) {
+                                bool closed = true;
+                                int lastIntensity = 0;
+                                int lastA = 0;
+                                for (int a = 0; a < rttsize; a++) {
                                     int index = (b * rttsize + a) * 4 + highIndex;
-                                    if (pixels[index] > 0) {
-                                        outputVBO[y].push_back({a / (float)rttsize, b / (float)rttsize, pixels[index] / 255.0f / highVal});
+
+                                    /// line close
+                                    if (!closed && (lastIntensity != pixels[index])) {
+                                        outputVBO[y].push_back({lastA / (float)rttsize, b / (float)rttsize, lastIntensity / 255.0f / highVal});
+                                        closed = true;
                                         count[y]++;
                                     }
+
+                                    lastA = a;
+                                    lastIntensity = pixels[index];
+
+                                    /// line begin
+                                    if (closed) {
+                                        if (pixels[index] > 0) {
+                                            outputVBO[y].push_back({lastA / (float)rttsize, b / (float)rttsize, lastIntensity / 255.0f / highVal});
+                                            closed = false;
+                                            count[y]++;
+                                        }
+                                    }
+                                }
+
+                                /// close line
+                                if (!closed) {
+                                    outputVBO[y].push_back({lastA / (float)rttsize, b / (float)rttsize, lastIntensity / 255.0f / highVal});
+                                    count[y]++;
                                 }
                             }
 
@@ -160,7 +177,7 @@ void display(void) {
             }
             fclose(file);
 
-            printf("OK\n");
+            printf("OK, written to %s\n", prefix("lights.vbo"));
             exit(0);
         }
     }

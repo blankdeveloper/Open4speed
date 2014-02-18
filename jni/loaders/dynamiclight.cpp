@@ -66,6 +66,10 @@ DynamicLight::DynamicLight(char* filename) {
         for (int j = 0; j < size; j++) {
             gets(line, file);
             sscanf(line, "%f %f %f", &vertices[j * 3 + 0], &vertices[j * 3 + 1], &vertices[j * 3 + 2]);
+            if (j % 2 == 1) {
+                vertices[j * 3 + 0] += 1 / 1280.0;
+                vertices[j * 3 + 1] += 1 / 1280.0;
+            }
         }
         lightVBO.push_back(getVBO(sizeof(float)*size, vertices, 0, 0, 0));
         delete[] vertices;
@@ -92,22 +96,22 @@ void DynamicLight::setLight(int index, bool value) {
     }
 
     glDisable(GL_DEPTH_TEST);
-    /*glEnable(GL_BLEND);
+    glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE);
     if (value)
         glBlendEquation(GL_FUNC_ADD);
     else
-        glBlendEquation(GL_FUNC_SUBTRACT);*/
+        glBlendEquation(GL_FUNC_SUBTRACT);
 
     for (int i = 0; i < lmCount; i++) {
-        trackdata->lightmaps[i]->bindFBO();
-        fboRenderer->bind();
-        fboRenderer->uniformFloat4("color", lightParam[pIndex + i]->r, lightParam[pIndex + i]->g, lightParam[pIndex + i]->b, 1.0f);
-        lightVBO[i]->render(fboRenderer, lightParam[pIndex + i]->begin, lightParam[pIndex + i]->len, false);
-        fboRenderer->unbind();
-        trackdata->lightmaps[i]->unbindFBO();
+        if (lightParam[pIndex + i]->len > 0) {
+            trackdata->lightmaps[i]->bindFBO();
+            fboRenderer->uniformFloat4("color", lightParam[pIndex + i]->r, lightParam[pIndex + i]->g, lightParam[pIndex + i]->b, 1.0f);
+            lightVBO[i]->render(fboRenderer, lightParam[pIndex + i]->begin, lightParam[pIndex + i]->len, false);
+            trackdata->lightmaps[i]->unbindFBO();
+        }
         lightParam[pIndex + i]->enabled = value;
     }
     glDisable(GL_BLEND);
-    //glBlendEquation(GL_FUNC_ADD);
+    glBlendEquation(GL_FUNC_ADD);
 }

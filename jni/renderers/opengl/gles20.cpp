@@ -698,7 +698,7 @@ char* gles20::getLMPixels(int i) {
 
     /// get pixels
     rtt[0]->unbindFBO();
-    lm[i].bindTexture();
+    lm[i]->bindTexture();
     glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
     glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels2);
 
@@ -765,15 +765,13 @@ char* gles20::getLMPixels(int i) {
 void gles20::prepareLM(int count) {
 
     /// set cube framebuffers
-    cube = new glfbo[count];
     for (int i = 0; i < 6; i++) {
-        cube[i] = *(new glfbo(rttsize, rttsize, true));
+        cube.push_back(new glfbo(rttsize, rttsize, true));
     }
 
     /// set lightmaps framebuffers
-    lm = new glfbo[count];
     for (int i = 0; i < count; i++) {
-        lm[i] = *(new glfbo(rttsize, rttsize, false));
+        lm.push_back(new glfbo(rttsize, rttsize, false));
     }
     resetLM(count);
 }
@@ -801,10 +799,10 @@ void gles20::renderLMLight(shader* lightrenderer) {
             perspective(90, 1, 0.1, 300);
             switch(v) {
                 case(0):
-                    lookAt(x, y, z, x, y - 1, z, 1, 0, 0);
+                    lookAt(x, y, z, x, y + 1, z, 1, 0, 0);
                     break;
                 case(1):
-                    lookAt(x, y, z, x, y + 1, z, 1, 0, 0);
+                    lookAt(x, y, z, x, y - 1, z, 1, 0, 0);
                     break;
                 case(2):
                     lookAt(x, y, z, x - 1, y, z, 0, 1, 0);
@@ -823,29 +821,30 @@ void gles20::renderLMLight(shader* lightrenderer) {
             /// render shadowmap
             if (i == 0) {
                 renderShadowMap = true;
-                cube[v].bindFBO();
-                cube[v].clear(true);
+                cube[v]->bindFBO();
+                cube[v]->clear(true);
                 overshader = shadowmap;
                 renderModel(trackdata);
                 overshader = 0;
                 renderShadowMap = false;
+                cube[v]->unbindFBO();
             }
 
             /// update lightmap
             light.u_light = view_matrix * pos;
             light.u_light_dir = view_matrix * dir;
             lmFilter = i;
-            lm[i].bindFBO();
-            lm[i].clear(false);
+            lm[i]->bindFBO();
             overmode = 1;
             overshader = lightrenderer;
             glActiveTexture( GL_TEXTURE2 );
-            cube[v].bindTexture();
+            cube[v]->bindTexture();
             glActiveTexture( GL_TEXTURE0 );
             renderModel(trackdata);
             overmode = 0;
             overshader = 0;
             lmFilter = -1;
+            lm[i]->unbindFBO();
         }
     }
 }
@@ -856,8 +855,8 @@ void gles20::renderLMLight(shader* lightrenderer) {
  */
 void gles20::resetLM(int count) {
     for (int i = 0; i < count; i++) {
-        lm[i].bindFBO();
-        lm[i].clear(true);
+        lm[i]->bindFBO();
+        lm[i]->clear(true);
     }
 }
 

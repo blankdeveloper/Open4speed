@@ -406,8 +406,10 @@ void displayScene() {
         eff[currentFrame].frame = 0;
         currentFrame++;
         bool v = lamp[(xrenderer->frame/2) % 100];
+        trackdata->dynamicLight->fboRenderer->bind();
         for (int l = 0; l < trackdata->dynamicLight->lightCount; l++)
             trackdata->dynamicLight->setLight(l, v);
+        trackdata->dynamicLight->fboRenderer->unbind();
         if (currentFrame >= effLen) {
             currentFrame = 0;
         }

@@ -1,0 +1,29 @@
+\begin{thebibliography}{Kap11}
+
+\bibitem[Kap11]{Kaplinski11}
+Lauris Kaplinski.
+\newblock {R}eflections.
+\newblock
+  \url{http://khayyam.kaplinski.com/2011/09/reflective-water-with-glsl-part-i.html},
+  2011.
+
+\bibitem[Mas11]{Masserann11}
+Arnaud Masserann.
+\newblock {S}hadow mapping.
+\newblock
+  \url{http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping},
+  2011.
+
+\bibitem[Pfa12]{Pfaff12}
+James Pfaff.
+\newblock {R}ealtime local reflections.
+\newblock
+  \url{http://www.gamedev.net/blog/1323/entry-2254101-real-time-local-reflections/},
+  2012.
+
+\bibitem[Sco02]{Scott02}
+Jim Scott.
+\newblock {P}acking lightmaps.
+\newblock \url{http://www.blackpawn.com/texts/lightmaps/}, 2002.
+
+\end{thebibliography}

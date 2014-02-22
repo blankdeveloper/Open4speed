@@ -179,7 +179,7 @@ void gles20::perspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zF
     if(!matrixBuffer.empty()) {
         matrixBuffer.pop();
     }
-    scene_projection_matrix = glm::perspective(fovy, aspect, zNear,zFar);
+    proj_matrix = glm::perspective(fovy, aspect, zNear,zFar);
     glEnable(GL_DEPTH_TEST);
 }
 
@@ -352,7 +352,7 @@ void gles20::renderDynamic(GLfloat *vertices, GLfloat *coords, shader* sh, textu
 
     /// set matrices
     sh->bind();
-    matrix = scene_projection_matrix * view_matrix;
+    matrix = proj_matrix * view_matrix;
     sh->uniformMatrix("u_Matrix",glm::value_ptr(matrix));
 
     /// render
@@ -499,8 +499,8 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     /// set matrices
     current->bind();
     current->uniformMatrix("u_ModelViewMatrix",glm::value_ptr(modelView));
-    current->uniformMatrix("u_ProjectionMatrix",glm::value_ptr(scene_projection_matrix));
-    matrix = scene_projection_matrix * modelView;
+    current->uniformMatrix("u_ProjectionMatrix",glm::value_ptr(proj_matrix));
+    matrix = proj_matrix * modelView;
     matrixScl = matScale * matrix;
     current->uniformMatrix("u_Matrix",glm::value_ptr(matrix));
     current->uniformMatrix("u_MatrixScl",glm::value_ptr(matrixScl));

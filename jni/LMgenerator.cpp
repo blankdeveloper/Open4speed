@@ -7,9 +7,10 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "stdafx.h"
-
-#define LIGHTMAP_PER_LIGHT
+#include <vector>
+#include "utils/io.h"
+#include "utils/scripting.h"
+#include "utils/switch.h"
 
 struct LMPixel {
     float x;
@@ -116,7 +117,7 @@ void display(void) {
                         /// get texel lines
                         for (int y = 0; y < trackdata->getLMCount(); y++) {
                             int oldCount = count[y];
-                            GLubyte* pixels = xrenderer->getLMPixels(y);
+                            char* pixels = xrenderer->getLMPixels(y);
                             for (int b = 0; b < rttsize; b++) {
                                 bool closed = true;
                                 int lastIntensity = 0;
@@ -204,10 +205,8 @@ void display(void) {
  */
 void idle(int v) {
     /// call update
-#ifndef ANDROID
     glutPostRedisplay();
     glutTimerFunc(50,idle,0);
-#endif
 }
 
 /**
@@ -258,7 +257,6 @@ int main(int argc, char** argv) {
     /// load configuration
     loadAll();
 
-#ifndef ANDROID
     /// init glut
     glutInit(&argc, argv);
 
@@ -270,7 +268,6 @@ int main(int argc, char** argv) {
     /// set handlers
     glutReshapeFunc(reshape);
     glutDisplayFunc(display);
-#endif
 
     /// load menu data
     carList = getList("CARS");
@@ -280,9 +277,7 @@ int main(int argc, char** argv) {
     trackList = getList("TRACKS");
 
     /// start loop
-#ifndef ANDROID
     glutTimerFunc(0,idle,0);
     glutMainLoop();
     return 0;
-#endif
 }

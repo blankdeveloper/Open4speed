@@ -37,7 +37,8 @@ SOURCES += \
     utils/scripting.cpp \
     interfaces/model.cpp \
     renderers/opengl/glfbo.cpp \
-    renderers/opengl/glvbo.cpp
+    renderers/opengl/glvbo.cpp \
+    raycaster/octreenode.cpp
 HEADERS += \
     input/keyboard.h \
     interfaces/input.h \
@@ -69,5 +70,6 @@ HEADERS += \
     utils/scripting.h \
     interfaces/fbo.h \
     renderers/opengl/glfbo.h \
-    renderers/opengl/glvbo.h
+    renderers/opengl/glvbo.h \
+    raycaster/octreenode.h
 INCLUDEPATH += ../support ../support/fmodapi-4.44.08 ../support/bullet-2.81-rev2613/src

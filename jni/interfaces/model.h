@@ -64,6 +64,7 @@ struct model3d {
     float* tid;         ///< Object lightmap coordinates
     float x,y,z;        ///< Object translation
     vbo* vboData;       ///< VBO of model
+    bool fixed;         ///< Raycasting flag
 };
 
 /**

@@ -39,7 +39,6 @@ public:
     float camZ;                           ///< Camera position z
     glm::mat4x4 matrix;                   ///< Matrix for dynamic rendering
     glm::mat4x4 matrixScl;                ///< Matrix for shadow mapping
-    glm::mat4x4 scene_projection_matrix;  ///< Scene projection matrix
     glm::mat4x4 matrix_result;            ///< Temp matrix for calculations
     std::stack<glm::mat4x4> matrixBuffer; ///< Matrix stack
     GLushort dynindices[4095];            ///< Indicies for dynamic rendering

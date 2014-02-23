@@ -588,8 +588,6 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     if (yp >= mod->cutY)
         yp = mod->cutY - 1;
 
-    int len = m->triangleCount[mod->cutX * mod->cutY];
-
     /// standart vertices
     if (mod->cutX * mod->cutY == 1) {
         m->vboData->render(current, 0, m->triangleCount[mod->cutX * mod->cutY], true);
@@ -687,9 +685,11 @@ void gles20::renderText(float x, float y, float layer, const char* text) {
 /**
  * @brief getLMPixels get raw pixels of lightmap
  * @param i is index of lightmap
+ * @param fix is true to fix lightmap holes
+ * @param blur is true to filter lightmap data
  * @return raw pixels
  */
-char* gles20::getLMPixels(int i) {
+char* gles20::getLMPixels(int i, bool fix, bool blur) {
 
     GLubyte* pixels = new GLubyte[rttsize * rttsize * 4];
 
@@ -703,25 +703,27 @@ char* gles20::getLMPixels(int i) {
     glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels2);
 
     /// fill holes
-    for (int a = 0; a < rttsize; a++) {
-        for (int b = 0; b < rttsize; b++) {
-            if (pixels[(b * rttsize + a) * 4 + 3] < 128) {
-                for (int i = -1; i <= 1; i++) {
-                    for (int j = -1; j <= 1; j++) {
-                        if ((a + i >= 0) && (a + i < rttsize) && (b + j >= 0) && (b + j < rttsize)) {
-                            if (pixels[((b + j) * rttsize + a + i) * 4 + 3] > 128) {
-                                for (int k = 0; k < 3; k++) {
-                                    pixels[(b * rttsize + a) * 4 + k] = pixels[((b + j) * rttsize + a + i) * 4 + k];
+    if (fix) {
+        for (int a = 0; a < rttsize; a++) {
+            for (int b = 0; b < rttsize; b++) {
+                if (pixels[(b * rttsize + a) * 4 + 3] < 128) {
+                    for (int i = -1; i <= 1; i++) {
+                        for (int j = -1; j <= 1; j++) {
+                            if ((a + i >= 0) && (a + i < rttsize) && (b + j >= 0) && (b + j < rttsize)) {
+                                if (pixels[((b + j) * rttsize + a + i) * 4 + 3] > 128) {
+                                    for (int k = 0; k < 3; k++) {
+                                        pixels[(b * rttsize + a) * 4 + k] = pixels[((b + j) * rttsize + a + i) * 4 + k];
+                                    }
+                                    pixels[(b * rttsize + a) * 4 + 3] = 128;
                                 }
-                                pixels[(b * rttsize + a) * 4 + 3] = 128;
+                            }
+                            if (pixels[(b * rttsize + a) * 4 + 3] == 128) {
+                                break;
                             }
                         }
                         if (pixels[(b * rttsize + a) * 4 + 3] == 128) {
                             break;
                         }
-                    }
-                    if (pixels[(b * rttsize + a) * 4 + 3] == 128) {
-                        break;
                     }
                 }
             }
@@ -729,29 +731,33 @@ char* gles20::getLMPixels(int i) {
     }
 
     /// blur
-    for (int a = 0; a < rttsize; a++) {
-        for (int b = 0; b < rttsize; b++) {
-            for (int k = 0; k < 3; k++) {
-                int count = 1;
-                int value = pixels[(b * rttsize + a) * 4 + k];
-                for (int i = -1; i <= 1; i++) {
-                    for (int j = -1; j <= 1; j++) {
-                        if ((b + j >= 0) && (b + j < rttsize))
-                            if ((a + i >= 0) && (a + i < rttsize))
-                                if (pixels[((b + j) * rttsize + a + i) * 4 + 3] > 128) {
-                                    count++;
-                                    value += pixels2[((b + j) * rttsize + a + i) * 4 + k];
-                                }
+    if (blur) {
+        for (int a = 0; a < rttsize; a++) {
+            for (int b = 0; b < rttsize; b++) {
+                for (int k = 0; k < 3; k++) {
+                    int count = 1;
+                    int value = pixels[(b * rttsize + a) * 4 + k];
+                    for (int i = -1; i <= 1; i++) {
+                        for (int j = -1; j <= 1; j++) {
+                            if ((b + j >= 0) && (b + j < rttsize))
+                                if ((a + i >= 0) && (a + i < rttsize))
+                                    if (pixels[((b + j) * rttsize + a + i) * 4 + 3] > 128) {
+                                        count++;
+                                        value += pixels2[((b + j) * rttsize + a + i) * 4 + k];
+                                    }
+                        }
                     }
+                    pixels[(b * rttsize + a) * 4 + k] = value / count;
                 }
-                pixels[(b * rttsize + a) * 4 + k] = value / count;
             }
         }
     }
 
     /// fix alpha channel
-    for (int a = 0; a < rttsize * rttsize; a++) {
-        pixels[a * 4 + 3] = 255;
+    if (fix) {
+        for (int a = 0; a < rttsize * rttsize; a++) {
+            pixels[a * 4 + 3] = 255;
+        }
     }
     delete[] pixels2;
 #endif
@@ -779,8 +785,9 @@ void gles20::prepareLM(int count) {
 /**
  * @brief renderLMLight render light into lightmap
  * @param lightrenderer is shader to use
+ * @param checkVisibility is true to check light visibility
  */
-void gles20::renderLMLight(shader* lightrenderer) {
+void gles20::renderLM(shader* lightrenderer, bool checkVisibility) {
     enable[1] = false;
     glm::vec4 pos = light.u_light;
     glm::vec4 dir = light.u_light_dir;
@@ -793,52 +800,54 @@ void gles20::renderLMLight(shader* lightrenderer) {
     for (int i = 0; i < trackdata->getLMCount(); i++) {
 
         /// cubemap sides
-        for (int v = 0; v < 6; v++) {
+        for (int v = 0; v < (checkVisibility ? 6 : 1); v++) {
 
-            /// set view
-            perspective(90, 1, 0.1, 300);
-            switch(v) {
-                case(0):
-                    lookAt(x, y, z, x, y + 1, z, 1, 0, 0);
-                    break;
-                case(1):
-                    lookAt(x, y, z, x, y - 1, z, 1, 0, 0);
-                    break;
-                case(2):
-                    lookAt(x, y, z, x - 1, y, z, 0, 1, 0);
-                    break;
-                case(3):
-                    lookAt(x, y, z, x + 1, y, z, 0, 1, 0);
-                    break;
-                case(4):
-                    lookAt(x, y, z, x, y, z - 1, 0, 1, 0);
-                    break;
-                case(5):
-                    lookAt(x, y, z, x, y, z + 1, 0, 1, 0);
-                    break;
+            if (checkVisibility) {
+                /// set view
+                perspective(90, 1, 0.1, 300);
+                switch(v) {
+                    case(0):
+                        lookAt(x, y, z, x, y + 1, z, 1, 0, 0);
+                        break;
+                    case(1):
+                        lookAt(x, y, z, x, y - 1, z, 1, 0, 0);
+                        break;
+                    case(2):
+                        lookAt(x, y, z, x - 1, y, z, 0, 1, 0);
+                        break;
+                    case(3):
+                        lookAt(x, y, z, x + 1, y, z, 0, 1, 0);
+                        break;
+                    case(4):
+                        lookAt(x, y, z, x, y, z - 1, 0, 1, 0);
+                        break;
+                    case(5):
+                        lookAt(x, y, z, x, y, z + 1, 0, 1, 0);
+                        break;
+                }
+
+                /// render shadowmap
+                if (i == 0) {
+                    renderShadowMap = true;
+                    cube[v]->bindFBO();
+                    cube[v]->clear(true);
+                    overshader = shadowmap;
+                    renderModel(trackdata);
+                    overshader = 0;
+                    renderShadowMap = false;
+                    cube[v]->unbindFBO();
+                }
+
+                /// update lightmap
+                light.u_light = view_matrix * pos;
+                light.u_light_dir = view_matrix * dir;
+                glActiveTexture( GL_TEXTURE2 );
+                cube[v]->bindTexture();
             }
-
-            /// render shadowmap
-            if (i == 0) {
-                renderShadowMap = true;
-                cube[v]->bindFBO();
-                cube[v]->clear(true);
-                overshader = shadowmap;
-                renderModel(trackdata);
-                overshader = 0;
-                renderShadowMap = false;
-                cube[v]->unbindFBO();
-            }
-
-            /// update lightmap
-            light.u_light = view_matrix * pos;
-            light.u_light_dir = view_matrix * dir;
             lmFilter = i;
             lm[i]->bindFBO();
             overmode = 1;
             overshader = lightrenderer;
-            glActiveTexture( GL_TEXTURE2 );
-            cube[v]->bindTexture();
             glActiveTexture( GL_TEXTURE0 );
             renderModel(trackdata);
             overmode = 0;
@@ -858,26 +867,4 @@ void gles20::resetLM(int count) {
         lm[i]->bindFBO();
         lm[i]->clear(true);
     }
-}
-
-/**
- * @brief saveLMs save lightmap into file
- */
-void gles20::saveLMs() {
-#ifndef ANDROID
-    /// save lightmap into file
-    for (int i = 0; i < trackdata->getLMCount(); i++) {
-
-        /// get raw texture
-        char* pixels = getLMPixels(i);
-
-        /// write file
-        char filename[256];
-        sprintf(filename, "lightmap%d.png", i);
-        writeImage(prefix(filename), rttsize, rttsize, pixels);
-
-        /// delete arrays
-        delete[] pixels;
-    }
-#endif
 }

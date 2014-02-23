@@ -2,7 +2,7 @@
 /**
  * \file       modelo4s.cpp
  * \author     Vonasek Lubos
- * \date       2014/02/14
+ * \date       2014/02/23
  * \brief      Class for loading models into OpenGL list, it parse full model file, apply
  *             textures, materials and blending.
 */
@@ -218,20 +218,31 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
                     c = 4;
                 }
                 if (u > 0) {
-                    m->tid[j * 6 + c] = (x + u) / 256.0 - 2 / 2048.0;
-                    m->tid[j * 6 + c + 1] = y / 256.0 + 2 / 2048.0;
-                    m->tid[j * 6 + b] = x / 256.0 + 2 / 2048.0;
-                    m->tid[j * 6 + b + 1] = (y + v) / 256.0 - 2 / 2048.0;
-                    m->tid[j * 6 + a] = x / 256.0 + 2 / 2048.0;
-                    m->tid[j * 6 + a + 1] = y / 256.0 + 2 / 2048.0;
+                    m->tid[j * 6 + c] = (x + u) / 256.0 - 2 / (float)rttsize;
+                    m->tid[j * 6 + c + 1] = y / 256.0 + 2 / (float)rttsize;
+                    m->tid[j * 6 + b] = x / 256.0 + 2 / (float)rttsize;
+                    m->tid[j * 6 + b + 1] = (y + v) / 256.0 - 2 / (float)rttsize;
+                    m->tid[j * 6 + a] = x / 256.0 + 2 / (float)rttsize;
+                    m->tid[j * 6 + a + 1] = y / 256.0 + 2 / (float)rttsize;
                 } else {
                     m->tid[j * 6 + c] = x / 256.0;
-                    m->tid[j * 6 + c + 1] = (y + v) / 256.0 + 4 / 2048.0;
+                    m->tid[j * 6 + c + 1] = (y + v) / 256.0 + 4 / (float)rttsize;
                     m->tid[j * 6 + a] = x / 256.0;
                     m->tid[j * 6 + a + 1] = y / 256.0;
-                    m->tid[j * 6 + b] = (x + u) / 256.0 + 4 / 2048.0;
+                    m->tid[j * 6 + b] = (x + u) / 256.0 + 4 / (float)rttsize;
                     m->tid[j * 6 + b + 1] = y / 256.0;
                 }
+                if (renderLightmap) {
+                    m->coords[j * 6 + 0] = 0;
+                    m->coords[j * 6 + 1] = 0;
+
+                    m->coords[j * 6 + 2] = 1;
+                    m->coords[j * 6 + 3] = 0;
+
+                    m->coords[j * 6 + 4] = 0;
+                    m->coords[j * 6 + 5] = 1;
+                }
+
             } else {
                 sscanf(line, "%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f",
                        &m->coords[j * 3 * 2 + 0], &m->coords[j * 3 * 2 + 1],

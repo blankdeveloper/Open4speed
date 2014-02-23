@@ -2,7 +2,7 @@
 /**
  * \file       renderer.h
  * \author     Vonasek Lubos
- * \date       2014/01/05
+ * \date       2014/02/23
  * \brief      Renderer draws geometry and other things on screen
 */
 //----------------------------------------------------------------------------------------
@@ -160,6 +160,14 @@ public:
      */
     virtual void renderButton(float x, float y, float w, float h, float layer, texture* button, const char* text) = 0;
 
+    /**
+     * @brief renderDynamic render dynamic objects
+     * @param vertices is vertices
+     * @param coords is texture coords
+     * @param sh is shader to use
+     * @param txt is texture to use
+     * @param triangleCount is triangle count
+     */
     virtual void renderDynamic(float *vertices, float *coords, shader* sh, texture* txt, int triangleCount) = 0;
 
     /**
@@ -190,11 +198,22 @@ public:
     virtual void renderSubModel(model* mod, model3d* m) = 0;
 
     /**
+     * @brief renderText renders text in GUI mode
+     * @param x is position x
+     * @param y is position y
+     * @param layer is distance from camera
+     * @param text is button text
+     */
+    virtual void renderText(float x, float y, float layer, const char* text) = 0;
+
+    /**
      * @brief getLMPixels get raw pixels of lightmap
      * @param i is index of lightmap
+     * @param fix is true to fix lightmap holes
+     * @param blur is true to filter lightmap data
      * @return raw pixels
      */
-    virtual char* getLMPixels(int i) = 0;
+    virtual char* getLMPixels(int i, bool fix, bool blur) = 0;
 
     /**
      * @brief prepareLM prepare rendering of lightmaps
@@ -205,28 +224,15 @@ public:
     /**
      * @brief renderLMLight render light into lightmap
      * @param lightrenderer is shader to use
+     * @param checkVisibility is true to check light visibility
      */
-    virtual void renderLMLight(shader* lightrenderer) = 0;
+    virtual void renderLM(shader* lightrenderer, bool checkVisibility) = 0;
 
     /**
      * @brief resetLM clear lightmaps
      * @param count is amount of lightmaps
      */
     virtual void resetLM(int count) = 0;
-
-    /**
-     * @brief saveLMs save lightmap into file
-     */
-    virtual void saveLMs() = 0;
-
-    /**
-     * @brief renderText renders text in GUI mode
-     * @param x is position x
-     * @param y is position y
-     * @param layer is distance from camera
-     * @param text is button text
-     */
-    virtual void renderText(float x, float y, float layer, const char* text) = 0;
 };
 
 #endif // RENDERER_H

@@ -2,7 +2,7 @@
 /**
  * \file       gles20.h
  * \author     Vonasek Lubos
- * \date       2014/02/09
+ * \date       2014/02/23
  * \brief      GL renderer draws geometry and other things on screen
 */
 //----------------------------------------------------------------------------------------
@@ -198,11 +198,22 @@ public:
     void renderSubModel(model* mod, model3d *m);
 
     /**
+     * @brief renderText renders text in GUI mode
+     * @param x is position x
+     * @param y is position y
+     * @param layer is distance from camera
+     * @param text is button text
+     */
+    void renderText(float x, float y, float layer, const char* text);
+
+    /**
      * @brief getLMPixels get raw pixels of lightmap
      * @param i is index of lightmap
+     * @param fix is true to fix lightmap holes
+     * @param blur is true to filter lightmap data
      * @return raw pixels
      */
-    char* getLMPixels(int i);
+    char* getLMPixels(int i, bool fix, bool blur);
 
     /**
      * @brief prepareLM prepare rendering of lightmaps
@@ -213,8 +224,9 @@ public:
     /**
      * @brief renderLMLight render light into lightmap
      * @param lightrenderer is shader to use
+     * @param checkVisibility is true to check light visibility
      */
-    void renderLMLight(shader* lightrenderer);
+    void renderLM(shader* lightrenderer, bool checkVisibility);
 
     /**
      * @brief resetLM clear lightmaps
@@ -222,19 +234,6 @@ public:
      */
     void resetLM(int count);
 
-    /**
-     * @brief saveLMs save lightmap into file
-     */
-    void saveLMs();
-
-    /**
-     * @brief renderText renders text in GUI mode
-     * @param x is position x
-     * @param y is position y
-     * @param layer is distance from camera
-     * @param text is button text
-     */
-    void renderText(float x, float y, float layer, const char* text);
 };
 
 #endif // GLES20_H

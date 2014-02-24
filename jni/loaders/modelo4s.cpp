@@ -56,7 +56,7 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
 
         /// set default value
         model3d *m = new model3d();
-        m->reg = new region();
+        m->reg = new AABB();
         m->triangleCount = new int[cutX * cutY + 1];
         m->usingLightmaps = lightmaps;
         float *colora = new float[4];

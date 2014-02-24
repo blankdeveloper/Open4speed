@@ -9,7 +9,9 @@
 
 #include <vector>
 #include "loaders/pngloader.h"
+#include "raycaster/triangle.h"
 #include "utils/io.h"
+#include "utils/math.h"
 #include "utils/scripting.h"
 #include "utils/switch.h"
 
@@ -30,24 +32,69 @@ struct LightParam {
 std::vector<LMPixel> *outputVBO;
 std::vector<LightParam> *lightInfo;
 
-/**
- * @brief saveLMs save lightmap into file
- */
-void saveLMs(bool final) {
-    /// save lightmap into file
+std::vector<unsigned char*> pixels;
+std::vector<unsigned char*> uvs;
+std::vector<triangle*> triangles;
+std::vector<int*> lmMap;
+std::vector<glm::vec3*> points;
+
+void getLMs(bool final) {
+    /// get lightmap data
     for (int i = 0; i < trackdata->getLMCount(); i++) {
 
         /// get raw texture
-        char* pixels = xrenderer->getLMPixels(i, final, final);
+        pixels.push_back(xrenderer->getLMPixels(i, final, final));
+        uvs.push_back(xrenderer->getLMPixels(i, final, final));
+    }
+}
+
+/**
+ * @brief saveLMs save lightmap into file
+ */
+void saveLMs(bool uv) {
+    /// save lightmap into file
+    for (int i = 0; i < trackdata->getLMCount(); i++) {
 
         /// write file
         char filename[256];
         sprintf(filename, "lightmap%d.png", i);
-        writeImage(prefix(filename), rttsize, rttsize, pixels);
-
-        /// delete arrays
-        delete[] pixels;
+        if (uv)
+            writeImage(prefix(filename), rttsize, rttsize, uvs[i]);
+        else
+            writeImage(prefix(filename), rttsize, rttsize, pixels[i]);
     }
+}
+
+bool seedTest(int x, int y, int lm) {
+    if (x < 0)
+        return false;
+    if (y < 0)
+        return false;
+    if (x >= rttsize)
+        return false;
+    if (y >= rttsize)
+        return false;
+    if (lmMap[lm][y * rttsize + x] >= 0)
+        return false;
+    if (pixels[lm][(y * rttsize + x) * 4 + 3] < 255)
+        return false;
+
+    return true;
+}
+
+void seed(int x, int y, int lm, int value) {
+    if (!seedTest(x, y, lm))
+        return;
+    lmMap[lm][y * rttsize + x] = value;
+
+    if (seedTest(x - 1, y, lm))
+        seed(x - 1, y, lm, value);
+    if (seedTest(x, y - 1, lm))
+        seed(x, y - 1, lm, value);
+    if (seedTest(x + 1, y, lm))
+        seed(x + 1, y, lm, value);
+    if (seedTest(x, y + 1, lm))
+        seed(x, y + 1, lm, value);
 }
 
 /**
@@ -83,7 +130,8 @@ void glRender() {
         }
         delete shadername;
     }
-    saveLMs(true);
+    getLMs(true);
+    saveLMs(false);
 
     /// dynamicly controlable lights
     outputVBO = new std::vector<LMPixel>[trackdata->getLMCount()];
@@ -134,7 +182,7 @@ void glRender() {
                 /// get texel lines
                 for (int y = 0; y < trackdata->getLMCount(); y++) {
                     int oldCount = count[y];
-                    char* pixels = xrenderer->getLMPixels(y, true, true);
+                    unsigned char* pixels = xrenderer->getLMPixels(y, true, true);
                     for (int b = 0; b < rttsize; b++) {
                         bool closed = true;
                         int lastIntensity = 0;
@@ -208,7 +256,97 @@ void display(void) {
         } else {
             xrenderer->prepareLM(trackdata->getLMCount());
             xrenderer->renderLM(getShader("lightmap_uv"), false);
+
+            /// create triangles for raycasting
+            for (unsigned int i = 0; i < trackdata->models.size(); i++) {
+                float* vertices = trackdata->models[i].vertices;
+                float* tid = trackdata->models[i].tid;
+                int triangleCount = trackdata->models[i].triangleCount[trackdata->cutX * trackdata->cutY];
+                for (int j = 0; j < triangleCount; j++) {
+                  triangles.push_back(new triangle(
+                          glm::vec3(vertices[j * 9 + 0], vertices[j * 9 + 1], vertices[j * 9 + 2]),
+                          glm::vec3(vertices[j * 9 + 3], vertices[j * 9 + 4], vertices[j * 9 + 5]),
+                          glm::vec3(vertices[j * 9 + 6], vertices[j * 9 + 7], vertices[j * 9 + 8]),
+                          glm::vec2(tid[j * 6 + 0], tid[j * 6 + 1]),
+                          glm::vec2(tid[j * 6 + 2], tid[j * 6 + 3]),
+                          glm::vec2(tid[j * 6 + 4], tid[j * 6 + 5]),
+                          trackdata->models[i].lmIndex));
+                }
+            }
+
+            /// alocate triangle maps
+            for (int i = 0; i < trackdata->getLMCount(); i++) {
+                lmMap.push_back(new int[rttsize * rttsize]);
+                for (unsigned int j = 0; j < rttsize * rttsize; j++) {
+                    lmMap[i][j] = -255;
+                }
+            }
+
+            /// fill triangle maps
+            getLMs(false);
+            for (unsigned int i = 0; i < triangles.size(); i++) {
+                for (int x = -1; x <= 1; x++)
+                    for (int y = -1; y <= 1; y++) {
+                        seed(triangles[i]->aID.x + x, triangles[i]->aID.y + y, triangles[i]->lmIndex, i);
+                        seed(triangles[i]->bID.x + x, triangles[i]->bID.y + y, triangles[i]->lmIndex, i);
+                        seed(triangles[i]->cID.x + x, triangles[i]->cID.y + y, triangles[i]->lmIndex, i);
+                    }
+            }
+
+            /// fix holes in triangle maps
+            for (int l = 0; l < trackdata->getLMCount(); l++) {
+                for (int a = 0; a < rttsize; a++) {
+                    for (int b = 0; b < rttsize; b++) {
+                        if (uvs[l][(b * rttsize + a) * 4 + 3] < 128) {
+                            for (int i = -1; i <= 1; i++) {
+                                for (int j = -1; j <= 1; j++) {
+                                    if ((a + i >= 0) && (a + i < rttsize) && (b + j >= 0) && (b + j < rttsize)) {
+                                        if (uvs[l][((b + j) * rttsize + a + i) * 4 + 3] > 128) {
+                                            for (int k = 0; k < 3; k++) {
+                                                uvs[l][(b * rttsize + a) * 4 + k] = uvs[l][((b + j) * rttsize + a + i) * 4 + k];
+                                            }
+                                            lmMap[l][b * rttsize + a] = lmMap[l][(b + j) * rttsize + a + i];
+                                            uvs[l][(b * rttsize + a) * 4 + 3] = 128;
+                                        }
+                                    }
+                                    if (uvs[l][(b * rttsize + a) * 4 + 3] == 128) {
+                                        break;
+                                    }
+                                }
+                                if (uvs[l][(b * rttsize + a) * 4 + 3] == 128) {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            /// triangle fill test
+            for (int i = 0; i < trackdata->getLMCount(); i++) {
+                for (unsigned int j = 0; j < rttsize * rttsize; j++) {
+                    if (lmMap[i][j] >= 0) {
+                        pixels[i][j * 4 + 0] = (lmMap[i][j] * 126456 + 5) % 128 + 128;
+                        pixels[i][j * 4 + 1] = (lmMap[i][j] * 564231 + 3) % 128 + 128;
+                        pixels[i][j * 4 + 2] = (lmMap[i][j] * 789362 + 8) % 128 + 128;
+                    }
+                    pixels[i][j * 4 + 3] = 255;
+                }
+            }
+
+            /// create points
+            for (int i = 0; i < trackdata->getLMCount(); i++) {
+                points.push_back(new glm::vec3[rttsize * rttsize]);
+                for (unsigned int j = 0; j < rttsize * rttsize; j++) {
+                    if (lmMap[i][j] >= 0) {
+                        points[i][j] = triangles[i][lmMap[i][j]].getPoint(uvs[i][j * 4 + 0], uvs[i][j * 4 + 1]);
+                    }
+                }
+            }
+
+
             saveLMs(false);
+            printf("OK\n");
             exit(0);
         }
     }

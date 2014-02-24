@@ -10,22 +10,13 @@
 #include "raycaster/octreenode.h"
 #include "common.h"
 
-int currentCycle = 0;               ///< Current cycle
-bool OPT_MAILBOXING = true;         ///< Mailboxing switch
-
-std::vector<model3d*> toRender;     ///< Nodes to render
-
 /**
  * @brief octreeNode is a constructor of root node
  * @param size is size of a world
  * @param m is model to add
  */
-octreeNode::octreeNode(region *r) {
+octreeNode::octreeNode(AABB *r) {
     reg = r;
-    distance = 0;
-    lastUpdate = 0;
-    previous_matrix = xrenderer->proj_matrix * xrenderer->view_matrix;
-
     for (int i = 0; i < 8; i++) {
         hasNext[i] = false;
     }
@@ -37,7 +28,7 @@ octreeNode::octreeNode(region *r) {
  */
 octreeNode::octreeNode(float size, model *m) {
     /// Set limits of tree
-    reg = new region();
+    reg = new AABB();
     reg->minX = -size / 2;
     reg->minY = -size / 2;
     reg->minZ = -size / 2;
@@ -45,10 +36,6 @@ octreeNode::octreeNode(float size, model *m) {
     reg->maxY = size / 2;
     reg->maxZ = size / 2;
     reg->size = size;
-
-    distance = 0;
-    lastUpdate = 0;
-    previous_matrix = xrenderer->proj_matrix * xrenderer->view_matrix;
 
     for (int i = 0; i < 8; i++) {
         hasNext[i] = false;
@@ -65,39 +52,10 @@ octreeNode::octreeNode(float size, model *m) {
 }
 
 /**
- * @brief basicTest tests AABB with frustm planes
- * @return 0 if it is outside, 1 if it is partitionaly inside, 2 if it is inside
- */
-int octreeNode::basicTest() {
-
-    /// Basic Intersection Test
-    int x1 = 0; int x2 = 0; int y1 = 0; int y2 = 0; int z1 = 0; int z2 = 0;
-    for (int i = 0; i < 8; i++) {
-        /// check if it is inside
-        glm::vec4 vec = getTransform(i);
-        if (vec.x <= 1) { x1++; }
-        if (vec.x >= -1) { x2++; }
-        if (vec.y <= 1) { y1++; }
-        if (vec.y >= -1) { y2++; }
-        if (vec.z <= 1) { z1++; }
-        if (vec.z >= -1) { z2++; }
-    }
-
-    /// return value
-    if (x1 + y1 + x2 + y2 + z1 + z2 == 48) {
-        return 2;
-    } else if ((x1 > 0) & (x2 > 0) & (y1 > 0) & (y2 > 0) & (z1 > 0) & (z2 > 0)) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-/**
  * @brief createSubNodes creates subnodes of current node
  */
 void octreeNode::createSubNodes() {
-    region* r[8];
+    AABB* r[8];
     r[0] = getSubregion(0, 0, 0);
     r[1] = getSubregion(0, 0, 1);
     r[2] = getSubregion(0, 1, 0);
@@ -168,8 +126,8 @@ void octreeNode::createSubNodes() {
  * @param z is position coordinate
  * @return instance of region structure
  */
-region* octreeNode::getSubregion(bool x, bool y, bool z) {
-    region *r = new region;
+AABB* octreeNode::getSubregion(bool x, bool y, bool z) {
+    AABB *r = new AABB;
     if (x) {
         r->minX = reg->minX + reg->size / 2;
         r->maxX = reg->maxX;
@@ -193,93 +151,4 @@ region* octreeNode::getSubregion(bool x, bool y, bool z) {
     }
     r->size = reg->size / 2;
     return r;
-}
-
-/**
- * @brief getTransform gets position of AABB vertex in frustum space
- * @param i is index of vertex
- * @return transformed vertex in frustum space
- */
-glm::vec4 octreeNode::getTransform(int i) {
-    if (lastUpdate != currentCycle) {
-        glm::mat4x4 view_projection_matrix = xrenderer->proj_matrix * xrenderer->view_matrix;
-        position[0] = view_projection_matrix * glm::vec4(reg->minX, reg->minY, reg->minZ, 1);
-        position[1] = view_projection_matrix * glm::vec4(reg->minX, reg->minY, reg->maxZ, 1);
-        position[2] = view_projection_matrix * glm::vec4(reg->minX, reg->maxY, reg->minZ, 1);
-        position[3] = view_projection_matrix * glm::vec4(reg->minX, reg->maxY, reg->maxZ, 1);
-        position[4] = view_projection_matrix * glm::vec4(reg->maxX, reg->minY, reg->minZ, 1);
-        position[5] = view_projection_matrix * glm::vec4(reg->maxX, reg->minY, reg->maxZ, 1);
-        position[6] = view_projection_matrix * glm::vec4(reg->maxX, reg->maxY, reg->minZ, 1);
-        position[7] = view_projection_matrix * glm::vec4(reg->maxX, reg->maxY, reg->maxZ, 1);
-        for (int j = 0; j < 8; j++) {
-            position[j].x = position[j].x / position[j].w;
-            position[j].y = position[j].y / position[j].w;
-            position[j].z = position[j].z / viewDistance * 2 - 1;
-        }
-        lastUpdate = currentCycle;
-    }
-    return position[i];
-}
-
-/**
- * @brief process processes node and subnodes
- */
-void octreeNode::process() {
-
-    /// update dynamic objects
-    if (update) {
-        distance = 0;
-        update = false;
-        createSubNodes();
-    }
-
-    /// add models of current node into render list
-    for (unsigned int i = 0; i < list.size(); i++) {
-        toRender.push_back(list[i].model);
-    }
-
-    // Basic Intersection Test
-    int bTest = basicTest();
-
-    ///  Mailboxing
-    if (OPT_MAILBOXING & (bTest == 2)) {
-        processAll();
-    }
-
-    ///  The Octant Test
-    else if (bTest == 1) {
-        for (int i = 0; i < 8; i++) {
-            if (hasNext[i]) {
-                next[i]->process();
-            }
-        }
-    }
-}
-
-/**
- * @brief processAll adds all into to render list
- */
-void octreeNode::processAll() {
-    for (unsigned int i = 0; i < list.size(); i++) {
-        toRender.push_back(list[i].model);
-    }
-    for (int i = 0; i < 8; i++) {
-        if (hasNext[i]) {
-            next[i]->processAll();
-        }
-    }
-}
-
-/**
- * @brief render renders current node
- * @param renderer is instance of renderer
- * @param gamma is requested amount of gamma
- */
-void octreeNode::render(renderer* renderer, float gamma) {
-    currentCycle++;
-    toRender.clear();
-    process();
-    for (unsigned int i = 0; i < toRender.size(); i++) {
-        renderer->renderSubModel(trackdata, toRender[i]);
-    }
 }

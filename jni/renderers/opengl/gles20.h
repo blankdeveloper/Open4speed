@@ -213,7 +213,7 @@ public:
      * @param blur is true to filter lightmap data
      * @return raw pixels
      */
-    char* getLMPixels(int i, bool fix, bool blur);
+    unsigned char* getLMPixels(int i, bool fix, bool blur);
 
     /**
      * @brief prepareLM prepare rendering of lightmaps

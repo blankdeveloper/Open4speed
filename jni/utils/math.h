@@ -2,7 +2,7 @@
 /**
  * \file       math.h
  * \author     Vonasek Lubos
- * \date       2014/01/05
+ * \date       2014/02/24
  * \brief      Common math utils used in program.
 */
 //----------------------------------------------------------------------------------------
@@ -174,6 +174,13 @@ std::vector<int>* nextEdge(std::vector<edge> *edges, edge e);
  * @return moved edge
  */
 edge sidemoveEdge(edge e, float amount);
+
+/**
+ * @brief sign returns sign of value
+ * @param v is value
+ * @return one with sign of value
+ */
+int sign(int v);
 
 /**
  * @brief sqr squares a number

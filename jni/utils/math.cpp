@@ -2,7 +2,7 @@
 /**
  * \file       math.cpp
  * \author     Vonasek Lubos
- * \date       2014/01/05
+ * \date       2014/02/24
  * \brief      Common math utils used in program.
 */
 //----------------------------------------------------------------------------------------
@@ -306,6 +306,18 @@ edge sidemoveEdge(edge e, float amount) {
     o.by = e.by;
     o.bz = e.bz + cos(a) * amount;
     return o;
+}
+
+/**
+ * @brief sign returns sign of value
+ * @param v is value
+ * @return one with sign of value
+ */
+int sign(int v) {
+    if (v > 0)
+        return 1;
+    else
+        return -1;
 }
 
 /**

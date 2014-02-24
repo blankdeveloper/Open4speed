@@ -689,7 +689,7 @@ void gles20::renderText(float x, float y, float layer, const char* text) {
  * @param blur is true to filter lightmap data
  * @return raw pixels
  */
-char* gles20::getLMPixels(int i, bool fix, bool blur) {
+unsigned char* gles20::getLMPixels(int i, bool fix, bool blur) {
 
     GLubyte* pixels = new GLubyte[rttsize * rttsize * 4];
 
@@ -761,7 +761,7 @@ char* gles20::getLMPixels(int i, bool fix, bool blur) {
     }
     delete[] pixels2;
 #endif
-    return (char*)pixels;
+    return (unsigned char*)pixels;
 }
 
 /**

@@ -2,7 +2,7 @@
 /**
  * \file       model.h
  * \author     Vonasek Lubos
- * \date       2014/01/05
+ * \date       2014/02/24
  * \brief      Loading and storing models
 */
 //----------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ struct edge {
 /**
  * @brief The region struct
  */
-struct region {
+struct AABB {
     float minX; ///< Region extreme
     float minY; ///< Region extreme
     float minZ; ///< Region extreme
@@ -55,7 +55,7 @@ struct model3d {
     bool dynamic;       ///< True if object is dynamic
     int dynamicID;      ///< ID of the last dynamic update
     int lmIndex;        ///< index of lightmap
-    region *reg;        ///< AABB of the object
+    AABB *reg;        ///< AABB of the object
     int* triangleCount; ///< Amount of triangles
     texture* texture2D; ///< Object texture
     float* vertices;    ///< Object vertices

@@ -443,9 +443,9 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         m->x = mat[12];
         m->y = mat[13];
         m->z = mat[14];
-        float w = m->reg->maxX - m->reg->minX;
-        float a = m->reg->maxY - m->reg->minY;
-        float h = m->reg->maxZ - m->reg->minZ;
+        float w = m->reg->max.x - m->reg->min.x;
+        float a = m->reg->max.y - m->reg->min.y;
+        float h = m->reg->max.z - m->reg->min.z;
         glm::mat4x4 translation(
             1,0,0,0,
             0,1,0,0,
@@ -464,7 +464,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
             1,0,0,0,
             0,1,0,0,
             0,0,1,0,
-            m->reg->minX, m->reg->minY, m->reg->minZ,1
+            m->reg->min.x, m->reg->min.y, m->reg->min.z,1
         );
         modelView = view_matrix * matrix_result * translation;
     }
@@ -575,9 +575,9 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     }
 
     /// set culling info positions
-    int xm = (camX - mod->minx) / culling - 1;
+    int xm = (camX - mod->aabb.min.x) / culling - 1;
     int xp = xm + 2;
-    int ym = (camZ - mod->minz) / culling - 1;
+    int ym = (camZ - mod->aabb.min.z) / culling - 1;
     int yp = ym + 2;
     if (xm < 0)
         xm = 0;

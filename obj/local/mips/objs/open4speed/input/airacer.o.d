@@ -1,38 +1,6 @@
 /home/lubos/Plocha/Open4speed/obj/local/mips/objs/open4speed/input/airacer.o: \
  input/airacer.cpp input/airacer.h interfaces/input.h utils/math.h \
- interfaces/model.h interfaces/fbo.h interfaces/shader.h \
- interfaces/texture.h \
- /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/vector \
- interfaces/vbo.h loaders/dynamiclight.h car.h interfaces/input.h \
- interfaces/model.h interfaces/sound.h common.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/jni.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/cdefs.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/cdefs_elf.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/android/api-level.h \
- ../support/libzip-0.11.1/lib/zip.h \
- ../support/libzip-0.11.1/lib/zipconf.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/inttypes.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/stdint.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/_types.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/machine/_types.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/types.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/linux/posix_types.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/linux/stddef.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/linux/compiler.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/asm/posix_types.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/asm/sgidefs.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/asm/types.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/linux/types.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/machine/kernel.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/sysmacros.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/stdio.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/time.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/time.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/linux/time.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/asm/siginfo.h \
- /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/asm-generic/siginfo.h \
- interfaces/physics.h interfaces/renderer.h ../support/glm/glm.hpp \
- ../support/glm/core/_fixes.hpp \
+ interfaces/model.h ../support/glm/glm.hpp ../support/glm/core/_fixes.hpp \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/climits \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/cfloat \
@@ -90,7 +58,21 @@
  ../support/glm/./core/func_integer.inl \
  ../support/glm/./core/func_noise.hpp \
  ../support/glm/./core/func_noise.inl ../support/glm/./core/_swizzle.hpp \
- interfaces/shader.h interfaces/texture.h utils/engine.h car.h
+ interfaces/fbo.h interfaces/shader.h interfaces/texture.h \
+ /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/vector \
+ interfaces/vbo.h loaders/dynamiclight.h car.h interfaces/input.h \
+ interfaces/model.h interfaces/sound.h common.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/jni.h \
+ ../support/libzip-0.11.1/lib/zip.h \
+ ../support/libzip-0.11.1/lib/zipconf.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/inttypes.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/time.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/time.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/linux/time.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/asm/siginfo.h \
+ /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/asm-generic/siginfo.h \
+ interfaces/physics.h interfaces/renderer.h interfaces/shader.h \
+ interfaces/texture.h utils/engine.h car.h
 
 input/airacer.h:
 
@@ -99,84 +81,6 @@ interfaces/input.h:
 utils/math.h:
 
 interfaces/model.h:
-
-interfaces/fbo.h:
-
-interfaces/shader.h:
-
-interfaces/texture.h:
-
-/opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/vector:
-
-interfaces/vbo.h:
-
-loaders/dynamiclight.h:
-
-car.h:
-
-interfaces/input.h:
-
-interfaces/model.h:
-
-interfaces/sound.h:
-
-common.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/jni.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/cdefs.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/cdefs_elf.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/android/api-level.h:
-
-../support/libzip-0.11.1/lib/zip.h:
-
-../support/libzip-0.11.1/lib/zipconf.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/inttypes.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/stdint.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/_types.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/machine/_types.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/types.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/linux/posix_types.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/linux/stddef.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/linux/compiler.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/asm/posix_types.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/asm/sgidefs.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/asm/types.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/linux/types.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/machine/kernel.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/sysmacros.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/stdio.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/time.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/time.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/linux/time.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/asm/siginfo.h:
-
-/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/asm-generic/siginfo.h:
-
-interfaces/physics.h:
-
-interfaces/renderer.h:
 
 ../support/glm/glm.hpp:
 
@@ -319,6 +223,50 @@ interfaces/renderer.h:
 ../support/glm/./core/func_noise.inl:
 
 ../support/glm/./core/_swizzle.hpp:
+
+interfaces/fbo.h:
+
+interfaces/shader.h:
+
+interfaces/texture.h:
+
+/opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/vector:
+
+interfaces/vbo.h:
+
+loaders/dynamiclight.h:
+
+car.h:
+
+interfaces/input.h:
+
+interfaces/model.h:
+
+interfaces/sound.h:
+
+common.h:
+
+/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/jni.h:
+
+../support/libzip-0.11.1/lib/zip.h:
+
+../support/libzip-0.11.1/lib/zipconf.h:
+
+/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/inttypes.h:
+
+/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/time.h:
+
+/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/time.h:
+
+/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/linux/time.h:
+
+/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/asm/siginfo.h:
+
+/opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/asm-generic/siginfo.h:
+
+interfaces/physics.h:
+
+interfaces/renderer.h:
 
 interfaces/shader.h:
 

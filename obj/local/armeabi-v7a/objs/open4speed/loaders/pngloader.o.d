@@ -46,10 +46,7 @@
  ../support/libzip-0.11.1/lib/zip.h \
  ../support/libzip-0.11.1/lib/zipconf.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/inttypes.h \
- interfaces/model.h interfaces/fbo.h interfaces/shader.h interfaces/vbo.h \
- loaders/dynamiclight.h interfaces/physics.h interfaces/model.h car.h \
- interfaces/input.h interfaces/sound.h interfaces/renderer.h \
- ../support/glm/glm.hpp ../support/glm/core/_fixes.hpp \
+ interfaces/model.h ../support/glm/glm.hpp ../support/glm/core/_fixes.hpp \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/climits \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/cfloat \
@@ -107,6 +104,9 @@
  ../support/glm/./core/func_integer.inl \
  ../support/glm/./core/func_noise.hpp \
  ../support/glm/./core/func_noise.inl ../support/glm/./core/_swizzle.hpp \
+ interfaces/fbo.h interfaces/shader.h interfaces/vbo.h \
+ loaders/dynamiclight.h interfaces/physics.h interfaces/model.h car.h \
+ interfaces/input.h interfaces/sound.h interfaces/renderer.h \
  interfaces/shader.h interfaces/texture.h utils/engine.h car.h
 
 ../support/libpng-1.6.3/png.h:
@@ -206,26 +206,6 @@ common.h:
 /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/inttypes.h:
 
 interfaces/model.h:
-
-interfaces/fbo.h:
-
-interfaces/shader.h:
-
-interfaces/vbo.h:
-
-loaders/dynamiclight.h:
-
-interfaces/physics.h:
-
-interfaces/model.h:
-
-car.h:
-
-interfaces/input.h:
-
-interfaces/sound.h:
-
-interfaces/renderer.h:
 
 ../support/glm/glm.hpp:
 
@@ -368,6 +348,26 @@ interfaces/renderer.h:
 ../support/glm/./core/func_noise.inl:
 
 ../support/glm/./core/_swizzle.hpp:
+
+interfaces/fbo.h:
+
+interfaces/shader.h:
+
+interfaces/vbo.h:
+
+loaders/dynamiclight.h:
+
+interfaces/physics.h:
+
+interfaces/model.h:
+
+car.h:
+
+interfaces/input.h:
+
+interfaces/sound.h:
+
+interfaces/renderer.h:
 
 interfaces/shader.h:
 

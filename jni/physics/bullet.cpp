@@ -217,9 +217,9 @@ void bullet::addModel(model *m) {
         if (m->models[i].dynamic) {
 
             /// Create object
-            float w = m->models[i].reg->maxX - m->models[i].reg->minX;
-            float a = m->models[i].reg->maxY - m->models[i].reg->minY;
-            float h = m->models[i].reg->maxZ - m->models[i].reg->minZ;
+            float w = m->models[i].reg->max.x - m->models[i].reg->min.x;
+            float a = m->models[i].reg->max.y - m->models[i].reg->min.y;
+            float h = m->models[i].reg->max.z - m->models[i].reg->min.z;
             btCollisionShape* shape = new btBoxShape(btVector3(w / 2, a / 2, h / 2));
             shapes.push_back(shape);
             btCompoundShape* compound = new btCompoundShape();
@@ -239,7 +239,7 @@ void bullet::addModel(model *m) {
             /// Set object default transform
             btTransform tr = *(new btTransform());
             tr.setIdentity();
-            tr.setOrigin(btVector3(m->models[i].reg->minX+w/2, m->models[i].reg->minY+a/2, m->models[i].reg->minZ+h/2));
+            tr.setOrigin(btVector3(m->models[i].reg->min.x+w/2, m->models[i].reg->min.y+a/2, m->models[i].reg->min.z+h/2));
 
             /// Create object
             body->setCenterOfMassTransform(tr);
@@ -265,7 +265,7 @@ void bullet::addModel(model *m) {
             btVector3 localInertia(0,0,0);
             btTransform localTrans = *(new btTransform());
             localTrans.setIdentity();
-            localTrans.setOrigin(btVector3(m->models[i].reg->minX, m->models[i].reg->minY, m->models[i].reg->minZ));
+            localTrans.setOrigin(btVector3(m->models[i].reg->min.x, m->models[i].reg->min.y, m->models[i].reg->min.z));
             btRigidBody* body = new btRigidBody(0,0,levelShape,localInertia);
             bodies2.push_back(body);
             body->setCenterOfMassTransform(localTrans);

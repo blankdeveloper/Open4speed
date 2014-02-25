@@ -11,46 +11,45 @@
 #include <vector>
 #include "interfaces/model.h"
 #include "interfaces/renderer.h"
+#include "raycaster/triangle.h"
 
 #ifndef OCTREENODE_H
 #define OCTREENODE_H
 
 /**
- * @brief The data struct
- */
-struct data {
-    model3d* model; ///< model instance
-    int updateId;   ///< last update id
-};
-
-/**
  * @brief The octreeNode class
  */
-class octreeNode {
+class octreenode {
 public:
 
+    int depth;                      ///< Depth of node
     bool hasNext[8];                ///< Information about childs
-    octreeNode *next[8];            ///< Childs
-    AABB *reg;                    ///< AABB region
-    std::vector<data> list;         ///< To render list
+    octreenode *next[8];            ///< Childs
+    AABB *reg;                      ///< AABB region
+    std::vector<triangle*> list;    ///< To render list
 
     /**
      * @brief octreeNode is a constructor of root node
      * @param size is size of a world
-     * @param m is model to add
+     * @param data is a vector of triangles to insert
      */
-    octreeNode(float size, model *m);
+    octreenode(float size, std::vector<triangle*> geom);
 
     /**
      * @brief octreeNode is constructor for subnodes
      * @param r is subnode region
+     * @param depth is depth of node
      */
-    octreeNode(AABB *r);
+    octreenode(AABB *r, int depth);
+
+    void addTriangleToDebug();
 
     /**
      * @brief createSubNodes creates subnodes of current node
      */
     void createSubNodes();
+
+    void debug();
 
     /**
      * @brief getSubregion gets subregion

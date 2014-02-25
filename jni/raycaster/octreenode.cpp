@@ -10,31 +10,36 @@
 #include "raycaster/octreenode.h"
 #include "common.h"
 
+std::vector<int> octreeStatus;
+
 /**
- * @brief octreeNode is a constructor of root node
- * @param size is size of a world
- * @param m is model to add
+ * @brief octreeNode is constructor for subnodes
+ * @param r is subnode region
+ * @param depth is depth of node
  */
-octreeNode::octreeNode(AABB *r) {
+octreenode::octreenode(AABB *r, int depth) {
     reg = r;
+    this->depth = depth;
     for (int i = 0; i < 8; i++) {
         hasNext[i] = false;
     }
 }
 
 /**
- * @brief octreeNode is constructor for subnodes
- * @param r is subnode region
+ * @brief octreeNode is a constructor of root node
+ * @param size is size of a world
+ * @param data is a vector of triangles to insert
  */
-octreeNode::octreeNode(float size, model *m) {
+octreenode::octreenode(float size, std::vector<triangle*> geom) {
     /// Set limits of tree
+    depth = 0;
     reg = new AABB();
-    reg->minX = -size / 2;
-    reg->minY = -size / 2;
-    reg->minZ = -size / 2;
-    reg->maxX = size / 2;
-    reg->maxY = size / 2;
-    reg->maxZ = size / 2;
+    reg->min.x = -size / 2;
+    reg->min.y = -size / 2;
+    reg->min.z = -size / 2;
+    reg->max.x = size / 2;
+    reg->max.y = size / 2;
+    reg->max.z = size / 2;
     reg->size = size;
 
     for (int i = 0; i < 8; i++) {
@@ -42,19 +47,27 @@ octreeNode::octreeNode(float size, model *m) {
     }
 
     /// Add top models
-    for (unsigned int i = 0; i < m->models.size(); i++) {
-        m->models[i].fixed = false;
-        data d = {&m->models[i], 0};
-        list.push_back(d);
+    octreeStatus.push_back(geom.size());
+    for (unsigned int i = 0; i < geom.size(); i++) {
+        geom[i]->fixed = false;
+        list.push_back(geom[i]);
     }
 
     createSubNodes();
 }
 
+void octreenode::addTriangleToDebug() {
+    if (depth + 1 == octreeStatus.size()) {
+        octreeStatus.push_back(1);
+    } else {
+        octreeStatus[depth + 1]++;
+    }
+}
+
 /**
  * @brief createSubNodes creates subnodes of current node
  */
-void octreeNode::createSubNodes() {
+void octreenode::createSubNodes() {
     AABB* r[8];
     r[0] = getSubregion(0, 0, 0);
     r[1] = getSubregion(0, 0, 1);
@@ -66,44 +79,38 @@ void octreeNode::createSubNodes() {
     r[7] = getSubregion(1, 1, 1);
 
     for (unsigned int i = 0; i < list.size(); i++) {
-        if (!list[i].model->fixed) {
+        if (!list[i]->fixed) {
             bool moved = false;
             for (int j = 0; j < 8; j++) {
                 bool ok = true;
-                if (r[j]->size < list[i].model->reg->size / 2.0f) {
+                if (r[j]->size < list[i]->reg.size / 2.0f) {
                     ok = false;
                 }
-                if (r[j]->minX > list[i].model->reg->maxX + list[i].model->x - list[i].model->reg->minX) {
+                if ((list[i]->reg.max.x < r[j]->min.x) || (r[j]->max.x < list[i]->reg.min.x)) {
                     ok = false;
                 }
-                if (r[j]->maxX < list[i].model->reg->minX + list[i].model->x - list[i].model->reg->minX) {
+                if ((list[i]->reg.max.y < r[j]->min.y) || (r[j]->max.y < list[i]->reg.min.y)) {
                     ok = false;
                 }
-                if (r[j]->minY > list[i].model->reg->maxY + list[i].model->y - list[i].model->reg->minY) {
+                if ((list[i]->reg.max.z < r[j]->min.z) || (r[j]->max.z < list[i]->reg.min.z)) {
                     ok = false;
                 }
-                if (r[j]->maxY < list[i].model->reg->minY + list[i].model->y - list[i].model->reg->minY) {
-                    ok = false;
-                }
-                if (r[j]->minZ > list[i].model->reg->maxZ + list[i].model->z - list[i].model->reg->minZ) {
-                    ok = false;
-                }
-                if (r[j]->maxZ < list[i].model->reg->minZ + list[i].model->z - list[i].model->reg->minZ) {
-                    ok = false;
-                }
+
                 if (ok) {
                     if (!hasNext[j]) {
-                        next[j] = new octreeNode(r[j]);
+                        next[j] = new octreenode(r[j], depth + 1);
                         hasNext[j] = true;
                     }
                     next[j]->list.push_back(list[i]);
+                    addTriangleToDebug();
                     moved = true;
                 }
 
             }
             if (!moved) {
-                list[i].model->fixed = true;
+                list[i]->fixed = true;
             } else {
+                octreeStatus[depth]--;
                 list.erase(list.begin() + i);
                 i--;
                 moved = true;
@@ -119,6 +126,12 @@ void octreeNode::createSubNodes() {
     }
 }
 
+void octreenode::debug() {
+    for (unsigned int i = 0; i < octreeStatus.size(); i++) {
+        printf("%d triangles in depth %d\n", octreeStatus[i], i);
+    }
+}
+
 /**
  * @brief getSubregion gets subregion
  * @param x is position coordinate
@@ -126,28 +139,28 @@ void octreeNode::createSubNodes() {
  * @param z is position coordinate
  * @return instance of region structure
  */
-AABB* octreeNode::getSubregion(bool x, bool y, bool z) {
+AABB* octreenode::getSubregion(bool x, bool y, bool z) {
     AABB *r = new AABB;
     if (x) {
-        r->minX = reg->minX + reg->size / 2;
-        r->maxX = reg->maxX;
+        r->min.x = reg->min.x + reg->size / 2;
+        r->max.x = reg->max.x;
     } else {
-        r->minX = reg->minX;
-        r->maxX = reg->maxX - reg->size / 2;
+        r->min.x = reg->min.x;
+        r->max.x = reg->max.x - reg->size / 2;
     }
     if (y) {
-        r->minY = reg->minY + reg->size / 2;
-        r->maxY = reg->maxY;
+        r->min.y = reg->min.y + reg->size / 2;
+        r->max.y = reg->max.y;
     } else {
-        r->minY = reg->minY;
-        r->maxY = reg->maxY - reg->size / 2;
+        r->min.y = reg->min.y;
+        r->max.y = reg->max.y - reg->size / 2;
     }
     if (z) {
-        r->minZ = reg->minZ + reg->size / 2;
-        r->maxZ = reg->maxZ;
+        r->min.z = reg->min.z + reg->size / 2;
+        r->max.z = reg->max.z;
     } else {
-        r->minZ = reg->minZ;
-        r->maxZ = reg->maxZ - reg->size / 2;
+        r->min.z = reg->min.z;
+        r->max.z = reg->max.z - reg->size / 2;
     }
     r->size = reg->size / 2;
     return r;

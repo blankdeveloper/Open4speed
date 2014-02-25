@@ -10,6 +10,7 @@
 #ifndef MODEL_H
 #define MODEL_H
 
+#include <glm/glm.hpp>
 #include "interfaces/fbo.h"
 #include "interfaces/shader.h"
 #include "interfaces/texture.h"
@@ -32,13 +33,9 @@ struct edge {
  * @brief The region struct
  */
 struct AABB {
-    float minX; ///< Region extreme
-    float minY; ///< Region extreme
-    float minZ; ///< Region extreme
-    float maxX; ///< Region extreme
-    float maxY; ///< Region extreme
-    float maxZ; ///< Region extreme
-    float size; ///< Region size
+    glm::vec3 min; ///< Region extreme
+    glm::vec3 max; ///< Region extreme
+    float size;    ///< Region size
 };
 
 /**
@@ -55,7 +52,7 @@ struct model3d {
     bool dynamic;       ///< True if object is dynamic
     int dynamicID;      ///< ID of the last dynamic update
     int lmIndex;        ///< index of lightmap
-    AABB *reg;        ///< AABB of the object
+    AABB *reg;          ///< AABB of the object
     int* triangleCount; ///< Amount of triangles
     texture* texture2D; ///< Object texture
     float* vertices;    ///< Object vertices
@@ -64,7 +61,6 @@ struct model3d {
     float* tid;         ///< Object lightmap coordinates
     float x,y,z;        ///< Object translation
     vbo* vboData;       ///< VBO of model
-    bool fixed;         ///< Raycasting flag
 };
 
 /**
@@ -81,7 +77,7 @@ public:
     int cutX, cutY, edgesCount;                ///< Size of SS Culling
     std::vector<edge> *edges;                  ///< All standalone edges of model
     std::vector<model3d> models;               ///< All parts of model
-    float minx, miny, minz, maxx, maxy, maxz;  ///< Extremes of current model
+    AABB aabb;                                 ///< Extremes of current model
     float width, aplitude, height, size;       ///< Dimensions of current model
     std::vector<fbo*> lightmaps;               ///< List of lightmaps
     DynamicLight *dynamicLight;                ///< Dynamic lights in lightmaps

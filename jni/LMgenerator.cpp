@@ -9,6 +9,7 @@
 
 #include <vector>
 #include "loaders/pngloader.h"
+#include "raycaster/octreenode.h"
 #include "raycaster/triangle.h"
 #include "utils/io.h"
 #include "utils/math.h"
@@ -29,6 +30,8 @@ struct LightParam {
     float b;
 };
 
+timespec ts_start, ts_end;          ///< Time messurement
+
 std::vector<LMPixel> *outputVBO;
 std::vector<LightParam> *lightInfo;
 
@@ -37,6 +40,7 @@ std::vector<unsigned char*> uvs;
 std::vector<triangle*> triangles;
 std::vector<int*> lmMap;
 std::vector<glm::vec3*> points;
+octreenode* root;
 
 void getLMs(bool final) {
     /// get lightmap data
@@ -254,10 +258,17 @@ void display(void) {
         if (trackdata == 0) {
             syntaxList = getList("RACE2");
         } else {
+
+            printf("Rendering triangle UVs into lightmap...");
+            clock_gettime(CLOCK_REALTIME, &ts_start);
             xrenderer->prepareLM(trackdata->getLMCount());
             xrenderer->renderLM(getShader("lightmap_uv"), false);
+            clock_gettime(CLOCK_REALTIME, &ts_end);
+            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
 
             /// create triangles for raycasting
+            printf("Convert O4S model into triangles for raycasting...");
+            clock_gettime(CLOCK_REALTIME, &ts_start);
             for (unsigned int i = 0; i < trackdata->models.size(); i++) {
                 float* vertices = trackdata->models[i].vertices;
                 float* tid = trackdata->models[i].tid;
@@ -273,16 +284,24 @@ void display(void) {
                           trackdata->models[i].lmIndex));
                 }
             }
+            clock_gettime(CLOCK_REALTIME, &ts_end);
+            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
 
             /// alocate triangle maps
+            printf("Alocate memory for lightmap pointers to triangles...");
+            clock_gettime(CLOCK_REALTIME, &ts_start);
             for (int i = 0; i < trackdata->getLMCount(); i++) {
                 lmMap.push_back(new int[rttsize * rttsize]);
                 for (unsigned int j = 0; j < rttsize * rttsize; j++) {
                     lmMap[i][j] = -255;
                 }
             }
+            clock_gettime(CLOCK_REALTIME, &ts_end);
+            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
 
             /// fill triangle maps
+            printf("Find pointers from lightmaps to triangles...");
+            clock_gettime(CLOCK_REALTIME, &ts_start);
             getLMs(false);
             for (unsigned int i = 0; i < triangles.size(); i++) {
                 for (int x = -1; x <= 1; x++)
@@ -292,8 +311,12 @@ void display(void) {
                         seed(triangles[i]->cID.x + x, triangles[i]->cID.y + y, triangles[i]->lmIndex, i);
                     }
             }
+            clock_gettime(CLOCK_REALTIME, &ts_end);
+            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
 
             /// fix holes in triangle maps
+            printf("Fix missing pointers from lightmaps to triangles...");
+            clock_gettime(CLOCK_REALTIME, &ts_start);
             for (int l = 0; l < trackdata->getLMCount(); l++) {
                 for (int a = 0; a < rttsize; a++) {
                     for (int b = 0; b < rttsize; b++) {
@@ -321,8 +344,12 @@ void display(void) {
                     }
                 }
             }
+            clock_gettime(CLOCK_REALTIME, &ts_end);
+            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
 
             /// triangle fill test
+            printf("Visualize lightmap triangles...");
+            clock_gettime(CLOCK_REALTIME, &ts_start);
             for (int i = 0; i < trackdata->getLMCount(); i++) {
                 for (unsigned int j = 0; j < rttsize * rttsize; j++) {
                     if (lmMap[i][j] >= 0) {
@@ -333,8 +360,12 @@ void display(void) {
                     pixels[i][j * 4 + 3] = 255;
                 }
             }
+            clock_gettime(CLOCK_REALTIME, &ts_end);
+            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
 
             /// create points
+            printf("Count 3D coordinates of all lightmap points...");
+            clock_gettime(CLOCK_REALTIME, &ts_start);
             for (int i = 0; i < trackdata->getLMCount(); i++) {
                 points.push_back(new glm::vec3[rttsize * rttsize]);
                 for (unsigned int j = 0; j < rttsize * rttsize; j++) {
@@ -343,9 +374,33 @@ void display(void) {
                     }
                 }
             }
+            clock_gettime(CLOCK_REALTIME, &ts_end);
+            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
 
+            /// build octree
+            printf("Fill octree with triangles...");
+            clock_gettime(CLOCK_REALTIME, &ts_start);
+            float size = absf(trackdata->aabb.min.x);
+            if (size < absf(trackdata->aabb.min.y))
+                size = absf(trackdata->aabb.min.y);
+            if (size < absf(trackdata->aabb.min.z))
+                size = absf(trackdata->aabb.min.z);
+            if (size < absf(trackdata->aabb.max.x))
+                size = absf(trackdata->aabb.max.x);
+            if (size < absf(trackdata->aabb.max.y))
+                size = absf(trackdata->aabb.max.y);
+            if (size < absf(trackdata->aabb.max.z))
+                size = absf(trackdata->aabb.max.z);
+            root = new octreenode(size * 4, triangles);
+            clock_gettime(CLOCK_REALTIME, &ts_end);
+            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
+            root->debug();
 
+            printf("Save lightmaps into files...");
+            clock_gettime(CLOCK_REALTIME, &ts_start);
             saveLMs(false);
+            clock_gettime(CLOCK_REALTIME, &ts_end);
+            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
             printf("OK\n");
             exit(0);
         }

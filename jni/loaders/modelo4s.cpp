@@ -37,10 +37,10 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
     gets(line, file);
     cutY = scandec(line);
     gets(line, file);
-    sscanf(line, "%f %f %f %f %f %f", &minx, &miny, &minz, &maxx, &maxy, &maxz);
-    width = maxx - minx;
-    aplitude = maxy - miny;
-    height = maxz - minz;
+    sscanf(line, "%f %f %f %f %f %f", &aabb.min.x, &aabb.min.y, &aabb.min.z, &aabb.max.x, &aabb.max.y, &aabb.max.z);
+    width = aabb.max.x - aabb.min.x;
+    aplitude = aabb.max.y - aabb.min.y;
+    height = aabb.max.z - aabb.min.z;
     size = width;
     if (size < aplitude)
         size = aplitude;
@@ -75,25 +75,25 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
         gets(line, file);
         if (lightmaps) {
             sscanf(line, "%f %f %f %f %f %f %s %f %f %f %f %f %f %f %f %f %f %s %d",
-                   &m->reg->minX, &m->reg->minY, &m->reg->minZ, &m->reg->maxX, &m->reg->maxY, &m->reg->maxZ,
+                   &m->reg->min.x, &m->reg->min.y, &m->reg->min.z, &m->reg->max.x, &m->reg->max.y, &m->reg->max.z,
                    &texturePath[0], &colora[0], &colora[1], &colora[2], &colord[0], &colord[1], &colord[2],
                    &colors[0], &colors[1], &colors[2], &alpha, &material[0], &m->lmIndex);
         } else {
             sscanf(line, "%f %f %f %f %f %f %s %f %f %f %f %f %f %f %f %f %f %s",
-                   &m->reg->minX, &m->reg->minY, &m->reg->minZ, &m->reg->maxX, &m->reg->maxY, &m->reg->maxZ,
+                   &m->reg->min.x, &m->reg->min.y, &m->reg->min.z, &m->reg->max.x, &m->reg->max.y, &m->reg->max.z,
                    &texturePath[0], &colora[0], &colora[1], &colora[2], &colord[0], &colord[1], &colord[2],
                    &colors[0], &colors[1], &colors[2], &alpha, &material[0]);
         }
 
         /// get model size
-        m->reg->size = m->reg->maxX - m->reg->minX;
-        if (m->reg->size < m->reg->maxY - m->reg->minY)
-            m->reg->size = m->reg->maxY - m->reg->minY;
-        if (m->reg->size < m->reg->maxZ - m->reg->minZ)
-            m->reg->size = m->reg->maxZ - m->reg->minZ;
-        m->x = m->reg->minX;
-        m->y = m->reg->minY;
-        m->z = m->reg->minZ;
+        m->reg->size = m->reg->max.x - m->reg->min.x;
+        if (m->reg->size < m->reg->max.y - m->reg->min.y)
+            m->reg->size = m->reg->max.y - m->reg->min.y;
+        if (m->reg->size < m->reg->max.z - m->reg->min.z)
+            m->reg->size = m->reg->max.z - m->reg->min.z;
+        m->x = m->reg->min.x;
+        m->y = m->reg->min.y;
+        m->z = m->reg->min.z;
 
         /// if texture is not only single color then load it
         if (texturePath[0] != '*') {

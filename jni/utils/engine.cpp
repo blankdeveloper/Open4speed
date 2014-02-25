@@ -387,9 +387,9 @@ void displayScene() {
                         s = allCar[i]->speed / 75.0f;
                     }
                     for (int l = 0; l < water->models[0].triangleCount[1] * 3; l++) {
-                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 0] = x + s * (water->models[0].vertices[l * 3 + 0] + water->models[0].reg->minX);
-                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 1] = y + s * (water->models[0].vertices[l * 3 + 1] + water->models[0].reg->minY);
-                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 2] = z + s * (water->models[0].vertices[l * 3 + 2] + water->models[0].reg->minZ);
+                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 0] = x + s * (water->models[0].vertices[l * 3 + 0] + water->models[0].reg->min.x);
+                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 1] = y + s * (water->models[0].vertices[l * 3 + 1] + water->models[0].reg->min.y);
+                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 2] = z + s * (water->models[0].vertices[l * 3 + 2] + water->models[0].reg->min.z);
                         eff[currentFrame].coords[eff[currentFrame].count * 2 + 0] = water->models[0].coords[l * 2 + 0];
                         eff[currentFrame].coords[eff[currentFrame].count * 2 + 1] = water->models[0].coords[l * 2 + 1];
                         eff[currentFrame].count++;

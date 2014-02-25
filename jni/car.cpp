@@ -191,7 +191,7 @@ void car::update() {
 
     /// count speed
     lspeed = speed;
-    speed = sqrt(sqr(absf(lx - x)) + sqr(absf(lz - z))) * speedAspect;
+    speed = sqrt(sqr(fabsf(lx - x)) + sqr(fabsf(lz - z))) * speedAspect;
 
     /// update current edge for counting laps
     edge cge = currentGoalEdge;

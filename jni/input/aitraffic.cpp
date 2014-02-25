@@ -40,7 +40,7 @@ float aitraffic::getGas() {
     float safeDistance = aiTrafficSafeDistance + allCar[index]->speed / aiTrafficSafeDistanceSpeedDependency;
     for (int x = 0; x < carCount; x++) {
         if (((index != x) & (allCar[x] != 0)) & !allCar[x]->reverse)
-            if (absf(allCar[x]->y - allCar[index]->y) < 1)
+            if (fabsf(allCar[x]->y - allCar[index]->y) < 1)
                 if (distance(allCar[x], allCar[index], aiTrafficFutureStep) < safeDistance)
                     if ((int)(allCar[index]->rot - angle(allCar[x], allCar[index]) + 360) % 360 < aiTrafficSafeAngle)
                         return 0;

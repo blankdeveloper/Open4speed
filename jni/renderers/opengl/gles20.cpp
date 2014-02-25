@@ -148,10 +148,10 @@ void gles20::lookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
     float upz = 0;
 
     /// set up vector
-    if (absf(eyex - centerx) > absf(eyey - centery)) {
+    if (fabsf(eyex - centerx) > fabsf(eyey - centery)) {
         upy = 1;
-    } else if (absf(eyex - centerx) == absf(eyey - centery)) {
-        if (absf(eyex - centerx) > absf(eyez - centerz)) {
+    } else if (fabsf(eyex - centerx) == fabsf(eyey - centery)) {
+        if (fabsf(eyex - centerx) > fabsf(eyez - centerz)) {
             upz = 1;
         } else {
             upx = 1;

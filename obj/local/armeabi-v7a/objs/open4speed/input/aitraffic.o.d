@@ -1,6 +1,6 @@
 /home/lubos/Plocha/Open4speed/obj/local/armeabi-v7a/objs/open4speed/input/aitraffic.o: \
  input/aitraffic.cpp input/aitraffic.h interfaces/input.h utils/math.h \
- interfaces/model.h ../support/glm/glm.hpp ../support/glm/core/_fixes.hpp \
+ ../support/glm/glm.hpp ../support/glm/core/_fixes.hpp \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/climits \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/cfloat \
@@ -58,7 +58,8 @@
  ../support/glm/./core/func_integer.inl \
  ../support/glm/./core/func_noise.hpp \
  ../support/glm/./core/func_noise.inl ../support/glm/./core/_swizzle.hpp \
- interfaces/fbo.h interfaces/shader.h interfaces/texture.h \
+ interfaces/model.h interfaces/fbo.h interfaces/shader.h \
+ interfaces/texture.h \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/vector \
  interfaces/vbo.h loaders/dynamiclight.h car.h interfaces/input.h \
  interfaces/model.h interfaces/sound.h common.h \
@@ -79,8 +80,6 @@ input/aitraffic.h:
 interfaces/input.h:
 
 utils/math.h:
-
-interfaces/model.h:
 
 ../support/glm/glm.hpp:
 
@@ -223,6 +222,8 @@ interfaces/model.h:
 ../support/glm/./core/func_noise.inl:
 
 ../support/glm/./core/_swizzle.hpp:
+
+interfaces/model.h:
 
 interfaces/fbo.h:
 

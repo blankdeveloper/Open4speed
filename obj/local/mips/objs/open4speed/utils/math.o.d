@@ -24,8 +24,7 @@
  /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/machine/limits.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/syslimits.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/asm/page.h \
- utils/math.h interfaces/model.h ../support/glm/glm.hpp \
- ../support/glm/core/_fixes.hpp \
+ utils/math.h ../support/glm/glm.hpp ../support/glm/core/_fixes.hpp \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/cmath \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/climits \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/cfloat \
@@ -83,7 +82,8 @@
  ../support/glm/./core/func_integer.inl \
  ../support/glm/./core/func_noise.hpp \
  ../support/glm/./core/func_noise.inl ../support/glm/./core/_swizzle.hpp \
- interfaces/fbo.h interfaces/shader.h interfaces/texture.h \
+ interfaces/model.h interfaces/fbo.h interfaces/shader.h \
+ interfaces/texture.h \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/vector \
  interfaces/vbo.h loaders/dynamiclight.h car.h interfaces/input.h \
  interfaces/model.h interfaces/sound.h
@@ -137,8 +137,6 @@
 /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/asm/page.h:
 
 utils/math.h:
-
-interfaces/model.h:
 
 ../support/glm/glm.hpp:
 
@@ -281,6 +279,8 @@ interfaces/model.h:
 ../support/glm/./core/func_noise.inl:
 
 ../support/glm/./core/_swizzle.hpp:
+
+interfaces/model.h:
 
 interfaces/fbo.h:
 

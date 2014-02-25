@@ -321,7 +321,7 @@ void bullet::updateCar(car* c) {
     if ((int)m_vehicle[c->index - 1]->getCurrentSpeedKmHour() > 0)
         c->reverse = false;
 
-    if (absf(m_vehicle[c->index - 1]->getCurrentSpeedKmHour()) < 5) {
+    if (fabsf(m_vehicle[c->index - 1]->getCurrentSpeedKmHour()) < 5) {
         if (c->control->getGas() > 0)
             c->reverse = false;
         if (c->control->getBrake() > 0)

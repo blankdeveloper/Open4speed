@@ -2,7 +2,7 @@
 /**
  * \file       model.h
  * \author     Vonasek Lubos
- * \date       2014/02/24
+ * \date       2014/02/25
  * \brief      Loading and storing models
 */
 //----------------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ struct edge {
 };
 
 /**
- * @brief The region struct
+ * @brief AABB struct
  */
 struct AABB {
     glm::vec3 min; ///< Region extreme

@@ -50,7 +50,7 @@ float airacer::getGas() {
 
     /// check angle of turn
     if (allCar[index]->speed > aiRacerSafeSpeed)
-        if (absf(gap(allCar[index]->currentEdge, allCar[index])) > aiRacerSafeGapGas)
+        if (fabsf(gap(allCar[index]->currentEdge, allCar[index])) > aiRacerSafeGapGas)
              return 0;
     if ((int)allCar[index]->speed > 5)
         problem = 0;

@@ -42,6 +42,17 @@ std::vector<int*> lmMap;
 std::vector<glm::vec3*> points;
 octreenode* root;
 
+void clearLMs() {
+    for (int i = 0; i < trackdata->getLMCount(); i++) {
+        for (unsigned int j = 0; j < rttsize * rttsize; j++) {
+            pixels[i][j * 4 + 0] = 0;
+            pixels[i][j * 4 + 1] = 0;
+            pixels[i][j * 4 + 2] = 0;
+            pixels[i][j * 4 + 3] = 255;
+        }
+    }
+}
+
 void getLMs(bool final) {
     /// get lightmap data
     for (int i = 0; i < trackdata->getLMCount(); i++) {
@@ -50,6 +61,16 @@ void getLMs(bool final) {
         pixels.push_back(xrenderer->getLMPixels(i, final, final));
         uvs.push_back(xrenderer->getLMPixels(i, final, final));
     }
+}
+
+bool isIntersected(glm::vec3 begin, glm::vec3 end, unsigned int ignore) {
+    for (unsigned int i = 0; i < triangles.size(); i++) {
+        if (i != ignore) {
+            if (triangles[i]->isIntersectedBySegment(begin, end))
+                return true;
+        }
+    }
+    return false;
 }
 
 /**
@@ -264,7 +285,7 @@ void display(void) {
             xrenderer->prepareLM(trackdata->getLMCount());
             xrenderer->renderLM(getShader("lightmap_uv"), false);
             clock_gettime(CLOCK_REALTIME, &ts_end);
-            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
+            printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
 
             /// create triangles for raycasting
             printf("Convert O4S model into triangles for raycasting...");
@@ -285,7 +306,7 @@ void display(void) {
                 }
             }
             clock_gettime(CLOCK_REALTIME, &ts_end);
-            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
+            printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
 
             /// alocate triangle maps
             printf("Alocate memory for lightmap pointers to triangles...");
@@ -297,7 +318,7 @@ void display(void) {
                 }
             }
             clock_gettime(CLOCK_REALTIME, &ts_end);
-            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
+            printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
 
             /// fill triangle maps
             printf("Find pointers from lightmaps to triangles...");
@@ -312,7 +333,7 @@ void display(void) {
                     }
             }
             clock_gettime(CLOCK_REALTIME, &ts_end);
-            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
+            printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
 
             /// fix holes in triangle maps
             printf("Fix missing pointers from lightmaps to triangles...");
@@ -345,7 +366,7 @@ void display(void) {
                 }
             }
             clock_gettime(CLOCK_REALTIME, &ts_end);
-            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
+            printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
 
             /// triangle fill test
             printf("Visualize lightmap triangles...");
@@ -361,7 +382,7 @@ void display(void) {
                 }
             }
             clock_gettime(CLOCK_REALTIME, &ts_end);
-            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
+            printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
 
             /// create points
             printf("Count 3D coordinates of all lightmap points...");
@@ -375,32 +396,36 @@ void display(void) {
                 }
             }
             clock_gettime(CLOCK_REALTIME, &ts_end);
-            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
+            printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
 
             /// build octree
             printf("Fill octree with triangles...");
             clock_gettime(CLOCK_REALTIME, &ts_start);
-            float size = absf(trackdata->aabb.min.x);
-            if (size < absf(trackdata->aabb.min.y))
-                size = absf(trackdata->aabb.min.y);
-            if (size < absf(trackdata->aabb.min.z))
-                size = absf(trackdata->aabb.min.z);
-            if (size < absf(trackdata->aabb.max.x))
-                size = absf(trackdata->aabb.max.x);
-            if (size < absf(trackdata->aabb.max.y))
-                size = absf(trackdata->aabb.max.y);
-            if (size < absf(trackdata->aabb.max.z))
-                size = absf(trackdata->aabb.max.z);
+            float size = fabsf(trackdata->aabb.min.x);
+            if (size < fabsf(trackdata->aabb.min.y))
+                size = fabsf(trackdata->aabb.min.y);
+            if (size < fabsf(trackdata->aabb.min.z))
+                size = fabsf(trackdata->aabb.min.z);
+            if (size < fabsf(trackdata->aabb.max.x))
+                size = fabsf(trackdata->aabb.max.x);
+            if (size < fabsf(trackdata->aabb.max.y))
+                size = fabsf(trackdata->aabb.max.y);
+            if (size < fabsf(trackdata->aabb.max.z))
+                size = fabsf(trackdata->aabb.max.z);
             root = new octreenode(size * 4, triangles);
             clock_gettime(CLOCK_REALTIME, &ts_end);
-            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
+            printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
             root->debug();
 
-            printf("Save lightmaps into files...");
+            /// render lightmaps
+            clearLMs();
+
+            /// Save lightmaps into PNGs
+            printf("Save lightmaps into PNG files...");
             clock_gettime(CLOCK_REALTIME, &ts_start);
             saveLMs(false);
             clock_gettime(CLOCK_REALTIME, &ts_end);
-            printf("%0.3fms\n", absf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
+            printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
             printf("OK\n");
             exit(0);
         }

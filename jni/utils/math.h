@@ -2,7 +2,7 @@
 /**
  * \file       math.h
  * \author     Vonasek Lubos
- * \date       2014/02/24
+ * \date       2014/02/25
  * \brief      Common math utils used in program.
 */
 //----------------------------------------------------------------------------------------
@@ -10,15 +10,19 @@
 #ifndef MATH_H
 #define MATH_H
 
+#include <glm/glm.hpp>
 #include "interfaces/model.h"
 #include "car.h"
 
 /**
- * @brief absf gets absolute value of float number
- * @param a is input value
- * @return absolute value of number
+ * @brief aabbSegmentIntersection check if AABB and line segment intersects
+ * @param p1 is begin of line segment
+ * @param p2 is end of line segment
+ * @param min is AABB minimum
+ * @param max is AABB maximum
+ * @return true if it is intersecting
  */
-float absf(float a);
+bool aabbSegmentIntersection(glm::vec3 p1, glm::vec3 p2, glm::vec3 min, glm::vec3 max);
 
 /**
  * @brief angle counts angle of line between two points given by coordinates

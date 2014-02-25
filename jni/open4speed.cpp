@@ -250,7 +250,7 @@ void idle(int v) {
             /// update current edge for navigation
             if (!physic->locked) {
                 if ((distance(allCar[i]->currentEdge, allCar[i]) < allCar[i]->control->getUpdate())
-                        && (absf(allCar[i]->currentEdge.by - allCar[i]->y) < 30)) {
+                        && (fabsf(allCar[i]->currentEdge.by - allCar[i]->y) < 30)) {
                     std::vector<int> *nEdges = nextEdge(&allCar[i]->edges, allCar[i]->currentEdgeOriginal);
                     if (nEdges->size() > 0) {
                         allCar[i]->currentEdgeOriginal = allCar[i]->edges[(*nEdges)[0]];

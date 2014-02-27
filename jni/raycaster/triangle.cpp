@@ -49,34 +49,36 @@ glm::vec3 triangle::getPoint(int u, int v) {
     return a + x * (b - a) + y * (c - a);
 }
 
-bool triangle::isIntersectedByRay(glm::vec3 point, glm::vec3 direction) {
-    glm::vec3 e1 = b - a;
-    glm::vec3 e2 = c - a;
-    glm::vec3 s1 = glm::cross(direction, e2);
+bool triangle::isIntersectedByRay(glm::vec3 rayOrig, glm::vec3 rayDir) {
+    // compute plane's normal
+    glm::vec3 A = b - a;
+    glm::vec3 B = c - a;
+    // no need to normalize
+    glm::vec3 N = glm::cross(A, B); // N
 
-    float divisor = glm::dot(s1, e1);
+    // check if ray and plane are parallel ?
+    float NdotRayDirection = glm::dot(N, rayDir);
+    if (NdotRayDirection == 0)
+        return false; // they are parallel so they don't intersect !
+    // compute t (equation 3)
+    float t = -(glm::dot(N, rayOrig) + glm::dot(N, a)) / NdotRayDirection;
+    // check if the triangle is in behind the ray
+    if ((t < 0) || (t > 1))
+        return false; // the triangle is behind
+    // compute the intersection point using equation 1
+    glm::vec3 P = rayOrig + t * rayDir;
 
-    if (divisor < 0.01f)
-        return false;
+    // edge 0
+    if (glm::dot(N, glm::cross(b - a, P - a)) < 0)
+        return false; // P is on the right side
 
-    /// Compute first barycentric coordinate
-    glm::vec3 d = point - a;
-    float b1 = glm::dot(d, s1);
-    if (b1 < 0. || b1 > divisor)
-        return false;
-    /// Compute second barycentric coordinate
-    glm::vec3 s2 = glm::cross(d, e1);
-    float b2 = glm::dot(direction, s2);
-    if (b2 < 0. || b1 + b2 > divisor)
-        return false;
+    // edge 1
+    if (glm::dot(N, glm::cross(c - b, P - b)) < 0)
+        return false; // P is on the right side
 
-    /// Compute _t_ to intersection point
-    if (glm::dot(e2, s2) / divisor > 0) {
-        return true;
-    }
-    return false;
-}
+    // edge 2
+    if (glm::dot(N, glm::cross(a - c, P - c)) < 0)
+        return false; // P is on the right side;
 
-bool triangle::isIntersectedBySegment(glm::vec3 begin, glm::vec3 end) {
-    return isIntersectedByRay(begin, end - begin) && isIntersectedByRay(end, begin - end);
+    return true; // this ray hits the triangle
 }

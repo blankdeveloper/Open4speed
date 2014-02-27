@@ -477,10 +477,11 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         glEnable(GL_DEPTH_TEST);
     } else {
         glDisable(GL_DEPTH_TEST);
+        glDisable(GL_CULL_FACE);
     }
 
     /// set special cases
-    if (renderShadowMap && !m->texture2D->transparent) {
+    /*if (renderShadowMap && !m->texture2D->transparent) {
         glEnable(GL_CULL_FACE);
         glCullFace(GL_FRONT);
     } else if (m->texture2D->transparent || (lmFilter >= 0)) {
@@ -488,7 +489,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     } else {
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
-    }
+    }*/
 
     /// set shader and VBO
     shader* current = m->material;
@@ -589,7 +590,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         yp = mod->cutY - 1;
 
     /// standart vertices
-    if (mod->cutX * mod->cutY == 1) {
+    if ((mod->cutX * mod->cutY == 1) || (lmFilter >= 0)) {
         m->vboData->render(current, 0, m->triangleCount[mod->cutX * mod->cutY], true);
     }
 
@@ -778,8 +779,10 @@ void gles20::prepareLM(int count) {
     /// set lightmaps framebuffers
     for (int i = 0; i < count; i++) {
         lm.push_back(new glfbo(rttsize, rttsize, false));
+        lm[i]->bindFBO();
+        lm[i]->clear(true);
+        lm[i]->unbindFBO();
     }
-    resetLM(count);
 }
 
 /**
@@ -866,5 +869,6 @@ void gles20::resetLM(int count) {
     for (int i = 0; i < count; i++) {
         lm[i]->bindFBO();
         lm[i]->clear(true);
+        lm[i]->unbindFBO();
     }
 }

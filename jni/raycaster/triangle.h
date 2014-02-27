@@ -24,8 +24,6 @@ public:
     glm::vec3 getPoint(int u, int v);
 
     bool isIntersectedByRay(glm::vec3 point, glm::vec3 direction);
-
-    bool isIntersectedBySegment(glm::vec3 begin, glm::vec3 end);
 };
 
 #endif // TRIANGLE_H

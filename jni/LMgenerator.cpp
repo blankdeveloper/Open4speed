@@ -66,7 +66,7 @@ void getLMs(bool final) {
 bool isIntersected(glm::vec3 begin, glm::vec3 end, unsigned int ignore) {
     for (unsigned int i = 0; i < triangles.size(); i++) {
         if (i != ignore) {
-            if (triangles[i]->isIntersectedBySegment(begin, end))
+            if (triangles[i]->isIntersectedByRay(begin, end - begin))
                 return true;
         }
     }
@@ -418,7 +418,33 @@ void display(void) {
             root->debug();
 
             /// render lightmaps
+            /*printf("Rendering lightmaps...");
+            clock_gettime(CLOCK_REALTIME, &ts_start);
             clearLMs();
+            glm::vec3 light = glm::vec3(100, 100, 100);
+            int p = 0;
+            int m = 0;
+            for (int i = 0; i < trackdata->getLMCount(); i++) {
+                for (unsigned int j = 0; j < rttsize * rttsize; j++) {
+                    if (lmMap[i][j] >= 0) {
+                        bool v = isIntersected(light, points[i][j], lmMap[i][j]);
+                        if (v)
+                        {
+                            p++;
+                            pixels[i][j * 4 + 0] = 255;
+                        }
+                        else {
+                            m++;
+                            pixels[i][j * 4 + 1] = 255;
+                        }
+                    }
+                    if (j % rttsize == 0)
+                        printf("%d/%d: intersected=%d visible=%d\n", i, j / rttsize, p, m);
+                }
+            }
+            clock_gettime(CLOCK_REALTIME, &ts_end);
+            printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);*/
+
 
             /// Save lightmaps into PNGs
             printf("Save lightmaps into PNG files...");

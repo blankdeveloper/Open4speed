@@ -7,6 +7,7 @@
 */
 //----------------------------------------------------------------------------------------
 
+#include <stack>
 #include <vector>
 #include "loaders/pngloader.h"
 #include "raycaster/octreenode.h"
@@ -90,6 +91,12 @@ void saveLMs(bool uv) {
     }
 }
 
+struct Seed {
+    int x, y, lm, value;
+};
+
+std::stack<Seed> seedStack;
+
 bool seedTest(int x, int y, int lm) {
     if (x < 0)
         return false;
@@ -110,16 +117,23 @@ bool seedTest(int x, int y, int lm) {
 void seed(int x, int y, int lm, int value) {
     if (!seedTest(x, y, lm))
         return;
-    lmMap[lm][y * rttsize + x] = value;
-
-    if (seedTest(x - 1, y, lm))
-        seed(x - 1, y, lm, value);
-    if (seedTest(x, y - 1, lm))
-        seed(x, y - 1, lm, value);
-    if (seedTest(x + 1, y, lm))
-        seed(x + 1, y, lm, value);
-    if (seedTest(x, y + 1, lm))
-        seed(x, y + 1, lm, value);
+    seedStack.push({x, y, lm, value});
+    while(!seedStack.empty()) {
+        x = seedStack.top().x;
+        y = seedStack.top().y;
+        lm = seedStack.top().lm;
+        value = seedStack.top().value;
+        lmMap[lm][y * rttsize + x] = value;
+        seedStack.pop();
+        if (seedTest(x - 1, y, lm))
+            seedStack.push({x - 1, y, lm, value});
+        if (seedTest(x, y - 1, lm))
+            seedStack.push({x, y - 1, lm, value});
+        if (seedTest(x + 1, y, lm))
+            seedStack.push({x + 1, y, lm, value});
+        if (seedTest(x, y + 1, lm))
+            seedStack.push({x, y + 1, lm, value});
+    }
 }
 
 /**
@@ -295,6 +309,9 @@ void display(void) {
                 float* tid = trackdata->models[i].tid;
                 int triangleCount = trackdata->models[i].triangleCount[trackdata->cutX * trackdata->cutY];
                 for (int j = 0; j < triangleCount; j++) {
+                    /*for (int k = 0; k < 9; k++)
+                      if (trackdata->models[i].vertices[j * 9 + k] == 0)
+                          printf("%f %d\n", trackdata->models[i].vertices[j * 9 + k], j * 9 + k);*/
                   triangles.push_back(new triangle(
                           glm::vec3(vertices[j * 9 + 0], vertices[j * 9 + 1], vertices[j * 9 + 2]),
                           glm::vec3(vertices[j * 9 + 3], vertices[j * 9 + 4], vertices[j * 9 + 5]),
@@ -325,8 +342,8 @@ void display(void) {
             clock_gettime(CLOCK_REALTIME, &ts_start);
             getLMs(false);
             for (unsigned int i = 0; i < triangles.size(); i++) {
-                for (int x = -1; x <= 1; x++)
-                    for (int y = -1; y <= 1; y++) {
+                for (int x = -1; x <= 1; x+=2)
+                    for (int y = -1; y <= 1; y+=2) {
                         seed(triangles[i]->aID.x + x, triangles[i]->aID.y + y, triangles[i]->lmIndex, i);
                         seed(triangles[i]->bID.x + x, triangles[i]->bID.y + y, triangles[i]->lmIndex, i);
                         seed(triangles[i]->cID.x + x, triangles[i]->cID.y + y, triangles[i]->lmIndex, i);
@@ -368,22 +385,6 @@ void display(void) {
             clock_gettime(CLOCK_REALTIME, &ts_end);
             printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
 
-            /// triangle fill test
-            printf("Visualize lightmap triangles...");
-            clock_gettime(CLOCK_REALTIME, &ts_start);
-            for (int i = 0; i < trackdata->getLMCount(); i++) {
-                for (unsigned int j = 0; j < rttsize * rttsize; j++) {
-                    if (lmMap[i][j] >= 0) {
-                        pixels[i][j * 4 + 0] = (lmMap[i][j] * 126456 + 5) % 128 + 128;
-                        pixels[i][j * 4 + 1] = (lmMap[i][j] * 564231 + 3) % 128 + 128;
-                        pixels[i][j * 4 + 2] = (lmMap[i][j] * 789362 + 8) % 128 + 128;
-                    }
-                    pixels[i][j * 4 + 3] = 255;
-                }
-            }
-            clock_gettime(CLOCK_REALTIME, &ts_end);
-            printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
-
             /// create points
             printf("Count 3D coordinates of all lightmap points...");
             clock_gettime(CLOCK_REALTIME, &ts_start);
@@ -392,7 +393,27 @@ void display(void) {
                 for (unsigned int j = 0; j < rttsize * rttsize; j++) {
                     if (lmMap[i][j] >= 0) {
                         points[i][j] = triangles[i][lmMap[i][j]].getPoint(uvs[i][j * 4 + 0], uvs[i][j * 4 + 1]);
+                        //printf("x=%f y=%f z=%f u=%d v=%d\n", points[i][j].x, points[i][j].y, points[i][j].z, uvs[i][j * 4 + 0], uvs[i][j * 4 + 1]);
                     }
+                }
+            }
+            clock_gettime(CLOCK_REALTIME, &ts_end);
+            printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
+
+            /// triangle fill test
+            printf("Visualize lightmap triangles...");
+            clock_gettime(CLOCK_REALTIME, &ts_start);
+            for (int i = 0; i < trackdata->getLMCount(); i++) {
+                for (unsigned int j = 0; j < rttsize * rttsize; j++) {
+                    if (lmMap[i][j] >= 0) {
+                        /*pixels[i][j * 4 + 0] = (int)(255 * (points[i][j].x - trackdata->aabb.min.x) / (trackdata->aabb.max.x - trackdata->aabb.min.x));
+                        pixels[i][j * 4 + 1] = (int)(255 * (points[i][j].y - trackdata->aabb.min.y) / (trackdata->aabb.max.y - trackdata->aabb.min.y));
+                        pixels[i][j * 4 + 2] = (int)(255 * (points[i][j].z - trackdata->aabb.min.z) / (trackdata->aabb.max.z - trackdata->aabb.min.z));*/
+                        pixels[i][j * 4 + 0] = (lmMap[i][j] * 126456 + 5) % 128 + 128;
+                        pixels[i][j * 4 + 1] = (lmMap[i][j] * 564231 + 3) % 128 + 128;
+                        pixels[i][j * 4 + 2] = (lmMap[i][j] * 789362 + 8) % 128 + 128;
+                    }
+                    pixels[i][j * 4 + 3] = 255;
                 }
             }
             clock_gettime(CLOCK_REALTIME, &ts_end);
@@ -432,10 +453,14 @@ void display(void) {
                         {
                             p++;
                             pixels[i][j * 4 + 0] = 255;
+                            pixels[i][j * 4 + 1] = 0;
+                            pixels[i][j * 4 + 2] = 0;
                         }
                         else {
                             m++;
+                            pixels[i][j * 4 + 0] = 0;
                             pixels[i][j * 4 + 1] = 255;
+                            pixels[i][j * 4 + 2] = 0;
                         }
                     }
                     if (j % rttsize == 0)

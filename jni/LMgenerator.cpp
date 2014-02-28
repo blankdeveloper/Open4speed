@@ -309,9 +309,6 @@ void display(void) {
                 float* tid = trackdata->models[i].tid;
                 int triangleCount = trackdata->models[i].triangleCount[trackdata->cutX * trackdata->cutY];
                 for (int j = 0; j < triangleCount; j++) {
-                    /*for (int k = 0; k < 9; k++)
-                      if (trackdata->models[i].vertices[j * 9 + k] == 0)
-                          printf("%f %d\n", trackdata->models[i].vertices[j * 9 + k], j * 9 + k);*/
                   triangles.push_back(new triangle(
                           glm::vec3(vertices[j * 9 + 0], vertices[j * 9 + 1], vertices[j * 9 + 2]),
                           glm::vec3(vertices[j * 9 + 3], vertices[j * 9 + 4], vertices[j * 9 + 5]),
@@ -392,7 +389,7 @@ void display(void) {
                 points.push_back(new glm::vec3[rttsize * rttsize]);
                 for (unsigned int j = 0; j < rttsize * rttsize; j++) {
                     if (lmMap[i][j] >= 0) {
-                        points[i][j] = triangles[i][lmMap[i][j]].getPoint(uvs[i][j * 4 + 0], uvs[i][j * 4 + 1]);
+                        points[i][j] = triangles[lmMap[i][j]]->getPoint(uvs[i][j * 4 + 0], uvs[i][j * 4 + 1]);
                         //printf("x=%f y=%f z=%f u=%d v=%d\n", points[i][j].x, points[i][j].y, points[i][j].z, uvs[i][j * 4 + 0], uvs[i][j * 4 + 1]);
                     }
                 }
@@ -406,12 +403,18 @@ void display(void) {
             for (int i = 0; i < trackdata->getLMCount(); i++) {
                 for (unsigned int j = 0; j < rttsize * rttsize; j++) {
                     if (lmMap[i][j] >= 0) {
-                        /*pixels[i][j * 4 + 0] = (int)(255 * (points[i][j].x - trackdata->aabb.min.x) / (trackdata->aabb.max.x - trackdata->aabb.min.x));
-                        pixels[i][j * 4 + 1] = (int)(255 * (points[i][j].y - trackdata->aabb.min.y) / (trackdata->aabb.max.y - trackdata->aabb.min.y));
-                        pixels[i][j * 4 + 2] = (int)(255 * (points[i][j].z - trackdata->aabb.min.z) / (trackdata->aabb.max.z - trackdata->aabb.min.z));*/
-                        pixels[i][j * 4 + 0] = (lmMap[i][j] * 126456 + 5) % 128 + 128;
+                        /*if ((points[i][j].x - trackdata->aabb.min.x < 0) || (points[i][j].x - trackdata->aabb.min.x > trackdata->aabb.max.x - trackdata->aabb.min.x))
+                            printf("Warning incorrect X: %f/%f\n", points[i][j].x - trackdata->aabb.min.x, trackdata->aabb.max.x - trackdata->aabb.min.x);
+                        if ((points[i][j].y - trackdata->aabb.min.y < 0) || (points[i][j].y - trackdata->aabb.min.y > trackdata->aabb.max.y - trackdata->aabb.min.y))
+                            printf("Warning incorrect Y: %f/%f\n", points[i][j].y - trackdata->aabb.min.y, trackdata->aabb.max.y - trackdata->aabb.min.y);
+                        if ((points[i][j].z - trackdata->aabb.min.z < 0) || (points[i][j].z - trackdata->aabb.min.z > trackdata->aabb.max.z - trackdata->aabb.min.z))
+                            printf("Warning incorrect Z: %f/%f\n", points[i][j].z - trackdata->aabb.min.z, trackdata->aabb.max.z - trackdata->aabb.min.z);*/
+                        pixels[i][j * 4 + 0] = (unsigned char)(128.0f * (points[i][j].x - trackdata->aabb.min.x) / (trackdata->aabb.max.x - trackdata->aabb.min.x));
+                        pixels[i][j * 4 + 1] = (unsigned char)(128.0f * (points[i][j].y - trackdata->aabb.min.y) / (trackdata->aabb.max.y - trackdata->aabb.min.y));
+                        pixels[i][j * 4 + 2] = (unsigned char)(128.0f * (points[i][j].z - trackdata->aabb.min.z) / (trackdata->aabb.max.z - trackdata->aabb.min.z));
+                        /*pixels[i][j * 4 + 0] = (lmMap[i][j] * 126456 + 5) % 128 + 128;
                         pixels[i][j * 4 + 1] = (lmMap[i][j] * 564231 + 3) % 128 + 128;
-                        pixels[i][j * 4 + 2] = (lmMap[i][j] * 789362 + 8) % 128 + 128;
+                        pixels[i][j * 4 + 2] = (lmMap[i][j] * 789362 + 8) % 128 + 128;*/
                     }
                     pixels[i][j * 4 + 3] = 255;
                 }

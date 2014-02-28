@@ -44,9 +44,21 @@ void triangle::addPointToAABB(glm::vec3 p) {
 }
 
 glm::vec3 triangle::getPoint(int u, int v) {
-    float x = u / 255.0f;
-    float y = v / 255.0f;
-    return a + x * (b - a) + y * (c - a);
+    double x = u / 255.0f;
+    double y = v / 255.0f;
+    if (x > y) {
+        double b1 = -(x - 1.0);
+        double b2 = (x - 1.0) - (y - 1.0);
+        double b3 = 1.0 - b1 - b2;
+        return (glm::vec3)(glm::dvec3(a) * b1 + glm::dvec3(b) * b2 + glm::dvec3(c) * b3);
+    }
+    else {
+        double b1 = -(y - 1.0);
+        double b2 = -((x - 1.0) - (y - 1.0));
+        double b3 = 1.0 - b1 - b2;
+        return (glm::vec3)(glm::dvec3(a) * b1 + glm::dvec3(b) * b2 + glm::dvec3(c) * b3);
+    }
+    //return a + (u / 255.0f) * (b - a) + (v / 255.0f) * (c - a);
 }
 
 bool triangle::isIntersectedByRay(glm::vec3 rayOrig, glm::vec3 rayDir) {

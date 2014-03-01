@@ -417,7 +417,8 @@ void display(void) {
             /// render lightmaps
             printf("Rendering lightmaps...");
             clock_gettime(CLOCK_REALTIME, &ts_start);
-            glm::vec3 light = glm::vec3(-4.698295, 6.139812, 347.63123);
+            //glm::vec3 light = glm::vec3(-4.698295, 6.139812, 347.63123);
+            glm::vec3 light = glm::vec3(100, 100, 100);
             int p = 0;
             int m = 0;
             long testID = 0;
@@ -438,7 +439,7 @@ void display(void) {
                         pixels[triangles[i]->lmIndex][index * 4 + 1] = 255;
                     }
                 }
-                printf("%0.1fpercent done: intersected=%d visible=%d\n", 100 * i / (float)triangles.size(), p, m);
+                printf("%0.2fpercents done: intersected=%d visible=%d\n", 100 * i / (float)triangles.size(), p, m);
             }
             clock_gettime(CLOCK_REALTIME, &ts_end);
             printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);

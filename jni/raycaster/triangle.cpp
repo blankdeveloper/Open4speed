@@ -1,7 +1,6 @@
 #include <glm/gtx/intersect.hpp>
 #include "raycaster/triangle.h"
 #include "raycaster/utils.h"
-#include "utils/math.h"
 #include "common.h"
 
 triangle* lastIntersectedTriangle = 0;
@@ -10,9 +9,9 @@ triangle::triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec2 aID, glm::ve
     this->a = glm::vec3(a);
     this->b = glm::vec3(b);
     this->c = glm::vec3(c);
-    this->aID = glm::ivec2(aID.x * rttsize, aID.y * rttsize);
-    this->bID = glm::ivec2(bID.x * rttsize, bID.y * rttsize);
-    this->cID = glm::ivec2(cID.x * rttsize, cID.y * rttsize);
+    this->aID = glm::vec2(aID.x * rttsize, aID.y * rttsize);
+    this->bID = glm::vec2(bID.x * rttsize, bID.y * rttsize);
+    this->cID = glm::vec2(cID.x * rttsize, cID.y * rttsize);
     this->lmIndex = lmIndex;
     this->tIndex = tIndex;
     lastTestID = -1;
@@ -45,18 +44,18 @@ void triangle::addPointToAABB(glm::vec3 p) {
 }
 
 void triangle::addLMPoint(int u, int v) {
-    double x = u / 255.0f;
-    double y = v / 255.0f;
-    double b1 = -(x - 1.0);
-    double b2;
-    double b3 = 1.0 - b1 - b2;
-    if (x > y)
-        b2 = (x - 1.0) - (y - 1.0);
-    else
-        b2 = -((x - 1.0) - (y - 1.0));
-    glm::vec3 vert = (glm::vec3)(glm::dvec3(a) * b1 + glm::dvec3(b) * b2 + glm::dvec3(c) * b3);
-    glm::ivec2 t = (glm::ivec2)(glm::dvec2(aID) * b1 + glm::dvec2(bID) * b2 + glm::dvec2(cID) * b3);
-    points.push_back({vert, t});
+    glm::vec3 A = glm::vec3(0, 0, 1);
+    glm::vec3 B = glm::vec3(1, 0, 1);
+    glm::vec3 C = glm::vec3(0, 1, 1);
+    glm::vec3 P = glm::vec3(u / 255.0f, v / 255.0f, 1);
+    float area = triangleArea(A, B, C);
+    float lena = triangleArea(P, B, C) / area;
+    float lenb = triangleArea(P, A, C) / area;
+    float lenc = triangleArea(P, A, B) / area;
+
+    glm::vec3 vert = a * lena + b * lenb + c * lenc;
+    glm::vec2 t = aID * lena + bID * lenb + cID * lenc;
+    points.push_back({vert, (glm::ivec2)t});
 }
 
 glm::vec3 p = glm::vec3(0,0,0);

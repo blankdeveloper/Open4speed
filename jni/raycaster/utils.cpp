@@ -47,3 +47,8 @@ void setUniforms(glm::vec3 begin, glm::vec3 end, int ignore1, int ignore2, long 
     uraydir = end - begin;
     utestID = testID;
 }
+
+float triangleArea(glm::vec3 a, glm::vec3 b, glm::vec3 c) {
+    return glm::length(glm::cross(c - a, c - b)) * 0.5f;
+}
+

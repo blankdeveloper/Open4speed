@@ -35,7 +35,6 @@ struct edge {
 struct AABB {
     glm::vec3 min; ///< Region extreme
     glm::vec3 max; ///< Region extreme
-    float size;    ///< Region size
 };
 
 /**

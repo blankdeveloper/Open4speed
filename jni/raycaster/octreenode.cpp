@@ -8,6 +8,7 @@
 //----------------------------------------------------------------------------------------
 
 #include "raycaster/octreenode.h"
+#include "raycaster/utils.h"
 #include "common.h"
 
 std::vector<int> octreeStatus;
@@ -27,29 +28,22 @@ octreenode::octreenode(AABB *r, int depth) {
 
 /**
  * @brief octreeNode is a constructor of root node
- * @param size is size of a world
+ * @param r is node region
  * @param data is a vector of triangles to insert
  */
-octreenode::octreenode(float size, std::vector<triangle*> geom) {
+octreenode::octreenode(AABB *r, std::vector<triangle*> geom) {
     /// Set limits of tree
     depth = 0;
-    reg = new AABB();
-    reg->min.x = -size / 2;
-    reg->min.y = -size / 2;
-    reg->min.z = -size / 2;
-    reg->max.x = size / 2;
-    reg->max.y = size / 2;
-    reg->max.z = size / 2;
-    reg->size = size;
+    reg = r;
 
     for (int i = 0; i < 8; i++) {
         hasNext[i] = false;
     }
+    childCount = 0;
 
     /// Add top models
     octreeStatus.push_back(geom.size());
     for (unsigned int i = 0; i < geom.size(); i++) {
-        geom[i]->fixed = false;
         list.push_back(geom[i]);
     }
 
@@ -78,14 +72,12 @@ void octreenode::createSubNodes() {
     r[6] = getSubregion(1, 1, 0);
     r[7] = getSubregion(1, 1, 1);
 
-    for (unsigned int i = 0; i < list.size(); i++) {
-        if (!list[i]->fixed) {
+    int size = list.size();
+    if (size > 20) {
+        for (unsigned int i = 0; i < list.size(); i++) {
             bool moved = false;
             for (int j = 0; j < 8; j++) {
                 bool ok = true;
-                if (r[j]->size < list[i]->reg.size / 2.0f) {
-                    ok = false;
-                }
                 if ((list[i]->reg.max.x < r[j]->min.x) || (r[j]->max.x < list[i]->reg.min.x)) {
                     ok = false;
                 }
@@ -107,9 +99,7 @@ void octreenode::createSubNodes() {
                 }
 
             }
-            if (!moved) {
-                list[i]->fixed = true;
-            } else {
+            if (moved) {
                 octreeStatus[depth]--;
                 list.erase(list.begin() + i);
                 i--;
@@ -117,18 +107,34 @@ void octreenode::createSubNodes() {
             }
         }
     }
+
+    bool subdivide = false;
     for (int j = 0; j < 8; j++) {
         if (hasNext[j]) {
             next[j]->createSubNodes();
+            subdivide = true;
+            childCount++;
         } else {
             delete r[j];
         }
     }
+
+    if (!subdivide && (list.size() > 50)) {
+        printf("Warning: node with depth %d has %d triangles\n", depth, list.size());
+    }
 }
 
-void octreenode::debug() {
-    for (unsigned int i = 0; i < octreeStatus.size(); i++) {
-        printf("%d triangles in depth %d\n", octreeStatus[i], i);
+long lastTestID = -1;
+long AABBTests = 0;
+long triangleTests = 0;
+
+void octreenode::debug(bool tests) {
+    if (tests) {
+        printf("%d AABBs tested, %d triangles tested\n", AABBTests, triangleTests);
+    } else {
+        for (unsigned int i = 0; i < octreeStatus.size(); i++) {
+            printf("%d triangles in depth %d\n", octreeStatus[i], i);
+        }
     }
 }
 
@@ -142,26 +148,62 @@ void octreenode::debug() {
 AABB* octreenode::getSubregion(bool x, bool y, bool z) {
     AABB *r = new AABB;
     if (x) {
-        r->min.x = reg->min.x + reg->size / 2;
+        r->min.x = reg->min.x + (reg->max.x - reg->min.x) / 2;
         r->max.x = reg->max.x;
     } else {
         r->min.x = reg->min.x;
-        r->max.x = reg->max.x - reg->size / 2;
+        r->max.x = reg->max.x - (reg->max.x - reg->min.x) / 2;
     }
     if (y) {
-        r->min.y = reg->min.y + reg->size / 2;
+        r->min.y = reg->min.y + (reg->max.y - reg->min.y) / 2;
         r->max.y = reg->max.y;
     } else {
         r->min.y = reg->min.y;
-        r->max.y = reg->max.y - reg->size / 2;
+        r->max.y = reg->max.y - (reg->max.y - reg->min.y) / 2;
     }
     if (z) {
-        r->min.z = reg->min.z + reg->size / 2;
+        r->min.z = reg->min.z + (reg->max.z - reg->min.z) / 2;
         r->max.z = reg->max.z;
     } else {
         r->min.z = reg->min.z;
-        r->max.z = reg->max.z - reg->size / 2;
+        r->max.z = reg->max.z - (reg->max.z - reg->min.z) / 2;
     }
-    r->size = reg->size / 2;
     return r;
+}
+
+bool octreenode::isIntersected() {
+
+    if (utestID != lastTestID) {
+        lastTestID = utestID;
+        AABBTests = 0;
+        triangleTests = 0;
+        if (lastIntersectedTriangle != 0) {
+            triangleTests++;
+            if (lastIntersectedTriangle->isIntersectedByRay())
+                return true;
+        }
+    }
+
+    /// current node test
+    for (unsigned int i = 0; i < list.size(); i++) {
+        if ((list[i]->tIndex != uignore1) && (list[i]->tIndex != uignore2)) {
+            triangleTests++;
+            if (list[i]->isIntersectedByRay())
+                return true;
+        }
+    }
+
+    /// subnodes test
+    for (int j = 0; j < 8; j++) {
+        if (hasNext[j]) {
+            AABBTests++;
+            if (aabbSegmentIntersection(next[j]->reg->min, next[j]->reg->max)) {
+                if (next[j]->isIntersected())
+                    return true;
+            }
+        }
+    }
+
+    /// no intersection found
+    return false;
 }

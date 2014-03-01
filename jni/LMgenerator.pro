@@ -39,7 +39,8 @@ SOURCES += \
     renderers/opengl/glfbo.cpp \
     renderers/opengl/glvbo.cpp \
     raycaster/octreenode.cpp \
-    raycaster/triangle.cpp
+    raycaster/triangle.cpp \
+    raycaster/utils.cpp
 HEADERS += \
     input/keyboard.h \
     interfaces/input.h \
@@ -73,5 +74,6 @@ HEADERS += \
     renderers/opengl/glfbo.h \
     renderers/opengl/glvbo.h \
     raycaster/octreenode.h \
-    raycaster/triangle.h
+    raycaster/triangle.h \
+    raycaster/utils.h
 INCLUDEPATH += ../support ../support/fmodapi-4.44.08 ../support/bullet-2.81-rev2613/src

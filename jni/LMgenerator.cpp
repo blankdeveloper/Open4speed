@@ -12,6 +12,7 @@
 #include "loaders/pngloader.h"
 #include "raycaster/octreenode.h"
 #include "raycaster/triangle.h"
+#include "raycaster/utils.h"
 #include "utils/io.h"
 #include "utils/math.h"
 #include "utils/scripting.h"
@@ -40,7 +41,6 @@ std::vector<unsigned char*> pixels;
 std::vector<unsigned char*> uvs;
 std::vector<triangle*> triangles;
 std::vector<int*> lmMap;
-std::vector<glm::vec3*> points;
 octreenode* root;
 
 void clearLMs() {
@@ -62,16 +62,6 @@ void getLMs(bool final) {
         pixels.push_back(xrenderer->getLMPixels(i, final, final));
         uvs.push_back(xrenderer->getLMPixels(i, final, final));
     }
-}
-
-bool isIntersected(glm::vec3 begin, glm::vec3 end, unsigned int ignore) {
-    for (unsigned int i = 0; i < triangles.size(); i++) {
-        if (i != ignore) {
-            if (triangles[i]->isIntersectedByRay(begin, end - begin))
-                return true;
-        }
-    }
-    return false;
 }
 
 /**
@@ -312,6 +302,7 @@ void display(void) {
                 float y = trackdata->models[i].reg->min.y;
                 float z = trackdata->models[i].reg->min.z;
                 for (int j = 0; j < triangleCount; j++) {
+                  int index = triangles.size();
                   triangles.push_back(new triangle(
                           glm::vec3(vertices[j * 9 + 0]+x, vertices[j * 9 + 1]+y, vertices[j * 9 + 2]+z),
                           glm::vec3(vertices[j * 9 + 3]+x, vertices[j * 9 + 4]+y, vertices[j * 9 + 5]+z),
@@ -319,7 +310,7 @@ void display(void) {
                           glm::vec2(tid[j * 6 + 0], tid[j * 6 + 1]),
                           glm::vec2(tid[j * 6 + 2], tid[j * 6 + 3]),
                           glm::vec2(tid[j * 6 + 4], tid[j * 6 + 5]),
-                          trackdata->models[i].lmIndex));
+                          trackdata->models[i].lmIndex, index));
                 }
             }
             clock_gettime(CLOCK_REALTIME, &ts_end);
@@ -389,10 +380,9 @@ void display(void) {
             printf("Count 3D coordinates of all lightmap points...");
             clock_gettime(CLOCK_REALTIME, &ts_start);
             for (int i = 0; i < trackdata->getLMCount(); i++) {
-                points.push_back(new glm::vec3[rttsize * rttsize]);
                 for (unsigned int j = 0; j < rttsize * rttsize; j++) {
                     if (lmMap[i][j] >= 0) {
-                        points[i][j] = triangles[lmMap[i][j]]->getPoint(uvs[i][j * 4 + 0], uvs[i][j * 4 + 1]);
+                        triangles[lmMap[i][j]]->addLMPoint(uvs[i][j * 4 + 0], uvs[i][j * 4 + 1]);
                         //printf("x=%f y=%f z=%f u=%d v=%d\n", points[i][j].x, points[i][j].y, points[i][j].z, uvs[i][j * 4 + 0], uvs[i][j * 4 + 1]);
                     }
                 }
@@ -406,18 +396,9 @@ void display(void) {
             for (int i = 0; i < trackdata->getLMCount(); i++) {
                 for (unsigned int j = 0; j < rttsize * rttsize; j++) {
                     if (lmMap[i][j] >= 0) {
-                        if ((points[i][j].x - trackdata->aabb.min.x < -0.0001f) || (points[i][j].x - trackdata->aabb.min.x > trackdata->aabb.max.x - trackdata->aabb.min.x + 0.0001f))
-                            printf("Warning incorrect X: %f/%f\n", points[i][j].x - trackdata->aabb.min.x, trackdata->aabb.max.x - trackdata->aabb.min.x);
-                        if ((points[i][j].y - trackdata->aabb.min.y < -0.0001f) || (points[i][j].y - trackdata->aabb.min.y > trackdata->aabb.max.y - trackdata->aabb.min.y + 0.0001f))
-                            printf("Warning incorrect Y: %f/%f\n", points[i][j].y - trackdata->aabb.min.y, trackdata->aabb.max.y - trackdata->aabb.min.y);
-                        if ((points[i][j].z - trackdata->aabb.min.z < -0.0001f) || (points[i][j].z - trackdata->aabb.min.z > trackdata->aabb.max.z - trackdata->aabb.min.z + 0.0001f))
-                            printf("Warning incorrect Z: %f/%f\n", points[i][j].z - trackdata->aabb.min.z, trackdata->aabb.max.z - trackdata->aabb.min.z);
-                        pixels[i][j * 4 + 0] = (unsigned char)(255.0f * (points[i][j].x - trackdata->aabb.min.x) / (trackdata->aabb.max.x - trackdata->aabb.min.x));
-                        pixels[i][j * 4 + 1] = (unsigned char)(255.0f * (points[i][j].y - trackdata->aabb.min.y) / (trackdata->aabb.max.y - trackdata->aabb.min.y));
-                        pixels[i][j * 4 + 2] = (unsigned char)(255.0f * (points[i][j].z - trackdata->aabb.min.z) / (trackdata->aabb.max.z - trackdata->aabb.min.z));
-                        /*pixels[i][j * 4 + 0] = (lmMap[i][j] * 126456 + 5) % 128 + 128;
+                        pixels[i][j * 4 + 0] = (lmMap[i][j] * 126456 + 5) % 128 + 128;
                         pixels[i][j * 4 + 1] = (lmMap[i][j] * 564231 + 3) % 128 + 128;
-                        pixels[i][j * 4 + 2] = (lmMap[i][j] * 789362 + 8) % 128 + 128;*/
+                        pixels[i][j * 4 + 2] = (lmMap[i][j] * 789362 + 8) % 128 + 128;
                     }
                     pixels[i][j * 4 + 3] = 255;
                 }
@@ -428,42 +409,39 @@ void display(void) {
             /// build octree
             printf("Fill octree with triangles...");
             clock_gettime(CLOCK_REALTIME, &ts_start);
-            root = new octreenode(trackdata->aabb.size * 2.0f, triangles);
+            root = new octreenode(&trackdata->aabb, triangles);
             clock_gettime(CLOCK_REALTIME, &ts_end);
             printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
-            root->debug();
+            root->debug(false);
 
             /// render lightmaps
-            /*printf("Rendering lightmaps...");
+            printf("Rendering lightmaps...");
             clock_gettime(CLOCK_REALTIME, &ts_start);
-            glm::vec3 light = glm::vec3(100, 100, 100);
+            glm::vec3 light = glm::vec3(-4.698295, 6.139812, 347.63123);
             int p = 0;
             int m = 0;
-            for (int i = 0; i < trackdata->getLMCount(); i++) {
-                for (unsigned int j = 0; j < rttsize * rttsize; j++) {
-                    if (lmMap[i][j] >= 0) {
-                        bool v = isIntersected(light, points[i][j], lmMap[i][j]);
-                        if (v)
-                        {
-                            p++;
-                            pixels[i][j * 4 + 0] = 255;
-                            pixels[i][j * 4 + 1] = 0;
-                            pixels[i][j * 4 + 2] = 0;
-                        }
-                        else {
-                            m++;
-                            pixels[i][j * 4 + 0] = 0;
-                            pixels[i][j * 4 + 1] = 255;
-                            pixels[i][j * 4 + 2] = 0;
-                        }
+            long testID = 0;
+            clearLMs();
+            for (unsigned int i = 0; i < triangles.size(); i++) {
+                for (unsigned int j = 0; j < triangles[i]->points.size(); j++) {
+                    setUniforms(light, triangles[i]->points[j].v, triangles[i]->tIndex, triangles[i]->tIndex, testID++);
+                    bool v = root->isIntersected();
+                    //root->debug(true);
+                    int index = triangles[i]->points[j].t.y * rttsize + triangles[i]->points[j].t.x;
+                    if (v)
+                    {
+                        p++;
+                        pixels[triangles[i]->lmIndex][index * 4 + 0] = 255;
                     }
-                    if (j % rttsize == 0)
-                        printf("%d/%d: intersected=%d visible=%d\n", i, j / rttsize, p, m);
+                    else {
+                        m++;
+                        pixels[triangles[i]->lmIndex][index * 4 + 1] = 255;
+                    }
                 }
+                printf("%0.1fpercent done: intersected=%d visible=%d\n", 100 * i / (float)triangles.size(), p, m);
             }
             clock_gettime(CLOCK_REALTIME, &ts_end);
-            printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);*/
-
+            printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
 
             /// Save lightmaps into PNGs
             printf("Save lightmaps into PNG files...");

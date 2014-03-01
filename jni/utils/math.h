@@ -15,16 +15,6 @@
 #include "car.h"
 
 /**
- * @brief aabbSegmentIntersection check if AABB and line segment intersects
- * @param p1 is begin of line segment
- * @param p2 is end of line segment
- * @param min is AABB minimum
- * @param max is AABB maximum
- * @return true if it is intersecting
- */
-bool aabbSegmentIntersection(glm::vec3 p1, glm::vec3 p2, glm::vec3 min, glm::vec3 max);
-
-/**
  * @brief angle counts angle of line between two points given by coordinates
  * @param fromX is first point coordinate x
  * @param fromY is first point coordinate y

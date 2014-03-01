@@ -23,6 +23,7 @@ class octreenode {
 public:
 
     int depth;                      ///< Depth of node
+    bool childCount;                ///< Information about child count
     bool hasNext[8];                ///< Information about childs
     octreenode *next[8];            ///< Childs
     AABB *reg;                      ///< AABB region
@@ -30,10 +31,10 @@ public:
 
     /**
      * @brief octreeNode is a constructor of root node
-     * @param size is size of a world
+     * @param r is node region
      * @param data is a vector of triangles to insert
      */
-    octreenode(float size, std::vector<triangle*> geom);
+    octreenode(AABB *r, std::vector<triangle*> geom);
 
     /**
      * @brief octreeNode is constructor for subnodes
@@ -49,7 +50,7 @@ public:
      */
     void createSubNodes();
 
-    void debug();
+    void debug(bool test);
 
     /**
      * @brief getSubregion gets subregion
@@ -59,6 +60,8 @@ public:
      * @return instance of region structure
      */
     AABB* getSubregion(bool x, bool y, bool z);
+
+    bool isIntersected();
 };
 
 #endif // OCTREENODE_H

@@ -26,8 +26,6 @@ public:
      */
     modelo4s(const char* filename, bool lightmaps);
 
-    void addPointToAABB(glm::vec3 p);
-
     /**
      * @brief getLMCount get amount of lightmaps
      * @return lightmaps count

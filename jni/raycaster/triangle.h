@@ -4,11 +4,15 @@
 #include <glm/glm.hpp>
 #include "interfaces/model.h"
 
+struct Point {
+    glm::vec3 v;
+    glm::ivec2 t;
+};
+
 class triangle
 {
 public:
     AABB reg;           ///< AABB of the object
-    bool fixed;         ///< Raycasting flag
     glm::vec3 a;
     glm::vec3 b;
     glm::vec3 c;
@@ -16,14 +20,19 @@ public:
     glm::ivec2 bID;
     glm::ivec2 cID;
     int lmIndex;
+    int tIndex;
+    long lastTestID;
+    std::vector<Point> points;
 
-    triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec2 aID, glm::vec2 bID, glm::vec2 cID, int lmIndex);
+    triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec2 aID, glm::vec2 bID, glm::vec2 cID, int lmIndex, int tIndex);
 
     void addPointToAABB(glm::vec3 p);
 
-    glm::vec3 getPoint(int u, int v);
+    void addLMPoint(int u, int v);
 
-    bool isIntersectedByRay(glm::vec3 point, glm::vec3 direction);
+    bool isIntersectedByRay();
 };
+
+extern triangle* lastIntersectedTriangle;
 
 #endif // TRIANGLE_H

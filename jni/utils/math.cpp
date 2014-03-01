@@ -10,39 +10,6 @@
 #include <math.h>
 #include "utils/math.h"
 
-const float EPSILON = 0.00001f;
-
-/**
- * @brief aabbSegmentIntersection check if AABB and line segment intersects
- * @param p1 is begin of line segment
- * @param p2 is end of line segment
- * @param min is AABB minimum
- * @param max is AABB maximum
- * @return true if it is intersecting
- */
-bool aabbSegmentIntersection(glm::vec3 p1, glm::vec3 p2, glm::vec3 min, glm::vec3 max) {
-    glm::vec3 d = (p2 - p1) * 0.5f;
-    glm::vec3 e = (max - min) * 0.5f;
-    glm::vec3 c = p1 + d - (min + max) * 0.5f;
-    glm::vec3 ad = glm::vec3(fabs(d.x), fabs(d.y), fabs(d.z));
-
-    if (fabsf(c[0]) > e[0] + ad[0])
-        return false;
-    if (fabsf(c[1]) > e[1] + ad[1])
-        return false;
-    if (fabsf(c[2]) > e[2] + ad[2])
-        return false;
-
-    if (fabsf(d[1] * c[2] - d[2] * c[1]) > e[1] * ad[2] + e[2] * ad[1] + EPSILON)
-        return false;
-    if (fabsf(d[2] * c[0] - d[0] * c[2]) > e[2] * ad[0] + e[0] * ad[2] + EPSILON)
-        return false;
-    if (fabsf(d[0] * c[1] - d[1] * c[0]) > e[0] * ad[1] + e[1] * ad[0] + EPSILON)
-        return false;
-
-    return true;
-}
-
 /**
  * @brief angle counts angle of line between two points given by coordinates
  * @param fromX is first point coordinate x

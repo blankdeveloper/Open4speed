@@ -60,13 +60,23 @@ void triangle::addLMPoint(int u, int v, glm::ivec2 t) {
 
 glm::vec3 p = glm::vec3(0,0,0);
 
+float ScalarTriple(glm::vec3 pq, glm::vec3 pc, glm::vec3 pb) {
+    return glm::dot(pb, glm::cross(pq, pc));
+}
+
 bool triangle::isIntersectedByRay() {
     if (!glm::intersectLineTriangle(ubegin, uraydir, a, b, c, p))
         return false;
+    /*glm::vec3 pq = uend - ubegin;
+    glm::vec3 pa = a - ubegin;
+    glm::vec3 pb = b - ubegin;
+    glm::vec3 pc = c - ubegin;
+    if (ScalarTriple(pq, pc, pb) < 0.0f) return 0;
+    if (ScalarTriple(pq, pa, pc) < 0.0f) return 0;
+    if (ScalarTriple(pq, pb, pa) < 0.0f) return 0;*/
 
-    if (lastIntersectedTriangle != 0) {
+    if (lastIntersectedTriangle != 0)
         lastIntersectedTriangle2 = lastIntersectedTriangle;
-    }
     lastIntersectedTriangle = this;
     return true;
 }

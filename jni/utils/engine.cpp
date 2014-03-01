@@ -405,11 +405,15 @@ void displayScene() {
         }
         eff[currentFrame].frame = 0;
         currentFrame++;
-        bool v = lamp[(xrenderer->frame/2) % 100];
-        trackdata->dynamicLight->fboRenderer->bind();
-        for (int l = 0; l < trackdata->dynamicLight->lightCount; l++)
-            trackdata->dynamicLight->setLight(l, v);
-        trackdata->dynamicLight->fboRenderer->unbind();
+
+        if (trackdata->dynamicLight != 0) {
+            bool v = lamp[(xrenderer->frame/2) % 100];
+            trackdata->dynamicLight->fboRenderer->bind();
+            for (int l = 0; l < trackdata->dynamicLight->lightCount; l++)
+                trackdata->dynamicLight->setLight(l, v);
+            trackdata->dynamicLight->fboRenderer->unbind();
+        }
+
         if (currentFrame >= effLen) {
             currentFrame = 0;
         }
@@ -491,9 +495,12 @@ void loadScene(std::vector<char*> *atributes) {
         for (int i = 0; i < trackdata->getLMCount(); i++) {
             char filename[256];
             sprintf(filename, getConfigStr("lightmap", atributes), i);
-            trackdata->lightmaps.push_back(getFBO(*loadPNG(filename)));
+            trackdata->lightmaps.push_back(getFBO(loadPNG(filename)));
         }
-        trackdata->dynamicLight = new DynamicLight(getConfigStr("dynamicLight", atributes));
+        if (strlen(getConfigStr("dynamicLight", atributes)) > 0 )
+            trackdata->dynamicLight = new DynamicLight(getConfigStr("dynamicLight", atributes));
+        else
+            trackdata->dynamicLight = 0;
     }
 }
 

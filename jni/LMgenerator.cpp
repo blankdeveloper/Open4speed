@@ -364,18 +364,11 @@ void display(void) {
                 for (unsigned int j = 0; j < triangles[i]->points.size(); j++) {
                     setUniforms(light, triangles[i]->points[j].v, triangles[i]->tIndex, triangles[i]->tIndex, testID++);
                     int index = triangles[i]->points[j].t.y * rttsize + triangles[i]->points[j].t.x;
+                    pixels[triangles[i]->lmIndex][index * 4 + 3] = 255;
                     if (!root->isIntersected()) {
                         pixels[triangles[i]->lmIndex][index * 4 + 0] = 255;
                         pixels[triangles[i]->lmIndex][index * 4 + 1] = 255;
                         pixels[triangles[i]->lmIndex][index * 4 + 2] = 255;
-                        pixels[triangles[i]->lmIndex][index * 4 + 3] = 255;
-                    } else {
-                        /*pixels[triangles[i]->lmIndex][index * 4 + 0] = triangles[i]->tIndex / 256;
-                        pixels[triangles[i]->lmIndex][index * 4 + 1] = triangles[i]->tIndex % 256;*/
-                        pixels[triangles[i]->lmIndex][index * 4 + 0] = 0;
-                        pixels[triangles[i]->lmIndex][index * 4 + 1] = 0;
-                        pixels[triangles[i]->lmIndex][index * 4 + 2] = 0;
-                        pixels[triangles[i]->lmIndex][index * 4 + 3] = 255;
                     }
                 }
                 printf("\rRendering lightmaps...%0.2f%% done", 100 * i / (float)triangles.size());

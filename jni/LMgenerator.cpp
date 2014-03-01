@@ -308,11 +308,14 @@ void display(void) {
                 float* vertices = trackdata->models[i].vertices;
                 float* tid = trackdata->models[i].tid;
                 int triangleCount = trackdata->models[i].triangleCount[trackdata->cutX * trackdata->cutY];
+                float x = trackdata->models[i].reg->min.x;
+                float y = trackdata->models[i].reg->min.y;
+                float z = trackdata->models[i].reg->min.z;
                 for (int j = 0; j < triangleCount; j++) {
                   triangles.push_back(new triangle(
-                          glm::vec3(vertices[j * 9 + 0], vertices[j * 9 + 1], vertices[j * 9 + 2]),
-                          glm::vec3(vertices[j * 9 + 3], vertices[j * 9 + 4], vertices[j * 9 + 5]),
-                          glm::vec3(vertices[j * 9 + 6], vertices[j * 9 + 7], vertices[j * 9 + 8]),
+                          glm::vec3(vertices[j * 9 + 0]+x, vertices[j * 9 + 1]+y, vertices[j * 9 + 2]+z),
+                          glm::vec3(vertices[j * 9 + 3]+x, vertices[j * 9 + 4]+y, vertices[j * 9 + 5]+z),
+                          glm::vec3(vertices[j * 9 + 6]+x, vertices[j * 9 + 7]+y, vertices[j * 9 + 8]+z),
                           glm::vec2(tid[j * 6 + 0], tid[j * 6 + 1]),
                           glm::vec2(tid[j * 6 + 2], tid[j * 6 + 3]),
                           glm::vec2(tid[j * 6 + 4], tid[j * 6 + 5]),
@@ -403,15 +406,15 @@ void display(void) {
             for (int i = 0; i < trackdata->getLMCount(); i++) {
                 for (unsigned int j = 0; j < rttsize * rttsize; j++) {
                     if (lmMap[i][j] >= 0) {
-                        /*if ((points[i][j].x - trackdata->aabb.min.x < 0) || (points[i][j].x - trackdata->aabb.min.x > trackdata->aabb.max.x - trackdata->aabb.min.x))
+                        if ((points[i][j].x - trackdata->aabb.min.x < -0.0001f) || (points[i][j].x - trackdata->aabb.min.x > trackdata->aabb.max.x - trackdata->aabb.min.x + 0.0001f))
                             printf("Warning incorrect X: %f/%f\n", points[i][j].x - trackdata->aabb.min.x, trackdata->aabb.max.x - trackdata->aabb.min.x);
-                        if ((points[i][j].y - trackdata->aabb.min.y < 0) || (points[i][j].y - trackdata->aabb.min.y > trackdata->aabb.max.y - trackdata->aabb.min.y))
+                        if ((points[i][j].y - trackdata->aabb.min.y < -0.0001f) || (points[i][j].y - trackdata->aabb.min.y > trackdata->aabb.max.y - trackdata->aabb.min.y + 0.0001f))
                             printf("Warning incorrect Y: %f/%f\n", points[i][j].y - trackdata->aabb.min.y, trackdata->aabb.max.y - trackdata->aabb.min.y);
-                        if ((points[i][j].z - trackdata->aabb.min.z < 0) || (points[i][j].z - trackdata->aabb.min.z > trackdata->aabb.max.z - trackdata->aabb.min.z))
-                            printf("Warning incorrect Z: %f/%f\n", points[i][j].z - trackdata->aabb.min.z, trackdata->aabb.max.z - trackdata->aabb.min.z);*/
-                        pixels[i][j * 4 + 0] = (unsigned char)(128.0f * (points[i][j].x - trackdata->aabb.min.x) / (trackdata->aabb.max.x - trackdata->aabb.min.x));
-                        pixels[i][j * 4 + 1] = (unsigned char)(128.0f * (points[i][j].y - trackdata->aabb.min.y) / (trackdata->aabb.max.y - trackdata->aabb.min.y));
-                        pixels[i][j * 4 + 2] = (unsigned char)(128.0f * (points[i][j].z - trackdata->aabb.min.z) / (trackdata->aabb.max.z - trackdata->aabb.min.z));
+                        if ((points[i][j].z - trackdata->aabb.min.z < -0.0001f) || (points[i][j].z - trackdata->aabb.min.z > trackdata->aabb.max.z - trackdata->aabb.min.z + 0.0001f))
+                            printf("Warning incorrect Z: %f/%f\n", points[i][j].z - trackdata->aabb.min.z, trackdata->aabb.max.z - trackdata->aabb.min.z);
+                        pixels[i][j * 4 + 0] = (unsigned char)(255.0f * (points[i][j].x - trackdata->aabb.min.x) / (trackdata->aabb.max.x - trackdata->aabb.min.x));
+                        pixels[i][j * 4 + 1] = (unsigned char)(255.0f * (points[i][j].y - trackdata->aabb.min.y) / (trackdata->aabb.max.y - trackdata->aabb.min.y));
+                        pixels[i][j * 4 + 2] = (unsigned char)(255.0f * (points[i][j].z - trackdata->aabb.min.z) / (trackdata->aabb.max.z - trackdata->aabb.min.z));
                         /*pixels[i][j * 4 + 0] = (lmMap[i][j] * 126456 + 5) % 128 + 128;
                         pixels[i][j * 4 + 1] = (lmMap[i][j] * 564231 + 3) % 128 + 128;
                         pixels[i][j * 4 + 2] = (lmMap[i][j] * 789362 + 8) % 128 + 128;*/
@@ -425,18 +428,7 @@ void display(void) {
             /// build octree
             printf("Fill octree with triangles...");
             clock_gettime(CLOCK_REALTIME, &ts_start);
-            float size = fabsf(trackdata->aabb.min.x);
-            if (size < fabsf(trackdata->aabb.min.y))
-                size = fabsf(trackdata->aabb.min.y);
-            if (size < fabsf(trackdata->aabb.min.z))
-                size = fabsf(trackdata->aabb.min.z);
-            if (size < fabsf(trackdata->aabb.max.x))
-                size = fabsf(trackdata->aabb.max.x);
-            if (size < fabsf(trackdata->aabb.max.y))
-                size = fabsf(trackdata->aabb.max.y);
-            if (size < fabsf(trackdata->aabb.max.z))
-                size = fabsf(trackdata->aabb.max.z);
-            root = new octreenode(size * 4, triangles);
+            root = new octreenode(trackdata->aabb.size * 2.0f, triangles);
             clock_gettime(CLOCK_REALTIME, &ts_end);
             printf("%0.3fms\n", fabsf(ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f);
             root->debug();
@@ -444,7 +436,6 @@ void display(void) {
             /// render lightmaps
             /*printf("Rendering lightmaps...");
             clock_gettime(CLOCK_REALTIME, &ts_start);
-            clearLMs();
             glm::vec3 light = glm::vec3(100, 100, 100);
             int p = 0;
             int m = 0;

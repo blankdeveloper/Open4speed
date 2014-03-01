@@ -41,11 +41,18 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
     width = aabb.max.x - aabb.min.x;
     aplitude = aabb.max.y - aabb.min.y;
     height = aabb.max.z - aabb.min.z;
-    size = width;
-    if (size < aplitude)
-        size = aplitude;
-    if (size < height)
-        size = height;
+    aabb.size = width;
+    if (aabb.size < aplitude)
+        aabb.size = aplitude;
+    if (aabb.size < height)
+        aabb.size = height;
+
+    /*aabb.min.x = 9999999;
+    aabb.min.y = 9999999;
+    aabb.min.z = 9999999;
+    aabb.max.x = -9999999;
+    aabb.max.y = -9999999;
+    aabb.max.z = -9999999;*/
 
     /// get amount of textures in model
     gets(line, file);
@@ -255,6 +262,9 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
                        &m->normals[j * 3 * 3 + 6], &m->normals[j * 3 * 3 + 7], &m->normals[j * 3 * 3 + 8],
                        &m->vertices[j * 3 * 3 + 6], &m->vertices[j * 3 * 3 + 7], &m->vertices[j * 3 * 3 + 8]);
             }
+            /*addPointToAABB(glm::vec3(m->vertices[j * 9 + 0], m->vertices[j * 9 + 1], m->vertices[j * 9 + 2]));
+            addPointToAABB(glm::vec3(m->vertices[j * 9 + 3], m->vertices[j * 9 + 4], m->vertices[j * 9 + 5]));
+            addPointToAABB(glm::vec3(m->vertices[j * 9 + 6], m->vertices[j * 9 + 7], m->vertices[j * 9 + 8]));*/
         }
 
         /// store model in VBO
@@ -288,6 +298,12 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
         }
     }
 
+    /*aabb.size = fabsf(aabb.max.x - aabb.min.x);
+    if (aabb.size < fabsf(aabb.max.y - aabb.min.y))
+        aabb.size = fabsf(aabb.max.y - aabb.min.y);
+    if (aabb.size < fabsf(aabb.max.z - aabb.min.z))
+        aabb.size = fabsf(aabb.max.z - aabb.min.z);*/
+
     delete[] line;
 #ifdef ZIP_ARCHIVE
     zip_fclose(file);
@@ -296,6 +312,21 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
 #endif
 }
 
+void modelo4s::addPointToAABB(glm::vec3 p) {
+    if (aabb.min.x > p.x)
+        aabb.min.x = p.x;
+    if (aabb.min.y > p.y)
+        aabb.min.y = p.y;
+    if (aabb.min.z > p.z)
+        aabb.min.z = p.z;
+
+    if (aabb.max.x < p.x)
+        aabb.max.x = p.x;
+    if (aabb.max.y < p.y)
+        aabb.max.y = p.y;
+    if (aabb.max.z < p.z)
+        aabb.max.z = p.z;
+}
 /**
  * @brief getLMCount get amount of lightmaps
  * @return lightmaps count

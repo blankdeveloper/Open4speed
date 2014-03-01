@@ -77,18 +77,7 @@ void octreenode::createSubNodes() {
         for (unsigned int i = 0; i < list.size(); i++) {
             bool moved = false;
             for (int j = 0; j < 8; j++) {
-                bool ok = true;
-                if ((list[i]->reg.max.x < r[j]->min.x) || (r[j]->max.x < list[i]->reg.min.x)) {
-                    ok = false;
-                }
-                if ((list[i]->reg.max.y < r[j]->min.y) || (r[j]->max.y < list[i]->reg.min.y)) {
-                    ok = false;
-                }
-                if ((list[i]->reg.max.z < r[j]->min.z) || (r[j]->max.z < list[i]->reg.min.z)) {
-                    ok = false;
-                }
-
-                if (ok) {
+                if (TestAABBAABB(&list[i]->reg, r[j])) {
                     if (!hasNext[j]) {
                         next[j] = new octreenode(r[j], depth + 1);
                         hasNext[j] = true;
@@ -197,7 +186,7 @@ bool octreenode::isIntersected() {
     for (int j = 0; j < 8; j++) {
         if (hasNext[j]) {
             AABBTests++;
-            if (aabbSegmentIntersection(next[j]->reg->min, next[j]->reg->max)) {
+            if (TestSegmentAABB(next[j]->reg)) {
                 if (next[j]->isIntersected())
                     return true;
             }

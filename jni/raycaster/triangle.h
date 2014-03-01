@@ -28,7 +28,7 @@ public:
 
     void addPointToAABB(glm::vec3 p);
 
-    void addLMPoint(int u, int v);
+    void addLMPoint(int u, int v, glm::ivec2 t);
 
     bool isIntersectedByRay();
 };

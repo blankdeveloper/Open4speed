@@ -1,4 +1,3 @@
-#include <glm/gtx/intersect.hpp>
 #include "raycaster/triangle.h"
 #include "raycaster/utils.h"
 #include "common.h"
@@ -9,9 +8,9 @@ triangle::triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec2 aID, glm::ve
     this->a = glm::vec3(a);
     this->b = glm::vec3(b);
     this->c = glm::vec3(c);
-    this->aID = glm::vec2(aID.x * rttsize, aID.y * rttsize);
-    this->bID = glm::vec2(bID.x * rttsize, bID.y * rttsize);
-    this->cID = glm::vec2(cID.x * rttsize, cID.y * rttsize);
+    this->aID = glm::vec2(aID.x * rttsize, aID.y * rttsize) + 0.5f;
+    this->bID = glm::vec2(bID.x * rttsize, bID.y * rttsize) + 0.5f;
+    this->cID = glm::vec2(cID.x * rttsize, cID.y * rttsize) + 0.5f;
     this->lmIndex = lmIndex;
     this->tIndex = tIndex;
     lastTestID = -1;
@@ -43,7 +42,7 @@ void triangle::addPointToAABB(glm::vec3 p) {
         reg.max.z = p.z;
 }
 
-void triangle::addLMPoint(int u, int v) {
+void triangle::addLMPoint(int u, int v, glm::ivec2 t) {
     glm::vec3 A = glm::vec3(0, 0, 1);
     glm::vec3 B = glm::vec3(1, 0, 1);
     glm::vec3 C = glm::vec3(0, 1, 1);
@@ -54,15 +53,25 @@ void triangle::addLMPoint(int u, int v) {
     float lenc = triangleArea(P, A, B) / area;
 
     glm::vec3 vert = a * lena + b * lenb + c * lenc;
-    glm::vec2 t = aID * lena + bID * lenb + cID * lenc;
-    points.push_back({vert, (glm::ivec2)t});
+    points.push_back({vert, t});
 }
 
-glm::vec3 p = glm::vec3(0,0,0);
+float ScalarTriple(glm::vec3 pq, glm::vec3 pc, glm::vec3 pb) {
+    return glm::dot(pb, glm::cross(pq, pc));
+}
 
 bool triangle::isIntersectedByRay() {
-    bool intersected = glm::intersectLineTriangle(ubegin, uraydir, a, b, c, p);
-    if (intersected)
-        lastIntersectedTriangle = this;
-    return intersected;
+    glm::vec3 pq = uend - ubegin;
+    glm::vec3 pa = a - ubegin;
+    glm::vec3 pb = b - ubegin;
+    glm::vec3 pc = c - ubegin;
+    // Test if pq is inside the edges bc, ca and ab. Done by testing
+    // that the signed tetrahedral volumes, computed using scalar triple
+    // products, are all positive
+    if (ScalarTriple(pq, pc, pb) < 0.0f) return 0;
+    if (ScalarTriple(pq, pa, pc) < 0.0f) return 0;
+    if (ScalarTriple(pq, pb, pa) < 0.0f) return 0;
+
+    lastIntersectedTriangle = this;
+    return true;
 }

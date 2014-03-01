@@ -7,11 +7,11 @@ timespec ts_start, ts_end;          ///< Time messurement
 glm::vec3 ubegin;
 glm::vec3 uend;
 glm::vec3 uraydir;
-int uignore1;
-int uignore2;
+long uignore1;
+long uignore2;
 long utestID;
 
-void setUniforms(glm::vec3 begin, glm::vec3 end, int ignore1, int ignore2, long testID) {
+void setUniforms(glm::vec3 begin, glm::vec3 end, long ignore1, long ignore2, long testID) {
     ubegin = begin;
     uend = end;
     uignore1 = ignore1;

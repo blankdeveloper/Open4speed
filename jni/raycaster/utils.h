@@ -7,11 +7,11 @@
 extern glm::vec3 ubegin;
 extern glm::vec3 uend;
 extern glm::vec3 uraydir;
-extern int uignore1;
-extern int uignore2;
+extern long uignore1;
+extern long uignore2;
 extern long utestID;
 
-void setUniforms(glm::vec3 begin, glm::vec3 end, int ignore1, int ignore2, long testID);
+void setUniforms(glm::vec3 begin, glm::vec3 end, long ignore1, long ignore2, long testID);
 
 void startTimer();
 

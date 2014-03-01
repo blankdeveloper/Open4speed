@@ -43,7 +43,7 @@ octreenode::octreenode(AABB *r, std::vector<triangle*> geom) {
 
     /// Add top models
     octreeStatus.push_back(geom.size());
-    for (unsigned int i = 0; i < geom.size(); i++) {
+    for (unsigned long i = 0; i < geom.size(); i++) {
         list.push_back(geom[i]);
     }
 
@@ -74,7 +74,7 @@ void octreenode::createSubNodes() {
 
     int size = list.size();
     if (size > 20) {
-        for (unsigned int i = 0; i < list.size(); i++) {
+        for (unsigned long i = 0; i < list.size(); i++) {
             bool moved = false;
             for (int j = 0; j < 8; j++) {
                 if (TestAABBAABB(&list[i]->reg, r[j])) {
@@ -162,14 +162,27 @@ AABB* octreenode::getSubregion(bool x, bool y, bool z) {
 
 bool octreenode::isIntersected() {
 
+    /// cached data test
     if (utestID != lastTestID) {
         lastTestID = utestID;
         AABBTests = 0;
         triangleTests = 0;
         if (lastIntersectedTriangle != 0) {
-            triangleTests++;
-            if (lastIntersectedTriangle->isIntersectedByRay())
-                return true;
+            if ((lastIntersectedTriangle->tIndex != uignore1) && (lastIntersectedTriangle->tIndex != uignore2)) {
+                triangleTests++;
+                if (lastIntersectedTriangle->isIntersectedByRay())
+                    return true;
+            }
+        }
+        if (lastIntersectedTriangle2 != 0) {
+            if ((lastIntersectedTriangle2->tIndex != uignore1) && (lastIntersectedTriangle2->tIndex != uignore2)) {
+                triangle* t = lastIntersectedTriangle;
+                lastIntersectedTriangle = lastIntersectedTriangle2;
+                lastIntersectedTriangle2 = t;
+                triangleTests++;
+                if (lastIntersectedTriangle->isIntersectedByRay())
+                    return true;
+            }
         }
     }
 

@@ -16,15 +16,15 @@ public:
     glm::vec3 a;
     glm::vec3 b;
     glm::vec3 c;
-    glm::vec2 aID;
-    glm::vec2 bID;
-    glm::vec2 cID;
+    glm::ivec2 aID;
+    glm::ivec2 bID;
+    glm::ivec2 cID;
     int lmIndex;
-    int tIndex;
+    long tIndex;
     long lastTestID;
     std::vector<Point> points;
 
-    triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec2 aID, glm::vec2 bID, glm::vec2 cID, int lmIndex, int tIndex);
+    triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec2 aID, glm::vec2 bID, glm::vec2 cID, int lmIndex, long tIndex);
 
     void addPointToAABB(glm::vec3 p);
 
@@ -34,5 +34,6 @@ public:
 };
 
 extern triangle* lastIntersectedTriangle;
+extern triangle* lastIntersectedTriangle2;
 
 #endif // TRIANGLE_H

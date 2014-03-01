@@ -38,7 +38,7 @@ std::vector<LightParam> *lightInfo;
 std::vector<unsigned char*> pixels;
 std::vector<unsigned char*> uvs;
 std::vector<triangle*> triangles;
-std::vector<int*> lmMap;
+std::vector<long*> lmMap;
 octreenode* root;
 
 void clearLMs() {
@@ -285,6 +285,7 @@ void display(void) {
             /// create triangles for raycasting
             printf("Converting O4S model into triangles for raycasting...");
             startTimer();
+            long index = 0;
             for (unsigned int i = 0; i < trackdata->models.size(); i++) {
                 float* vertices = trackdata->models[i].vertices;
                 float* tid = trackdata->models[i].tid;
@@ -293,7 +294,6 @@ void display(void) {
                 float y = trackdata->models[i].reg->min.y;
                 float z = trackdata->models[i].reg->min.z;
                 for (int j = 0; j < triangleCount; j++) {
-                  int index = triangles.size();
                   triangles.push_back(new triangle(
                           glm::vec3(vertices[j * 9 + 0]+x, vertices[j * 9 + 1]+y, vertices[j * 9 + 2]+z),
                           glm::vec3(vertices[j * 9 + 3]+x, vertices[j * 9 + 4]+y, vertices[j * 9 + 5]+z),
@@ -301,7 +301,7 @@ void display(void) {
                           glm::vec2(tid[j * 6 + 0], tid[j * 6 + 1]),
                           glm::vec2(tid[j * 6 + 2], tid[j * 6 + 3]),
                           glm::vec2(tid[j * 6 + 4], tid[j * 6 + 5]),
-                          trackdata->models[i].lmIndex, index));
+                          trackdata->models[i].lmIndex, index++));
                 }
             }
             stopTimer();
@@ -310,7 +310,7 @@ void display(void) {
             printf("Alocating memory for lightmap pointers to triangles...");
             startTimer();
             for (int i = 0; i < trackdata->getLMCount(); i++) {
-                lmMap.push_back(new int[rttsize * rttsize]);
+                lmMap.push_back(new long[rttsize * rttsize]);
                 for (unsigned int j = 0; j < rttsize * rttsize; j++) {
                     lmMap[i][j] = -255;
                 }
@@ -321,12 +321,12 @@ void display(void) {
             printf("Finding pointers from lightmaps to triangles...");
             startTimer();
             getLMs(false);
-            for (unsigned int i = 0; i < triangles.size(); i++) {
-                for (int x = -1; x <= 1; x+=2)
-                    for (int y = -1; y <= 1; y+=2) {
-                        seed(triangles[i]->aID.x + x, triangles[i]->aID.y + y, triangles[i]->lmIndex, i);
-                        seed(triangles[i]->bID.x + x, triangles[i]->bID.y + y, triangles[i]->lmIndex, i);
-                        seed(triangles[i]->cID.x + x, triangles[i]->cID.y + y, triangles[i]->lmIndex, i);
+            for (unsigned long i = 0; i < triangles.size(); i++) {
+                for (int x = -1; x <= 1; x++)
+                    for (int y = -1; y <= 1; y++) {
+                        seed(triangles[i]->aID.x + x, triangles[i]->aID.y + y, triangles[i]->lmIndex, triangles[i]->tIndex);
+                        seed(triangles[i]->bID.x + x, triangles[i]->bID.y + y, triangles[i]->lmIndex, triangles[i]->tIndex);
+                        seed(triangles[i]->cID.x + x, triangles[i]->cID.y + y, triangles[i]->lmIndex, triangles[i]->tIndex);
                     }
             }
             stopTimer();
@@ -360,7 +360,7 @@ void display(void) {
             glm::vec3 light = glm::vec3(100, 100, 100);
             long testID = 0;
             clearLMs();
-            for (unsigned int i = 0; i < triangles.size(); i++) {
+            for (unsigned long i = 0; i < triangles.size(); i++) {
                 for (unsigned int j = 0; j < triangles[i]->points.size(); j++) {
                     setUniforms(light, triangles[i]->points[j].v, triangles[i]->tIndex, triangles[i]->tIndex, testID++);
                     int index = triangles[i]->points[j].t.y * rttsize + triangles[i]->points[j].t.x;
@@ -370,6 +370,8 @@ void display(void) {
                         pixels[triangles[i]->lmIndex][index * 4 + 2] = 255;
                         pixels[triangles[i]->lmIndex][index * 4 + 3] = 255;
                     } else {
+                        /*pixels[triangles[i]->lmIndex][index * 4 + 0] = triangles[i]->tIndex / 256;
+                        pixels[triangles[i]->lmIndex][index * 4 + 1] = triangles[i]->tIndex % 256;*/
                         pixels[triangles[i]->lmIndex][index * 4 + 0] = 0;
                         pixels[triangles[i]->lmIndex][index * 4 + 1] = 0;
                         pixels[triangles[i]->lmIndex][index * 4 + 2] = 0;

@@ -20,7 +20,7 @@ glm::vec3 getColor(Point p) {
       //diffuse light
       glm::vec3 color = glm::max(glm::dot(N, L), 0.0f) * swizle(xrenderer->light.u_light_diffuse);
       //light attenuation
-      float d = glm::abs(uniform->raydir.z);
+      float d = glm::length(uniform->raydir);
       glm::vec3 D = glm::vec3(1.0, d, d * d);
       color *= glm::pow(eff, xrenderer->light.u_light_spot_eff) / glm::dot(swizle(xrenderer->light.u_light_att), D);
       // add to previous lightmap

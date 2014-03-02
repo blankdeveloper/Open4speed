@@ -77,7 +77,7 @@ float ScalarTriple(glm::vec3 pq, glm::vec3 pc, glm::vec3 pb) {
 }
 
 bool triangle::isIntersectedByRay() {
-    if (!glm::intersectLineTriangle(ubegin, uraydir, a, b, c, p))
+    if (!glm::intersectLineTriangle(uniform->begin, uniform->raydir, a, b, c, p))
         return false;
     /*glm::vec3 pq = uend - ubegin;
     glm::vec3 pa = a - ubegin;

@@ -11,12 +11,16 @@ struct Point {
     glm::vec2 c;
 };
 
-extern glm::vec3 ubegin;
-extern glm::vec3 uend;
-extern glm::vec3 uraydir;
-extern long uignore1;
-extern long uignore2;
-extern long utestID;
+struct Uniform {
+    glm::vec3 begin;
+    glm::vec3 end;
+    glm::vec3 raydir;
+    long ignore1;
+    long ignore2;
+    long testID;
+};
+
+extern Uniform *uniform;
 
 glm::vec3 getColor(Point p);
 

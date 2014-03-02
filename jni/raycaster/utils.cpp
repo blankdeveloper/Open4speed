@@ -4,28 +4,23 @@
 const float EPSILON = 0.00001f;
 timespec ts_start, ts_end;          ///< Time messurement
 
-glm::vec3 ubegin;
-glm::vec3 uend;
-glm::vec3 uraydir;
-long uignore1;
-long uignore2;
-long utestID;
+
+Uniform *uniform = new Uniform();
 
 glm::vec3 getColor(Point p) {
 
-
     //count light
-    glm::vec3 lightDir = -uraydir;
+    glm::vec3 lightDir = -uniform->raydir;
     glm::vec3 N = glm::normalize(p.n);
     glm::vec3 L = glm::normalize(lightDir);
     //count effectivity(directionaly)
-    float eff = glm::dot(glm::normalize(swizle(xrenderer->light.u_light_dir)), -L);
+    float eff = glm::dot(glm::normalize(-swizle(xrenderer->light.u_light_dir)), -L);
     //light cutoff
     if (eff >= xrenderer->light.u_light_cut) {
       //diffuse light
       glm::vec3 color = glm::max(glm::dot(N, L), 0.0f) * swizle(xrenderer->light.u_light_diffuse);
       //light attenuation
-      float d = glm::abs(uraydir.z);
+      float d = glm::abs(uniform->raydir.z);
       glm::vec3 D = glm::vec3(1.0, d, d * d);
       color *= glm::pow(eff, xrenderer->light.u_light_spot_eff) / glm::dot(swizle(xrenderer->light.u_light_att), D);
       // add to previous lightmap
@@ -43,12 +38,12 @@ bool isBlack(glm::vec3 color) {
 }
 
 void setUniforms(glm::vec3 begin, glm::vec3 end, long ignore1, long ignore2, long testID) {
-    ubegin = begin;
-    uend = end;
-    uignore1 = ignore1;
-    uignore2 = ignore2;
-    uraydir = end - begin;
-    utestID = testID;
+    uniform->begin = begin;
+    uniform->end = end;
+    uniform->ignore1 = ignore1;
+    uniform->ignore2 = ignore2;
+    uniform->raydir = end - begin;
+    uniform->testID = testID;
 }
 
 
@@ -79,8 +74,8 @@ bool TestAABBAABB(AABB* a, AABB* b) {
 int TestSegmentAABB(AABB* b) {
     glm::vec3 c = (b->min + b->max) * 0.5f; // Box center-point
     glm::vec3 e = b->max - c; // Box halflength extents
-    glm::vec3 m = (ubegin + uend) * 0.5f; // Segment midpoint
-    glm::vec3 d = uend - m; // Segment halflength vector
+    glm::vec3 m = (uniform->begin + uniform->end) * 0.5f; // Segment midpoint
+    glm::vec3 d = uniform->end - m; // Segment halflength vector
     m = m - c; // Translate box and segment to origin
     // Try world coordinate axes as separating axes
     float adx = fabsf(d.x);

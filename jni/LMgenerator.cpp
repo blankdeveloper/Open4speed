@@ -123,11 +123,11 @@ void seed(int x, int y, int lm, int value) {
  */
 void glRender() {
     xrenderer->prepareLM(trackdata->getLMCount());
-    for (int i = 0; i < trackdata->edgesCount; i++) {
+    for (int lightGroup = 0; lightGroup < trackdata->edgesCount; lightGroup++) {
 
         /// get light parameters
         char param[128];
-        sprintf(param, "LIGHT%d", i);
+        sprintf(param, "LIGHT%d", lightGroup);
         std::vector<char*> *lights = getListEx(param, "lights.ini");
         char* shadername = getConfigStr("shader", lights);
 
@@ -141,12 +141,12 @@ void glRender() {
             xrenderer->light.u_near = getConfig("near", lights);
 
             /// apply all lights
-            for (unsigned int x = 0; x < trackdata->edges[i].size() / 2; x++) {
-                edge e = trackdata->edges[i][x];
+            for (unsigned int x = 0; x < trackdata->edges[lightGroup].size() / 2; x++) {
+                edge e = trackdata->edges[lightGroup][x];
                 xrenderer->light.u_light = glm::vec4(e.bx, e.by, e.bz, 1);
                 xrenderer->light.u_light_dir = glm::vec4(e.bx - e.ax, e.by - e.ay, e.bz - e.az, 0);
                 xrenderer->renderLM(lightShader, true);
-                printf("%d/%d\n", i, x);
+                printf("%d/%d\n", lightGroup, x);
             }
         }
         delete shadername;
@@ -364,31 +364,65 @@ void display(void) {
             /// render lightmaps
             printf("Rendering lightmaps...");
             startTimer();
-            xrenderer->light.u_light = glm::vec4(100, 100, 100, 1);
-            xrenderer->light.u_light_dir = glm::vec4(0, -1, 0, 0);
-            xrenderer->light.u_light_diffuse = glm::vec4(400, 400, 200, 0);
-            xrenderer->light.u_light_cut = cos(90 * 3.14 / 180.0);
-            xrenderer->light.u_light_spot_eff = 0.5;
-            xrenderer->light.u_light_att = glm::vec4(0.01, 0.02, 0.03, 0);
             long testID = 0;
             clearLMs();
-            glm::vec3 begin = swizle(xrenderer->light.u_light);
-            for (unsigned long i = 0; i < triangles.size(); i++) {
-                for (unsigned int j = 0; j < triangles[i]->points.size(); j++) {
-                    setUniforms(begin, triangles[i]->points[j].v, triangles[i]->tIndex, triangles[i]->tIndex, testID++);
-                    int index = triangles[i]->points[j].t.y * rttsize + triangles[i]->points[j].t.x;
-                    pixels[triangles[i]->lmIndex][index * 4 + 3] = 255;
-                    glm::vec3 color = getColor(triangles[i]->points[j]);
-                    if (!isBlack(color)) {
-                        if (!root->isIntersected()) {
-                            pixels[triangles[i]->lmIndex][index * 4 + 0] = (int)(color.x * 255.0f);
-                            pixels[triangles[i]->lmIndex][index * 4 + 1] = (int)(color.y * 255.0f);
-                            pixels[triangles[i]->lmIndex][index * 4 + 2] = (int)(color.z * 255.0f);
+            int count = 0;
+            for (int lightGroup = 0; lightGroup < trackdata->edgesCount; lightGroup++) {
+                /// get light parameters
+                char param[128];
+                sprintf(param, "LIGHT%d", lightGroup);
+                std::vector<char*> *lights = getListEx(param, "lights.ini");
+                char* shadername = getConfigStr("shader", lights);
+                /// light is enabled and it is not able to dynamicly disable it
+                if (strlen(shadername) > 0) {
+                    count+=trackdata->edges[lightGroup].size() / 2;
+                }
+                delete shadername;
+            }
+            float status = 0;
+            for (int lightGroup = 0; lightGroup < trackdata->edgesCount; lightGroup++) {
+                /// get light parameters
+                char param[128];
+                sprintf(param, "LIGHT%d", lightGroup);
+                std::vector<char*> *lights = getListEx(param, "lights.ini");
+                char* shadername = getConfigStr("shader", lights);
+                /// light is enabled and it is not able to dynamicly disable it
+                if (strlen(shadername) > 0) {
+                    xrenderer->light.u_light_diffuse = glm::vec4(getConfig("R", lights), getConfig("G", lights), getConfig("B", lights), 0);
+                    xrenderer->light.u_light_cut = cos(getConfig("cut", lights) * 3.14 / 180.0);
+                    xrenderer->light.u_light_spot_eff = getConfig("spot", lights);
+                    xrenderer->light.u_light_att = glm::vec4(getConfig("att0", lights), getConfig("att1", lights), getConfig("att2", lights), 0);
+                    xrenderer->light.u_near = getConfig("near", lights);
+
+                    /// apply all lights
+                    for (unsigned int x = 0; x < trackdata->edges[lightGroup].size() / 2; x++) {
+                        edge e = trackdata->edges[lightGroup][x];
+                        xrenderer->light.u_light = glm::vec4(e.ax, e.ay, e.az, 1);
+                        xrenderer->light.u_light_dir = glm::vec4(e.bx - e.ax, e.by - e.ay, e.bz - e.az, 0);
+                        /// create ray and raycast
+                        glm::vec3 begin = swizle(xrenderer->light.u_light);
+                        for (unsigned long i = 0; i < triangles.size(); i++) {
+                            for (unsigned int j = 0; j < triangles[i]->points.size(); j++) {
+                                setUniforms(begin, triangles[i]->points[j].v, triangles[i]->tIndex, triangles[i]->tIndex, testID++);
+                                int index = triangles[i]->points[j].t.y * rttsize + triangles[i]->points[j].t.x;
+                                pixels[triangles[i]->lmIndex][index * 4 + 3] = 255;
+                                glm::vec3 color = getColor(triangles[i]->points[j]);
+                                if (!isBlack(color)) {
+                                    if (!root->isIntersected()) {
+                                        pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 255.0f));
+                                        pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 255.0f));
+                                        pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 255.0f));
+                                    }
+                                }
+                            }
+                            float percent = status + 100 * i / (float)triangles.size() / (float)count;
+                            printf("\rRendering lightmaps...%0.3f%% done", percent);
+                            fflush(stdout);
                         }
+                        status += 100 / (float)count;
                     }
                 }
-                printf("\rRendering lightmaps...%0.2f%% done", 100 * i / (float)triangles.size());
-                fflush(stdout);
+                delete shadername;
             }
             printf("\r                                     ");
             printf("\rRendering lightmaps...");

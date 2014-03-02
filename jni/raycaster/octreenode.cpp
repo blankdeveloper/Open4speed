@@ -163,19 +163,19 @@ AABB* octreenode::getSubregion(bool x, bool y, bool z) {
 bool octreenode::isIntersected() {
 
     /// cached data test
-    if (utestID != lastTestID) {
-        lastTestID = utestID;
+    if (uniform->testID != lastTestID) {
+        lastTestID = uniform->testID;
         AABBTests = 0;
         triangleTests = 0;
         if (lastIntersectedTriangle != 0) {
-            if ((lastIntersectedTriangle->tIndex != uignore1) && (lastIntersectedTriangle->tIndex != uignore2)) {
+            if ((lastIntersectedTriangle->tIndex != uniform->ignore1) && (lastIntersectedTriangle->tIndex != uniform->ignore2)) {
                 triangleTests++;
                 if (lastIntersectedTriangle->isIntersectedByRay())
                     return true;
             }
         }
         if (lastIntersectedTriangle2 != 0) {
-            if ((lastIntersectedTriangle2->tIndex != uignore1) && (lastIntersectedTriangle2->tIndex != uignore2)) {
+            if ((lastIntersectedTriangle2->tIndex != uniform->ignore1) && (lastIntersectedTriangle2->tIndex != uniform->ignore2)) {
                 triangle* t = lastIntersectedTriangle;
                 lastIntersectedTriangle = lastIntersectedTriangle2;
                 lastIntersectedTriangle2 = t;
@@ -188,7 +188,7 @@ bool octreenode::isIntersected() {
 
     /// current node test
     for (unsigned int i = 0; i < list.size(); i++) {
-        if ((list[i]->tIndex != uignore1) && (list[i]->tIndex != uignore2)) {
+        if ((list[i]->tIndex != uniform->ignore1) && (list[i]->tIndex != uniform->ignore2)) {
             triangleTests++;
             if (list[i]->isIntersectedByRay())
                 return true;

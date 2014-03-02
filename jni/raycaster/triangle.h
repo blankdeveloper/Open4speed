@@ -1,15 +1,7 @@
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
 
-#include <glm/glm.hpp>
-#include "interfaces/model.h"
-
-struct Point {
-    glm::vec3 v;
-    glm::ivec2 t;
-    glm::vec3 n;
-    glm::vec2 c;
-};
+#include "raycaster/utils.h"
 
 class triangle
 {

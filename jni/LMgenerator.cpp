@@ -364,19 +364,27 @@ void display(void) {
             /// render lightmaps
             printf("Rendering lightmaps...");
             startTimer();
-            //glm::vec3 light = glm::vec3(-4.698295, 6.139812, 347.63123);
-            glm::vec3 light = glm::vec3(100, 100, 100);
+            xrenderer->light.u_light = glm::vec4(100, 100, 100, 1);
+            xrenderer->light.u_light_dir = glm::vec4(0, -1, 0, 0);
+            xrenderer->light.u_light_diffuse = glm::vec4(400, 400, 200, 0);
+            xrenderer->light.u_light_cut = cos(90 * 3.14 / 180.0);
+            xrenderer->light.u_light_spot_eff = 0.5;
+            xrenderer->light.u_light_att = glm::vec4(0.01, 0.02, 0.03, 0);
             long testID = 0;
             clearLMs();
+            glm::vec3 begin = swizle(xrenderer->light.u_light);
             for (unsigned long i = 0; i < triangles.size(); i++) {
                 for (unsigned int j = 0; j < triangles[i]->points.size(); j++) {
-                    setUniforms(light, triangles[i]->points[j].v, triangles[i]->tIndex, triangles[i]->tIndex, testID++);
+                    setUniforms(begin, triangles[i]->points[j].v, triangles[i]->tIndex, triangles[i]->tIndex, testID++);
                     int index = triangles[i]->points[j].t.y * rttsize + triangles[i]->points[j].t.x;
                     pixels[triangles[i]->lmIndex][index * 4 + 3] = 255;
-                    if (!root->isIntersected()) {
-                        pixels[triangles[i]->lmIndex][index * 4 + 0] = 255;
-                        pixels[triangles[i]->lmIndex][index * 4 + 1] = 255;
-                        pixels[triangles[i]->lmIndex][index * 4 + 2] = 255;
+                    glm::vec3 color = getColor(triangles[i]->points[j]);
+                    if (!isBlack(color)) {
+                        if (!root->isIntersected()) {
+                            pixels[triangles[i]->lmIndex][index * 4 + 0] = (int)(color.x * 255.0f);
+                            pixels[triangles[i]->lmIndex][index * 4 + 1] = (int)(color.y * 255.0f);
+                            pixels[triangles[i]->lmIndex][index * 4 + 2] = (int)(color.z * 255.0f);
+                        }
                     }
                 }
                 printf("\rRendering lightmaps...%0.2f%% done", 100 * i / (float)triangles.size());

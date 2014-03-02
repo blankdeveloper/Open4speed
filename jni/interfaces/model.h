@@ -58,6 +58,7 @@ struct model3d {
     float* normals;     ///< Object normals
     float* coords;      ///< Object texture coordinates
     float* tid;         ///< Object lightmap coordinates
+    float* tuv;         ///< Object triangle coordinates
     float x,y,z;        ///< Object translation
     vbo* vboData;       ///< VBO of model
 };

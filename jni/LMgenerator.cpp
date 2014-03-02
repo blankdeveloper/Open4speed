@@ -2,7 +2,7 @@
 /**
  * \file       open4speed.cpp
  * \author     Vonasek Lubos
- * \date       2014/02/23
+ * \date       2014/03/02
  * \brief      Runable code of project.
 */
 //----------------------------------------------------------------------------------------
@@ -288,6 +288,8 @@ void display(void) {
             long index = 0;
             for (unsigned int i = 0; i < trackdata->models.size(); i++) {
                 float* vertices = trackdata->models[i].vertices;
+                float* normals = trackdata->models[i].normals;
+                float* coords = trackdata->models[i].coords;
                 float* tid = trackdata->models[i].tid;
                 int triangleCount = trackdata->models[i].triangleCount[trackdata->cutX * trackdata->cutY];
                 float x = trackdata->models[i].reg->min.x;
@@ -301,6 +303,12 @@ void display(void) {
                           glm::vec2(tid[j * 6 + 0], tid[j * 6 + 1]),
                           glm::vec2(tid[j * 6 + 2], tid[j * 6 + 3]),
                           glm::vec2(tid[j * 6 + 4], tid[j * 6 + 5]),
+                          glm::vec3(normals[j * 9 + 0], normals[j * 9 + 1], normals[j * 9 + 2]),
+                          glm::vec3(normals[j * 9 + 3], normals[j * 9 + 4], normals[j * 9 + 5]),
+                          glm::vec3(normals[j * 9 + 6], normals[j * 9 + 7], normals[j * 9 + 8]),
+                          glm::vec2(coords[j * 6 + 0], coords[j * 6 + 1]),
+                          glm::vec2(coords[j * 6 + 2], coords[j * 6 + 3]),
+                          glm::vec2(coords[j * 6 + 4], coords[j * 6 + 5]),
                           trackdata->models[i].lmIndex, index++));
                 }
             }

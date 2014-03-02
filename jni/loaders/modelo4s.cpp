@@ -143,6 +143,8 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
         m->normals = new float[m->triangleCount[cutX * cutY] * 3 * 3];
         m->coords = new float[m->triangleCount[cutX * cutY] * 3 * 2];
         m->tid = new float[m->triangleCount[cutX * cutY] * 3 * 2];
+        if (renderLightmap)
+            m->tuv = new float[m->triangleCount[cutX * cutY] * 3 * 2];
         for (int j = 0; j < m->triangleCount[cutX * cutY]; j++) {
             for (int k = 0; k < 6; k++) {
                 m->tid[j * 6 + 0 + k] = 4095 / 4096.0;
@@ -223,14 +225,12 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
                     m->tid[j * 6 + b + 1] = y / 256.0;
                 }
                 if (renderLightmap) {
-                    m->coords[j * 6 + 0] = 0;
-                    m->coords[j * 6 + 1] = 0;
-
-                    m->coords[j * 6 + 2] = 1;
-                    m->coords[j * 6 + 3] = 0;
-
-                    m->coords[j * 6 + 4] = 0;
-                    m->coords[j * 6 + 5] = 1;
+                    m->tuv[j * 6 + 0] = 0;
+                    m->tuv[j * 6 + 1] = 0;
+                    m->tuv[j * 6 + 2] = 1;
+                    m->tuv[j * 6 + 3] = 0;
+                    m->tuv[j * 6 + 4] = 0;
+                    m->tuv[j * 6 + 5] = 1;
                 }
 
             } else {
@@ -249,7 +249,10 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
 
         /// store model in VBO
         int size = sizeof(float)*m->triangleCount[cutX * cutY] * 3;
-        m->vboData = getVBO(size, m->vertices, m->normals, m->coords, m->tid);
+        if (renderLightmap)
+            m->vboData = getVBO(size, m->vertices, m->normals, m->tuv, m->tid);
+        else
+            m->vboData = getVBO(size, m->vertices, m->normals, m->coords, m->tid);
         models.push_back(*m);
     }
 

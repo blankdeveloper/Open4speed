@@ -143,8 +143,8 @@ float antialiasing = 0.5f;      ///< antialiasing level
 bool active;                    ///< Information if scene is active
 int currentTrack;               ///< Current track index
 int opponentCount;              ///< Opponent count
-model *trackdata;               ///< Track first model
-model *trackdata2;              ///< Track second model
+model *trackdata = 0;           ///< Track first model
+model *trackdata2 = 0;          ///< Track second model
 model *skydome;                 ///< Skydome model
 car *allCar[carLimit];          ///< All cars in scene instances
 int carCount = 0;               ///< Amount of cars in scene

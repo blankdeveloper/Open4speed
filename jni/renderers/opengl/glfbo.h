@@ -20,6 +20,7 @@ public:
     GLuint* rendertexture2;       ///< Texture for depth buffer
     GLuint* rboID;                ///< Render buffer object id
     GLuint* fboID;                ///< Frame buffer object id
+    texture* rtt;                 ///< Texture for color buffer loaded from file
     bool depth, rb;               ///< Info about buffers usage
 
     /**
@@ -31,7 +32,7 @@ public:
      * @brief glfbo creates framebuffer from raster data
      * @param texture is texture raster instance
      */
-    glfbo(Texture texture);
+    glfbo(texture *texture);
 
     /**
      * @brief constructor init framebuffer and renderbuffer

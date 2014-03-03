@@ -29,11 +29,11 @@
  * @brief getFBO creates framebuffer from raster data
  * @param texture is texture raster instance
  */
-fbo* getFBO(Texture *texture) {
+fbo* getFBO(texture *texture) {
 
     /// create VBO
     if (strcmp(screenRenderer, "glsl") == 0) {
-        fbo* instance = new glfbo(*texture);
+        fbo* instance = new glfbo(texture);
         return instance;
     }
     loge("Renderer incompatible FBO", "");

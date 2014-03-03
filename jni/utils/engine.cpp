@@ -431,10 +431,16 @@ void displayScene() {
 void loadScene(std::vector<char*> *atributes) {
 
     /// clear previous scene
-    for (int i = 0; i < carCount; i++)
-        delete allCar[i];
-    delete trackdata;
-    delete skydome;
+    if (trackdata != 0) {
+        while(!trackdata->lightmaps.empty()) {
+            trackdata->lightmaps[0]->destroy();
+            trackdata->lightmaps.erase(trackdata->lightmaps.begin());
+        }
+        for (int i = 0; i < carCount; i++)
+            delete allCar[i];
+        delete trackdata;
+        delete skydome;
+    }
     if (trackdata2 != 0)
         delete trackdata2;
     trackdata2 = 0;
@@ -495,7 +501,7 @@ void loadScene(std::vector<char*> *atributes) {
         for (int i = 0; i < trackdata->getLMCount(); i++) {
             char filename[256];
             sprintf(filename, getConfigStr("lightmap", atributes), i);
-            trackdata->lightmaps.push_back(getFBO(loadPNG(filename)));
+            trackdata->lightmaps.push_back(getFBO(getTexture(filename, 1.0)));
         }
         if (strlen(getConfigStr("dynamicLight", atributes)) > 0 )
             trackdata->dynamicLight = new DynamicLight(getConfigStr("dynamicLight", atributes));

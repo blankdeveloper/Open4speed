@@ -26,13 +26,13 @@ glfbo::glfbo() {
  * @brief glfbo creates framebuffer from raster data
  * @param texture is texture raster instance
  */
-glfbo::glfbo(Texture texture) {
+glfbo::glfbo(texture *texture) {
 
         //find ideal texture resolution
         res = 2;
-        res = max(texture.width, texture.height);
-        width = texture.width;
-        height = texture.height;
+        res = max(texture->twidth, texture->twidth);
+        width = texture->twidth;
+        height = texture->twidth;
 
         //create frame buffer
         fboID = new GLuint[1];
@@ -42,17 +42,10 @@ glfbo::glfbo(Texture texture) {
         depth = false;
         rb = false;
 
+        rtt = texture;
+        rendertexture[0] = rtt->textureID;
         glGenFramebuffers(1, fboID);
         glBindFramebuffer(GL_FRAMEBUFFER, fboID[0]);
-        glGenTextures(1, rendertexture);
-        glBindTexture(GL_TEXTURE_2D, rendertexture[0]);
-        glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-        glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-        if (texture.hasAlpha) {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture.width, texture.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture.data);
-        } else {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture.width, texture.height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture.data);
-        }
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rendertexture[0], 0);
 
         if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
@@ -155,7 +148,9 @@ void glfbo::clear(bool colors) {
  * @brief destroy removes all data from memory
  */
 void glfbo::destroy() {
-    glDeleteTextures(1, rendertexture);
+    if (!depth && !rb) {
+        rtt->pointerDecrease();
+    }
     if (depth) {
         glDeleteTextures(1, rendertexture2);
     }

@@ -25,7 +25,7 @@
  * @brief getFBO creates framebuffer from raster data
  * @param texture is texture raster instance
  */
-fbo* getFBO(Texture *texture);
+fbo* getFBO(texture *texture);
 
 /**
  * @brief getInput gets input controller

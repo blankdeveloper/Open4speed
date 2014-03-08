@@ -319,29 +319,21 @@ Očekávají se cca 1 -- 2 odstavce, maximálně půl stránky.
 % atd...
 
 %*****************************************************************************
-\chapter{Zadání}
-Prostudujte metody efektivního zobrazování rozsáhlých scén se zaměřením na low-end mobilní zařízení. Soustřeďte se na metody využívající předpočtenou informaci o osvětlení ve formě map osvětlení (light map). Navrhněte metodu pro aktualizaci map osvětlení pro dynamické scény s omezeným počtem měnících se světel. Konkrétní testovací scénou bude model nočního města s několika pohybujícími se vozidly a několika zhasínajícími lampami pouličního osvětlení. Navrženou metodu implementujte v jazyce C++ s využitím OpenGL. Výsledky implementace otestujte a zhodnoťte její paměťovou a výpočetní efektivitu.. 
+\chapter{Úvod}
+TODO napsat úvod
 
 
 %*****************************************************************************
-\chapter{Specifikace cílů}
-Samotnou realizaci projektu lze rozdělit do dvou dílčích částí. První částí je předzpracování, ve kterém se vytváří mapy osvětlení. To znamená vytvoření koordinát map a vykreslení hodnot do lightmap. Druhou částí je samotný simulátor, který s těmito předzpracovanými hodnotami pracuje.
+\chapter{Cíle práce}
+Samotnou realizaci projektu lze rozdělit do dvou dílčích částí. První částí je předzpracování, ve kterém se vytváří mapy osvětlení. To znamená vytvoření koordinát map a vykreslení hodnot do map osvětlení. Druhou částí je samotný simulátor, který s těmito předzpracovanými hodnotami pracuje.
 
-\section{Předzpracování}
-Ve fázi předzpracování se provede konverze 3D modelů do vlastního formátu, který bude umožňovat mít v sobě jak souřadnice standardních textur, tak i souřadnice v lightmapách. Formát by neměl zahazovat informace o modelu. I když je třeba výsledný simulátor nevyužije, je dobré tyto informace ponechat pro případ dalšího vývoje. Formát by měl být schopen uložit některé další informace o materiálu a shaderu.
-
-Souřadnice lightmap je nutné co nejvíce nahustit z důvodu očekávané malé paměti vymezeny pro velké textury. Aby bylo možné určit nejvhodnější rozlišení těchto textur, je třeba umožnit jejich škálování.
-
-Vykreslení hodnot do lightmap se provede pomocí OpenGL, bude zde řešena viditelnost(pomocí stínových map), vypočteno utlumení a výpočet difuzního odrazu světla.
-
-\section{Simulátor}
-Simulátor bude navržen tak, aby fungoval na X11-Linuxu a Androidu. Znamená to výběr multiplatformních knihoven nebo ve výjimečných případech rozdílná implementace pro jednotlivé platformy. K vykreslování jsem vybral OpenGLES 2.0(jedná se o odlehčené OpenGL 3.0) a GLSL verze 1.0(to zaručí maximální možnou kompatibilitu).
-
-Fyzika bude realizována pomocí Bullet Physics(tento engine používá mnoho známých firem zabývajících se vývojem mobilních her). Zvuk bude realizován na mobilních zařízeních pomocí Android API a na Linuxu pomocí knihovny FMOD API. Správce oken je na Androidu třeba doprogramovat, aby fungovalo dotykové ovládání a pozastavení simulátoru(např při hovoru). Na Linuxu bude použitý freeglut.
+TODO:vysvělit problematiku lightmap
 
 \section{Existující implementace}
 
-\subsection{Asphalt Urban od Gameloftu}
+TODO:přidat implementace na PC, popsat proč je vhodné brát ohled na implementace pro Android
+
+\subsubsection{Asphalt Urban od Gameloftu}
 \begin{wrapfigure}{l}{-0.5\linewidth}
   \includegraphics[width=50mm]{figures/games/a7.png}
   \caption{Asphalt 7}
@@ -355,10 +347,10 @@ Na obrázku 2.1 můžete vidět 7.díl simulátoru. Osvětlení z pouličních l
   \includegraphics[width=50mm]{figures/games/a8.png}
   \caption{Asphalt 8}
 \end{wrapfigure}
-Další díl ze série Asphalt Urban už odlesky řeší lépe. Odráží se hlavně světla a odlesk je lépe přizpůsoben povrchu. Vzniká zde dojem mokré silnice. Dochází i k rozmazání brzdových světel, od kol cáká voda. Osvětlení od lamp je opět řešeno texturou. Nepříjemnou změnou je absence reflektoru vozidla a přidání rušivého chvění kamery během jízdy.
+Další díl ze série Asphalt Urban už odlesky řeší lépe. Odráží se hlavně světla a odlesk je lépe přizpůsoben povrchu. Vzniká zde dojem mokré silnice. Dochází i k rozmazání brzdových světel. Osvětlení od lamp je opět řešeno texturou. Nepříjemnou změnou je absence reflektoru vozidla a přidání rušivého chvění kamery během jízdy.
 \\ \\ \\ \\ \\
 
-\subsection{Need for Speed Most Wanted od EA Games a Firemonkeys}
+\subsubsection{Need for Speed Most Wanted od EA Games a Firemonkeys}
 \begin{wrapfigure}{l}{-0.5\linewidth}
   \includegraphics[width=50mm]{figures/games/nfs.png}
   \caption{Need for Speed Most Wanted mobilní verze Zdroj:www.androidpolice.com}
@@ -368,17 +360,17 @@ Simulátor, který je spíše známý z PC, na mobilním trhu takový úspěch n
 Oproti Asphalt 8 má navíc efekt Depth-of-field, to znamená, že vzdálené modely jsou rozmazané a zabarveny\linebreak do barvy pozadí. Tento efekt vytváří přijemný mlhovitý efekt. Jinak bych řekl, že tyto dva simulátory jsou si sobě velice podobné. Na stejném enginu funguje i známý simulátor Real Racing 3, který ale noční jízdu nemá.
 \newpage
 
-\subsection{GT Racing 2 od Gameloftu}
+\subsubsection{GT Racing 2 od Gameloftu}
 \begin{wrapfigure}{l}{-0.5\linewidth}
   \includegraphics[width=50mm]{figures/games/gt2.png}
   \caption{GT Racing 2 Zdroj:www.youtube.com}
 \end{wrapfigure}
-Mým oblíbeným závodním simulátorem je v současné době GT Racing 2, je to hlavně díky jeho zpracováním a tím, že je zdarma. Jako jediný z uvedených simulátorů má při noční jízdě nízké ambientní osvětlení a scéna je osvětlena hlavně reflektorem vozidla.
+Úspěšným závodním simulátorem je v současné době GT Racing 2, je to hlavně díky jeho zpracování. Jako jediný\linebreak z uvedených simulátorů má při noční jízdě nízké ambientní osvětlení a scéna je osvětlena hlavně reflektorem vozidla.
 
-Nejsem si jist, jestli osvětlení lampami je vykresleno přímo do textury nebo jestli jsou zde použity lightmapy. Řekl bych, že se jedná o lightmapy.
+Nejsem si jist, zda osvětlení lampami je přímo součástí textur modelů nebo jestli jsou zde použity mapy osvětlení.
 \\ \\ \\
 
-\subsection{Sports Car Challenge od Fishlabs}
+\subsubsection{Sports Car Challenge od Fishlabs}
 \begin{wrapfigure}{l}{-0.5\linewidth}
   \includegraphics[width=50mm]{figures/games/scc.png}
   \caption{Sports Car Challenge}
@@ -388,28 +380,32 @@ Asi nejdetailnější model vozidla má právě Sports Car Challenge. Vývojář
 Projekt trpí slabší kompatibilitou s mobilními zařízeními, i když náročnost enginu je nízká. Co se týká noční jízdy, je realizována stejnými technikami jako denní jízda. Jsou zde použity pouze tmavé textury a halo efekt pouličních lamp.
 \\ \\
 
-\subsection{Track Racing od vývojáře Soulkey}
+\subsubsection{Track Racing od vývojáře Soulkey}
 \begin{wrapfigure}{l}{-0.5\linewidth}
   \includegraphics[width=50mm]{figures/games/tm.png}
   \caption{Track Racing}
 \end{wrapfigure}
 I když tento projekt není závodní simulátor s noční jízdou, zmiňuji ho hlavně kvůli ovládání. Jedná se o neoficiální remake hry Trackmania známé z PC. Projekt běží na Unity3D enginu a je dostupný na mnoha platformách, ale nedá se stáhnout přímo z Marketu či Storu.
 
-U výše uvedených simulátorů vozidlo automaticky zrychluje a u některých i samo brzdí. Hráč nemá tedy nad vozidlem takovou kontrolu. V případě Track Racing má hráč plnou kontrolu a zážitek ze hry se dá srovnat se zážitkem z PC hry.
+U výše uvedených simulátorů vozidlo automaticky zrychluje a u některých i samo brzdí. Hráč nemá tedy nad vozidlem takovou kontrolu. V případě Track Racing má hráč plnou kontrolu a zážitek ze hry se dá srovnat se zážitkem\linebreak z PC hry.
 %*****************************************************************************
 \chapter{Rešerše}
 
-\section{Předvypočítané osvětlení}
-Předvypočítané osvětlení je z hlediska vykreslování velice jednoduchá technika. Pouze se aplikuje další textura či textury, které mají vlastní texturovací souřadnice a nesou\linebreak v sobě informaci o osvětlení jednotlivých trojúhelníků. Těmto texturám se říká lightmapy a s drobným nadhledem by se dalo říct, že se jedná o techniku, která rozšiřuje techniku předvypočítaných stínů.
+TODO: výpočet osvětlení, suma světel, blending textur, spekulární složka
 
-Z hlediska generování těchto textur je tato technika náročnější, skládá se z několika kroků. V prvním kroku je třeba vytvořit texturovací souřadnice pro jednotlivé trojúhelníky.
+\section{Předvypočítané osvětlení}
+Předvypočítané osvětlení je z hlediska vykreslování poměrně jednoduchá technika. Pouze se aplikuje další textura či textury, které mají vlastní texturovací souřadnice a nesou\linebreak v sobě informaci o osvětlení jednotlivých trojúhelníků. Těmto texturám se říká mapy osvětlení a dalo by se říct, že se jedná o techniku, která rozšiřuje techniku předvypočítaných stínů.
+
+Z hlediska generování těchto textur je tato technika náročnější než výsledné vykreslování, skládá se z několika kroků. V prvním kroku je třeba vytvořit texturovací souřadnice pro jednotlivé trojúhelníky.
 
 \subsection{Vytvoření texturovacích souřadnic}
-Jeden z velmi efektivních algoritmů řešící tuto problematiku je Packing Lightmaps \cite{Scott02}. Za využití datové struktury kD stromu, která u tohoto algoritmu reprezentuje rozložení geometrie v lightmapě, je možné řešit rozložení pro obdélníky. Aby bylo možné pracovat\linebreak s trojúhelníky, je nutné algoritmus rozšířit.
+TODO: přepsat
+Jeden z velmi efektivních algoritmů řešící problematiku vytváření texturovacích souřadnic je Packing Lightmaps \cite{Scott02}. Za využití datové struktury kD stromu, která u tohoto algoritmu reprezentuje rozložení geometrie v mapě osvětlení, je možné řešit rozložení pro obdélníky. Aby bylo možné pracovat s trojúhelníky, je nutné algoritmus rozšířit.
 
 Práci s trojúhelníky lze realizovat tak, že vždy dva trojúhelníky spolu vytvoří jeden obdélník. Nejdříve se provede drobná deformace tak, aby všechny trojúhelníky byly pravoúhlé(je nutné hlídat, aby se nesnižoval počet texelů připadající na daný trojúhelník). Poté už stačí trojúhelníky vhodně spárovat(vytvořit z nich obdélníky) a je možné spustit původní algoritmus.
 
 Jak je kD strom použit je vidět na následujícím obrázku. V uzlech jsou provedeny řezy, kterými se rozděluje rovina, v listech jsou pak jednotlivé objekty.
+TODO: popis algoritmu
 
 \begin{center}
 \begin{figure}[h!]
@@ -420,14 +416,14 @@ Jak je kD strom použit je vidět na následujícím obrázku. V uzlech jsou pro
 \end{center}
 \newpage
 
-\subsection{Generování lightmap}
-Generování lightmap lze provádět pomocí rasterizace nebo vrhání paprsku. Vrhání paprsku je v porovnání s rasterizací daleko složitější metoda. V rámci předmětu softwarový projekt se zabývám pouze rasterizací.
+\subsection{Generování map osvětlení}
+Generování map osvětlení lze provádět pomocí rasterizace nebo vrhání paprsku. Vrhání paprsku je v porovnání s rasterizací daleko složitější metoda. V rámci předmětu softwarový projekt se zabývám pouze rasterizací.
 
-Generování se provádí pomocí standardního rasterizačního řetezce. Geometrie se netransformuje do souřadnic kamery, ale do souřadnic lightmapy. Otexturovanou geometrii do souřadnic lightmapy můžete vidět na obrázku 3.2.
+Generování se provádí pomocí standardního rasterizačního řetezce. Geometrie se netransformuje do souřadnic kamery, ale do souřadnic map osvětlení. Otexturovanou geometrii do souřadnic mapy osvětlení můžete vidět na obrázku 3.2.
 \begin{center}
 \begin{figure}[h!]
 \includegraphics[width=70mm]{figures/LM-vse.png}
-\caption{Model města transformován do souřadnic lightmapy}
+\caption{Model města transformován do souřadnic mapy osvětlení}
 \end{figure}
 \end{center}
 \newpage
@@ -436,15 +432,14 @@ Dále je potřeba vyfiltrovat objekty, které nejsou viditelné. K tomu slouží
 \begin{center}
 \begin{figure}[h!]
 \includegraphics[width=100mm]{figures/shadowmapping.png}
-\caption{Princip stínových map}
-\floatfoot{Zdroj: \cite{Masserann11}}
+\caption{Princip stínových map. Zdroj: \cite{Masserann11}}
 \end{figure}
 \end{center}
 
-Tímto způsobem vyfiltrujeme neosvětlené objekty. Výsledek lze vylepšit využitím dalších technik jako je například útlum světla, PCF filtrování a další.
+Tímto způsobem vyfiltrujeme neosvětlené objekty. Výsledek lze vylepšit využitím dalších technik jako je například útlum světla, PCF filtrování a další. TODO: akumulace více světel, přepsat
 
 \subsection{Oprava chyby sousedících trojúhelníků}
-Pokud bychom použili přímo souřadnice získané metodou Packing Lightmaps, vznikly by ve výsledné scéně chyby(buď v důsledku zaokrouhlování souřadnic nebo v případě lineárního filtrování vlivem sousedních texelů). Je proto nutné už při generování lightmap souřadnice posunout nepatrně směrem ke středu každého trojúhelníku. Po dokončení generování lightmap se provede postprocesing, který doplní mezery v lightmapách vždy nejbližší možnou hodnotou.
+Pokud bychom použili přímo souřadnice získané metodou Packing Lightmaps, vznikly by ve výsledné scéně chyby(buď v důsledku zaokrouhlování souřadnic nebo v případě lineárního filtrování vlivem sousedních texelů). Je proto nutné už při generování map osvětlení souřadnice posunout nepatrně směrem ke středu každého trojúhelníku. Po dokončení generování map osvětlení se provede postprocesing, který doplní mezery v mapách osvětlení vždy nejbližší možnou hodnotou.
 
 
 \section{Odlesky povrchů}
@@ -482,6 +477,19 @@ Odrazy zrcadel v budově se pochopitelně pomocí screen-space nedají řešit. 
 \chapter{Realizace}
 Základním problémem realizace simulátoru na mobilních zařízení je jejich nízký výkon.
 Uživatelé očekávají kvalitu grafiky srovnatelnou s počítačovou grafikou, nicméně mobilní zařízení zatím takového výkonu nedosahují.
+
+\section{Předzpracování}
+Ve fázi předzpracování se provede konverze 3D modelů do vlastního formátu, který bude umožňovat mít v sobě jak souřadnice standardních textur, tak i souřadnice v mapách osvětlení. Formát by měl zachovat veškeré informace o modelu. I když je třeba výsledný simulátor nevyužije, je dobré tyto informace ponechat pro případ dalšího vývoje. Formát by měl být schopen uložit některé další informace o materiálu a shaderu.
+
+Plochu map osvětlení je nutné maximálně zaplnit z důvodu očekávané malé paměti vymezeny pro velké textury. Aby bylo možné určit nejvhodnější rozlišení těchto textur, je třeba umožnit jejich škálování.
+
+Vykreslení hodnot do map osvětlení se provede pomocí OpenGL, bude zde řešena viditelnost (pomocí stínových map), vypočteno utlumení a výpočet difuzního odrazu světla.
+TODO dopsat
+
+\section{Simulátor}
+Simulátor bude navržen tak, aby fungoval na X11-Linuxu a Androidu. Znamená to výběr multiplatformních knihoven nebo ve výjimečných případech rozdílná implementace pro jednotlivé platformy. K vykreslování jsem vybral OpenGLES 2.0 (jedná se o odlehčené OpenGL 3.0) a GLSL verze 1.0 (to zaručí maximální možnou kompatibilitu).
+
+Fyzikální vlastnosti vozidel budou realizovány pomocí enginu Bullet Physics (tento engine používá mnoho známých firem zabývajících se vývojem mobilních her). Zvuk bude realizován na mobilních zařízeních pomocí Android API a na Linuxu pomocí knihovny FMOD API. Správce oken je na Androidu třeba doprogramovat, aby fungovalo dotykové ovládání a pozastavení simulátoru (např při hovoru). Na Linuxu bude použitý freeglut.
 
 \section{Realizace na platformě Android}
 Platforma Android je postavená na Linuxovém jádře a využívá mnohé komponenty\linebreak z projektu GNU, nicméně celé Android API je v jazyku Java. Android využívá svůj Java virtuální stroj Dalwik. Pomocí Android NDK(native development kit) je možné zkompilovat C/C++ kód jako knihovnu, kterou je možné zavolat z jazyku Java. Toto je prováděno pomocí JNI(Java native interface).
@@ -584,15 +592,15 @@ Předvypočítané osvětlení umožňuje velmi rychle zobrazovat stínování a
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=110mm]{figures/lamps.png}
-\caption{Scéna s aplikovanými lightmapami lamp}
+\caption{Scéna s aplikovanými mapami osvětlení lamp}
 \end{center}
 \end{figure}
 
-Pro generování lightmap jsou k dispozici dva druhy světel: bodové světlo a reflektor. Tyto světla jsou definované přímo v 3D modelovacím software. Dosah světel je omezen\linebreak na 300metrů(je to z důvodu chyb, které vznikají u osvětlení na velkou vzdálenost). Světla pochopitelně nepoužívají spekulární složku, protože tato složka je závislá na pohledu kamery a tudíž jí nelze předpočítat.
+Pro generování map osvětlení jsou k dispozici dva druhy světel: bodové světlo a reflektor. Tyto světla jsou definované přímo v 3D modelovacím software. Dosah světel je omezen\linebreak na 300metrů(je to z důvodu chyb, které vznikají u osvětlení na velkou vzdálenost). Světla pochopitelně nepoužívají spekulární složku, protože tato složka je závislá na pohledu kamery a tudíž jí nelze předpočítat.
 
-I maximální možné rozlišení lightmap pro danou scénu není dostatečné a stíny jsou kostičkované. Z tohoto důvodu se používají dva druhy filtrování. Prvním je filtrování PCF, které se provádí přímo při generování lightmapy a druhým je lineární filtrování, které se aplikuje až při aplikování lightmapy. Tato kombinace filtrování značně zvýší výslednou kvalitu stínů.
+I maximální možné rozlišení map osvětlení pro danou scénu není dostatečné a stíny jsou kostičkované. Z tohoto důvodu se používají dva druhy filtrování. Prvním je filtrování PCF, které se provádí přímo při generování mapy osvětlení a druhým je lineární filtrování, které se aplikuje až při aplikování mapy osvětlení. Tato kombinace filtrování značně zvýší výslednou kvalitu stínů.
 
-Dalším problémem je rozsah intenzity osvětlení v lightmapě. Například pouliční lampa na obr.4.4 nedělá očekáváné stíny od stojanu lampy. Tento stín zmizí, protože při připočtení druhého světla se úroveň osvětlení v daných bodech rovná maximální možné hodnotě(dochází zde k ořezu vyšších hodnot).
+Dalším problémem je rozsah intenzity osvětlení v mapě osvětlení. Například pouliční lampa na obr.4.4 nedělá očekáváné stíny od stojanu lampy. Tento stín zmizí, protože při připočtení druhého světla se úroveň osvětlení v daných bodech rovná maximální možné hodnotě(dochází zde k ořezu vyšších hodnot).
 
 \section{Světla vozidel}
 
@@ -645,7 +653,7 @@ V prvním testu zjišťuji, jak je vykreslování rychlé při různém počtu v
 Z výsledku je patrně vidět výkonový rozdíl mezi laptopem proti tabletu a mobilu. Laptop je přibližně 3x až 4x rychlejší, což je menší rozdíl než jsem očekával.
 \\
 
-Dále jsem testoval závislost rozlišení textury lightmapy a rychlosti vykreslování. Naměřené údaje jsou v tabulce 5.3.
+Dále jsem testoval závislost rozlišení textury mapy osvětlení a rychlosti vykreslování. Naměřené údaje jsou v tabulce 5.3.
 
 \begin{table}[h!]
 \begin{center}
@@ -657,7 +665,7 @@ Dále jsem testoval závislost rozlišení textury lightmapy a rychlosti vykresl
 1024x1024 & 46.9ms - 48.6ms & 41.5ms - 45.4ms & 13.1ms - 13.3ms \\ \hline
 2048x2048 & 47.6ms - 59.9ms & 42.1ms - 45.4ms & 15.5ms - 15.9ms \\ \hline
 \end{tabular}
-\caption{Závislost rychlosti vykreslování scény na platformě a rozlišení textur lightmap při vizuálních detailech normal(poměr 0.6x ku nativnímu rozlišení). Z každého měření je uvedená minimální a maximální hodnota}
+\caption{Závislost rychlosti vykreslování scény na platformě a rozlišení textur map osvětlení při vizuálních detailech normal(poměr 0.6x ku nativnímu rozlišení). Z každého měření je uvedená minimální a maximální hodnota}
 \end{center}
 \end{table}
 
@@ -676,7 +684,7 @@ V dalším testu jsem se zaměřil na paměťovou náročnost. Tento test bohuž
 1024x1024 & 29776kB & 56928kB \\ \hline
 2048x2048 & 29776kB & 159328kB \\ \hline
 \end{tabular}
-\caption{Závislost využití paměti na rozlišení textur lightmap. Testováno na Acer TravelMate P253-e (laptop)}
+\caption{Závislost využití paměti na rozlišení textur map osvětlení. Testováno na Acer TravelMate P253-e (laptop)}
 \end{center}
 \end{table}
 \pagebreak
@@ -687,9 +695,9 @@ Nakonec jsem otestoval kompatibilitu s dalšími zařízeními, v testu uspěl t
 \chapter{Závěr}
 Vzniklý simulátor sice není po grafické stránce schopen konkurovat komerčním simulátorům na platformě Android. Nicméně disponuje několika grafickými technikami, které mnoho komerčních simulátorů postrádá. Předzpracované osvětlení dodává scéně lepší vzhled a povedlo se dokonce částečně aplikovat předzpracované osvětlení i na dynamické objekty.
 
-Zadání bylo splněno, pouze poblikávající lampy nebyly realizovány ideálně. Jsou realizovány pomocí střídání více lightmap, což je paměťově zbytečně náročné a není zde možnost nastavení více stavů světla. Práce je poměrně rozsáhlá a nestihl jsem zhasínající světla realizovat efektivněji.
+Zadání bylo splněno, pouze poblikávající lampy nebyly realizovány ideálně. Jsou realizovány pomocí střídání více map osvětlení, což je paměťově zbytečně náročné a není zde možnost nastavení více stavů světla. Práce je poměrně rozsáhlá a nestihl jsem zhasínající světla realizovat efektivněji.
 
-Práci do budoucna hodlám rozšířit o generování lightmap pomocí vrhání paprsku. Výsledek provedený pomocí rasterizace je sice uspokojivý, ale pomocí vrhání paprsku by šly realizovat i plošné zdroje světla a tím by byl výsledný efekt daleko kvalitnější. Aby scéna nebyla příliš tmavá, bylo nutné nastavit poměrně velkou hodnotu pro ambientní složku osvětlovacího modelu.
+Práci do budoucna hodlám rozšířit o generování map osvětlení pomocí vrhání paprsku. Výsledek provedený pomocí rasterizace je sice uspokojivý, ale pomocí vrhání paprsku by šly realizovat i plošné zdroje světla a tím by byl výsledný efekt daleko kvalitnější. Aby scéna nebyla příliš tmavá, bylo nutné nastavit poměrně velkou hodnotu pro ambientní složku osvětlovacího modelu.
 
 %*****************************************************************************
 % Seznam literatury je v samostatnem souboru reference.bib. Ten

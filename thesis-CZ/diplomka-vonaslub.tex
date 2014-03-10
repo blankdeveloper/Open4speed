@@ -324,14 +324,35 @@ TODO napsat úvod
 
 
 %*****************************************************************************
-\chapter{Cíle práce}
+\chapter{Specifikace práce}
 Samotnou realizaci projektu lze rozdělit do dvou dílčích částí. První částí je předzpracování, ve kterém se vytváří mapy osvětlení. To znamená vytvoření koordinát map a vykreslení hodnot do map osvětlení. Druhou částí je samotný simulátor, který s těmito předzpracovanými hodnotami pracuje.
 
+\section{Požadavky na funkčnost}
+
+\section{Cílová platforma Android}
 TODO:vysvělit problematiku lightmap
+
+\section{Implementované grafické techniky}
+
+\subsection{Mapy osvětlení}
+
+\subsection{Dynamické aktualizování map osvětlení}
+
+\subsection{Aplikování statického osvětlení na dynamické objekty}
 
 \section{Existující implementace}
 
+\subsection{Projekty zabývající se vykreslování noční scény}
+
+\subsubsection{Imperfect Shadow Maps for Efficient Computation of Indirect Illumination}
+
+\subsubsection{Procedural City Modeling and Night City Lighting}
+
+\subsubsection{A computational model of afterimages}
+
 TODO:přidat implementace na PC, popsat proč je vhodné brát ohled na implementace pro Android
+
+\subsection{Závodní simulátory s noční scénou pro platformu Android}
 
 \subsubsection{Asphalt Urban od Gameloftu}
 \begin{wrapfigure}{l}{-0.5\linewidth}
@@ -388,10 +409,18 @@ Projekt trpí slabší kompatibilitou s mobilními zařízeními, i když náro�
 I když tento projekt není závodní simulátor s noční jízdou, zmiňuji ho hlavně kvůli ovládání. Jedná se o neoficiální remake hry Trackmania známé z PC. Projekt běží na Unity3D enginu a je dostupný na mnoha platformách, ale nedá se stáhnout přímo z Marketu či Storu.
 
 U výše uvedených simulátorů vozidlo automaticky zrychluje a u některých i samo brzdí. Hráč nemá tedy nad vozidlem takovou kontrolu. V případě Track Racing má hráč plnou kontrolu a zážitek ze hry se dá srovnat se zážitkem\linebreak z PC hry.
+
 %*****************************************************************************
 \chapter{Rešerše}
 
+\section{Osvětlovací model}
 TODO: výpočet osvětlení, suma světel, blending textur, spekulární složka
+
+\subsection{Výpočet osvětlení}
+
+\subsection{Výpočet stínů v reálném čase}
+
+\subsection{Spekulární složka osvětlovací modelu}
 
 \section{Předvypočítané osvětlení}
 Předvypočítané osvětlení je z hlediska vykreslování poměrně jednoduchá technika. Pouze se aplikuje další textura či textury, které mají vlastní texturovací souřadnice a nesou\linebreak v sobě informaci o osvětlení jednotlivých trojúhelníků. Těmto texturám se říká mapy osvětlení a dalo by se říct, že se jedná o techniku, která rozšiřuje techniku předvypočítaných stínů.
@@ -479,6 +508,15 @@ Základním problémem realizace simulátoru na mobilních zařízení je jejich
 Uživatelé očekávají kvalitu grafiky srovnatelnou s počítačovou grafikou, nicméně mobilní zařízení zatím takového výkonu nedosahují.
 
 \section{Předzpracování}
+
+\subsection{Vytváření map osvětlení}
+
+\subsubsection{Generování texturovacích souřadnic pro mapy osvětlení}
+
+\subsubsection{Generování map osvětlení}
+
+\subsection{Příprava dat pro dynamickou aktualizaci map osvětlení}
+
 Ve fázi předzpracování se provede konverze 3D modelů do vlastního formátu, který bude umožňovat mít v sobě jak souřadnice standardních textur, tak i souřadnice v mapách osvětlení. Formát by měl zachovat veškeré informace o modelu. I když je třeba výsledný simulátor nevyužije, je dobré tyto informace ponechat pro případ dalšího vývoje. Formát by měl být schopen uložit některé další informace o materiálu a shaderu.
 
 Plochu map osvětlení je nutné maximálně zaplnit z důvodu očekávané malé paměti vymezeny pro velké textury. Aby bylo možné určit nejvhodnější rozlišení těchto textur, je třeba umožnit jejich škálování.
@@ -496,7 +534,7 @@ Platforma Android je postavená na Linuxovém jádře a využívá mnohé kompon
 
 Snažší by bylo naprogramovat simulátor přímo v Javě, ale tím bych ztratil možnost portovat simulátor na další platformy, které virtuální stroj Dalwik nemají. Dále by byl problém s použitím fyzikálního engine, který je napsaný v jazyce C++. Musel bych napsat interface pro fyzikální engine, který by mi umožnil komunikaci mezi C++ a Java kódem.
 
-\subsection{Java native interface}
+\subsection{Problematika Android API}
 Java native interface je rozhraní, které umožňuje spustit C++ kód z jazyku Java a obráceně. Nicméně komunikaci nelze realizovat nějak jednoduše a je proto vhodné tuto komunikaci minimalizovat.
 \lstset{language=C++} 
 \begin{lstlisting}[caption=Volání Java metody z jazyku C++]

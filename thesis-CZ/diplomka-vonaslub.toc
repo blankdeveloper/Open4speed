@@ -1,32 +1,51 @@
 \select@language {english}
 \select@language {czech}
 \contentsline {chapter}{\numberline {1}\IeC {\'U}vod}{1}{chapter.1}
-\contentsline {chapter}{\numberline {2}C\IeC {\'\i }le pr\IeC {\'a}ce}{3}{chapter.2}
-\contentsline {section}{\numberline {2.1}Existuj\IeC {\'\i }c\IeC {\'\i } implementace}{3}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Asphalt Urban od Gameloftu}{3}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}Need for Speed Most Wanted od EA Games a Firemonkeys}{4}{subsection.2.1.2}
-\contentsline {subsection}{\numberline {2.1.3}GT Racing 2 od Gameloftu}{5}{subsection.2.1.3}
-\contentsline {subsection}{\numberline {2.1.4}Sports Car Challenge od Fishlabs}{5}{subsection.2.1.4}
-\contentsline {subsection}{\numberline {2.1.5}Track Racing od v\IeC {\'y}voj\IeC {\'a}\IeC {\v r}e Soulkey}{5}{subsection.2.1.5}
+\contentsline {chapter}{\numberline {2}Specifikace pr\IeC {\'a}ce}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Po\IeC {\v z}adavky na funk\IeC {\v c}nost}{3}{section.2.1}
+\contentsline {section}{\numberline {2.2}C\IeC {\'\i }lov\IeC {\'a} platforma Android}{3}{section.2.2}
+\contentsline {section}{\numberline {2.3}Implementovan\IeC {\'e} grafick\IeC {\'e} techniky}{3}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Mapy osv\IeC {\v e}tlen\IeC {\'\i }}{3}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Dynamick\IeC {\'e} aktualizov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{3}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Aplikov\IeC {\'a}n\IeC {\'\i } statick\IeC {\'e}ho osv\IeC {\v e}tlen\IeC {\'\i } na dynamick\IeC {\'e} objekty}{3}{subsection.2.3.3}
+\contentsline {section}{\numberline {2.4}Existuj\IeC {\'\i }c\IeC {\'\i } implementace}{3}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Projekty zab\IeC {\'y}vaj\IeC {\'\i }c\IeC {\'\i } se vykreslov\IeC {\'a}n\IeC {\'\i } no\IeC {\v c}n\IeC {\'\i } sc\IeC {\'e}ny}{3}{subsection.2.4.1}
+\contentsline {subsubsection}{\numberline {2.4.1.1}Imperfect Shadow Maps for Efficient Computation of Indirect Illumination}{3}{subsubsection.2.4.1.1}
+\contentsline {subsubsection}{\numberline {2.4.1.2}Procedural City Modeling and Night City Lighting}{3}{subsubsection.2.4.1.2}
+\contentsline {subsubsection}{\numberline {2.4.1.3}A computational model of afterimages}{3}{subsubsection.2.4.1.3}
+\contentsline {subsection}{\numberline {2.4.2}Z\IeC {\'a}vodn\IeC {\'\i } simul\IeC {\'a}tory s no\IeC {\v c}n\IeC {\'\i } sc\IeC {\'e}nou pro platformu Android}{4}{subsection.2.4.2}
+\contentsline {subsubsection}{\numberline {2.4.2.1}Asphalt Urban od Gameloftu}{4}{subsubsection.2.4.2.1}
+\contentsline {subsubsection}{\numberline {2.4.2.2}Need for Speed Most Wanted od EA Games a Firemonkeys}{4}{subsubsection.2.4.2.2}
+\contentsline {subsubsection}{\numberline {2.4.2.3}GT Racing 2 od Gameloftu}{5}{subsubsection.2.4.2.3}
+\contentsline {subsubsection}{\numberline {2.4.2.4}Sports Car Challenge od Fishlabs}{5}{subsubsection.2.4.2.4}
+\contentsline {subsubsection}{\numberline {2.4.2.5}Track Racing od v\IeC {\'y}voj\IeC {\'a}\IeC {\v r}e Soulkey}{5}{subsubsection.2.4.2.5}
 \contentsline {chapter}{\numberline {3}Re\IeC {\v s}er\IeC {\v s}e}{7}{chapter.3}
-\contentsline {section}{\numberline {3.1}P\IeC {\v r}edvypo\IeC {\v c}\IeC {\'\i }tan\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i }}{7}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Vytvo\IeC {\v r}en\IeC {\'\i } texturovac\IeC {\'\i }ch sou\IeC {\v r}adnic}{7}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{8}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}Oprava chyby soused\IeC {\'\i }c\IeC {\'\i }ch troj\IeC {\'u}heln\IeC {\'\i }k\IeC {\r u}}{9}{subsection.3.1.3}
-\contentsline {section}{\numberline {3.2}Odlesky povrch\IeC {\r u}}{9}{section.3.2}
-\contentsline {section}{\numberline {3.3}Screen-space p\IeC {\v r}\IeC {\'\i }stup}{10}{section.3.3}
+\contentsline {section}{\numberline {3.1}Osv\IeC {\v e}tlovac\IeC {\'\i } model}{7}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}V\IeC {\'y}po\IeC {\v c}et osv\IeC {\v e}tlen\IeC {\'\i }}{7}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}V\IeC {\'y}po\IeC {\v c}et st\IeC {\'\i }n\IeC {\r u} v re\IeC {\'a}ln\IeC {\'e}m \IeC {\v c}ase}{7}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Spekul\IeC {\'a}rn\IeC {\'\i } slo\IeC {\v z}ka osv\IeC {\v e}tlovac\IeC {\'\i } modelu}{7}{subsection.3.1.3}
+\contentsline {section}{\numberline {3.2}P\IeC {\v r}edvypo\IeC {\v c}\IeC {\'\i }tan\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i }}{7}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Vytvo\IeC {\v r}en\IeC {\'\i } texturovac\IeC {\'\i }ch sou\IeC {\v r}adnic}{7}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{9}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Oprava chyby soused\IeC {\'\i }c\IeC {\'\i }ch troj\IeC {\'u}heln\IeC {\'\i }k\IeC {\r u}}{10}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.3}Odlesky povrch\IeC {\r u}}{10}{section.3.3}
+\contentsline {section}{\numberline {3.4}Screen-space p\IeC {\v r}\IeC {\'\i }stup}{11}{section.3.4}
 \contentsline {chapter}{\numberline {4}Realizace}{13}{chapter.4}
 \contentsline {section}{\numberline {4.1}P\IeC {\v r}edzpracov\IeC {\'a}n\IeC {\'\i }}{13}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Vytv\IeC {\'a}\IeC {\v r}en\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{13}{subsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.1.1}Generov\IeC {\'a}n\IeC {\'\i } texturovac\IeC {\'\i }ch sou\IeC {\v r}adnic pro mapy osv\IeC {\v e}tlen\IeC {\'\i }}{13}{subsubsection.4.1.1.1}
+\contentsline {subsubsection}{\numberline {4.1.1.2}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{13}{subsubsection.4.1.1.2}
+\contentsline {subsection}{\numberline {4.1.2}P\IeC {\v r}\IeC {\'\i }prava dat pro dynamickou aktualizaci map osv\IeC {\v e}tlen\IeC {\'\i }}{13}{subsection.4.1.2}
 \contentsline {section}{\numberline {4.2}Simul\IeC {\'a}tor}{13}{section.4.2}
 \contentsline {section}{\numberline {4.3}Realizace na platform\IeC {\v e} Android}{14}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Java native interface}{14}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.1}Problematika Android API}{14}{subsection.4.3.1}
 \contentsline {subsection}{\numberline {4.3.2}Vyu\IeC {\v z}it\IeC {\'\i } vl\IeC {\'a}ken}{14}{subsection.4.3.2}
 \contentsline {subsection}{\numberline {4.3.3}Pr\IeC {\'a}ce se soubory}{15}{subsection.4.3.3}
 \contentsline {section}{\numberline {4.4}Nahrazen\IeC {\'\i } v\IeC {\'\i }cepr\IeC {\r u}chodov\IeC {\'y}ch p\IeC {\v r}\IeC {\'\i }stup\IeC {\r u}}{15}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Rozm\IeC {\v e}r textur na OpenGL ES 2.0}{15}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.1}Rozm\IeC {\v e}r textur na OpenGL ES 2.0}{16}{subsection.4.4.1}
 \contentsline {subsection}{\numberline {4.4.2}Efekty pomoc\IeC {\'\i } screen-space p\IeC {\v r}\IeC {\'\i }stupu}{16}{subsection.4.4.2}
 \contentsline {section}{\numberline {4.5}P\IeC {\v r}edvypo\IeC {\v c}\IeC {\'\i }tan\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i }}{18}{section.4.5}
-\contentsline {section}{\numberline {4.6}Sv\IeC {\v e}tla vozidel}{18}{section.4.6}
+\contentsline {section}{\numberline {4.6}Sv\IeC {\v e}tla vozidel}{19}{section.4.6}
 \contentsline {chapter}{\numberline {5}Testov\IeC {\'a}n\IeC {\'\i }}{21}{chapter.5}
 \contentsline {chapter}{\numberline {6}Z\IeC {\'a}v\IeC {\v e}r}{25}{chapter.6}
 \contentsline {chapter}{Literatura}{27}{chapter*.6}

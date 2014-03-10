@@ -4,21 +4,21 @@
 \contentsline {chapter}{\numberline {2}Specifikace pr\IeC {\'a}ce}{3}{chapter.2}
 \contentsline {section}{\numberline {2.1}Po\IeC {\v z}adavky na funk\IeC {\v c}nost}{3}{section.2.1}
 \contentsline {section}{\numberline {2.2}C\IeC {\'\i }lov\IeC {\'a} platforma Android}{3}{section.2.2}
-\contentsline {section}{\numberline {2.3}Implementovan\IeC {\'e} grafick\IeC {\'e} techniky}{3}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Mapy osv\IeC {\v e}tlen\IeC {\'\i }}{3}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}Dynamick\IeC {\'e} aktualizov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{3}{subsection.2.3.2}
-\contentsline {subsection}{\numberline {2.3.3}Aplikov\IeC {\'a}n\IeC {\'\i } statick\IeC {\'e}ho osv\IeC {\v e}tlen\IeC {\'\i } na dynamick\IeC {\'e} objekty}{3}{subsection.2.3.3}
-\contentsline {section}{\numberline {2.4}Existuj\IeC {\'\i }c\IeC {\'\i } implementace}{3}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}Projekty zab\IeC {\'y}vaj\IeC {\'\i }c\IeC {\'\i } se vykreslov\IeC {\'a}n\IeC {\'\i } no\IeC {\v c}n\IeC {\'\i } sc\IeC {\'e}ny}{3}{subsection.2.4.1}
-\contentsline {subsubsection}{\numberline {2.4.1.1}Imperfect Shadow Maps for Efficient Computation of Indirect Illumination}{3}{subsubsection.2.4.1.1}
-\contentsline {subsubsection}{\numberline {2.4.1.2}Procedural City Modeling and Night City Lighting}{3}{subsubsection.2.4.1.2}
-\contentsline {subsubsection}{\numberline {2.4.1.3}A computational model of afterimages}{3}{subsubsection.2.4.1.3}
-\contentsline {subsection}{\numberline {2.4.2}Z\IeC {\'a}vodn\IeC {\'\i } simul\IeC {\'a}tory s no\IeC {\v c}n\IeC {\'\i } sc\IeC {\'e}nou pro platformu Android}{4}{subsection.2.4.2}
-\contentsline {subsubsection}{\numberline {2.4.2.1}Asphalt Urban od Gameloftu}{4}{subsubsection.2.4.2.1}
-\contentsline {subsubsection}{\numberline {2.4.2.2}Need for Speed Most Wanted od EA Games a Firemonkeys}{4}{subsubsection.2.4.2.2}
-\contentsline {subsubsection}{\numberline {2.4.2.3}GT Racing 2 od Gameloftu}{5}{subsubsection.2.4.2.3}
-\contentsline {subsubsection}{\numberline {2.4.2.4}Sports Car Challenge od Fishlabs}{5}{subsubsection.2.4.2.4}
-\contentsline {subsubsection}{\numberline {2.4.2.5}Track Racing od v\IeC {\'y}voj\IeC {\'a}\IeC {\v r}e Soulkey}{5}{subsubsection.2.4.2.5}
+\contentsline {section}{\numberline {2.3}Implementovan\IeC {\'e} grafick\IeC {\'e} techniky}{4}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Mapy osv\IeC {\v e}tlen\IeC {\'\i }}{4}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Dynamick\IeC {\'e} aktualizov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{4}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Aplikov\IeC {\'a}n\IeC {\'\i } statick\IeC {\'e}ho osv\IeC {\v e}tlen\IeC {\'\i } na dynamick\IeC {\'e} objekty}{4}{subsection.2.3.3}
+\contentsline {section}{\numberline {2.4}Existuj\IeC {\'\i }c\IeC {\'\i } implementace}{4}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Projekty zab\IeC {\'y}vaj\IeC {\'\i }c\IeC {\'\i } se vykreslov\IeC {\'a}n\IeC {\'\i } no\IeC {\v c}n\IeC {\'\i } sc\IeC {\'e}ny}{4}{subsection.2.4.1}
+\contentsline {subsubsection}{\numberline {2.4.1.1}Imperfect Shadow Maps for Efficient Computation of Indirect Illumination}{4}{subsubsection.2.4.1.1}
+\contentsline {subsubsection}{\numberline {2.4.1.2}Procedural City Modeling and Night City Lighting}{4}{subsubsection.2.4.1.2}
+\contentsline {subsubsection}{\numberline {2.4.1.3}A computational model of afterimages}{4}{subsubsection.2.4.1.3}
+\contentsline {subsection}{\numberline {2.4.2}Z\IeC {\'a}vodn\IeC {\'\i } simul\IeC {\'a}tory s no\IeC {\v c}n\IeC {\'\i } sc\IeC {\'e}nou pro platformu Android}{5}{subsection.2.4.2}
+\contentsline {subsubsection}{\numberline {2.4.2.1}Asphalt Urban od Gameloftu}{5}{subsubsection.2.4.2.1}
+\contentsline {subsubsection}{\numberline {2.4.2.2}Need for Speed Most Wanted od EA Games a Firemonkeys}{5}{subsubsection.2.4.2.2}
+\contentsline {subsubsection}{\numberline {2.4.2.3}GT Racing 2 od Gameloftu}{6}{subsubsection.2.4.2.3}
+\contentsline {subsubsection}{\numberline {2.4.2.4}Sports Car Challenge od Fishlabs}{6}{subsubsection.2.4.2.4}
+\contentsline {subsubsection}{\numberline {2.4.2.5}Track Racing od v\IeC {\'y}voj\IeC {\'a}\IeC {\v r}e Soulkey}{6}{subsubsection.2.4.2.5}
 \contentsline {chapter}{\numberline {3}Re\IeC {\v s}er\IeC {\v s}e}{7}{chapter.3}
 \contentsline {section}{\numberline {3.1}Osv\IeC {\v e}tlovac\IeC {\'\i } model}{7}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}V\IeC {\'y}po\IeC {\v c}et osv\IeC {\v e}tlen\IeC {\'\i }}{7}{subsection.3.1.1}

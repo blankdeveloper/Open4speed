@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.2.17)  13 MAR 2014 21:58
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.2.17)  14 MAR 2014 23:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -724,65 +724,71 @@ Kapitola 1.
 
 ]
 Kapitola 2.
-<figures/android.png, id=469, 1606.803pt x 1303.269pt>
-File: figures/android.png Graphic file (type png)
 
-<use figures/android.png>
-Package pdftex.def Info: figures/android.png used on input line 348.
-(pdftex.def)             Requested size: 341.43306pt x 276.93604pt.
+Underfull \hbox (badness 1406) in paragraph at lines 341--343
+[]\T1/cmr/m/n/10.95 Projekt je roz-d¥-len do dvou sa-mo-stat-ných £ástí. První 
+£ástí je p°edzpra-co-vání,
+ []
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[3] <figures/games/a7.png, id=476, 1284.8pt x 803.0pt>
-File: figures/games/a7.png Graphic file (type png)
-
-<use figures/games/a7.png>
-Package pdftex.def Info: figures/games/a7.png used on input line 370.
-(pdftex.def)             Requested size: 142.26378pt x 88.90614pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 375--377
+Underfull \hbox (badness 10000) in paragraph at lines 341--343
 
  []
 
-[4 <./figures/android.png> <./figures/games/a7.png>]
+[3] <figures/android.png, id=474, 1606.803pt x 1303.269pt>
+File: figures/android.png Graphic file (type png)
+
+<use figures/android.png>
+Package pdftex.def Info: figures/android.png used on input line 354.
+(pdftex.def)             Requested size: 341.43306pt x 276.93604pt.
+ <figures/games/a7.png, id=476, 1284.8pt x 803.0pt>
+File: figures/games/a7.png Graphic file (type png)
+
+<use figures/games/a7.png>
+Package pdftex.def Info: figures/games/a7.png used on input line 375.
+(pdftex.def)             Requested size: 142.26378pt x 88.90614pt.
+ [4 <./figures/android.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 380--382
+
+ []
+
 <figures/games/a8.png, id=484, 1284.8pt x 963.6pt>
 File: figures/games/a8.png Graphic file (type png)
  <use figures/games/a8.png>
-Package pdftex.def Info: figures/games/a8.png used on input line 379.
+Package pdftex.def Info: figures/games/a8.png used on input line 384.
 (pdftex.def)             Requested size: 142.26378pt x 106.68738pt.
 
-Underfull \hbox (badness 1314) in paragraph at lines 382--384
+Underfull \hbox (badness 1314) in paragraph at lines 387--389
 \T1/cmr/m/n/10.95 ²eno tex-tu-rou. Ne-p°í-jem-nou zm¥-nou je ab-sence re-flek-
  []
 
 
-Underfull \hbox (badness 1400) in paragraph at lines 382--384
+Underfull \hbox (badness 1400) in paragraph at lines 387--389
 \T1/cmr/m/n/10.95 toru vo-zi-dla a p°i-dání ru-²i-vého chv¥ní ka-mery b¥-hem
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 382--384
+Underfull \hbox (badness 10000) in paragraph at lines 387--389
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 382--384
+Underfull \hbox (badness 10000) in paragraph at lines 387--389
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 382--384
+Underfull \hbox (badness 10000) in paragraph at lines 387--389
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 382--384
+Underfull \hbox (badness 10000) in paragraph at lines 387--389
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 382--384
+Underfull \hbox (badness 10000) in paragraph at lines 387--389
 
  []
 
@@ -790,32 +796,33 @@ Underfull \hbox (badness 10000) in paragraph at lines 382--384
 File: figures/games/nfs.png Graphic file (type png)
 
 <use figures/games/nfs.png>
-Package pdftex.def Info: figures/games/nfs.png used on input line 387.
+Package pdftex.def Info: figures/games/nfs.png used on input line 392.
 (pdftex.def)             Requested size: 142.26378pt x 88.90614pt.
- [5 <./figures/games/a8.png> <./figures/games/nfs.png>] <figures/games/gt2.png,
- id=491, 903.375pt x 526.96875pt>
+ [5 <./figures/games/a7.png> <./figures/games/a8.png> <./figures/games/nfs.png>
+]
+<figures/games/gt2.png, id=491, 903.375pt x 526.96875pt>
 File: figures/games/gt2.png Graphic file (type png)
 
 <use figures/games/gt2.png>
-Package pdftex.def Info: figures/games/gt2.png used on input line 397.
+Package pdftex.def Info: figures/games/gt2.png used on input line 402.
 (pdftex.def)             Requested size: 142.26378pt x 82.98193pt.
 
-Underfull \hbox (badness 1178) in paragraph at lines 398--398
+Underfull \hbox (badness 1178) in paragraph at lines 403--403
 []\T1/cmr/m/n/10.95 Obrázek 2.5: []GT Ra-cing 2
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--404
+Underfull \hbox (badness 10000) in paragraph at lines 407--409
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--404
+Underfull \hbox (badness 10000) in paragraph at lines 407--409
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--404
+Underfull \hbox (badness 10000) in paragraph at lines 407--409
 
  []
 
@@ -823,27 +830,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 402--404
 File: figures/games/scc.png Graphic file (type png)
 
 <use figures/games/scc.png>
-Package pdftex.def Info: figures/games/scc.png used on input line 407.
+Package pdftex.def Info: figures/games/scc.png used on input line 412.
 (pdftex.def)             Requested size: 142.26378pt x 88.90614pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 408--408
+Underfull \hbox (badness 10000) in paragraph at lines 413--413
 []\T1/cmr/m/n/10.95 Obrázek 2.6: []Sports Car
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 412--414
+Underfull \hbox (badness 10000) in paragraph at lines 417--419
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 412--414
+Underfull \hbox (badness 10000) in paragraph at lines 417--419
 
  []
 
 <figures/games/tm.png, id=493, 1284.8pt x 803.0pt>
 File: figures/games/tm.png Graphic file (type png)
  <use figures/games/tm.png>
-Package pdftex.def Info: figures/games/tm.png used on input line 417.
+Package pdftex.def Info: figures/games/tm.png used on input line 422.
 (pdftex.def)             Requested size: 142.26378pt x 88.90614pt.
 
 [6 <./figures/games/gt2.png> <./figures/games/scc.png> <./figures/games/tm.png>
@@ -855,13 +862,13 @@ Kapitola 3.
 File: figures/packingLM.png Graphic file (type png)
 
 <use figures/packingLM.png>
-Package pdftex.def Info: figures/packingLM.png used on input line 452.
+Package pdftex.def Info: figures/packingLM.png used on input line 457.
 (pdftex.def)             Requested size: 341.43306pt x 201.07164pt.
  [8 <./figures/packingLM.png>]
 <figures/LM-vse.png, id=514, 2055.68pt x 2055.68pt>
 File: figures/LM-vse.png Graphic file (type png)
  <use figures/LM-vse.png>
-Package pdftex.def Info: figures/LM-vse.png used on input line 465.
+Package pdftex.def Info: figures/LM-vse.png used on input line 470.
 (pdftex.def)             Requested size: 199.16928pt x 199.14978pt.
 
 [9 <./figures/LM-vse.png>]
@@ -869,14 +876,14 @@ Package pdftex.def Info: figures/LM-vse.png used on input line 465.
 File: figures/shadowmapping.png Graphic file (type png)
 
 <use figures/shadowmapping.png>
-Package pdftex.def Info: figures/shadowmapping.png used on input line 474.
+Package pdftex.def Info: figures/shadowmapping.png used on input line 479.
 (pdftex.def)             Requested size: 284.52756pt x 121.6859pt.
 
 <figures/reflection-diagram.png, id=522, 642.4pt x 481.8pt>
 File: figures/reflection-diagram.png Graphic file (type png)
 
 <use figures/reflection-diagram.png>
-Package pdftex.def Info: figures/reflection-diagram.png used on input line 494.
+Package pdftex.def Info: figures/reflection-diagram.png used on input line 499.
 
 (pdftex.def)             Requested size: 227.62204pt x 170.71304pt.
 
@@ -888,7 +895,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: figures/screenspace.png Graphic file (type png)
 
 <use figures/screenspace.png>
-Package pdftex.def Info: figures/screenspace.png used on input line 506.
+Package pdftex.def Info: figures/screenspace.png used on input line 511.
 (pdftex.def)             Requested size: 199.16928pt x 116.53868pt.
  [11 <./figures/reflection-diagram.png> <./figures/screenspace.png>] [12]
 Kapitola 4.
@@ -903,7 +910,7 @@ File: lstlang1.sty 2013/08/26 1.5b listings language file
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2013/08/26 1.5b (Carsten Heinz)
 )
-LaTeX Font Info:    Try loading font information for T1+cmss on input line 551.
+LaTeX Font Info:    Try loading font information for T1+cmss on input line 556.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmss.fd
@@ -913,79 +920,79 @@ File: t1cmss.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 File: figures/render-schema.png Graphic file (type png)
 
 <use figures/render-schema.png>
-Package pdftex.def Info: figures/render-schema.png used on input line 579.
+Package pdftex.def Info: figures/render-schema.png used on input line 584.
 (pdftex.def)             Requested size: 426.79134pt x 43.27481pt.
  [15 <./figures/render-schema.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmss on input line 605
+LaTeX Font Info:    Try loading font information for OMS+cmss on input line 610
 .
-LaTeX Font Info:    No file OMScmss.fd. on input line 605.
+LaTeX Font Info:    No file OMScmss.fd. on input line 610.
 
 
 LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textasteriskcentered' on input line 605.
+(Font)              for symbol `textasteriskcentered' on input line 610.
 
 <figures/reflect-horizont.png, id=563, 963.6pt x 481.8pt>
 File: figures/reflect-horizont.png Graphic file (type png)
 
 <use figures/reflect-horizont.png>
-Package pdftex.def Info: figures/reflect-horizont.png used on input line 620.
+Package pdftex.def Info: figures/reflect-horizont.png used on input line 625.
 (pdftex.def)             Requested size: 426.79134pt x 213.38947pt.
  [16]
 <figures/reflect-car.png, id=584, 963.6pt x 401.5pt>
 File: figures/reflect-car.png Graphic file (type png)
 
 <use figures/reflect-car.png>
-Package pdftex.def Info: figures/reflect-car.png used on input line 628.
+Package pdftex.def Info: figures/reflect-car.png used on input line 633.
 (pdftex.def)             Requested size: 426.79134pt x 177.82455pt.
  [17 <./figures/reflect-horizont.png> <./figures/reflect-car.png>] <figures/lam
 ps.png, id=592, 602.25pt x 361.35pt>
 File: figures/lamps.png Graphic file (type png)
 
 <use figures/lamps.png>
-Package pdftex.def Info: figures/lamps.png used on input line 643.
+Package pdftex.def Info: figures/lamps.png used on input line 648.
 (pdftex.def)             Requested size: 312.9803pt x 187.7928pt.
  [18 <./figures/lamps.png>] [19] [20
 
 ]
 Kapitola 5.
 
-Underfull \hbox (badness 6063) in paragraph at lines 672--672
+Underfull \hbox (badness 6063) in paragraph at lines 677--677
 []\T1/cmr/bx/n/10.95 Samsung Ga-laxy
  []
 
 
-Underfull \hbox (badness 2932) in paragraph at lines 672--672
+Underfull \hbox (badness 2932) in paragraph at lines 677--677
 []\T1/cmr/bx/n/10.95 Google Ne-xus 7
  []
 
 
-Underfull \hbox (badness 4518) in paragraph at lines 672--673
+Underfull \hbox (badness 4518) in paragraph at lines 677--678
 []\T1/cmr/bx/n/10.95 Acer Tra-vel-Mate
  []
 
 
-Overfull \hbox (10.82343pt too wide) in paragraph at lines 670--682
+Overfull \hbox (10.82343pt too wide) in paragraph at lines 675--687
  [] 
  []
 
 
-Underfull \hbox (badness 6063) in paragraph at lines 693--693
+Underfull \hbox (badness 6063) in paragraph at lines 698--698
 []\T1/cmr/bx/n/10.95 Samsung Ga-laxy
  []
 
 
-Underfull \hbox (badness 2932) in paragraph at lines 693--693
+Underfull \hbox (badness 2932) in paragraph at lines 698--698
 []\T1/cmr/bx/n/10.95 Google Ne-xus 7
  []
 
 
-Underfull \hbox (badness 4518) in paragraph at lines 693--694
+Underfull \hbox (badness 4518) in paragraph at lines 698--699
 []\T1/cmr/bx/n/10.95 Acer Tra-vel-Mate
  []
 
 
-Overfull \hbox (10.82343pt too wide) in paragraph at lines 691--701
+Overfull \hbox (10.82343pt too wide) in paragraph at lines 696--706
  [] 
  []
 
@@ -996,32 +1003,32 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 Underfull \vbox (badness 4120) has occurred while \output is active []
 
  [21]
-Underfull \hbox (badness 10000) in paragraph at lines 706--708
+Underfull \hbox (badness 10000) in paragraph at lines 711--713
 
  []
 
 
-Underfull \hbox (badness 6063) in paragraph at lines 715--715
+Underfull \hbox (badness 6063) in paragraph at lines 720--720
 []\T1/cmr/bx/n/10.95 Samsung Ga-laxy
  []
 
 
-Underfull \hbox (badness 2932) in paragraph at lines 715--715
+Underfull \hbox (badness 2932) in paragraph at lines 720--720
 []\T1/cmr/bx/n/10.95 Google Ne-xus 7
  []
 
 
-Underfull \hbox (badness 4518) in paragraph at lines 715--716
+Underfull \hbox (badness 4518) in paragraph at lines 720--721
 []\T1/cmr/bx/n/10.95 Acer Tra-vel-Mate
  []
 
 
-Overfull \hbox (10.82343pt too wide) in paragraph at lines 713--721
+Overfull \hbox (10.82343pt too wide) in paragraph at lines 718--726
  [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 725--727
+Underfull \hbox (badness 10000) in paragraph at lines 730--732
 
  []
 
@@ -1053,36 +1060,36 @@ P\v {r}\'{\i }loha A.
 [29] [30] [31] [32]
 P\v {r}\'{\i }loha B.
 
-LaTeX Warning: Citation `CSTUG' on page 33 undefined on input line 829.
+LaTeX Warning: Citation `CSTUG' on page 33 undefined on input line 834.
 
 
-LaTeX Warning: Citation `latexdocweb' on page 33 undefined on input line 829.
+LaTeX Warning: Citation `latexdocweb' on page 33 undefined on input line 834.
 
 
-LaTeX Warning: Citation `latexwiki' on page 33 undefined on input line 829.
+LaTeX Warning: Citation `latexwiki' on page 33 undefined on input line 834.
 
 File: figures/LogoCVUT.pdf Graphic file (type pdf)
 <use figures/LogoCVUT.pdf>
-Package pdftex.def Info: figures/LogoCVUT.pdf used on input line 841.
+Package pdftex.def Info: figures/LogoCVUT.pdf used on input line 846.
 (pdftex.def)             Requested size: 142.26378pt x 107.08527pt.
  [33
 
 ]
 
-LaTeX Warning: Citation `ipe' on page 34 undefined on input line 861.
+LaTeX Warning: Citation `ipe' on page 34 undefined on input line 866.
 
 [34] [35]
 
-LaTeX Warning: Citation `kniha' on page 36 undefined on input line 986.
+LaTeX Warning: Citation `kniha' on page 36 undefined on input line 991.
 
 
-LaTeX Warning: Citation `clanek' on page 36 undefined on input line 986.
+LaTeX Warning: Citation `clanek' on page 36 undefined on input line 991.
 
 
-LaTeX Warning: Citation `sbornik' on page 36 undefined on input line 986.
+LaTeX Warning: Citation `sbornik' on page 36 undefined on input line 991.
 
 
-LaTeX Warning: Citation `www' on page 36 undefined on input line 986.
+LaTeX Warning: Citation `www' on page 36 undefined on input line 991.
 
 [36] [37] [38]
 P\v {r}\'{\i }loha C.
@@ -1101,14 +1108,14 @@ P\v {r}\'{\i }loha E.
 ]
 P\v {r}\'{\i }loha F.
 
-LaTeX Warning: Citation `infodp' on page 45 undefined on input line 1079.
+LaTeX Warning: Citation `infodp' on page 45 undefined on input line 1084.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1089.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1094.
 [45]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1089.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1094.
  (./diplomka-vonaslub.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1089.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1089.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1094.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1094.
 
 Package rerunfilecheck Info: File `diplomka-vonaslub.out' has not changed.
 (rerunfilecheck)             Checksum: A8E3120D5ACDFE5F5659C4D61F1EB49F;12740.
@@ -1119,7 +1126,7 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1089.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1094.
  ) 
 Here is how much of TeX's memory you used:
  13494 strings out of 494953
@@ -1148,7 +1155,7 @@ re/texmf/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/texmf/fonts/type1
 /public/cm-super/sfti1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sft
 t0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb></usr/shar
 e/texmf/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on diplomka-vonaslub.pdf (61 pages, 19328864 bytes).
+Output written on diplomka-vonaslub.pdf (61 pages, 19329464 bytes).
 PDF statistics:
  853 PDF objects out of 1000 (max. 8388607)
  728 compressed objects within 8 object streams

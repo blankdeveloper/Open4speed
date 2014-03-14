@@ -332,15 +332,21 @@ Obecně platí, že během vykreslování 3D scény se některé výpočty neust
 
 %*****************************************************************************
 \chapter{Specifikace práce}
-Samotnou realizaci projektu lze rozdělit do dvou dílčích částí. První částí je předzpracování, ve kterém se vytváří mapy osvětlení. To znamená vytvoření koordinát map a vykreslení hodnot do map osvětlení. Druhou částí je samotný simulátor, který s těmito předzpracovanými hodnotami pracuje.
+Cílem práce bylo realizovat efektivní vykreslování rozsáhlých nočních scén na platformě Android za použití grafické knihovny OpenGL. Rozhodl jsem se práci realizovat v podobě závodního simulátoru, který obsahuje několik pohybujících se vozidel a blikajících světel. Tato podoba realizace plně využívá veškeré grafické techniky, které jsem implementoval\linebreak a zároveň umožní lépe ohodnotit použitelnost projektu, než kdybych zvolil podobu technického dema.
+
+Důraz byl kladen na co nejvyšší optimalizaci vykreslování. Kromě hlavní grafické techniky map osvětlení (anglicky lightmap) bylo použito několik dalších technik řešící jednotlivé problémy, které vznikají při použití map osvětlení. Problémy nastávají hlavně při použití dynamických objektů nebo při změně osvětlení. Technika map osvětlení řeší pouze statickou scénu\linebreak a v případě použití dynamické scény je potřeba metodu značně rozšířit.
 
 \section{Požadavky na funkčnost}
+
+Projekt je rozdělen do dvou samostatných částí. První částí je předzpracování,\linebreak ve kterém se vytváří mapy osvětlení. Mapy osvětlení jsou textury 3D modelů, které obsahují informace o difuzním osvětlení (difuzní osvětlení je závislé pouze na poloze světla, směru světla a povrchu tělesa, lze jej tedy pro statickou část modelu předpočítat). Druhou částí projektu je simulátor, který mapy osvětlení používá.
+\\
 
 TODO: Mapy osvětlení
 
 TODO: Dynamické aktualizování map osvětlení
 
 TODO: Aplikování statického osvětlení na dynamické objekty
+\newpage
 
 \section{Cílová platforma Android}
 \begin{center}
@@ -349,7 +355,6 @@ TODO: Aplikování statického osvětlení na dynamické objekty
 \caption{Komponenty platformy Android}
 \end{figure}
 \end{center}
-\newpage
 
 \section{Existující implementace}
 

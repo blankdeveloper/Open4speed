@@ -386,11 +386,24 @@ Pro platformu Android existuje nepřeberné množství aplikací a toho začína
 
 \subsection{Projekty zabývající se vykreslování noční scény}
 
-\subsubsection{Imperfect Shadow Maps for Efficient Computation of Indirect Illumination}
+\subsubsection{Imperfektní stínové mapy pro efektivní výpočet nepřímého osvětlení}
 
-\subsubsection{Procedural City Modeling and Night City Lighting}
+\begin{center}
+\begin{figure}[h!]
+\includegraphics[width=150mm]{figures/ISM.png}
+\caption{Ukázka výsledků techniky imperfektních stínových map pro efektivní výpočet nepřímého osvětlení}
+\end{figure}
+\end{center}
 
-\subsubsection{A computational model of afterimages}
+\subsubsection{Proceduralní modelování města a osvětlení nočního města}
+
+\begin{center}
+\begin{figure}[h!]
+\includegraphics[width=150mm]{figures/NR.png}
+\caption{Ukázka nočního renderingu}
+\end{figure}
+\end{center}
+
 
 TODO:přidat implementace na PC, popsat proč je vhodné brát ohled na implementace pro Android
 \newpage
@@ -398,60 +411,38 @@ TODO:přidat implementace na PC, popsat proč je vhodné brát ohled na implemen
 \subsection{Závodní simulátory s noční scénou pro platformu Android}
 
 \subsubsection{Asphalt Urban od Gameloftu}
-\begin{wrapfigure}{l}{-0.5\linewidth}
-  \includegraphics[width=50mm]{figures/games/a7.png}
-  \caption{Asphalt 7}
-\end{wrapfigure}
 Asphalt Urban je série mobilních závodních simulátorů, jejíchž první díl byl publikován spolu s herním smartphonem Nokia N-Gage. Jedná se o úspěšnou sérii, která přitahuje hráče všech možných platforem.
 
-Na obrázku 2.1 můžete vidět 7.díl simulátoru. Osvětlení z pouličních lamp je vykresleno přímo do textur, reflektor vozidla je tvořen zřejmě pomocí projektivní textury. Povrch zrcadlově odráží 3D objekty. Po bližším zkoumání lze zjistit, že některé tyto odražené objekty jsou odlišné. Domnívám se, že zde byl použit duplicitní objekt.
-\\
+Zmíním 7.díl ze série Asphalt Urban, který osobě považuji za nejúspěšnější díl. Osvětlení z pouličních lamp je součástí textur, reflektor vozidla je tvořen zřejmě pomocí projektivní textury. Povrch zrcadlově odráží 3D objekty. Po bližším zkoumání lze zjistit, že některé tyto odražené objekty jsou odlišné. Domnívám se, že zde byl použit duplicitní objekt.
 
-\begin{wrapfigure}{l}{-0.5\linewidth}
-  \includegraphics[width=50mm]{figures/games/a8.png}
-  \caption{Asphalt 8}
-\end{wrapfigure}
 Další díl ze série Asphalt Urban už odlesky řeší lépe. Odráží se hlavně světla a odlesk je lépe přizpůsoben povrchu. Vzniká zde dojem mokré silnice. Dochází i k rozmazání brzdových světel. Osvětlení od lamp je opět řešeno texturou. Nepříjemnou změnou je absence reflektoru vozidla a přidání rušivého chvění kamery během jízdy.
-\\ \\ \\ \\ \\
 
 \subsubsection{Need for Speed Most Wanted od EA Games a Firemonkeys}
-\begin{wrapfigure}{l}{-0.5\linewidth}
-  \includegraphics[width=50mm]{figures/games/nfs.png}
-  \caption{Need for Speed Most Wanted mobilní verze Zdroj:www.androidpolice.com}
-\end{wrapfigure}
 Simulátor, který je spíše známý z PC, na mobilním trhu takový úspěch nemá. Od PC verze je velice odlišný, ale rozhodně se nejedná o nějakou lacinou napodobeninu. Jedná se o první závodní simulátor pro mobilní zařízení, který disponuje modelem ničení vozidla(je možné vozidlo poškrábat, rozbít mu okna apod).
 
-Oproti Asphalt 8 má navíc efekt Depth-of-field, to znamená, že vzdálené modely jsou rozmazané a zabarveny\linebreak do barvy pozadí. Tento efekt vytváří přijemný mlhovitý efekt. Jinak bych řekl, že tyto dva simulátory jsou si sobě velice podobné. Na stejném enginu funguje i známý simulátor Real Racing 3, který ale noční jízdu nemá.
-\newpage
+Oproti Asphalt 8 má navíc efekt Depth-of-field, to znamená, že vzdálené modely jsou rozmazané a zabarveny do barvy pozadí. Tento efekt vytváří přijemný mlhovitý efekt. Jinak bych řekl, že tyto dva simulátory jsou si sobě velice podobné. Na stejném enginu funguje i známý simulátor Real Racing 3, který ale noční jízdu nemá.
 
 \subsubsection{GT Racing 2 od Gameloftu}
-\begin{wrapfigure}{l}{-0.5\linewidth}
-  \includegraphics[width=50mm]{figures/games/gt2.png}
-  \caption{GT Racing 2 Zdroj:www.youtube.com}
-\end{wrapfigure}
-Úspěšným závodním simulátorem je v současné době GT Racing 2, je to hlavně díky jeho zpracování. Jako jediný\linebreak z uvedených simulátorů má při noční jízdě nízké ambientní osvětlení a scéna je osvětlena hlavně reflektorem vozidla.
+Úspěšným závodním simulátorem je v současné době GT Racing 2, je to hlavně díky jeho zpracování. Jako jediný z uvedených simulátorů má při noční jízdě nízké ambientní osvětlení a scéna je osvětlena hlavně reflektorem vozidla.
 
 Nejsem si jist, zda osvětlení lampami je přímo součástí textur modelů nebo jestli jsou zde použity mapy osvětlení.
-\\ \\ \\
 
 \subsubsection{Sports Car Challenge od Fishlabs}
-\begin{wrapfigure}{l}{-0.5\linewidth}
-  \includegraphics[width=50mm]{figures/games/scc.png}
-  \caption{Sports Car Challenge}
-\end{wrapfigure}
 Asi nejdetailnější model vozidla má právě Sports Car Challenge. Vývojář spolupracuje s předními výrobci automobilů a to se odrazilo právě na modelech vozidel. Modely jsou realistické a to včetně interiérů.
 
 Projekt trpí slabší kompatibilitou s mobilními zařízeními, i když náročnost enginu je nízká. Co se týká noční jízdy, je realizována stejnými technikami jako denní jízda. Jsou zde použity pouze tmavé textury a halo efekt pouličních lamp.
-\\ \\
 
 \subsubsection{Track Racing od vývojáře Soulkey}
-\begin{wrapfigure}{l}{-0.5\linewidth}
-  \includegraphics[width=50mm]{figures/games/tm.png}
-  \caption{Track Racing}
-\end{wrapfigure}
 I když tento projekt není závodní simulátor s noční jízdou, zmiňuji ho hlavně kvůli ovládání. Jedná se o neoficiální remake hry Trackmania známé z PC. Projekt běží na Unity3D enginu a je dostupný na mnoha platformách, ale nedá se stáhnout přímo z Marketu či Storu.
 
-U výše uvedených simulátorů vozidlo automaticky zrychluje a u některých i samo brzdí. Hráč nemá tedy nad vozidlem takovou kontrolu. V případě Track Racing má hráč plnou kontrolu a zážitek ze hry se dá srovnat se zážitkem\linebreak z PC hry.
+U výše uvedených simulátorů vozidlo automaticky zrychluje a u některých i samo brzdí. Hráč nemá tedy nad vozidlem takovou kontrolu. V případě Track Racing má hráč plnou kontrolu a zážitek ze hry se dá srovnat se zážitkem z PC hry.
+
+\begin{center}
+\begin{figure}[h!]
+\includegraphics[width=150mm]{figures/games.png}
+\caption{Ukázka závodních simulátorů s noční scénou pro platformu Android, první řada zleva: Asphalt 7, Asphalt 8, Need for Speed Most Wanted, druhá řáda zleva: GT Racing 2, Sports Car Challenge, Track Racing}
+\end{figure}
+\end{center}
 
 %*****************************************************************************
 \chapter{Zobrazování scén s předpočteným osvětlením}

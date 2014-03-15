@@ -384,9 +384,29 @@ Pro platformu Android existuje nepřeberné množství aplikací a toho začína
 
 \section{Existující implementace}
 
+Rešerši existujících implementací jsem zaměřil na dvě různé kategorie. První kategorie jsou implementace pro PC, kde je nejčastěji řešeno nepřímé osvětlení, které by na mobilních zařízeních zatím použít nešlo. Druhá kategorie jsou závodní simulátory s noční jízdou pro platformu Android. V této kategorii bývají nejčastěji použity techniky jako v této práci.
+
 \subsection{Projekty zabývající se vykreslování noční scény}
 
-\subsubsection{Imperfektní stínové mapy pro efektivní výpočet nepřímého osvětlení}
+V této sekci jsem vybral co nejrealističtější implementace, ke kterým existuje nějaký článek o tom, jak bylo výsledku dosaženo. Existuje sice několik implementací, které vypadají ještě více realističtěji. To jsou ale většinou komerční produkty, které nesdílejí ostatním, jakým způsobem byla implementace realizována.
+
+\subsubsection{Proceduralní modelování města a osvětlení nočního města}
+Tato implementace je z roku 1999 a zabývá se proceduálním modelováním města (konkrétně Bostonu) a následně jej vykresluje pomocí sledování paprsku za využití algoritmu Monte Carlo. Implementace pochopitelně neběží v reálném čase. Výsledek je při detailním záběru po grafické stránce velice realistický. Vytknul bych jen, že reflektory vozidla osvítí pouze blízké okolí. Při záběru na město z výšky výsledek nebudí tolik realistický dojem jako při detailním záběru.
+
+\begin{center}
+\begin{figure}[h!]
+\includegraphics[width=150mm]{figures/NR.png}
+\caption{Ukázka nočního renderingu}
+\end{figure}
+\end{center}
+\newpage
+
+\subsubsection{Imperfektní stínové mapy pro výpočet nepřímého osvětlení}
+Tato implementace, představená roku 2008, se nezabývá přímo noční scénou, zabývá se nepřímým osvětlením, které s noční scénou souvisí. Implementace běží v reálném čase a její výsledky jsou srovnatelné se snímky, které se vykreslují několik hodin.
+
+V této implementaci se nevyužívá předpočtených dat. Využívá se zde virtuálních bodových světel (VPL), která simulují odrazy světla. Z každého VPL se vytvoří stínová mapa o malém rozlišením a při vykreslování výsledné scény se vyhodnocuje viditelnost ze všech VPL.
+
+Implementace podporuje více typů zdrojů světla, včetně plošných. Nemá problémy\linebreak s barevným světlem ani s kaustiky.
 
 \begin{center}
 \begin{figure}[h!]
@@ -395,20 +415,8 @@ Pro platformu Android existuje nepřeberné množství aplikací a toho začína
 \end{figure}
 \end{center}
 
-\subsubsection{Proceduralní modelování města a osvětlení nočního města}
-
-\begin{center}
-\begin{figure}[h!]
-\includegraphics[width=150mm]{figures/NR.png}
-\caption{Ukázka nočního renderingu}
-\end{figure}
-\end{center}
-
-
-TODO:přidat implementace na PC, popsat proč je vhodné brát ohled na implementace pro Android
-\newpage
-
 \subsection{Závodní simulátory s noční scénou pro platformu Android}
+V této sekci jsem vyhledával i implementace, u kterých není uvedeno, jak bylo výsledků dosaženo. Je to z důvodu malého počtu implementací odpovídající dané kategorii.
 
 \subsubsection{Asphalt Urban od Gameloftu}
 Asphalt Urban je série mobilních závodních simulátorů, jejíchž první díl byl publikován spolu s herním smartphonem Nokia N-Gage. Jedná se o úspěšnou sérii, která přitahuje hráče všech možných platforem.
@@ -418,14 +426,14 @@ Zmíním 7.díl ze série Asphalt Urban, který osobě považuji za nejúspěšn
 Další díl ze série Asphalt Urban už odlesky řeší lépe. Odráží se hlavně světla a odlesk je lépe přizpůsoben povrchu. Vzniká zde dojem mokré silnice. Dochází i k rozmazání brzdových světel. Osvětlení od lamp je opět řešeno texturou. Nepříjemnou změnou je absence reflektoru vozidla a přidání rušivého chvění kamery během jízdy.
 
 \subsubsection{Need for Speed Most Wanted od EA Games a Firemonkeys}
-Simulátor, který je spíše známý z PC, na mobilním trhu takový úspěch nemá. Od PC verze je velice odlišný, ale rozhodně se nejedná o nějakou lacinou napodobeninu. Jedná se o první závodní simulátor pro mobilní zařízení, který disponuje modelem ničení vozidla(je možné vozidlo poškrábat, rozbít mu okna apod).
+Simulátor, který je spíše známý z PC, na mobilním trhu takový úspěch nemá. Od PC verze je velice odlišný, ale rozhodně se nejedná o nějakou lacinou napodobeninu. Jedná se o první závodní simulátor pro mobilní zařízení, který disponuje modelem ničení vozidla (je možné vozidlo poškrábat, rozbít mu okna apod).
 
-Oproti Asphalt 8 má navíc efekt Depth-of-field, to znamená, že vzdálené modely jsou rozmazané a zabarveny do barvy pozadí. Tento efekt vytváří přijemný mlhovitý efekt. Jinak bych řekl, že tyto dva simulátory jsou si sobě velice podobné. Na stejném enginu funguje i známý simulátor Real Racing 3, který ale noční jízdu nemá.
+Oproti Asphalt 8 má navíc efekt Depth-of-field. To znamená, že vzdálené modely jsou rozmazané a zabarveny do barvy pozadí. Tento efekt vytváří přijemný mlhovitý dpjem. Jinak bych řekl, že tyto dva simulátory jsou si sobě velice podobné. Na stejném enginu funguje\linebreak i známý simulátor Real Racing 3, který ale noční jízdu nemá.
 
 \subsubsection{GT Racing 2 od Gameloftu}
 Úspěšným závodním simulátorem je v současné době GT Racing 2, je to hlavně díky jeho zpracování. Jako jediný z uvedených simulátorů má při noční jízdě nízké ambientní osvětlení a scéna je osvětlena hlavně reflektorem vozidla.
 
-Nejsem si jist, zda osvětlení lampami je přímo součástí textur modelů nebo jestli jsou zde použity mapy osvětlení.
+Nejsem si jist, zda osvětlení lampami je přímo součástí textur nebo jestli jsou zde použity mapy osvětlení.
 
 \subsubsection{Sports Car Challenge od Fishlabs}
 Asi nejdetailnější model vozidla má právě Sports Car Challenge. Vývojář spolupracuje s předními výrobci automobilů a to se odrazilo právě na modelech vozidel. Modely jsou realistické a to včetně interiérů.
@@ -433,9 +441,10 @@ Asi nejdetailnější model vozidla má právě Sports Car Challenge. Vývojář
 Projekt trpí slabší kompatibilitou s mobilními zařízeními, i když náročnost enginu je nízká. Co se týká noční jízdy, je realizována stejnými technikami jako denní jízda. Jsou zde použity pouze tmavé textury a halo efekt pouličních lamp.
 
 \subsubsection{Track Racing od vývojáře Soulkey}
-I když tento projekt není závodní simulátor s noční jízdou, zmiňuji ho hlavně kvůli ovládání. Jedná se o neoficiální remake hry Trackmania známé z PC. Projekt běží na Unity3D enginu a je dostupný na mnoha platformách, ale nedá se stáhnout přímo z Marketu či Storu.
+I když tento projekt není závodní simulátor s noční jízdou, zmiňuji ho hlavně kvůli ovládání. Jedná se o neoficiální remake hry Trackmania známé z PC. Projekt běží na Unity3D enginu a je dostupný na mnoha platformách, nedá se ale stáhnout přímo z Marketu či Storu.
 
-U výše uvedených simulátorů vozidlo automaticky zrychluje a u některých i samo brzdí. Hráč nemá tedy nad vozidlem takovou kontrolu. V případě Track Racing má hráč plnou kontrolu a zážitek ze hry se dá srovnat se zážitkem z PC hry.
+U výše uvedených simulátorů vozidlo automaticky zrychluje a u některých i samo brzdí. Hráč nemá tedy nad vozidlem takovou kontrolu. V případě Track Racing má hráč nad vozidlem plnou kontrolu a zážitek ze hry se dá srovnat se zážitkem z původní PC hry.
+\newpage
 
 \begin{center}
 \begin{figure}[h!]

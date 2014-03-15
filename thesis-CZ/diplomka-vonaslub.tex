@@ -337,15 +337,35 @@ Cílem práce bylo realizovat efektivní vykreslování rozsáhlých nočních s
 Důraz byl kladen na co nejvyšší optimalizaci vykreslování. Kromě hlavní grafické techniky map osvětlení (anglicky lightmap) bylo použito několik dalších technik řešící jednotlivé problémy, které vznikají při použití map osvětlení. Problémy nastávají hlavně při použití dynamických objektů nebo při změně osvětlení. Technika map osvětlení řeší pouze statickou scénu\linebreak a v případě použití dynamické scény je potřeba metodu značně rozšířit.
 
 \section{Požadavky na funkčnost}
+Projekt je rozdělen do dvou samostatných částí. První částí je předzpracování,\linebreak ve kterém se vytváří mapy osvětlení. Druhou částí projektu je závodní simulátor, který mapy osvětlení používá. Fázi předzpracování by teoreticky bylo možné provádět i na platformě Android. Vzhledem k tomu, že klasické počítače dosahují vyššího výkonu než mobilní zařízení, je daleko efektivnější provést předzpracování na počítači.
+\newpage
 
-Projekt je rozdělen do dvou samostatných částí. První částí je předzpracování,\linebreak ve kterém se vytváří mapy osvětlení. Mapy osvětlení jsou textury 3D modelů, které obsahují informace o difuzním osvětlení (difuzní osvětlení je závislé pouze na poloze světla, směru světla a povrchu tělesa, lze jej tedy pro statickou část modelu předpočítat). Druhou částí projektu je simulátor, který mapy osvětlení používá.
-\\
+\subsection{Mapy osvětlení}
+Mapy osvětlení jsou textury 3D modelů, které obsahují informace o difuzním osvětlení. Difuzní osvětlení je závislé pouze na poloze světla, směru světla a povrchu tělesa, lze jej tedy pro statickou část modelu předpočítat.
 
-TODO: Mapy osvětlení
+\begin{center}
+\begin{figure}[h!]
+\includegraphics[width=100mm]{figures/lmapply.png}
+\caption{Ukázka mapy osvětlení na jednoduchém 3D modelu}
+\end{figure}
+\end{center}
 
-TODO: Dynamické aktualizování map osvětlení
+Aby bylo možné mapy osvětlení dynamicky aktualizovat, je potřeba mít do map rychlý zapisovací přístup. Rychlé zapisování do textur se v OpenGL realizuje pomocí Frame Buffer Objektu (FBO). Pro aktualizaci musíme mít předpočítanou tzv. záplatu. Záplatou se rozumí menší textura, která se přidá do současné osvětlovací mapy. Přidáním záplaty lze tedy přidat do scény další světlo, které máme předpočítané. Záplata jde z FBO opět odebrat (provede se odečet stejné záplaty).
 
-TODO: Aplikování statického osvětlení na dynamické objekty
+Protože uchovávání záplat v paměti by bylo příliš paměťově náročné, jsou uloženy\linebreak ve vektorové podobě přímo na GPU pomocí Vertex Buffer Objektu (VBO). 
+\newpage
+
+\begin{center}
+\begin{figure}[h!]
+\includegraphics[width=110mm]{figures/lmupdate.png}
+\caption{Ukázka aktualizace map osvětlení na jednoduchém 3D modelu}
+\end{figure}
+\end{center}
+
+\subsection{Statické osvětlení s dynamickými objekty ve scéně}
+Při použití dynamických objektů ve scéně se statickém osvětlením vznikají dva základní problémy. Prvním problém je, že dynamické objekty mají jiné osvětlení než statická scéna\linebreak a to vypadá velice nepřirozeně. Druhým problémem je, že pokud dynamický objekt zastíní zdroj světla, tak nevznikne stín na statických objektech.
+
+Oba problémy lze vyřešit jen částečně. V prvním případě lze přečíst informaci o intenzitě osvětlení z nejbližšího bodu na statickém objektu a tuto intenzitu aplikovat na dynamický objekt. V druhém případě při vykreslování jednotlivých pixelů lze zjistit, zda se v okolí vykreslovaného bodu nenachází dynamický objekt a tím aproximačně zjistit zda byl vykreslovaný bod zastíněn.
 \newpage
 
 \section{Cílová platforma Android}

@@ -2,29 +2,31 @@
 \select@language {czech}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Komponenty platformy Android}}{4}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Asphalt 7}}{5}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Asphalt 8}}{5}{figure.2.3}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Need for Speed Most Wanted mobiln\IeC {\'\i } verze Zdroj:www.androidpolice.com}}{5}{figure.2.4}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces GT Racing 2 Zdroj:www.youtube.com}}{6}{figure.2.5}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Sports Car Challenge}}{6}{figure.2.6}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Track Racing}}{6}{figure.2.7}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Uk\IeC {\'a}zka mapy osv\IeC {\v e}tlen\IeC {\'\i } na jednoduch\IeC {\'e}m 3D modelu}}{4}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Uk\IeC {\'a}zka aktualizace map osv\IeC {\v e}tlen\IeC {\'\i } na jednoduch\IeC {\'e}m 3D modelu}}{5}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Komponenty platformy Android}}{6}{figure.2.3}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Asphalt 7}}{7}{figure.2.4}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Asphalt 8}}{7}{figure.2.5}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Need for Speed Most Wanted mobiln\IeC {\'\i } verze Zdroj:www.androidpolice.com}}{7}{figure.2.6}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces GT Racing 2 Zdroj:www.youtube.com}}{8}{figure.2.7}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Sports Car Challenge}}{8}{figure.2.8}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Track Racing}}{8}{figure.2.9}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces kD strom v metod\IeC {\v e} Packing Lightmaps}}{8}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Model m\IeC {\v e}sta transformov\IeC {\'a}n do sou\IeC {\v r}adnic mapy osv\IeC {\v e}tlen\IeC {\'\i }}}{9}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Princip st\IeC {\'\i }nov\IeC {\'y}ch map. Zdroj: \cite {Masserann11}}}{10}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Diagram odrazu vodn\IeC {\'\i } hladiny}}{11}{figure.3.4}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Odraz objekt\IeC {\r u} v screen-space p\IeC {\v r}\IeC {\'\i }stupu}}{11}{figure.3.5}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces kD strom v metod\IeC {\v e} Packing Lightmaps}}{10}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Model m\IeC {\v e}sta transformov\IeC {\'a}n do sou\IeC {\v r}adnic mapy osv\IeC {\v e}tlen\IeC {\'\i }}}{11}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Princip st\IeC {\'\i }nov\IeC {\'y}ch map. Zdroj: \cite {Masserann11}}}{12}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Diagram odrazu vodn\IeC {\'\i } hladiny}}{13}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Odraz objekt\IeC {\r u} v screen-space p\IeC {\v r}\IeC {\'\i }stupu}}{13}{figure.3.5}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Vykreslovac\IeC {\'\i } \IeC {\v r}et\IeC {\v e}zec simul\IeC {\'a}toru}}{15}{figure.4.1}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Odlesky na povrchu vozovky.}}{17}{figure.4.2}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Odlesky na vozidle. B\IeC {\'\i }l\IeC {\'e} plochy zn\IeC {\'a}zor\IeC {\v n}uj\IeC {\'\i } pozice, ze kter\IeC {\'y}ch se \IeC {\v c}te barva odlesku.}}{17}{figure.4.3}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Sc\IeC {\'e}na s aplikovan\IeC {\'y}mi mapami osv\IeC {\v e}tlen\IeC {\'\i } lamp}}{18}{figure.4.4}
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Vykreslovac\IeC {\'\i } \IeC {\v r}et\IeC {\v e}zec simul\IeC {\'a}toru}}{17}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Odlesky na povrchu vozovky.}}{19}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Odlesky na vozidle. B\IeC {\'\i }l\IeC {\'e} plochy zn\IeC {\'a}zor\IeC {\v n}uj\IeC {\'\i } pozice, ze kter\IeC {\'y}ch se \IeC {\v c}te barva odlesku.}}{19}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Sc\IeC {\'e}na s aplikovan\IeC {\'y}mi mapami osv\IeC {\v e}tlen\IeC {\'\i } lamp}}{20}{figure.4.4}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {B.1}{\ignorespaces Popiska obr\IeC {\'a}zku}}{34}{figure.B.1}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Popiska obr\IeC {\'a}zku}}{36}{figure.B.1}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -369,12 +369,18 @@ Oba problémy lze vyřešit jen částečně. V prvním případě lze přečís
 \newpage
 
 \section{Cílová platforma Android}
+Platforma Android je postavena na Linuxovém jádře a využívá knihovny, které bývají součástí unixových systémů. Od klasického desktopového Linuxu se odlišuje hlavně v tom, že jako hlavní programovací jazyk využívá Javu. Pomocí Javy je naprogramováno celé Android API, které zprostředkovává téměř veškeré služby systému.
+
+Na Androidu je téměř nemožné spustit C/C++ program přímo. Standardně se to řeší tak, že se vytvoří z programu knihovna, kterou spustí kód napsaný v Javě. Pak je nutné veškeré vstupy/výstupy obsluhovat v jazyce Java a to velice komplikuje portování programů z desktopového Linuxu na Android. Výjimku tvoří OpenGL, které umožňuje vykreslovat\linebreak na displej přímo z C/C++ kódu.
+
 \begin{center}
 \begin{figure}[h!]
 \includegraphics[width=120mm]{figures/android.png}
-\caption{Komponenty platformy Android}
+\caption{Komponenty platformy Android, komponenty vyznačené modrou barvou jsou napsané v jazyce Java, žlutou barvou je virtuální stroj, který umožňuje běh Java aplikací, zelenou barvou jsou C/C++ knihovny a červenou je Linuxové jádro}
 \end{figure}
 \end{center}
+
+Pro platformu Android existuje nepřeberné množství aplikací a toho začínají využívat ostatní platformy. V současné době platformy BlackBerry a Jolla umožňují spouštět Android aplikace, dále existuje platforma NokiaX, která je postavena přímo na operačním systému Android.
 
 \section{Existující implementace}
 
@@ -387,6 +393,7 @@ Oba problémy lze vyřešit jen částečně. V prvním případě lze přečís
 \subsubsection{A computational model of afterimages}
 
 TODO:přidat implementace na PC, popsat proč je vhodné brát ohled na implementace pro Android
+\newpage
 
 \subsection{Závodní simulátory s noční scénou pro platformu Android}
 

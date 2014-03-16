@@ -515,6 +515,57 @@ $I_s = C_l \cdot k_s \cdot C_s \cdot (\vec{E} \cdot \vec{R})^h$
 \end{center}
 
 \section{Výpočet osvětlení}
+Jednotlivá světla spočteme jako součin efektivity reflektoru pro daný vertex(Er), faktoru útlumu(Fa) a složek takzvaného Phongova osvětlovacího modelu.
+\begin{center}
+$light_i = E_r \cdot F_a \cdot (I_a + I_d + I_s)$
+\end{center}
+
+Pokud světlo není reflektor, poté $E_r = 1$\\
+Pokud bod leží mimo světelný kužel, tedy $(\vec{D} \cdot \vec{L}) < cos(\alpha)$, poté $E_r = 0$\\
+Pro ostatní případy $E_r = max(cos(\vec{V} \cdot \vec{D}))$
+
+\begin{center}
+\begin{figure}[h!]
+\includegraphics[width=60mm]{figures/cutoff.png}
+\caption{Vektory k efektivity reflektoru, $\vec{D}$ je směr světla, $\vec{V}$ je směr světla na kraji světelného kužele, $\alpha$ je úhel, který tyto vektory svírají, $\vec{L}$ je pozice světla a $P$ je bod na povrchu tělesa}
+\end{figure}
+\end{center}
+
+\begin{center}
+$F_a = \frac{1}{k_c + k_l \cdot d + k_q \cdot d^2}$
+\end{center}
+$d$ je vzdálenost bodu od zdroje světla\\
+$k_c$ je parametr konstantního utlumení\\
+$k_l$ je parametr lineárního utlumení\\
+$k_q$ je parametr kvadratického utlumení\\
+
+\begin{center}
+$color = k_e + k_ag + \sum_{}{} light_i$
+\end{center}
+$k_e$ je emisní světlo\\
+$k_ag$ je globální ambientní světlo\\
+
+\section{Poloprůhledné textury}
+Funkce blendingu spočívá v míchání barev a alpha kanálu(kanál, který určuje průhlednost) ve vykreslovacím bufferu. Výpočet výsledné hodnoty je dán následující rovnicí.
+\begin{center}
+($R_d$, $G_d$, $B_d$, $A_d$) = ($R_s S_r$ + $R_d S_d$, $G_s S_r$ + $G_d S_d$, $B_s S_r$ + $B_d S_d$, $A_s S_r$ + $A_d S_d$)
+\end{center}
+
+Složky ($R_s$, $G_s$, $B_s$, $A_s$) jsou kanály nově vykreslovaného obrazce(zdrojové)\\
+Složky ($R_d$, $G_d$, $B_d$, $A_d$) jsou kanály již vykreslené na scéně(cílové)\\ 
+Složky ($S_r$, $S_g$, $S_b$, $S_a$) a ($D_r$, $D_g$, $D_b$, $D_a$) jsou dány blending funkcemi. Tyto funkce se dělí do dvou kategorií(zdrojové a cílové).
+
+\begin{figure}[h]
+\begin{center}$
+\begin{array}{cc}
+\includegraphics[width=60mm]{figures/blendoff.png} &
+\includegraphics[width=60mm]{figures/blendon.png}
+\end{array}$
+\end{center}
+\caption{Rozdíl mezi průhledným a neprůhledným materiálem}
+\end{figure}
+
+\section{Stínování}
 
 \section{Výpočet stínů v reálném čase}
 

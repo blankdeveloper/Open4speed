@@ -341,7 +341,7 @@ Projekt je rozdělen do dvou samostatných částí. První částí je předzpr
 \newpage
 
 \subsection{Mapy osvětlení}
-Mapy osvětlení jsou textury 3D modelů, které obsahují informace o difuzním osvětlení. Difuzní osvětlení je závislé pouze na poloze světla, směru světla a povrchu tělesa, lze jej tedy pro statickou část modelu předpočítat.
+Mapy osvětlení jsou textury 3D modelů, které obsahují informace o difúzním osvětlení. Difúzní osvětlení je závislé pouze na poloze světla, směru světla a povrchu tělesa, lze jej tedy pro statickou část modelu předpočítat.
 
 \begin{center}
 \begin{figure}[h!]
@@ -454,10 +454,66 @@ U výše uvedených simulátorů vozidlo automaticky zrychluje a u některých i
 \end{center}
 
 %*****************************************************************************
-\chapter{Zobrazování scén s předpočteným osvětlením}
+\chapter{Teoretická část}
 
 \section{Osvětlovací model}
-TODO: výpočet osvětlení, suma světel, blending textur, spekulární složka
+Existuje několik osvětlovacích modelů, asi nejpoužívanější lokální osvětlovací model je Phongův. Phongův model se skládá ze tří typů osvětlení:
+\begin{itemize}
+\item ambientní osvětlení - nahrazuje nepřímé osvětlení konstantní hodnotou osvětlení
+\item difúzní osvětlení - osvětlení nezávislé na pohledu kamery, Odpovídá ideálně matnému povrchu
+\item spekulární osvětlení - osvětlení závislé na pohledu kamery, odpovídá ideálně odrazivému tělesu povrchy
+\end{itemize}
+
+Jak je patrné z obrázku 3.1, výsledná intenzita povrchu $I$ je součtem ambientní složky ($I_a$), difúzní složky ($I_d$) a spekulární složky ($I_s$):
+\begin{center}
+$I = I_a + I_d + I_s$
+\end{center}
+
+\begin{center}
+\begin{figure}[h!]
+\includegraphics[width=150mm]{figures/phong.png}
+\caption{Phongův osvětlovací model}
+\end{figure}
+\end{center}
+
+Všesměrové osvětlení je ve Phongovo osvětlovacím modelu konstantní pro celou scénu\linebreak a říká se jí ambientní osvětlení $I_a$. Výsledná intenzita se spočte jako součin konstant barvy ambientního světla $C_a$, koeficientem ambientního odrazu $k_a$ a barvou povrchu $C_d$, která je shodná i pro difúzní složku:
+\begin{center}
+$I_a = C_a \cdot k_a \cdot C_d$
+\end{center}
+
+Difúzní složka odpovídá ideálně matnému (Lambertovskému) povrchu a závisí na úhlu $\alpha$ mezi vektory $\vec{L}$ a $\vec{N}$.
+\begin{center}
+\begin{figure}[h!]
+\includegraphics[width=60mm]{figures/phongD.png}
+\caption{Difúzní osvětlení, $\vec{L}$ je normalizovaný směr světla, $\vec{N}$ je normalizovaná normála povrchu, $\alpha$ je úhel, který tyto vektory svírají, $\vec{E}$ je normalizovaný směr pohledu kamery (eye vektor) a $P$ je bod na povrchu tělesa}
+\end{figure}
+\end{center}
+Intenzitu difúzní složky lze vyjádřit následovně:
+\begin{center}
+$I_d = C_l \cdot k_d \cdot C_d \cdot cos(\alpha)$
+\end{center}
+Kde $C_l$ je barva světla, $k_d$ koeficient difúzního odrazu, $C_d$ barva povrchu a pro úhel $\alpha$ platí, že $cos(\alpha) = \vec{L} \cdot \vec{N}$. Po dosazení tedy získáme výsledný výraz:
+\begin{center}
+$I_d = C_l \cdot k_d \cdot C_d \cdot (\vec{L} \cdot \vec{N})$
+\end{center}
+\bigskip
+
+Spekulární (zrcadlová) složka odpovídá ideálně odrazivému tělesu a závisí na úhlu $\beta$ mezi vektory $\vec{E}$ a $\vec{R}$. 
+\begin{center}
+\begin{figure}[h!]
+\includegraphics[width=60mm]{figures/phongS.png}
+\caption{Spekulární osvětlení, $\vec{L}$ je normalizovaný směr světla, $\vec{N}$ je normalizovaná normála povrchu, $\alpha$ je úhel, který tyto vektory svírají, $\vec{E}$ je normalizovaný směr pohledu kamery (eye vektor), $\vec{R}$ je normalizovaný směr odrazu světla, $\beta$ je ůhel, který svírají vektory $\vec{E}$, $\vec{R}$ a $P$ je bod na povrchu tělesa}
+\end{figure}
+\end{center}
+
+Intenzitu spekulární složky lze vyjádřit následovně:
+\begin{center}
+$I_s = C_l \cdot k_s \cdot C_s \cdot cos^h(\beta)$
+\end{center}
+Kde $C_l$ je barva světla, $k_s$ koeficient spekulárního odrazu, $C_s$ barva lesklého povrchu, která většinou bývá bílá, $h$ je ostrost odrazu a pro úhel $\beta$ platí, že $cos(\beta) = \vec{E} \cdot \vec{R}$. Po dosazení tedy získáme výsledný výraz:
+\begin{center}
+$I_s = C_l \cdot k_s \cdot C_s \cdot (\vec{E} \cdot \vec{R})^h$
+\end{center}
 
 \subsection{Výpočet osvětlení}
 
@@ -564,7 +620,7 @@ Ve fázi předzpracování se provede konverze 3D modelů do vlastního formátu
 
 Plochu map osvětlení je nutné maximálně zaplnit z důvodu očekávané malé paměti vymezeny pro velké textury. Aby bylo možné určit nejvhodnější rozlišení těchto textur, je třeba umožnit jejich škálování.
 
-Vykreslení hodnot do map osvětlení se provede pomocí OpenGL, bude zde řešena viditelnost (pomocí stínových map), vypočteno utlumení a výpočet difuzního odrazu světla.
+Vykreslení hodnot do map osvětlení se provede pomocí OpenGL, bude zde řešena viditelnost (pomocí stínových map), vypočteno utlumení a výpočet difúzního odrazu světla.
 TODO dopsat
 
 \section{Simulátor}

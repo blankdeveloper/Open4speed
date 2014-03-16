@@ -464,7 +464,7 @@ Existuje několik osvětlovacích modelů, asi nejpoužívanější lokální os
 \item spekulární osvětlení - osvětlení závislé na pohledu kamery, odpovídá ideálně odrazivému tělesu povrchy
 \end{itemize}
 
-Jak je patrné z obrázku 3.1, výsledná intenzita povrchu $I$ je součtem ambientní složky ($I_a$), difúzní složky ($I_d$) a spekulární složky ($I_s$):
+Jak je patrné z obrázku 3.1, výsledná intenzita osvětlení povrchu $I$ je součtem ambientní složky ($I_a$), difúzní složky ($I_d$) a spekulární složky ($I_s$):
 \begin{center}
 $I = I_a + I_d + I_s$
 \end{center}
@@ -476,7 +476,7 @@ $I = I_a + I_d + I_s$
 \end{figure}
 \end{center}
 
-Všesměrové osvětlení je ve Phongovo osvětlovacím modelu konstantní pro celou scénu\linebreak a říká se jí ambientní osvětlení $I_a$. Výsledná intenzita se spočte jako součin konstant barvy ambientního světla $C_a$, koeficientem ambientního odrazu $k_a$ a barvou povrchu $C_d$, která je shodná i pro difúzní složku:
+Všesměrové osvětlení je ve Phongovo osvětlovacím modelu konstantní pro celou scénu\linebreak a říká se jí ambientní osvětlení $I_a$. Výsledná intenzita se spočte jako součin barvy ambientního světla $C_a$, koeficientem ambientního odrazu $k_a$ a barvou povrchu $C_d$, která je shodná i pro difúzní složku:
 \begin{center}
 $I_a = C_a \cdot k_a \cdot C_d$
 \end{center}
@@ -485,14 +485,14 @@ Difúzní složka odpovídá ideálně matnému (Lambertovskému) povrchu a záv
 \begin{center}
 \begin{figure}[h!]
 \includegraphics[width=60mm]{figures/phongD.png}
-\caption{Difúzní osvětlení, $\vec{L}$ je normalizovaný směr světla, $\vec{N}$ je normalizovaná normála povrchu, $\alpha$ je úhel, který tyto vektory svírají, $\vec{E}$ je normalizovaný směr pohledu kamery (eye vektor) a $P$ je bod na povrchu tělesa}
+\caption{Vektory k výpočtu difúzního osvětlení, $\vec{L}$ je normalizovaný směr světla, $\vec{N}$ je normalizovaná normála povrchu, $\alpha$ je úhel, který tyto vektory svírají, $\vec{E}$ je normalizovaný směr pohledu kamery (eye vektor) a $P$ je bod na povrchu tělesa}
 \end{figure}
 \end{center}
 Intenzitu difúzní složky lze vyjádřit následovně:
 \begin{center}
 $I_d = C_l \cdot k_d \cdot C_d \cdot cos(\alpha)$
 \end{center}
-Kde $C_l$ je barva světla, $k_d$ koeficient difúzního odrazu, $C_d$ barva povrchu a pro úhel $\alpha$ platí, že $cos(\alpha) = \vec{L} \cdot \vec{N}$. Po dosazení tedy získáme výsledný výraz:
+$C_l$ je barva světla, $k_d$ koeficient difúzního odrazu, $C_d$ barva povrchu a pro úhel $\alpha$ platí, že $cos(\alpha) = \vec{L} \cdot \vec{N}$. Po dosazení tedy získáme výsledný výraz:
 \begin{center}
 $I_d = C_l \cdot k_d \cdot C_d \cdot (\vec{L} \cdot \vec{N})$
 \end{center}
@@ -502,24 +502,21 @@ Spekulární (zrcadlová) složka odpovídá ideálně odrazivému tělesu a zá
 \begin{center}
 \begin{figure}[h!]
 \includegraphics[width=60mm]{figures/phongS.png}
-\caption{Spekulární osvětlení, $\vec{L}$ je normalizovaný směr světla, $\vec{N}$ je normalizovaná normála povrchu, $\alpha$ je úhel, který tyto vektory svírají, $\vec{E}$ je normalizovaný směr pohledu kamery (eye vektor), $\vec{R}$ je normalizovaný směr odrazu světla, $\beta$ je ůhel, který svírají vektory $\vec{E}$, $\vec{R}$ a $P$ je bod na povrchu tělesa}
+\caption{Vektory k výpočtu spekulárního osvětlení, $\vec{E}$ je normalizovaný směr pohledu kamery (eye vektor), $\vec{R}$ je normalizovaný směr odrazu světla, $\beta$ je ůhel, který tyto vektory svírají a $P$ je bod na povrchu tělesa}
 \end{figure}
 \end{center}
-
 Intenzitu spekulární složky lze vyjádřit následovně:
 \begin{center}
 $I_s = C_l \cdot k_s \cdot C_s \cdot cos^h(\beta)$
 \end{center}
-Kde $C_l$ je barva světla, $k_s$ koeficient spekulárního odrazu, $C_s$ barva lesklého povrchu, která většinou bývá bílá, $h$ je ostrost odrazu a pro úhel $\beta$ platí, že $cos(\beta) = \vec{E} \cdot \vec{R}$. Po dosazení tedy získáme výsledný výraz:
+$C_l$ je barva světla, $k_s$ koeficient spekulárního odrazu, $C_s$ barva lesklého povrchu (většinou bývá bílá), $h$ je ostrost odrazu a pro úhel $\beta$ platí, že $cos(\beta) = \vec{E} \cdot \vec{R}$. Po dosazení tedy získáme výsledný výraz:
 \begin{center}
 $I_s = C_l \cdot k_s \cdot C_s \cdot (\vec{E} \cdot \vec{R})^h$
 \end{center}
 
-\subsection{Výpočet osvětlení}
+\section{Výpočet osvětlení}
 
-\subsection{Výpočet stínů v reálném čase}
-
-\subsection{Spekulární složka osvětlovací modelu}
+\section{Výpočet stínů v reálném čase}
 
 \section{Předvypočítané osvětlení}
 Předvypočítané osvětlení je z hlediska vykreslování poměrně jednoduchá technika. Pouze se aplikuje další textura či textury, které mají vlastní texturovací souřadnice a nesou\linebreak v sobě informaci o osvětlení jednotlivých trojúhelníků. Těmto texturám se říká mapy osvětlení a dalo by se říct, že se jedná o techniku, která rozšiřuje techniku předvypočítaných stínů.
@@ -569,6 +566,8 @@ Tímto způsobem vyfiltrujeme neosvětlené objekty. Výsledek lze vylepšit vyu
 \subsection{Oprava chyby sousedících trojúhelníků}
 Pokud bychom použili přímo souřadnice získané metodou Packing Lightmaps, vznikly by ve výsledné scéně chyby(buď v důsledku zaokrouhlování souřadnic nebo v případě lineárního filtrování vlivem sousedních texelů). Je proto nutné už při generování map osvětlení souřadnice posunout nepatrně směrem ke středu každého trojúhelníku. Po dokončení generování map osvětlení se provede postprocesing, který doplní mezery v mapách osvětlení vždy nejbližší možnou hodnotou.
 
+
+\subsection{Spekulární složka osvětlovací modelu}
 
 \section{Odlesky povrchů}
 Odlesky dodávají scéně lepší vzhled, dodávají dojem buď kovového nebo mokrého povrchu. V rasterizačním řetězci jsou odlesky drobet problematické, protože grafická karta vždy zpracovává pouze aktuální geometrii a nemá informaci o okolí.

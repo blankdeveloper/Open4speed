@@ -19,11 +19,11 @@
 \contentsline {chapter}{\numberline {3}Teoretick\IeC {\'a} \IeC {\v c}\IeC {\'a}st}{11}{chapter.3}
 \contentsline {section}{\numberline {3.1}Osv\IeC {\v e}tlovac\IeC {\'\i } model}{11}{section.3.1}
 \contentsline {section}{\numberline {3.2}V\IeC {\'y}po\IeC {\v c}et osv\IeC {\v e}tlen\IeC {\'\i }}{13}{section.3.2}
-\contentsline {section}{\numberline {3.3}Polopr\IeC {\r u}hledn\IeC {\'e} textury}{14}{section.3.3}
+\contentsline {section}{\numberline {3.3}M\IeC {\'\i }ch\IeC {\'a}n\IeC {\'\i } textur}{14}{section.3.3}
 \contentsline {section}{\numberline {3.4}St\IeC {\'\i }nov\IeC {\'a}n\IeC {\'\i }}{14}{section.3.4}
 \contentsline {section}{\numberline {3.5}V\IeC {\'y}po\IeC {\v c}et st\IeC {\'\i }n\IeC {\r u} v re\IeC {\'a}ln\IeC {\'e}m \IeC {\v c}ase}{14}{section.3.5}
 \contentsline {section}{\numberline {3.6}P\IeC {\v r}edvypo\IeC {\v c}\IeC {\'\i }tan\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i }}{14}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Vytvo\IeC {\v r}en\IeC {\'\i } texturovac\IeC {\'\i }ch sou\IeC {\v r}adnic}{14}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.1}Vytvo\IeC {\v r}en\IeC {\'\i } texturovac\IeC {\'\i }ch sou\IeC {\v r}adnic}{15}{subsection.3.6.1}
 \contentsline {subsection}{\numberline {3.6.2}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{16}{subsection.3.6.2}
 \contentsline {subsection}{\numberline {3.6.3}Oprava chyby soused\IeC {\'\i }c\IeC {\'\i }ch troj\IeC {\'u}heln\IeC {\'\i }k\IeC {\r u}}{17}{subsection.3.6.3}
 \contentsline {subsection}{\numberline {3.6.4}Spekul\IeC {\'a}rn\IeC {\'\i } slo\IeC {\v z}ka osv\IeC {\v e}tlovac\IeC {\'\i } modelu}{17}{subsection.3.6.4}

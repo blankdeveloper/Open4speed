@@ -464,7 +464,7 @@ Existuje několik osvětlovacích modelů, asi nejpoužívanější lokální os
 \item spekulární osvětlení - osvětlení závislé na pohledu kamery, odpovídá ideálně odrazivému tělesu povrchy
 \end{itemize}
 
-Jak je patrné z obrázku 3.1, výsledná intenzita osvětlení povrchu $I$ je součtem ambientní složky ($I_a$), difúzní složky ($I_d$) a spekulární složky ($I_s$):
+Jak je patrné z obrázku 3.1, výsledná intenzita osvětlení povrchu $I$ je součtem ambientní složky ($I_a$), difúzní složky ($I_d$) a spekulární složky ($I_s$).
 \begin{center}
 $I = I_a + I_d + I_s$
 \end{center}
@@ -476,7 +476,7 @@ $I = I_a + I_d + I_s$
 \end{figure}
 \end{center}
 
-Všesměrové osvětlení je ve Phongovo osvětlovacím modelu konstantní pro celou scénu\linebreak a říká se jí ambientní osvětlení $I_a$. Výsledná intenzita se spočte jako součin barvy ambientního světla $C_a$, koeficientem ambientního odrazu $k_a$ a barvou povrchu $C_d$, která je shodná i pro difúzní složku:
+Všesměrové osvětlení je ve Phongovo osvětlovacím modelu konstantní pro celou scénu\linebreak a říká se jí ambientní osvětlení $I_a$. Výsledná intenzita se spočte jako součin barvy ambientního světla $C_a$, koeficientem ambientního odrazu $k_a$ a barvou povrchu $C_d$, která je shodná i pro difúzní složku.
 \begin{center}
 $I_a = C_a \cdot k_a \cdot C_d$
 \end{center}
@@ -485,7 +485,7 @@ Difúzní složka odpovídá ideálně matnému (Lambertovskému) povrchu a záv
 \begin{center}
 \begin{figure}[h!]
 \includegraphics[width=60mm]{figures/phongD.png}
-\caption{Vektory k výpočtu difúzního osvětlení, $\vec{L}$ je normalizovaný směr světla, $\vec{N}$ je normalizovaná normála povrchu, $\alpha$ je úhel, který tyto vektory svírají, $\vec{E}$ je normalizovaný směr pohledu kamery (eye vektor) a $P$ je bod na povrchu tělesa}
+\caption{Vektory k výpočtu difúzního osvětlení, $\vec{L}$ je normalizovaný směr světla, $\vec{N}$ je normalizovaná normála povrchu, $\alpha$ je úhel, který tyto vektory svírají, $\vec{E}$ je normalizovaný směr pohledu kamery (eye vektor) a $\vec{P}$ je bod na povrchu tělesa}
 \end{figure}
 \end{center}
 Intenzitu difúzní složky lze vyjádřit následovně:
@@ -502,7 +502,7 @@ Spekulární (zrcadlová) složka odpovídá ideálně odrazivému tělesu a zá
 \begin{center}
 \begin{figure}[h!]
 \includegraphics[width=60mm]{figures/phongS.png}
-\caption{Vektory k výpočtu spekulárního osvětlení, $\vec{E}$ je normalizovaný směr pohledu kamery (eye vektor), $\vec{R}$ je normalizovaný směr odrazu světla, $\beta$ je ůhel, který tyto vektory svírají a $P$ je bod na povrchu tělesa}
+\caption{Vektory k výpočtu spekulárního osvětlení, $\vec{E}$ je normalizovaný směr pohledu kamery (eye vektor), $\vec{R}$ je normalizovaný směr odrazu světla, $\beta$ je ůhel, který tyto vektory svírají a $\vec{P}$ je bod na povrchu tělesa}
 \end{figure}
 \end{center}
 Intenzitu spekulární složky lze vyjádřit následovně:
@@ -515,45 +515,40 @@ $I_s = C_l \cdot k_s \cdot C_s \cdot (\vec{E} \cdot \vec{R})^h$
 \end{center}
 
 \section{Výpočet osvětlení}
-Jednotlivá světla spočteme jako součin efektivity reflektoru pro daný vertex(Er), faktoru útlumu(Fa) a složek takzvaného Phongova osvětlovacího modelu.
+
+Pro výpočet osvětlení konkrétního bodu na obrazovce je potřeba nejdříve spočítat příspěvky jednotlivých světel pro tento bod. Příspěvky jednotlivých světel spočteme jako součin efektivity reflektoru pro daný vertex $E_r$, faktoru útlumu $F_a$ a součtu složek Phongova osvětlovacího modelu.
 \begin{center}
 $light_i = E_r \cdot F_a \cdot (I_a + I_d + I_s)$
 \end{center}
 
-Pokud světlo není reflektor, poté $E_r = 1$\\
-Pokud bod leží mimo světelný kužel, tedy $(\vec{D} \cdot \vec{L}) < cos(\alpha)$, poté $E_r = 0$\\
-Pro ostatní případy $E_r = max(cos(\vec{V} \cdot \vec{D}))$
-
+Efektivita reflektoru $E_r$ je parametr určující intenzitu osvětlení zdroje světla typu reflektor. Příkladem takového zdroje světla je například baterka.
 \begin{center}
 \begin{figure}[h!]
 \includegraphics[width=60mm]{figures/cutoff.png}
-\caption{Vektory k efektivity reflektoru, $\vec{D}$ je směr světla, $\vec{V}$ je směr světla na kraji světelného kužele, $\alpha$ je úhel, který tyto vektory svírají, $\vec{L}$ je pozice světla a $P$ je bod na povrchu tělesa}
+\caption{Vektory k výpočtu efektivity reflektoru, $\vec{D}$ je normalizovaný směr světla, $\vec{V}$ je normalizovaný směr světla na kraji světelného kužele, $\alpha$ je úhel, který tyto vektory svírají, $\vec{L_p}$ je pozice zdroje světla a $\vec{P}$ je bod na povrchu tělesa}
 \end{figure}
 \end{center}
 
+Hodnota efektivity reflektoru se spočte podle následujících podmínek:\\
+Pokud světlo není reflektor, poté $E_r = 1$.\\
+Pokud bod leží mimo světelný kužel, tedy $(\vec{V} \cdot \vec{D}) < cos(\alpha)$, poté $E_r = 0$.\\
+Pro ostatní případy $E_r = max(0, cos(\vec{V} \cdot \vec{D}))^{k_{se}}$, kde $k_{se}$ je parametr spot efektu.
+\newpage
+
+Faktor útlumu $F_a$ řeší, jak moc má být intenzita světla utlumena s rostoucí vzdáleností $d$ od zdroje světla. Konstantní útlum určuje parametr $k_c$, lineární útlum parametr $k_l$\linebreak a kvadratický útlum parametr $k_q$.
 \begin{center}
 $F_a = \frac{1}{k_c + k_l \cdot d + k_q \cdot d^2}$
 \end{center}
-$d$ je vzdálenost bodu od zdroje světla\\
-$k_c$ je parametr konstantního utlumení\\
-$k_l$ je parametr lineárního utlumení\\
-$k_q$ je parametr kvadratického utlumení\\
+\bigskip
 
+Výsledná barva bodu na obrazovce se spočítá jako součet barvy emisního světla $C_e$, barvy globálního ambientního světla $C_{ag}$ a sumy příspěvků jednotlivých světel.
 \begin{center}
-$color = k_e + k_ag + \sum_{}{} light_i$
-\end{center}
-$k_e$ je emisní světlo\\
-$k_ag$ je globální ambientní světlo\\
-
-\section{Poloprůhledné textury}
-Funkce blendingu spočívá v míchání barev a alpha kanálu(kanál, který určuje průhlednost) ve vykreslovacím bufferu. Výpočet výsledné hodnoty je dán následující rovnicí.
-\begin{center}
-($R_d$, $G_d$, $B_d$, $A_d$) = ($R_s S_r$ + $R_d S_d$, $G_s S_r$ + $G_d S_d$, $B_s S_r$ + $B_d S_d$, $A_s S_r$ + $A_d S_d$)
+$color = C_e + C_{ag} + \sum_{}{} light_i$
 \end{center}
 
-Složky ($R_s$, $G_s$, $B_s$, $A_s$) jsou kanály nově vykreslovaného obrazce(zdrojové)\\
-Složky ($R_d$, $G_d$, $B_d$, $A_d$) jsou kanály již vykreslené na scéně(cílové)\\ 
-Složky ($S_r$, $S_g$, $S_b$, $S_a$) a ($D_r$, $D_g$, $D_b$, $D_a$) jsou dány blending funkcemi. Tyto funkce se dělí do dvou kategorií(zdrojové a cílové).
+\section{Míchání textur}
+
+Míchání textur se v OpenGL provádí pomocí blendingu. Tato technika míchá cílový obraz (ten je již vykreslený ve FBO) a zdrojový obraz, tedy texturu namapovanou na nějaký model.
 
 \begin{figure}[h]
 \begin{center}$
@@ -562,8 +557,13 @@ Složky ($S_r$, $S_g$, $S_b$, $S_a$) a ($D_r$, $D_g$, $D_b$, $D_a$) jsou dány b
 \includegraphics[width=60mm]{figures/blendon.png}
 \end{array}$
 \end{center}
-\caption{Rozdíl mezi průhledným a neprůhledným materiálem}
+\caption{Příklad neprůhledného a poloprůhledného materiálu}
 \end{figure}
+
+Vstupem pro blending funkci je zdrojová barva $C_s$, cílová barva $C_d$ a parametry $B_s$\linebreak a $B_d$, které určují pro každý kanál, jak se má hodnota míchat. Výstupem funkce je nová cílová barva $C_d$.
+\begin{center}
+$C_d = C_s \cdot B_s + C_d \cdot B_d$
+\end{center}
 
 \section{Stínování}
 

@@ -570,7 +570,7 @@ Pojem stínování v počítačové grafice znamená postup vybarvování trojú
 \begin{itemize}
 \item Konstantní stínování - celý polygon se vybarví jednou barvou dle normály povrchu. Používá se ve scénách, ve kterých se nacházejí pouze směrové zdroje světla.
 \item Gouraudovo stínování - spočítá se osvětlení ve vrcholech a následně se interpolují hodnoty mezi vrcholy. Toto stínování je velmi rychlé. Problém nastane, pokud světlo osvětluje střed polygonu a zároveň neosvětluje nebo jen částečně osvětluje vrchol. Osvětlení je po té ve vrcholech velmi nízké a nemůže tedy vzniknout korektně osvětlený obraz.
-\item Phongovo stínování - spočítá se osvětlení pro každý pixel polygonu na obrazovce. Dnes asi nejpoužívanější stínování. V OpenGL se toto stínování provádí pomocí shaderů. Vstupem do vertexového shaderu je pozice vrcholu a jeho normála. Ve vertex shaderu se provede transformace do pohledu kamery a určí se, že pozice vrcholu a normála se mají interpolovat. Po rasterizaci získáme interpolované hodnoty jako vstup ve fragment shaderu a zde provedeme výpočet podle výše uvedeného osvětlovacího modelu.
+\item Phongovo stínování - spočítá se osvětlení pro každý pixel polygonu na obrazovce. Dnes je to asi nejpoužívanější stínování. V OpenGL se toto stínování provádí pomocí shaderů. Vstupem do vertexového shaderu je pozice vrcholu a jeho normála. Ve vertex shaderu se provede transformace do pohledu kamery a určí se, že pozice vrcholu a normála se mají interpolovat. Po rasterizaci získáme interpolované hodnoty jako vstup ve fragment shaderu a zde provedeme výpočet podle výše uvedeného osvětlovacího modelu.
 \end{itemize}
 
 \begin{center}
@@ -591,10 +591,10 @@ Interpolaci provádí OpenGL automaticky. Jeden ze způsobů jak provést interp
 
 Nejdříve potřebujeme spočítat obsah jednotlivých trojúhelníků, abychom získali váhu hodnot v jednotlivých vrcholech.
 \begin{center}
-$S_{ABC} = 0.5 \cdot (\vec{AB} \times \vec{AC})$\\
-$S_{ABP} = 0.5 \cdot (\vec{AB} \times \vec{AP})$\\
-$S_{APC} = 0.5 \cdot (\vec{AP} \times \vec{AC})$\\
-$S_{PBC} = 0.5 \cdot (\vec{PB} \times \vec{PC})$
+$S_{ABC} = 0.5 \cdot |\vec{AB} \times \vec{AC}|$\\
+$S_{ABP} = 0.5 \cdot |\vec{AB} \times \vec{AP}|$\\
+$S_{APC} = 0.5 \cdot |\vec{AP} \times \vec{AC}|$\\
+$S_{PBC} = 0.5 \cdot |\vec{PB} \times \vec{PC}|$
 \end{center}
 
 Pokud si označím hodnotu u bodu $A$ jako $a$, u bodu $B$ jako $b$ a u bodu $C$ jako $c$, získáme interpolovanou hodnotu $p$ v bodě $P$ následovně.

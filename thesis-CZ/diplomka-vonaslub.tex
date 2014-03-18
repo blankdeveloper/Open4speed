@@ -457,7 +457,7 @@ U výše uvedených simulátorů vozidlo automaticky zrychluje a u některých i
 \chapter{Teoretická část}
 
 \section{Osvětlovací model}
-Existuje několik osvětlovacích modelů, asi nejpoužívanější lokální osvětlovací model je Phongův. Phongův model se skládá ze tří typů osvětlení:
+Existuje několik osvětlovacích modelů, asi nejpoužívanější lokální osvětlovací model je Phongův. Phongův model se skládá ze tří typů osvětlení.
 \begin{itemize}
 \item ambientní osvětlení - nahrazuje nepřímé osvětlení konstantní hodnotou osvětlení
 \item difúzní osvětlení - osvětlení nezávislé na pohledu kamery, Odpovídá ideálně matnému povrchu
@@ -488,11 +488,11 @@ Difúzní složka odpovídá ideálně matnému (Lambertovskému) povrchu a záv
 \caption{Vektory k výpočtu difúzního osvětlení, $\vec{L}$ je normalizovaný směr světla, $\vec{N}$ je normalizovaná normála povrchu, $\alpha$ je úhel, který tyto vektory svírají, $\vec{E}$ je normalizovaný směr pohledu kamery (eye vektor) a $\vec{P}$ je bod na povrchu tělesa}
 \end{figure}
 \end{center}
-Intenzitu difúzní složky lze vyjádřit následovně:
+Intenzitu difúzní složky lze vyjádřit následovně.
 \begin{center}
 $I_d = C_l \cdot k_d \cdot C_d \cdot cos(\alpha)$
 \end{center}
-$C_l$ je barva světla, $k_d$ koeficient difúzního odrazu, $C_d$ barva povrchu a pro úhel $\alpha$ platí, že $cos(\alpha) = \vec{L} \cdot \vec{N}$. Po dosazení tedy získáme výsledný výraz:
+$C_l$ je barva světla, $k_d$ koeficient difúzního odrazu, $C_d$ barva povrchu a pro úhel $\alpha$ platí, že $cos(\alpha) = \vec{L} \cdot \vec{N}$. Po dosazení tedy získáme výsledný výraz.
 \begin{center}
 $I_d = C_l \cdot k_d \cdot C_d \cdot (\vec{L} \cdot \vec{N})$
 \end{center}
@@ -505,11 +505,11 @@ Spekulární (zrcadlová) složka odpovídá ideálně odrazivému tělesu a zá
 \caption{Vektory k výpočtu spekulárního osvětlení, $\vec{E}$ je normalizovaný směr pohledu kamery (eye vektor), $\vec{R}$ je normalizovaný směr odrazu světla, $\beta$ je ůhel, který tyto vektory svírají a $\vec{P}$ je bod na povrchu tělesa}
 \end{figure}
 \end{center}
-Intenzitu spekulární složky lze vyjádřit následovně:
+Intenzitu spekulární složky lze vyjádřit následovně.
 \begin{center}
 $I_s = C_l \cdot k_s \cdot C_s \cdot cos^h(\beta)$
 \end{center}
-$C_l$ je barva světla, $k_s$ koeficient spekulárního odrazu, $C_s$ barva lesklého povrchu (většinou bývá bílá), $h$ je ostrost odrazu a pro úhel $\beta$ platí, že $cos(\beta) = \vec{E} \cdot \vec{R}$. Po dosazení tedy získáme výsledný výraz:
+$C_l$ je barva světla, $k_s$ koeficient spekulárního odrazu, $C_s$ barva lesklého povrchu (většinou bývá bílá), $h$ je ostrost odrazu a pro úhel $\beta$ platí, že $cos(\beta) = \vec{E} \cdot \vec{R}$. Po dosazení tedy získáme výsledný výraz.
 \begin{center}
 $I_s = C_l \cdot k_s \cdot C_s \cdot (\vec{E} \cdot \vec{R})^h$
 \end{center}
@@ -529,7 +529,7 @@ Efektivita reflektoru $E_r$ je parametr určující intenzitu osvětlení zdroje
 \end{figure}
 \end{center}
 
-Hodnota efektivity reflektoru se spočte podle následujících podmínek:\\
+Hodnota efektivity reflektoru se spočte podle následujících podmínek.\\
 Pokud světlo není reflektor, poté $E_r = 1$.\\
 Pokud bod leží mimo světelný kužel, tedy $(\vec{V} \cdot \vec{D}) < cos(\alpha)$, poté $E_r = 0$.\\
 Pro ostatní případy $E_r = max(0, cos(\vec{V} \cdot \vec{D}))^{k_{se}}$, kde $k_{se}$ je parametr spot efektu.
@@ -604,8 +604,8 @@ $p = a \cdot \frac{S_{PBC}}{S_{ABC}} + b \cdot \frac{S_{APC}}{S_{ABC}} + c \cdot
 
 \section{Výpočet stínů v reálném čase}
 
-\section{Předvypočítané osvětlení}
-Předvypočítané osvětlení je z hlediska vykreslování poměrně jednoduchá technika. Pouze se aplikuje další textura či textury, které mají vlastní texturovací souřadnice a nesou\linebreak v sobě informaci o osvětlení jednotlivých trojúhelníků. Těmto texturám se říká mapy osvětlení a dalo by se říct, že se jedná o techniku, která rozšiřuje techniku předvypočítaných stínů.
+\section{Předpočtené osvětlení}
+Předpočtené osvětlení je z hlediska vykreslování poměrně jednoduchá technika. Pouze se aplikuje další textura či textury, které mají vlastní texturovací souřadnice a nesou\linebreak v sobě informaci o osvětlení jednotlivých trojúhelníků. Těmto texturám se říká mapy osvětlení a dalo by se říct, že se jedná o techniku, která rozšiřuje techniku předpočtených stínů.
 
 Z hlediska generování těchto textur je tato technika náročnější než výsledné vykreslování, skládá se z několika kroků. V prvním kroku je třeba vytvořit texturovací souřadnice pro jednotlivé trojúhelníky.
 
@@ -803,13 +803,13 @@ U vozidel se odlesk provádí pouze podle normály. Pro výpočet pozice odraže
 \end{figure}
 \newpage
 
-Pokud máme ve scéně \textbf{předvypočítané stíny}, je vhodné tyto statické stíny aplikovat\linebreak i \textbf{na dynamické objekty}. V případě vozidla lze přečíst intenzitu osvětlení z některých bodů na silnici pod vozidlem. Intenzitu osvětlení lze jednoduše ukládat do alfa kanálu textury,\linebreak ve které se nachází aktuální scéna.
+Pokud máme ve scéně \textbf{předpočtené stíny}, je vhodné tyto statické stíny aplikovat\linebreak i \textbf{na dynamické objekty}. V případě vozidla lze přečíst intenzitu osvětlení z některých bodů na silnici pod vozidlem. Intenzitu osvětlení lze jednoduše ukládat do alfa kanálu textury,\linebreak ve které se nachází aktuální scéna.
 
 Zde vzniká problém s barevným světlem. Jsou zde dvě možnosti řešení. Prvním je přidání další textury, ve kterém by byla barevná intenzita světla(tím by došlo ke zvýšení náročnosti na hardware a ke zvýšení paměťové náročnosti). Druhým možným řešením je omezit barevná světla do nějaké sytosti(pokud se slabě zabarvené světlo aplikuje jako bílé, není to tolik rušivé).
 
-\section{Předvypočítané osvětlení}
+\section{Předpočtené osvětlení}
 
-Předvypočítané osvětlení umožňuje velmi rychle zobrazovat stínování a stíny na statických objektech. Problémem je, že je potřeba aplikovat tento efekt i na dynamických objektech. Úroveň osvětlení lze přečíst z nejbližšího statického objektu, tedy za předpokladu, že budeme mít tuto hodnotu někde k dispozici. Tuto hodnotu lze mít uloženou v alfa kanálu aktuálního snímku a jen jí přečíst před tím, než se vykreslí dynamické objekty.
+Předpočtené osvětlení umožňuje velmi rychle zobrazovat stínování a stíny na statických objektech. Problémem je, že je potřeba aplikovat tento efekt i na dynamických objektech. Úroveň osvětlení lze přečíst z nejbližšího statického objektu, tedy za předpokladu, že budeme mít tuto hodnotu někde k dispozici. Tuto hodnotu lze mít uloženou v alfa kanálu aktuálního snímku a jen jí přečíst před tím, než se vykreslí dynamické objekty.
 
 \begin{figure}[h!]
 \begin{center}

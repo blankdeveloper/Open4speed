@@ -14,11 +14,13 @@
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Vektory k v\IeC {\'y}po\IeC {\v c}tu spekul\IeC {\'a}rn\IeC {\'\i }ho osv\IeC {\v e}tlen\IeC {\'\i }, $\mathaccentV {vec}17E{E}$ je normalizovan\IeC {\'y} sm\IeC {\v e}r pohledu kamery (eye vektor), $\mathaccentV {vec}17E{R}$ je normalizovan\IeC {\'y} sm\IeC {\v e}r odrazu sv\IeC {\v e}tla, $\beta $ je \IeC {\r u}hel, kter\IeC {\'y} tyto vektory sv\IeC {\'\i }raj\IeC {\'\i } a $\mathaccentV {vec}17E{P}$ je bod na povrchu t\IeC {\v e}lesa}}{12}{figure.3.3}
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Vektory k v\IeC {\'y}po\IeC {\v c}tu efektivity reflektoru, $\mathaccentV {vec}17E{D}$ je normalizovan\IeC {\'y} sm\IeC {\v e}r sv\IeC {\v e}tla, $\mathaccentV {vec}17E{V}$ je normalizovan\IeC {\'y} sm\IeC {\v e}r sv\IeC {\v e}tla na kraji sv\IeC {\v e}teln\IeC {\'e}ho ku\IeC {\v z}ele, $\alpha $ je \IeC {\'u}hel, kter\IeC {\'y} tyto vektory sv\IeC {\'\i }raj\IeC {\'\i }, $\mathaccentV {vec}17E{L_p}$ je pozice zdroje sv\IeC {\v e}tla a $\mathaccentV {vec}17E{P}$ je bod na povrchu t\IeC {\v e}lesa}}{13}{figure.3.4}
 \contentsline {figure}{\numberline {3.5}{\ignorespaces P\IeC {\v r}\IeC {\'\i }klad nepr\IeC {\r u}hledn\IeC {\'e}ho a polopr\IeC {\r u}hledn\IeC {\'e}ho materi\IeC {\'a}lu}}{14}{figure.3.5}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces kD strom v metod\IeC {\v e} Packing Lightmaps}}{15}{figure.3.6}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Model m\IeC {\v e}sta transformov\IeC {\'a}n do sou\IeC {\v r}adnic mapy osv\IeC {\v e}tlen\IeC {\'\i }}}{16}{figure.3.7}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Princip st\IeC {\'\i }nov\IeC {\'y}ch map. Zdroj: \cite {Masserann11}}}{17}{figure.3.8}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Diagram odrazu vodn\IeC {\'\i } hladiny}}{18}{figure.3.9}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Odraz objekt\IeC {\r u} v screen-space p\IeC {\v r}\IeC {\'\i }stupu}}{19}{figure.3.10}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Uk\IeC {\'a}zka jednotliv\IeC {\'y}ch typ\IeC {\r u} st\IeC {\'\i }nov\IeC {\'a}n\IeC {\'\i }}}{15}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Pomocn\IeC {\'y} obr\IeC {\'a}zek k v\IeC {\'y}po\IeC {\v c}tu barycentrick\IeC {\'e} interpolace}}{15}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces kD strom v metod\IeC {\v e} Packing Lightmaps}}{17}{figure.3.8}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Model m\IeC {\v e}sta transformov\IeC {\'a}n do sou\IeC {\v r}adnic mapy osv\IeC {\v e}tlen\IeC {\'\i }}}{17}{figure.3.9}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Princip st\IeC {\'\i }nov\IeC {\'y}ch map. Zdroj: \cite {Masserann11}}}{18}{figure.3.10}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Diagram odrazu vodn\IeC {\'\i } hladiny}}{19}{figure.3.11}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Odraz objekt\IeC {\r u} v screen-space p\IeC {\v r}\IeC {\'\i }stupu}}{20}{figure.3.12}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Vykreslovac\IeC {\'\i } \IeC {\v r}et\IeC {\v e}zec simul\IeC {\'a}toru}}{23}{figure.4.1}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Odlesky na povrchu vozovky.}}{25}{figure.4.2}

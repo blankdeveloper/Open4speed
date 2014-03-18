@@ -566,6 +566,41 @@ $C_d = C_s \cdot B_s + C_d \cdot B_d$
 \end{center}
 
 \section{Stínování}
+Pojem stínování v počítačové grafice znamená postup vybarvování trojúhelníků. Existují tři typy stínování.
+\begin{itemize}
+\item Konstantní stínování - celý polygon se vybarví jednou barvou dle normály povrchu. Používá se ve scénách, ve kterých se nacházejí pouze směrové zdroje světla.
+\item Gouraudovo stínování - spočítá se osvětlení ve vrcholech a následně se interpolují hodnoty mezi vrcholy. Toto stínování je velmi rychlé. Problém nastane, pokud světlo osvětluje střed polygonu a zároveň neosvětluje nebo jen částečně osvětluje vrchol. Osvětlení je po té ve vrcholech velmi nízké a nemůže tedy vzniknout korektně osvětlený obraz.
+\item Phongovo stínování - spočítá se osvětlení pro každý pixel polygonu na obrazovce. Dnes asi nejpoužívanější stínování. V OpenGL se toto stínování provádí pomocí shaderů. Vstupem do vertexového shaderu je pozice vrcholu a jeho normála. Ve vertex shaderu se provede transformace do pohledu kamery a určí se, že pozice vrcholu a normála se mají interpolovat. Po rasterizaci získáme interpolované hodnoty jako vstup ve fragment shaderu a zde provedeme výpočet podle výše uvedeného osvětlovacího modelu.
+\end{itemize}
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=135mm]{figures/shading.png}
+\caption{Ukázka jednotlivých typů stínování}
+\end{figure}
+\end{center}
+
+Interpolaci provádí OpenGL automaticky. Jeden ze způsobů jak provést interpolaci ručně je provést rasterizaci(tím získat všechny body uvnitř trojúhelníka) a poté provést barycentrickou interpolaci.
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=65mm]{figures/interpolation.png}
+\caption{Pomocný obrázek k výpočtu barycentrické interpolace}
+\end{figure}
+\end{center}
+\newpage
+
+Nejdříve potřebujeme spočítat obsah jednotlivých trojúhelníků, abychom získali váhu hodnot v jednotlivých vrcholech.
+\begin{center}
+$S_{ABC} = 0.5 \cdot (\vec{AB} \times \vec{AC})$\\
+$S_{ABP} = 0.5 \cdot (\vec{AB} \times \vec{AP})$\\
+$S_{APC} = 0.5 \cdot (\vec{AP} \times \vec{AC})$\\
+$S_{PBC} = 0.5 \cdot (\vec{PB} \times \vec{PC})$
+\end{center}
+
+Pokud si označím hodnotu u bodu $A$ jako $a$, u bodu $B$ jako $b$ a u bodu $C$ jako $c$, získáme interpolovanou hodnotu $p$ v bodě $P$ následovně.
+\begin{center}
+$p = a \cdot \frac{S_{PBC}}{S_{ABC}} + b \cdot \frac{S_{APC}}{S_{ABC}} + c \cdot \frac{S_{ABP}}{S_{ABC}}$
+\end{center}
 
 \section{Výpočet stínů v reálném čase}
 

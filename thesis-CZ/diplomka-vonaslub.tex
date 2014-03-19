@@ -546,25 +546,6 @@ Výsledná barva bodu na obrazovce se spočítá jako součet barvy emisního sv
 $color = C_e + C_{ag} + \sum_{}{} light_i$
 \end{center}
 
-\section{Míchání textur}
-
-Míchání textur se v OpenGL provádí pomocí blendingu. Tato technika míchá cílový obraz (ten je již vykreslený ve FBO) a zdrojový obraz, tedy texturu namapovanou na nějaký model.
-
-\begin{figure}[h]
-\begin{center}$
-\begin{array}{cc}
-\includegraphics[width=60mm]{figures/blendoff.png} &
-\includegraphics[width=60mm]{figures/blendon.png}
-\end{array}$
-\end{center}
-\caption{Příklad neprůhledného a poloprůhledného materiálu}
-\end{figure}
-
-Vstupem pro blending funkci je zdrojová barva $C_s$, cílová barva $C_d$ a parametry $B_s$\linebreak a $B_d$, které určují pro každý kanál, jak se má hodnota míchat. Výstupem funkce je nová cílová barva $C_d$.
-\begin{center}
-$C_d = C_s \cdot B_s + C_d \cdot B_d$
-\end{center}
-
 \section{Stínování}
 Pojem stínování v počítačové grafice znamená postup vybarvování trojúhelníků. Existují tři typy stínování.
 \begin{itemize}
@@ -579,28 +560,50 @@ Pojem stínování v počítačové grafice znamená postup vybarvování trojú
 \caption{Ukázka jednotlivých typů stínování}
 \end{figure}
 \end{center}
+\newpage
 
 Interpolaci provádí OpenGL automaticky. Jeden ze způsobů jak provést interpolaci ručně je provést rasterizaci(tím získat všechny body uvnitř trojúhelníka) a poté provést barycentrickou interpolaci.
+
 \begin{center}
 \begin{figure}[h]
 \includegraphics[width=65mm]{figures/interpolation.png}
 \caption{Pomocný obrázek k výpočtu barycentrické interpolace}
 \end{figure}
 \end{center}
-\newpage
 
 Nejdříve potřebujeme spočítat obsah jednotlivých trojúhelníků, abychom získali váhu hodnot v jednotlivých vrcholech.
-\begin{center}
-$S_{ABC} = 0.5 \cdot |\vec{AB} \times \vec{AC}|$\\
-$S_{ABP} = 0.5 \cdot |\vec{AB} \times \vec{AP}|$\\
-$S_{APC} = 0.5 \cdot |\vec{AP} \times \vec{AC}|$\\
-$S_{PBC} = 0.5 \cdot |\vec{PB} \times \vec{PC}|$
+\begin{center} 
+$S_{PBC} = \frac{|\vec{PB} \times \vec{PC}|}{2}$;
+$S_{APC} = \frac{|\vec{AP} \times \vec{AC}|}{2}$; 
+$S_{ABP} = \frac{|\vec{AB} \times \vec{AP}|}{2}$;
+$S_{ABC} = \frac{|\vec{AB} \times \vec{AC}|}{2}$
 \end{center}
 
 Pokud si označím hodnotu u bodu $A$ jako $a$, u bodu $B$ jako $b$ a u bodu $C$ jako $c$, získáme interpolovanou hodnotu $p$ v bodě $P$ následovně.
 \begin{center}
 $p = a \cdot \frac{S_{PBC}}{S_{ABC}} + b \cdot \frac{S_{APC}}{S_{ABC}} + c \cdot \frac{S_{ABP}}{S_{ABC}}$
 \end{center}
+
+\section{Míchání textur}
+
+Míchání textur se v OpenGL provádí pomocí blendingu. Tato technika míchá cílový obraz (ten již vykreslený ve FBO) a zdrojový obraz, tedy texturu namapovanou na nějaký model.
+
+Vstupem pro blending funkci je zdrojová barva $C_s$, cílová barva $C_d$ a parametry $B_s$\linebreak a $B_d$, které určují pro každý kanál, jak se má hodnota míchat. Výstupem funkce je nová cílová barva $C_d$.
+\begin{center}
+$C_d = C_s \cdot B_s + C_d \cdot B_d$
+\end{center}
+
+Příklad použití blendingu je technika poloprůhledného materiálu. Nejdříve se vykreslí neprůhledná část scény (tím se vykreslí i hloubkový buffer). Poté se vypne zápis do hloubkového bufferu a vykreslí se geometrie s částečnou průhledností.
+
+\begin{figure}[h]
+\begin{center}$
+\begin{array}{cc}
+\includegraphics[width=70mm]{figures/blendoff.png} &
+\includegraphics[width=70mm]{figures/blendon.png}
+\end{array}$
+\end{center}
+\caption{Ukázka problému při vykreslení poloprůhledného materiálu před neprůhledným}
+\end{figure}
 
 \section{Výpočet stínů v reálném čase}
 

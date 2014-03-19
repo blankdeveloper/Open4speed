@@ -598,44 +598,77 @@ Příklad použití blendingu je technika poloprůhledného materiálu. Nejdří
 \begin{figure}[h]
 \begin{center}$
 \begin{array}{cc}
-\includegraphics[width=70mm]{figures/blendoff.png} &
-\includegraphics[width=70mm]{figures/blendon.png}
+\includegraphics[width=60mm]{figures/blendoff.png} &
+\includegraphics[width=60mm]{figures/blendon.png}
 \end{array}$
 \end{center}
 \caption{Ukázka problému při vykreslení poloprůhledného materiálu před neprůhledným}
 \end{figure}
 
 \section{Výpočet stínů v reálném čase}
-TODO:popis
+Stíny v počítačové grafice napomáhají k vnímání souvislostí ve scéně. Pokud ve scéně stíny nepoužijeme, nebudeme například schopni poznat zda se těleso dotýká povrchu nebo se vznáší (výjimku tvoří pohled, při kterém vzniká viditelná mezera mezi objektem a povrchem).
+
+Abychom mohli stín spočítat musíme znát informace o okolí aktuálně vykreslovaného primitiva. To je v OpenGL problém, protože při vykreslování primitiv nemáme standardně žádné informace o okolí. Problém se řeší pomocí tzv. stínových map. 
+
+Stínová mapa je textura, do které se vykreslí scéna z pohledu zdroje světla. Do stínové mapy se nekreslí barevná informace, kreslí se do ní vzdálenost od zdroje světla (na obrázku 3.9 je tato vzdálenost namapovaná na odstíny šedi).
+
+Princip stínových map je naznačen na obrázku 3.8. Při vyhodnocování bodu P se spočítá vzdálenost bodu od zdroje světla a porovná se s hodnotou uloženou ve stínové mapě.\linebreak V případě bodu P je vzdálenost vyšší než hodnota ve stínové mapě a bod je vyhodnocen jako zastíněný. V případě bodu Q je vzdálenost stejná jako ve stínové mapě (s numerickou tolerancí) a bod je tedy viditelný.
+
 \begin{center}
 \begin{figure}[h]
-\includegraphics[width=100mm]{figures/shadowmaps.png}
-\caption{Princip stínových map}
+\includegraphics[width=90mm]{figures/shadowmaps.png}
+\caption{Pomocný obrázek k výpočtu viditelnosti pomocí stínových map}
 \end{figure}
 \end{center}
-\newpage
 
 \begin{center}
 \begin{figure}[h]
 \includegraphics[width=120mm]{figures/shadowmap.png}
-\caption{Ukázka stínové mapy}
+\caption{Ukázka scény (vlevo) a její stínové mapy (vpravo)}
 \end{figure}
 \end{center}
 
+Transformace ze světových souřadnic do souřadnic projekce je vyjádřen pomocí součinu modelové, pohledové a projekční matice (anglicky model, view, projection matrix, používá se zkratka MVP). Transformaci kamery si označím jako $MVP_{camera}$ a transformaci pro pohled zdroje světla jako $MVP_{light}$. Vrchol primitiva si označím jako $\vec{v}$, spočteme vektor $\vec{p}$, jehož složky $x,y$ určují pozici hodnoty ve stínové mapě a složka $z$ hodnotu texelu. Pokud bychom měli hodnotu ve stínové mapě přepisovat, zapíšeme vždy nižší hodnotu (nižší hodnota je bod bližší zdroji světla).
 \begin{center}
-\begin{figure}[h]
-\includegraphics[width=120mm]{figures/pcf.png}
-\caption{Vyhodnocení úrovně zastínění pomocí PCF}
-\end{figure}
+$\vec{p} = MVP_{light} \cdot \begin{pmatrix}\vec{v}\\ 1\\\end{pmatrix}$
 \end{center}
+
+Pomocí tohoto postupu získáme stínovou mapu, kterou využijeme při vykreslování scény z pohledu kamery. Vypočteme $\vec{p}$ stejně jako při výpočtu stínové mapy a získáme vzdálenost $d$ ze stínové mapy $SM$.
+\begin{center}
+$d = SM[\vec{p}.x, \vec{p}.y]$
+\end{center}
+
+Nakonec zjistíme, jak se tyto hodnoty liší pomocí podmínky $|\vec{p}.z - d| < \epsilon$, kde $\epsilon$ je malé číslo filtrující numerickou chybu. Pokud je podmínka splněna, je bod osvětlený daným zdrojem světla.
+\bigskip
+
+Výše uvedeným postupem jsou řešeny ostré stíny pro bodové zdroje světla, případně světelné reflektory. Dále je potřeba řešit měkké stíny, které vznikají z plošných zdrojů světla. Rozdíl mezi ostrými a měkkými stíny je znázorněn na obrázku 3.10.
 \newpage
 
 \begin{center}
 \begin{figure}[h]
-\includegraphics[width=120mm]{figures/pcf-example.png}
-\caption{Ukázka filtrování PCF}
+\includegraphics[width=110mm]{figures/shadows-pa.png}
+\caption{Rozdíl mezi ostrými stíny (vlevo) a měkkými stíny (vpravo)}
 \end{figure}
 \end{center}
+
+Výpočet plošných zdrojů světel v reálném čase je stále výpočetně příliš náročný. Pro zobrazení měkkých stínů je možné použít filtrování PCF (Percentage Closer Filtering), které umožní vytvořit měkký stín pro bodový zdroj světla.
+
+Filtrování PCF je snadno implementovatelné, vrací dobré výsledky, ale může být náročnější na výpočetní výkon. Princip filtrování PCF je, že při výpočtu zastínění se ze stínové mapy vyhodnocují i okolní body a tím vzniká přechod mezi zastíněnými a nezastíněnými pixely na obrazovce.
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=85mm]{figures/pcf.png}
+\caption{Ukázka vyhodnocení zastínění pomocí PCF 3x3. Vlevo jsou data ze stínové mapy, uprostřed vyhodnocení zastínění jednotlivých bodů (0 je viditelný bod, 1 je zastíněný bod) a vpravo výsledné zastínění}
+\end{figure}
+\end{center}
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=100mm]{figures/pcf-example.png}
+\caption{Ukázka výsledků filtrování PCF}
+\end{figure}
+\end{center}
+\newpage
 
 \section{Předpočtené osvětlení}
 Předpočtené osvětlení je z hlediska vykreslování poměrně jednoduchá technika. Pouze se aplikuje další textura či textury, které mají vlastní texturovací souřadnice a nesou\linebreak v sobě informaci o osvětlení jednotlivých trojúhelníků. Těmto texturám se říká mapy osvětlení a dalo by se říct, že se jedná o techniku, která rozšiřuje techniku předpočtených stínů.

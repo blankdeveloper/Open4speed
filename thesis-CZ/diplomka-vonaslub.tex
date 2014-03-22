@@ -320,15 +320,15 @@ Očekávají se cca 1 -- 2 odstavce, maximálně půl stránky.
 
 %*****************************************************************************
 \chapter{Úvod}
-V minulosti se výrobci počítačového hardwaru primárně soustředili na dosažení nejvyššího výpočetního výkonu na trhu. Během posledních let v tomto konkurenčním boji nastala změna. Už tolik nedochází ke zvyšování výkonu hardwaru, výrobci se soustředí spíše\linebreak na miniaturizaci. S miniaturizaci hardwaru souvisí stoupající výpočetní výkon mobilních zařízeních. 
+V minulosti se výrobci počítačového hardwaru primárně soustředili na dosažení nejvyššího výpočetního výkonu na trhu. Během posledních let v tomto konkurenčním boji nastala změna. Už tolik nedochází ke zvyšování výkonu hardwaru, výrobci se soustředí spíše\linebreak na miniaturizaci. S miniaturizaci hardwaru souvisí stoupající výpočetní výkon mobilních zařízení. 
 
 Mobilní telefony a tablety jsou zatím v porovnání s výkonem osobních počítačů slabší, ale to za několik let nemusí platit. Chytré mobilní telefony postupně přebírají funkce jiných zařízení. Některé mobilní telefony lze použít jako dálkový ovladač k televizi, platební kartu, autonavigaci a další.
 
-Trend udělat z mobilního telefonu univerzální zařízení zasahuje i do oblasti počítačových her. To souvisí s odvětvím počítačové grafiky. Výrobci her se předhánějí v tom, kdo vytvoří nejrealističtější grafiku ve svých hrách. Tím nepřímo přispívají k rozvoji počítačové grafiky.
+Trend udělat z mobilního telefonu univerzální zařízení zasahuje i do oblasti počítačových her. To souvisí s odvětvím počítačové grafiky. Výrobci her se předhánějí, kdo vytvoří nejrealističtější grafiku ve svých hrách. Tím nepřímo přispívají k rozvoji počítačové grafiky.
 
 Vývoj her pro mobilní zařízení je v porovnání s vývojem her pro osobní počítače rozdílný z několika hledisek. Používá se rozdílné ovládání, mobilní zařízení je menší a je zde různý výpočetní výkon. V mé práci se zabývám problematikou výpočetního výkonu z hlediska grafického výpočtu.
 
-Obecně platí, že během vykreslování 3D scény se některé výpočty neustále dokola opakují. V práci většinu těchto výpočtů předpočítávám a tím získám ve výsledné implementaci daleko lepší výsledky, než kdybych předpočítání nepoužil.
+Obecně platí, že během vykreslování 3D scény se některé výpočty cyklicky opakují.\linebreak V práci většinu těchto výpočtů předpočítávám a tím získám ve výsledné implementaci daleko lepší výsledky, než kdybych předpočítání nepoužil.
 
 %*****************************************************************************
 \chapter{Specifikace práce}
@@ -365,7 +365,7 @@ Protože uchovávání záplat v paměti by bylo příliš paměťově náročn�
 \subsection{Statické osvětlení s dynamickými objekty ve scéně}
 Při použití dynamických objektů ve scéně se statickém osvětlením vznikají dva základní problémy. Prvním problém je, že dynamické objekty mají jiné osvětlení než statická scéna\linebreak a to vypadá velice nepřirozeně. Druhým problémem je, že pokud dynamický objekt zastíní zdroj světla, tak nevznikne stín na statických objektech.
 
-Oba problémy lze vyřešit jen částečně. V prvním případě lze přečíst informaci o intenzitě osvětlení z nejbližšího bodu na statickém objektu a tuto intenzitu aplikovat na dynamický objekt. V druhém případě při vykreslování jednotlivých pixelů lze zjistit, zda se v okolí vykreslovaného bodu nenachází dynamický objekt a tím aproximačně zjistit zda byl vykreslovaný bod zastíněn.
+Oba problémy lze vyřešit jen částečně. V prvním případě lze přečíst informaci o intenzitě osvětlení z nejbližšího bodu na statickém objektu a tuto intenzitu aplikovat na dynamický objekt. V druhém případě při vykreslování jednotlivých pixelů lze zjistit, zda se v okolí vykreslovaného bodu nenachází dynamický objekt a tím aproximačně zjistit, zda byl vykreslovaný bod zastíněn.
 \newpage
 
 \section{Cílová platforma Android}
@@ -404,7 +404,7 @@ Tato implementace je z roku 1999 a zabývá se proceduálním modelováním měs
 \subsubsection{Imperfektní stínové mapy pro výpočet nepřímého osvětlení}
 Tato implementace, představená roku 2008, se nezabývá přímo noční scénou, zabývá se nepřímým osvětlením, které s noční scénou souvisí. Implementace běží v reálném čase a její výsledky jsou srovnatelné se snímky, které se vykreslují několik hodin.
 
-V této implementaci se nevyužívá předpočtených dat. Využívá se zde virtuálních bodových světel (VPL), která simulují odrazy světla. Z každého VPL se vytvoří stínová mapa o malém rozlišením a při vykreslování výsledné scény se vyhodnocuje viditelnost ze všech VPL.
+V této implementaci se nevyužívá předpočtených dat. Využívá se zde virtuálních bodových světel (VPL), která simulují odrazy světla. Z každého VPL se vytvoří stínová mapa o malém rozlišení a při vykreslování výsledné scény se vyhodnocuje viditelnost ze všech VPL.
 
 Implementace podporuje více typů zdrojů světla, včetně plošných. Nemá problémy\linebreak s barevným světlem ani s kaustiky.
 
@@ -421,14 +421,14 @@ V této sekci jsem vyhledával i implementace, u kterých není uvedeno, jak byl
 \subsubsection{Asphalt Urban od Gameloftu}
 Asphalt Urban je série mobilních závodních simulátorů, jejíchž první díl byl publikován spolu s herním smartphonem Nokia N-Gage. Jedná se o úspěšnou sérii, která přitahuje hráče všech možných platforem.
 
-Zmíním 7.díl ze série Asphalt Urban, který osobě považuji za nejúspěšnější díl. Osvětlení z pouličních lamp je součástí textur, reflektor vozidla je tvořen zřejmě pomocí projektivní textury. Povrch zrcadlově odráží 3D objekty. Po bližším zkoumání lze zjistit, že některé tyto odražené objekty jsou odlišné. Domnívám se, že zde byl použit duplicitní objekt.
+Zmíním 7.díl ze série Asphalt Urban, který osobně považuji za nejúspěšnější díl. Osvětlení z pouličních lamp je součástí textur, reflektor vozidla je tvořen zřejmě pomocí projektivní textury. Povrch zrcadlově odráží 3D objekty. Po bližším zkoumání lze zjistit, že některé tyto odražené objekty jsou odlišné. Domnívám se, že zde byl použit duplicitní objekt.
 
 Další díl ze série Asphalt Urban už odlesky řeší lépe. Odráží se hlavně světla a odlesk je lépe přizpůsoben povrchu. Vzniká zde dojem mokré silnice. Dochází i k rozmazání brzdových světel. Osvětlení od lamp je opět řešeno texturou. Nepříjemnou změnou je absence reflektoru vozidla a přidání rušivého chvění kamery během jízdy.
 
 \subsubsection{Need for Speed Most Wanted od EA Games a Firemonkeys}
 Simulátor, který je spíše známý z PC, na mobilním trhu takový úspěch nemá. Od PC verze je velice odlišný, ale rozhodně se nejedná o nějakou lacinou napodobeninu. Jedná se o první závodní simulátor pro mobilní zařízení, který disponuje modelem ničení vozidla (je možné vozidlo poškrábat, rozbít mu okna apod).
 
-Oproti Asphalt 8 má navíc efekt Depth-of-field. To znamená, že vzdálené modely jsou rozmazané a zabarveny do barvy pozadí. Tento efekt vytváří přijemný mlhovitý dpjem. Jinak bych řekl, že tyto dva simulátory jsou si sobě velice podobné. Na stejném enginu funguje\linebreak i známý simulátor Real Racing 3, který ale noční jízdu nemá.
+Oproti Asphalt 8 má navíc efekt Depth-of-field. To znamená, že vzdálené modely jsou rozmazané a zabarveny do barvy pozadí. Tento efekt vytváří příjemný mlhovitý dojem. Jinak bych řekl, že tyto dva simulátory jsou si sobě velice podobné. Na stejném enginu funguje\linebreak i známý simulátor Real Racing 3, který ale noční jízdu nemá.
 
 \subsubsection{GT Racing 2 od Gameloftu}
 Úspěšným závodním simulátorem je v současné době GT Racing 2, je to hlavně díky jeho zpracování. Jako jediný z uvedených simulátorů má při noční jízdě nízké ambientní osvětlení a scéna je osvětlena hlavně reflektorem vozidla.
@@ -461,7 +461,7 @@ Existuje několik osvětlovacích modelů, asi nejpoužívanější lokální os
 \begin{itemize}
 \item ambientní osvětlení - nahrazuje nepřímé osvětlení konstantní hodnotou osvětlení
 \item difúzní osvětlení - osvětlení nezávislé na pohledu kamery, Odpovídá ideálně matnému povrchu
-\item spekulární osvětlení - osvětlení závislé na pohledu kamery, odpovídá ideálně odrazivému tělesu povrchy
+\item spekulární osvětlení - osvětlení závislé na pohledu kamery, odpovídá ideálně odrazivému povrchu
 \end{itemize}
 
 Jak je patrné z obrázku 3.1, výsledná intenzita osvětlení povrchu $I$ je součtem ambientní složky ($I_a$), difúzní složky ($I_d$) a spekulární složky ($I_s$).
@@ -476,7 +476,7 @@ $I = I_a + I_d + I_s$
 \end{figure}
 \end{center}
 
-Všesměrové osvětlení je ve Phongovo osvětlovacím modelu konstantní pro celou scénu\linebreak a říká se jí ambientní osvětlení $I_a$. Výsledná intenzita se spočte jako součin barvy ambientního světla $C_a$, koeficientem ambientního odrazu $k_a$ a barvou povrchu $C_d$, která je shodná i pro difúzní složku.
+Všesměrové osvětlení je ve Phongovo osvětlovacím modelu konstantní pro daný objekt\linebreak a říká se jí ambientní osvětlení $I_a$. Výsledná intenzita se spočte jako součin barvy ambientního světla $C_a$, koeficientem ambientního odrazu $k_a$ a barvou povrchu $C_d$, která je shodná i pro difúzní složku.
 \begin{center}
 $I_a = C_a \cdot k_a \cdot C_d$
 \end{center}
@@ -606,9 +606,9 @@ Příklad použití blendingu je technika poloprůhledného materiálu. Nejdří
 \end{figure}
 
 \section{Výpočet stínů v reálném čase}
-Stíny v počítačové grafice napomáhají k vnímání souvislostí ve scéně. Pokud ve scéně stíny nepoužijeme, nebudeme například schopni poznat zda se těleso dotýká povrchu nebo se vznáší (výjimku tvoří pohled, při kterém vzniká viditelná mezera mezi objektem a povrchem).
+Stíny v počítačové grafice napomáhají k vnímání souvislostí ve scéně. Pokud ve scéně stíny nepoužijeme, nebudeme například schopni poznat, zda se těleso dotýká povrchu nebo se vznáší (výjimku tvoří pohled, při kterém vzniká viditelná mezera mezi objektem a povrchem).
 
-Abychom mohli stín spočítat musíme znát informace o okolí aktuálně vykreslovaného primitiva. To je v OpenGL problém, protože při vykreslování primitiv nemáme standardně žádné informace o okolí. Problém se řeší pomocí tzv. stínových map. 
+Abychom mohli stín spočítat, musíme znát informace o okolí aktuálně vykreslovaného primitiva. To je v OpenGL problém, protože při vykreslování primitiv nemáme standardně žádné informace o okolí. Problém se řeší pomocí tzv. stínových map. 
 
 Stínová mapa je textura, do které se vykreslí scéna z pohledu zdroje světla. Do stínové mapy se nekreslí barevná informace, kreslí se do ní vzdálenost od zdroje světla (na obrázku 3.9 je tato vzdálenost namapovaná na odstíny šedi).
 
@@ -617,7 +617,7 @@ Princip stínových map je naznačen na obrázku 3.8. Při vyhodnocování bodu 
 \begin{center}
 \begin{figure}[h]
 \includegraphics[width=90mm]{figures/shadowmaps.png}
-\caption{Pomocný obrázek k výpočtu viditelnosti pomocí stínových map}
+\caption{Pomocný obrázek k výpočtu zastínění pomocí stínových map}
 \end{figure}
 \end{center}
 

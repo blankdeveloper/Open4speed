@@ -762,10 +762,10 @@ V případě rovných povrchů je nutné použít jiný přístup, scéna se vyk
 \end{center}
 \end{figure}
 
-Pohled $P$ je MVP matice, pro získání pohledu $P'$ potřebujeme vypočítat reflexní matici $R$, která převrátí pohled podle normály povrchu $\vec{N}$.
+Pohled $P$ je MVP matice, pro získání pohledu $P'$ potřebujeme vypočítat reflexní matici $R$, která převrátí pohled podle normály povrchu $\vec{N}$ a parametru $d$ spočítaného z rovnice roviny.
               
 \begin{center}
-$d = -(\vec{N}_x + \vec{N}_y + \vec{N}_z)$
+$d = -(xN_x + yN_y + zN_z)$
 \end{center}
 \begin{center}
 $R = \begin{pmatrix}

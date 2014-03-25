@@ -24,44 +24,44 @@
 \contentsline {section}{\numberline {3.5}V\IeC {\'y}po\IeC {\v c}et st\IeC {\'\i }n\IeC {\r u} v re\IeC {\'a}ln\IeC {\'e}m \IeC {\v c}ase}{16}{section.3.5}
 \contentsline {section}{\numberline {3.6}P\IeC {\v r}edpo\IeC {\v c}ten\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i }}{19}{section.3.6}
 \contentsline {subsection}{\numberline {3.6.1}Vytvo\IeC {\v r}en\IeC {\'\i } texturovac\IeC {\'\i }ch sou\IeC {\v r}adnic}{19}{subsection.3.6.1}
-\contentsline {subsection}{\numberline {3.6.2}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{20}{subsection.3.6.2}
-\contentsline {subsection}{\numberline {3.6.3}Oprava chyby soused\IeC {\'\i }c\IeC {\'\i }ch troj\IeC {\'u}heln\IeC {\'\i }k\IeC {\r u}}{20}{subsection.3.6.3}
-\contentsline {subsection}{\numberline {3.6.4}Spekul\IeC {\'a}rn\IeC {\'\i } slo\IeC {\v z}ka osv\IeC {\v e}tlovac\IeC {\'\i } modelu}{21}{subsection.3.6.4}
-\contentsline {section}{\numberline {3.7}Odlesky povrch\IeC {\r u}}{21}{section.3.7}
-\contentsline {chapter}{\numberline {4}Realizace}{23}{chapter.4}
-\contentsline {section}{\numberline {4.1}P\IeC {\v r}edzpracov\IeC {\'a}n\IeC {\'\i }}{23}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Vytv\IeC {\'a}\IeC {\v r}en\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{23}{subsection.4.1.1}
-\contentsline {subsubsection}{\numberline {4.1.1.1}Generov\IeC {\'a}n\IeC {\'\i } texturovac\IeC {\'\i }ch sou\IeC {\v r}adnic pro mapy osv\IeC {\v e}tlen\IeC {\'\i }}{23}{subsubsection.4.1.1.1}
-\contentsline {subsubsection}{\numberline {4.1.1.2}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{23}{subsubsection.4.1.1.2}
-\contentsline {subsection}{\numberline {4.1.2}P\IeC {\v r}\IeC {\'\i }prava dat pro dynamickou aktualizaci map osv\IeC {\v e}tlen\IeC {\'\i }}{23}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Simul\IeC {\'a}tor}{23}{section.4.2}
-\contentsline {section}{\numberline {4.3}Realizace na platform\IeC {\v e} Android}{24}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Problematika Android API}{24}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Vyu\IeC {\v z}it\IeC {\'\i } vl\IeC {\'a}ken}{24}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}Pr\IeC {\'a}ce se soubory}{25}{subsection.4.3.3}
-\contentsline {section}{\numberline {4.4}Nahrazen\IeC {\'\i } v\IeC {\'\i }cepr\IeC {\r u}chodov\IeC {\'y}ch p\IeC {\v r}\IeC {\'\i }stup\IeC {\r u}}{25}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Rozm\IeC {\v e}r textur na OpenGL ES 2.0}{26}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Efekty pomoc\IeC {\'\i } screen-space p\IeC {\v r}\IeC {\'\i }stupu}{26}{subsection.4.4.2}
-\contentsline {section}{\numberline {4.5}P\IeC {\v r}edpo\IeC {\v c}ten\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i }}{28}{section.4.5}
-\contentsline {section}{\numberline {4.6}Sv\IeC {\v e}tla vozidel}{29}{section.4.6}
-\contentsline {chapter}{\numberline {5}Testov\IeC {\'a}n\IeC {\'\i }}{31}{chapter.5}
-\contentsline {section}{\numberline {5.1}P\IeC {\v r}edzpracov\IeC {\'a}n\IeC {\'\i }}{31}{section.5.1}
-\contentsline {section}{\numberline {5.2}Simul\IeC {\'a}tor}{31}{section.5.2}
-\contentsline {chapter}{\numberline {6}Z\IeC {\'a}v\IeC {\v e}r}{35}{chapter.6}
-\contentsline {chapter}{Literatura}{37}{chapter*.6}
-\contentsline {chapter}{\numberline {A}Testov\IeC {\'a}n\IeC {\'\i } zapln\IeC {\v e}n\IeC {\'\i } str\IeC {\'a}nky a odsazen\IeC {\'\i } odstavc\IeC {\r u}}{39}{appendix.A}
-\contentsline {chapter}{\numberline {B}Pokyny a n\IeC {\'a}vody k form\IeC {\'a}tov\IeC {\'a}n\IeC {\'\i } textu pr\IeC {\'a}ce}{43}{appendix.B}
-\contentsline {section}{\numberline {B.1}Vkl\IeC {\'a}d\IeC {\'a}n\IeC {\'\i } obr\IeC {\'a}zk\IeC {\r u}}{43}{section.B.1}
-\contentsline {section}{\numberline {B.2}Kreslen\IeC {\'\i } obr\IeC {\'a}zk\IeC {\r u}}{44}{section.B.2}
-\contentsline {section}{\numberline {B.3}Tabulky}{44}{section.B.3}
-\contentsline {section}{\numberline {B.4}Odkazy v textu}{45}{section.B.4}
-\contentsline {subsection}{\numberline {B.4.1}Odkazy na literaturu}{45}{subsection.B.4.1}
-\contentsline {subsection}{\numberline {B.4.2}Odkazy na obr\IeC {\'a}zky, tabulky a kapitoly}{46}{subsection.B.4.2}
-\contentsline {section}{\numberline {B.5}Rovnice, centrovan\IeC {\'a}, \IeC {\v c}\IeC {\'\i }slovan\IeC {\'a} matematika}{46}{section.B.5}
-\contentsline {section}{\numberline {B.6}K\IeC {\'o}dy programu}{47}{section.B.6}
-\contentsline {section}{\numberline {B.7}Dal\IeC {\v s}\IeC {\'\i } pozn\IeC {\'a}mky}{48}{section.B.7}
-\contentsline {subsection}{\numberline {B.7.1}\IeC {\v C}esk\IeC {\'e} uvozovky}{48}{subsection.B.7.1}
-\contentsline {chapter}{\numberline {C}Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{49}{appendix.C}
-\contentsline {chapter}{\numberline {D}UML diagramy}{51}{appendix.D}
-\contentsline {chapter}{\numberline {E}Instala\IeC {\v c}n\IeC {\'\i } a u\IeC {\v z}ivatelsk\IeC {\'a} p\IeC {\v r}\IeC {\'\i }ru\IeC {\v c}ka}{53}{appendix.E}
-\contentsline {chapter}{\numberline {F}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{55}{appendix.F}
+\contentsline {subsection}{\numberline {3.6.2}Oprava chyby soused\IeC {\'\i }c\IeC {\'\i }ch troj\IeC {\'u}heln\IeC {\'\i }k\IeC {\r u}}{21}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.6.3}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{21}{subsection.3.6.3}
+\contentsline {subsection}{\numberline {3.6.4}Spekul\IeC {\'a}rn\IeC {\'\i } slo\IeC {\v z}ka osv\IeC {\v e}tlovac\IeC {\'\i } modelu}{22}{subsection.3.6.4}
+\contentsline {section}{\numberline {3.7}Odlesky povrch\IeC {\r u}}{22}{section.3.7}
+\contentsline {chapter}{\numberline {4}Realizace}{25}{chapter.4}
+\contentsline {section}{\numberline {4.1}P\IeC {\v r}edzpracov\IeC {\'a}n\IeC {\'\i }}{25}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Vytv\IeC {\'a}\IeC {\v r}en\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{25}{subsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.1.1}Generov\IeC {\'a}n\IeC {\'\i } texturovac\IeC {\'\i }ch sou\IeC {\v r}adnic pro mapy osv\IeC {\v e}tlen\IeC {\'\i }}{25}{subsubsection.4.1.1.1}
+\contentsline {subsubsection}{\numberline {4.1.1.2}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{25}{subsubsection.4.1.1.2}
+\contentsline {subsection}{\numberline {4.1.2}P\IeC {\v r}\IeC {\'\i }prava dat pro dynamickou aktualizaci map osv\IeC {\v e}tlen\IeC {\'\i }}{25}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Simul\IeC {\'a}tor}{25}{section.4.2}
+\contentsline {section}{\numberline {4.3}Realizace na platform\IeC {\v e} Android}{26}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Problematika Android API}{26}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Vyu\IeC {\v z}it\IeC {\'\i } vl\IeC {\'a}ken}{26}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Pr\IeC {\'a}ce se soubory}{27}{subsection.4.3.3}
+\contentsline {section}{\numberline {4.4}Nahrazen\IeC {\'\i } v\IeC {\'\i }cepr\IeC {\r u}chodov\IeC {\'y}ch p\IeC {\v r}\IeC {\'\i }stup\IeC {\r u}}{27}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Rozm\IeC {\v e}r textur na OpenGL ES 2.0}{28}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Efekty pomoc\IeC {\'\i } screen-space p\IeC {\v r}\IeC {\'\i }stupu}{28}{subsection.4.4.2}
+\contentsline {section}{\numberline {4.5}P\IeC {\v r}edpo\IeC {\v c}ten\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i }}{30}{section.4.5}
+\contentsline {section}{\numberline {4.6}Sv\IeC {\v e}tla vozidel}{31}{section.4.6}
+\contentsline {chapter}{\numberline {5}Testov\IeC {\'a}n\IeC {\'\i }}{33}{chapter.5}
+\contentsline {section}{\numberline {5.1}P\IeC {\v r}edzpracov\IeC {\'a}n\IeC {\'\i }}{33}{section.5.1}
+\contentsline {section}{\numberline {5.2}Simul\IeC {\'a}tor}{33}{section.5.2}
+\contentsline {chapter}{\numberline {6}Z\IeC {\'a}v\IeC {\v e}r}{37}{chapter.6}
+\contentsline {chapter}{Literatura}{39}{chapter*.6}
+\contentsline {chapter}{\numberline {A}Testov\IeC {\'a}n\IeC {\'\i } zapln\IeC {\v e}n\IeC {\'\i } str\IeC {\'a}nky a odsazen\IeC {\'\i } odstavc\IeC {\r u}}{41}{appendix.A}
+\contentsline {chapter}{\numberline {B}Pokyny a n\IeC {\'a}vody k form\IeC {\'a}tov\IeC {\'a}n\IeC {\'\i } textu pr\IeC {\'a}ce}{45}{appendix.B}
+\contentsline {section}{\numberline {B.1}Vkl\IeC {\'a}d\IeC {\'a}n\IeC {\'\i } obr\IeC {\'a}zk\IeC {\r u}}{45}{section.B.1}
+\contentsline {section}{\numberline {B.2}Kreslen\IeC {\'\i } obr\IeC {\'a}zk\IeC {\r u}}{46}{section.B.2}
+\contentsline {section}{\numberline {B.3}Tabulky}{46}{section.B.3}
+\contentsline {section}{\numberline {B.4}Odkazy v textu}{47}{section.B.4}
+\contentsline {subsection}{\numberline {B.4.1}Odkazy na literaturu}{47}{subsection.B.4.1}
+\contentsline {subsection}{\numberline {B.4.2}Odkazy na obr\IeC {\'a}zky, tabulky a kapitoly}{48}{subsection.B.4.2}
+\contentsline {section}{\numberline {B.5}Rovnice, centrovan\IeC {\'a}, \IeC {\v c}\IeC {\'\i }slovan\IeC {\'a} matematika}{48}{section.B.5}
+\contentsline {section}{\numberline {B.6}K\IeC {\'o}dy programu}{49}{section.B.6}
+\contentsline {section}{\numberline {B.7}Dal\IeC {\v s}\IeC {\'\i } pozn\IeC {\'a}mky}{50}{section.B.7}
+\contentsline {subsection}{\numberline {B.7.1}\IeC {\v C}esk\IeC {\'e} uvozovky}{50}{subsection.B.7.1}
+\contentsline {chapter}{\numberline {C}Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{51}{appendix.C}
+\contentsline {chapter}{\numberline {D}UML diagramy}{53}{appendix.D}
+\contentsline {chapter}{\numberline {E}Instala\IeC {\v c}n\IeC {\'\i } a u\IeC {\v z}ivatelsk\IeC {\'a} p\IeC {\v r}\IeC {\'\i }ru\IeC {\v c}ka}{55}{appendix.E}
+\contentsline {chapter}{\numberline {F}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{57}{appendix.F}

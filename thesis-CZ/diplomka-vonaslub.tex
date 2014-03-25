@@ -671,37 +671,46 @@ Filtrování PCF je snadno implementovatelné, vrací dobré výsledky, ale mů�
 \newpage
 
 \section{Předpočtené osvětlení}
-Předpočtené osvětlení je z hlediska vykreslování poměrně jednoduchá technika. Pouze se na 3D model aplikuje další textura či textury, které mají vlastní texturovací souřadnice a nesou v sobě informaci o osvětlení jednotlivých trojúhelníků. Jak již bylo uvedeno, těmto texturám se říká mapy osvětlení a dalo by se říct, že se jedná o techniku, která rozšiřuje techniku předpočtených stínů.
+Předpočtené osvětlení je z hlediska vykreslování poměrně jednoduchá technika. Na 3D model se aplikuje další textura či textury, které mají vlastní texturovací souřadnice a nesou v sobě informaci o osvětlení jednotlivých trojúhelníků. Jak již bylo uvedeno, těmto texturám se říká mapy osvětlení a dalo by se říct, že se jedná o techniku, která rozšiřuje techniku předpočtených stínů.
 
 Z hlediska generování těchto textur je tato technika náročnější než výsledné vykreslování, skládá se z několika kroků. V prvním kroku je třeba vytvořit texturovací souřadnice pro jednotlivé trojúhelníky.
 
 \subsection{Vytvoření texturovacích souřadnic}
+Pro mapy osvětlení není vhodné použít standardní texturovací souřadnice. V osvětlovacích mapách je potřeba zajistit, aby každý texel mapy odpovídal právě jednomu bodu\linebreak v prostoru. Pokud by tomu tak nebylo, stalo by se, že při osvětlení jednoho bodu se rozzáří\linebreak i jiný bod než ten osvětlený.
+
+Obsah povrchu 3D modelu v ideálním případě odpovídá obsahu ploch map osvětlení. Abychom se tomuto případu přiblížili, musíme plochu map co nejvíce využít. Maximálním využitím 2D plochy se zabývá problém batohu, který patří do kategorie problémů NP-hard (obtížný nedeterministický problém řešitelný v polynomiálním čase).
+
+Běžně se problém batohu zabývá pouze osově zarovnanými obálkovými tělesy (AABB). V této práci tento problém rozšiřuji o práci s trojúhelníky. Řešení spočívá ve spojování trojúhelníků do tvaru obdélníku, aby bylo možné problém řešit jako běžný problém batohu.
 
 \begin{center}
 \begin{figure}[h]
-\includegraphics[width=100mm]{figures/lmcoords.png}
-\caption{Ukázka rozložení mapy osvětlení se spárovanými trojúhelníky}
+\includegraphics[width=80mm]{figures/lmcoords.png}
+\caption{Výsledek řešení problému batohu se spárovanými trojúhelníky}
 \end{figure}
 \end{center}
 \newpage
 
+Problém batohu lze řešit pomocí ILP (Integer Linear programming). Problém lze přeformulovat pomocí kolizí dvou AABB. Pokud si všechny levé horní body AABB označím souřadnicemi $[minx, miny]$ a pravé dolní souřadnicemi $[maxx, maxy]$, platí poté následující výraz, pomocí kterého lze sestrojit ILP řešení (toto řešení neuvažuje otáčení AABB).
+
+$\forall_{i,j}, i \neq j: (minx_i < maxx_j) \cap (miny_i < maxy_j) \cap (maxx_i > minx_j) \cap (maxy_i > miny_j)$
+\bigskip
+
+Abychom mohli problém řešit tímto způsobem, musíme mít nejdříve AABB místo trojúhelníků. Vytvoření AABB se zde provádí pomocí párování trojúhelníků. 
+
+V prvním kroku se spočítá Eulerovská délka jednotlivých hran, nejdelší hranu označíme jako $c$ (to je přepona). Pokud chceme vytvořit plně využité AABB musíme mít všechny trojúhelníky pravoúhlé, z toho důvodu původní $c$ zahodíme a vytvoříme pravoúhlý trojúhelník o délce stran $a, b$. Pro novou přeponu platí $c' = \sqrt{a^2 + b^2}$.
+
 \begin{center}
 \begin{figure}[h]
 \includegraphics[width=100mm]{figures/triangle.png}
-\caption{Změna délky přepony trojúhelníka pro vytvoření páru dvou trojúhelníků}
+\caption{Změna délky přepony trojúhelníka pro vytvoření páru dvou trojúhelníků, vlevo původní nepravoúhlý trojúhelník, vpravo trojúhelník s novou délkou přepony}
 \end{figure}
 \end{center}
 
-\subsection{Generování map osvětlení}
-
-\begin{center}
-\begin{figure}[h]
-\includegraphics[width=100mm]{figures/cubemap.png}
-\caption{Využití cube mapy jako stínové mapy pro bodové osvětlení}
-\end{figure}
-\end{center}
+V dalším kroku hledáme párové trojúhelníky se stejnými délky stran $a, b$ (s určitou tolerancí), párové se spojí přeponou k sobě. Pro nepárové trojúhelníky vytvoříme AABB\linebreak o velikosti $a, b$ a tím máme vyřešený problém párování trojúhelníků.
+\newpage
 
 \subsection{Oprava chyby sousedících trojúhelníků}
+Při použití výše uvedeného postupu vzniká problém při vykreslování, protože není\linebreak u texelů kolem přepon jednoznačné, ke kterému trojúhelníku texel patří a proto vznikají ve výsledné scéně artefakty. Stává se to, protože sousedící trojúhelníky v mapě osvětlení spolu nesousedí ve scéně.
 
 \begin{center}
 \begin{figure}[h]
@@ -709,9 +718,34 @@ Z hlediska generování těchto textur je tato technika náročnější než vý
 \caption{Problém kolizních texelů dvou trojúhelníků}
 \end{figure}
 \end{center}
-\newpage
+
+Provádí se zde posun texturovacích souřadnic směrem dovnitř trojúhelníku, aby k tomuto problému nedocházelo. Posouvají se i osově zarovnané hrany, protože při použití lineárního filtrování textur by docházelo k obdobným artefaktům jako v případě přepon.
+
+\subsection{Generování map osvětlení}
+Existují dvě základní metody generování map osvětlení, pomocí vrhání či sledování paprsku a pomocí rasterizace. V této kapitole popisuji rasterizační metodu (tedy pomocí OpenGL). Lze využít stínových map stejným způsobem, jako se používají k výpočtu zastínění v reálném čase. Rozdíl je pouze v transformování vrcholů a ve výpočtu barvy (nechceme vykreslovat texturu do světelných map, vedlo by to ke ztrátě kvality textur).
+
+Nejdříve si vložíme ke každému vrcholu do VBO jeho souřadnice v osvětlovací mapě. Transformujeme vrchol do souřadnic mapy osvětlení. To se provede přiřazením souřadnic $u, v$ jako pozici ve FBO (s pozicí vrcholu se počítá pouze při výpočtu osvětlení).
+
+Výslednou barvu texelu $C_t$ vypočteme z difúzního osvětlení pomocí níže uvedeného vzorce, kde $E_r$ je efektivita reflektoru, $F_a$ faktor útlumu, $C_l$ barva světla, $k_d$ koeficient difúzního odrazu, $\vec{L}$ je normalizovaný směr světla a $\vec{N}$ je normalizovaná normála povrchu. Více informací k výpočtu v kapitole 3.1.
+\begin{center}
+$C_t = E_r \cdot F_a \cdot C_l \cdot k_d \cdot (\vec{L} \cdot \vec{N})$
+\end{center}
+
+Je vhodné vytvářet mapy osvětlení pro každé světlo zvlášť a sčítat příspěvky světel až\linebreak na úrovni hotových světelných map. Lze tak později řešit rozsah intenzity osvětlení v případě, že použitý rozsah nedostačuje.
+
+Pokud bychom chtěli použit i bodové zdroje světla, musíme mít stínovou mapu pro všechny možné směry světelných paprsků. K tomu lze využít tzv. cube mapování. Cube mapování je mapování scény na krychli, při kterém se na každou stěnu vykreslí pohled v jednom směru s perspektivním úhlem $90^{\circ}$. V případě využití cube mapování na stínové mapy, se pro každou stranu provádí výpočet jakoby se jednalo o samostatné světlo (efektivita reflektoru $E_r = 1$).
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=150mm]{figures/cubemap.png}
+\caption{Využití cube mapování na stínové mapy u bodových osvětlení, vlevo dva náhledy scény, vpravo stínová mapa}
+\end{figure}
+\end{center}
 
 \subsection{Spekulární složka osvětlovací modelu}
+Spekulární složka osvětlovacího modelu je závislá na pohledu kamery a nelze jí tedy předpočítat a také nelze počítat v reálném čase spekulární složky pro desítky světel. Tento problém se dá řešit vypnutím vzdálených světel. Světla se seřadí podle vzdálenosti\linebreak od kamery a provede se započítání $n$ nejbližších (konstantu $n$ je vhodné mít co nejnižší, protože spekulární složka je poměrně náročná na výpočet). 
+
+Nutno podotknout, že tento přístup neřeší viditelnost světla. Stejný přístup lze použít\linebreak i pro difúzní osvětlení, ale předpočtené osvětlení je efektivnější.
 
 \section{Odlesky povrchů}
 Odlesky dodávají scéně lepší vzhled, dodávají dojem buď kovového nebo mokrého povrchu. V rasterizačním řetězci jsou odlesky drobet problematické, protože grafická karta vždy zpracovává pouze aktuální geometrii a nemá informaci o okolí.

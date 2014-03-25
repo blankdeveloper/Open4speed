@@ -671,53 +671,45 @@ Filtrování PCF je snadno implementovatelné, vrací dobré výsledky, ale mů�
 \newpage
 
 \section{Předpočtené osvětlení}
-Předpočtené osvětlení je z hlediska vykreslování poměrně jednoduchá technika. Pouze se aplikuje další textura či textury, které mají vlastní texturovací souřadnice a nesou\linebreak v sobě informaci o osvětlení jednotlivých trojúhelníků. Těmto texturám se říká mapy osvětlení a dalo by se říct, že se jedná o techniku, která rozšiřuje techniku předpočtených stínů.
+Předpočtené osvětlení je z hlediska vykreslování poměrně jednoduchá technika. Pouze se na 3D model aplikuje další textura či textury, které mají vlastní texturovací souřadnice a nesou v sobě informaci o osvětlení jednotlivých trojúhelníků. Jak již bylo uvedeno, těmto texturám se říká mapy osvětlení a dalo by se říct, že se jedná o techniku, která rozšiřuje techniku předpočtených stínů.
 
 Z hlediska generování těchto textur je tato technika náročnější než výsledné vykreslování, skládá se z několika kroků. V prvním kroku je třeba vytvořit texturovací souřadnice pro jednotlivé trojúhelníky.
 
 \subsection{Vytvoření texturovacích souřadnic}
-TODO: přepsat
-Jeden z velmi efektivních algoritmů řešící problematiku vytváření texturovacích souřadnic je Packing Lightmaps \cite{Scott02}. Za využití datové struktury kD stromu, která u tohoto algoritmu reprezentuje rozložení geometrie v mapě osvětlení, je možné řešit rozložení pro obdélníky. Aby bylo možné pracovat s trojúhelníky, je nutné algoritmus rozšířit.
-
-Práci s trojúhelníky lze realizovat tak, že vždy dva trojúhelníky spolu vytvoří jeden obdélník. Nejdříve se provede drobná deformace tak, aby všechny trojúhelníky byly pravoúhlé(je nutné hlídat, aby se nesnižoval počet texelů připadající na daný trojúhelník). Poté už stačí trojúhelníky vhodně spárovat(vytvořit z nich obdélníky) a je možné spustit původní algoritmus.
-
-Jak je kD strom použit je vidět na následujícím obrázku. V uzlech jsou provedeny řezy, kterými se rozděluje rovina, v listech jsou pak jednotlivé objekty.
-TODO: popis algoritmu
 
 \begin{center}
-\begin{figure}[h!]
-\includegraphics[width=120mm]{figures/packingLM.png}
-\caption{kD strom v metodě Packing Lightmaps}
-\floatfoot{Zdroj: \cite{Scott02}}
+\begin{figure}[h]
+\includegraphics[width=100mm]{figures/lmcoords.png}
+\caption{Ukázka rozložení mapy osvětlení se spárovanými trojúhelníky}
 \end{figure}
 \end{center}
 \newpage
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=100mm]{figures/triangle.png}
+\caption{Změna délky přepony trojúhelníka pro vytvoření páru dvou trojúhelníků}
+\end{figure}
+\end{center}
 
 \subsection{Generování map osvětlení}
-Generování map osvětlení lze provádět pomocí rasterizace nebo vrhání paprsku. Vrhání paprsku je v porovnání s rasterizací daleko složitější metoda. V rámci předmětu softwarový projekt se zabývám pouze rasterizací.
 
-Generování se provádí pomocí standardního rasterizačního řetezce. Geometrie se netransformuje do souřadnic kamery, ale do souřadnic map osvětlení. Otexturovanou geometrii do souřadnic mapy osvětlení můžete vidět na obrázku 3.2.
 \begin{center}
-\begin{figure}[h!]
-\includegraphics[width=70mm]{figures/LM-vse.png}
-\caption{Model města transformován do souřadnic mapy osvětlení}
+\begin{figure}[h]
+\includegraphics[width=100mm]{figures/cubemap.png}
+\caption{Využití cube mapy jako stínové mapy pro bodové osvětlení}
+\end{figure}
+\end{center}
+
+\subsection{Oprava chyby sousedících trojúhelníků}
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=60mm]{figures/lmfix.png}
+\caption{Problém kolizních texelů dvou trojúhelníků}
 \end{figure}
 \end{center}
 \newpage
-
-Dále je potřeba vyfiltrovat objekty, které nejsou viditelné. K tomu slouží stínová mapa. Stínová mapa je textura, která v sobě má uloženou vzdálenost od světla pro velké množství bodů. Při vykreslování se spočítá souřadnice bodu ve stínové mapě, z toho se získá vzdálenost bodu od světla. Porovnáním vzdálenosti od světla vykreslovaného bodu se zjistí, zda je bod osvětlený daným světlem. Viz obrázek níže.
-\begin{center}
-\begin{figure}[h!]
-\includegraphics[width=100mm]{figures/shadowmapping.png}
-\caption{Princip stínových map. Zdroj: \cite{Masserann11}}
-\end{figure}
-\end{center}
-
-Tímto způsobem vyfiltrujeme neosvětlené objekty. Výsledek lze vylepšit využitím dalších technik jako je například útlum světla, PCF filtrování a další. TODO: akumulace více světel, přepsat
-
-\subsection{Oprava chyby sousedících trojúhelníků}
-Pokud bychom použili přímo souřadnice získané metodou Packing Lightmaps, vznikly by ve výsledné scéně chyby(buď v důsledku zaokrouhlování souřadnic nebo v případě lineárního filtrování vlivem sousedních texelů). Je proto nutné už při generování map osvětlení souřadnice posunout nepatrně směrem ke středu každého trojúhelníku. Po dokončení generování map osvětlení se provede postprocesing, který doplní mezery v mapách osvětlení vždy nejbližší možnou hodnotou.
-
 
 \subsection{Spekulární složka osvětlovací modelu}
 
@@ -735,22 +727,6 @@ V případě rovných povrchů je nutné použít jiný přístup, scéna se vyk
 \floatfoot{Zdroj: \cite{Kaplinski11}}
 \end{figure}
 \end{center}
-
-\section{Screen-space přístup}
-Základem screen-space přístupu je vykreslení scény do takzvaného geometry bufferu, který umožňuje na rozdíl od frame bufferu uložit daleko více informací o jednotlivých bodech. Dalšími informacemi typicky bývá normála, hloubka nebo informace k výpočtu spekulární složky světla. Geometry buffer je součástí OpenGL 4 a vyšší, ale některé poznatky o screen-space přístupu se dají použít i za pomocí staršího OpenGL.
-
-Pomocí screen-space přístupu se dá implementovat mnoho efektů. V podstatě by bylo možné si v hlavním průchodu pouze vykreslit scénu pomocí velice jednoduchého shaderu\linebreak a osvětlovací model, případně další efekty, řešit až v průchodu pro screen-space data. Problém je, že screen-space průchod je typicky realizován pomocí jednoho shaderu a tedy musí být veškeré efekty a materiály implementovány v tomto shaderu.
-\begin{center}
-\begin{figure}[h!]
-\includegraphics[width=70mm]{figures/screenspace.png}
-\caption{Odraz objektů v screen-space přístupu}
-\floatfoot{Zdroj: \cite{Pfaff12}}
-\end{figure}
-\end{center}
-
-Problém nastává, pokud jsou potřeba číst informace, které jsou mimo rozmezí geometry bufferu. Tento případ nastává typicky při pokusu o vykreslení odrazivých ploch. Problém se často řeší absencí tohoto efektu pokud nejsou k dispozici potřebné informace. Aby absence nebyla tak rušivá, provádí se plynulý přechod mezi místy, kde efekt je a kde není(tedy jakoby na kraji geometry bufferu byl přechod do ztracena).
-
-Odrazy zrcadel v budově se pochopitelně pomocí screen-space nedají řešit. Obecně lze říct, že odrazy pomocí screen-space lze realizovat jen u objektů, na které se kamera nebude dívat kolmo.
 
 %*****************************************************************************
 \chapter{Realizace}

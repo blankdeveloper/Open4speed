@@ -21,21 +21,21 @@
 \contentsline {figure}{\numberline {3.10}{\ignorespaces Rozd\IeC {\'\i }l mezi ostr\IeC {\'y}mi st\IeC {\'\i }ny (vlevo) a m\IeC {\v e}kk\IeC {\'y}mi st\IeC {\'\i }ny (vpravo)}}{18}{figure.3.10}
 \contentsline {figure}{\numberline {3.11}{\ignorespaces Uk\IeC {\'a}zka vyhodnocen\IeC {\'\i } zast\IeC {\'\i }n\IeC {\v e}n\IeC {\'\i } pomoc\IeC {\'\i } PCF 3x3. Vlevo jsou data ze st\IeC {\'\i }nov\IeC {\'e} mapy, uprost\IeC {\v r}ed vyhodnocen\IeC {\'\i } zast\IeC {\'\i }n\IeC {\v e}n\IeC {\'\i } jednotliv\IeC {\'y}ch bod\IeC {\r u} (0 je viditeln\IeC {\'y} bod, 1 je zast\IeC {\'\i }n\IeC {\v e}n\IeC {\'y} bod) a vpravo v\IeC {\'y}sledn\IeC {\'e} zast\IeC {\'\i }n\IeC {\v e}n\IeC {\'\i }}}{18}{figure.3.11}
 \contentsline {figure}{\numberline {3.12}{\ignorespaces Uk\IeC {\'a}zka v\IeC {\'y}sledk\IeC {\r u} filtrov\IeC {\'a}n\IeC {\'\i } PCF}}{18}{figure.3.12}
-\contentsline {figure}{\numberline {3.13}{\ignorespaces kD strom v metod\IeC {\v e} Packing Lightmaps}}{19}{figure.3.13}
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Model m\IeC {\v e}sta transformov\IeC {\'a}n do sou\IeC {\v r}adnic mapy osv\IeC {\v e}tlen\IeC {\'\i }}}{20}{figure.3.14}
-\contentsline {figure}{\numberline {3.15}{\ignorespaces Princip st\IeC {\'\i }nov\IeC {\'y}ch map. Zdroj: \cite {Masserann11}}}{21}{figure.3.15}
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Diagram odrazu vodn\IeC {\'\i } hladiny}}{22}{figure.3.16}
-\contentsline {figure}{\numberline {3.17}{\ignorespaces Odraz objekt\IeC {\r u} v screen-space p\IeC {\v r}\IeC {\'\i }stupu}}{23}{figure.3.17}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Uk\IeC {\'a}zka rozlo\IeC {\v z}en\IeC {\'\i } mapy osv\IeC {\v e}tlen\IeC {\'\i } se sp\IeC {\'a}rovan\IeC {\'y}mi troj\IeC {\'u}heln\IeC {\'\i }ky}}{19}{figure.3.13}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Zm\IeC {\v e}na d\IeC {\'e}lky p\IeC {\v r}epony troj\IeC {\'u}heln\IeC {\'\i }ka pro vytvo\IeC {\v r}en\IeC {\'\i } p\IeC {\'a}ru dvou troj\IeC {\'u}heln\IeC {\'\i }k\IeC {\r u}}}{20}{figure.3.14}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Vyu\IeC {\v z}it\IeC {\'\i } cube mapy jako st\IeC {\'\i }nov\IeC {\'e} mapy pro bodov\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i }}}{20}{figure.3.15}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Probl\IeC {\'e}m kolizn\IeC {\'\i }ch texel\IeC {\r u} dvou troj\IeC {\'u}heln\IeC {\'\i }k\IeC {\r u}}}{21}{figure.3.16}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Diagram odrazu vodn\IeC {\'\i } hladiny}}{22}{figure.3.17}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Vykreslovac\IeC {\'\i } \IeC {\v r}et\IeC {\v e}zec simul\IeC {\'a}toru}}{27}{figure.4.1}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Odlesky na povrchu vozovky.}}{29}{figure.4.2}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Odlesky na vozidle. B\IeC {\'\i }l\IeC {\'e} plochy zn\IeC {\'a}zor\IeC {\v n}uj\IeC {\'\i } pozice, ze kter\IeC {\'y}ch se \IeC {\v c}te barva odlesku.}}{29}{figure.4.3}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Sc\IeC {\'e}na s aplikovan\IeC {\'y}mi mapami osv\IeC {\v e}tlen\IeC {\'\i } lamp}}{30}{figure.4.4}
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Vykreslovac\IeC {\'\i } \IeC {\v r}et\IeC {\v e}zec simul\IeC {\'a}toru}}{25}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Odlesky na povrchu vozovky.}}{27}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Odlesky na vozidle. B\IeC {\'\i }l\IeC {\'e} plochy zn\IeC {\'a}zor\IeC {\v n}uj\IeC {\'\i } pozice, ze kter\IeC {\'y}ch se \IeC {\v c}te barva odlesku.}}{27}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Sc\IeC {\'e}na s aplikovan\IeC {\'y}mi mapami osv\IeC {\v e}tlen\IeC {\'\i } lamp}}{28}{figure.4.4}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {B.1}{\ignorespaces Popiska obr\IeC {\'a}zku}}{46}{figure.B.1}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Popiska obr\IeC {\'a}zku}}{44}{figure.B.1}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -635,10 +635,10 @@ $\vec{p} = MVP_{light} \cdot \begin{pmatrix}\vec{v}\\ 1\\\end{pmatrix}$
 
 Pomocí tohoto postupu získáme stínovou mapu, kterou využijeme při vykreslování scény z pohledu kamery. Vypočteme $\vec{p}$ stejně jako při výpočtu stínové mapy a získáme vzdálenost $d$ ze stínové mapy $SM$.
 \begin{center}
-$d = SM[\vec{p}.x, \vec{p}.y]$
+$d = SM[\vec{p}_x, \vec{p}_y]$
 \end{center}
 
-Nakonec zjistíme, jak se tyto hodnoty liší pomocí podmínky $|\vec{p}.z - d| < \epsilon$, kde $\epsilon$ je malé číslo filtrující numerickou chybu. Pokud je podmínka splněna, je bod osvětlený daným zdrojem světla.
+Nakonec zjistíme, jak se tyto hodnoty liší pomocí podmínky $|\vec{p}_z - d| < \epsilon$, kde $\epsilon$ je malé číslo filtrující numerickou chybu. Pokud je podmínka splněna, je bod osvětlený daným zdrojem světla.
 \bigskip
 
 Výše uvedeným postupem jsou řešeny ostré stíny pro bodové zdroje světla, případně světelné reflektory. Dále je potřeba řešit měkké stíny, které vznikají z plošných zdrojů světla. Rozdíl mezi ostrými a měkkými stíny je znázorněn na obrázku 3.10.
@@ -748,19 +748,55 @@ Spekulární složka osvětlovacího modelu je závislá na pohledu kamery a nel
 Nutno podotknout, že tento přístup neřeší viditelnost světla. Stejný přístup lze použít\linebreak i pro difúzní osvětlení, ale předpočtené osvětlení je efektivnější.
 
 \section{Odlesky povrchů}
-Odlesky dodávají scéně lepší vzhled, dodávají dojem buď kovového nebo mokrého povrchu. V rasterizačním řetězci jsou odlesky drobet problematické, protože grafická karta vždy zpracovává pouze aktuální geometrii a nemá informaci o okolí.
+Odlesky dodávají scéně lepší vzhled, dodávají dojem buď kovového nebo mokrého povrchu. V rasterizačním řetězci jsou odlesky drobet problematické, protože grafická karta vždy zpracovává pouze aktuální geometrii a nemá informace o okolí.
 
-Standardně se odlesk realizuje dalším průchodem, ve kterém se vykreslí okolí do textury a tato textura se pak aplikuje na model s odleskem. U menších objektů jako je třeba auto se vykreslí okolí ve formě cubemapy(krychle, která má na svých stěnách obrazy z okolí objektu). Cubemapa se následně \uv{nalepí} na objekt a tím se získá lesklý povrch.
+Standardně se odlesk realizuje dalším průchodem, ve kterém se vykreslí okolí do textury\linebreak a tato textura se poté aplikuje na model s odleskem. U menších objektů, jako je například auto, se vykreslí okolí pomocí cube mapování do FBO. Výsledná textura se následně namapuje na objekt a tím se získá dojem lesklého povrchu.
+\newpage
 
-V případě rovných povrchů je nutné použít jiný přístup, scéna se vykreslí do textury z pohledu, který je na obrázku 3.4 označen jako P'. Pohled snímá objekty jakoby z povrchu(všechny objekty pod povrchem je třeba vyfiltrovat). Při vykreslování na obrazovku se spočítá pozice daného pixelu povrchu ve vykreslené textuře a z té se aplikuje barva pixelu.
+V případě rovných povrchů je nutné použít jiný přístup, scéna se vykreslí do textury\linebreak z pohledu pod povrchem, který je na obrázku 3.17 označen jako $P'$. Pohled snímá objekty jakoby z povrchu a při vykreslování na obrazovku se spočítá pozice daného pixelu povrchu ve vykreslené textuře a z té se aplikuje barva pixelu.
 
-\begin{center}
 \begin{figure}[h!]
+\begin{center}
 \includegraphics[width=80mm]{figures/reflection-diagram.png}
-\caption{Diagram odrazu vodní hladiny}
-\floatfoot{Zdroj: \cite{Kaplinski11}}
-\end{figure}
+\caption{Diagram odrazu vodní hladiny \cite{Kaplinski11}}
 \end{center}
+\end{figure}
+
+Pohled $P$ je MVP matice, pro získání pohledu $P'$ potřebujeme vypočítat reflexní matici $R$, která převrátí pohled podle normály povrchu $\vec{N}$.
+              
+\begin{center}
+$d = -(\vec{N}_x + \vec{N}_y + \vec{N}_z)$
+\end{center}
+\begin{center}
+$R = \begin{pmatrix}
+1 -2 \cdot {\vec{N}_x}^2 & -2 \cdot \vec{N}_x \cdot \vec{N}_y & -2 \cdot \vec{N}_x \cdot \vec{N}_z & -2 \cdot \vec{N}_x \cdot d\\
+-2 \cdot \vec{N}_y \cdot \vec{N}_x & 1 -2 \cdot {\vec{N}_y}^2 & -2 \cdot \vec{N}_y \cdot \vec{N}_z & -2 \cdot \vec{N}_y \cdot d\\
+-2 \cdot \vec{N}_z \cdot \vec{N}_x & -2 \cdot \vec{N}_z \cdot \vec{N}_y & 1 -2 \cdot {\vec{N}_z}^2 & -2 \cdot \vec{N}_z \cdot d\\
+0 & 0 & 0 & 1
+\end{pmatrix}$
+\end{center}
+
+Vynásobením matice $R$ s maticí $P$ získáme reflekční matici, která otáčí obraz o $180^{\circ}$, abychom získali korektní pohled, musíme provést ještě rotaci kolem osy Z.
+\begin{center}
+$P' = R \cdot P \cdot \begin{pmatrix}
+-1 & 0 & 0 & 0\\
+0 & -1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{pmatrix}$
+\end{center}
+
+Při vykreslování reflexního pohledu je nutné provést ořez scény pod povrchem a nevykreslovat odvrácené trojúhelníky. Pro finální vykreslování si označím reflexní mapu jako $RM$ a vykreslovaný vrchol jako $\vec{v}$. Barva odlesku $color_r$ se spočítá dle níže uvedeného vzorce.
+\begin{center}
+$\vec{p} = P' \cdot \begin{pmatrix}
+\vec{v}\\
+1
+\end{pmatrix}$
+\end{center}
+\begin{center}
+$color_r = RM[\vec{p}_x, \vec{p}_y]$
+\end{center}
+
 
 %*****************************************************************************
 \chapter{Realizace}

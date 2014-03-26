@@ -8,10 +8,6 @@ package geometry;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author lubos
- */
 public class Graph {
     public ArrayList<Edge> edges;
     

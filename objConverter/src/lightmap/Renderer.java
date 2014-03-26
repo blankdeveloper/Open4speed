@@ -8,9 +8,9 @@ import javax.swing.JPanel;
 
 public class Renderer {
 	
-    Node localRoot;
+    KDNode localRoot;
   
-	public JFrame render(String header, final Node root) {
+	public JFrame render(String header, final KDNode root) {
         localRoot = root;
 		// image
 		JPanel panel = new JPanel() {

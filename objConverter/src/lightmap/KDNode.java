@@ -9,38 +9,34 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Trida uzel je trida reprezentujici uzly kD stromu a operace nad nimi
- *
- * @author Lubos Vonasek
- *
+ * Class representing nodes of kD tree
  */
-public class Node {
+public class KDNode {
 
-  private static ArrayList<Node> secondHalf;
+  private static ArrayList<KDNode> secondHalf;
   private Triangle t1, t2;
-  // generator nahodnych cisel
+  // random number generator
   static Random rnd = new Random();
   int freeSpace;
-  // potomci uzlu
-  public Node next1, next2;
-  // rozmery uzlu
+  public KDNode next1, next2;
+  // node dimension
   public int width;
   public int height;
 
-  // informace zda je uzel list
+  // information if node is a list
   public boolean isList;
-  // barva uzlu
+  // color of node
   Color color;
   Color color2;
 
   /**
-   * Vytvori novy uzel
+   * create node
    *
-   * @param width je sirka listu
-   * @param height je vyska listu
-   * @param isList je informace zda se jedna o list
+   * @param width is node width
+   * @param height is node height
+   * @param isList is true if node is a list
    */
-  public Node(int width, int height, boolean isList) {
+  public KDNode(int width, int height, boolean isList) {
     this.width = width;
     this.height = height;
     this.isList = isList;
@@ -54,7 +50,7 @@ public class Node {
 
   public boolean addHalfNode(Triangle t) {
     for (int i = 0; i < secondHalf.size(); i++) {
-      Node m = secondHalf.get(i);
+      KDNode m = secondHalf.get(i);
       if ((m.width == t.node.width) && (m.height == t.node.height)) {
         m.color2 = new Color(rnd.nextInt(254) + 1, rnd.nextInt(254) + 1,
                 rnd.nextInt(254) + 1);
@@ -70,7 +66,7 @@ public class Node {
   public boolean addHalfNodeForce(Triangle t) {
 
     for (int i = 0; i < secondHalf.size(); i++) {
-      Node m = secondHalf.get(i);
+      KDNode m = secondHalf.get(i);
       if ((m.width >= t.node.width) && (m.height >= t.node.height)) {
         m.color2 = new Color(rnd.nextInt(254) + 1, rnd.nextInt(254) + 1,
                 rnd.nextInt(254) + 1);
@@ -88,59 +84,59 @@ public class Node {
   }
 
   /**
-   * Vlozi uzel standartne
+   * Insert node standard way
    *
-   * @param t
-   * @return true pokud byl vlozen
-   * @throws Exception pri nekorektnich datech
+   * @param t is a triangle to add
+   * @return true if triangle was inserted
+   * @throws Exception on incorrect data
    */
   public boolean addNode(Triangle t) throws Exception {
-    // jedna se o list -> neresit
+    // do not solve if it is a list
     if (isList) {
       return false;
     }
 
-    // uzel je prazdny -> vytvoreni leve vetve
+    // node is empty -> create left subnode
     if (next1 == null) {
-      // kontrola volneho mista
+      // check space
       if ((t.node.width <= width) && (t.node.height <= height)) {
 
-        // padne presne
+        // fits exactly
         if ((t.node.width == width) || (t.node.height == height)) {
           next1 = t.node;
           secondHalf.add(t.node);
           next1.t1 = t;
           return true;
-        } // dalsi deleni roviny
+        } // space division
         else {
-          next1 = new Node(t.node.width, height, false);
+          next1 = new KDNode(t.node.width, height, false);
           if (next1.addNode(t)) {
             return true;
           }
         }
       }
-    } // zkusit vlozit do leve vetve
+    } // try to insert into left subnode
     else if (next1.addNode(t)) {
       return true;
-    } // vytvoreni prave vetve
+    } // create right subnode
     else if (next2 == null) {
 
-      // deleni roviny horizontalne
+      // horizontal space division
       if ((t.node.width <= width) && (t.node.height <= height - next1.height)) {
-        next2 = new Node(width, height - next1.height, false);
+        next2 = new KDNode(width, height - next1.height, false);
         if (next2.addNode(t)) {
           return true;
         }
       }
 
-      // deleni roviny vertikalne
+      // vertical space division
       if ((t.node.width <= width - next1.width) && (t.node.height <= height)) {
-        next2 = new Node(width - next1.width, height, false);
+        next2 = new KDNode(width - next1.width, height, false);
         if (next2.addNode(t)) {
           return true;
         }
       }
-    } // zkusit vlozit do prave vetve
+    } // try to insert into right subnode
     else if (next2.addNode(t)) {
       return true;
     }
@@ -179,13 +175,13 @@ public class Node {
   }
 
   /**
-   * Vykresli aktualni uzel i s poduzly do okna
+   * Render curret node and subnodes into window
    *
-   * @param g je instance Graphics z JPanelu
-   * @param x je levy horni roh
-   * @param y je levy horni roh
-   * @param s
-   * @throws Exception pri nekorektnich datech
+   * @param g is an instance of Graphics of JPanel
+   * @param x is top left corner X
+   * @param y is top left corner Y
+   * @param s is scale factor
+   * @throws Exception on incorrect data
    */
   public void draw(Graphics g, int x, int y, int s) throws Exception {
     if (t1 != null) {
@@ -240,7 +236,7 @@ public class Node {
   }
 
   /**
-   * Nastavi uzel na sirku
+   * Set node landscaped
    */
   public void landscape() {
     if (width < height) {
@@ -249,7 +245,7 @@ public class Node {
   }
 
   /**
-   * Otoci uzel
+   * Rotate node
    */
   void rotate() {
     int temp = width;
@@ -258,9 +254,9 @@ public class Node {
   }
 
   /**
-   * Vrati velikost uzlu
+   * Return area of node
    *
-   * @return velikost uzlu(obsah)
+   * @return area of node
    */
   int size() {
     return width * height;

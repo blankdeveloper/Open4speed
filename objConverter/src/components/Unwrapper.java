@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import lightmap.MTLPair;
-import lightmap.Node;
+import lightmap.KDNode;
 import geometry.Edge;
 import geometry.Point2D;
 import geometry.Triangle;
@@ -14,7 +14,7 @@ public class Unwrapper {
 
   final static double LIGHTMAP_PRECISION = 8.5;
   static int res;
-  static Node root;
+  static KDNode root;
 
   static ArrayList<MTLPair> mtls = new ArrayList<>();
   static ArrayList<MTLLoader> skipped = new ArrayList<>();
@@ -114,13 +114,13 @@ public class Unwrapper {
         double b = Edge.dist(t.a, t.c);
         double c = Edge.dist(t.a, t.b);
         if ((a >= b) && (a >= c)) {
-          t.node = new Node((int) (b * scale + 1), (int) (c * scale + 1), true);
+          t.node = new KDNode((int) (b * scale + 1), (int) (c * scale + 1), true);
         }
         if ((b >= a) && (b >= c)) {
-          t.node = new Node((int) (a * scale + 1), (int) (c * scale + 1), true);
+          t.node = new KDNode((int) (a * scale + 1), (int) (c * scale + 1), true);
         }
         if ((c >= a) && (c >= b)) {
-          t.node = new Node((int) (a * scale + 1), (int) (b * scale + 1), true);
+          t.node = new KDNode((int) (a * scale + 1), (int) (b * scale + 1), true);
         }
         t.node.landscape();
         if (t.node.width > 128) {
@@ -141,7 +141,7 @@ public class Unwrapper {
       });
 
       // add geometry as it has texture coords
-      root = new Node(256, 256, false);
+      root = new KDNode(256, 256, false);
       root.reset();
       for (int i = 0; i < faces.size(); i++) {
         Triangle t = faces.get(i);

@@ -1,17 +1,17 @@
 package geometry;
 
-import lightmap.Node;
+import lightmap.KDNode;
 
 // 3d points connected into triangle
 public class Triangle {
 
-	public Node node;
-	public Point a, b, c;
+	public KDNode node;
+	public Vertex a, b, c;
 	public int cell;
 
 	public int lightmapX, lightmapY, lightmapU, lightmapV;
 	
-	public Triangle(Point a, Point b, Point c) {
+	public Triangle(Vertex a, Vertex b, Vertex c) {
 		this.a = a;
 		this.b = b;
 		this.c = c;

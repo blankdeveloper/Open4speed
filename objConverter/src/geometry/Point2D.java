@@ -9,7 +9,7 @@ public class Point2D {
 		this.v = v;
 	}
 	
-	public static double dist(Point a, Point b) {
+	public static double dist(Vertex a, Vertex b) {
 		return Edge.dist(a.t.u, a.t.v, 1, b.t.u, b.t.v, 1);
 	}
 	

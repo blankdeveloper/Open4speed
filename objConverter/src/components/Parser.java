@@ -1,7 +1,7 @@
 package components;
 
 import geometry.Edge;
-import geometry.Point;
+import geometry.Vertex;
 import geometry.Point2D;
 import geometry.Point3D;
 import geometry.Triangle;
@@ -86,7 +86,7 @@ public class Parser {
 				StringTokenizer lsc = new StringTokenizer(line);
 				lsc.nextToken();
 				// create object for points
-				Point[] point = new Point[4];
+				Vertex[] point = new Vertex[4];
 				// set index of current point
 				int pointsCount = 0;
 				// parse vertices
@@ -113,7 +113,7 @@ public class Parser {
 					}
 
 					// save point
-					point[pointsCount++] = new Point(normal, texCoord, vertex);
+					point[pointsCount++] = new Vertex(normal, texCoord, vertex);
 				}
 				if (pointsCount == 2) {
 					Common.graph.get(graphIndex).edges.add(new Edge(point[0].v, point[1].v));
@@ -125,7 +125,7 @@ public class Parser {
 				StringTokenizer lsc = new StringTokenizer(line);
 				lsc.nextToken();
 				// create object for points
-				Point[] point = new Point[4];
+				Vertex[] point = new Vertex[4];
 				// set index of current point
 				int pointsCount = 0;
 				// parse vertices
@@ -152,7 +152,7 @@ public class Parser {
 					}
 
 					// save point
-					point[pointsCount++] = new Point(normal, texCoord, vertex);
+					point[pointsCount++] = new Vertex(normal, texCoord, vertex);
 				}
 
 				switch (pointsCount) {

@@ -18,11 +18,11 @@ public class Edge {
     return a * a;
   }
 
-  public static double dist(Point a, Point b) {
+  public static double dist(Vertex a, Vertex b) {
     return dist(a.v.x, a.v.y, a.v.z, b.v.x, b.v.y, b.v.z);
   }
 
-  public static boolean isSame(Point k, Point l, Point r, Point s) {
+  public static boolean isSame(Vertex k, Vertex l, Vertex r, Vertex s) {
     if ((k.t.u == r.t.u) && (k.t.v == r.t.v)) {
       if ((l.t.u == s.t.u) && (l.t.v == s.t.v)) {
         return true;

@@ -803,39 +803,30 @@ $color_r = RM[\vec{p}_x, \vec{p}_y]$
 Základním problémem realizace simulátoru na mobilních zařízení je jejich nízký výkon.
 Uživatelé očekávají kvalitu grafiky srovnatelnou s počítačovou grafikou, nicméně mobilní zařízení zatím takového výkonu nedosahují.
 
-\section{Předzpracování}
-
-\subsection{Vytváření map osvětlení}
-
-\subsubsection{Generování texturovacích souřadnic pro mapy osvětlení}
-
-\begin{center}
-\begin{figure}[h]
-\includegraphics[width=120mm]{figures/objconv.png}
-\caption{UML diagram konvertoru modelů}
-\end{figure}
-\end{center}
-
-\subsubsection{Generování map osvětlení}
-
-\subsection{Příprava dat pro dynamickou aktualizaci map osvětlení}
-
-Ve fázi předzpracování se provede konverze 3D modelů do vlastního formátu, který bude umožňovat mít v sobě jak souřadnice standardních textur, tak i souřadnice v mapách osvětlení. Formát by měl zachovat veškeré informace o modelu. I když je třeba výsledný simulátor nevyužije, je dobré tyto informace ponechat pro případ dalšího vývoje. Formát by měl být schopen uložit některé další informace o materiálu a shaderu.
-
-Plochu map osvětlení je nutné maximálně zaplnit z důvodu očekávané malé paměti vymezeny pro velké textury. Aby bylo možné určit nejvhodnější rozlišení těchto textur, je třeba umožnit jejich škálování.
-
-Vykreslení hodnot do map osvětlení se provede pomocí OpenGL, bude zde řešena viditelnost (pomocí stínových map), vypočteno utlumení a výpočet difúzního odrazu světla.
-TODO dopsat
-
 \section{Simulátor}
 Simulátor bude navržen tak, aby fungoval na X11-Linuxu a Androidu. Znamená to výběr multiplatformních knihoven nebo ve výjimečných případech rozdílná implementace pro jednotlivé platformy. K vykreslování jsem vybral OpenGLES 2.0 (jedná se o odlehčené OpenGL 3.0) a GLSL verze 1.0 (to zaručí maximální možnou kompatibilitu).
 
 Fyzikální vlastnosti vozidel budou realizovány pomocí enginu Bullet Physics (tento engine používá mnoho známých firem zabývajících se vývojem mobilních her). Zvuk bude realizován na mobilních zařízeních pomocí Android API a na Linuxu pomocí knihovny FMOD API. Správce oken je na Androidu třeba doprogramovat, aby fungovalo dotykové ovládání a pozastavení simulátoru (např při hovoru). Na Linuxu bude použitý freeglut.
+\newpage
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=160mm]{figures/o4suml.png}
+\caption{UML diagram projektu, horní část je abstraktní, dolní část implementuje jednotlivá rozhraní a načítá data do paměti, spustitelné soubory jsou označeny tečkou}
+\end{figure}
+\end{center}
 
 \section{Realizace na platformě Android}
 Platforma Android je postavená na Linuxovém jádře a využívá mnohé komponenty\linebreak z projektu GNU, nicméně celé Android API je v jazyku Java. Android využívá svůj Java virtuální stroj Dalwik. Pomocí Android NDK(native development kit) je možné zkompilovat C/C++ kód jako knihovnu, kterou je možné zavolat z jazyku Java. Toto je prováděno pomocí JNI(Java native interface).
 
 Snažší by bylo naprogramovat simulátor přímo v Javě, ale tím bych ztratil možnost portovat simulátor na další platformy, které virtuální stroj Dalwik nemají. Dále by byl problém s použitím fyzikálního engine, který je napsaný v jazyce C++. Musel bych napsat interface pro fyzikální engine, který by mi umožnil komunikaci mezi C++ a Java kódem.
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=80mm]{figures/jni.png}
+\caption{UML diagram spustitelného klienta pro Android}
+\end{figure}
+\end{center}
 
 \subsection{Problematika Android API}
 Java native interface je rozhraní, které umožňuje spustit C++ kód z jazyku Java a obráceně. Nicméně komunikaci nelze realizovat nějak jednoduše a je proto vhodné tuto komunikaci minimalizovat.
@@ -880,7 +871,31 @@ Není ale nutné vykreslovat do celé textury, pomocí příkazu \textit{glViewp
 
 Dále je možné zvolit nižší rozlišení viewportu než je rozlišení displeje. Mobilní zařízení obvykle disponují obrovskou hustotou pixelů a pokud zařízení nebude stíhat vykreslovat scénu v plném rozlišení, lze vykreslovat v rozlišení menším. U počítačových 3D her se také setkáváme s možností změnit rozlišení, tam řeší změnu přímo hardware displeje nebo jeho ovladač.
 
-\subsection{Efekty pomocí screen-space přístupu}
+\section{Předzpracování}
+
+\subsection{Vytváření map osvětlení}
+
+\subsubsection{Generování texturovacích souřadnic pro mapy osvětlení}
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=90mm]{figures/objconv.png}
+\caption{UML diagram konvertoru 3D modelů}
+\end{figure}
+\end{center}
+
+\subsubsection{Generování map osvětlení}
+
+\subsection{Příprava dat pro dynamickou aktualizaci map osvětlení}
+
+Ve fázi předzpracování se provede konverze 3D modelů do vlastního formátu, který bude umožňovat mít v sobě jak souřadnice standardních textur, tak i souřadnice v mapách osvětlení. Formát by měl zachovat veškeré informace o modelu. I když je třeba výsledný simulátor nevyužije, je dobré tyto informace ponechat pro případ dalšího vývoje. Formát by měl být schopen uložit některé další informace o materiálu a shaderu.
+
+Plochu map osvětlení je nutné maximálně zaplnit z důvodu očekávané malé paměti vymezeny pro velké textury. Aby bylo možné určit nejvhodnější rozlišení těchto textur, je třeba umožnit jejich škálování.
+
+Vykreslení hodnot do map osvětlení se provede pomocí OpenGL, bude zde řešena viditelnost (pomocí stínových map), vypočteno utlumení a výpočet difúzního odrazu světla.
+TODO dopsat
+
+\subsection{Dynamické osvětlení a dynamické objekty}
 
 Jedním z velmi rychlých efektů ve screen-space je \textbf{motion-blur}.
 \lstset{language=GLSL} 

@@ -41,29 +41,43 @@
 \usepackage{graphicx}
 \usepackage{indentfirst} %1. odstavec jako v cestine.
 \usepackage{listings}
+\usepackage{color}
+\usepackage{soul}
+\setul{0.1ex}{}
+
 \renewcommand{\lstlistingname}{Ukázka}
-\lstset{
-  frame=top,frame=bottom,
-  basicstyle=\small\normalfont\sffamily,    % the size of the fonts that are used for the code
-  stepnumber=1,                           % the step between two line-numbers. If it is 1 each line will be numbered
-  numbersep=10pt,                         % how far the line-numbers are from the code
-  tabsize=2,                              % tab size in blank spaces
-  extendedchars=true,                     %
-  breaklines=true,                        % sets automatic line breaking
-  captionpos=b,                           % sets the caption-position to top
-  mathescape=true,
-  stringstyle=\color{white}\ttfamily, % Farbe der String
-  showspaces=false,           % Leerzeichen anzeigen ?
-  showtabs=false,             % Tabs anzeigen ?
-  xleftmargin=17pt,
-  xrightmargin=17pt,
-  framexleftmargin=17pt,
-  framexrightmargin=17pt,
-  framexbottommargin=5pt,
-  framextopmargin=5pt,
-  showstringspaces=false      % Leerzeichen in Strings anzeigen ?
- }
- 
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
 \lstdefinelanguage{GLSL}
 {
 sensitive=true,
@@ -800,21 +814,50 @@ $color_r = RM[\vec{p}_x, \vec{p}_y]$
 
 %*****************************************************************************
 \chapter{Realizace}
-Základním problémem realizace simulátoru na mobilních zařízení je jejich nízký výkon.
-Uživatelé očekávají kvalitu grafiky srovnatelnou s počítačovou grafikou, nicméně mobilní zařízení zatím takového výkonu nedosahují.
+Realizace projektu byla provedena ve třech fázích. Nejdříve byla vytvořena verze pro PC bez předpočteného osvětlení, dále bylo provedeno portování projektu na Android\linebreak a v poslední fázi jsem se zabýval předpočteným osvětlením a problémy s ním spojené.
 
 \section{Simulátor}
-Simulátor bude navržen tak, aby fungoval na X11-Linuxu a Androidu. Znamená to výběr multiplatformních knihoven nebo ve výjimečných případech rozdílná implementace pro jednotlivé platformy. K vykreslování jsem vybral OpenGLES 2.0 (jedná se o odlehčené OpenGL 3.0) a GLSL verze 1.0 (to zaručí maximální možnou kompatibilitu).
+Simulátor je navržen tak, aby fungoval na X11-Linuxu a Androidu. Znamená to výběr multiplatformních knihoven nebo ve výjimečných případech rozdílných implementací pro jednotlivé platformy. K vykreslování jsem vybral OpenGL ES 2.0 (jedná se o odlehčené OpenGL 3.0) a GLSL core verzi 1.0 (to zaručuje maximální možnou kompatibilitu).
 
-Fyzikální vlastnosti vozidel budou realizovány pomocí enginu Bullet Physics (tento engine používá mnoho známých firem zabývajících se vývojem mobilních her). Zvuk bude realizován na mobilních zařízeních pomocí Android API a na Linuxu pomocí knihovny FMOD API. Správce oken je na Androidu třeba doprogramovat, aby fungovalo dotykové ovládání a pozastavení simulátoru (např při hovoru). Na Linuxu bude použitý freeglut.
+Fyzikální vlastnosti vozidel jsou realizovány pomocí enginu Bullet Physics (tento engine používá mnoho známých firem zabývajících se vývojem mobilních her). Zvuk je realizován na mobilních zařízeních pomocí Android API a na Linuxu pomocí knihovny FMOD API. Správce oken je na Androidu třeba doprogramovat, aby fungovalo dotykové ovládání a pozastavení simulátoru (např. při hovoru). Na Linuxu je použitá knihovna freeglut.
+
+Samotný simulátor je rozdělen do dvou oddělených částí. První část je abstraktní\linebreak a řeší logickou část projektu. Abstrakce je realizována pomocí rozhraní, které definují společné metody abstraktních objektů. Druhá část implementuje jednotlivá rozhraní a řeší také načítání dat ze souborů.
+\lstset{language=C++} 
+\begin{lstlisting}[caption=Načtení 3D modelu vozidla pomocí abstraktního přístupu]
+    /// load models
+    skin = getModel(getConfigStr("skin_model", atributes), false);
+    wheel = getModel(getConfigStr("wheel_model", atributes), false);
+
+    /// set car wheels position
+    wheelX = getConfig("wheel_x", atributes);
+    wheelY = getConfig("wheel_y", atributes);
+    wheelZ1 = getConfig("wheel_back", atributes);
+    wheelZ2 = getConfig("wheel_front", atributes);
+\end{lstlisting}
 \newpage
 
-\begin{center}
+Důvodem oddělení částí je, že implementace jednotlivých rozhraní může být v budoucnu snadno nahrazena anebo mohou být použité různé implementace pro různé platformy. Příkladem různých implementací rozhraní pro různé platformy může být například renderer.\linebreak V simulátoru je využita knihovna OpenGL, která například na platformě Windows Phone není dostupná a bylo by potřeba na této platformě použit Direct3D.
+
 \begin{figure}[h]
+\begin{center}
 \includegraphics[width=160mm]{figures/o4suml.png}
 \caption{UML diagram projektu, horní část je abstraktní, dolní část implementuje jednotlivá rozhraní a načítá data do paměti, spustitelné soubory jsou označeny tečkou}
-\end{figure}
 \end{center}
+\end{figure}
+Jak je vidět na obrázku 4.1, simulátor je rozdělen do dalších dílčích částí. Část \ul{raycaster} a třída \ul{LMgenerator} realizují předzpracování. Třída \ul{open4speed} se zabývá správou okna\linebreak a spouštění dílčích součástí. \ul{Common} uchovává veškeré objekty a proměnné, je to z důvodu, že jinak by v třídách \ul{open4speed} a \ul{LMgenerator} musel být obsah struktury \ul{common} duplicitně.
+
+Třída \ul{car} je v první řadě struktura uchovávající veškeré proměnné realizující vozidlo, dále zajišťuje propojení mezi fyzikálním enginem, vykreslováním, zvukem, vstupem umělé inteligence a uživatele.
+\\ \\
+Část \ul{utils} je balík příkazů tvořící simulátor.
+\begin{itemize}
+\item \ul{engine} realizuje GUI a 3D scénu
+\item \ul{io} obstarává práci se soubory
+\item \ul{math} poskytuje sadu matematických příkazů pro práci s 3D objekty
+\item \ul{scripting} interpretuje skriptování GUI
+\item \ul{switch} obstarává objekty jednotlivých rozhraní a naplňuje je daty
+\end{itemize}
+
+Jednotlivá rozhraní mají různé funkce. Rozhraní \ul{fbo}, \ul{renderer}, \ul{shader}, \ul{texture} a \ul{vbo} vytváří abstraktní přístup k OpenGL, \ul{input} je rozhraní pro ovládání vozidla (implementací může být buď klávesnice anebo umělá inteligence), rozhraní \ul{physics} reprezentuje fyzikální engine a rozhraní \ul{sound} umožňuje přehrávat zvuky. Implementace rozhraní \ul{sound} jsou příkladem použití různých implementací na různých platformách.
 
 \section{Realizace na platformě Android}
 Platforma Android je postavená na Linuxovém jádře a využívá mnohé komponenty\linebreak z projektu GNU, nicméně celé Android API je v jazyku Java. Android využívá svůj Java virtuální stroj Dalwik. Pomocí Android NDK(native development kit) je možné zkompilovat C/C++ kód jako knihovnu, kterou je možné zavolat z jazyku Java. Toto je prováděno pomocí JNI(Java native interface).

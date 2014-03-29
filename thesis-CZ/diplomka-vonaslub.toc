@@ -34,16 +34,16 @@
 \contentsline {subsection}{\numberline {4.2.1}Problematika Android API}{27}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Vyu\IeC {\v z}it\IeC {\'\i } vl\IeC {\'a}ken}{29}{subsection.4.2.2}
 \contentsline {subsection}{\numberline {4.2.3}Pr\IeC {\'a}ce se soubory}{30}{subsection.4.2.3}
-\contentsline {section}{\numberline {4.3}P\IeC {\v r}edpo\IeC {\v c}ten\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i }}{30}{section.4.3}
-\contentsline {section}{\numberline {4.4}P\IeC {\v r}edzpracov\IeC {\'a}n\IeC {\'\i }}{31}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Vytv\IeC {\'a}\IeC {\v r}en\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{31}{subsection.4.4.1}
-\contentsline {subsubsection}{\numberline {4.4.1.1}Generov\IeC {\'a}n\IeC {\'\i } texturovac\IeC {\'\i }ch sou\IeC {\v r}adnic pro mapy osv\IeC {\v e}tlen\IeC {\'\i }}{31}{subsubsection.4.4.1.1}
-\contentsline {subsubsection}{\numberline {4.4.1.2}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{31}{subsubsection.4.4.1.2}
-\contentsline {subsection}{\numberline {4.4.2}P\IeC {\v r}\IeC {\'\i }prava dat pro dynamickou aktualizaci map osv\IeC {\v e}tlen\IeC {\'\i }}{31}{subsection.4.4.2}
+\contentsline {section}{\numberline {4.3}P\IeC {\v r}edpo\IeC {\v c}ten\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i }}{31}{section.4.3}
+\contentsline {section}{\numberline {4.4}P\IeC {\v r}edzpracov\IeC {\'a}n\IeC {\'\i }}{32}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Vytv\IeC {\'a}\IeC {\v r}en\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{32}{subsection.4.4.1}
+\contentsline {subsubsection}{\numberline {4.4.1.1}Generov\IeC {\'a}n\IeC {\'\i } texturovac\IeC {\'\i }ch sou\IeC {\v r}adnic pro mapy osv\IeC {\v e}tlen\IeC {\'\i }}{32}{subsubsection.4.4.1.1}
+\contentsline {subsubsection}{\numberline {4.4.1.2}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{32}{subsubsection.4.4.1.2}
+\contentsline {subsection}{\numberline {4.4.2}P\IeC {\v r}\IeC {\'\i }prava dat pro dynamickou aktualizaci map osv\IeC {\v e}tlen\IeC {\'\i }}{32}{subsection.4.4.2}
 \contentsline {subsection}{\numberline {4.4.3}Dynamick\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i } a dynamick\IeC {\'e} objekty}{32}{subsection.4.4.3}
-\contentsline {subsection}{\numberline {4.4.4}Sv\IeC {\v e}tla vozidel}{34}{subsection.4.4.4}
-\contentsline {section}{\numberline {4.5}Nahrazen\IeC {\'\i } v\IeC {\'\i }cepr\IeC {\r u}chodov\IeC {\'y}ch p\IeC {\v r}\IeC {\'\i }stup\IeC {\r u}}{34}{section.4.5}
-\contentsline {subsection}{\numberline {4.5.1}Rozm\IeC {\v e}r textur na OpenGL ES 2.0}{34}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.4.4}Sv\IeC {\v e}tla vozidel}{35}{subsection.4.4.4}
+\contentsline {section}{\numberline {4.5}Nahrazen\IeC {\'\i } v\IeC {\'\i }cepr\IeC {\r u}chodov\IeC {\'y}ch p\IeC {\v r}\IeC {\'\i }stup\IeC {\r u}}{35}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}Rozm\IeC {\v e}r textur na OpenGL ES 2.0}{35}{subsection.4.5.1}
 \contentsline {chapter}{\numberline {5}Testov\IeC {\'a}n\IeC {\'\i }}{37}{chapter.5}
 \contentsline {section}{\numberline {5.1}P\IeC {\v r}edzpracov\IeC {\'a}n\IeC {\'\i }}{37}{section.5.1}
 \contentsline {section}{\numberline {5.2}Simul\IeC {\'a}tor}{37}{section.5.2}

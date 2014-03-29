@@ -964,12 +964,50 @@ Většina zařízení, které dnes už spadají do střední třídy, je vybaven
 
 V menu simulátoru se používá pouze grafické vlákno, negrafické vlákno je primárně použito pro fyzikální výpočty, které zařízení vytěžují nejvíce. Vlákna jsou synchronizovaná, aby nedocházelo k použití transformace vozidla z předešlého snímku(to by bylo velmi rušivé).
 
-Dále provádím regulaci rychlosti simulátoru v závislosti na výkonu hardwaru. Ukázalo se, že je daleko příjemnější hru zpomalit, než aby docházelo k trhanému zobrazení. Problém je, že nelze zpomalovat rychlost simulátoru do nekonečna, proto je zde nastavena minimální hodnota, na kterou se může simulátor zpomalit. Je zde i horní limit, aby nedocházelo\linebreak k zrychlené jízdě a tedy i ke zvýšené spotřebě energie.
+Dále provádím regulaci rychlosti simulátoru v závislosti na výkonu hardwaru. Je potřeba, aby obě vlákna prováděla výpočet co nejvíce paralelně, pokud by negrafické vlákno příliš dlouho nedodávalo novou transformaci vozidla, docházelo by k trhanému vykreslování (některý snímek by se vykresloval víckrát a to by se projevilo tak, že by se snímková frekvence zdála být na krátký okamžik poloviční). Pokud k tomuto případu dojde, je vhodné snížit frekvenci volání obou vláken a tím snížit rychlost simulátoru.
+
+Problém je, že nelze snižovat rychlost simulátoru do nekonečna, proto je zde nastavena minimální hodnota, na kterou se může simulátor zpomalit. Je zde i horní limit, aby nedocházelo k zrychlené jízdě a tedy i ke zvýšené spotřebě energie.
 
 \subsection{Práce se soubory}
-V Androidu se aplikace publikují v APK balíčku. Jedná se o ZIP soubor, který má nějakou danou strukturu. V Java kódu je možné na veškeré soubory uvnitř balíčku přistupovat,\linebreak v C++ tato možnost není. Někteří vývojáři toto řeší, že po prvním spuštění si aplikace stáhne ze serveru přídavná data a ty si uloží například na paměťovou kartu. Lze také rozbalit soubory z APK balíčku a s těma pak v C++ pracovat. To se moc nepoužívá, protože jsou potom data v zařízení dvakrát.
+V Androidu se aplikace publikují v APK balíčku. Jedná se o ZIP soubor, který má nějakou danou strukturu. V Java kódu je možné na veškeré soubory uvnitř balíčku přistupovat,\linebreak v C++ tato možnost není. Někteří vývojáři toto řeší, že po prvním spuštění si aplikace stáhne ze serveru přídavná data a ty si uloží například na paměťovou kartu. Lze také rozbalit soubory z APK balíčku a s těmi pak v C++ pracovat. To se moc nepoužívá, protože jsou potom data v zařízení dvakrát.
 
-Další možnou variantou je přistupovat k APK balíčku jako k ZIP souboru. Knihovna libzip umožňuje zpracovávat data ze ZIP souboru jako kdyby byla uložena normálně na disku nebo na paměťové kartě. To má výhodu, že data jsou komprimovaná a zároveň přístupná. Tato varianta je tedy lepší než stahovat data ze serveru.
+Další možnou variantou je přistupovat k APK balíčku jako k ZIP souboru. Knihovna libZIP umožňuje zpracovávat data ze ZIP souboru jako kdyby byla uložena normálně na disku nebo na paměťové kartě. To má výhodu, že data jsou komprimovaná a zároveň přístupná.
+\lstset{language=C++} 
+\begin{lstlisting}[caption=Čtení řádky z APK balíčku (vlevo) a ze souboru (vpravo)]
+void gets(char* line, zip_file* f) {   |  void gets(char* line, FILE* f) {
+  for (int i=0; i<MAX_LENGTH; i++) {   |    for (int i=0; i<MAX_LENGTH; i++) {
+    zip_fread(f, character, 1);        |      fread(character, 1, 1, f);
+    line[i] = character[0];            |      line[i] = character[0];
+    if (line[i] == '\n') {             |      if (line[i] == '\n') {
+      line[i + 1] = '\000';            |        line[i + 1] = '\000';
+      return;                          |        return;
+    }                                  |      }  
+  }                                    |    }      
+}                                      |  }   
+\end{lstlisting}
+
+Problém může nastat při použití externích knihoven, které čtou ze souborů. To je případ knihovny libPNG, která načítá ze souborů PNG rastrová data. Tato knihovna umožňuje použití vlastní čtecí funkce a tím umožňuje číst data přímo z APK, kdyby tomu tak nebylo, nemohli bychom touto knihovnou načítat data přímo z APK balíčku.
+
+\lstset{language=C++} 
+\begin{lstlisting}[caption=Použití vlastní čtecí funkce při použití knihovny libPNG]
+void png_read(png_structp png_ptr, png_bytep data, png_size_t length) {
+#ifdef USE_APK_PACKAGE
+  zip_fread(zipFile, data, length);
+#else
+  fread(data, length, 1, file);
+#endif
+}
+
+Texture* loadPNG(const char* filename) {
+#ifdef USE_APK_PACKAGE
+  zipFile = zip_fopen(APKArchive, prefix(filename), 0);
+#else
+  file = fopen(prefix(filename), "rb");
+#endif
+  png_set_read_fn(png_ptr, NULL, png_read);
+  ...
+}
+\end{lstlisting}
 
 \section{Předpočtené osvětlení}
 

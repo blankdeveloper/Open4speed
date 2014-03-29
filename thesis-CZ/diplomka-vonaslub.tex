@@ -860,27 +860,104 @@ Třída \ul{car} je v první řadě struktura uchovávající veškeré proměnn
 Jednotlivá rozhraní mají různé funkce. Rozhraní \ul{fbo}, \ul{renderer}, \ul{shader}, \ul{texture} a \ul{vbo} vytváří abstraktní přístup k OpenGL, \ul{input} je rozhraní pro ovládání vozidla (implementací může být buď klávesnice anebo umělá inteligence), rozhraní \ul{physics} reprezentuje fyzikální engine a rozhraní \ul{sound} umožňuje přehrávat zvuky. Implementace rozhraní \ul{sound} jsou příkladem použití různých implementací na různých platformách.
 
 \section{Realizace na platformě Android}
-Platforma Android je postavená na Linuxovém jádře a využívá mnohé komponenty\linebreak z projektu GNU, nicméně celé Android API je v jazyku Java. Android využívá svůj Java virtuální stroj Dalwik. Pomocí Android NDK(native development kit) je možné zkompilovat C/C++ kód jako knihovnu, kterou je možné zavolat z jazyku Java. Toto je prováděno pomocí JNI(Java native interface).
+Platforma Android je postavená na Linuxovém jádře a využívá mnohé komponenty\linebreak z projektu GNU, nicméně celé Android API je v jazyku Java za využiti virtuálního stroje Dalwik. Pomocí Android NDK(native development kit) je možné zkompilovat C/C++ kód jako knihovnu, kterou je možné zavolat z jazyku Java. Toto je prováděno pomocí JNI(Java native interface).
 
-Snažší by bylo naprogramovat simulátor přímo v Javě, ale tím bych ztratil možnost portovat simulátor na další platformy, které virtuální stroj Dalwik nemají. Dále by byl problém s použitím fyzikálního engine, který je napsaný v jazyce C++. Musel bych napsat interface pro fyzikální engine, který by mi umožnil komunikaci mezi C++ a Java kódem.
+Snažší by bylo naprogramovat simulátor přímo v Javě, ale tím bych ztratil možnost portovat simulátor na další platformy, které virtuální stroj Dalwik nemají. Dále by byl problém s použitím fyzikálního enginu, který je napsaný v jazyce C++. Musel bych napsat interface pro fyzikální engine, který by mi umožnil komunikaci mezi C++ a Java kódem.
+
+\subsection{Problematika Android API}
+Java native interface je rozhraní, které umožňuje spustit C++ kód z jazyku Java a obráceně. Největší problém je, že neexistuje použitelný port freeglut knihovny pro Android. Udělal jsem tedy JNI rozhraní, které odpovídá handlerům knihovny freeglut. Tedy nahrazuji veškeré funkce této knihovny svou implementací. Knihovna implementuje správu oken, vstup klávesnice a myši a volání idle a display funkcí. Klávesnice a myš byla pochopitelně plně nahrazena dotykovým ovládáním, ale pokud do Android zařízení připojíme klávesnici nebo myš, bude plně funkční. Funkčnost myši zařizuje sám systém, klávesnice stačila namapovat.
+
+Aby bylo možné volat C++ metody přímo z Javy musí být pojmenovány ve formátu Java\_\textit{package}\_\textit{třída}\_\textit{metoda}. C++ knihovna bude tedy možné spustit pouze z jedné Java třídy.
+\lstset{language=C++} 
+\begin{lstlisting}[caption=JNI metody v C++ kódu pro nahrazení freeglut knihovny]
+extern "C" {
+  void Java_com_cvut_o4s_O4SJNI_nativeInit(JNIEnv* e, jstring apkPath ) {
+    instance = env;
+    APKArchive = zip_open(env->GetStringUTFChars(apkPath), 0, NULL);
+    main(0, 0);
+  }
+  void Java_com_cvut_o4s_O4SJNI_nativeClick(JNIEnv* e, jint x, jint y) { 
+    mouseClick(0, 0, x, y); 
+  }
+  void Java_com_cvut_o4s_O4SJNI_nativeKey(JNIEnv* e, jint i) { keyDown(i); }
+  void Java_com_cvut_o4s_O4SJNI_nativeKeyUp(JNIEnv* e, jint i) { keyUp(i); }
+  void Java_com_cvut_o4s_O4SJNI_nativeDisplay(JNIEnv* e) { display(); }
+  void Java_com_cvut_o4s_O4SJNI_nativeLoop(JNIEnv* e) { idle(0); }
+}
+\end{lstlisting}
+
+Dále je potřeba C++ knihovnu načíst pomocí volání System.loadLibrary a metody deklarovat v dané Java třídě pomocí klíčového slova native.
+
+\lstset{language=Java} 
+\begin{lstlisting}[caption=Deklarování C++ metod v Java kódu]
+package com.cvut.o4s;
+
+class O4SJNI {
+
+  static { System.loadLibrary("open4speed"); }
+  static native void nativeInit(String apkPath);
+  static native void nativeClick(int x, int y);
+  static native void nativeKey(int i);
+  static native void nativeKeyUp(int i);
+  static native void nativeDisplay();
+  static native void nativeLoop();
+
+  ...
+}
+\end{lstlisting}
+
+Dalším problémem je volání Android API z C++ kódu (tzn. volání Java kódu z C++). Příkladem je přehrávání zvuků pomocí Android API, ovládání zvuku je nutno řídit z C++, kdežto API je přímo přístupné pouze z Javy. Na obrázku 4.2 je to případ třídy Sounds. Problém se řeší také pomocí JNI, pouze volání jsou prováděny v opačném směru.
 
 \begin{center}
 \begin{figure}[h]
 \includegraphics[width=80mm]{figures/jni.png}
-\caption{UML diagram spustitelného klienta pro Android}
+\caption{UML diagram spustitelného klienta pro Android, kde libopen4speed.so je zkompilovaná C++ knihovna projektu}
 \end{figure}
 \end{center}
 
-\subsection{Problematika Android API}
-Java native interface je rozhraní, které umožňuje spustit C++ kód z jazyku Java a obráceně. Nicméně komunikaci nelze realizovat nějak jednoduše a je proto vhodné tuto komunikaci minimalizovat.
 \lstset{language=C++} 
-\begin{lstlisting}[caption=Volání Java metody z jazyku C++]
-jclass cl = env->FindClass(className);
-jmethodID m = env->GetStaticMethodID(cl, methodName, paramFormat);
-env->CallStaticVoidMethod(cl, m, id, volume);
+\begin{lstlisting}[caption=Volání Java metody pro přehrání zvuku z C++ kódu]
+void soundpool::play(int index) {
+  jclass clazz = instance->FindClass("com/cvut/o4s/Sounds");
+  //get method "void soundPlay(int, int)"
+  jmethodID method = instance->GetStaticMethodID(clazz, "soundPlay", "(II)V");
+  instance->CallStaticVoidMethod(clazz, method, index, (int)looping);
+}
 \end{lstlisting}
+\newpage
 
-Udělal jsem tedy rozhraní, které odpovídá handlerům knihovny freeglut. Tedy nahrazuji veškeré funkce této knihovny svou implementací. Knihovna implementuje správu oken, vstup klávesnice a myši a volání idle a display funkcí. Klávesnice a myš byla pochopitelně plně nahrazena dotykovým ovládáním, ale pokud do Android zařízení připojíme klávesnici nebo myš, bude plně funkční. Funkčnost myši zařizuje sám systém, klávesnice stačila namapovat.
+V Javě se poté musí ještě rozlišovat přehrávání zvuků od přehrávání hudby. Hudba bývá řádově náročnější na paměť a nemá smysl jí celou držet v paměti, když na ni není potřeba aplikovat další zvukové efekty.
+
+\lstset{language=Java} 
+\begin{lstlisting}[caption=Přehrání zvuku v Javě pomocí Android API]
+package com.cvut.o4s;
+
+import ...
+
+class Sounds {
+  // instances of sounds
+  static ArrayList<Sound> list;
+  // instances of sound APIs
+  static MediaPlayer music;
+  static SoundPool snd;
+  
+  ...  
+  
+  public static void soundPlay(int index, int loop) {
+    //instance is a music
+    if (list.get(index).id == TYPE_MUSIC) {
+      music.setLooping(loop == 1);
+      music.start();
+    }
+
+    //audio clip
+    else {
+      Sound s = list.get(index);
+      snd.play(s.id, s.volume, s.volume, 1, loop, s.rate);
+    }
+  }
+}
+\end{lstlisting}
 
 \subsection{Využití vláken}
 Většina zařízení, které dnes už spadají do střední třídy, je vybavena aspoň dvěma procesory, je proto vhodné rozdělit činnost do více vláken, aby bylo dosaženo maximálního výkonu. Třída GLSurfaceView, která umožňuje vykreslovat OpenGL scénu z C++ umožňuje volat OpenGL příkazy pouze z jednoho vlákna. Z tohoto důvodu jsem rozdělil kód na grafické\linebreak a negrafické vlákno.
@@ -894,25 +971,22 @@ V Androidu se aplikace publikují v APK balíčku. Jedná se o ZIP soubor, kter�
 
 Další možnou variantou je přistupovat k APK balíčku jako k ZIP souboru. Knihovna libzip umožňuje zpracovávat data ze ZIP souboru jako kdyby byla uložena normálně na disku nebo na paměťové kartě. To má výhodu, že data jsou komprimovaná a zároveň přístupná. Tato varianta je tedy lepší než stahovat data ze serveru.
 
-\section{Nahrazení víceprůchodových přístupů}
-Při běhu jakéhokoliv simulátoru je největší zátěž mobilního hardware způsobena vykreslováním 3D scény, proto je nutné tuto část co nejvíce zefektivnit. Pro mnoho efektů se používají takzvané víceprůchodové přístupy(scéna se vykreslí víckrát z různých pohledů nebo pomocí různých shaderů), ale na mobilním zařízení je zatím z hlediska výkonu možné použít pouze jednoprůchodový přístup.
+\section{Předpočtené osvětlení}
 
-Abych částečně nahradil ve svém simulátoru víceprůchodový přístup, použil jsem screen-space přístup(to je obecně jakákoliv technika využívající data z pohledu kamery, jinými slovy máme pouze výsledný snímek a na něm provádíme další operace). V praxi se používá hlavně pro zrcadlové plochy. Potřeboval jsem přistupovat do aktuálně vykreslovaného snímku. To je ale problém, protože tento snímek není kompletní a kdybych vykresloval přímo do něj\linebreak a zároveň z něj četl způsobilo by to chyby ve výsledném obraze.
-
-Řešením je vykreslování střídavě do dvou různých textur. To znamená, že při lichém snímku kreslím do textury 1 a čtu z textury 2. Při sudém snímku je tomu obráceně. Tímto způsobem získám přístup do vykreslené scény, sice s drobným zpožděním, ale při dostatečně rychlém vykreslování si toho uživatel nevšimne(za předpokladu, že textura bude použita\linebreak na efekty jako jsou odlesky nebo stíny).
+Předpočtené osvětlení umožňuje velmi rychle zobrazovat stínování a stíny na statických objektech. Problémem je, že je potřeba aplikovat tento efekt i na dynamických objektech. Úroveň osvětlení lze přečíst z nejbližšího statického objektu, tedy za předpokladu, že budeme mít tuto hodnotu někde k dispozici. Tuto hodnotu lze mít uloženou v alfa kanálu aktuálního snímku a jen jí přečíst před tím, než se vykreslí dynamické objekty.
 
 \begin{figure}[h!]
-\includegraphics[width=150mm]{figures/render-schema.png}
-\caption{Vykreslovací řetězec simulátoru}
+\begin{center}
+\includegraphics[width=110mm]{figures/lamps.png}
+\caption{Scéna s aplikovanými mapami osvětlení lamp}
+\end{center}
 \end{figure}
 
-\subsection{Rozměr textur na OpenGL ES 2.0}
-Verze OpenGL ES 2.0 neumožňuje používat obdélníkové textury. Textury musí být čtvercové a jejich strana musí být o velikosti mocniny 2.
-Pro vykreslování do textury, která bude výsledně umístěna na obrazovku je tedy nutné zvolit vyšší rozlišení. Např. u tabletu Google Nexus 7 2012 s rozlišením 1280x720 se zvolí textura 2048x1024. To znamená, že by se ve výsledku vykreslilo víc než 2x více pixelů než je potřeba.
+Pro generování map osvětlení jsou k dispozici dva druhy světel: bodové světlo a reflektor. Tyto světla jsou definované přímo v 3D modelovacím software. Dosah světel je omezen\linebreak na 300metrů(je to z důvodu chyb, které vznikají u osvětlení na velkou vzdálenost). Světla pochopitelně nepoužívají spekulární složku, protože tato složka je závislá na pohledu kamery a tudíž jí nelze předpočítat.
 
-Není ale nutné vykreslovat do celé textury, pomocí příkazu \textit{glViewport} se dá nastavit část textury, do které má OpenGL vykreslovat a nedojde tedy k plýtvání výkonem(bude se plýtvat pouze pamětí).
+I maximální možné rozlišení map osvětlení pro danou scénu není dostatečné a stíny jsou kostičkované. Z tohoto důvodu se používají dva druhy filtrování. Prvním je filtrování PCF, které se provádí přímo při generování mapy osvětlení a druhým je lineární filtrování, které se aplikuje až při aplikování mapy osvětlení. Tato kombinace filtrování značně zvýší výslednou kvalitu stínů.
 
-Dále je možné zvolit nižší rozlišení viewportu než je rozlišení displeje. Mobilní zařízení obvykle disponují obrovskou hustotou pixelů a pokud zařízení nebude stíhat vykreslovat scénu v plném rozlišení, lze vykreslovat v rozlišení menším. U počítačových 3D her se také setkáváme s možností změnit rozlišení, tam řeší změnu přímo hardware displeje nebo jeho ovladač.
+Dalším problémem je rozsah intenzity osvětlení v mapě osvětlení. Například pouliční lampa na obr.4.4 nedělá očekáváné stíny od stojanu lampy. Tento stín zmizí, protože při připočtení druhého světla se úroveň osvětlení v daných bodech rovná maximální možné hodnotě(dochází zde k ořezu vyšších hodnot).
 
 \section{Předzpracování}
 
@@ -984,28 +1058,31 @@ Pokud máme ve scéně \textbf{předpočtené stíny}, je vhodné tyto statické
 
 Zde vzniká problém s barevným světlem. Jsou zde dvě možnosti řešení. Prvním je přidání další textury, ve kterém by byla barevná intenzita světla(tím by došlo ke zvýšení náročnosti na hardware a ke zvýšení paměťové náročnosti). Druhým možným řešením je omezit barevná světla do nějaké sytosti(pokud se slabě zabarvené světlo aplikuje jako bílé, není to tolik rušivé).
 
-\section{Předpočtené osvětlení}
-
-Předpočtené osvětlení umožňuje velmi rychle zobrazovat stínování a stíny na statických objektech. Problémem je, že je potřeba aplikovat tento efekt i na dynamických objektech. Úroveň osvětlení lze přečíst z nejbližšího statického objektu, tedy za předpokladu, že budeme mít tuto hodnotu někde k dispozici. Tuto hodnotu lze mít uloženou v alfa kanálu aktuálního snímku a jen jí přečíst před tím, než se vykreslí dynamické objekty.
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=110mm]{figures/lamps.png}
-\caption{Scéna s aplikovanými mapami osvětlení lamp}
-\end{center}
-\end{figure}
-
-Pro generování map osvětlení jsou k dispozici dva druhy světel: bodové světlo a reflektor. Tyto světla jsou definované přímo v 3D modelovacím software. Dosah světel je omezen\linebreak na 300metrů(je to z důvodu chyb, které vznikají u osvětlení na velkou vzdálenost). Světla pochopitelně nepoužívají spekulární složku, protože tato složka je závislá na pohledu kamery a tudíž jí nelze předpočítat.
-
-I maximální možné rozlišení map osvětlení pro danou scénu není dostatečné a stíny jsou kostičkované. Z tohoto důvodu se používají dva druhy filtrování. Prvním je filtrování PCF, které se provádí přímo při generování mapy osvětlení a druhým je lineární filtrování, které se aplikuje až při aplikování mapy osvětlení. Tato kombinace filtrování značně zvýší výslednou kvalitu stínů.
-
-Dalším problémem je rozsah intenzity osvětlení v mapě osvětlení. Například pouliční lampa na obr.4.4 nedělá očekáváné stíny od stojanu lampy. Tento stín zmizí, protože při připočtení druhého světla se úroveň osvětlení v daných bodech rovná maximální možné hodnotě(dochází zde k ořezu vyšších hodnot).
-
-\section{Světla vozidel}
+\subsection{Světla vozidel}
 
 Dle předběžných měření jsem zjistil, že na mobilních zařízeních lze za běhu počítat jedno až dvě světla(bez řešení viditelnosti světla). U vozidla ovládané hráčem není potřeba řešit viditelnost světla, prakticky zde nedochází k situacím, že by světlo osvětlovalo neviditelné objekty(je to z důvodu těsné vazby světlo hráčova vozidla-kamera).
 
 U ostatních vozidel je třeba osvětlení zjednodušit, aby to mobilní hardware zvládal. Zvolil jsem metodu vykreslování kuželů do scény. Při vykreslování je použita OpenGL funkce blending, která umožňuje kreslit objekty s částečnou průhledností. Dále je také zapnuté ořezávání odvrácených trojúhelníku. Střed kužele je vyplněn několikrát zevnitř s odvrácenou normálou. Z toho důvodu je osvětlení silnější pokud světlo svítí do kamery než od kamery.
+
+\section{Nahrazení víceprůchodových přístupů}
+Při běhu jakéhokoliv simulátoru je největší zátěž mobilního hardware způsobena vykreslováním 3D scény, proto je nutné tuto část co nejvíce zefektivnit. Pro mnoho efektů se používají takzvané víceprůchodové přístupy(scéna se vykreslí víckrát z různých pohledů nebo pomocí různých shaderů), ale na mobilním zařízení je zatím z hlediska výkonu možné použít pouze jednoprůchodový přístup.
+
+Abych částečně nahradil ve svém simulátoru víceprůchodový přístup, použil jsem screen-space přístup(to je obecně jakákoliv technika využívající data z pohledu kamery, jinými slovy máme pouze výsledný snímek a na něm provádíme další operace). V praxi se používá hlavně pro zrcadlové plochy. Potřeboval jsem přistupovat do aktuálně vykreslovaného snímku. To je ale problém, protože tento snímek není kompletní a kdybych vykresloval přímo do něj\linebreak a zároveň z něj četl způsobilo by to chyby ve výsledném obraze.
+
+Řešením je vykreslování střídavě do dvou různých textur. To znamená, že při lichém snímku kreslím do textury 1 a čtu z textury 2. Při sudém snímku je tomu obráceně. Tímto způsobem získám přístup do vykreslené scény, sice s drobným zpožděním, ale při dostatečně rychlém vykreslování si toho uživatel nevšimne(za předpokladu, že textura bude použita\linebreak na efekty jako jsou odlesky nebo stíny).
+
+\begin{figure}[h!]
+\includegraphics[width=150mm]{figures/render-schema.png}
+\caption{Vykreslovací řetězec simulátoru}
+\end{figure}
+
+\subsection{Rozměr textur na OpenGL ES 2.0}
+Verze OpenGL ES 2.0 neumožňuje používat obdélníkové textury. Textury musí být čtvercové a jejich strana musí být o velikosti mocniny 2.
+Pro vykreslování do textury, která bude výsledně umístěna na obrazovku je tedy nutné zvolit vyšší rozlišení. Např. u tabletu Google Nexus 7 2012 s rozlišením 1280x720 se zvolí textura 2048x1024. To znamená, že by se ve výsledku vykreslilo víc než 2x více pixelů než je potřeba.
+
+Není ale nutné vykreslovat do celé textury, pomocí příkazu \textit{glViewport} se dá nastavit část textury, do které má OpenGL vykreslovat a nedojde tedy k plýtvání výkonem(bude se plýtvat pouze pamětí).
+
+Dále je možné zvolit nižší rozlišení viewportu než je rozlišení displeje. Mobilní zařízení obvykle disponují obrovskou hustotou pixelů a pokud zařízení nebude stíhat vykreslovat scénu v plném rozlišení, lze vykreslovat v rozlišení menším. U počítačových 3D her se také setkáváme s možností změnit rozlišení, tam řeší změnu přímo hardware displeje nebo jeho ovladač.
 
 %*****************************************************************************
 \chapter{Testování}

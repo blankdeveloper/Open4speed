@@ -28,17 +28,17 @@
 \contentsline {figure}{\numberline {3.17}{\ignorespaces Diagram odrazu vodn\IeC {\'\i } hladiny \cite {Kaplinski11}}}{23}{figure.3.17}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces UML diagram projektu, horn\IeC {\'\i } \IeC {\v c}\IeC {\'a}st je abstraktn\IeC {\'\i }, doln\IeC {\'\i } \IeC {\v c}\IeC {\'a}st implementuje jednotliv\IeC {\'a} rozhran\IeC {\'\i } a na\IeC {\v c}\IeC {\'\i }t\IeC {\'a} data do pam\IeC {\v e}ti, spustiteln\IeC {\'e} soubory jsou ozna\IeC {\v c}eny te\IeC {\v c}kou}}{26}{figure.4.1}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces UML diagram spustiteln\IeC {\'e}ho klienta pro Android}}{27}{figure.4.2}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Vykreslovac\IeC {\'\i } \IeC {\v r}et\IeC {\v e}zec simul\IeC {\'a}toru}}{29}{figure.4.3}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces UML diagram konvertoru 3D model\IeC {\r u}}}{30}{figure.4.4}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Odlesky na povrchu vozovky.}}{31}{figure.4.5}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Odlesky na vozidle. B\IeC {\'\i }l\IeC {\'e} plochy zn\IeC {\'a}zor\IeC {\v n}uj\IeC {\'\i } pozice, ze kter\IeC {\'y}ch se \IeC {\v c}te barva odlesku.}}{32}{figure.4.6}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Sc\IeC {\'e}na s aplikovan\IeC {\'y}mi mapami osv\IeC {\v e}tlen\IeC {\'\i } lamp}}{33}{figure.4.7}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces UML diagram spustiteln\IeC {\'e}ho klienta pro Android, kde libopen4speed.so je zkompilovan\IeC {\'a} C++ knihovna projektu}}{28}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Sc\IeC {\'e}na s aplikovan\IeC {\'y}mi mapami osv\IeC {\v e}tlen\IeC {\'\i } lamp}}{30}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces UML diagram konvertoru 3D model\IeC {\r u}}}{31}{figure.4.4}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Odlesky na povrchu vozovky.}}{33}{figure.4.5}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Odlesky na vozidle. B\IeC {\'\i }l\IeC {\'e} plochy zn\IeC {\'a}zor\IeC {\v n}uj\IeC {\'\i } pozice, ze kter\IeC {\'y}ch se \IeC {\v c}te barva odlesku.}}{33}{figure.4.6}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Vykreslovac\IeC {\'\i } \IeC {\v r}et\IeC {\v e}zec simul\IeC {\'a}toru}}{34}{figure.4.7}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {B.1}{\ignorespaces Popiska obr\IeC {\'a}zku}}{48}{figure.B.1}
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Popiska obr\IeC {\'a}zku}}{50}{figure.B.1}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

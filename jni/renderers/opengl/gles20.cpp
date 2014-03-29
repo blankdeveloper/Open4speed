@@ -786,7 +786,7 @@ void gles20::prepareLM(int count) {
 }
 
 /**
- * @brief renderLMLight render light into lightmap
+ * @brief renderLM render light into lightmap
  * @param lightrenderer is shader to use
  * @param checkVisibility is true to check light visibility
  */

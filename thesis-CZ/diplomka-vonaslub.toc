@@ -34,7 +34,7 @@
 \contentsline {subsection}{\numberline {4.2.1}Problematika Android API}{27}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Vyu\IeC {\v z}it\IeC {\'\i } vl\IeC {\'a}ken}{29}{subsection.4.2.2}
 \contentsline {subsection}{\numberline {4.2.3}Pr\IeC {\'a}ce se soubory}{30}{subsection.4.2.3}
-\contentsline {section}{\numberline {4.3}P\IeC {\v r}edpo\IeC {\v c}ten\IeC {\'e} osv\IeC {\v e}teln\IeC {\'\i }}{31}{section.4.3}
+\contentsline {section}{\numberline {4.3}P\IeC {\v r}edpo\IeC {\v c}ten\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i }}{31}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}Vytv\IeC {\'a}\IeC {\v r}en\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{31}{subsection.4.3.1}
 \contentsline {subsubsection}{\numberline {4.3.1.1}Generov\IeC {\'a}n\IeC {\'\i } texturovac\IeC {\'\i }ch sou\IeC {\v r}adnic pro mapy osv\IeC {\v e}tlen\IeC {\'\i }}{32}{subsubsection.4.3.1.1}
 \contentsline {subsubsection}{\numberline {4.3.1.2}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{33}{subsubsection.4.3.1.2}

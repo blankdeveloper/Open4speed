@@ -22,7 +22,7 @@ Texture* createRGB(int width, int height, float r, float g, float b) {
 
     /// create color pixel raster
     Texture* texture = new Texture();
-    texture->data = new char[width * height * 4];
+    texture->data = new unsigned char[width * height * 4];
     int index = 0;
     for (int x = 0; x < width; x++)
         for (int y = 0; y < height; y++) {

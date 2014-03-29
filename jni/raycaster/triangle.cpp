@@ -1,6 +1,9 @@
 #include <glm/gtx/intersect.hpp>
+#include <string.h>
+#include "loaders/pngloader.h"
 #include "raycaster/triangle.h"
 #include "raycaster/utils.h"
+#include "utils/io.h"
 #include "common.h"
 
 triangle* lastIntersectedTriangle = 0;
@@ -10,10 +13,11 @@ triangle::triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c,
          glm::vec2 aID, glm::vec2 bID, glm::vec2 cID,
          glm::vec3 na, glm::vec3 nb, glm::vec3 nc,
          glm::vec2 ta, glm::vec2 tb, glm::vec2 tc,
-         int lmIndex, long tIndex) {
+         int lmIndex, long tIndex, Texture* txt) {
     this->a = a;
     this->b = b;
     this->c = c;
+    this->txt = txt;
     this->aID = glm::ivec2((int)(aID.x * rttsize + 0.5f), (int)(aID.y * rttsize + 0.5f));
     this->bID = glm::ivec2((int)(bID.x * rttsize + 0.5f), (int)(bID.y * rttsize + 0.5f));
     this->cID = glm::ivec2((int)(cID.x * rttsize + 0.5f), (int)(cID.y * rttsize + 0.5f));
@@ -79,6 +83,18 @@ float ScalarTriple(glm::vec3 pq, glm::vec3 pc, glm::vec3 pb) {
 bool triangle::isIntersectedByRay() {
     if (!glm::intersectLineTriangle(uniform->begin, uniform->raydir, a, b, c, p))
         return false;
+    else if (txt != 0) {
+        float area = triangleArea(a, b, c);
+        float lena = triangleArea(p, b, c) / area;
+        float lenb = triangleArea(p, a, c) / area;
+        float lenc = triangleArea(p, a, b) / area;
+        // find the uv corresponding to point p
+        glm::vec2 uv = ta * lena + tb * lenb + tc * lenc;
+        uv = glm::mod(uv + 1024.0f, 1.0f);
+        glm::ivec2 c = glm::ivec2(uv.x * txt->width, uv.y * txt->height);
+        if (txt->data[(c.y * txt->width + c.x) * 4 + 3] < 128)
+            return false;
+    }
     /*glm::vec3 pq = uend - ubegin;
     glm::vec3 pa = a - ubegin;
     glm::vec3 pb = b - ubegin;

@@ -64,7 +64,7 @@ Texture* loadPNG(const char* filename) {
 
   /// load PNG
   unsigned int row_bytes = png_get_rowbytes(png_ptr, info_ptr);
-  texture->data = new char[row_bytes * height];
+  texture->data = new unsigned char[row_bytes * height];
   png_bytepp row_pointers = png_get_rows(png_ptr, info_ptr);
   for (unsigned int i = 0; i < height; i++) {
       memcpy(texture->data+(row_bytes * (height-1-i)), row_pointers[i], row_bytes);
@@ -125,10 +125,6 @@ int writeImage(char* filename, int width, int height, unsigned char *buffer) {
     if (info_ptr != NULL) png_free_data(png_ptr, info_ptr, PNG_FREE_ALL, -1);
     if (png_ptr != NULL) png_destroy_write_struct(&png_ptr, (png_infopp)NULL);
     if (row != NULL) free(row);
-
-    /*char s[256];
-    sprintf(s, "convert %s %s", filename, filename);
-    system(s);*/
 
     return 0;
 }

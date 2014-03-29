@@ -15,7 +15,7 @@
 struct Texture {
     int width;
     int height;
-    char* data;
+    unsigned char* data;
     bool hasAlpha;
 };
 

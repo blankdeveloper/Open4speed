@@ -1,6 +1,7 @@
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
 
+#include "renderers/opengl/gltexture.h"
 #include "raycaster/utils.h"
 
 class triangle
@@ -19,16 +20,18 @@ public:
     glm::vec2 ta;
     glm::vec2 tb;
     glm::vec2 tc;
+    int dataIndex;
     int lmIndex;
     long tIndex;
     long lastTestID;
+    Texture* txt;
     std::vector<Point> points;
 
     triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c,
              glm::vec2 aID, glm::vec2 bID, glm::vec2 cID,
              glm::vec3 na, glm::vec3 nb, glm::vec3 nc,
              glm::vec2 ta, glm::vec2 tb, glm::vec2 tc,
-             int lmIndex, long tIndex);
+             int lmIndex, long tIndex, Texture* txt);
 
     void addPointToAABB(glm::vec3 p);
 

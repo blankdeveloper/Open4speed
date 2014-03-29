@@ -146,21 +146,24 @@ void display(void) {
                 float x = trackdata->models[i].reg->min.x;
                 float y = trackdata->models[i].reg->min.y;
                 float z = trackdata->models[i].reg->min.z;
+                Texture* txt = 0;
+                if (trackdata->models[i].texture2D->transparent)
+                  txt = loadPNG(trackdata->models[i].texture2D->texturename);
                 for (int j = 0; j < triangleCount; j++) {
                   triangles.push_back(new triangle(
-                          glm::vec3(vertices[j * 9 + 0]+x, vertices[j * 9 + 1]+y, vertices[j * 9 + 2]+z),
-                          glm::vec3(vertices[j * 9 + 3]+x, vertices[j * 9 + 4]+y, vertices[j * 9 + 5]+z),
-                          glm::vec3(vertices[j * 9 + 6]+x, vertices[j * 9 + 7]+y, vertices[j * 9 + 8]+z),
-                          glm::vec2(tid[j * 6 + 0], tid[j * 6 + 1]),
-                          glm::vec2(tid[j * 6 + 2], tid[j * 6 + 3]),
-                          glm::vec2(tid[j * 6 + 4], tid[j * 6 + 5]),
-                          glm::vec3(normals[j * 9 + 0], normals[j * 9 + 1], normals[j * 9 + 2]),
-                          glm::vec3(normals[j * 9 + 3], normals[j * 9 + 4], normals[j * 9 + 5]),
-                          glm::vec3(normals[j * 9 + 6], normals[j * 9 + 7], normals[j * 9 + 8]),
-                          glm::vec2(coords[j * 6 + 0], coords[j * 6 + 1]),
-                          glm::vec2(coords[j * 6 + 2], coords[j * 6 + 3]),
-                          glm::vec2(coords[j * 6 + 4], coords[j * 6 + 5]),
-                          trackdata->models[i].lmIndex, index++));
+                                          glm::vec3(vertices[j * 9 + 0]+x, vertices[j * 9 + 1]+y, vertices[j * 9 + 2]+z),
+                                          glm::vec3(vertices[j * 9 + 3]+x, vertices[j * 9 + 4]+y, vertices[j * 9 + 5]+z),
+                                          glm::vec3(vertices[j * 9 + 6]+x, vertices[j * 9 + 7]+y, vertices[j * 9 + 8]+z),
+                                          glm::vec2(tid[j * 6 + 0], tid[j * 6 + 1]),
+                                          glm::vec2(tid[j * 6 + 2], tid[j * 6 + 3]),
+                                          glm::vec2(tid[j * 6 + 4], tid[j * 6 + 5]),
+                                          glm::vec3(normals[j * 9 + 0], normals[j * 9 + 1], normals[j * 9 + 2]),
+                                          glm::vec3(normals[j * 9 + 3], normals[j * 9 + 4], normals[j * 9 + 5]),
+                                          glm::vec3(normals[j * 9 + 6], normals[j * 9 + 7], normals[j * 9 + 8]),
+                                          glm::vec2(coords[j * 6 + 0], coords[j * 6 + 1]),
+                                          glm::vec2(coords[j * 6 + 2], coords[j * 6 + 3]),
+                                          glm::vec2(coords[j * 6 + 4], coords[j * 6 + 5]),
+                                          trackdata->models[i].lmIndex, index++, txt));
                 }
             }
             stopTimer();
@@ -250,6 +253,11 @@ void display(void) {
                         edge e = trackdata->edges[lightGroup][x];
                         xrenderer->light.u_light = glm::vec4(e.ax, e.ay, e.az, 1);
                         xrenderer->light.u_light_dir = glm::vec4(e.bx - e.ax, e.by - e.ay, e.bz - e.az, 0);
+
+                        // render SUN experiment
+                        /*xrenderer->light.u_light = glm::vec4(100, 100, 100, 1);
+                        xrenderer->light.u_light_dir = glm::vec4(0, 1, 0, 0);
+                        xrenderer->light.u_light_diffuse = glm::vec4(getConfig("R", lights), getConfig("G", lights), getConfig("B", lights), 0) * 10000.0f;*/
                         /// create ray and raycast
                         glm::vec3 begin = swizle(xrenderer->light.u_light);
                         for (unsigned long i = 0; i < triangles.size(); i++) {
@@ -271,6 +279,7 @@ void display(void) {
                             fflush(stdout);
                         }
                         status += 100 / (float)count;
+                        //break;
                     }
                 }
                 delete shadername;

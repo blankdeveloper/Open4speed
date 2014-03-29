@@ -1026,7 +1026,7 @@ I maximální možné rozlišení map osvětlení pro použitou scénu není dos
 
 Dalším problémem je rozsah intenzity osvětlení v mapě osvětlení. Například pouliční lampa na obr.4.3 nedělá očekávané stíny od stojanu lampy. Tento stín zmizí, protože při připočtení druhého světla se úroveň osvětlení v daných bodech rovná maximální možné hodnotě (dochází zde k ořezu vyšších hodnot). Ve výsledné implementaci byl rozsah změněn, aby k tomuto problému nedocházelo.
 
-V přístupu využívající vrhání paprsku jsou navíc k dispozici plošné zdroje světla, které jsou definovány pomocí světelných map, což jsou textury, u kterých jsou vykresleny pouze texely vyzařující světlo. Světelné mapy mají stejné texturovací souřadnice jako difúzní textura 3D modelu. Plošný zdroj světla se realizuje tak, že každý barevný texel ve světelné mapě vygeneruje bodový zdroj světla. Množina vzniklých bodových světel pak tvoří plošný zdroj světla.
+V přístupu využívající vrhání paprsku jsou navíc k dispozici plošné zdroje světla, které jsou definovány pomocí osvětlovacích textur, což jsou textury, u kterých jsou vykresleny pouze texely vyzařující světlo. Osvětlovací textury mají stejné texturovací souřadnice jako difúzní textury 3D modelu. Plošný zdroj světla se realizuje tak, že každý barevný texel\linebreak v osvětlovací textuře vygeneruje bodový zdroj světla. Množina vzniklých bodových světel pak tvoří plošný zdroj světla.
 
 \begin{figure}[h]
 \begin{center}$
@@ -1035,7 +1035,7 @@ V přístupu využívající vrhání paprsku jsou navíc k dispozici plošné z
 \includegraphics[width=50mm]{figures/buildz3-e.png}
 \end{array}$
 \end{center}
-\caption{Ukázka difúzní textury modelu (vlevo) a světelné mapy (vpravo)}
+\caption{Ukázka difúzní textury modelu (vlevo) a osvětlovací textury (vpravo)}
 \end{figure}
 
 \subsubsection{Generování texturovacích souřadnic pro mapy osvětlení}

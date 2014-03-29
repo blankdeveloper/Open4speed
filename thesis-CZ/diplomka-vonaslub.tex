@@ -1009,26 +1009,34 @@ Texture* loadPNG(const char* filename) {
 }
 \end{lstlisting}
 
-\section{Předpočtené osvětlení}
-
+\section{Předpočtené osvětelní}
 Předpočtené osvětlení umožňuje velmi rychle zobrazovat stínování a stíny na statických objektech. Problémem je, že je potřeba aplikovat tento efekt i na dynamických objektech. Úroveň osvětlení lze přečíst z nejbližšího statického objektu, tedy za předpokladu, že budeme mít tuto hodnotu někde k dispozici. Tuto hodnotu lze mít uloženou v alfa kanálu aktuálního snímku a jen jí přečíst před tím, než se vykreslí dynamické objekty.
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=110mm]{figures/lamps.png}
+\includegraphics[width=120mm]{figures/lamps.png}
 \caption{Scéna s aplikovanými mapami osvětlení lamp}
 \end{center}
 \end{figure}
 
-Pro generování map osvětlení jsou k dispozici dva druhy světel: bodové světlo a reflektor. Tyto světla jsou definované přímo v 3D modelovacím software. Dosah světel je omezen\linebreak na 300metrů(je to z důvodu chyb, které vznikají u osvětlení na velkou vzdálenost). Světla pochopitelně nepoužívají spekulární složku, protože tato složka je závislá na pohledu kamery a tudíž jí nelze předpočítat.
-
-I maximální možné rozlišení map osvětlení pro danou scénu není dostatečné a stíny jsou kostičkované. Z tohoto důvodu se používají dva druhy filtrování. Prvním je filtrování PCF, které se provádí přímo při generování mapy osvětlení a druhým je lineární filtrování, které se aplikuje až při aplikování mapy osvětlení. Tato kombinace filtrování značně zvýší výslednou kvalitu stínů.
-
-Dalším problémem je rozsah intenzity osvětlení v mapě osvětlení. Například pouliční lampa na obr.4.4 nedělá očekáváné stíny od stojanu lampy. Tento stín zmizí, protože při připočtení druhého světla se úroveň osvětlení v daných bodech rovná maximální možné hodnotě(dochází zde k ořezu vyšších hodnot).
-
-\section{Předzpracování}
-
 \subsection{Vytváření map osvětlení}
+Vytváření map osvětlení je realizováno dvěma přístupy, první je rasterizační (pomocí OpenGL) a druhý je vrhání paprsku. Pro rasterizační přistup jsou k dispozici dva druhy světel: bodové světlo a reflektor. Tyto světla jsou definovaná přímo v 3D modelovacím software. Dosah světel je omezen na 300metrů (je to z důvodu chyb, které vznikají u osvětlení\linebreak na velkou vzdálenost). Světla pochopitelně nepoužívají spekulární složku, protože tato složka je závislá na pohledu kamery a tudíž jí nelze předpočítat.
+
+I maximální možné rozlišení map osvětlení pro použitou scénu není dostatečné a stíny jsou kostičkované. Z tohoto důvodu se používají dva druhy filtrování. Prvním je rozmazání map osvětlení, které se provádí přímo po generování mapy osvětlení a druhým je lineární filtrování, které se aplikuje až při aplikování mapy osvětlení. Tato kombinace filtrování značně zvýší výslednou kvalitu stínů.
+
+Dalším problémem je rozsah intenzity osvětlení v mapě osvětlení. Například pouliční lampa na obr.4.3 nedělá očekávané stíny od stojanu lampy. Tento stín zmizí, protože při připočtení druhého světla se úroveň osvětlení v daných bodech rovná maximální možné hodnotě (dochází zde k ořezu vyšších hodnot). Ve výsledné implementaci byl rozsah změněn, aby k tomuto problému nedocházelo.
+
+V přístupu využívající vrhání paprsku jsou navíc k dispozici plošné zdroje světla, které jsou definovány pomocí světelných map, což jsou textury, u kterých jsou vykresleny pouze texely vyzařující světlo. Světelné mapy mají stejné texturovací souřadnice jako difúzní textura 3D modelu. Plošný zdroj světla se realizuje tak, že každý barevný texel ve světelné mapě vygeneruje bodový zdroj světla. Množina vzniklých bodových světel pak tvoří plošný zdroj světla.
+
+\begin{figure}[h]
+\begin{center}$
+\begin{array}{cc}
+\includegraphics[width=50mm]{figures/buildz3-n.png} &
+\includegraphics[width=50mm]{figures/buildz3-e.png}
+\end{array}$
+\end{center}
+\caption{Ukázka difúzní textury modelu (vlevo) a světelné mapy (vpravo)}
+\end{figure}
 
 \subsubsection{Generování texturovacích souřadnic pro mapy osvětlení}
 

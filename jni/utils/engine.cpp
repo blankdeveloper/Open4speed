@@ -7,6 +7,7 @@
 */
 //----------------------------------------------------------------------------------------
 
+#include <cstdlib>
 #include "interfaces/model.h"
 #include "input/airacer.h"
 #include "input/aitraffic.h"

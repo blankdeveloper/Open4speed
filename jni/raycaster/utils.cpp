@@ -7,34 +7,34 @@ timespec ts_start, ts_end;          ///< Time messurement
 
 Uniform *uniform = new Uniform();
 
-glm::vec3 getColor(Point p) {
+float cstep = 1 / 255.0f;
 
-    //count light
-    glm::vec3 lightDir = -uniform->raydir;
-    glm::vec3 N = glm::normalize(p.n);
-    glm::vec3 L = glm::normalize(lightDir);
-    //count effectivity(directionaly)
-    float eff = glm::dot(glm::normalize(-swizle(xrenderer->light.u_light_dir)), -L);
+glm::vec4 getColor(Point p) {
+
+    //count effectivity
+    float sEff = 1;
+    if (xrenderer->light.u_light_cut != -2)
+        sEff = glm::dot(glm::normalize(-swizle(xrenderer->light.u_light_dir)), -uniform->L);
+
     //light cutoff
-    if (eff >= xrenderer->light.u_light_cut) {
+    if (sEff >= xrenderer->light.u_light_cut) {
       //diffuse light
-      glm::vec3 color = glm::max(glm::dot(N, L), 0.0f) * swizle(xrenderer->light.u_light_diffuse);
+      glm::vec4 color = glm::max(glm::dot(p.n, uniform->L), 0.0f) * xrenderer->light.u_light_diffuse;
+      color.w = 1;
       //light attenuation
       float d = glm::length(uniform->raydir);
-      glm::vec3 D = glm::vec3(1.0, d, d * d);
-      color *= glm::pow(eff, xrenderer->light.u_light_spot_eff) / glm::dot(swizle(xrenderer->light.u_light_att), D);
+      color *= sEff / glm::dot(xrenderer->light.u_light_att, glm::vec4(1.0, d, d * d, 0));
       // add to previous lightmap
-      return glm::clamp(color, 0, 1);
-    } else {
-      return glm::vec3(0, 0, 0);
-    }
-}
+      color = glm::clamp(color, glm::vec4(0, 0, 0, 1), glm::vec4(1, 1, 1, 1));
 
-bool isBlack(glm::vec3 color) {
-    if ((int)(color.x * 255.0f) > 0) return false;
-    if ((int)(color.y * 255.0f) > 0) return false;
-    if ((int)(color.z * 255.0f) > 0) return false;
-    return true;
+      if ((color.x < cstep) && (color.y < cstep) && (color.z < cstep))
+          return glm::vec4(0, 0, 0, 0);
+      else
+          return glm::clamp(color, glm::vec4(0, 0, 0, 1), glm::vec4(1, 1, 1, 1));
+
+    } else {
+      return glm::vec4(0, 0, 0, 0);
+    }
 }
 
 void setUniforms(glm::vec3 begin, glm::vec3 end, long ignore1, long ignore2, long testID) {
@@ -44,6 +44,7 @@ void setUniforms(glm::vec3 begin, glm::vec3 end, long ignore1, long ignore2, lon
     uniform->ignore2 = ignore2;
     uniform->raydir = end - begin;
     uniform->testID = testID;
+    uniform->L = glm::normalize(-uniform->raydir);
 }
 
 

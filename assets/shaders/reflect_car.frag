@@ -47,7 +47,7 @@ void main()
   
     //dynamic shadow
     float a = texture2D(EnvMap1, vec2(0.5, 0.0)).a;
-    gl_FragColor *= min(a, 0.75);
+    gl_FragColor *= min(a + 0.05, 0.75);
   } else {
     gl_FragColor.rgb *= (v_Coords.t > 0.3) ? 1.0 : 1.0 + u_brake * 1.5;
   }

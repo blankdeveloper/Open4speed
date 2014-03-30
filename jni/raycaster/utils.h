@@ -11,6 +11,13 @@ struct Point {
     glm::vec2 c;
 };
 
+struct PLP {
+    glm::vec4 pos;
+    glm::vec4 dir;
+    glm::vec4 color;
+    bool useable;
+};
+
 struct Uniform {
     glm::vec3 begin;
     glm::vec3 end;
@@ -18,13 +25,12 @@ struct Uniform {
     long ignore1;
     long ignore2;
     long testID;
+    glm::vec3 L;
 };
 
 extern Uniform *uniform;
 
-glm::vec3 getColor(Point p);
-
-bool isBlack(glm::vec3 color);
+glm::vec4 getColor(Point p);
 
 void setUniforms(glm::vec3 begin, glm::vec3 end, long ignore1, long ignore2, long testID);
 

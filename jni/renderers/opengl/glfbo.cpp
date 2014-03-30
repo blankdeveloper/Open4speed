@@ -10,6 +10,7 @@
 #ifdef ANDROID
 #include <jni.h>
 #endif
+#include <cstdlib>
 #include "renderers/opengl/glfbo.h"
 #include "utils/math.h"
 #include "common.h"

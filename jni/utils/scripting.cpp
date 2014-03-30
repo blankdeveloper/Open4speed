@@ -7,6 +7,7 @@
 */
 //----------------------------------------------------------------------------------------
 
+#include <cstdlib>
 #include <unistd.h>
 #include "utils/io.h"
 #include "utils/switch.h"

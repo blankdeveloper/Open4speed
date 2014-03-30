@@ -17,12 +17,10 @@ uniform vec4 u_light_dir;
 
 void main()
 {
-  //transparency
-  vec4 c = texture2D(color_texture, v_Coords);
-  if (c.a < 0.5) {
+  vec4 diffuse = texture2D(color_texture, v_Coords);
+  if (diffuse.a < 0.5)
     discard;
-  }
-  gl_FragColor = c;
+  gl_FragColor = 0.01 * diffuse;
   
   //player car light
   vec3 lightDir = u_light.xyz - v_Vertex;
@@ -33,7 +31,7 @@ void main()
   //light cutoff
   if (eff >= u_light_cut) {
     //diffuse light
-    vec3 color = abs(dot(N, L)) * gl_FragColor.rgb * u_light_diffuse.rgb;
+    vec3 color = 0.2 * abs(dot(N, L)) * diffuse.rgb * u_light_diffuse.rgb;
     //specular light
     //vec3 R = normalize(-reflect(L, N));
     //vec3 E = normalize(-v_Vertex);
@@ -45,12 +43,11 @@ void main()
     //apply light color
     gl_FragColor.rgb += color;
   }
-  
+
   //static shadow
-  vec4 shadow = texture2D(Lightmap, v_T);
-  gl_FragColor.rgb *= shadow.rgb + 0.1;
-  gl_FragColor.a *= shadow.g + 0.1;
-  gl_FragColor.a = min(gl_FragColor.a, 0.9);
+  vec4 shadow = 2.0 * texture2D(Lightmap, v_T);
+  gl_FragColor.rgb += diffuse.rgb * shadow.rgb;
+  gl_FragColor.a = min(length(shadow.rgb), 0.9);
   
   //dynamic shadow
   if (texture2D(EnvMap1, vec2(gl_FragCoord.x * u_res, gl_FragCoord.y * u_res + 0.5 * (1.0 - gl_FragCoord.z))).a == 1.0)

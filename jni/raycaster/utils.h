@@ -30,6 +30,8 @@ struct Uniform {
 
 extern Uniform *uniform;
 
+float countLightMaxDistance(float att);
+
 glm::vec4 getColor(Point p);
 
 void setUniforms(glm::vec3 begin, glm::vec3 end, long ignore1, long ignore2, long testID);

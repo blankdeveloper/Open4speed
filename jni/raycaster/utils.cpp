@@ -9,6 +9,13 @@ Uniform *uniform = new Uniform();
 
 float cstep = 1 / 255.0f;
 
+float countLightMaxDistance(float att) {
+    float maxColor = xrenderer->light.u_light_diffuse.x;
+    maxColor = glm::max(maxColor, xrenderer->light.u_light_diffuse.y);
+    maxColor = glm::max(maxColor, xrenderer->light.u_light_diffuse.z);
+    return glm::sqrt(255.0f * maxColor / att);
+}
+
 glm::vec4 getColor(Point p) {
 
     //count effectivity

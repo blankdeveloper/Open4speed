@@ -78,6 +78,19 @@ void triangle::addLMPoint(int u, int v, glm::ivec2 t) {
     points.push_back({vert, t, n, c});
 }
 
+float triangle::countDistanceTo(triangle* t) {
+    float min = glm::length(t->a - a);
+    min = glm::min(min, glm::length(t->a - b));
+    min = glm::min(min, glm::length(t->a - c));
+    min = glm::min(min, glm::length(t->b - a));
+    min = glm::min(min, glm::length(t->b - b));
+    min = glm::min(min, glm::length(t->b - c));
+    min = glm::min(min, glm::length(t->c - a));
+    min = glm::min(min, glm::length(t->c - b));
+    min = glm::min(min, glm::length(t->c - c));
+    return min;
+}
+
 PLP* triangle::getPointLight(glm::vec3 p) {
     float area = triangleArea(a, b, c);
     float lena = triangleArea(p, b, c) / area;

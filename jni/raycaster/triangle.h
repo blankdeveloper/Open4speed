@@ -38,6 +38,8 @@ public:
 
     void addLMPoint(int u, int v, glm::ivec2 t);
 
+    float countDistanceTo(triangle* t);
+
     PLP* getPointLight(glm::vec3 p);
 
     bool isIntersectedByRay();

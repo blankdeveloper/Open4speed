@@ -43,7 +43,7 @@ void main()
   }
 
   //static shadow
-  vec4 shadow = 2.0 * texture2D(Lightmap, v_T);
+  vec4 shadow = 1.5 * texture2D(Lightmap, v_T);
   gl_FragColor.rgb += diffuse.rgb * shadow.rgb;
   gl_FragColor.a = min(length(shadow.rgb), 0.9);
   
@@ -54,7 +54,7 @@ void main()
   //reflect
   if (v_Normal.y > 0.0) {
     float y = 4.0 + u_view - gl_FragCoord.y * u_res - 0.2 + gl_FragCoord.z * (u_view * 10.0 + 5.0) * 0.025 - v_Normal.y * 4.0;
-    gl_FragColor.rgb += 0.5 * texture2D(EnvMap1, vec2(gl_FragCoord.x * u_res, y)).rgb * max(gl_FragCoord.y * u_res / u_view * 2.0 - 0.5, 0.0);
+    gl_FragColor.rgb += 0.25 * texture2D(EnvMap1, vec2(gl_FragCoord.x * u_res, y)).rgb * max(gl_FragCoord.y * u_res / u_view * 2.0 - 0.5, 0.0);
   }
 
   //blur

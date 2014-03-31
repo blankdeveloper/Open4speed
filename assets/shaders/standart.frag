@@ -43,7 +43,7 @@ void main()
   }
 
   //static shadow
-  vec4 shadow = 2.0 * texture2D(Lightmap, v_T);
+  vec4 shadow = 1.5 * texture2D(Lightmap, v_T);
   gl_FragColor.rgb += diffuse.rgb * shadow.rgb;
   gl_FragColor.a = min(length(shadow.rgb), 0.9);
   

@@ -249,7 +249,6 @@ void display(void) {
                     xrenderer->light.u_light_diffuse = glm::vec4(getConfig("R", lights), getConfig("G", lights), getConfig("B", lights), 0);
                     xrenderer->light.u_light_cut = cos(getConfig("cut", lights) * 3.14 / 180.0);
                     xrenderer->light.u_light_att = glm::vec4(getConfig("att0", lights), getConfig("att1", lights), getConfig("att2", lights), 0);
-                    xrenderer->light.u_near = getConfig("near", lights);
 
                     /// apply all lights
                     for (unsigned int x = 0; x < trackdata->edges[lightGroup].size() / 2; x++) {
@@ -270,9 +269,9 @@ void display(void) {
                                 glm::vec4 color = getColor(triangles[i]->points[j]);
                                 if (color.w > 0.5f) {
                                     if (!root->isIntersected()) {
-                                        pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 255.0f));
-                                        pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 255.0f));
-                                        pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 255.0f));
+                                        pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 25.5f));
+                                        pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 25.5f));
+                                        pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 25.5f));
                                     }
                                 }
                                 pixels[triangles[i]->lmIndex][index * 4 + 3] = 255;
@@ -322,13 +321,12 @@ void display(void) {
             /// render area lights into lightmaps
             printf("Rendering area lights into lightmaps...");
             startTimer();
-            float cutoff = cos(160 * 3.14 / 180.0);
-            xrenderer->light.u_near = 3;
+            float cutoff = cos(90 * 3.14 / 180.0);
 
             /// apply all lights
             glm::vec3 begin;
             glm::vec4 color;
-            float att = 0.2f;
+            float att = 0.1f;
             float eff;
             int tr;
             for (unsigned long i = 0; i < triangles.size(); i++) {
@@ -354,9 +352,9 @@ void display(void) {
                                             // add to previous lightmap
                                             color = glm::clamp(color, glm::vec4(0, 0, 0, 1), glm::vec4(1, 1, 1, 1));
                                             index = triangles[i]->points[j].t.y * rttsize + triangles[i]->points[j].t.x;
-                                            pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 255.0f));
-                                            pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 255.0f));
-                                            pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 255.0f));
+                                            pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 25.5f));
+                                            pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 25.5f));
+                                            pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 25.5f));
                                         }
                                     }
                                 }

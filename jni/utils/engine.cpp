@@ -258,7 +258,7 @@ void displayScene() {
     xrenderer->light.u_light_diffuse = glm::vec4(2000.0, 2000.0, 1500.0, 0);
     xrenderer->light.u_light_cut = cos(90.0 * 3.14 / 180.0);
     xrenderer->light.u_light_spot_eff = 5.0;
-    xrenderer->light.u_light_att = glm::vec4(1.0, 5.0, 10.0, 0);
+    xrenderer->light.u_light_att = glm::vec4(1.0, 5.0, 100.0, 0);
     xrenderer->light.u_light_dir = glm::vec4(0.0, 0.75, 1.0, 0);
     xrenderer->pushMatrix();
     float* mat = allCar[cameraCar]->transform[0].value;

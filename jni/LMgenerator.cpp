@@ -222,7 +222,6 @@ void display(void) {
             /// render point lights into lightmaps
             printf("Rendering point lights into lightmaps...");
             startTimer();
-            long testID = 0;
             clearLMs();
             unsigned long count = 0;
             for (int lightGroup = 0; lightGroup < trackdata->edgesCount; lightGroup++) {
@@ -264,11 +263,11 @@ void display(void) {
                         glm::vec3 begin = swizle(xrenderer->light.u_light);
                         for (unsigned long i = 0; i < triangles.size(); i++) {
                             for (unsigned int j = 0; j < triangles[i]->points.size(); j++) {
-                                setUniforms(begin, triangles[i]->points[j].v, triangles[i]->tIndex, triangles[i]->tIndex, testID++);
+                                glm::vec3 end = triangles[i]->points[j].v;
                                 int index = triangles[i]->points[j].t.y * rttsize + triangles[i]->points[j].t.x;
-                                glm::vec4 color = getColor(triangles[i]->points[j]);
+                                glm::vec4 color = getColor(triangles[i]->points[j], begin, end);
                                 if (color.w > 0.5f) {
-                                    if (!root->isIntersected()) {
+                                    if (!root->isIntersected(begin, end, triangles[i]->tIndex, triangles[i]->tIndex)) {
                                         pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 8.0f));
                                         pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 8.0f));
                                         pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 8.0f));
@@ -326,7 +325,7 @@ void display(void) {
             /// apply all lights
             glm::vec3 begin;
             glm::vec4 color;
-            float att = 0.05f;
+            float att = 0.1f;
             float eff;
             int tr;
             for (unsigned long i = 0; i < triangles.size(); i++) {
@@ -340,21 +339,23 @@ void display(void) {
                         tr = trIndex[k];
                         while ((tr == trIndex[k]) && (k < pIndex.size())) {
                             for (unsigned int j = 0; j < triangles[i]->points.size(); j++) {
-                                setUniforms(begin, triangles[i]->points[j].v, triangles[i]->tIndex, triangles[trIndex[k]]->tIndex, testID++);
-                                eff = glm::dot(-swizle(xrenderer->light.u_light_dir), -uniform->L);
+                                glm::vec3 end = triangles[i]->points[j].v;
+                                glm::vec3 raydir = end - begin;
+                                glm::vec3 L = glm::normalize(-raydir);
+                                eff = glm::dot(-swizle(xrenderer->light.u_light_dir), -L);
                                 if (eff >= cutoff) {
                                     //diffuse light
-                                    color = glm::max(glm::dot(triangles[i]->points[j].n, uniform->L), 0.0f) * xrenderer->light.u_light_diffuse;
+                                    color = glm::max(glm::dot(triangles[i]->points[j].n, L), 0.0f) * xrenderer->light.u_light_diffuse;
                                     //light attenuation
-                                    color *= eff / (att * sqr(glm::length(uniform->raydir)));
+                                    color *= eff / (att * sqr(glm::length(raydir)));
                                     if (color.w > 0.5f) {
-                                        if (!root->isIntersected()) {
+                                        if (!root->isIntersected(begin, end, triangles[i]->tIndex, triangles[trIndex[k]]->tIndex)) {
                                             // add to previous lightmap
                                             color = glm::clamp(color, glm::vec4(0, 0, 0, 1), glm::vec4(1, 1, 1, 1));
                                             index = triangles[i]->points[j].t.y * rttsize + triangles[i]->points[j].t.x;
-                                            pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 8.0f));
-                                            pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 8.0f));
-                                            pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 8.0f));
+                                            pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 128.0f));
+                                            pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 128.0f));
+                                            pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 128.0f));
                                         }
                                     }
                                 }

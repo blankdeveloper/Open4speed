@@ -18,23 +18,9 @@ struct PLP {
     bool useable;
 };
 
-struct Uniform {
-    glm::vec3 begin;
-    glm::vec3 end;
-    glm::vec3 raydir;
-    long ignore1;
-    long ignore2;
-    long testID;
-    glm::vec3 L;
-};
-
-extern Uniform *uniform;
-
 float countLightMaxDistance(float att);
 
-glm::vec4 getColor(Point p);
-
-void setUniforms(glm::vec3 begin, glm::vec3 end, long ignore1, long ignore2, long testID);
+glm::vec4 getColor(Point p, glm::vec3 begin, glm::vec3 end);
 
 void startTimer();
 
@@ -47,6 +33,6 @@ float triangleArea(glm::vec3 a, glm::vec3 b, glm::vec3 c);
 bool TestAABBAABB(AABB* a, AABB* b);
 
 // Test if segment intersects AABB b
-int TestSegmentAABB(AABB* b);
+int TestSegmentAABB(AABB* b, glm::vec3 begin, glm::vec3 end);
 
 #endif // UTILS_H

@@ -32,7 +32,6 @@ triangle::triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c,
     this->tc = tc;
     this->lmIndex = lmIndex;
     this->tIndex = tIndex;
-    lastTestID = -1;
     reg.min.x = 9999999;
     reg.min.y = 9999999;
     reg.min.z = 9999999;
@@ -104,7 +103,7 @@ PLP* triangle::getPointLight(glm::vec3 p) {
                            txtmap->data[(c.y * txtmap->width + c.x) * 3 + 1],
                            txtmap->data[(c.y * txtmap->width + c.x) * 3 + 2], 0) / 255.0f;
     glm::vec3 normal = glm::normalize(na * lena + nb * lenb + nc * lenc);
-    plp->pos = glm::vec4(p + normal * 0.1f, 1.0f);
+    plp->pos = glm::vec4(p, 1.0f);
     plp->dir = glm::vec4(-normal, 0.0f);
     plp->useable = ((plp->color.x > step) || (plp->color.y > step) || (plp->color.z > step));
     return plp;
@@ -112,12 +111,25 @@ PLP* triangle::getPointLight(glm::vec3 p) {
 
 glm::vec3 p = glm::vec3(0,0,0);
 
+bool SameSign(float a, float b) {
+    if ((a > 0) && (b > 0))
+        return true;
+    if ((a <= 0) && (b <= 0))
+        return true;
+    return false;
+}
+
 float ScalarTriple(glm::vec3 pq, glm::vec3 pc, glm::vec3 pb) {
     return glm::dot(pb, glm::cross(pq, pc));
 }
 
-bool triangle::isIntersectedByRay() {
-    if (!glm::intersectLineTriangle(uniform->begin, uniform->raydir, a, b, c, p))
+bool triangle::isIntersectedByRay(glm::vec3 begin, glm::vec3 end) {
+    glm::vec3 pq = end - begin;
+    glm::vec3 m = glm::cross(pq, begin);
+    float u = glm::dot(pq, glm::cross(c, b)) + glm::dot(m, c - b);
+    float v = glm::dot(pq, glm::cross(a, c)) + glm::dot(m, a - c);
+    float w = glm::dot(pq, glm::cross(b, a)) + glm::dot(m, b - a);
+    if (!SameSign(u, v) || !SameSign(u, w))
         return false;
     else if (txt != 0) {
         float area = triangleArea(a, b, c);
@@ -131,13 +143,6 @@ bool triangle::isIntersectedByRay() {
         if (txt->data[(c.y * txt->width + c.x) * 4 + 3] < 128)
             return false;
     }
-    /*glm::vec3 pq = uend - ubegin;
-    glm::vec3 pa = a - ubegin;
-    glm::vec3 pb = b - ubegin;
-    glm::vec3 pc = c - ubegin;
-    if (ScalarTriple(pq, pc, pb) < 0.0f) return 0;
-    if (ScalarTriple(pq, pa, pc) < 0.0f) return 0;
-    if (ScalarTriple(pq, pb, pa) < 0.0f) return 0;*/
 
     if (lastIntersectedTriangle != 0)
         lastIntersectedTriangle2 = lastIntersectedTriangle;

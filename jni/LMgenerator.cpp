@@ -269,9 +269,9 @@ void display(void) {
                                 glm::vec4 color = getColor(triangles[i]->points[j]);
                                 if (color.w > 0.5f) {
                                     if (!root->isIntersected()) {
-                                        pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 25.5f));
-                                        pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 25.5f));
-                                        pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 25.5f));
+                                        pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 8.0f));
+                                        pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 8.0f));
+                                        pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 8.0f));
                                     }
                                 }
                                 pixels[triangles[i]->lmIndex][index * 4 + 3] = 255;
@@ -326,7 +326,7 @@ void display(void) {
             /// apply all lights
             glm::vec3 begin;
             glm::vec4 color;
-            float att = 0.1f;
+            float att = 0.05f;
             float eff;
             int tr;
             for (unsigned long i = 0; i < triangles.size(); i++) {
@@ -352,9 +352,9 @@ void display(void) {
                                             // add to previous lightmap
                                             color = glm::clamp(color, glm::vec4(0, 0, 0, 1), glm::vec4(1, 1, 1, 1));
                                             index = triangles[i]->points[j].t.y * rttsize + triangles[i]->points[j].t.x;
-                                            pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 25.5f));
-                                            pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 25.5f));
-                                            pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 25.5f));
+                                            pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 8.0f));
+                                            pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 8.0f));
+                                            pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 8.0f));
                                         }
                                     }
                                 }

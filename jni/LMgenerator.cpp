@@ -18,23 +18,6 @@
 #include "utils/scripting.h"
 #include "utils/switch.h"
 
-struct LMPixel {
-    float x;
-    float y;
-    float intensity;
-};
-
-struct LightParam {
-    int begin;
-    int len;
-    float r;
-    float g;
-    float b;
-};
-
-std::vector<LMPixel> *outputVBO;
-std::vector<LightParam> *lightInfo;
-
 std::vector<unsigned char*> pixels;
 std::vector<unsigned char*> uvs;
 std::vector<triangle*> triangles;
@@ -267,7 +250,7 @@ void display(void) {
                                 int index = triangles[i]->points[j].t.y * rttsize + triangles[i]->points[j].t.x;
                                 glm::vec4 color = getColor(triangles[i]->points[j], begin, end);
                                 if (color.w > 0.5f) {
-                                    if (!root->isIntersected(begin, end, triangles[i]->tIndex, triangles[i]->tIndex)) {
+                                    if (!root->isIntersected(begin, end)) {
                                         pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 8.0f));
                                         pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 8.0f));
                                         pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 8.0f));
@@ -349,7 +332,7 @@ void display(void) {
                                     //light attenuation
                                     color *= eff / (att * sqr(glm::length(raydir)));
                                     if (color.w > 0.5f) {
-                                        if (!root->isIntersected(begin, end, triangles[i]->tIndex, triangles[trIndex[k]]->tIndex)) {
+                                        if (!root->isIntersected(begin, end)) {
                                             // add to previous lightmap
                                             color = glm::clamp(color, glm::vec4(0, 0, 0, 1), glm::vec4(1, 1, 1, 1));
                                             index = triangles[i]->points[j].t.y * rttsize + triangles[i]->points[j].t.x;

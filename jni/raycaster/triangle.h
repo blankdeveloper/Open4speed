@@ -39,6 +39,8 @@ public:
 
     float countDistanceTo(triangle* t);
 
+    glm::vec3 ClosestPtPointTriangle(glm::vec3 p);
+
     PLP* getPointLight(glm::vec3 p);
 
     bool isIntersectedByRay(glm::vec3 begin, glm::vec3 end);

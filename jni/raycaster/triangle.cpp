@@ -109,21 +109,64 @@ PLP* triangle::getPointLight(glm::vec3 p) {
     return plp;
 }
 
-glm::vec3 p = glm::vec3(0,0,0);
-
 bool SameSign(float a, float b) {
+    if ((fabs(a) < 0.05) && (fabs(b) < 0.05))
+        return false;
     if ((a > 0) && (b > 0))
         return true;
-    if ((a <= 0) && (b <= 0))
+    if ((a < 0) && (b = 0))
         return true;
     return false;
 }
 
-float ScalarTriple(glm::vec3 pq, glm::vec3 pc, glm::vec3 pb) {
-    return glm::dot(pb, glm::cross(pq, pc));
+glm::vec3 triangle::ClosestPtPointTriangle(glm::vec3 p) {
+    glm::vec3 ab = b - a;
+    glm::vec3 ac = c - a;
+    glm::vec3 bc = c - b;
+    // Compute parametric position s for projection P’ of P on AB,
+    // P’ = A + s*AB, s = snom/(snom+sdenom)
+    float snom = glm::dot(p - a, ab);
+    float sdenom = glm::dot(p - b, a - b);
+    // Compute parametric position t for projection P’ of P on AC,
+    // P’ = A + t*AC, s = tnom/(tnom+tdenom)
+    float tnom = glm::dot(p - a, ac);
+    float tdenom = glm::dot(p - c, a - c);
+    if (snom <= 0.0f && tnom <= 0.0f) return a; // Vertex region early out
+    // Compute parametric position u for projection P’ of P on BC,
+    // P’ = B + u*BC, u = unom/(unom+udenom)
+    float unom = glm::dot(p - b, bc);
+    float udenom = glm::dot(p - c, b - c);
+    if (sdenom <= 0.0f && unom <= 0.0f) return b; // Vertex region early out
+    if (tdenom <= 0.0f && udenom <= 0.0f) return c; // Vertex region early out
+    // P is outside (or on) AB if the triple scalar product [N PA PB] <= 0
+    glm::vec3 n = glm::cross(b - a, c - a);
+    float vc = glm::dot(n, glm::cross(a - p, b - p));
+    // If P outside AB and within feature region of AB,
+    // return projection of P onto AB
+    if (vc <= 0.0f && snom >= 0.0f && sdenom >= 0.0f)
+    return a + snom / (snom + sdenom) * ab;
+    // P is outside (or on) BC if the triple scalar product [N PB PC] <= 0
+    float va = glm::dot(n, glm::cross(b - p, c - p));
+    // If P outside BC and within feature region of BC,
+    // return projection of P onto BC
+    if (va <= 0.0f && unom >= 0.0f && udenom >= 0.0f)
+    return b + unom / (unom + udenom) * bc;
+    // P is outside (or on) CA if the triple scalar product [N PC PA] <= 0
+    float vb = glm::dot(n, glm::cross(c - p, a - p));
+    // If P outside CA and within feature region of CA,
+    // return projection of P onto CA
+    if (vb <= 0.0f && tnom >= 0.0f && tdenom >= 0.0f)
+    return a + tnom / (tnom + tdenom) * ac;
+    // P must project inside face region. Compute Q using barycentric coordinates
+    float u = va / (va + vb + vc);
+    float v = vb / (va + vb + vc);
+    float w = 1.0f - u - v; // = vc / (va + vb + vc)
+    return u * a + v * b + w * c;
 }
 
 bool triangle::isIntersectedByRay(glm::vec3 begin, glm::vec3 end) {
+
+    /// get intersection by ray
     glm::vec3 pq = end - begin;
     glm::vec3 m = glm::cross(pq, begin);
     float u = glm::dot(pq, glm::cross(c, b)) + glm::dot(m, c - b);
@@ -131,18 +174,20 @@ bool triangle::isIntersectedByRay(glm::vec3 begin, glm::vec3 end) {
     float w = glm::dot(pq, glm::cross(b, a)) + glm::dot(m, b - a);
     if (!SameSign(u, v) || !SameSign(u, w))
         return false;
+    /// check if point is visible in texture
     else if (txt != 0) {
-        float area = triangleArea(a, b, c);
-        float lena = triangleArea(p, b, c) / area;
-        float lenb = triangleArea(p, a, c) / area;
-        float lenc = triangleArea(p, a, b) / area;
         // find the uv corresponding to point p
-        glm::vec2 uv = ta * lena + tb * lenb + tc * lenc;
+        glm::vec2 uv = ta * u + tb * v + tc * w;
         uv = glm::mod(uv + 1024.0f, 1.0f);
         glm::ivec2 c = glm::ivec2(uv.x * txt->width, uv.y * txt->height);
         if (txt->data[(c.y * txt->width + c.x) * 4 + 3] < 128)
             return false;
     }
+
+    /// self and neightbour intersection protection
+    if ((glm::length(ClosestPtPointTriangle(begin) - begin) < 0.5f)
+     || (glm::length(ClosestPtPointTriangle(end) - end) < 0.5f))
+        return false;
 
     if (lastIntersectedTriangle != 0)
         lastIntersectedTriangle2 = lastIntersectedTriangle;

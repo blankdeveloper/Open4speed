@@ -159,42 +159,36 @@ AABB* octreenode::getSubregion(bool x, bool y, bool z) {
     return r;
 }
 
-bool octreenode::isIntersected(glm::vec3 begin, glm::vec3 end, int ignore1, int ignore2) {
+bool octreenode::isIntersected(glm::vec3 begin, glm::vec3 end) {
 
     /// cached data test
     AABBTests = 0;
     triangleTests = 0;
     if (lastIntersectedTriangle != 0) {
-        if ((lastIntersectedTriangle->tIndex != ignore1) && (lastIntersectedTriangle->tIndex != ignore2)) {
-            triangleTests++;
-            if (lastIntersectedTriangle->isIntersectedByRay(begin, end))
-                return true;
-        }
+        triangleTests++;
+        if (lastIntersectedTriangle->isIntersectedByRay(begin, end))
+            return true;
     }
     if (lastIntersectedTriangle2 != 0) {
-        if ((lastIntersectedTriangle2->tIndex != ignore1) && (lastIntersectedTriangle2->tIndex != ignore2)) {
-            triangle* t = lastIntersectedTriangle;
-            lastIntersectedTriangle = lastIntersectedTriangle2;
-            lastIntersectedTriangle2 = t;
-            triangleTests++;
-            if (lastIntersectedTriangle->isIntersectedByRay(begin, end))
-                return true;
-        }
+        triangle* t = lastIntersectedTriangle;
+        lastIntersectedTriangle = lastIntersectedTriangle2;
+        lastIntersectedTriangle2 = t;
+        triangleTests++;
+        if (lastIntersectedTriangle->isIntersectedByRay(begin, end))
+            return true;
     }
 
     /// normal test
-    isIntersectedEx(begin, end, ignore1, ignore2);
+    isIntersectedEx(begin, end);
 }
 
-bool octreenode::isIntersectedEx(glm::vec3 begin, glm::vec3 end, int ignore1, int ignore2) {
+bool octreenode::isIntersectedEx(glm::vec3 begin, glm::vec3 end) {
 
     /// current node test
     for (unsigned int i = 0; i < list.size(); i++) {
-        if ((list[i]->tIndex != ignore1) && (list[i]->tIndex != ignore2)) {
-            triangleTests++;
-            if (list[i]->isIntersectedByRay(begin, end))
-                return true;
-        }
+        triangleTests++;
+        if (list[i]->isIntersectedByRay(begin, end))
+            return true;
     }
 
     /// subnodes test
@@ -202,7 +196,7 @@ bool octreenode::isIntersectedEx(glm::vec3 begin, glm::vec3 end, int ignore1, in
         if (hasNext[j]) {
             AABBTests++;
             if (TestSegmentAABB(next[j]->reg, begin, end)) {
-                if (next[j]->isIntersectedEx(begin, end, ignore1, ignore2))
+                if (next[j]->isIntersectedEx(begin, end))
                     return true;
             }
         }

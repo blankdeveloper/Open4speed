@@ -745,8 +745,6 @@ Výslednou barvu texelu $C_t$ vypočteme z difúzního osvětlení pomocí níž
 $C_t = E_r \cdot F_a \cdot C_l \cdot k_d \cdot (\vec{L} \cdot \vec{N})$
 \end{center}
 
-Je vhodné vytvářet mapy osvětlení pro každé světlo zvlášť a sčítat příspěvky světel až\linebreak na úrovni hotových světelných map. Lze tak později řešit rozsah intenzity osvětlení v případě, že použitý rozsah nedostačuje.
-
 Pokud bychom chtěli použit i bodové zdroje světla, musíme mít stínovou mapu pro všechny možné směry světelných paprsků. K tomu lze využít tzv. cube mapování. Cube mapování je mapování scény na krychli, při kterém se na každou stěnu vykreslí pohled v jednom směru s perspektivním úhlem $90^{\circ}$. V případě využití cube mapování na stínové mapy, se pro každou stranu provádí výpočet jakoby se jednalo o samostatné světlo (efektivita reflektoru $E_r = 1$).
 
 \begin{center}
@@ -1024,8 +1022,6 @@ Vytváření map osvětlení je realizováno dvěma přístupy, první je raster
 
 I maximální možné rozlišení map osvětlení pro použitou scénu není dostatečné a stíny jsou kostičkované. Z tohoto důvodu se používají dva druhy filtrování. Prvním je rozmazání map osvětlení, které se provádí přímo po generování mapy osvětlení a druhým je lineární filtrování, které se aplikuje až při aplikování mapy osvětlení. Tato kombinace filtrování značně zvýší výslednou kvalitu stínů.
 
-Dalším problémem je rozsah intenzity osvětlení v mapě osvětlení. Například pouliční lampa na obr.4.3 nedělá očekávané stíny od stojanu lampy. Tento stín zmizí, protože při připočtení druhého světla se úroveň osvětlení v daných bodech rovná maximální možné hodnotě (dochází zde k ořezu vyšších hodnot). Ve výsledné implementaci byl rozsah změněn, aby k tomuto problému nedocházelo.
-
 V přístupu využívající vrhání paprsku jsou navíc k dispozici plošné zdroje světla, které jsou definovány pomocí osvětlovacích textur, což jsou textury, u kterých jsou vykresleny pouze texely vyzařující světlo. Osvětlovací textury mají stejné texturovací souřadnice jako difúzní textury 3D modelu. Plošný zdroj světla se realizuje tak, že každý barevný texel\linebreak v osvětlovací textuře vygeneruje bodový zdroj světla. Množina vzniklých bodových světel pak tvoří plošný zdroj světla.
 
 \begin{figure}[h]
@@ -1039,13 +1035,67 @@ V přístupu využívající vrhání paprsku jsou navíc k dispozici plošné z
 \end{figure}
 
 \subsubsection{Generování texturovacích souřadnic pro mapy osvětlení}
+V teoretické části byl popsán postup generování texturovacích souřadnic pomocí ILP.\linebreak V praxi toto řešení nelze použít, protože jeho výpočetní složitost $f(m, n)$ $\epsilon$ $O(m^2 \cdot n^2)$, $m$ je počet trojúhelníků a $n$ počet texelů v lightmapě.  Pomocí ILP se tedy dají řešit pouze velice malé instance problému. V této práci problém řeším pomocí metody Packing Lightmaps, což je metoda řešící problém batohu za použití datové struktury kD stromu, která dělí $k$-rozměrný objekt půlením.
+
+V případě Packing Lightmaps dělíme rovinu horizontálním nebo vertikálním řezem, kD strom je v podstatě binární strom, jehož kořen reprezentuje k-rozměrný objekt (v našem případě mapu osvětlení). Vnitřní uzly jsou dělící, určují podle které osy se řez povede a je v nich zapsána pozice řezu. Listy stromu reprezentují objekty uložené ve struktuře, v této práci AABB - tedy dva párové trojúhelníky (viz kapitola 3.6.1).
 
 \begin{center}
 \begin{figure}[h]
-\includegraphics[width=90mm]{figures/objconv.png}
-\caption{UML diagram konvertoru 3D modelů}
+\includegraphics[width=120mm]{figures/kd.png}
+\caption{Ukázka naplnění kD stromu pomocí metody Packing Lightmaps}
 \end{figure}
 \end{center}
+
+Metoda Packing Lightmaps nejdříve seřadí AABB podle jejich plochy a postupně je vkládá do kD stromu. Při každém vložení se nejdříve hledají neobsazené listy, zda neexistuje takový, který by odpovídal rozměrům AABB. Pokud takový neexistuje pokusí se algoritmus nalézt takový neobsazený list, kterému odpovídá aspoň jeden rozměr. V případě úspěšného hledání se AABB vloží do listu, v ostatních případech se najde větší list, provede se jeho rozdělení a následně se AABB do jednoho z potomků vloží.
+
+\lstset{language=Java} 
+\begin{lstlisting}[caption=Vkládání AABB do kD stromu]
+public boolean addAABB(AABB aabb) {
+  // check if current node is empty and has enought space for AABB
+  if (isEmpty() && (aabb.width <= width) && (aabb.height <= height)) {
+
+    // fits exactly
+    if ((aabb.width == width) && (aabb.height == height)) {
+      child1 = new KDNode(aabb);
+      return true;
+    } 
+        
+    // plane subdivision
+    else {
+      child1 = new KDNode(aabb.width, height, false);
+      if (child1.addAABB(aabb))
+        return true;
+    }
+  } 
+    
+  // try to insert into first child
+  else if (child1.addNode(aabb))
+    return true;
+
+  // create second child
+  else if (child2 == null) {
+    
+    // horizontal plane subdivision
+    if ((aabb.width <= width) && (aabb.height <= getChild2Height())) {
+      child2 = new KDNode(width, height - aabb.height, false);
+      if (child2.addAABB(aabb))
+        return true;
+    }
+      
+    // vertical plane subdivision
+    if ((aabb.width <= getChild2Width()) && (aabb.height <= height)) {
+      child2 = new KDNode(width - child1.width, height, false);
+      if (child2.addNode(aabb))
+        return true;
+    }
+  } 
+    
+  // try to insert into second child
+  else if (child2.addAABB(aabb))
+    return true;
+  return false;
+}
+\end{lstlisting}
 
 \subsubsection{Generování map osvětlení}
 
@@ -1250,313 +1300,503 @@ Práci do budoucna hodlám rozšířit o generování map osvětlení pomocí vr
 %*****************************************************************************
 \appendix
 
-\chapter{Testování zaplnění stránky a odsazení odstavců}
-\textbf{\large Tato příloha nebude součástí vaší práce. 
-Slouží pouze jako příklad formátování textu.}
-
-\section*{}
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili? Určitě existuje nějaká pěkná latinská věta, která se k tomuhle testování používá, ale co mají dělat ti, kteří se nikdy latinsky neučili?
-
-%*****************************************************************************
-\chapter{Pokyny a návody k formátování textu práce}
-\textbf{\large Tato příloha samozřejmě nebude součástí vaší práce. Slouží pouze jako příklad formátování textu.}
-
-Používat se dají všechny příkazy systému \LaTeX. Existuje velké množství volně přístupné dokumentace, tutoriálů, příruček a dalších materiálů v elektronické podobě. Výchozím bodem, kromě Googlu, může být stránka CSTUG (Czech Tech Users Group) \cite{CSTUG}. Tam najdete odkazy na další materiály.  Vetšinou dostačující a přehledně organizovanou elektronikou dokumentaci najdete například na \cite{latexdocweb} nebo \cite{latexwiki}.
-
-Existují i různé nadstavby nad systémy \TeX{} a \LaTeX, které výrazně usnadní psaní textu zejména začátečníkům. Velmi rozšířený v Linuxovém prostředí je systém Kile.
-
-
-\section{Vkládání obrázků}
-Obrázky se umísťují do plovoucího prostředí \verb|figure|. Každý obrázek by měl obsahovat \textbf{název} (\verb|\caption|) a \textbf{návěští} (\verb|\label|). Použití příkazu pro vložení obrázku \\\verb|\includegraphics| je podmíněno aktivací (načtením) balíku graphicx příkazem\\ \verb|\usepackage{graphicx}|.
-
-Budete-li zdrojový text zpracovávat pomocí programu \verb|pdflatex|, očekávají se obrázky s příponou \verb|*.pdf|\footnote{pdflatex umí také formáty PNG a JPG.}, použijete-li k formátování \verb|latex|, očekávají se obrázky s příponou \verb|*.eps|.\footnote{Vzájemnou konverzi mezi snad všemi typy obrazku včetně změn vekostí a dalších vymožeností vám může zajistit balík ImageMagic  (http://www.imagemagick.org/script/index.php). Je dostupný pod Linuxem, Mac OS i MS Windows. Důležité jsou zejména příkazy convert a identify.}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=5cm]{figures/LogoCVUT}
-\caption{Popiska obrázku}
-\label{fig:logo}
-\end{center}
-\end{figure}
-
-Příklad vložení obrázku:
-\begin{verbatim}
-\begin{figure}[h]
-\begin{center}
-\includegraphics[width=5cm]{figures/LogoCVUT}
-\caption{Popiska obrazku}
-\label{fig:logo}
-\end{center}
-\end{figure}
-\end{verbatim}
-
-\section{Kreslení obrázků}
-Zřejmě každý z vás má nějaký oblíbený nástroj pro tvorbu obrázků. Jde jen o to, abyste dokázali obrázek uložit v požadovaném formátu nebo jej do něj konvertovat (viz předchozí kapitola). Je zřejmě vhodné kreslit obrázky vektorově. Celkem oblíbený, na ovládání celkem jednoduchý a přitom dostatečně mocný je například program Inkscape.
-
-Zde stojí za to upozornit na kreslící programe Ipe \cite{ipe}, který dokáže do obrázku vkládat komentáře přímo v latexovském formátu (vzroce, stejné fonty atd.). Podobné věci umí na Linuxové platformě nástroj Xfig. 
-
-Za pozornost ještě stojí schopnost editoru Ipe importovat obrázek (jpg nebo bitmap) a krelit do něj latexovské popisky a komentáře. Výsledek pak umí exportovat přímo do pdf.
-
-\section{Tabulky}
-Existuje více způsobů, jak sázet tabulky. Například je možno použít prostředí \verb|table|, které je velmi podobné prostředí \verb|figure|. 
-
-\begin{table}
-\begin{center}
-\begin{tabular}{|c|l|l|}
-\hline
-\textbf{DTD} & \textbf{construction} & \textbf{elimination} \\
-\hline
-$\mid$ & \verb+in1|A|B a:sum A B+ & \verb+case([_:A]a)([_:B]a)ab:A+\\
-&\verb+in1|A|B b:sum A B+ & \verb+case([_:A]b)([_:B]b)ba:B+\\
-\hline
-$+$&\verb+do_reg:A -> reg A+&\verb+undo_reg:reg A -> A+\\
-\hline
-$*,?$& the same like $\mid$ and $+$ & the same like $\mid$ and $+$\\
-& with \verb+emtpy_el:empty+ & with \verb+emtpy_el:empty+\\
-\hline
-R(a,b) & \verb+make_R:A->B->R+ & \verb+a: R -> A+\\
- & & \verb+b: R -> B+\\
-\hline
-\end{tabular}
-\end{center}
-\caption{Ukázka tabulky}
-\label{tab:tab1}
-\end{table}
-
-Zdrojový text tabulky \ref{tab:tab1} vypadá takto:
-\begin{verbatim}
-\begin{table}
-\begin{center}
-\begin{tabular}{|c|l|l|}
-\hline
-\textbf{DTD} & \textbf{construction} & \textbf{elimination} \\
-\hline
-$\mid$ & \verb+in1|A|B a:sum A B+ & \verb+case([_:A]a)([_:B]a)ab:A+\\
-&\verb+in1|A|B b:sum A B+ & \verb+case([_:A]b)([_:B]b)ba:B+\\
-\hline
-$+$&\verb+do_reg:A -> reg A+&\verb+undo_reg:reg A -> A+\\
-\hline
-$*,?$& the same like $\mid$ and $+$ & the same like $\mid$ and $+$\\
-& with \verb+emtpy_el:empty+ & with \verb+emtpy_el:empty+\\
-\hline
-R(a,b) & \verb+make_R:A->B->R+ & \verb+a: R -> A+\\
- & & \verb+b: R -> B+\\
-\hline
-\end{tabular}
-\end{center}
-\caption{Ukázka tabulky}
-\label{tab:tab1}
-\end{table}
-\begin{table}
-\end{verbatim}
-
-\section{Odkazy v textu}
-\subsection{Odkazy na literaturu}
-Jsou realizovány příkazem \verb|\cite{odkaz}|. 
-
-%11.12.2008, 3.5.2009
-\textbf{Pozor:} Sazba názvů odkazů je dána Bib\TeX{} stylem\\ (\verb|\bibliographystyle{abbrv}|). 
-%Budete-li používat české prostředí (\verb|\usepackage[czech]{babel}|), 
-Bib\TeX{} tedy obvykle vysází velké pouze počáteční písmeno z názvu zdroje, 
-ostatní písmena zůstanou malá bez ohledu na to, jak je napíšete. 
-Přesněji řečeno, styl může zvolit pro každý typ publikace jiné konverze. 
-Pro časopisecké články třeba výše uvedené, jiné pro monografie (u nich často bývá 
-naopak velikost písmen zachována).
-
-Pokud chcete Bib\TeX u napovědět, která písmena nechat bez konverzí 
-(viz \texttt{title = "\{$\backslash$LaTeX\} -{}-{}- online manuál"} 
-v~předchozím příkladu), je nutné příslušné písmeno (zde celé makro) uzavřít 
-do složených závorek. Pro přehlednost je proto vhodné celé parametry 
-uzavírat do uvozovek (\texttt{author = "\dots"}), nikoliv do složených závorek.
-
-Odkazy na literaturu ve zdrojovém textu se pak zapisují:
-\begin{verbatim}
-Podívejte se na \cite{Chen01}, 
-další detaily najdete na \cite{latexdocweb}
-\end{verbatim}
-
-Vazbu mezi soubory \verb|*.tex| a \verb|*.bib| zajistíte příkazem 
-\verb|\bibliography{}| v souboru \verb|*.tex|.  V našem případě tedy zdrojový 
-dokument \verb|thesis.tex| obsahuje příkaz\\
-\verb|\bibliography{reference}|.
-
-Zpracování zdrojového textu s odkazy se provede postupným voláním programů\\
-\verb|pdflatex <soubor>| (případně \verb|latex <soubor>|), \verb|bibtex <soubor>| 
-a opět\\ \verb|pdflatex <soubor>|.\footnote{První volání \texttt{pdflatex} 
-vytvoří soubor s~koncovkou \texttt{*.aux}, který je vstupem pro program 
-\texttt{bibtex}, pak je potřeba znovu zavolat program \texttt{pdflatex} 
-(\texttt{latex}), který tentokrát zpracuje soubory s příponami \texttt{.aux} a 
-\texttt{.tex}. 
-Informaci o případných nevyřešených odkazech (cross-reference) vidíte přímo při 
-zpracovávání zdrojového souboru příkazem \texttt{pdflatex}. Program \texttt{pdflatex} 
-(\texttt{latex}) lze volat vícekrát, pokud stále vidíte nevyřešené závislosti.}
-
-
-Níže uvedený příklad je převzat z dříve existujících pokynů studentům, kteří 
-dělají svou diplomovou nebo bakalářskou práci v~Grafické skupině.\footnote{Několikrát 
-jsem byl upozorněn, že web s těmito pokyny byl zrušen, proto jej zde přímo necituji. 
-Nicméně příklad sám o sobě dokumentuje obecně přijímaný konsensus ohledně citací 
-v~bakalářských a diplomových pracích na KP.} Zde se praví:
-\begin{small}
-\begin{verbatim}
-...
-j) Seznam literatury a dalších použitých pramenů, odkazy na WWW stránky, ...
- Pozor na to, že na veškeré uvedené prameny se musíte v textu práce 
- odkazovat -- [1]. 
-Pramen, na který neodkazujete, vypadá, že jste ho vlastně nepotřebovali 
-a je uveden jen do počtu. Příklad citace knihy [1], článku v časopise [2], 
-stati ve sborníku [3] a html odkazu [4]: 
-[1] J. Žára, B. Beneš;, and P. Felkel. 
-     Moderní počítačová grafika. Computer Press s.r.o, Brno, 1 edition, 1998. 
-     (in Czech). 
-[2] P. Slavík. Grammars and Rewriting Systems as Models for Graphical User 
-     Interfaces. Cognitive Systems, 4(4--3):381--399, 1997. 
-[3] M. Haindl, Š. Kment, and P. Slavík. Virtual Information Systems. 
-     In WSCG'2000 -- Short communication papers, pages 22--27, Pilsen, 2000. 
-     University of West Bohemia. 
-[4] Knihovna grafické skupiny katedry počítačů: 
-     http://www.cgg.cvut.cz/Bib/library/ 
-\end{verbatim}
-\end{small}
-\ldots{} abychom výše citované odkazy skutečně našli v (automaticky generovaném) seznamu literatury tohoto textu, musíme je nyní alespoň jednou citovat: Kniha \cite{kniha}, článek v~časopisu \cite{clanek}, příspěvek na konferenci \cite{sbornik}, www odkaz \cite{www}.
-
-\subsection{Odkazy na obrázky, tabulky a kapitoly}
+\chapter{Seznam použitých zkratek}
 \begin{itemize}
-\item Označení místa v textu, na které chcete později čtenáře práce odkázat, se provede příkazem \verb|\label{navesti}|. Lze použít v prostředích \verb|figure| a  \verb|table|, ale též za názvem kapitoly nebo podkapitoly.
-\item Na návěští se odkážeme příkazem \verb|\ref{navesti}| nebo \verb|\pageref{navesti}|.
+\item 3D (Three-dimensional) - trojrozměrné
+\item API (Application Interface) - rozhraní aplikace neboli šablona, která říká, jaké má mít aplikace metody
+\item GLSL (openGL Shading Language) - jazyk pracující s grafickou kartou k výpočtu stínování
+\item GPS (Global Positioning System) - systém pro určení polohy kdekoliv na světě
+\item UML (Unified Modeling Language) - vizuální jazyk pro modelování softwaru
 \end{itemize}
 
-\section{Rovnice, centrovaná, číslovaná matematika}
-Jednoduchý matematický výraz zapsaný přímo do textu se vysází pomocí prostředí \verb|math|, resp. zkrácený zápis pomocí uzavření textu rovnice mezi znaky \verb|$|.
-
-Kód \verb|$ S = \pi * r^2 $| bude vysázen takto: $ S = \pi * r^2 $.
-
-Pokud chcete nečíslované rovnice, ale umístěné centrovaně na samostatné řádky, pak lze použít prostředí \verb|displaymath|, resp. zkrácený zápis pomocí uzavření textu rovnice mezi znaky \verb|$$|. Zdrojový kód: 
-\begin{verb}
-|$$ S = \pi * r^2 $$|
-\end{verb}
-bude pak vysázen takto:
-$$ S = \pi * r^2 $$
-
-Chcete-li mít rovnice číslované, je třeba použít prostředí \verb|eqation|. Kód:
-\begin{verbatim}
-\begin{equation}
-  S = \pi * r^2
-\end{equation}
-
-\begin{equation}
-  V = \pi * r^3
-\end{equation}
-\end{verbatim}
-je potom vysázen takto:
-\begin{equation}
-  S = \pi * r^2
-\end{equation}
-
-\begin{equation}
-  V = \pi * r^3
-\end{equation}
-
-\section{Kódy programu}
-Chceme-li vysázet například část zdrojového kódu programu (bez formátování), hodí se prostředí \verb|verbatim|: 
-\begin{verbatim}
-         (* nickname2 *)
-Lego> Refine in1
-             (do_reg (nickname1 h));
-Refine by  in1 (do_reg (nickname1 h))
-   ?4 : pcdata
-   ?5 : pcdata
-          (* surname2 *)
-Lego> Refine surname1 h;
-Refine by  surname1 h
-   ?5 : pcdata
-          (* email2 *)
-Lego> Refine undo_reg (email1 h);
-Refine by  undo_reg (email1 h)
-*** QED ***
-\end{verbatim}
-
-\section{Další poznámky}
-\subsection{České uvozovky}
-V souboru \verb|k336_thesis_macros.tex| je příkaz \verb|\uv{}| pro sázení českých uvozovek. \uv{Text uzavřený do českých uvozovek.}
-
-% JZ: 3.5.2009 \chapter z book zajistí automaticky
-%\subsection{Začátky kapitol na liché stránky}
-%Ve výsledném textu je dobré, když každá kapitola začíná na liché stránce. Tedy použijte:
-%\begin{verbatim}
-%  \cleardoublepage\include{1_uvod}
-%  \cleardoublepage\include{2_teorie}
-%   atd.\ldots{}
-%\end{verbatim}
-
-%*****************************************************************************
-\chapter{Seznam použitých zkratek}
-
-\begin{description}
-\item[2D] Two-Dimensional
-\item[ABN] Abstract Boolean Networks
-\item[ASIC] Application-Specific Integrated Circuit
-\end{description}
-\vdots
-
-%*****************************************************************************
-\chapter{UML diagramy}
-\textbf{\large Tato příloha není povinná a zřejmě se neobjeví v každé práci. Máte-li ale větší množství podobných diagramů popisujících systém, není nutné všechny umísťovat do hlavního textu, zvláště pokud by to snižovalo jeho čitelnost.}
-
-%*****************************************************************************
-\chapter{Instalační a uživatelská příručka}
-\textbf{\large Tato příloha velmi žádoucí zejména u softwarových implementačních prací.}
-
-%*****************************************************************************
 \chapter{Obsah přiloženého CD}
-\textbf{\large Tato příloha je povinná pro každou práci. Každá práce musí totiž obsahovat přiložené CD. Viz dále.}
 
-Může vypadat například takto. Váš seznam samozřejmě bude odpovídat typu vaší práce. (viz \cite{infodp}):
+\begin{center}
+\begin{tabular}{|p{50mm}|p{100mm}|}
+\hline
+\textbf{Položka} & 
+\textbf{Popis} \\
+\hline
+\hline
+bin/objConverter.jar & konvertor modelů\\
+\hline
+bin/open4speed.zip & spustitelná verze simulátoru\\
+\hline
+doc/latex & editovatelná dokumentace simulátoru\\
+\hline
+doc/text.pdf & dokumentace simulátoru\\
+\hline
+src/objConverter & zdrojové kódy konvertoru modelů\\
+\hline
+src/open4speed & zdrojové kódy simulátoru\\
+\hline
+support & knihovny potřebné ke zkompilování simulátoru\\
+\hline
+install.txt & návod k instalaci simulátoru\\
+\hline
+readme.txt & informace potřebné k používání simulátoru\\
+\hline
+\end{tabular}
+\end{center}
 
-Na GNU/Linuxu si strukturu přiloženého CD můžete snadno vyrobit příkazem:\\ 
-\verb|$ tree . >tree.txt|\\
-Ve vzniklém souboru pak stačí pouze doplnit komentáře.
 
-Z \textbf{README.TXT} (případne index.html apod.)  musí být rovněž zřejmé, jak programy instalovat, spouštět a jaké požadavky mají tyto programy na hardware.
+\chapter{Uživatelská příručka}
 
-Adresář \textbf{text}  musí obsahovat soubor s vlastním textem práce v PDF nebo PS formátu, který bude později použit pro prezentaci diplomové práce na WWW.
+\section{Instalace simulátoru}
+\paragraph{Linux}\ \ \\
+Před kompilováním je potřeba mít nainstalované následující balíčky:\ \ \\
+libbullet-dev freeglut3-dev libpng-dev qmake make\ \ \\
+\ \ \\
+Pokud máte 64bitový systém je potřeba nahradit v jni/open4speed.pro řádek\ \ \\
+./fmodapi/libfmodex-4.44.08.so\ \ \\
+řádkem\ \ \\
+./fmodapi/libfmodex64-4.44.08.so\ \ \\
+\ \ \\
+Kompilování se spustí zadáním těchto příkazů do terminálu:\ \ \\
+cd jni\ \ \\
+qmake open4speed.pro\ \ \\
+make\ \ \\
+\ \ \\
+Spuštění se provede příkazem\ \ \\
+./open4speed\ \ \\
+
+\paragraph{Android}\ \ \\
+Pro Android je k dispozici spustitelný binární soubor Open4speed.apk.\ \ \\
+Pro kompilování je potřeba mít nainstalované následující software:\ \ \\
+Android Studio, Android NDK(v případě potřeby kompilovat C++ kód)\ \ \\
+\ \ \\
+Kompilování C++ kódu:\ \ \\
+cd jni\ \ \\
+<cesta k Android NDK>/ndk-build\ \ \\
+\ \ \\
+Pro zbytek stačí otevřít projekt v Android Studiu a klepnout na Run
+
+\section{Používání simulátoru}
+\paragraph{Menu}\ \ \\
+\begin{itemize}
+\item Start race - herní mód, je zde vytyčen okruh, závodí se s vozidly ovládané umělou inteligencí
+\item Free ride - volná jízda po městě
+\item Options - přejde do nabídky nastavení
+\item Quit game - ukončí simulátor
+\end{itemize}
+
+\paragraph{Ovládání simulátoru}\ \ \\
+\begin{itemize}
+\item šipky nahoru/dolu - plyn/brzda
+\item šipky vlevo/vpravo - zatáčení
+\item klávesa esc/zpět - pauza, menu pro restart závodu, ukončení závodu
+\end{itemize}
+\newpage
+
+\section{Příprava vlastního obsahu pro simulátor}
+
+\subsection{Příprava aut pro simulátor}
+Pro práci s 3D modely pro můj simulátor doporučuji použít program Blender. Jedná se opensource projekt, který korektně exportuje modely do formátu OBJ a dobře se s ním pracuje. Je možné použít i jiný software, tam nemohu zaručit kompatibilitu se simulátorem.
+\begin{figure}[h!] 				
+\begin{center}
+  \includegraphics[width=140mm]{figures/blender.png}\\
+  \caption{Ukázka modelu vozidla v programu Blender}
+\end{center}
+\end{figure}
+
+Aby 3D model rozměrově odpovídal, je potřeba ho správně škálovat. V Blenderu je položka $Dimensions$, kde snadno upravíte rozměry modelu(zvolené měřítko je v tomto případě v metrech).
+
+Model není třeba centrovat, jádro to udělá samo. Jen je potřeba před exportem odstranit z modelu kola a při exportu povolit normály. Po exportu se vygeneruje též soubor s materiály. Zde je potřeba zkontrolovat, zda v souboru jsou cesty k texturám relativní a zvolené textury jsou ve formátu PNG(jinak se textury nezobrazí).
+
+Dále je potřeba stejným způsobem vyexportovat jedno samotné kolo auta. Aby kolo bylo zobrazeno správně, je třeba vybrat kolo z pravé strany auta.
+
+Pro rychlejší načítání modelů a fungování veškerých grafických technik, je vhodné konvertovat výsledný OBJ soubor do formátu O4S pomocí příkazu:
+\begin{center}
+java -jar objConverter $<model>$.obj $<cesta$ $exportu>$/3d.o4s
+\end{center}
+\newpage
+
+Dále je nutné vytvořit informační soubor, ve kterém budou uvedeny jednotlivé fyzikální a vizuální vlastnosti vozidla. Viz následující příklad.
+
+\begin{lstlisting}[caption=Informační soubor vozidla]
+//cesty k jednotlivym modelum
+skin_model ./cars/ford/white/3d.o4s
+wheel_model ./cars/ford/wheel/3d.o4s
+//pozice kol v metrech
+wheel_x 0.75
+wheel_y 0.2
+wheel_z1 1.05
+wheel_z2 1.15
+
+//tiha vozidla v kilogramech
+mass 1000
+//maximalni rejd prednich kol ve stupnich
+steering 30
+//sila auta v kilowattech
+power 40
+//sila brzdoveho pedalu v newtonech
+brake_power 500
+//sila auta pri nejnizsich otackach motoru v procentech(ze sily auta)
+low_aspect 0.75
+
+//pocet rychlosti - index 0 je zpatecka
+gear_count 3
+//rychlost v km/h jednotlivych rychlosti pri nizkych a vysokych otackach
+gear0_max 20
+gear1_max 30
+gear2_max 80
+gear3_min 20
+gear3_max 130
+
+//definovani nizkych a vysokych otacek
+gear_low 1000
+gear_high 6000
+//otacky pri kterych automaticka prevodka preradi
+gear_up 4500
+gear_down 2000
+\end{lstlisting}
+
+Převodový stupeň jednotlivých rychlostí je zde udán pomocí minimální a maximální rychlosti jednotlivých rychlostí(daleko snadněji se tento údaj měří).
+
+Pozice jednotlivých kol jsou brány relativně od středu vozidla, pro přesné umístění je vhodné si model vozidla vycentrovat a změřit vzdálenosti.
+\newpage
+
+\begin{figure}[h!] 				
+\begin{center}
+  \includegraphics[width=140mm]{figures/wheels.png}\\
+  \caption{Pomocný obrázek k pozicování kol}
+\end{center}
+\end{figure}
+
+
+Posledním krokem, jak dostat vozidlo do simulátoru, je odkázání se na informační soubor v hlavním konfiguračním souboru $assets/config/open4speed.txt$.
+
+\subsection{Příprava tratí}
+Po vytvoření 3D modelu je třeba z modelu odstranit veškeré hrany, které netvoří polygon. Takové hrany v simulátoru slouží k navigaci na trati. Po odstranění nechtěných hran vytvořte pomocí hran trasu, která povede prostředkem silnice. Hrany by měly být dlouhé stejně jako je jejich vzdálenost od krajnice.
+\newpage
+
+\begin{figure}[h!] 				
+\begin{center}
+  \includegraphics[width=120mm]{figures/track.png}\\
+  \caption{Ukázka scény s vyznačenými trasami}
+\end{center}
+\end{figure}
+
+Pro vytvoření jednosměrné ulice vytvořte krátkou hranu z bodu křižovatky kolmo nahoru. Ze strany jednosměrné ulice připojte hranu na horní vrchol a z druhé strany \linebreak na dolní. To zařídí, že vozidla nebudou vjíždět do protisměru.
+
+Při spojování dvou jednosměrných ulic v jednu je nutné spojit vrcholy až na následujícím vrcholu za křižovatkou a to metodou dvou výškově souběžných hran od křižovatky směrem do spojené ulice.
+
+Tratě je možné optimalizovat stejným způsobem jako se dají optimalizovat vozidla. \linebreak Po dokončení tratě je potřeba vytvořit informační soubor o trati.
+\newpage
+
+\begin{lstlisting}[caption=Informační soubor tratě]
+//cesty k jednotlivym modelum
+track_model ./tracks/city/3d.o4s
+sky_model ./skydomes/sunrise/3d.o4s
+
+//nasvetleni sceny
+gamma 0.5
+
+//index trasy
+race_track 0
+//index startu hrace
+player_start 10
+//pocet kol
+laps 2
+//index cile zavodu
+finish 20
+//pocet pocitacem rizenych vozu
+opponent_count 2
+//index vozidla protihrace
+opponent1_car 1
+//index startu protihrace
+opponent1_start 1
+//index vozidla protihrace
+opponent2_car 2
+//index startu protihrace
+opponent2_start 20
+//index trati protihrace(hrac pojede po jine trase)
+opponent2_track 1
+//prepnuti modu umele inteligence ze zavodnika na bezneho ridice
+opponent2_type 1
+
+//cesta k pouzite sade map osvetleni
+lightmap lightmaps/city1b%d.png
+//cesta k dynamickym mapam osvetleni
+dynamicLight lightmaps/city1b.vbo
+\end{lstlisting}
+
+Indexy pozic na jednotlivých tratí lze získat zapnutím debug modu simulátoru. Indexy tras se zobrazí při převodu modelu z OBJ do O4S formátu. Indexy vozidel jsou dány pořadím v konfiguračním souboru $assets/config/open4speed.txt$, do stejného souboru se musí uvést odkaz na danou trať.
+
+\subsection{Konfigurace uživatelského rozhraní}
+Konfigurace rozhraní se provádí pomocí skriptů. Skripty jsou rozděleny do bloků, každý blok začíná svým názvem a končí klíčovým slovem END. Existují dva typy bloků: obsahový \linebreak a zdrojový. Obsahový blok odkazuje na textury, modely a další. Zdrojový se skládá z příkazů. které mají být vykonávány. Po spuštění jádra se načte blok CONFIG a spustí se blok INIT v souboru $assets/config/open4speed.txt$.
+
+Pro práci s pamětí se používá univerzální proměnná, se kterou pracuje většina příkazů. Proměnnou lze uložit do konfiguračního souboru nebo jen dočasně jinam do paměti.
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|p{30mm}|p{30mm}|p{90mm}|}
+\hline
+\textbf{Příkaz} & 
+\textbf{Atributy} & 
+\textbf{Popis} \\
+\hline
+\hline
+getCfg & 
+index & 
+uloží do proměnné hodnotu z paměti na zadané pozici \\
+\hline
+ifBgr & 
+hodnota, blok & 
+pokud je proměnná vyšší než zadaná hodnota, spustí se zadaný blok příkazů \\
+\hline
+ifEql & 
+hodnota, blok & 
+pokud je proměnná stejná jako zadaná hodnota, spustí se zadaný blok příkazů \\
+\hline
+ifSml & 
+hodnota, blok & 
+pokud je proměnná menší než zadaná hodnota, spustí se zadaný blok příkazů \\
+\hline
+minus & 
+hodnota & 
+odečte od proměnné zadanou hodnotu \\
+\hline
+minusListSize & 
+index & 
+odečte od proměnné počet nezakomentovaných řádků bloku \\
+\hline
+plus & 
+hodnota & 
+přičte k proměnné zadanou hodnotu \\
+\hline
+rnd & 
+max.hodnota & 
+uloží do proměnné náhodné číslo omezené zadanou maximální hodnotu \\
+\hline
+saveCfg & 
+- & 
+uloží veškeré hodnoty paměti do souboru\\
+\hline
+set & 
+hodnota & 
+nastaví hodnotu proměnné na zadanou hodnotu \\
+\hline
+setCfg & 
+index & 
+nastaví zadanou pozici v paměti na hodnotu proměnné\\
+\hline
+sub & 
+hodnota & 
+vynásobí proměnnou zadanou hodnotou \\
+\hline
+\end{tabular}
+\caption{Sada příkazů pro práci s proměnnou}
+\end{center}
+\end{table}
+\newpage
+
+K aktivování a deaktivování jednotlivých funkcí jádra se používají přepínače. Přepínače umožňují přepnutí z jednoho módu na jiný.
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|p{30mm}|p{30mm}|p{90mm}|}
+\hline
+\textbf{Příkaz} & 
+\textbf{Atributy} & 
+\textbf{Popis} \\
+\hline
+\hline
+active & 
+0 nebo 1 & 
+hodnota 1 zaktivuje závod(spustí se fyzikální engine \linebreak a budou se generovat zvuky prostředí) \\
+\hline
+debug & 
+0 nebo 1 & 
+hodnota 1 zapne debug mód(výpis zátěže systému \linebreak a pozici na dané trati) \\
+\hline
+locked & 
+0 nebo 1 & 
+hodnota 1 zamkne všechna vozidla, aby je nebylo možné ovládat\\
+physicalEngine & 
+řetězec & 
+nastaví aktuálně používaný fyzikální engine \\
+\hline
+\hline
+race & 
+0 nebo 1 & 
+hodnota 1 spustí vykreslování 3D scény, pozadí menu musí být po té odstraněno \\
+\hline
+transmission & 
+0 nebo 1 & 
+hodnota 1 nastaví automatické řazení, 0 manuální \\
+\hline
+viewCar & 
+0 nebo 1 & 
+hodnota 1 zobrazí vozidlo v módu garáže \\
+\hline
+\end{tabular}
+\caption{Sada přepínačů pro nastavení jádra}
+\end{center}
+\end{table}
+
+Dalším typem příkazů jsou takzvané spouštěče, které umožňují spuštění jiného bloku. Spouštěče umožňují spustit jiný blok v závislosti na činnosti uživatele.
+\newpage
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|p{30mm}|p{30mm}|p{90mm}|}
+\hline
+\textbf{Příkaz} & 
+\textbf{Atributy} & 
+\textbf{Popis} \\
+\hline
+\hline
+esc & 
+blok příkazů & 
+spustí zadaný blok příkazů při stisknutí esc \\
+\hline
+finish & 
+blok příkazů & 
+spustí zadaný blok příkazů při ukončení závodu, po skončení závodu je v proměnné pozice, na které se hráč umístil \\
+\hline
+include & 
+blok příkazů & 
+spustí zadaný blok příkazů \\
+\hline
+\#import & 
+název souboru & 
+speciální typ syntaxe vyskytující se mimo blok příkazů, která ke skriptovacímu souboru připojí další skript \\
+\hline
+\end{tabular}
+\caption{Sada spouštěčů bloků příkazů}
+\end{center}
+\end{table}
+
+K používání příkazů sady je důležité mít nadefinované bloky TEXTS a TEXTCFGx(kde x je index zobrazované konfigurace).
+\begin{itemize}
+\item TEXTS - všechny použité statické texty
+\item TEXTCFG1 - texty pro jednotlivé hodnoty konfigurace na indexu 1
+\end{itemize}
+\bigskip
+
+\ \ Pro vložení tlačítka je nutné určit jeho typ, existuje několik typů:
+\begin{itemize}
+\item none - zobrazí pouze obrázek, text nikoliv, použijte index textu 0
+\item text - zobrazí text, index se načítá z bloku TEXTS
+\item cfg - zobrazí text z bloku TEXTCFGx, kde x je dáno indexem textu
+\item mon - speciální typ tlačítka, index 0 zobrazí otáčkoměr, index 1 tachometr a index 2 řadící páku
+\end{itemize}
+\newpage
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|p{30mm}|p{30mm}|p{90mm}|}
+\hline
+\textbf{Příkaz} & 
+\textbf{Atributy} & 
+\textbf{Popis} \\
+\hline
+\hline
+addButton &
+parametry, blok příkazů & 
+přidá na obrazovku tlačítko, které při kliknutí spustí blok příkazů, v případě potřeby použití nefunkční tlačítka zvolte blok NONE; parametry tlačítka začínají klíčovým slovem img, následuje index obrázku, typ textu a index textu(vše s mezerami), po té už jen
+[poziceX]x[poziceY]-[šířka]x[výška] \\
+\hline
+addImage &
+název souboru & 
+přidá do paměti texturu, kterou po lze používat v GUI \\
+\hline
+clearButtons & 
+- & 
+vymaže všechny tlačítka \\
+\hline
+forceRender & 
+- & 
+vynutí vykreslení během provádění skriptu \\
+\hline
+fxFlyIn & 
+- & 
+spustí vstupní animaci tlačítek \\
+\hline
+fxFlyOut & 
+- & 
+spustí výstupní animaci tlačítek \\
+\hline
+quit & 
+- & 
+ukončí program \\
+\hline
+setBackground & 
+index obrázku & 
+nastaví pozadí menu na zadaný index obrázku (záporná hodnota pozadí nezobrazí) \\
+\hline
+\end{tabular}
+\caption{Sada příkazů pro práci s menu}
+\end{center}
+\end{table}
+
+\ \ Pro práci s příkazy využívající média, je potřeba mít nadefinované bloky CARS, TRACKS a MUSIC. CARS a TRACKS odkazují na informační soubory vozidel a tratí, blok MUSIC odkazuje na hudební soubory.
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|p{30mm}|p{30mm}|p{90mm}|}
+\hline
+\textbf{Příkaz} & 
+\textbf{Atributy} & 
+\textbf{Popis} \\
+\hline
+\hline
+detail &
+úroveň detailu 0-4 &
+změní úroveň detailu scény (rozlišení)\\
+\hline
+initSound &
+- &
+načte veškeré zvuky popsané v bloku INIT \\
+\hline
+loadCar &
+index vozidla &
+načte vozidlo hráče \\
+\hline
+loadScene &
+index scény &
+načte scénu \\
+\hline
+musicPlay &
+index skladby &
+spustí hudbu \\
+\hline
+musicSetVolume &
+- &
+nastaví hlasitost hudby podle proměnné (max. 10), při této operaci musí hudba hrát \\
+\hline
+musicStop &
+- &
+zastaví hudbu \\
+\hline
+muteSound &
+- &
+utlumí zvuky motoru \\
+\hline
+nav &
+index hrany &
+nastaví nový cíl, kam se má vozidlo navigovat \\
+\hline
+reset &
+- &
+vrátí vozidlo zpět na silnici \\
+\hline
+setVolume &
+- &
+nastaví hlasitost prostředí dle proměnné (max. 10) \\
+\hline
+sleep &
+počet sekund &
+pozastaví provádění skriptu na zadaný počet sekund \\
+\hline
+wait &
+počet sekund &
+pozastaví veškerou činnost na zadaný počet sekund \\
+\hline
+\end{tabular}
+\caption{Sada příkazů pro práci s médii}
+\end{center}
+\end{table}
 
 \end{document}

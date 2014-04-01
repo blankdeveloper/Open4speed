@@ -18,7 +18,7 @@ public class KDNode {
   // random number generator
   static Random rnd = new Random();
   int freeSpace;
-  public KDNode next1, next2;
+  public KDNode child1, child2;
   // node dimension
   public int width;
   public int height;
@@ -96,48 +96,48 @@ public class KDNode {
       return false;
     }
 
-    // node is empty -> create left subnode
-    if (next1 == null) {
+    // first child is empty
+    if (child1 == null) {
       // check space
       if ((t.node.width <= width) && (t.node.height <= height)) {
 
         // fits exactly
         if ((t.node.width == width) || (t.node.height == height)) {
-          next1 = t.node;
+          child1 = t.node;
           secondHalf.add(t.node);
-          next1.t1 = t;
+          child1.t1 = t;
           return true;
-        } // space division
+        } // plane subdivision
         else {
-          next1 = new KDNode(t.node.width, height, false);
-          if (next1.addNode(t)) {
+          child1 = new KDNode(t.node.width, height, false);
+          if (child1.addNode(t)) {
             return true;
           }
         }
       }
-    } // try to insert into left subnode
-    else if (next1.addNode(t)) {
+    } // try to insert into first child
+    else if (child1.addNode(t)) {
       return true;
-    } // create right subnode
-    else if (next2 == null) {
+    } // create second child
+    else if (child2 == null) {
 
-      // horizontal space division
-      if ((t.node.width <= width) && (t.node.height <= height - next1.height)) {
-        next2 = new KDNode(width, height - next1.height, false);
-        if (next2.addNode(t)) {
+      // horizontal plane subdivision
+      if ((t.node.width <= width) && (t.node.height <= height - child1.height)) {
+        child2 = new KDNode(width, height - child1.height, false);
+        if (child2.addNode(t)) {
           return true;
         }
       }
 
-      // vertical space division
-      if ((t.node.width <= width - next1.width) && (t.node.height <= height)) {
-        next2 = new KDNode(width - next1.width, height, false);
-        if (next2.addNode(t)) {
+      // vertical plane subdivision
+      if ((t.node.width <= width - child1.width) && (t.node.height <= height)) {
+        child2 = new KDNode(width - child1.width, height, false);
+        if (child2.addNode(t)) {
           return true;
         }
       }
-    } // try to insert into right subnode
-    else if (next2.addNode(t)) {
+    } // try to insert into second child
+    else if (child2.addNode(t)) {
       return true;
     }
     return false;
@@ -157,17 +157,17 @@ public class KDNode {
       t2.lightmapY = y - t2.lightmapV;
     }
 
-    if (next1 != null) {
-      next1.countLM(x, y);
+    if (child1 != null) {
+      child1.countLM(x, y);
     }
-    if (next2 != null) {
-      if (next1 == null) {
+    if (child2 != null) {
+      if (child1 == null) {
         throw new Exception("Chybne poradi uzlu");
       }
-      if (next1.width == width) {
-        next2.countLM(x, y + next1.height);
-      } else if (next2.height == height) {
-        next2.countLM(x + next1.width, y);
+      if (child1.width == width) {
+        child2.countLM(x, y + child1.height);
+      } else if (child2.height == height) {
+        child2.countLM(x + child1.width, y);
       } else {
         throw new Exception("Chybna konzistence kD stromu");
       }
@@ -203,17 +203,17 @@ public class KDNode {
 
     }
 
-    if (next1 != null) {
-      next1.draw(g, x, y, s);
+    if (child1 != null) {
+      child1.draw(g, x, y, s);
     }
-    if (next2 != null) {
-      if (next1 == null) {
+    if (child2 != null) {
+      if (child1 == null) {
         throw new Exception("Chybne poradi uzlu");
       }
-      if (next1.width == width) {
-        next2.draw(g, x, y + next1.height, s);
-      } else if (next2.height == height) {
-        next2.draw(g, x + next1.width, y, s);
+      if (child1.width == width) {
+        child2.draw(g, x, y + child1.height, s);
+      } else if (child2.height == height) {
+        child2.draw(g, x + child1.width, y, s);
       } else {
         throw new Exception("Chybna konzistence kD stromu");
       }
@@ -221,16 +221,16 @@ public class KDNode {
   }
 
   int getFreeSpace() {
-    if (next1 == null) {
+    if (child1 == null) {
       if (isList) {
         freeSpace = 0;
       } else {
         freeSpace = size();
       }
-    } else if (next2 == null) {
-      freeSpace = size() - next1.size() + next1.getFreeSpace();
+    } else if (child2 == null) {
+      freeSpace = size() - child1.size() + child1.getFreeSpace();
     } else {
-      freeSpace = next1.getFreeSpace() + next2.getFreeSpace();
+      freeSpace = child1.getFreeSpace() + child2.getFreeSpace();
     }
     return freeSpace;
   }

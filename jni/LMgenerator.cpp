@@ -305,7 +305,7 @@ void display(void) {
             /// render area lights into lightmaps
             printf("Rendering area lights into lightmaps...");
             startTimer();
-            float cutoff = cos(90 * 3.14 / 180.0);
+            float cutoff = cos(135 * 3.14 / 180.0);
 
             /// apply all lights
             glm::vec3 raybegin;

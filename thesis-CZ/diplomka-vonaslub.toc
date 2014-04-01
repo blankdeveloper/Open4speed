@@ -40,23 +40,26 @@
 \contentsline {subsubsection}{\numberline {4.3.1.2}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{34}{subsubsection.4.3.1.2}
 \contentsline {subsection}{\numberline {4.3.2}P\IeC {\v r}\IeC {\'\i }prava dat pro dynamickou aktualizaci map osv\IeC {\v e}tlen\IeC {\'\i }}{34}{subsection.4.3.2}
 \contentsline {subsection}{\numberline {4.3.3}Dynamick\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i } a dynamick\IeC {\'e} objekty}{34}{subsection.4.3.3}
-\contentsline {subsection}{\numberline {4.3.4}Sv\IeC {\v e}tla vozidel}{36}{subsection.4.3.4}
-\contentsline {section}{\numberline {4.4}Nahrazen\IeC {\'\i } v\IeC {\'\i }cepr\IeC {\r u}chodov\IeC {\'y}ch p\IeC {\v r}\IeC {\'\i }stup\IeC {\r u}}{36}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Rozm\IeC {\v e}r textur na OpenGL ES 2.0}{36}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.3.4}Sv\IeC {\v e}tla vozidel}{34}{subsection.4.3.4}
+\contentsline {section}{\numberline {4.4}Nahrazen\IeC {\'\i } v\IeC {\'\i }cepr\IeC {\r u}chodov\IeC {\'y}ch p\IeC {\v r}\IeC {\'\i }stup\IeC {\r u}}{34}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Rozm\IeC {\v e}r textur na OpenGL ES 2.0}{35}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Odlesky}{35}{subsection.4.4.2}
 \contentsline {chapter}{\numberline {5}Testov\IeC {\'a}n\IeC {\'\i }}{39}{chapter.5}
-\contentsline {section}{\numberline {5.1}P\IeC {\v r}edzpracov\IeC {\'a}n\IeC {\'\i }}{39}{section.5.1}
-\contentsline {section}{\numberline {5.2}Simul\IeC {\'a}tor}{39}{section.5.2}
+\contentsline {section}{\numberline {5.1}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{40}{section.5.1}
+\contentsline {paragraph}{Bodov\IeC {\'e} zdroje sv\IeC {\v e}tla}{40}{section*.6}
+\contentsline {paragraph}{Plo\IeC {\v s}n\IeC {\'e} zdroje sv\IeC {\v e}tla}{40}{section*.7}
+\contentsline {section}{\numberline {5.2}Simul\IeC {\'a}tor}{41}{section.5.2}
 \contentsline {chapter}{\numberline {6}Z\IeC {\'a}v\IeC {\v e}r}{43}{chapter.6}
-\contentsline {chapter}{Literatura}{45}{chapter*.6}
+\contentsline {chapter}{Literatura}{45}{chapter*.8}
 \contentsline {chapter}{\numberline {A}Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{47}{appendix.A}
 \contentsline {chapter}{\numberline {B}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{49}{appendix.B}
 \contentsline {chapter}{\numberline {C}U\IeC {\v z}ivatelsk\IeC {\'a} p\IeC {\v r}\IeC {\'\i }ru\IeC {\v c}ka}{51}{appendix.C}
 \contentsline {section}{\numberline {C.1}Instalace simul\IeC {\'a}toru}{51}{section.C.1}
-\contentsline {paragraph}{Linux}{51}{section*.7}
-\contentsline {paragraph}{Android}{51}{section*.8}
+\contentsline {paragraph}{Linux}{51}{section*.9}
+\contentsline {paragraph}{Android}{51}{section*.10}
 \contentsline {section}{\numberline {C.2}Pou\IeC {\v z}\IeC {\'\i }v\IeC {\'a}n\IeC {\'\i } simul\IeC {\'a}toru}{52}{section.C.2}
-\contentsline {paragraph}{Menu}{52}{section*.9}
-\contentsline {paragraph}{Ovl\IeC {\'a}d\IeC {\'a}n\IeC {\'\i } simul\IeC {\'a}toru}{52}{section*.10}
+\contentsline {paragraph}{Menu}{52}{section*.11}
+\contentsline {paragraph}{Ovl\IeC {\'a}d\IeC {\'a}n\IeC {\'\i } simul\IeC {\'a}toru}{52}{section*.12}
 \contentsline {section}{\numberline {C.3}P\IeC {\v r}\IeC {\'\i }prava vlastn\IeC {\'\i }ho obsahu pro simul\IeC {\'a}tor}{53}{section.C.3}
 \contentsline {subsection}{\numberline {C.3.1}P\IeC {\v r}\IeC {\'\i }prava aut pro simul\IeC {\'a}tor}{53}{subsection.C.3.1}
 \contentsline {subsection}{\numberline {C.3.2}P\IeC {\v r}\IeC {\'\i }prava trat\IeC {\'\i }}{55}{subsection.C.3.2}

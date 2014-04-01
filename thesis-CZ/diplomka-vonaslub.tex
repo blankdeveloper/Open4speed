@@ -13,7 +13,7 @@
 % Two-page layout: final printing
 \documentclass[11pt,twoside,a4paper]{book}   
 
-\usepackage{wrapfig, floatrow, amsmath, url, graphicx}
+\usepackage{wrapfig, floatrow, amsmath, url, graphicx, array}
 
 \usepackage[czech, english]{babel}
 \usepackage[T1]{fontenc} % pouzije EC fonty 
@@ -352,6 +352,10 @@ Důraz byl kladen na co nejvyšší optimalizaci vykreslování. Kromě hlavní 
 
 \section{Požadavky na funkčnost}
 Projekt je rozdělen do dvou samostatných částí. První částí je předzpracování,\linebreak ve kterém se vytváří mapy osvětlení. Druhou částí projektu je závodní simulátor, který mapy osvětlení používá. Fázi předzpracování by teoreticky bylo možné provádět i na platformě Android. Vzhledem k tomu, že klasické počítače dosahují vyššího výkonu než mobilní zařízení, je daleko efektivnější provést předzpracování na počítači.
+
+Simulátor využívá vlastní formát, který umožňuje mít v sobě jak souřadnice standardních textur, tak i souřadnice v mapách osvětlení. Formát zachovává veškeré informace o modelu. I když je třeba výsledný simulátor nevyužije, je dobré tyto informace ponechat pro případ dalšího vývoje. Formát je schopen uložit některé další informace o materiálu a shaderu.
+
+Plocha map osvětlení je maximálně možně zaplněna z důvodu očekávané malé paměti vymezeny pro velké textury. Aby bylo možné určit nejvhodnější rozlišení těchto textur, je umožněno škálování mapy osvětlení.
 \newpage
 
 \subsection{Mapy osvětlení}
@@ -1101,14 +1105,35 @@ public boolean addAABB(AABB aabb) {
 
 \subsection{Příprava dat pro dynamickou aktualizaci map osvětlení}
 
-Ve fázi předzpracování se provede konverze 3D modelů do vlastního formátu, který bude umožňovat mít v sobě jak souřadnice standardních textur, tak i souřadnice v mapách osvětlení. Formát by měl zachovat veškeré informace o modelu. I když je třeba výsledný simulátor nevyužije, je dobré tyto informace ponechat pro případ dalšího vývoje. Formát by měl být schopen uložit některé další informace o materiálu a shaderu.
-
-Plochu map osvětlení je nutné maximálně zaplnit z důvodu očekávané malé paměti vymezeny pro velké textury. Aby bylo možné určit nejvhodnější rozlišení těchto textur, je třeba umožnit jejich škálování.
-
-Vykreslení hodnot do map osvětlení se provede pomocí OpenGL, bude zde řešena viditelnost (pomocí stínových map), vypočteno utlumení a výpočet difúzního odrazu světla.
-TODO dopsat
-
 \subsection{Dynamické osvětlení a dynamické objekty}
+
+\subsection{Světla vozidel}
+
+Dle předběžných měření jsem zjistil, že na mobilních zařízeních lze za běhu počítat jedno až dvě světla(bez řešení viditelnosti světla). U vozidla ovládané hráčem není potřeba řešit viditelnost světla, prakticky zde nedochází k situacím, že by světlo osvětlovalo neviditelné objekty(je to z důvodu těsné vazby světlo hráčova vozidla-kamera).
+
+U ostatních vozidel je třeba osvětlení zjednodušit, aby to mobilní hardware zvládal. Zvolil jsem metodu vykreslování kuželů do scény. Při vykreslování je použita OpenGL funkce blending, která umožňuje kreslit objekty s částečnou průhledností. Dále je také zapnuté ořezávání odvrácených trojúhelníku. Střed kužele je vyplněn několikrát zevnitř s odvrácenou normálou. Z toho důvodu je osvětlení silnější pokud světlo svítí do kamery než od kamery.
+
+\section{Nahrazení víceprůchodových přístupů}
+Při běhu jakéhokoliv simulátoru je největší zátěž mobilního hardware způsobena vykreslováním 3D scény, proto je nutné tuto část co nejvíce zefektivnit. Pro mnoho efektů se používají takzvané víceprůchodové přístupy(scéna se vykreslí víckrát z různých pohledů nebo pomocí různých shaderů), ale na mobilním zařízení je zatím z hlediska výkonu možné použít pouze jednoprůchodový přístup.
+
+Abych částečně nahradil ve svém simulátoru víceprůchodový přístup, použil jsem screen-space přístup(to je obecně jakákoliv technika využívající data z pohledu kamery, jinými slovy máme pouze výsledný snímek a na něm provádíme další operace). V praxi se používá hlavně pro zrcadlové plochy. Potřeboval jsem přistupovat do aktuálně vykreslovaného snímku. To je ale problém, protože tento snímek není kompletní a kdybych vykresloval přímo do něj\linebreak a zároveň z něj četl způsobilo by to chyby ve výsledném obraze.
+
+Řešením je vykreslování střídavě do dvou různých textur. To znamená, že při lichém snímku kreslím do textury 1 a čtu z textury 2. Při sudém snímku je tomu obráceně. Tímto způsobem získám přístup do vykreslené scény, sice s drobným zpožděním, ale při dostatečně rychlém vykreslování si toho uživatel nevšimne(za předpokladu, že textura bude použita\linebreak na efekty jako jsou odlesky nebo stíny).
+
+\begin{figure}[h!]
+\includegraphics[width=150mm]{figures/render-schema.png}
+\caption{Vykreslovací řetězec simulátoru}
+\end{figure}
+
+\subsection{Rozměr textur na OpenGL ES 2.0}
+Verze OpenGL ES 2.0 neumožňuje používat obdélníkové textury. Textury musí být čtvercové a jejich strana musí být o velikosti mocniny 2.
+Pro vykreslování do textury, která bude výsledně umístěna na obrazovku je tedy nutné zvolit vyšší rozlišení. Např. u tabletu Google Nexus 7 2012 s rozlišením 1280x720 se zvolí textura 2048x1024. To znamená, že by se ve výsledku vykreslilo víc než 2x více pixelů než je potřeba.
+
+Není ale nutné vykreslovat do celé textury, pomocí příkazu \textit{glViewport} se dá nastavit část textury, do které má OpenGL vykreslovat a nedojde tedy k plýtvání výkonem(bude se plýtvat pouze pamětí).
+
+Dále je možné zvolit nižší rozlišení viewportu než je rozlišení displeje. Mobilní zařízení obvykle disponují obrovskou hustotou pixelů a pokud zařízení nebude stíhat vykreslovat scénu v plném rozlišení, lze vykreslovat v rozlišení menším. U počítačových 3D her se také setkáváme s možností změnit rozlišení, tam řeší změnu přímo hardware displeje nebo jeho ovladač.
+
+\subsection{Odlesky}
 
 Jedním z velmi rychlých efektů ve screen-space je \textbf{motion-blur}.
 \lstset{language=GLSL} 
@@ -1154,39 +1179,9 @@ Pokud máme ve scéně \textbf{předpočtené stíny}, je vhodné tyto statické
 
 Zde vzniká problém s barevným světlem. Jsou zde dvě možnosti řešení. Prvním je přidání další textury, ve kterém by byla barevná intenzita světla(tím by došlo ke zvýšení náročnosti na hardware a ke zvýšení paměťové náročnosti). Druhým možným řešením je omezit barevná světla do nějaké sytosti(pokud se slabě zabarvené světlo aplikuje jako bílé, není to tolik rušivé).
 
-\subsection{Světla vozidel}
-
-Dle předběžných měření jsem zjistil, že na mobilních zařízeních lze za běhu počítat jedno až dvě světla(bez řešení viditelnosti světla). U vozidla ovládané hráčem není potřeba řešit viditelnost světla, prakticky zde nedochází k situacím, že by světlo osvětlovalo neviditelné objekty(je to z důvodu těsné vazby světlo hráčova vozidla-kamera).
-
-U ostatních vozidel je třeba osvětlení zjednodušit, aby to mobilní hardware zvládal. Zvolil jsem metodu vykreslování kuželů do scény. Při vykreslování je použita OpenGL funkce blending, která umožňuje kreslit objekty s částečnou průhledností. Dále je také zapnuté ořezávání odvrácených trojúhelníku. Střed kužele je vyplněn několikrát zevnitř s odvrácenou normálou. Z toho důvodu je osvětlení silnější pokud světlo svítí do kamery než od kamery.
-
-\section{Nahrazení víceprůchodových přístupů}
-Při běhu jakéhokoliv simulátoru je největší zátěž mobilního hardware způsobena vykreslováním 3D scény, proto je nutné tuto část co nejvíce zefektivnit. Pro mnoho efektů se používají takzvané víceprůchodové přístupy(scéna se vykreslí víckrát z různých pohledů nebo pomocí různých shaderů), ale na mobilním zařízení je zatím z hlediska výkonu možné použít pouze jednoprůchodový přístup.
-
-Abych částečně nahradil ve svém simulátoru víceprůchodový přístup, použil jsem screen-space přístup(to je obecně jakákoliv technika využívající data z pohledu kamery, jinými slovy máme pouze výsledný snímek a na něm provádíme další operace). V praxi se používá hlavně pro zrcadlové plochy. Potřeboval jsem přistupovat do aktuálně vykreslovaného snímku. To je ale problém, protože tento snímek není kompletní a kdybych vykresloval přímo do něj\linebreak a zároveň z něj četl způsobilo by to chyby ve výsledném obraze.
-
-Řešením je vykreslování střídavě do dvou různých textur. To znamená, že při lichém snímku kreslím do textury 1 a čtu z textury 2. Při sudém snímku je tomu obráceně. Tímto způsobem získám přístup do vykreslené scény, sice s drobným zpožděním, ale při dostatečně rychlém vykreslování si toho uživatel nevšimne(za předpokladu, že textura bude použita\linebreak na efekty jako jsou odlesky nebo stíny).
-
-\begin{figure}[h!]
-\includegraphics[width=150mm]{figures/render-schema.png}
-\caption{Vykreslovací řetězec simulátoru}
-\end{figure}
-
-\subsection{Rozměr textur na OpenGL ES 2.0}
-Verze OpenGL ES 2.0 neumožňuje používat obdélníkové textury. Textury musí být čtvercové a jejich strana musí být o velikosti mocniny 2.
-Pro vykreslování do textury, která bude výsledně umístěna na obrazovku je tedy nutné zvolit vyšší rozlišení. Např. u tabletu Google Nexus 7 2012 s rozlišením 1280x720 se zvolí textura 2048x1024. To znamená, že by se ve výsledku vykreslilo víc než 2x více pixelů než je potřeba.
-
-Není ale nutné vykreslovat do celé textury, pomocí příkazu \textit{glViewport} se dá nastavit část textury, do které má OpenGL vykreslovat a nedojde tedy k plýtvání výkonem(bude se plýtvat pouze pamětí).
-
-Dále je možné zvolit nižší rozlišení viewportu než je rozlišení displeje. Mobilní zařízení obvykle disponují obrovskou hustotou pixelů a pokud zařízení nebude stíhat vykreslovat scénu v plném rozlišení, lze vykreslovat v rozlišení menším. U počítačových 3D her se také setkáváme s možností změnit rozlišení, tam řeší změnu přímo hardware displeje nebo jeho ovladač.
-
 %*****************************************************************************
 \chapter{Testování}
 Testování probíhalo na smartphonu, tabletu a laptopu, které jsou blíže popsány v tabulce 5.1. Zařízení byla během testování plně nabita, byla připojena ke zdroji napájení a byly vypnuty volby úspory energie. Veškeré testy byly prováděny v režimu \uv{free ride} a za stejných podmínek.
-
-\section{Předzpracování}
-
-\section{Simulátor}
 
 \begin{table}[h!]
 \begin{center}
@@ -1206,7 +1201,57 @@ Operační systém & Android 4.1 & Android 4.4 & Kubuntu 13.10 32bit \\ \hline
 *tablet má extra procesor pro nižší spotřebu během nečinnosti
 \end{center}
 \end{table}
+\newpage
 
+\section{Generování map osvětlení}
+\paragraph{Bodové zdroje světla}\ \ \\
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|p{50mm}|c|}
+\hline
+\textbf{Nastavení} & \textbf{Čas vykreslování} \\
+\hline
+OpenGL bez PCF & 2.25min\\ \hline
+OpenGL s PCF8x8 & 19.267min\\ \hline
+raycasting & 28.176min\\ \hline
+\end{tabular}
+\caption{Vykreslování 106 bodových zdrojů světla pomocí OpenGL a pomocí raycastingu}
+\end{center}
+\end{table}
+
+\paragraph{Plošné zdroje světla}\ \ \\
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|p{100mm}|c|}
+\hline
+\textbf{Nastavení} & \textbf{Čas vykreslování} \\
+\hline
+kvadratický útlum 0.2, optimalizováno & 10.276s\\ \hline
+kvadratický útlum 0.1, optimalizováno & 19.483s\\ \hline
+kvadratický útlum 0.05, optimalizováno & 36.875s\\ \hline
+kvadratický útlum 0.05, neoptimalizováno & 359.796s\\ \hline
+lineární útlum 0.05, neoptimalizováno & 960.546s\\ \hline
+lineární útlum 0.05, spot effekt 0.5, neoptimalizováno & 12874.661s\\ \hline
+\end{tabular}
+\caption{Vykreslování několika plošných zdrojů světel navzorkovaných na 202 bodových světel, optimalizace spočívá v testování paprsků vždy mezi dvěma trojúhelníky a detekování, zda bod na trojúhelník dosvítí }
+\end{center}
+\end{table}
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|p{100mm}|c|}
+\hline
+\textbf{Nastavení} & \textbf{Čas vykreslování} \\
+\hline
+kvadratický útlum 0.1, optimalizováno & 4.925h\\ \hline
+kvadratický útlum 0.05, optimalizováno & 9.578h\\ \hline
+\end{tabular}
+\caption{Vykreslování všech plošných zdrojů světel navzorkovaných na 372854 bodových světel, optimalizace spočívá v testování paprsků vždy mezi dvěma trojúhelníky a detekování, zda bod na trojúhelník dosvítí }
+\end{center}
+\end{table}
+\newpage
+
+\section{Simulátor}
 V prvním testu zjišťuji, jak je vykreslování rychlé při různém počtu vykreslovaných fragmentů. Jedná se v podstatě o snížení rozlišení displeje k zvýšení výkonu.
 
 \begin{table}[h!]
@@ -1224,7 +1269,6 @@ V prvním testu zjišťuji, jak je vykreslování rychlé při různém počtu v
 \caption{Závislost rychlosti vykreslování scény na zařízení a poměru rozlišení oproti nativnímu(v závorce je uvedena konfigurace v nastavení simulátoru). Z každého měření je uvedená minimální a maximální hodnota}
 \end{center}
 \end{table}
-\pagebreak
 
 Z výsledku je patrně vidět výkonový rozdíl mezi laptopem proti tabletu a mobilu. Laptop je přibližně 3x až 4x rychlejší, což je menší rozdíl než jsem očekával.
 \\

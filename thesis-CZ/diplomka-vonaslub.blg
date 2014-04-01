@@ -3,18 +3,9 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: diplomka-vonaslub.aux
 The style file: alpha.bst
 Database file #1: reference.bib
-Warning--I didn't find a database entry for "CSTUG"
-Warning--I didn't find a database entry for "latexdocweb"
-Warning--I didn't find a database entry for "latexwiki"
-Warning--I didn't find a database entry for "ipe"
-Warning--I didn't find a database entry for "kniha"
-Warning--I didn't find a database entry for "clanek"
-Warning--I didn't find a database entry for "sbornik"
-Warning--I didn't find a database entry for "www"
-Warning--I didn't find a database entry for "infodp"
 You've used 1 entry,
             2543 wiz_defined-function locations,
-            574 strings with 4658 characters,
+            564 strings with 4598 characters,
 and the built_in function-call counts, 293 in all, are:
 = -- 26
 > -- 8
@@ -53,4 +44,3 @@ warning$ -- 0
 while$ -- 2
 width$ -- 2
 write$ -- 14
-(There were 9 warnings)

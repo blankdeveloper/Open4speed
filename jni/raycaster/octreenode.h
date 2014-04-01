@@ -61,9 +61,9 @@ public:
      */
     AABB* getSubregion(bool x, bool y, bool z);
 
-    bool isIntersected(glm::vec3 begin, glm::vec3 end);
+    bool isIntersected(glm::vec3 raybegin, glm::vec3 rayend);
 
-    bool isIntersectedEx(glm::vec3 begin, glm::vec3 end);
+    bool isIntersectedEx(glm::vec3 raybegin, glm::vec3 rayend);
 };
 
 #endif // OCTREENODE_H

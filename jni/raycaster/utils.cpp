@@ -13,11 +13,11 @@ float countLightMaxDistance(float att) {
     return glm::sqrt(255.0f * maxColor / att);
 }
 
-glm::vec4 getColor(Point p, glm::vec3 begin, glm::vec3 end) {
+glm::vec4 getColor(Point *p, glm::vec3 raybegin, glm::vec3 rayend) {
 
     //count effectivity
     float sEff = 1;
-    glm::vec3 raydir = end - begin;
+    glm::vec3 raydir = rayend - raybegin;
     glm::vec3 L = glm::normalize(-raydir);
     if (xrenderer->light.u_light_cut != -2)
         sEff = glm::dot(glm::normalize(-swizle(xrenderer->light.u_light_dir)), -L);
@@ -25,7 +25,7 @@ glm::vec4 getColor(Point p, glm::vec3 begin, glm::vec3 end) {
     //light cutoff
     if (sEff >= xrenderer->light.u_light_cut) {
       //diffuse light
-      glm::vec4 color = glm::max(glm::dot(p.n, L), 0.0f) * xrenderer->light.u_light_diffuse;
+      glm::vec4 color = glm::max(glm::dot(p->n, L), 0.0f) * xrenderer->light.u_light_diffuse;
       color.w = 1;
       //light attenuation
       float d = glm::length(raydir);
@@ -67,11 +67,11 @@ bool TestAABBAABB(AABB* a, AABB* b) {
 }
 
 // Test if segment intersects AABB b
-int TestSegmentAABB(AABB* b, glm::vec3 begin, glm::vec3 end) {
+int TestSegmentAABB(AABB* b, glm::vec3 raybegin, glm::vec3 rayend) {
     glm::vec3 c = (b->min + b->max) * 0.5f; // Box center-point
     glm::vec3 e = b->max - c; // Box halflength extents
-    glm::vec3 m = (begin + end) * 0.5f; // Segment midpoint
-    glm::vec3 d = end - m; // Segment halflength vector
+    glm::vec3 m = (raybegin + rayend) * 0.5f; // Segment midpoint
+    glm::vec3 d = rayend - m; // Segment halflength vector
     m = m - c; // Translate box and segment to origin
     // Try world coordinate axes as separating axes
     float adx = fabsf(d.x);

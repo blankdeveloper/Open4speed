@@ -14,6 +14,8 @@
 #include "utils/switch.h"
 #include "common.h"
 
+char* line = new char[1024];
+
 /**
  * @brief Constructor for loading model from file
  * @param filename is path and name of file to load
@@ -29,7 +31,6 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
 #else
     FILE* file = fopen(prefix(filename), "r");
 #endif
-    char* line = new char[1024];
 
     /// get model dimensions
     gets(line, file);
@@ -264,24 +265,23 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
         gets(line, file);
         int edgeCount = scandec(line);
         for (int j = 0; j < edgeCount; j++) {
-            edge value = *(new edge());
+            edge *value = new edge();
             gets(line, file);
-            sscanf(line, "%f %f %f %f %f %f", &value.ax, &value.ay, &value.az, &value.bx, &value.by, &value.bz);
-            edges[i].push_back(value);
+            sscanf(line, "%f %f %f %f %f %f", &value->ax, &value->ay, &value->az, &value->bx, &value->by, &value->bz);
+            edges[i].push_back(*value);
         }
         for (int j = 0; j < edgeCount; j++) {
-            edge value = *(new edge());
-            value.ax = edges[i][j].bx;
-            value.ay = edges[i][j].by;
-            value.az = edges[i][j].bz;
-            value.bx = edges[i][j].ax;
-            value.by = edges[i][j].ay;
-            value.bz = edges[i][j].az;
-            edges[i].push_back(value);
+            edge *value = new edge();
+            value->ax = edges[i][j].bx;
+            value->ay = edges[i][j].by;
+            value->az = edges[i][j].bz;
+            value->bx = edges[i][j].ax;
+            value->by = edges[i][j].ay;
+            value->bz = edges[i][j].az;
+            edges[i].push_back(*value);
         }
     }
 
-    delete[] line;
 #ifdef ZIP_ARCHIVE
     zip_fclose(file);
 #else

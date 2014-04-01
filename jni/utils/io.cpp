@@ -12,7 +12,7 @@
 #include "common.h"
 
 char* string1 = new char[255];
-char character[1];  ///< temp char
+char* character = new char[2];  ///< temp char
 
 #ifdef ZIP_ARCHIVE
 #ifdef ANDROID

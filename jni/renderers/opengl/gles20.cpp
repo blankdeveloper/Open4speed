@@ -64,6 +64,9 @@ gles20::gles20() {
     for (int i = 0; i < 4095; i++) {
         dynindices[i] = i;
     }
+    camX = 0;
+    camY = 0;
+    camZ = 0;
     overmode = 0;
     overshader = 0;
     frame = 0;

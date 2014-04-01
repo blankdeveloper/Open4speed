@@ -10,6 +10,9 @@ triangle* lastIntersectedTriangle = 0;
 triangle* lastIntersectedTriangle2 = 0;
 
 float step = 1 / 255.0f;
+int ignore1 = 0;
+int ignore2 = 0;
+
 
 triangle::triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c,
          glm::vec2 aID, glm::vec2 bID, glm::vec2 cID,
@@ -74,7 +77,7 @@ void triangle::addLMPoint(int u, int v, glm::ivec2 t) {
     glm::vec3 n = glm::normalize(na * lena + nb * lenb + nc * lenc);
     glm::vec2 c = ta * lena + tb * lenb + tc * lenc;
 
-    points.push_back({vert, t, n, c});
+    points.push_back(new Point{vert, t, n, c});
 }
 
 float triangle::countDistanceTo(triangle* t) {
@@ -97,26 +100,16 @@ PLP* triangle::getPointLight(glm::vec3 p) {
     float lenc = triangleArea(p, a, b) / area;
     glm::vec2 uv = ta * lena + tb * lenb + tc * lenc;
     uv = glm::mod(uv + 1024.0f, 1.0f);
-    glm::ivec2 c = glm::ivec2(0.5f + uv.x * txtmap->width, 0.5f + uv.y * txtmap->height);
+    glm::ivec2 tc = glm::ivec2(0.5f + uv.x * txtmap->width, 0.5f + uv.y * txtmap->height);
     PLP* plp = new PLP();
-    plp->color = glm::vec4(txtmap->data[(c.y * txtmap->width + c.x) * 3 + 0],
-                           txtmap->data[(c.y * txtmap->width + c.x) * 3 + 1],
-                           txtmap->data[(c.y * txtmap->width + c.x) * 3 + 2], 0) / 255.0f;
+    plp->color = glm::vec4(txtmap->data[(tc.y * txtmap->width + tc.x) * 3 + 0],
+                           txtmap->data[(tc.y * txtmap->width + tc.x) * 3 + 1],
+                           txtmap->data[(tc.y * txtmap->width + tc.x) * 3 + 2], 0) / 255.0f;
     glm::vec3 normal = glm::normalize(na * lena + nb * lenb + nc * lenc);
     plp->pos = glm::vec4(p, 1.0f);
     plp->dir = glm::vec4(-normal, 0.0f);
     plp->useable = ((plp->color.x > step) || (plp->color.y > step) || (plp->color.z > step));
     return plp;
-}
-
-bool SameSign(float a, float b) {
-    if ((fabs(a) < 0.05) && (fabs(b) < 0.05))
-        return false;
-    if ((a > 0) && (b > 0))
-        return true;
-    if ((a < 0) && (b = 0))
-        return true;
-    return false;
 }
 
 glm::vec3 triangle::ClosestPtPointTriangle(glm::vec3 p) {
@@ -164,19 +157,27 @@ glm::vec3 triangle::ClosestPtPointTriangle(glm::vec3 p) {
     return u * a + v * b + w * c;
 }
 
-bool triangle::isIntersectedByRay(glm::vec3 begin, glm::vec3 end) {
+bool triangle::isIntersectedByRay(glm::vec3 raybegin, glm::vec3 rayend) {
+
+    /// skip on test itself
+    if ((tIndex == ignore1) || (tIndex == ignore2))
+        return false;
 
     /// get intersection by ray
-    glm::vec3 pq = end - begin;
-    glm::vec3 m = glm::cross(pq, begin);
+    glm::vec3 pq = raybegin - rayend;
+    glm::vec3 m = glm::cross(pq, rayend);
     float u = glm::dot(pq, glm::cross(c, b)) + glm::dot(m, c - b);
     float v = glm::dot(pq, glm::cross(a, c)) + glm::dot(m, a - c);
     float w = glm::dot(pq, glm::cross(b, a)) + glm::dot(m, b - a);
-    if (!SameSign(u, v) || !SameSign(u, w))
+    if ((u < 0) || (v < 0) || (w < 0))
         return false;
     /// check if point is visible in texture
     else if (txt != 0) {
         // find the uv corresponding to point p
+        float denom = 1.0f / (u + v + w);
+        u *= denom;
+        v *= denom;
+        w *= denom;
         glm::vec2 uv = ta * u + tb * v + tc * w;
         uv = glm::mod(uv + 1024.0f, 1.0f);
         glm::ivec2 c = glm::ivec2(uv.x * txt->width, uv.y * txt->height);
@@ -185,8 +186,8 @@ bool triangle::isIntersectedByRay(glm::vec3 begin, glm::vec3 end) {
     }
 
     /// self and neightbour intersection protection
-    if ((glm::length(ClosestPtPointTriangle(begin) - begin) < 0.5f)
-     || (glm::length(ClosestPtPointTriangle(end) - end) < 0.5f))
+    if ((glm::length(ClosestPtPointTriangle(raybegin) - raybegin) < 0.005f)
+     || (glm::length(ClosestPtPointTriangle(rayend) - rayend) < 0.005f))
         return false;
 
     if (lastIntersectedTriangle != 0)

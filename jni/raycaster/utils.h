@@ -20,7 +20,7 @@ struct PLP {
 
 float countLightMaxDistance(float att);
 
-glm::vec4 getColor(Point p, glm::vec3 begin, glm::vec3 end);
+glm::vec4 getColor(Point *p, glm::vec3 raybegin, glm::vec3 rayend);
 
 void startTimer();
 
@@ -33,6 +33,6 @@ float triangleArea(glm::vec3 a, glm::vec3 b, glm::vec3 c);
 bool TestAABBAABB(AABB* a, AABB* b);
 
 // Test if segment intersects AABB b
-int TestSegmentAABB(AABB* b, glm::vec3 begin, glm::vec3 end);
+int TestSegmentAABB(AABB* b, glm::vec3 raybegin, glm::vec3 rayend);
 
 #endif // UTILS_H

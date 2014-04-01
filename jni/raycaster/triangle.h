@@ -4,6 +4,9 @@
 #include "renderers/opengl/gltexture.h"
 #include "raycaster/utils.h"
 
+extern int ignore1;
+extern int ignore2;
+
 class triangle
 {
 public:
@@ -25,7 +28,7 @@ public:
     long tIndex;
     Texture* txt;
     Texture* txtmap;
-    std::vector<Point> points;
+    std::vector<Point*> points;
 
     triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c,
              glm::vec2 aID, glm::vec2 bID, glm::vec2 cID,
@@ -43,7 +46,9 @@ public:
 
     PLP* getPointLight(glm::vec3 p);
 
-    bool isIntersectedByRay(glm::vec3 begin, glm::vec3 end);
+    bool intersection(glm::vec3 raybegin, glm::vec3 rayend, glm::vec3 a, glm::vec3 b, glm::vec3 c);
+
+    bool isIntersectedByRay(glm::vec3 raybegin, glm::vec3 rayend);
 };
 
 extern triangle* lastIntersectedTriangle;

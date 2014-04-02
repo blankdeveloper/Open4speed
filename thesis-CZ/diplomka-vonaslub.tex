@@ -1053,7 +1053,7 @@ V případě Packing Lightmaps dělíme rovinu horizontálním nebo vertikální
 Metoda Packing Lightmaps nejdříve seřadí AABB podle jejich plochy a postupně je vkládá do kD stromu. Při každém vložení se nejdříve hledají neobsazené listy, zda neexistuje takový, který by odpovídal rozměrům AABB. Pokud takový neexistuje pokusí se algoritmus nalézt takový neobsazený list, kterému odpovídá aspoň jeden rozměr. V případě úspěšného hledání se AABB vloží do listu, v ostatních případech se najde větší list, provede se jeho rozdělení a následně se AABB do jednoho z potomků vloží.
 
 \lstset{language=Java} 
-\begin{lstlisting}[caption=Vkládání AABB do kD stromu]
+\begin{lstlisting}[caption=Vkládání AABB do kD stromu za využití rekurze]
 public boolean addAABB(AABB aabb) {
   // check if current node is empty and has enought space for AABB
   if (isEmpty() && (aabb.width <= width) && (aabb.height <= height)) {
@@ -1064,32 +1064,32 @@ public boolean addAABB(AABB aabb) {
       return true;
     } 
         
-    // plane subdivision
+    // subdivision
     else {
-      child1 = new KDNode(aabb.width, height, false);
+      child1 = new KDNode(aabb.width, height);
       if (child1.addAABB(aabb))
         return true;
     }
   } 
     
   // try to insert into first child
-  else if (child1.addNode(aabb))
+  else if (child1.addAABB(aabb))
     return true;
 
   // create second child
   else if (child2 == null) {
     
-    // horizontal plane subdivision
+    // horizontal subdivision
     if ((aabb.width <= width) && (aabb.height <= getChild2Height())) {
-      child2 = new KDNode(width, height - aabb.height, false);
+      child2 = new KDNode(width, height - aabb.height);
       if (child2.addAABB(aabb))
         return true;
     }
       
-    // vertical plane subdivision
+    // vertical subdivision
     if ((aabb.width <= getChild2Width()) && (aabb.height <= height)) {
-      child2 = new KDNode(width - child1.width, height, false);
-      if (child2.addNode(aabb))
+      child2 = new KDNode(width - child1.width, height);
+      if (child2.addAABB(aabb))
         return true;
     }
   } 

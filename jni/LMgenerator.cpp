@@ -305,12 +305,12 @@ void display(void) {
             /// render area lights into lightmaps
             printf("Rendering area lights into lightmaps...");
             startTimer();
-            float cutoff = cos(135 * 3.14 / 180.0);
+            float cutoff = cos(90 * 3.14 / 180.0);
 
             /// apply all lights
             glm::vec3 raybegin;
             glm::vec4 color;
-            float att = 0.05f;
+            float att = 0.2f;
             float eff;
             int tr;
             for (unsigned long i = 0; i < triangles.size(); i++) {
@@ -339,9 +339,9 @@ void display(void) {
                                         if (!root->isIntersected(raybegin, rayend)) {
                                             // add to previous lightmap
                                             index = triangles[i]->points[j]->t.y * rttsize + triangles[i]->points[j]->t.x;
-                                            pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 8.0f));
-                                            pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 8.0f));
-                                            pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 8.0f));
+                                            pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 128.0f));
+                                            pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 128.0f));
+                                            pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 128.0f));
                                         }
                                     }
                                 }

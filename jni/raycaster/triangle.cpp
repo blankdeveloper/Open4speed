@@ -191,7 +191,11 @@ bool triangle::isIntersectedByRay(glm::vec3 raybegin, glm::vec3 rayend) {
         return false;
 
     if (lastIntersectedTriangle != 0)
+    {
         lastIntersectedTriangle2 = lastIntersectedTriangle;
-    lastIntersectedTriangle = this;
+        if (lastIntersectedTriangle2->tIndex != tIndex)
+            lastIntersectedTriangle = this;
+    } else
+        lastIntersectedTriangle = this;
     return true;
 }

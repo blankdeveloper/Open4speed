@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.2.17)  2 APR 2014 01:52
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.2.17)  2 APR 2014 21:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -827,12 +827,12 @@ Package pdftex.def Info: figures/shading.png used on input line 577.
 (pdftex.def)             Requested size: 384.1122pt x 115.23277pt.
 
 [14 <./figures/shading.png>]
-<figures/interpolation.png, id=598, 462.528pt x 433.62pt>
+<figures/interpolation.png, id=598, 332.442pt x 375.804pt>
 File: figures/interpolation.png Graphic file (type png)
 
 <use figures/interpolation.png>
 Package pdftex.def Info: figures/interpolation.png used on input line 587.
-(pdftex.def)             Requested size: 184.9429pt x 173.38538pt.
+(pdftex.def)             Requested size: 184.9429pt x 209.06683pt.
 
 <figures/blendoff.png, id=599, 1370.9619pt x 707.5233pt>
 File: figures/blendoff.png Graphic file (type png)
@@ -1261,7 +1261,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1846.
 Here is how much of TeX's memory you used:
  14324 strings out of 494953
  200063 string characters out of 6179185
- 490282 words of memory out of 5000000
+ 490283 words of memory out of 5000000
  16914 multiletter control sequences out of 15000+600000
  20508 words of font info for 48 fonts, out of 8000000 for 9000
  50 hyphenation exceptions out of 8191
@@ -1286,7 +1286,7 @@ e/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/
 public/cm-super/sfsl1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti
 1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1440.pfb></usr/share
 /texmf/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on diplomka-vonaslub.pdf (76 pages, 15043143 bytes).
+Output written on diplomka-vonaslub.pdf (76 pages, 15035894 bytes).
 PDF statistics:
  1254 PDF objects out of 1440 (max. 8388607)
  1072 compressed objects within 11 object streams

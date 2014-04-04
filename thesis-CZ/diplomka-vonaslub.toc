@@ -60,7 +60,3 @@
 \contentsline {section}{\numberline {C.2}Pou\IeC {\v z}\IeC {\'\i }v\IeC {\'a}n\IeC {\'\i } simul\IeC {\'a}toru}{52}{section.C.2}
 \contentsline {paragraph}{Menu}{52}{section*.11}
 \contentsline {paragraph}{Ovl\IeC {\'a}d\IeC {\'a}n\IeC {\'\i } simul\IeC {\'a}toru}{52}{section*.12}
-\contentsline {section}{\numberline {C.3}P\IeC {\v r}\IeC {\'\i }prava vlastn\IeC {\'\i }ho obsahu pro simul\IeC {\'a}tor}{53}{section.C.3}
-\contentsline {subsection}{\numberline {C.3.1}P\IeC {\v r}\IeC {\'\i }prava aut pro simul\IeC {\'a}tor}{53}{subsection.C.3.1}
-\contentsline {subsection}{\numberline {C.3.2}P\IeC {\v r}\IeC {\'\i }prava trat\IeC {\'\i }}{55}{subsection.C.3.2}
-\contentsline {subsection}{\numberline {C.3.3}Konfigurace u\IeC {\v z}ivatelsk\IeC {\'e}ho rozhran\IeC {\'\i }}{57}{subsection.C.3.3}

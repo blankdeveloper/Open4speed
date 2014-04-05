@@ -86,7 +86,6 @@ void octreenode::createSubNodes() {
                     addTriangleToDebug();
                     moved = true;
                 }
-
             }
             if (moved) {
                 octreeStatus[depth]--;
@@ -159,14 +158,14 @@ AABB* octreenode::getSubregion(bool x, bool y, bool z) {
     return r;
 }
 
-bool octreenode::isIntersected(glm::vec3 raybegin, glm::vec3 rayend) {
+bool octreenode::isIntersected(glm::vec3 raybegin, glm::vec3 rayend, long testID) {
 
     /// cached data test
     AABBTests = 0;
     triangleTests = 0;
     if (lastIntersectedTriangle != 0) {
         triangleTests++;
-        if (lastIntersectedTriangle->isIntersectedByRay(raybegin, rayend))
+        if (lastIntersectedTriangle->isIntersectedByRay(raybegin, rayend, testID))
             return true;
     }
     if (lastIntersectedTriangle2 != 0) {
@@ -174,20 +173,20 @@ bool octreenode::isIntersected(glm::vec3 raybegin, glm::vec3 rayend) {
         lastIntersectedTriangle = lastIntersectedTriangle2;
         lastIntersectedTriangle2 = t;
         triangleTests++;
-        if (lastIntersectedTriangle->isIntersectedByRay(raybegin, rayend))
+        if (lastIntersectedTriangle->isIntersectedByRay(raybegin, rayend, testID))
             return true;
     }
 
     /// normal test
-    isIntersectedEx(raybegin, rayend);
+    isIntersectedEx(raybegin, rayend, testID);
 }
 
-bool octreenode::isIntersectedEx(glm::vec3 raybegin, glm::vec3 rayend) {
+bool octreenode::isIntersectedEx(glm::vec3 raybegin, glm::vec3 rayend, long testID) {
 
     /// current node test
     for (unsigned int i = 0; i < list.size(); i++) {
         triangleTests++;
-        if (list[i]->isIntersectedByRay(raybegin, rayend))
+        if (list[i]->isIntersectedByRay(raybegin, rayend, testID))
             return true;
     }
 
@@ -196,7 +195,7 @@ bool octreenode::isIntersectedEx(glm::vec3 raybegin, glm::vec3 rayend) {
         if (hasNext[j]) {
             AABBTests++;
             if (TestSegmentAABB(next[j]->reg, raybegin, rayend)) {
-                if (next[j]->isIntersectedEx(raybegin, rayend))
+                if (next[j]->isIntersectedEx(raybegin, rayend, testID))
                     return true;
             }
         }

@@ -157,13 +157,14 @@ glm::vec3 triangle::ClosestPtPointTriangle(glm::vec3 p) {
     return u * a + v * b + w * c;
 }
 
-bool triangle::isIntersectedByRay(glm::vec3 raybegin, glm::vec3 rayend) {
+bool triangle::isIntersectedByRay(glm::vec3 raybegin, glm::vec3 rayend, long testID) {
 
-    /// skip on test itself
-    if ((tIndex == ignore1) || (tIndex == ignore2))
+    /// skip on test itself or it was already tested
+    if ((tIndex == ignore1) || (tIndex == ignore2 || (this->testID == testID)))
         return false;
 
     /// get intersection by ray
+    this->testID = testID;
     glm::vec3 pq = raybegin - rayend;
     glm::vec3 m = glm::cross(pq, rayend);
     float u = glm::dot(pq, glm::cross(c, b)) + glm::dot(m, c - b);

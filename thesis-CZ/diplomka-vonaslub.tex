@@ -1062,7 +1062,33 @@ public boolean addAABB(AABB aabb) {
 \end{lstlisting}
 
 \subsubsection{Generování map osvětlení}
-\newpage
+Generování map osvětlení znamená v podstatě vykreslení celé scény do souřadnic map osvětlení (tím se vykreslí celá scéna, aniž by docházelo k zakrývání objektů). Generování je\linebreak v práci řešeno dvěma různými přístupy. Prvním přístupem je rasterizační (pomocí OpenGL) a druhým je vrhání paprsku. V obou přístupech se provede výpočet difúzního osvětlení stejným způsobem jako se provádí při běžném vykreslování scény. 
+
+Aby mapa osvětlení obsahovala stíny, musí se provést test viditelnosti jednotlivých bodů pro jednotlivá světla. V rasterizačním přístupu se toto provádí pomocí stínových map (viz. kapitola 3.6.3).
+
+V druhém přístupu se pro každý zdroj světla vrhají paprsky do všech bodů v mapě osvětlení (paprsky mají definováno, kde končí). Pokud paprsek protne mezi počátkem\linebreak a destinací nějaký trojúhelník, nepřipočte se pro bod v osvětlovací mapě příspěvek z daného zdroje světla.
+
+Pokud bychom testovali pro každý paprsek existenci průsečíku s nějakým trojúhelníkem ve scéně, bylo by generování příliš pomalé. Z toho důvodu jsem použil akcelerační datovou strukturu octree. Octree je datovou stromová datová struktura, která dělí rovnoměrně prostor vždy na osm stejných podprostorů. V mé realizaci je rozměr každého uzlu určený pomocí AABB a obsahuje seznam trojúhelníků, který tomuto uzlu náleží.
+
+Stavba stromu octree se provádí odshora dolů, to znamená, že nejdříve se všechny trojúhelníky vloží do kořenového uzlu a po té se provede jejich přesun do nižších uzlů, pokud jsou splněna následující kritéria.
+\begin{itemize}
+\item dochází k průniku AABB trojúhelníka a AABB aktuálního uzlu
+\item počet trojúhelníků v aktuálním uzlu je vyšší než 20 (v takovém případě je neefektivní strom dále větvit)
+\end{itemize}
+
+\lstset{language=C++} 
+\begin{lstlisting}[caption=Průnik dvou AABB ve 3D]
+bool TestAABBAABB(AABB* a, AABB* b) {
+    if (a->max[0] < b->min[0] || a->min[0] > b->max[0]) return false;
+    if (a->max[1] < b->min[1] || a->min[1] > b->max[1]) return false;
+    if (a->max[2] < b->min[2] || a->min[2] > b->max[2]) return false;
+    return true;
+}
+\end{lstlisting}
+
+Po sestavení stromu máme tedy rozdělené trojúhelníky do segmentů, které jsou definované pomocí AABB. Abychom nalezli průsečík paprsku s nějakým trojúhelníkem ve scéně, musíme strom procházet. Nejdříve provedeme test průniku paprsku s AABB potomků kořene. U každého potomka, u kterého byl test pozitivní, provedeme test jeho potomků. Tímto způsobem pokračujeme dokud se nedostaneme na list . V každém uzlu, u kterého byl test pozitivní, provedeme také test průsečíku se všemi trojúhelníky, které má v seznamu. Pokud test jakéhokoliv trojúhelníku je pozitivní, vrátíme test paprsku jako pozitivní.
+
+Ukázka rekurzivního hledání v octree je na obrázku 4.6 (na obrázku je pouze quadtree, což je obdoba octree ve 2D).
 
 \begin{center}
 \begin{figure}[h]
@@ -1070,6 +1096,16 @@ public boolean addAABB(AABB aabb) {
 \caption{Ukázka hledání průsečíku paprsku v datové struktuře quadtree}
 \end{figure}
 \end{center}
+
+Aby hledání ve stromu bylo ještě rychlejší, lze použít ještě několik optimalizací. Může se například ukládat $n$ posledních průsečíků a testovat, jestli další paprsek nemá stejný průsečík se stejným trojúhelníkem jako předešlý paprsek. Tato optimalizace má smysl pouze pro malé $n$. V mém projektu jsem nastavil $n = 2$ a testuji paprsky, které mají cílový trojúhelník stejný, vždy za sebou.
+
+Dále je vhodné přeskakovat testy stejných trojúhelníků. Podle zvoleného kritéria dělení stromu při jeho stavbě může dojít k tomu, že některé trojúhelníky jsou uloženy ve stromu víckrát (pokud jejich AABB proniká s více uzly stejné hloubky). Řešit to lze jednoduše. Stačí si u trojúhelníku vždy pamatovat ID paprsku, s kterým byl proveden poslední test průsečíku. Díky tomu lze zjistit, jestli některý paprsek není testován víckrát a případně tento test přeskočit.
+
+Další možnost urychlení generování map osvětlení je přeskakování testování paprsků,\linebreak u kterých je délka paprsku delší než vzdálenost, na kterou dosvítí zdroj světla. Tuto vzdálenost lze spočítat pomocí vzorce pro útlum (viz. kapitola 3.2). Minimální přípustnou hodnotu si označím $\epsilon$. Rovnici lze vyřešit pomocí diskriminantu.
+\begin{center}
+$d = length(ray)$, $F_a = \frac{1}{k_c + k_l \cdot d + k_q \cdot d^2}$, $F_a = \epsilon$
+\end{center}
+
 
 \subsection{Příprava dat pro dynamickou aktualizaci map osvětlení}
 

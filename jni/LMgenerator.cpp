@@ -220,6 +220,7 @@ void display(void) {
                 delete[] shadername;
             }
             float status = 0;
+            long testID = 0;
             for (int lightGroup = 0; lightGroup < trackdata->edgesCount; lightGroup++) {
                 /// get light parameters
                 char param[128];
@@ -252,7 +253,7 @@ void display(void) {
                                 int index = triangles[i]->points[j]->t.y * rttsize + triangles[i]->points[j]->t.x;
                                 glm::vec4 color = getColor(triangles[i]->points[j], begin, end);
                                 if (color.w > 0.5f) {
-                                    if (!root->isIntersected(begin, end)) {
+                                    if (!root->isIntersected(begin, end, testID++)) {
                                         pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 8.0f));
                                         pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 8.0f));
                                         pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 8.0f));
@@ -336,7 +337,7 @@ void display(void) {
                                     //light attenuation
                                     color *= eff / (att * sqr(glm::length(raydir)));
                                     if (color.w > 0.5f) {
-                                        if (!root->isIntersected(raybegin, rayend)) {
+                                        if (!root->isIntersected(raybegin, rayend, testID++)) {
                                             // add to previous lightmap
                                             index = triangles[i]->points[j]->t.y * rttsize + triangles[i]->points[j]->t.x;
                                             pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 32.0f));

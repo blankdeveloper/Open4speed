@@ -26,6 +26,7 @@ public:
     int dataIndex;
     int lmIndex;
     long tIndex;
+    long testID;
     Texture* txt;
     Texture* txtmap;
     std::vector<Point*> points;
@@ -46,9 +47,7 @@ public:
 
     PLP* getPointLight(glm::vec3 p);
 
-    bool intersection(glm::vec3 raybegin, glm::vec3 rayend, glm::vec3 a, glm::vec3 b, glm::vec3 c);
-
-    bool isIntersectedByRay(glm::vec3 raybegin, glm::vec3 rayend);
+    bool isIntersectedByRay(glm::vec3 raybegin, glm::vec3 rayend, long testID);
 };
 
 extern triangle* lastIntersectedTriangle;

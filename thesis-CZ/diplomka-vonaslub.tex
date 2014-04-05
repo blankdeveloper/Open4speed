@@ -351,11 +351,11 @@ Cílem práce bylo realizovat efektivní vykreslování rozsáhlých nočních s
 Důraz byl kladen na co nejvyšší optimalizaci vykreslování. Kromě hlavní grafické techniky map osvětlení (anglicky lightmap) bylo použito několik dalších technik řešící jednotlivé problémy, které vznikají při použití map osvětlení. Problémy nastávají hlavně při použití dynamických objektů nebo při změně osvětlení. Technika map osvětlení řeší pouze statickou scénu\linebreak a v případě použití dynamické scény je potřeba metodu značně rozšířit.
 
 \section{Požadavky na funkčnost}
-Projekt je rozdělen do dvou samostatných částí. První částí je předzpracování,\linebreak ve kterém se vytváří mapy osvětlení. Druhou částí projektu je závodní simulátor, který mapy osvětlení používá. Fázi předzpracování by teoreticky bylo možné provádět i na platformě Android. Vzhledem k tomu, že klasické počítače dosahují vyššího výkonu než mobilní zařízení, je daleko efektivnější provést předzpracování na počítači.
+Zádání předpokládá, že projekt bude rozdělen do dvou samostatných částí. První částí bude předzpracování, ve kterém se budou vytvářet mapy osvětlení. Druhou částí projektu bude závodní simulátor, který mapy osvětlení využije. Fázi předzpracování by teoreticky bylo možné provádět i na platformě Android. Vzhledem k tomu, že klasické počítače dosahují vyššího výkonu než mobilní zařízení, bude daleko efektivnější provést předzpracování\linebreak na počítači.
 
-Simulátor využívá vlastní formát, který umožňuje mít v sobě jak souřadnice standardních textur, tak i souřadnice v mapách osvětlení. Formát zachovává veškeré informace o modelu. I když je třeba výsledný simulátor nevyužije, je dobré tyto informace ponechat pro případ dalšího vývoje. Formát je schopen uložit některé další informace o materiálu a shaderu.
+Simulátor bude využívat vlastní formát, který bude umožňovat mít v sobě jak souřadnice standardních textur, tak i souřadnice v mapách osvětlení. Formát bude zachovávat veškeré informace o modelu. I když je třeba výsledný simulátor nevyužije, bude dobré tyto informace ponechat pro případ dalšího vývoje. Formát bude schopen uložit některé další informace\linebreak o materiálu a shaderu.
 
-Plocha map osvětlení je maximálně možně zaplněna z důvodu očekávané malé paměti vymezeny pro velké textury. Aby bylo možné určit nejvhodnější rozlišení těchto textur, je umožněno škálování mapy osvětlení.
+Plocha map osvětlení bude co možně nejvíce využita z důvodu očekávané malé paměti vymezeny pro velké textury. Aby bylo možné určit nejvhodnější rozlišení těchto textur, bude umožněno škálování map osvětlení.
 \newpage
 
 \subsection{Mapy osvětlení}
@@ -376,7 +376,7 @@ Protože uchovávání záplat v paměti by bylo příliš paměťově náročn�
 \begin{center}
 \begin{figure}[h!]
 \includegraphics[width=110mm]{figures/lmupdate.png}
-\caption{Ukázka aktualizace map osvětlení na jednoduchém 3D modelu}
+\caption{Ukázka aktualizace map osvětlení na jednoduchém 3D modelu, žlutou barvou je znázorněna část záplaty, která nenese informaci o změně osvětlení}
 \end{figure}
 \end{center}
 
@@ -584,7 +584,7 @@ Interpolaci provádí OpenGL automaticky. Jeden ze způsobů jak provést interp
 
 \begin{center}
 \begin{figure}[h]
-\includegraphics[width=65mm]{figures/interpolation.png}
+\includegraphics[width=50mm]{figures/interpolation.png}
 \caption{Pomocný obrázek k výpočtu barycentrické interpolace}
 \end{figure}
 \end{center}
@@ -871,44 +871,23 @@ Java native interface je rozhraní, které umožňuje spustit C++ kód z jazyku 
 
 Aby bylo možné volat C++ metody přímo z Javy musí být pojmenovány ve formátu Java\_\textit{package}\_\textit{třída}\_\textit{metoda}. C++ knihovna bude tedy možné spustit pouze z jedné Java třídy.
 \lstset{language=C++} 
-\begin{lstlisting}[caption=JNI metody v C++ kódu pro nahrazení freeglut knihovny]
-extern "C" {
-  void Java_com_cvut_o4s_O4SJNI_nativeInit(JNIEnv* e, jstring apkPath ) {
-    instance = env;
-    APKArchive = zip_open(env->GetStringUTFChars(apkPath), 0, NULL);
-    main(0, 0);
-  }
-  void Java_com_cvut_o4s_O4SJNI_nativeClick(JNIEnv* e, jint x, jint y) { 
-    mouseClick(0, 0, x, y); 
-  }
-  void Java_com_cvut_o4s_O4SJNI_nativeKey(JNIEnv* e, jint i) { keyDown(i); }
-  void Java_com_cvut_o4s_O4SJNI_nativeKeyUp(JNIEnv* e, jint i) { keyUp(i); }
-  void Java_com_cvut_o4s_O4SJNI_nativeDisplay(JNIEnv* e) { display(); }
-  void Java_com_cvut_o4s_O4SJNI_nativeLoop(JNIEnv* e) { idle(0); }
-}
+\begin{lstlisting}[caption=Volání metod pomocí JNI v C++ pro nahrazení freeglut knihovny]
+void Java_com_cvut_o4s_O4SJNI_nativeInit(JNIEnv* e) { main(0, 0); }
+void Java_com_cvut_o4s_O4SJNI_nativeKey(JNIEnv* e, jint i) { key(i); }
+void Java_com_cvut_o4s_O4SJNI_nativeDisplay(JNIEnv* e) { display(); }
 \end{lstlisting}
 
 Dále je potřeba C++ knihovnu načíst pomocí volání System.loadLibrary a metody deklarovat v dané Java třídě pomocí klíčového slova native.
 
 \lstset{language=Java} 
-\begin{lstlisting}[caption=Deklarování C++ metod v Java kódu]
-package com.cvut.o4s;
-
-class O4SJNI {
-
-  static { System.loadLibrary("open4speed"); }
-  static native void nativeInit(String apkPath);
-  static native void nativeClick(int x, int y);
-  static native void nativeKey(int i);
-  static native void nativeKeyUp(int i);
-  static native void nativeDisplay();
-  static native void nativeLoop();
-
-  ...
-}
+\begin{lstlisting}[caption=Ukázka deklarování C++ metod v Java kódu]
+static native void nativeInit();
+static native void nativeKey(int i);
+static native void nativeDisplay();
 \end{lstlisting}
+\newpage
 
-Dalším problémem je volání Android API z C++ kódu (tzn. volání Java kódu z C++). Příkladem je přehrávání zvuků pomocí Android API, ovládání zvuku je nutno řídit z C++, kdežto API je přímo přístupné pouze z Javy. Na obrázku 4.2 je to případ třídy Sounds. Problém se řeší také pomocí JNI, pouze volání jsou prováděny v opačném směru.
+Dalším problémem je volání Android API z C++ kódu (tzn. volání Java kódu z C++). Příkladem je přehrávání zvuků pomocí Android API, ovládání zvuku je nutno řídit z C++, ale API je přímo přístupné pouze z Javy. Na obrázku 4.2 je znázorněn případ třídy Sounds. Problém se řeší také pomocí JNI, pouze volání jsou prováděny v opačném směru.
 
 \begin{center}
 \begin{figure}[h]
@@ -926,37 +905,22 @@ void soundpool::play(int index) {
   instance->CallStaticVoidMethod(clazz, method, index, (int)looping);
 }
 \end{lstlisting}
-\newpage
 
 V Javě se poté musí ještě rozlišovat přehrávání zvuků od přehrávání hudby. Hudba bývá řádově náročnější na paměť a nemá smysl jí celou držet v paměti, když na ni není potřeba aplikovat další zvukové efekty.
 
 \lstset{language=Java} 
-\begin{lstlisting}[caption=Přehrání zvuku v Javě pomocí Android API]
-package com.cvut.o4s;
+\begin{lstlisting}[caption=Přehrání zvuku v Javě pomocí Android API]  
+public static void soundPlay(int index, int loop) {
+  //instance is a music
+  if (list.get(index).id == TYPE_MUSIC) {
+    music.setLooping(loop == 1);
+    music.start();
+  }
 
-import ...
-
-class Sounds {
-  // instances of sounds
-  static ArrayList<Sound> list;
-  // instances of sound APIs
-  static MediaPlayer music;
-  static SoundPool snd;
-  
-  ...  
-  
-  public static void soundPlay(int index, int loop) {
-    //instance is a music
-    if (list.get(index).id == TYPE_MUSIC) {
-      music.setLooping(loop == 1);
-      music.start();
-    }
-
-    //audio clip
-    else {
-      Sound s = list.get(index);
-      snd.play(s.id, s.volume, s.volume, 1, loop, s.rate);
-    }
+  //audio clip
+  else {
+    Sound s = list.get(index);
+    snd.play(s.id, s.volume, s.volume, 1, loop, s.rate);
   }
 }
 \end{lstlisting}
@@ -1031,12 +995,13 @@ V přístupu využívající vrhání paprsku jsou navíc k dispozici plošné z
 \begin{figure}[h]
 \begin{center}$
 \begin{array}{cc}
-\includegraphics[width=50mm]{figures/buildz3-n.png} &
-\includegraphics[width=50mm]{figures/buildz3-e.png}
+\includegraphics[width=70mm]{figures/buildz3-n.png} &
+\includegraphics[width=70mm]{figures/buildz3-e.png}
 \end{array}$
 \end{center}
 \caption{Ukázka difúzní textury modelu (vlevo) a osvětlovací textury (vpravo)}
 \end{figure}
+\newpage
 
 \subsubsection{Generování texturovacích souřadnic pro mapy osvětlení}
 V teoretické části byl popsán postup generování texturovacích souřadnic pomocí ILP.\linebreak V praxi toto řešení nelze použít, protože jeho výpočetní složitost $f(m, n)$ $\epsilon$ $O(m^2 \cdot n^2)$, $m$ je počet trojúhelníků a $n$ počet texelů v lightmapě.  Pomocí ILP se tedy dají řešit pouze velice malé instance problému. V této práci problém řeším pomocí metody Packing Lightmaps, což je metoda řešící problém batohu za použití datové struktury kD stromu, která dělí $k$-rozměrný objekt půlením.
@@ -1051,49 +1016,44 @@ V případě Packing Lightmaps dělíme rovinu horizontálním nebo vertikální
 \end{center}
 
 Metoda Packing Lightmaps nejdříve seřadí AABB podle jejich plochy a postupně je vkládá do kD stromu. Při každém vložení se nejdříve hledají neobsazené listy, zda neexistuje takový, který by odpovídal rozměrům AABB. Pokud takový neexistuje pokusí se algoritmus nalézt takový neobsazený list, kterému odpovídá aspoň jeden rozměr. V případě úspěšného hledání se AABB vloží do listu, v ostatních případech se najde větší list, provede se jeho rozdělení a následně se AABB do jednoho z potomků vloží.
+\newpage
 
 \lstset{language=Java} 
 \begin{lstlisting}[caption=Vkládání AABB do kD stromu za využití rekurze]
 public boolean addAABB(AABB aabb) {
   // check if current node is empty and has enought space for AABB
   if (isEmpty() && (aabb.width <= width) && (aabb.height <= height)) {
-
     // fits exactly
     if ((aabb.width == width) && (aabb.height == height)) {
       child1 = new KDNode(aabb);
       return true;
-    } 
-        
+    }         
     // subdivision
     else {
       child1 = new KDNode(aabb.width, height);
       if (child1.addAABB(aabb))
         return true;
     }
-  } 
-    
+  }     
   // try to insert into first child
   else if (child1.addAABB(aabb))
     return true;
 
   // create second child
-  else if (child2 == null) {
-    
+  else if (child2 == null) {    
     // horizontal subdivision
     if ((aabb.width <= width) && (aabb.height <= getChild2Height())) {
       child2 = new KDNode(width, height - aabb.height);
       if (child2.addAABB(aabb))
         return true;
-    }
-      
+    }      
     // vertical subdivision
     if ((aabb.width <= getChild2Width()) && (aabb.height <= height)) {
       child2 = new KDNode(width - child1.width, height);
       if (child2.addAABB(aabb))
         return true;
     }
-  } 
-    
+  }     
   // try to insert into second child
   else if (child2.addAABB(aabb))
     return true;
@@ -1102,8 +1062,23 @@ public boolean addAABB(AABB aabb) {
 \end{lstlisting}
 
 \subsubsection{Generování map osvětlení}
+\newpage
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=150mm]{figures/quadtree.png}
+\caption{Ukázka hledání průsečíku paprsku v datové struktuře quadtree}
+\end{figure}
+\end{center}
 
 \subsection{Příprava dat pro dynamickou aktualizaci map osvětlení}
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=150mm]{figures/lmpatch.png}
+\caption{Ukázka převodu záplaty osvětlovací mapy do vektorové podoby }
+\end{figure}
+\end{center}
 
 \subsection{Dynamické osvětlení a dynamické objekty}
 

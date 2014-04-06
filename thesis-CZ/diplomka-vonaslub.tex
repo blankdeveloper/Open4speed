@@ -1167,29 +1167,28 @@ U ostatních vozidel je třeba osvětlení zjednodušit, aby to mobilní hardwar
 \end{center}
 
 
-\section{Nahrazení víceprůchodových přístupů}
-Při běhu jakéhokoliv simulátoru je největší zátěž mobilního hardware způsobena vykreslováním 3D scény, proto je nutné tuto část co nejvíce zefektivnit. Pro mnoho efektů se používají takzvané víceprůchodové přístupy(scéna se vykreslí víckrát z různých pohledů nebo pomocí různých shaderů), ale na mobilním zařízení je zatím z hlediska výkonu možné použít pouze jednoprůchodový přístup.
+\section{Víceprůchodové přístupy}
+Při běhu jakéhokoliv simulátoru je největší zátěž mobilního hardware způsobena vykreslováním 3D scény, proto je nutné tuto část co nejvíce zefektivnit. Pro mnoho efektů se používají takzvané víceprůchodové přístupy (scéna se vykreslí víckrát z různých pohledů nebo pomocí různých shaderů), ale na mobilním zařízení je zatím z hlediska výkonu možné použít pouze jednoprůchodový přístup.
 
 Abych částečně nahradil ve svém simulátoru víceprůchodový přístup, použil jsem screen-space přístup(to je obecně jakákoliv technika využívající data z pohledu kamery, jinými slovy máme pouze výsledný snímek a na něm provádíme další operace). V praxi se používá hlavně pro zrcadlové plochy. Potřeboval jsem přistupovat do aktuálně vykreslovaného snímku. To je ale problém, protože tento snímek není kompletní a kdybych vykresloval přímo do něj\linebreak a zároveň z něj četl způsobilo by to chyby ve výsledném obraze.
 
 Řešením je vykreslování střídavě do dvou různých textur. To znamená, že při lichém snímku kreslím do textury 1 a čtu z textury 2. Při sudém snímku je tomu obráceně. Tímto způsobem získám přístup do vykreslené scény, sice s drobným zpožděním, ale při dostatečně rychlém vykreslování si toho uživatel nevšimne(za předpokladu, že textura bude použita\linebreak na efekty jako jsou odlesky nebo stíny).
 
 \begin{figure}[h!]
-\includegraphics[width=150mm]{figures/render-schema.png}
+\includegraphics[width=90mm]{figures/render-schema.png}
 \caption{Vykreslovací řetězec simulátoru}
 \end{figure}
 
 \subsection{Rozměr textur na OpenGL ES 2.0}
-Verze OpenGL ES 2.0 neumožňuje používat obdélníkové textury. Textury musí být čtvercové a jejich strana musí být o velikosti mocniny 2.
+Verze OpenGL ES 2.0 umožňuje používat obdélníkové textury pouze omezeně. Textury tedy musí být čtvercové a jejich strana musí být o velikosti mocniny 2.
 Pro vykreslování do textury, která bude výsledně umístěna na obrazovku je tedy nutné zvolit vyšší rozlišení. Např. u tabletu Google Nexus 7 2012 s rozlišením 1280x720 se zvolí textura 2048x1024. To znamená, že by se ve výsledku vykreslilo víc než 2x více pixelů než je potřeba.
 
-Není ale nutné vykreslovat do celé textury, pomocí příkazu \textit{glViewport} se dá nastavit část textury, do které má OpenGL vykreslovat a nedojde tedy k plýtvání výkonem(bude se plýtvat pouze pamětí).
+Není ale nutné vykreslovat do celé textury, pomocí příkazu \textit{glViewport} se dá nastavit část textury, do které má OpenGL vykreslovat a nedojde tedy k plýtvání výkonem.
 
 Dále je možné zvolit nižší rozlišení viewportu než je rozlišení displeje. Mobilní zařízení obvykle disponují obrovskou hustotou pixelů a pokud zařízení nebude stíhat vykreslovat scénu v plném rozlišení, lze vykreslovat v rozlišení menším. U počítačových 3D her se také setkáváme s možností změnit rozlišení, tam řeší změnu přímo hardware displeje nebo jeho ovladač.
 
-\subsection{Odlesky}
-
-Jedním z velmi rychlých efektů ve screen-space je \textbf{motion-blur}.
+\subsection{Motion-blur}
+Jedním z velmi rychlých efektů ve screen-space je motion-blur. Jedná efekt rozmáznutí obrazu rychlým pohybem. Motion-blur se používá ve většině závodních simulátorů, rozmáznutí dodává dojem rychlosti.
 \lstset{language=GLSL} 
 \begin{lstlisting}[caption=Motion blur fragment shader dle rychlosti vozidla]
 uniform sampler2D color_texture, pFrm;
@@ -1206,11 +1205,11 @@ void main() {
 }
 \end{lstlisting}
 
-Speed je rychlost vozidla od 0 do 1, pFrm je textura předchozího snímku a res je 1 / plné rozlišení textury(pro jednoduchost je použitý čtvercový rozměr textury).
+$Speed$ je rychlost vozidla od 0 do 1, $pFrm$ je textura předchozího snímku a $res$ je\linebreak 1 / \textit{plné rozlišení textury} (pro jednoduchost je použitý čtvercový rozměr textury).
 
-Tento kód je použit přímo při renderování modelů, nikoliv při postprocesu. Výhodou je, že rozmaznutí se projeví po několik snímků za sebou pomocí jednoho čtení textury navíc. Nevýhodou je, že tento kód musí být vložen do každého shaderu vykreslující 3D model.
-\bigskip
+Tento kód je použit přímo při renderování modelů, nikoliv při postprocesu. Výhodou je, že rozmáznutí se projeví po několik snímků za sebou pomocí jednoho čtení textury navíc. Nevýhodou je, že tento kód musí být vložen do každého shaderu vykreslující 3D model.
 
+\subsection{Odlesky}
 Dále je možné ve screen-space řešit \textbf{odlesky}. Existuje obecný(složitý) postup jak tyto odlesky vypočítat, který by mobilní hardware nezvládl. Problém jsem rozdělil podle typu ploch. Vzhledem k tomu, že v simulátoru dochází pouze k rotaci pohledu podle osy y(rotace yaw), je možné řešit pro odlesky pro různé směry normál zvlášť.
 
 Například u vozovky stačí nalézt, kde vozovka končí, a podle toho obraz převrátit. Korektně to pro zatím z hlediska výkonu není možné vypočítat, proto dochází k velké nepřesnosti odlesku. Odhad zlomu je prováděn pomocí normály a pozice daného fragmentu, do kterého se odlesk započítává.

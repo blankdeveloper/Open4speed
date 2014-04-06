@@ -48,6 +48,7 @@ public:
     shader* overshader;         ///< Shader to be applied over current shader
     shader* scene_shader;       ///< Scene shader
     int overmode;               ///< Special mode
+    glm::vec4 model_position;   ///< Uniform of dynamic model 3D position
     glm::mat4x4 proj_matrix;    ///< Scene projection matrix
     glm::mat4x4 view_matrix;    ///< View matrix
 

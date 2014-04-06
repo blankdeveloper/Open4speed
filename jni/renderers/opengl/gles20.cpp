@@ -422,7 +422,6 @@ void gles20::renderImage(float x, float y, float w, float h, float layer, textur
  */
 void gles20::renderModel(model* m) {
     glDisable(GL_BLEND);
-    glActiveTexture(GL_TEXTURE0);
     /// set opengl for rendering models
     for (unsigned int i = 0; i < m->models.size(); i++) {
         if (enable[m->models[i].filter] && ((lmFilter < 0) || (m->models[i].lmIndex == lmFilter))) {
@@ -472,9 +471,6 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         modelView = view_matrix * matrix_result * translation;
     }
 
-    /// set texture
-    m->texture2D->apply();
-
     /// set depth test
     if (lmFilter < 0) {
         glEnable(GL_DEPTH_TEST);
@@ -513,23 +509,31 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     if (!mod->lightmaps.empty()) {
         glActiveTexture( GL_TEXTURE3 );
         mod->lightmaps[m->lmIndex]->bindTexture();
+        current->uniformInt("Lightmap", 3);
     }
 
     /// previous screen
     if (!renderLightmap) {
         glActiveTexture( GL_TEXTURE1 );
         rtt[oddFrame]->bindTexture();
+        current->uniformInt("EnvMap1", 1);
+    } else {
+        glActiveTexture( GL_TEXTURE2 );
+        current->uniformInt("Shadowmap", 2);
     }
-    glActiveTexture( GL_TEXTURE0 );
 
-    /// set samplers
+    /// set texture
+    glActiveTexture( GL_TEXTURE0 );    
+    m->texture2D->apply();
     current->uniformInt("color_texture", 0);
-    current->uniformInt("EnvMap1", 1);
-    current->uniformInt("Shadowmap", 2);
-    current->uniformInt("Lightmap", 3);
 
     /// set uniforms
+    glm::vec4 mpos = (proj_matrix * view_matrix * model_position);
+    float z = mpos.z;
+    mpos /= mpos.w;
+    float y = mpos.y * 0.5 + 0.5 - 600 / z / (float)screen_height;
     current->uniformFloat("u_Time", frame / 1000.0f);
+    current->uniformFloat4("u_model_position", glm::clamp(mpos.x * 0.5f + 0.5f, 0.0f, 1.0f), glm::max(0.0f, y), 0, 1);
     current->uniformFloat("u_res", 1 / (float)rtt[oddFrame]->res);
     current->uniformFloat("u_width", 1 / (float)screen_width);
     current->uniformFloat("u_height", 1 / (float)screen_height);

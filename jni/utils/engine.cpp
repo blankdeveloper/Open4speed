@@ -268,7 +268,7 @@ void displayScene() {
                                         mat[12], mat[13], mat[14], mat[15]);
     xrenderer->light.u_light = xrenderer->view_matrix * bulletMat * glm::vec4(0, allCar[cameraCar]->skin->aplitude * 0.5f,
                                                                               allCar[cameraCar]->skin->height * 0.6f, 1);
-    xrenderer->light.u_light_dir = xrenderer->view_matrix * bulletMat * glm::vec4(0, allCar[cameraCar]->skin->aplitude * 4.0f,
+    xrenderer->light.u_light_dir = xrenderer->view_matrix * bulletMat * glm::vec4(0, allCar[cameraCar]->skin->aplitude * 3.0f,
                                                                                   -allCar[cameraCar]->skin->height, 0);
     xrenderer->popMatrix();
 
@@ -292,12 +292,12 @@ void displayScene() {
 
         /// find nearest light
         xrenderer->light.u_nearest1 = glm::vec4(99999,99999,99999,99999);
-        glm::vec4 carPos = glm::vec4(allCar[i]->transform->value[12], allCar[i]->transform->value[13], allCar[i]->transform->value[14], 1);
+        xrenderer->model_position = glm::vec4(allCar[i]->transform->value[12], allCar[i]->transform->value[13], allCar[i]->transform->value[14], 1);
         for (int j = 1; j < trackdata->edgesCount; j++) {
             for (unsigned int x = 0; x < trackdata->edges[j].size() / 2; x++) {
                 edge e = trackdata->edges[j][x];
                 glm::vec4 pos = glm::vec4(e.bx, e.by, e.bz, 1);
-                if (glm::length(carPos - pos) < glm::length(carPos - xrenderer->light.u_nearest1)) {
+                if (glm::length(xrenderer->model_position - pos) < glm::length(xrenderer->model_position - xrenderer->light.u_nearest1)) {
                     xrenderer->light.u_nearest1 = pos;
                 }
             }

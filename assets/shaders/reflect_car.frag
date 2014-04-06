@@ -13,6 +13,7 @@ uniform vec4 u_light;
 uniform vec4 u_light_att;
 uniform vec4 u_light_dir;
 uniform vec4 u_nearest1;
+uniform vec4 u_model_position;
 
 void main()
 {
@@ -25,7 +26,7 @@ void main()
     vec3 lightDir = u_light.xyz - v_Vertex;
     vec3 L = normalize(lightDir);
     //count effectivity(directionaly)
-    float eff = dot(normalize(-u_light_dir.xyz), -L);
+    float eff = dot(normalize(-u_light_dir.xyz), -L) * 2.0;
     //light cutoff
     if (eff >= u_light_cut) {
       //diffuse light
@@ -37,16 +38,16 @@ void main()
       //light attenuation
       float d = length(lightDir);
       vec3 D = vec3(1.0, d, d * d);
-      color *= pow(eff, u_light_spot_eff) / dot(u_light_att.xyz, D);
+      color *= pow(eff, u_light_spot_eff) / dot(u_light_att.xyz * 0.5, D);
       //apply light color
-      gl_FragColor.rgb += color;
+      gl_FragColor.rgb += 4.0 * color;
     }
   
     //reflect
     gl_FragColor += 8.0 * texture2D(EnvMap1, vec2(0.5 + v_Normal.x * 0.25, 1.5 - gl_FragCoord.z * 1.0 + v_Normal.y * 0.25) * u_view) * clamp(0.0, (v_Vertex2.y - 0.4), 1.0);
   
     //dynamic shadow
-    float a = texture2D(EnvMap1, vec2(0.5, 0.0)).a;
+    float a = texture2D(EnvMap1, u_model_position.xy).a;
     gl_FragColor *= min(a + 0.05, 0.75);
   } else {
     gl_FragColor.rgb *= (v_Coords.t > 0.3) ? 1.0 : 1.0 + u_brake * 1.5;

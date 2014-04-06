@@ -49,11 +49,12 @@ void main()
   
   //dynamic shadow
   if (texture2D(EnvMap1, vec2(gl_FragCoord.x * u_res, gl_FragCoord.y * u_res + 0.5 * (1.0 - gl_FragCoord.z))).a == 1.0)
-    gl_FragColor.rgb -= 0.05;
+    gl_FragColor.rgb -= 0.1;
   
   //reflect
-  if (v_Normal.y > 0.0) {
-    float y = 4.0 + u_view - gl_FragCoord.y * u_res - 0.2 + gl_FragCoord.z * (u_view * 10.0 + 5.0) * 0.025 - v_Normal.y * 4.0;
+  if (v_Normal.y > 0) {
+    float y = u_view - gl_FragCoord.y * u_res;
+    y += gl_FragCoord.z * 0.1 + gl_FragCoord.z * (1.0 - v_Normal.y) * 2.0;
     gl_FragColor.rgb += 0.25 * texture2D(EnvMap1, vec2(gl_FragCoord.x * u_res, y)).rgb * max(gl_FragCoord.y * u_res / u_view * 2.0 - 0.5, 0.0);
   }
 

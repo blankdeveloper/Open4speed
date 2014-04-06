@@ -77,9 +77,9 @@ void scriptLoop() {
             /// Set detail level
             if (strcmp("detail", syntax) == 0) {
                 if (variable == 0) {
-                    antialiasing = 0.2f;
-                } else if (variable == 1) {
                     antialiasing = 0.4f;
+                } else if (variable == 1) {
+                    antialiasing = 0.5f;
                 } else if (variable == 2) {
                     antialiasing = 0.6f;
                 } else if (variable == 3) {

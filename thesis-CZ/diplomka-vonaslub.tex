@@ -1135,7 +1135,7 @@ Abychom získali záplaty v této podobě musíme nejdříve vykreslit pro každ
 \end{figure}
 \end{center}
 
-\subsection{Aplikování statického osvětlení na dynamické objekty}
+\subsection{Statického osvětlení a dynamické objekty}
 
 Pokud máme ve scéně předpočtené stíny, je vhodné tyto statické stíny aplikovat\linebreak i na dynamické objekty. V případě vozidla lze přečíst intenzitu osvětlení z některých bodů na silnici pod vozidlem. Intenzitu osvětlení lze jednoduše ukládat do alfa kanálu textury,\linebreak ve které se nachází aktuální scéna.
 
@@ -1156,12 +1156,25 @@ $sp''_y = sp'_y - a / s_z$
 \end{center}
 
 Tím jsme získali pozici texelu nesoucí informaci o intenzitě osvětlení. Vzniká zde ale problém s barevným světlem. Jsou zde dvě možnosti řešení. Prvním je přidání další textury, ve kterém by byla barevná intenzita světla(tím by došlo ke zvýšení náročnosti na hardware a ke zvýšení paměťové náročnosti). Druhým možným řešením je omezit barevná světla\linebreak do nějaké sytosti (pokud se slabě zabarvené světlo aplikuje jako bílé, není to tolik rušivé).
+\newpage
+
+Dalším problémem je, že dynamické objekty (tedy vozidla) by měly zastínit statický model. Tento problém lze řešit opět pomocí screen-space přístupu. Ve screen-space textuře si můžeme označit texely, na kterých je vykreslené vozidlo. V době vykreslování vozovky se vždy díváme o několik texelů výše, než je aktuální vykreslovaný texel, a pokud je texel označen, ztmavíme aktuálně vykreslovaný fragment. Důležitou poznámkou je, že texely kol vozidla se neoznačují (tím by vznikal chybný stín).
+
+Stín je kvalitou obdobný jako projektivní stín. Bylo by možné zjišťovat pozice světel, aby vznikl měkčí stín, ale tím by se simulátor značně zpomalil. Při rychlém otáčení lze zpozorovat chybu, která vzniká kvůli použitému screen-space přístupu. V noční scéně to moc není vidět, nicméně ve světlých scénách by to mohlo být značně rušivé.
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=120mm]{figures/nearshadow.png}
+\caption{Vržený stín vozidla}
+\end{figure}
+\end{center}
 
 \subsection{Světla vozidel}
 
 Dle předběžných měření jsem zjistil, že na mobilních zařízeních lze za běhu počítat jedno až dvě světla(bez řešení viditelnosti světla). U vozidla ovládané hráčem není potřeba řešit viditelnost světla, prakticky zde nedochází k situacím, že by světlo osvětlovalo neviditelné objekty (je to z důvodu těsné vazby světla hráčova vozidla a kamery).
 
 U ostatních vozidel je třeba osvětlení zjednodušit, aby to mobilní hardware zvládal. Zvolil jsem metodu vykreslování poloprůhledných kuželů do scény, k tomu je použita OpenGL funkce blending, která umožňuje kreslit objekty s částečnou průhledností. Je zde počítán útlum světla stejně jako u standardních světel.
+\newpage
 
 \begin{center}
 \begin{figure}[h]
@@ -1170,7 +1183,6 @@ U ostatních vozidel je třeba osvětlení zjednodušit, aby to mobilní hardwar
 \end{figure}
 \end{center}
 
-
 \section{Víceprůchodové přístupy}
 Při běhu jakéhokoliv simulátoru je největší zátěž mobilního hardware způsobena vykreslováním 3D scény, proto je nutné tuto část co nejvíce zefektivnit. Pro mnoho efektů se používají takzvané víceprůchodové přístupy (scéna se vykreslí víckrát z různých pohledů nebo pomocí různých shaderů), ale na mobilním zařízení je zatím z hlediska výkonu možné použít pouze jednoprůchodový přístup.
 
@@ -1178,10 +1190,12 @@ Abych částečně nahradil ve svém simulátoru víceprůchodový přístup, po
 
 Řešením je vykreslování střídavě do dvou různých textur. To znamená, že při lichém snímku kreslím do textury 1 a čtu z textury 2. Při sudém snímku je tomu obráceně. Tímto způsobem získám přístup do vykreslené scény, sice s drobným zpožděním, ale při dostatečně rychlém vykreslování si toho uživatel nevšimne(za předpokladu, že textura bude použita\linebreak na efekty jako jsou odlesky nebo stíny).
 
+\begin{center}
 \begin{figure}[h!]
 \includegraphics[width=90mm]{figures/render-schema.png}
 \caption{Vykreslovací řetězec simulátoru}
 \end{figure}
+\end{center}
 
 \subsection{Rozměr textur na OpenGL ES 2.0}
 Verze OpenGL ES 2.0 umožňuje používat obdélníkové textury pouze omezeně. Textury tedy musí být čtvercové a jejich strana musí být o velikosti mocniny 2.
@@ -1212,25 +1226,48 @@ void main() {
 $Speed$ je rychlost vozidla od 0 do 1, $pFrm$ je textura předchozího snímku a $res$ je\linebreak 1 / \textit{plné rozlišení textury} (pro jednoduchost je použitý čtvercový rozměr textury).
 
 Tento kód je použit přímo při renderování modelů, nikoliv při postprocesu. Výhodou je, že rozmáznutí se projeví po několik snímků za sebou pomocí jednoho čtení textury navíc. Nevýhodou je, že tento kód musí být vložen do každého shaderu vykreslující 3D model.
+\newpage
 
 \subsection{Odlesky}
-Dále je možné ve screen-space řešit \textbf{odlesky}. Existuje obecný(složitý) postup jak tyto odlesky vypočítat, který by mobilní hardware nezvládl. Problém jsem rozdělil podle typu ploch. Vzhledem k tomu, že v simulátoru dochází pouze k rotaci pohledu podle osy y(rotace yaw), je možné řešit pro odlesky pro různé směry normál zvlášť.
+Dále je možné ve screen-space řešit odlesky. Existuje obecný (složitý) postup jak tyto odlesky vypočítat, který by mobilní hardware nezvládl. Problém jsem rozdělil podle typu ploch. Vzhledem k tomu, že v simulátoru dochází pouze k rotaci pohledu podle osy y (rotace yaw), je možné řešit pro odlesky pro různé tvary povrchů zvlášť.
 
-Například u vozovky stačí nalézt, kde vozovka končí, a podle toho obraz převrátit. Korektně to pro zatím z hlediska výkonu není možné vypočítat, proto dochází k velké nepřesnosti odlesku. Odhad zlomu je prováděn pomocí normály a pozice daného fragmentu, do kterého se odlesk započítává.
+Abychom vytvořili odlesk povrchu vozovky optimálně, potřebovali bychom informaci\linebreak o hloubce scény. To by bylo opět výpočetně náročné a proto jsem zvolil jednodušší postup. Odlesk funguje pouze pro jeden úhel pohledu mezi vozovkou a směrovým vektorem kamery.
 
+Na úrovni přední řezné roviny kamery je horizont povrchu přesně v polovině obrazovky. Pokud budeme tedy mít normálu povrchu směřující kolmo nahoru, jsme schopni realizovat odlesk pomocí převrácení aktuální vykreslovací textury. Pro souřadnice aktuálně vykreslovaného fragmentu $[f_x, f_y, f_z]$ vypočteme souřadnice odlesku $r$ převrácením y hodnoty. Tím získáme odlesk na úrovni  přední řezné roviny.
+\begin{center}
+$r = [f_x, 1 - f_y]$
+\end{center}
+
+S rostoucí vzdáleností od přední řezné roviny se lineárně posouvá horizont směrem vzhůru. Nalezením konstanty $a$ získáme souřadnice odlesku $r'$ pro kolmý povrch limitovaný úhlem pohledu kamery.
+\begin{center}
+$r' = [f_x, 1 - f_y + f_z \cdot a]$
+\end{center}
+
+Dále je potřeba podporovat i nekolmé povrchy. To se provede nalezením další konstanty $b$, která bude měnit lineární posun odlesku podle normály povrchu $\vec{n}$. Tím získáme souřadnice odlesku $r''$ limitované pouze úhlem pohledu kamery.
+\begin{center}
+$r'' = [f_x, 1 - f_y + f_z \cdot a + f_z \cdot (1 - \vec{n}_y) \cdot b]$
+\end{center}
+
+\begin{center}
 \begin{figure}[h!]
-\includegraphics[width=150mm]{figures/reflect-horizont.png}
-\caption{Odlesky na povrchu vozovky.}
+\includegraphics[width=130mm]{figures/reflect-horizont.png}
+\caption{Odlesky na povrchu vozovky}
 \end{figure}
-\bigskip
+\end{center}
 
-U vozidel se odlesk provádí pouze podle normály. Pro výpočet pozice odraženého obrazu se vezme střed vozidla a přičte se k němu normála vynásobena určitým faktorem(funguje pouze u vozidla, které uživatel ovládá).
+U vozidel by se optimálně měl odlesk řešit pomocí víceprůchodového algoritmu za využití cube mapování. Vzhledem k tomu, že potřebuji maximální možný výkon a Android zařízení mají typicky malý displej, použil jsem jednodušší variantu.
 
+Souřadnice odlesku $r$ u vozidel se provádí pouze podle normály. Pro výpočet pozice odraženého obrazu se vezme střed vozidla $s$ v souřadnicích kamery a přičte se k němu normála $\vec{n}$ vynásobena určitým faktorem $f$ (to funguje pouze u vozidla, které uživatel ovládá).
+\begin{center}
+$r = [s_x + \vec{n}_x \cdot f, s_y + \vec{n}_y \cdot f]$
+\end{center}
+
+\begin{center}
 \begin{figure}[h!]
-\includegraphics[width=150mm]{figures/reflect-car.png}
-\caption{Odlesky na vozidle. Bílé plochy znázorňují pozice, ze kterých se čte barva odlesku.}
+\includegraphics[width=130mm]{figures/reflect-car.png}
+\caption{Ukázka výsledných odlesků na vozidle, vlevo bez odlesků, vpravo s odlesky}
 \end{figure}
-\newpage
+\end{center}
 
 %*****************************************************************************
 \chapter{Testování}
@@ -1328,7 +1365,7 @@ V prvním testu zjišťuji, jak je vykreslování rychlé při různém počtu v
 \caption{Závislost rychlosti vykreslování scény na zařízení a poměru rozlišení oproti nativnímu}
 \end{figure}
 
-Z výsledku je patrně vidět výkonový rozdíl mezi laptopem proti tabletu a mobilu. Laptop je přibližně 3x až 4x rychlejší, což je menší rozdíl než jsem očekával.
+Z výsledku je patrně vidět výkonový rozdíl mezi laptopem proti tabletu a mobilu. Laptop je přibližně 3x až 4x rychlejší při použití srovnatelného rozlišení, což je menší rozdíl než jsem očekával.
 \\
 
 Dále jsem testoval závislost rozlišení textury mapy osvětlení a rychlosti vykreslování. Naměřené údaje jsou v tabulce 5.3.

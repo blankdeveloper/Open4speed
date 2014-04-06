@@ -1,5 +1,6 @@
 uniform mat4 u_ModelViewMatrix;
 uniform mat4 u_ProjectionMatrix;
+uniform mat4 u_Matrix;
 attribute vec3 v_vertex;
 attribute vec3 v_normal;
 attribute vec2 v_coord;

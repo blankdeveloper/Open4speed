@@ -61,3 +61,4 @@
 \contentsline {section}{\numberline {C.2}Pou\IeC {\v z}\IeC {\'\i }v\IeC {\'a}n\IeC {\'\i } simul\IeC {\'a}toru}{56}{section.C.2}
 \contentsline {paragraph}{Menu}{56}{section*.11}
 \contentsline {paragraph}{Ovl\IeC {\'a}d\IeC {\'a}n\IeC {\'\i } simul\IeC {\'a}toru}{56}{section*.12}
+\contentsline {section}{\numberline {C.3}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{56}{section.C.3}

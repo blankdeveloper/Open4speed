@@ -190,7 +190,7 @@ pdfauthor={\FirstandFamilyName},
 bookmarks=true,
 colorlinks=true,
 breaklinks=true,
-urlcolor=blue,
+urlcolor=black,
 citecolor=blue,
 linkcolor=blue,
 unicode=true,
@@ -264,8 +264,10 @@ unicode=true,
 \item v jedné odevzdané práci bude originál tohoto zadání (originál zůstává po obhajobě na katedře),
 \item ve druhé bude na stejném místě neověřená kopie tohoto dokumentu (tato se vám vrátí po obhajobě).
 \end{itemize}
-\newpage
 }
+%to print missing literature in reference
+\cite{OpenGL10} \cite{Hawkins01} \cite{Buss03} \cite{Ericson04}  
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%    Titulni stranka / Title page 
 \coverpagestarts
@@ -273,15 +275,16 @@ unicode=true,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%    Podekovani / Acknowledgements 
 \acknowledgements
 \noindent
-Zde můžete napsat své poděkování, pokud chcete a máte komu děkovat.
+Rád bych poděkoval panu Jiřímu Bittnerovi za vedení této diplomové práce, za obrovské množství užitečných rad a za připomínky, které mi pomohly zvýšit kvalitu práce. Dále bych rád poděkoval učitelům z katedry počítačové grafiky a interakce za kvalitní výuku a za mnoho předaných znalostí, které jsem v této práci využil.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%   Prohlaseni / Declaration 
-\declaration{V~Praze dne 15.\,5.\,2014}
+\declaration{V~Praze dne 12.\,5.\,2014}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%    Abstract 
 \abstractpage
+TODO
 Translation of Czech abstract into English.
 
 % Prace v cestine musi krome abstraktu v anglictine obsahovat i
@@ -291,6 +294,7 @@ Translation of Czech abstract into English.
 \noindent{\Huge \textbf{Abstrakt}}
 \vskip 2.75\baselineskip
 
+TODO
 \noindent
 Abstrakt práce by měl velmi stručně vystihovat její podstatu. Tedy čím se práce zabývá a co je jejím výsledkem/přínosem.
 
@@ -426,12 +430,12 @@ V této implementaci se nevyužívá předpočtených dat. Využívá se zde vir
 
 Implementace podporuje více typů zdrojů světla, včetně plošných. Nemá problémy\linebreak s barevným světlem ani s kaustiky.
 
-\begin{center}
 \begin{figure}[h!]
+\begin{center}
 \includegraphics[width=150mm]{figures/ISM.png}
-\caption{Ukázka výsledků techniky imperfektních stínových map pro efektivní výpočet nepřímého osvětlení}
-\end{figure}
+\caption{Ukázka výsledků techniky imperfektních stínových map pro efektivní výpočet nepřímého osvětlení \cite{Ritschel:2008:ISM}}
 \end{center}
+\end{figure}
 
 \subsection{Závodní simulátory s noční scénou pro platformu Android}
 V této sekci jsem vyhledával i implementace, u kterých není uvedeno, jak bylo výsledků dosaženo. Je to z důvodu malého počtu implementací odpovídající dané kategorii.
@@ -1004,7 +1008,7 @@ V přístupu využívající vrhání paprsku jsou navíc k dispozici plošné z
 \newpage
 
 \subsubsection{Generování texturovacích souřadnic pro mapy osvětlení}
-V teoretické části byl popsán postup generování texturovacích souřadnic pomocí ILP.\linebreak V praxi toto řešení nelze použít, protože jeho výpočetní složitost $f(m, n)$ $\epsilon$ $O(m^2 \cdot n^2)$, $m$ je počet trojúhelníků a $n$ počet texelů v lightmapě.  Pomocí ILP se tedy dají řešit pouze velice malé instance problému. V této práci problém řeším pomocí metody Packing Lightmaps, což je metoda řešící problém batohu za použití datové struktury kD stromu, která dělí $k$-rozměrný objekt půlením.
+V teoretické části byl popsán postup generování texturovacích souřadnic pomocí ILP.\linebreak V praxi toto řešení nelze použít, protože jeho výpočetní složitost $f(m, n)$ $\epsilon$ $O(m^2 \cdot n^2)$, $m$ je počet trojúhelníků a $n$ počet texelů v lightmapě.  Pomocí ILP se tedy dají řešit pouze velice malé instance problému. V této práci problém řeším pomocí metody Packing Lightmaps \cite{Scott02}, což je metoda řešící problém batohu za použití datové struktury kD stromu, která dělí $k$-rozměrný objekt půlením.
 
 V případě Packing Lightmaps dělíme rovinu horizontálním nebo vertikálním řezem, kD strom je v podstatě binární strom, jehož kořen reprezentuje k-rozměrný objekt (v našem případě mapu osvětlení). Vnitřní uzly jsou dělící, určují podle které osy se řez povede a je v nich zapsána pozice řezu. Listy stromu reprezentují objekty uložené ve struktuře, v této práci AABB - tedy dva párové trojúhelníky (viz kapitola 3.6.1).
 
@@ -1385,12 +1389,13 @@ Práci do budoucna hodlám rozšířit o generování map osvětlení pomocí vr
 % latex). Druhy z nich alespon 2x, aby se poresily odkazy.
 
 %\bibliographystyle{abbrv}
-%\bibliographystyle{plain}
+\bibliographystyle{plain}
 %\bibliographystyle{psc}
-\bibliographystyle{alpha}
+%\bibliographystyle{alpha}
 {
 %JZ: 11.12.2008 Kdo chce mit v techto ukazkovych odkazech take odkaz na CSTeX:
-\def\CS{$\cal C\kern-0.1667em\lower.5ex\hbox{$\cal S$}\kern-0.075em $}
+%\def\CS{$\cal C\kern-0.1667em\lower.5ex\hbox{$\cal S$}\kern-0.075em $}
+\raggedright
 \bibliography{reference}
 }
 
@@ -1489,5 +1494,8 @@ Pro zbytek stačí otevřít projekt v Android Studiu a klepnout na Run
 \item šipky vlevo/vpravo - zatáčení
 \item klávesa esc/zpět - pauza, menu pro restart závodu, ukončení závodu
 \end{itemize}
+
+\section{Generování map osvětlení}
+TODO
 
 \end{document}

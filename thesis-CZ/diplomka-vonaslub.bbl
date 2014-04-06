@@ -1,10 +1,41 @@
-\begin{thebibliography}{Kap11}
+\begin{thebibliography}{1}
 
-\bibitem[Kap11]{Kaplinski11}
+\bibitem{Buss03}
+Samuel~R. Buss.
+\newblock {\em {3}-D Computer Graphics: A Mathematical Introduction with
+  OpenGL}.
+\newblock 2003.
+
+\bibitem{Ericson04}
+Christer Ericson.
+\newblock {\em {R}eal Time Collision Detection}.
+\newblock 2004.
+
+\bibitem{OpenGL10}
+Richard S. Wright Jr. a Nicholas~Haemel Graham~Sellers.
+\newblock {\em {O}penGL SuperBible}.
+\newblock 2010.
+
+\bibitem{Kaplinski11}
 Lauris Kaplinski.
-\newblock {R}eflections.
-\newblock
-  \url{http://khayyam.kaplinski.com/2011/09/reflective-water-with-glsl-part-i.html},
-  2011.
+\newblock {R}eflective water with glsl.
+\newblock \url{khayyam.kaplinski.com/2011/09}, 2011.
+
+\bibitem{Hawkins01}
+Dave~Astle Kevin~Hawkins.
+\newblock {\em {O}penGL Game Programing}.
+\newblock 2001.
+
+\bibitem{Ritschel:2008:ISM}
+Tobias Ritschel, Thorsten Grosch, Min~H. Kim, Hans-Peter Seidel, Carsten
+  Dachsbacher, and Jan Kautz.
+\newblock {Imperfect Shadow Maps for Efficient Computation of Indirect
+  Illumination}.
+\newblock {\em ACM Trans. Graph. (Proc. of SIGGRAPH ASIA 2008)}, 27(5), 2008.
+
+\bibitem{Scott02}
+Jim Scott.
+\newblock {P}acking lightmaps.
+\newblock \url{www.blackpawn.com/texts/lightmaps}, 2002.
 
 \end{thebibliography}

@@ -1135,7 +1135,7 @@ Abychom získali záplaty v této podobě musíme nejdříve vykreslit pro každ
 \end{figure}
 \end{center}
 
-\subsection{Statického osvětlení a dynamické objekty}
+\subsection{Statické osvětlení a dynamické objekty}
 
 Pokud máme ve scéně předpočtené stíny, je vhodné tyto statické stíny aplikovat\linebreak i na dynamické objekty. V případě vozidla lze přečíst intenzitu osvětlení z některých bodů na silnici pod vozidlem. Intenzitu osvětlení lze jednoduše ukládat do alfa kanálu textury,\linebreak ve které se nachází aktuální scéna.
 
@@ -1178,12 +1178,12 @@ U ostatních vozidel je třeba osvětlení zjednodušit, aby to mobilní hardwar
 
 \begin{center}
 \begin{figure}[h]
-\includegraphics[width=100mm]{figures/carlight.png}
+\includegraphics[width=60mm]{figures/carlight.png}
 \caption{Ukázka světel pomocí poloprůhledných kuželů}
 \end{figure}
 \end{center}
 
-\section{Víceprůchodové přístupy}
+\section{Screen-space přístup}
 Při běhu jakéhokoliv simulátoru je největší zátěž mobilního hardware způsobena vykreslováním 3D scény, proto je nutné tuto část co nejvíce zefektivnit. Pro mnoho efektů se používají takzvané víceprůchodové přístupy (scéna se vykreslí víckrát z různých pohledů nebo pomocí různých shaderů), ale na mobilním zařízení je zatím z hlediska výkonu možné použít pouze jednoprůchodový přístup.
 
 Abych částečně nahradil ve svém simulátoru víceprůchodový přístup, použil jsem screen-space přístup(to je obecně jakákoliv technika využívající data z pohledu kamery, jinými slovy máme pouze výsledný snímek a na něm provádíme další operace). V praxi se používá hlavně pro zrcadlové plochy. Potřeboval jsem přistupovat do aktuálně vykreslovaného snímku. To je ale problém, protože tento snímek není kompletní a kdybych vykresloval přímo do něj\linebreak a zároveň z něj četl způsobilo by to chyby ve výsledném obraze.
@@ -1192,7 +1192,7 @@ Abych částečně nahradil ve svém simulátoru víceprůchodový přístup, po
 
 \begin{center}
 \begin{figure}[h!]
-\includegraphics[width=90mm]{figures/render-schema.png}
+\includegraphics[width=85mm]{figures/render-schema.png}
 \caption{Vykreslovací řetězec simulátoru}
 \end{figure}
 \end{center}
@@ -1254,6 +1254,9 @@ $r'' = [f_x, 1 - f_y + f_z \cdot a + f_z \cdot (1 - \vec{n}_y) \cdot b]$
 \caption{Odlesky na povrchu vozovky}
 \end{figure}
 \end{center}
+
+Pro můj zvolený pohled jsem zvolil konstanty $a = 0.1; b = 2$. Odlesk vizuálně odpovídá a vykresluje se velice rychle. Problém je při nízké snímkovací frekvenci, kdy dochází k posunu odlesku (jak je vidět na obrázku 4.11). Posun není nijak výrazný, ale pokud se na něj soustředíme, vidíme jej. Dále při mísení efektů odlesků s motion-blurem dochází k rozmazání odlesku více než původního obrazu. Motion-blur je pro odlesky dvojnásobný, protože se aplikuje jak na původní objekt, tak na zrcadlový povrch.
+\bigskip
 
 U vozidel by se optimálně měl odlesk řešit pomocí víceprůchodového algoritmu za využití cube mapování. Vzhledem k tomu, že potřebuji maximální možný výkon a Android zařízení mají typicky malý displej, použil jsem jednodušší variantu.
 

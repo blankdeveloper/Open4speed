@@ -77,6 +77,15 @@ sound* getSound(const char* filename, bool loop, int channels);
  */
 texture* getTexture(const char* filename, float alpha);
 
+/**
+ * @brief getTexture gets texture
+ * @param r is amount of red from 0 to 1
+ * @param g is amount of green from 0 to 1
+ * @param b is amount of blue from 0 to 1
+ * @param alpha is amount of blending
+ * @return texture instance
+ */
+texture* getTexture(float r, float g, float b, float alpha);
 
 /**
  * @brief getVBO creates VBO from data

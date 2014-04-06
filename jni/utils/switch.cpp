@@ -11,6 +11,7 @@
 #include "input/keyboard.h"
 #include "loaders/modelo4s.h"
 #include "loaders/pngloader.h"
+#include "loaders/rgb.h"
 #include "physics/bullet.h"
 #include "renderers/opengl/gles20.h"
 #include "renderers/opengl/glfbo.h"
@@ -204,6 +205,26 @@ texture* getTexture(const char* filename, float alpha) {
     }
 
     logi("Renderer incompatible texture:",filename);
+    return gray;
+}
+
+/**
+ * @brief getTexture gets texture
+ * @param r is amount of red from 0 to 1
+ * @param g is amount of green from 0 to 1
+ * @param b is amount of blue from 0 to 1
+ * @param alpha is amount of blending
+ * @return texture instance
+ */
+texture* getTexture(float r, float g, float b, float alpha) {
+
+    /// create new instance
+    if (strcmp(screenRenderer, "glsl") == 0) {
+        texture* instance = new gltexture(*createRGB(1, 1, r, g, b), alpha);
+       return instance;
+    }
+
+    logi("Renderer incompatible RGB texture", "");
     return gray;
 }
 

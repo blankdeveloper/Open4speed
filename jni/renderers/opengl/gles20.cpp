@@ -531,7 +531,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     glm::vec4 mpos = (proj_matrix * view_matrix * model_position);
     float z = mpos.z;
     mpos /= mpos.w;
-    float y = mpos.y * 0.5 + 0.5 - 600 / z / (float)screen_height;
+    float y = mpos.y * 0.5 + 0.5 - 2 / z;
     current->uniformFloat("u_Time", frame / 1000.0f);
     current->uniformFloat4("u_model_position", glm::clamp(mpos.x * 0.5f + 0.5f, 0.0f, 1.0f), glm::max(0.0f, y), 0, 1);
     current->uniformFloat("u_res", 1 / (float)rtt[oddFrame]->res);

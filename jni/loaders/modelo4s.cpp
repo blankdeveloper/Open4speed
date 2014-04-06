@@ -91,7 +91,7 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
             m->texture2D = getTexture(texturePath, alpha);
         /// create color texture
         } else {
-            m->texture2D = xrenderer->getGrayTexture();
+            m->texture2D = getTexture(colord[0], colord[1], colord[2], alpha);
         }
 
         int cursor = 0;

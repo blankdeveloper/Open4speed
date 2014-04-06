@@ -1135,13 +1135,37 @@ Abychom získali záplaty v této podobě musíme nejdříve vykreslit pro každ
 
 Pokud máme ve scéně předpočtené stíny, je vhodné tyto statické stíny aplikovat\linebreak i na dynamické objekty. V případě vozidla lze přečíst intenzitu osvětlení z některých bodů na silnici pod vozidlem. Intenzitu osvětlení lze jednoduše ukládat do alfa kanálu textury,\linebreak ve které se nachází aktuální scéna.
 
-Zde vzniká problém s barevným světlem. Jsou zde dvě možnosti řešení. Prvním je přidání další textury, ve kterém by byla barevná intenzita světla(tím by došlo ke zvýšení náročnosti na hardware a ke zvýšení paměťové náročnosti). Druhým možným řešením je omezit barevná světla do nějaké sytosti(pokud se slabě zabarvené světlo aplikuje jako bílé, není to tolik rušivé).
+Výpočet pozice bodu na obrazovce se provádí na CPU. Fyzikální engine vrací pozici středu vozidla $\vec{p}$, tu lze vynásobit maticí $MVP$ a po perspektivním dělením získáme pozici vozidla na obrazovce označenou jako $sp$. 
+\begin{center}
+$s = MVP \cdot \vec{p}$\\
+$sp = s / s_w$
+\end{center}
+Pozice je v rozmezí $<-1, 1>$. Pro čtení z textury je třeba pozici přepočítat do rozmezí $<0, 1>$.
+\begin{center}
+$sp' = sp \cdot 0.5 + 0.5$
+\end{center}
+
+Tím jsme získali pozici vozidla, pokud chceme pozici pod vozidlem, musíme vypočítat pozici o něco níž. Úroveň posunu označím jako $a$. Velikost posunu je dále závislá na vzdálenosti vozidla od kamery. Vzdálenost je uložená v proměnné $s_z$.
+\begin{center}
+$sp''_x = sp'_x$\\
+$sp''_y = sp'_y - a / s_z$
+\end{center}
+
+Tím jsme získali pozici texelu nesoucí informaci o intenzitě osvětlení. Vzniká zde ale problém s barevným světlem. Jsou zde dvě možnosti řešení. Prvním je přidání další textury, ve kterém by byla barevná intenzita světla(tím by došlo ke zvýšení náročnosti na hardware a ke zvýšení paměťové náročnosti). Druhým možným řešením je omezit barevná světla\linebreak do nějaké sytosti (pokud se slabě zabarvené světlo aplikuje jako bílé, není to tolik rušivé).
 
 \subsection{Světla vozidel}
 
-Dle předběžných měření jsem zjistil, že na mobilních zařízeních lze za běhu počítat jedno až dvě světla(bez řešení viditelnosti světla). U vozidla ovládané hráčem není potřeba řešit viditelnost světla, prakticky zde nedochází k situacím, že by světlo osvětlovalo neviditelné objekty(je to z důvodu těsné vazby světlo hráčova vozidla-kamera).
+Dle předběžných měření jsem zjistil, že na mobilních zařízeních lze za běhu počítat jedno až dvě světla(bez řešení viditelnosti světla). U vozidla ovládané hráčem není potřeba řešit viditelnost světla, prakticky zde nedochází k situacím, že by světlo osvětlovalo neviditelné objekty (je to z důvodu těsné vazby světla hráčova vozidla a kamery).
 
-U ostatních vozidel je třeba osvětlení zjednodušit, aby to mobilní hardware zvládal. Zvolil jsem metodu vykreslování kuželů do scény. Při vykreslování je použita OpenGL funkce blending, která umožňuje kreslit objekty s částečnou průhledností. Dále je také zapnuté ořezávání odvrácených trojúhelníku. Střed kužele je vyplněn několikrát zevnitř s odvrácenou normálou. Z toho důvodu je osvětlení silnější pokud světlo svítí do kamery než od kamery.
+U ostatních vozidel je třeba osvětlení zjednodušit, aby to mobilní hardware zvládal. Zvolil jsem metodu vykreslování poloprůhledných kuželů do scény, k tomu je použita OpenGL funkce blending, která umožňuje kreslit objekty s částečnou průhledností. Je zde počítán útlum světla stejně jako u standardních světel.
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=100mm]{figures/carlight.png}
+\caption{Ukázka světel pomocí poloprůhledných kuželů}
+\end{figure}
+\end{center}
+
 
 \section{Nahrazení víceprůchodových přístupů}
 Při běhu jakéhokoliv simulátoru je největší zátěž mobilního hardware způsobena vykreslováním 3D scény, proto je nutné tuto část co nejvíce zefektivnit. Pro mnoho efektů se používají takzvané víceprůchodové přístupy(scéna se vykreslí víckrát z různých pohledů nebo pomocí různých shaderů), ale na mobilním zařízení je zatím z hlediska výkonu možné použít pouze jednoprůchodový přístup.

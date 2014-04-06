@@ -40,7 +40,7 @@ void main()
       vec3 D = vec3(1.0, d, d * d);
       color *= pow(eff, u_light_spot_eff) / dot(u_light_att.xyz * 0.5, D);
       //apply light color
-      gl_FragColor.rgb += 4.0 * color;
+      gl_FragColor.rgb += 2.0 * color;
     }
   
     //reflect

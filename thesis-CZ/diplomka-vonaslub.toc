@@ -40,10 +40,10 @@
 \contentsline {subsubsection}{\numberline {4.3.1.2}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{35}{subsubsection.4.3.1.2}
 \contentsline {subsection}{\numberline {4.3.2}P\IeC {\v r}\IeC {\'\i }prava dat pro dynamickou aktualizaci map osv\IeC {\v e}tlen\IeC {\'\i }}{37}{subsection.4.3.2}
 \contentsline {subsection}{\numberline {4.3.3}Aplikov\IeC {\'a}n\IeC {\'\i } statick\IeC {\'e}ho osv\IeC {\v e}tlen\IeC {\'\i } na dynamick\IeC {\'e} objekty}{38}{subsection.4.3.3}
-\contentsline {subsection}{\numberline {4.3.4}Sv\IeC {\v e}tla vozidel}{38}{subsection.4.3.4}
-\contentsline {section}{\numberline {4.4}Nahrazen\IeC {\'\i } v\IeC {\'\i }cepr\IeC {\r u}chodov\IeC {\'y}ch p\IeC {\v r}\IeC {\'\i }stup\IeC {\r u}}{38}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Rozm\IeC {\v e}r textur na OpenGL ES 2.0}{39}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Odlesky}{39}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.3.4}Sv\IeC {\v e}tla vozidel}{39}{subsection.4.3.4}
+\contentsline {section}{\numberline {4.4}Nahrazen\IeC {\'\i } v\IeC {\'\i }cepr\IeC {\r u}chodov\IeC {\'y}ch p\IeC {\v r}\IeC {\'\i }stup\IeC {\r u}}{39}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Rozm\IeC {\v e}r textur na OpenGL ES 2.0}{40}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Odlesky}{40}{subsection.4.4.2}
 \contentsline {chapter}{\numberline {5}Testov\IeC {\'a}n\IeC {\'\i }}{43}{chapter.5}
 \contentsline {section}{\numberline {5.1}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{44}{section.5.1}
 \contentsline {paragraph}{Bodov\IeC {\'e} zdroje sv\IeC {\v e}tla}{44}{section*.6}

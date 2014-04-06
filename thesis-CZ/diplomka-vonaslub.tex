@@ -1101,22 +1101,41 @@ Aby hledání ve stromu bylo ještě rychlejší, lze použít ještě několik 
 
 Dále je vhodné přeskakovat testy stejných trojúhelníků. Podle zvoleného kritéria dělení stromu při jeho stavbě může dojít k tomu, že některé trojúhelníky jsou uloženy ve stromu víckrát (pokud jejich AABB proniká s více uzly stejné hloubky). Řešit to lze jednoduše. Stačí si u trojúhelníku vždy pamatovat ID paprsku, s kterým byl proveden poslední test průsečíku. Díky tomu lze zjistit, jestli některý paprsek není testován víckrát a případně tento test přeskočit.
 
-Další možnost urychlení generování map osvětlení je přeskakování testování paprsků,\linebreak u kterých je délka paprsku delší než vzdálenost, na kterou dosvítí zdroj světla. Tuto vzdálenost lze spočítat pomocí vzorce pro útlum (viz. kapitola 3.2). Minimální přípustnou hodnotu si označím $\epsilon$. Rovnici lze vyřešit pomocí diskriminantu.
+Další možnost urychlení generování map osvětlení je přeskakování testování paprsků,\linebreak u kterých je délka paprsku delší než vzdálenost, na kterou dosvítí zdroj světla. Tuto vzdálenost lze spočítat pomocí vzorce pro útlum (viz. kapitola 3.2). Minimální přípustnou hodnotu si označím $\epsilon$ a maximálně délku paprsku jako $d$.
 \begin{center}
-$d = length(ray)$, $F_a = \frac{1}{k_c + k_l \cdot d + k_q \cdot d^2}$, $F_a = \epsilon$
+$F_a = \frac{1}{k_c + k_l \cdot d + k_q \cdot d^2}$, $F_a = \epsilon$
+\end{center}
+Po dosazení a otočení rovnice získáme výraz
+\begin{center}
+$k_c + k_l \cdot d + k_q \cdot d^2 = \frac{1}{\epsilon}$
+\end{center}
+Kvadratickou funkci spočteme pomocí diskriminantu
+\begin{center}
+$D = {k_l}^2 - 4 \cdot k_q \cdot (k_c - \frac{1}{\epsilon})$\\
+$d = \frac{-k_l \pm \sqrt{D}}{2 \cdot (k_c - \frac{1}{\epsilon})}$
 \end{center}
 
 
 \subsection{Příprava dat pro dynamickou aktualizaci map osvětlení}
+Data pro dynamickou aktualizaci map osvětlení se nazývají záplaty. Záplata je v podstatě také mapa osvětlení, ale pouze pro jeden zdroj světla. Problém je, že tyto záplaty by byly příliš paměťově náročné, proto používám vektorovou podobu těchto dat.
+
+Data záplaty jsou při běhu simulátoru uloženy jako trojúhelníky ve VBO (tedy na GPU). Každý vrchol má dva atributy a to pozici v mapě osvětlení a barvu světla vynásobenou intenzitou. Lze tedy snadno a rychle mapy osvětlení aktualizovat, pokud máme záplaty\linebreak v této podobě uloženy.
+
+Abychom získali záplaty v této podobě musíme nejdříve vykreslit pro každý dynamický zdroj světla vykreslit mapu osvětlení a poté tyto data zvektorizovat. Pro zvektorizování lze využít informaci o souřadnicích jednotlivých trojúhelníků v mapě osvětlení. V prvním kroku se přečtou informace o osvětlení ve vrcholech trojúhelníků. Poté se provede interpolace těchto hodnot (vždy pouze v rámci jednoho trojúhelníku) a zkontroluje se, zda hodnota s nějakou tolerancí odpovídá. Pokud ano, přidá se geometrie trojúhelníku do vektorových dat záplaty. Pokud ne, rozdělí se trojúhelník podle jeho středu a provádí se znovu stejný postup.
+\newpage
 
 \begin{center}
 \begin{figure}[h]
 \includegraphics[width=150mm]{figures/lmpatch.png}
-\caption{Ukázka převodu záplaty osvětlovací mapy do vektorové podoby }
+\caption{Ukázka převodu záplaty osvětlovací mapy do vektorové podoby, vlevo původní mapa osvětlení, uprostřed první iterace algoritmu a vpravo další iterace}
 \end{figure}
 \end{center}
 
-\subsection{Dynamické osvětlení a dynamické objekty}
+\subsection{Aplikování statického osvětlení na dynamické objekty}
+
+Pokud máme ve scéně předpočtené stíny, je vhodné tyto statické stíny aplikovat\linebreak i na dynamické objekty. V případě vozidla lze přečíst intenzitu osvětlení z některých bodů na silnici pod vozidlem. Intenzitu osvětlení lze jednoduše ukládat do alfa kanálu textury,\linebreak ve které se nachází aktuální scéna.
+
+Zde vzniká problém s barevným světlem. Jsou zde dvě možnosti řešení. Prvním je přidání další textury, ve kterém by byla barevná intenzita světla(tím by došlo ke zvýšení náročnosti na hardware a ke zvýšení paměťové náročnosti). Druhým možným řešením je omezit barevná světla do nějaké sytosti(pokud se slabě zabarvené světlo aplikuje jako bílé, není to tolik rušivé).
 
 \subsection{Světla vozidel}
 
@@ -1185,10 +1204,6 @@ U vozidel se odlesk provádí pouze podle normály. Pro výpočet pozice odraže
 \caption{Odlesky na vozidle. Bílé plochy znázorňují pozice, ze kterých se čte barva odlesku.}
 \end{figure}
 \newpage
-
-Pokud máme ve scéně \textbf{předpočtené stíny}, je vhodné tyto statické stíny aplikovat\linebreak i \textbf{na dynamické objekty}. V případě vozidla lze přečíst intenzitu osvětlení z některých bodů na silnici pod vozidlem. Intenzitu osvětlení lze jednoduše ukládat do alfa kanálu textury,\linebreak ve které se nachází aktuální scéna.
-
-Zde vzniká problém s barevným světlem. Jsou zde dvě možnosti řešení. Prvním je přidání další textury, ve kterém by byla barevná intenzita světla(tím by došlo ke zvýšení náročnosti na hardware a ke zvýšení paměťové náročnosti). Druhým možným řešením je omezit barevná světla do nějaké sytosti(pokud se slabě zabarvené světlo aplikuje jako bílé, není to tolik rušivé).
 
 %*****************************************************************************
 \chapter{Testování}
@@ -1281,6 +1296,11 @@ V prvním testu zjišťuji, jak je vykreslování rychlé při různém počtu v
 \end{center}
 \end{table}
 
+\begin{figure}[h!]
+\includegraphics[width=150mm]{figures/graf2.png}
+\caption{Závislost rychlosti vykreslování scény na zařízení a poměru rozlišení oproti nativnímu}
+\end{figure}
+
 Z výsledku je patrně vidět výkonový rozdíl mezi laptopem proti tabletu a mobilu. Laptop je přibližně 3x až 4x rychlejší, což je menší rozdíl než jsem očekával.
 \\
 
@@ -1299,6 +1319,11 @@ Dále jsem testoval závislost rozlišení textury mapy osvětlení a rychlosti 
 \caption{Závislost rychlosti vykreslování scény na platformě a rozlišení textur map osvětlení při vizuálních detailech normal(poměr 0.6x ku nativnímu rozlišení). Z každého měření je uvedená minimální a maximální hodnota}
 \end{center}
 \end{table}
+
+\begin{figure}[h!]
+\includegraphics[width=150mm]{figures/graf1.png}
+\caption{Závislost rychlosti vykreslování scény na platformě a rozlišení textur map osvětlení při vizuálních detailech normal}
+\end{figure}
 
 Z měření vyplývá relativně malá závislost na rozlišení textury. Pokud pominu nepřesnost v měření, jedná se o rozdíl přibližně 2ms u všech zařízení.
 \\

@@ -311,7 +311,7 @@ void display(void) {
             /// apply all lights
             glm::vec3 raybegin;
             glm::vec4 color;
-            float att = 0.1f;
+            float att = 0.05f;
             float eff;
             int tr;
             for (unsigned long i = 0; i < triangles.size(); i++) {

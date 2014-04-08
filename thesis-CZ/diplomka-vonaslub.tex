@@ -350,7 +350,7 @@ Obecně platí, že během vykreslování 3D scény se některé výpočty cykli
 
 %*****************************************************************************
 \chapter{Specifikace práce}
-Cílem práce bylo realizovat efektivní vykreslování rozsáhlých nočních scén na platformě Android za použití grafické knihovny OpenGL. Rozhodl jsem se práci realizovat v podobě závodního simulátoru, který obsahuje několik pohybujících se vozidel a blikajících světel. Tato podoba realizace plně využívá veškeré grafické techniky, které jsem implementoval\linebreak a zároveň umožní lépe ohodnotit použitelnost projektu, než kdybych zvolil podobu technického dema.
+Cílem práce bylo realizovat efektivní vykreslování rozsáhlých nočních scén na platformě Android za použití grafické knihovny OpenGL. Rozhodl jsem se práci realizovat v podobě závodního simulátoru, který obsahuje několik pohybujících se vozidel a blikajících světel. Tato podoba realizace plně využívá veškeré grafické techniky, které jsem implementoval\linebreak a zároveň umožní lépe zhodnotit použitelnost projektu, než kdybych zvolil podobu technického dema.
 
 Důraz byl kladen na co nejvyšší optimalizaci vykreslování. Kromě hlavní grafické techniky map osvětlení (anglicky lightmap) bylo použito několik dalších technik řešící jednotlivé problémy, které vznikají při použití map osvětlení. Problémy nastávají hlavně při použití dynamických objektů nebo při změně osvětlení. Technika map osvětlení řeší pouze statickou scénu\linebreak a v případě použití dynamické scény je potřeba metodu značně rozšířit.
 
@@ -359,7 +359,7 @@ Zádání předpokládá, že projekt bude rozdělen do dvou samostatných čás
 
 Simulátor bude využívat vlastní formát, který bude umožňovat mít v sobě jak souřadnice standardních textur, tak i souřadnice v mapách osvětlení. Formát bude zachovávat veškeré informace o modelu. I když je třeba výsledný simulátor nevyužije, bude dobré tyto informace ponechat pro případ dalšího vývoje. Formát bude schopen uložit některé další informace\linebreak o materiálu a shaderu.
 
-Plocha map osvětlení bude co možně nejvíce využita z důvodu očekávané malé paměti vymezeny pro velké textury. Aby bylo možné určit nejvhodnější rozlišení těchto textur, bude umožněno škálování map osvětlení.
+Plocha map osvětlení bude co možná nejvíce využita z důvodu očekávané malé paměti vymezeny pro velké textury. Aby bylo možné určit nejvhodnější rozlišení těchto textur, bude umožněno škálování map osvětlení.
 \newpage
 
 \subsection{Mapy osvětlení}
@@ -1008,9 +1008,9 @@ V přístupu využívající vrhání paprsku jsou navíc k dispozici plošné z
 \newpage
 
 \subsubsection{Generování texturovacích souřadnic pro mapy osvětlení}
-V teoretické části byl popsán postup generování texturovacích souřadnic pomocí ILP.\linebreak V praxi toto řešení nelze použít, protože jeho výpočetní složitost $f(m, n)$ $\epsilon$ $O(m^2 \cdot n^2)$, $m$ je počet trojúhelníků a $n$ počet texelů v lightmapě.  Pomocí ILP se tedy dají řešit pouze velice malé instance problému. V této práci problém řeším pomocí metody Packing Lightmaps \cite{Scott02}, což je metoda řešící problém batohu za použití datové struktury kD stromu, která dělí $k$-rozměrný objekt půlením.
+V teoretické části byl popsán postup generování texturovacích souřadnic pomocí ILP.\linebreak V praxi toto řešení nelze použít, protože jeho výpočetní složitost metody je $O(m^2 \cdot n^2)$, kde $m$ je počet trojúhelníků a $n$ počet texelů v lightmapě.  Pomocí ILP se tedy dají řešit pouze velice malé instance problému. V této práci problém řeším pomocí metody Packing Lightmaps \cite{Scott02}, což je metoda řešící problém batohu za použití datové struktury kD stromu, která dělí $k$-rozměrný objekt půlením.
 
-V případě Packing Lightmaps dělíme rovinu horizontálním nebo vertikálním řezem, kD strom je v podstatě binární strom, jehož kořen reprezentuje k-rozměrný objekt (v našem případě mapu osvětlení). Vnitřní uzly jsou dělící, určují podle které osy se řez povede a je v nich zapsána pozice řezu. Listy stromu reprezentují objekty uložené ve struktuře, v této práci AABB - tedy dva párové trojúhelníky (viz kapitola 3.6.1).
+V případě Packing Lightmaps dělíme rovinu horizontálním nebo vertikálním řezem. kD strom je typ binárního stromu, jehož kořen reprezentuje k-rozměrný objekt (v našem případě mapu osvětlení). Vnitřní uzly jsou dělící, určují podle které osy se provede řez a je v nich zapsána také pozice řezu. Listy stromu reprezentují objekty uložené ve struktuře, v mém případě AABB - tedy dva párové trojúhelníky (viz kapitola 3.6.1).
 
 \begin{center}
 \begin{figure}[h]
@@ -1066,13 +1066,13 @@ public boolean addAABB(AABB aabb) {
 \end{lstlisting}
 
 \subsubsection{Generování map osvětlení}
-Generování map osvětlení znamená v podstatě vykreslení celé scény do souřadnic map osvětlení (tím se vykreslí celá scéna, aniž by docházelo k zakrývání objektů). Generování je\linebreak v práci řešeno dvěma různými přístupy. Prvním přístupem je rasterizační (pomocí OpenGL) a druhým je vrhání paprsku. V obou přístupech se provede výpočet difúzního osvětlení stejným způsobem jako se provádí při běžném vykreslování scény. 
+Generování map osvětlení znamená v podstatě vykreslení celé scény v souřadnicích map osvětlení (tím se vykreslí celá scéna, aniž by docházelo k zakrývání objektů). Generování je\linebreak v práci řešeno dvěma různými přístupy. Prvním přístupem je rasterizační (pomocí OpenGL) a druhým je vrhání paprsku. V obou přístupech se provede výpočet difúzního osvětlení stejným způsobem jako se provádí při běžném vykreslování scény. 
 
 Aby mapa osvětlení obsahovala stíny, musí se provést test viditelnosti jednotlivých bodů pro jednotlivá světla. V rasterizačním přístupu se toto provádí pomocí stínových map (viz. kapitola 3.6.3).
 
 V druhém přístupu se pro každý zdroj světla vrhají paprsky do všech bodů v mapě osvětlení (paprsky mají definováno, kde končí). Pokud paprsek protne mezi počátkem\linebreak a destinací nějaký trojúhelník, nepřipočte se pro bod v osvětlovací mapě příspěvek z daného zdroje světla.
 
-Pokud bychom testovali pro každý paprsek existenci průsečíku s nějakým trojúhelníkem ve scéně, bylo by generování příliš pomalé. Z toho důvodu jsem použil akcelerační datovou strukturu octree. Octree je datovou stromová datová struktura, která dělí rovnoměrně prostor vždy na osm stejných podprostorů. V mé realizaci je rozměr každého uzlu určený pomocí AABB a obsahuje seznam trojúhelníků, který tomuto uzlu náleží.
+Pokud bychom testovali pro každý paprsek existenci průsečíku s nějakým trojúhelníkem ve scéně, bylo by generování příliš pomalé. Z toho důvodu jsem použil akcelerační datovou strukturu octree. Octree je stromová datová struktura, která dělí rovnoměrně prostor vždy na osm stejných podprostorů. V mé realizaci každý uzel určený pomocí AABB a seznamu trojúhelníků, který do AABB spadají.
 
 Stavba stromu octree se provádí odshora dolů, to znamená, že nejdříve se všechny trojúhelníky vloží do kořenového uzlu a po té se provede jejich přesun do nižších uzlů, pokud jsou splněna následující kritéria.
 \begin{itemize}
@@ -1090,7 +1090,7 @@ bool TestAABBAABB(AABB* a, AABB* b) {
 }
 \end{lstlisting}
 
-Po sestavení stromu máme tedy rozdělené trojúhelníky do segmentů, které jsou definované pomocí AABB. Abychom nalezli průsečík paprsku s nějakým trojúhelníkem ve scéně, musíme strom procházet. Nejdříve provedeme test průniku paprsku s AABB potomků kořene. U každého potomka, u kterého byl test pozitivní, provedeme test jeho potomků. Tímto způsobem pokračujeme dokud se nedostaneme na list . V každém uzlu, u kterého byl test pozitivní, provedeme také test průsečíku se všemi trojúhelníky, které má v seznamu. Pokud test jakéhokoliv trojúhelníku je pozitivní, vrátíme test paprsku jako pozitivní.
+Po sestavení stromu máme tedy rozdělené trojúhelníky do segmentů, které jsou definované pomocí AABB. Abychom nalezli průsečík paprsku s nějakým trojúhelníkem ve scéně, musíme strom procházet. Nejdříve provedeme test průniku paprsku s AABB potomků kořene. U každého potomka, u kterého byl test pozitivní, provedeme test jeho potomků. Tímto způsobem pokračujeme dokud se nedostaneme na úroveň listů. V každém uzlu, u kterého byl test pozitivní, provedeme také test průsečíku se všemi trojúhelníky, které má v seznamu. Pokud test jakéhokoliv trojúhelníku je pozitivní, vrátíme test paprsku jako pozitivní.
 
 Ukázka rekurzivního hledání v octree je na obrázku 4.6 (na obrázku je pouze quadtree, což je obdoba octree ve 2D).
 
@@ -1101,7 +1101,7 @@ Ukázka rekurzivního hledání v octree je na obrázku 4.6 (na obrázku je pouz
 \end{figure}
 \end{center}
 
-Aby hledání ve stromu bylo ještě rychlejší, lze použít ještě několik optimalizací. Může se například ukládat $n$ posledních průsečíků a testovat, jestli další paprsek nemá stejný průsečík se stejným trojúhelníkem jako předešlý paprsek. Tato optimalizace má smysl pouze pro malé $n$. V mém projektu jsem nastavil $n = 2$ a testuji paprsky, které mají cílový trojúhelník stejný, vždy za sebou.
+Aby hledání ve stromu bylo ještě rychlejší, lze použít ještě několik optimalizací. Může se například ukládat $n$ posledních průsečíků a testovat, jestli další paprsek nemá stejný průsečík se stejným trojúhelníkem jako předešlý paprsek. Tato optimalizace má smysl pouze pro malé $n$. V mém projektu jsem nastavil $n = 2$. Paprsky testuji v pořadí podle indexu cílového trojúhelníku.
 
 Dále je vhodné přeskakovat testy stejných trojúhelníků. Podle zvoleného kritéria dělení stromu při jeho stavbě může dojít k tomu, že některé trojúhelníky jsou uloženy ve stromu víckrát (pokud jejich AABB proniká s více uzly stejné hloubky). Řešit to lze jednoduše. Stačí si u trojúhelníku vždy pamatovat ID paprsku, s kterým byl proveden poslední test průsečíku. Díky tomu lze zjistit, jestli některý paprsek není testován víckrát a případně tento test přeskočit.
 
@@ -1125,7 +1125,7 @@ Data pro dynamickou aktualizaci map osvětlení se nazývají záplaty. Záplata
 
 Data záplaty jsou při běhu simulátoru uloženy jako trojúhelníky ve VBO (tedy na GPU). Každý vrchol má dva atributy a to pozici v mapě osvětlení a barvu světla vynásobenou intenzitou. Lze tedy snadno a rychle mapy osvětlení aktualizovat, pokud máme záplaty\linebreak v této podobě uloženy.
 
-Abychom získali záplaty v této podobě musíme nejdříve vykreslit pro každý dynamický zdroj světla vykreslit mapu osvětlení a poté tyto data zvektorizovat. Pro zvektorizování lze využít informaci o souřadnicích jednotlivých trojúhelníků v mapě osvětlení. V prvním kroku se přečtou informace o osvětlení ve vrcholech trojúhelníků. Poté se provede interpolace těchto hodnot (vždy pouze v rámci jednoho trojúhelníku) a zkontroluje se, zda hodnota s nějakou tolerancí odpovídá. Pokud ano, přidá se geometrie trojúhelníku do vektorových dat záplaty. Pokud ne, rozdělí se trojúhelník podle jeho středu a provádí se znovu stejný postup.
+Abychom získali záplaty v této podobě musíme nejdříve pro každý dynamický zdroj světla vykreslit mapu osvětlení a poté tyto data zvektorizovat. Pro zvektorizování lze využít informaci o souřadnicích jednotlivých trojúhelníků v mapě osvětlení. V prvním kroku se přečtou informace o osvětlení ve vrcholech trojúhelníků. Poté se provede interpolace těchto hodnot (vždy pouze v rámci jednoho trojúhelníku) a zkontroluje se, zda hodnota s nějakou tolerancí odpovídá. Pokud ano, přidá se geometrie trojúhelníku do vektorových dat záplaty. Pokud ne, rozdělí se trojúhelník podle jeho středu a provádí se znovu stejný postup.
 \newpage
 
 \begin{center}
@@ -1155,12 +1155,12 @@ $sp''_x = sp'_x$\\
 $sp''_y = sp'_y - a / s_z$
 \end{center}
 
-Tím jsme získali pozici texelu nesoucí informaci o intenzitě osvětlení. Vzniká zde ale problém s barevným světlem. Jsou zde dvě možnosti řešení. Prvním je přidání další textury, ve kterém by byla barevná intenzita světla(tím by došlo ke zvýšení náročnosti na hardware a ke zvýšení paměťové náročnosti). Druhým možným řešením je omezit barevná světla\linebreak do nějaké sytosti (pokud se slabě zabarvené světlo aplikuje jako bílé, není to tolik rušivé).
+Tím jsme získali pozici texelu nesoucí informaci o intenzitě osvětlení. Vzniká zde ale problém s barevným světlem. Jsou zde dvě možnosti řešení. Prvním je přidání další textury, ve kterém by byla barevná intenzita světla (tím by došlo ke zvýšení náročnosti na hardware a ke zvýšení paměťové náročnosti). Druhým možným řešením je omezit barevná světla\linebreak do nějaké sytosti (pokud se slabě zabarvené světlo aplikuje jako bílé, není to tolik rušivé).
 \newpage
 
-Dalším problémem je, že dynamické objekty (tedy vozidla) by měly zastínit statický model. Tento problém lze řešit opět pomocí screen-space přístupu. Ve screen-space textuře si můžeme označit texely, na kterých je vykreslené vozidlo. V době vykreslování vozovky se vždy díváme o několik texelů výše, než je aktuální vykreslovaný texel, a pokud je texel označen, ztmavíme aktuálně vykreslovaný fragment. Důležitou poznámkou je, že texely kol vozidla se neoznačují (tím by vznikal chybný stín).
+Dalším problémem je, že dynamické objekty (tedy vozidla) by měly zastínit statický model. Tento problém lze řešit opět pomocí screen-space přístupu. Ve screen-space textuře si můžeme označit texely, na kterých je vykreslené vozidlo. V době vykreslování vozovky se vždy díváme o několik texelů výše, než je aktuální vykreslovaný fragment, a pokud je texel označen, ztmavíme aktuálně vykreslovaný fragment. Důležitou poznámkou je, že texely kol vozidla se neoznačují (tím by vznikal chybný stín).
 
-Stín je kvalitou obdobný jako projektivní stín. Bylo by možné zjišťovat pozice světel, aby vznikl měkčí stín, ale tím by se simulátor značně zpomalil. Při rychlém otáčení lze zpozorovat chybu, která vzniká kvůli použitému screen-space přístupu. V noční scéně to moc není vidět, nicméně ve světlých scénách by to mohlo být značně rušivé.
+Stín je kvalitou srovnatelný s projektivním stínem. Bylo by možné zjišťovat pozice světel, aby vznikl měkký stín, ale tím by se simulátor značně zpomalil. Při rychlém otáčení lze zpozorovat chybu, která vzniká kvůli použitému screen-space přístupu. V noční scéně to moc není vidět, nicméně ve světlých scénách by to mohlo být značně rušivé.
 
 \begin{center}
 \begin{figure}[h]
@@ -1171,7 +1171,7 @@ Stín je kvalitou obdobný jako projektivní stín. Bylo by možné zjišťovat 
 
 \subsection{Světla vozidel}
 
-Dle předběžných měření jsem zjistil, že na mobilních zařízeních lze za běhu počítat jedno až dvě světla(bez řešení viditelnosti světla). U vozidla ovládané hráčem není potřeba řešit viditelnost světla, prakticky zde nedochází k situacím, že by světlo osvětlovalo neviditelné objekty (je to z důvodu těsné vazby světla hráčova vozidla a kamery).
+Dle předběžných měření jsem zjistil, že na mobilních zařízeních lze za běhu počítat jedno až dvě světla (bez výpočtu zastínění zdroje světla). U vozidla ovládané hráčem není potřeba řešit viditelnost světla, prakticky zde nedochází k situacím, že by světlo osvětlovalo neviditelné objekty (je to z důvodu těsné vazby světla hráčova vozidla a kamery).
 
 U ostatních vozidel je třeba osvětlení zjednodušit, aby to mobilní hardware zvládal. Zvolil jsem metodu vykreslování poloprůhledných kuželů do scény, k tomu je použita OpenGL funkce blending, která umožňuje kreslit objekty s částečnou průhledností. Je zde počítán útlum světla stejně jako u standardních světel.
 \newpage
@@ -1186,9 +1186,9 @@ U ostatních vozidel je třeba osvětlení zjednodušit, aby to mobilní hardwar
 \section{Screen-space přístup}
 Při běhu jakéhokoliv simulátoru je největší zátěž mobilního hardware způsobena vykreslováním 3D scény, proto je nutné tuto část co nejvíce zefektivnit. Pro mnoho efektů se používají takzvané víceprůchodové přístupy (scéna se vykreslí víckrát z různých pohledů nebo pomocí různých shaderů), ale na mobilním zařízení je zatím z hlediska výkonu možné použít pouze jednoprůchodový přístup.
 
-Abych částečně nahradil ve svém simulátoru víceprůchodový přístup, použil jsem screen-space přístup(to je obecně jakákoliv technika využívající data z pohledu kamery, jinými slovy máme pouze výsledný snímek a na něm provádíme další operace). V praxi se používá hlavně pro zrcadlové plochy. Potřeboval jsem přistupovat do aktuálně vykreslovaného snímku. To je ale problém, protože tento snímek není kompletní a kdybych vykresloval přímo do něj\linebreak a zároveň z něj četl způsobilo by to chyby ve výsledném obraze.
+Abych částečně nahradil ve svém simulátoru víceprůchodový přístup, použil jsem screen-space přístup (to je obecně jakákoliv technika využívající data z pohledu kamery, jinými slovy máme pouze výsledný snímek a na něm provádíme další operace). V praxi se používá hlavně pro zrcadlové plochy. Potřeboval jsem přistupovat do aktuálně vykreslovaného snímku. To je ale problém, protože tento snímek není kompletní a kdybych vykresloval přímo do něj\linebreak a zároveň z něj četl způsobilo by to chyby ve výsledném obraze.
 
-Řešením je vykreslování střídavě do dvou různých textur. To znamená, že při lichém snímku kreslím do textury 1 a čtu z textury 2. Při sudém snímku je tomu obráceně. Tímto způsobem získám přístup do vykreslené scény, sice s drobným zpožděním, ale při dostatečně rychlém vykreslování si toho uživatel nevšimne(za předpokladu, že textura bude použita\linebreak na efekty jako jsou odlesky nebo stíny).
+Řešením je vykreslování střídavě do dvou různých textur. To znamená, že při lichém snímku kreslím do textury 1 a čtu z textury 2. Při sudém snímku je tomu obráceně. Tímto způsobem získám přístup do vykreslené scény, sice s drobným zpožděním, ale při dostatečně rychlém vykreslování si toho uživatel nevšimne (za předpokladu, že textura bude použita\linebreak na efekty jako jsou odlesky nebo stíny).
 
 \begin{center}
 \begin{figure}[h!]
@@ -1198,7 +1198,7 @@ Abych částečně nahradil ve svém simulátoru víceprůchodový přístup, po
 \end{center}
 
 \subsection{Rozměr textur na OpenGL ES 2.0}
-Verze OpenGL ES 2.0 umožňuje používat obdélníkové textury pouze omezeně. Textury tedy musí být čtvercové a jejich strana musí být o velikosti mocniny 2.
+Verze OpenGL ES 2.0 umožňuje používat obdélníkové textury pouze omezeně. Strana textury musí být o velikosti mocniny 2.
 Pro vykreslování do textury, která bude výsledně umístěna na obrazovku je tedy nutné zvolit vyšší rozlišení. Např. u tabletu Google Nexus 7 2012 s rozlišením 1280x720 se zvolí textura 2048x1024. To znamená, že by se ve výsledku vykreslilo víc než 2x více pixelů než je potřeba.
 
 Není ale nutné vykreslovat do celé textury, pomocí příkazu \textit{glViewport} se dá nastavit část textury, do které má OpenGL vykreslovat a nedojde tedy k plýtvání výkonem.
@@ -1260,7 +1260,7 @@ Pro můj zvolený pohled jsem zvolil konstanty $a = 0.1; b = 2$. Odlesk vizuáln
 
 U vozidel by se optimálně měl odlesk řešit pomocí víceprůchodového algoritmu za využití cube mapování. Vzhledem k tomu, že potřebuji maximální možný výkon a Android zařízení mají typicky malý displej, použil jsem jednodušší variantu.
 
-Souřadnice odlesku $r$ u vozidel se provádí pouze podle normály. Pro výpočet pozice odraženého obrazu se vezme střed vozidla $s$ v souřadnicích kamery a přičte se k němu normála $\vec{n}$ vynásobena určitým faktorem $f$ (to funguje pouze u vozidla, které uživatel ovládá).
+Souřadnice odlesku $r$ u vozidel se provádí pouze podle normály. Pro výpočet pozice odraženého obrazu se vezme střed vozidla $s$ v souřadnicích kamery a přičte se k němu normála $\vec{n}$ vynásobena určitým faktorem $f$ (toto platí pouze pro vozidla, které uživatel ovládá).
 \begin{center}
 $r = [s_x + \vec{n}_x \cdot f, s_y + \vec{n}_y \cdot f]$
 \end{center}
@@ -1418,9 +1418,9 @@ Nakonec jsem otestoval kompatibilitu s dalšími zařízeními, v testu uspěl t
 \chapter{Závěr}
 Vzniklý simulátor sice není po grafické stránce schopen konkurovat komerčním simulátorům na platformě Android. Nicméně disponuje několika grafickými technikami, které mnoho komerčních simulátorů postrádá. Předzpracované osvětlení dodává scéně lepší vzhled a povedlo se dokonce částečně aplikovat předzpracované osvětlení i na dynamické objekty.
 
-Zadání bylo splněno, pouze poblikávající lampy nebyly realizovány ideálně. Jsou realizovány pomocí střídání více map osvětlení, což je paměťově zbytečně náročné a není zde možnost nastavení více stavů světla. Práce je poměrně rozsáhlá a nestihl jsem zhasínající světla realizovat efektivněji.
+Zadání bylo splněno, úspěšně jsem realizoval generování map osvětlení pomocí vrhání paprsku. Realizoval jsem závodní simulátor, který mapy osvětlení využívá a nad rámec zadání jsem aplikoval statické osvětlení na dynamické objekty. Vylepšil jsem výsledek aplikováním odlesků a motion-blur. Výsledek jsem úspěšně otestoval na několika zařízeních. Podle měření je simulátor poměrně náročný na výkon, nicméně mobilní zařízení střední a vyšší třídy\linebreak s tímto nemají problém.
 
-Práci do budoucna hodlám rozšířit o generování map osvětlení pomocí vrhání paprsku. Výsledek provedený pomocí rasterizace je sice uspokojivý, ale pomocí vrhání paprsku by šly realizovat i plošné zdroje světla a tím by byl výsledný efekt daleko kvalitnější. Aby scéna nebyla příliš tmavá, bylo nutné nastavit poměrně velkou hodnotu pro ambientní složku osvětlovacího modelu.
+Práci do budoucna hodlám dále vyvíjet. Chci se soustředit hlavně na další možnosti optimalizace jako je například ořez scény pohledovým jehlanem, použití techniky Level-of-detail a dynamické načítání scény.
 
 %*****************************************************************************
 % Seznam literatury je v samostatnem souboru reference.bib. Ten
@@ -1456,6 +1456,7 @@ Práci do budoucna hodlám rozšířit o generování map osvětlení pomocí vr
 \item GPS (Global Positioning System) - systém pro určení polohy kdekoliv na světě
 \item UML (Unified Modeling Language) - vizuální jazyk pro modelování softwaru
 \end{itemize}
+TODO
 
 \chapter{Obsah přiloženého CD}
 
@@ -1486,11 +1487,13 @@ readme.txt & informace potřebné k používání simulátoru\\
 \hline
 \end{tabular}
 \end{center}
-
+TODO
 
 \chapter{Uživatelská příručka}
+Simulátor vyžaduje minimálně jednojádrový procesor o taktu 1GHz, 1GB RAM paměti, grafickou kartu s pamětí 64MB. Dále vyžaduje OpenGL ES 2.0 (nebo OpenGL 3.0) a GLSL 1.0. Binární soubor pro Android je kompatibilní s Android 4.0+. Projekt lze zkompilovat\linebreak i na Android 2.3 (zařízení s touto verzí systému obvykle nedosahují potřebného výkonu).
 
 \section{Instalace simulátoru}
+
 \paragraph{Linux}\ \ \\
 Před kompilováním je potřeba mít nainstalované následující balíčky:\ \ \\
 libbullet-dev freeglut3-dev libpng-dev qmake make\ \ \\
@@ -1503,10 +1506,7 @@ Pokud máte 64bitový systém je potřeba nahradit v jni/open4speed.pro řádek\
 Kompilování se spustí zadáním těchto příkazů do terminálu:\ \ \\
 cd jni\ \ \\
 qmake open4speed.pro\ \ \\
-make\ \ \\
-\ \ \\
-Spuštění se provede příkazem\ \ \\
-./open4speed\ \ \\
+make
 
 \paragraph{Android}\ \ \\
 Pro Android je k dispozici spustitelný binární soubor Open4speed.apk.\ \ \\

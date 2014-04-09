@@ -379,7 +379,7 @@ Protože uchovávání záplat v paměti by bylo příliš paměťově náročn�
 
 \begin{center}
 \begin{figure}[h!]
-\includegraphics[width=110mm]{figures/lmupdate.png}
+\includegraphics[width=105mm]{figures/lmupdate.png}
 \caption{Ukázka aktualizace map osvětlení na jednoduchém 3D modelu, žlutou barvou je znázorněna část záplaty, která nenese informaci o změně osvětlení}
 \end{figure}
 \end{center}
@@ -1297,6 +1297,7 @@ Operační systém & Android 4.1.2 & Android 4.4.2 & Kubuntu 14.04 32bit \\ \hli
 \newpage
 
 \section{Generování map osvětlení}
+TODO okomentovat výsledky
 \paragraph{Bodové zdroje světla}\ \ \\
 \begin{table}[h!]
 \begin{center}
@@ -1315,36 +1316,47 @@ raycasting & 28.176min\\ \hline
 \paragraph{Plošné zdroje světla}\ \ \\
 \begin{table}[h!]
 \begin{center}
-\begin{tabular}{|p{100mm}|c|}
+\begin{tabular}{|p{80mm}|c|c|}
 \hline
-\textbf{Nastavení} & \textbf{Čas vykreslování} \\
+\textbf{Nastavení} & \textbf{1 paprsek} & \textbf{všechny mapy osv.} \\
 \hline
-kvadratický útlum 0.2, optimalizováno & 10.276s\\ \hline
-kvadratický útlum 0.1, optimalizováno & 19.483s\\ \hline
-kvadratický útlum 0.05, optimalizováno & 36.875s\\ \hline
-kvadratický útlum 0.05, neoptimalizováno & 359.796s\\ \hline
-lineární útlum 0.05, neoptimalizováno & 960.546s\\ \hline
-lineární útlum 0.05, spot effekt 0.5, neoptimalizováno & 12874.661s\\ \hline
+kvadratický útlum 0.2 & 1.52ns & 10.276s\\ \hline
+kvadratický útlum 0.1 & 2.87ns & 19.483s\\ \hline
+kvadratický útlum 0.05 & 5.44ns & 36.875s\\ \hline
+neseřazené trojúhelníky & 141.71ns & 960.546s\\ \hline
+neseřazené trojúhelníky, spot efekt 0.5 & 1899.48ns & 12874.661s\\ \hline
 \end{tabular}
-\caption{Vykreslování několika plošných zdrojů světel navzorkovaných na 202 bodových světel, optimalizace spočívá v testování paprsků vždy mezi dvěma trojúhelníky a detekování, zda bod na trojúhelník dosvítí }
+\caption{Vykreslování několika plošných zdrojů světel navzorkovaných na 202 bodových světel, neseřazené trojúhelníky znamená, že paprsky byly testovány neoptimálním pořadí, v každém testu bylo testováno přibližně 6.5 miliard paprsků }
 \end{center}
 \end{table}
 
 \begin{table}[h!]
 \begin{center}
-\begin{tabular}{|p{100mm}|c|}
+\begin{tabular}{|p{80mm}|c|c|}
 \hline
-\textbf{Nastavení} & \textbf{Čas vykreslování} \\
+\textbf{Nastavení} & \textbf{1 paprsek} & \textbf{všechny mapy osv.} \\
 \hline
-kvadratický útlum 0.1, optimalizováno & 4.925h\\ \hline
-kvadratický útlum 0.05, optimalizováno & 9.578h\\ \hline
+kvadratický útlum 0.2 & 0.87ns & 1.219h\\ \hline
+kvadratický útlum 0.2 dupl.test & 0.94ns & 1.322h\\ \hline
+kvadratický útlum 0.1 & 1.71ns & 2.398h\\ \hline
+kvadratický útlum 0.1 dupl.test & 1.88ns & 2.635h\\ \hline
+kvadratický útlum 0.05 & 3.39ns & 4.746h\\ \hline
+kvadratický útlum 0.05 dupl.test & 3.73ns & 5.222h\\ \hline
+bez detekování dosahu & 14.68ns & 20.561h\\ \hline
 \end{tabular}
-\caption{Vykreslování všech plošných zdrojů světel navzorkovaných na 372854 bodových světel, optimalizace spočívá v testování paprsků vždy mezi dvěma trojúhelníky a detekování, zda bod na trojúhelník dosvítí }
+\caption{Vykreslování všech plošných zdrojů světel navzorkovaných na 150306 bodových světel, duplicitní test znamená filtrování trojúhelníků, které byly pro daný paprsky již testovány, v každém testu bylo testováno přibližně 4.8 biliónu paprsků }
 \end{center}
 \end{table}
 \newpage
 
+\begin{figure}[h!]
+\includegraphics[width=150mm]{figures/graf3.png}
+\caption{Závislost rychlosti vykreslování paprsku na dosahu zdrojů světel, testování různě osvětlených scén}
+\end{figure}
+
 \section{Simulátor}
+TODO provést nové měření, přepsat
+
 V prvním testu zjišťuji, jak je vykreslování rychlé při různém počtu vykreslovaných fragmentů. Jedná se v podstatě o snížení rozlišení displeje k zvýšení výkonu.
 
 \begin{table}[h!]

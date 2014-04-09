@@ -336,7 +336,7 @@ void display(void) {
                                     color = glm::max(glm::dot(triangles[i]->points[j]->n, L), 0.0f) * xrenderer->light.u_light_diffuse;
                                     //light attenuation
                                     color *= eff / (att * sqr(glm::length(raydir)));
-                                    //if (color.w > 0.5f) {
+                                    if (color.w > 0.5f) {
                                         if (!root->isIntersected(raybegin, rayend, testID++)) {
                                             // add to previous lightmap
                                             index = triangles[i]->points[j]->t.y * rttsize + triangles[i]->points[j]->t.x;
@@ -344,7 +344,7 @@ void display(void) {
                                             pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 32.0f));
                                             pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 32.0f));
                                         }
-                                    //}
+                                    }
                                 }
                             }
                             k++;

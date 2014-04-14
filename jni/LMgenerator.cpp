@@ -433,7 +433,7 @@ void display(void) {
             printf("Generated %d lights\n", pIndex.size());
 
             /// render area lights into lightmaps
-            /*printf("Rendering area lights into lightmaps...");
+            printf("Rendering area lights into lightmaps...");
             startTimer();
             float cutoff = cos(90 * 3.14 / 180.0);
 
@@ -491,7 +491,7 @@ void display(void) {
             }
             printf("\r                                                        ");
             printf("\rRendering area lights into lightmaps...");
-            stopTimer();*/
+            stopTimer();
 
             /// fix holes in lightmaps
             printf("Fixing holes in lightmaps...");

@@ -77,7 +77,7 @@ void triangle::addLMPoint(int u, int v, glm::ivec2 t) {
     glm::vec3 n = glm::normalize(na * lena + nb * lenb + nc * lenc);
     glm::vec2 c = ta * lena + tb * lenb + tc * lenc;
 
-    points.push_back(new Point{vert, t, n, c});
+    points.push_back(new Point{vert, t, n, c, glm::vec3(lena, lenb, lenc)});
 }
 
 float triangle::countDistanceTo(triangle* t) {

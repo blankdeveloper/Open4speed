@@ -34,6 +34,7 @@ public:
 
     int lmCount;
     int lightCount;
+    bool* lastValue;
     shader* fboRenderer;
     std::vector<VBOLightParam*> lightParam;
     std::vector<vbo*> lightVBO;

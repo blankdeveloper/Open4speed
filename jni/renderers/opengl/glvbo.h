@@ -39,9 +39,8 @@ public:
      * @param sh is shader for rendering
      * @param begin is index of first vector/triangle
      * @param len is length of data to renderer
-     * @param triangles is true when rendering triangles
      */
-    void render(shader* sh, int begin, int len, bool triangles);
+    void render(shader* sh, int begin, int len);
 };
 
 #endif // GLVBO_H

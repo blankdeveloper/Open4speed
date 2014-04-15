@@ -66,16 +66,10 @@ void glvbo::destroy() {
  * @param sh is shader for rendering
  * @param begin is index of first vector/triangle
  * @param len is length of data to renderer
- * @param triangles is true when rendering triangles
  */
-void glvbo::render(shader* sh, int begin, int len, bool triangles) {
+void glvbo::render(shader* sh, int begin, int len) {
     glBindBuffer(GL_ARRAY_BUFFER, instance);
     sh->attrib(size);
-    if (triangles) {
-        glDrawArrays(GL_TRIANGLES, begin * 3, len * 3);
-    } else {
-        glLineWidth(1);
-        glDrawArrays(GL_LINES, begin, len);
-    }
+    glDrawArrays(GL_TRIANGLES, begin * 3, len * 3);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

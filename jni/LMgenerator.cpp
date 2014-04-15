@@ -103,6 +103,66 @@ void seed(int x, int y, int lm, int value) {
     }
 }
 
+void fixLM() {
+    for (int l = 0; l < trackdata->getLMCount(); l++) {
+        /// fill holes
+        for (int a = 0; a < rttsize; a++) {
+            for (int b = 0; b < rttsize; b++) {
+                if (pixels[l][(b * rttsize + a) * 4 + 3] < 128) {
+                    for (int i = -1; i <= 1; i++) {
+                        for (int j = -1; j <= 1; j++) {
+                            if ((a + i >= 0) && (a + i < rttsize) && (b + j >= 0) && (b + j < rttsize)) {
+                                if (pixels[l][((b + j) * rttsize + a + i) * 4 + 3] > 128) {
+                                    for (int k = 0; k < 3; k++) {
+                                        pixels[l][(b * rttsize + a) * 4 + k] = pixels[l][((b + j) * rttsize + a + i) * 4 + k];
+                                    }
+                                    pixels[l][(b * rttsize + a) * 4 + 3] = 128;
+                                }
+                            }
+                            if (pixels[l][(b * rttsize + a) * 4 + 3] == 128) {
+                                break;
+                            }
+                        }
+                        if (pixels[l][(b * rttsize + a) * 4 + 3] == 128) {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        /// copy pixels
+        unsigned char* pixels2 = new unsigned char[rttsize * rttsize * 4];
+        for (unsigned int i = 0; i < rttsize * rttsize * 4; i++) {
+            pixels2[i] = pixels[l][i];
+        }
+        /// blur
+        for (int a = 0; a < rttsize; a++) {
+            for (int b = 0; b < rttsize; b++) {
+                for (int k = 0; k < 3; k++) {
+                    int count = 1;
+                    int value = pixels[l][(b * rttsize + a) * 4 + k];
+                    for (int i = -1; i <= 1; i++) {
+                        for (int j = -1; j <= 1; j++) {
+                            if ((b + j >= 0) && (b + j < rttsize))
+                                if ((a + i >= 0) && (a + i < rttsize))
+                                    if (pixels[l][((b + j) * rttsize + a + i) * 4 + 3] > 128) {
+                                        count++;
+                                        value += pixels2[((b + j) * rttsize + a + i) * 4 + k];
+                                    }
+                        }
+                    }
+                    pixels[l][(b * rttsize + a) * 4 + k] = value / count;
+                }
+            }
+        }
+        /// fix alpha channel
+        for (int a = 0; a < rttsize * rttsize; a++) {
+            pixels[l][a * 4 + 3] = 255;
+        }
+        delete[] pixels2;
+    }
+}
+
 /**
  * @brief display updates display
  */
@@ -284,47 +344,69 @@ void display(void) {
                             fflush(stdout);
                         }
 
-                        /// get texel lines
+                        /// render triangles
+                        fixLM();
                         for (int y = 0; y < trackdata->getLMCount(); y++) {
                             int oldCount = lcount[y];
-                            for (int b = 0; b < rttsize; b++) {
-                                bool closed = true;
-                                int lastIntensity = 0;
-                                int lastA = 0;
-                                for (int a = 0; a < rttsize; a++) {
-                                    int index = (b * rttsize + a) * 4 + highIndex;
-
-                                    /// line close
-                                    if (!closed && (lastIntensity != pixels[y][index])) {
-                                        outputVBO[y].push_back({lastA / (float)rttsize, b / (float)rttsize, lastIntensity / 255.0f / highVal});
-                                        closed = true;
-                                        lcount[y]++;
-                                    }
-
-                                    lastA = a;
-                                    lastIntensity = pixels[y][index];
-
-                                    /// line begin
-                                    if (closed) {
-                                        if (pixels[index] > 0) {
-                                            outputVBO[y].push_back({lastA / (float)rttsize, b / (float)rttsize, lastIntensity / 255.0f / highVal});
-                                            closed = false;
-                                            lcount[y]++;
+                            for (unsigned long i = 0; i < triangles.size(); i++) {
+                                if (triangles[i]->lmIndex == y) {
+                                    glm::ivec2 a = triangles[i]->aID;
+                                    glm::ivec2 b = triangles[i]->bID;
+                                    glm::ivec2 c = triangles[i]->cID;
+                                    int ia = pixels[y][(a.y * rttsize + a.x) * 4 + highIndex];
+                                    int ib = pixels[y][(b.y * rttsize + b.x) * 4 + highIndex];
+                                    int ic = pixels[y][(c.y * rttsize + c.x) * 4 + highIndex];
+                                    bool black = true;
+                                    if ((ia > 2) || (ib > 2) || (ic > 2))
+                                        black = false;
+                                    if (black) {
+                                        for (unsigned int j = 0; j < triangles[i]->points.size(); j++) {
+                                            glm::ivec2 t = triangles[i]->points[j]->t;
+                                            glm::vec3 ba = triangles[i]->points[j]->bary;
+                                            int ita = pixels[y][(t.y * rttsize + t.x) * 4 + highIndex];
+                                            int itb = ba.x * ia + ba.y * ib + ba.z * ic;
+                                            if (ita > 2) {
+                                                black = false;
+                                                break;
+                                            }
                                         }
                                     }
-                                }
-
-                                /// close line
-                                if (!closed) {
-                                    outputVBO[y].push_back({lastA / (float)rttsize, b / (float)rttsize, lastIntensity / 255.0f / highVal});
-                                    lcount[y]++;
+                                    if (!black) {
+                                        glm::ivec2 center = (a + b + c) / 3;
+                                        if (a.x > center.x)
+                                            a.x++;
+                                        else
+                                            a.x-=2;
+                                        if (b.x > center.x)
+                                            b.x+=2;
+                                        else
+                                            b.x-=2;
+                                        if (c.x > center.x)
+                                            c.x+=2;
+                                        else
+                                            c.x-=2;
+                                        if (a.y > center.y)
+                                            a.y+=2;
+                                        else
+                                            a.y-=2;
+                                        if (b.x > center.y)
+                                            b.y+=2;
+                                        else
+                                            b.y-=2;
+                                        if (c.y > center.y)
+                                            c.y+=2;
+                                        else
+                                            c.y-=2;
+                                        outputVBO[y].push_back({a.x / (float)rttsize, a.y / (float)rttsize, ia / 255.0f});
+                                        outputVBO[y].push_back({b.x / (float)rttsize, b.y / (float)rttsize, ib / 255.0f});
+                                        outputVBO[y].push_back({c.x / (float)rttsize, c.y / (float)rttsize, ic / 255.0f});
+                                        lcount[y]+=3;
+                                    }
                                 }
                             }
-
-
-                            /// add info about light
                             lightInfo[y].push_back({oldCount, lcount[y] - oldCount, getConfig("R", lights), getConfig("G", lights), getConfig("B", lights)});
                         }
+
                         status += 100 / (float)count;
                     }
                 }
@@ -335,7 +417,7 @@ void display(void) {
             stopTimer();
 
             /// render static point lights into lightmaps
-            printf("Rendering static point lights into lightmaps...");
+            /*printf("Rendering static point lights into lightmaps...");
             startTimer();
             clearLMs();
             count = 0;
@@ -496,73 +578,17 @@ void display(void) {
             /// fix holes in lightmaps
             printf("Fixing holes in lightmaps...");
             startTimer();
-            for (int l = 0; l < trackdata->getLMCount(); l++) {
-                /// fill holes
-                for (int a = 0; a < rttsize; a++) {
-                    for (int b = 0; b < rttsize; b++) {
-                        if (pixels[l][(b * rttsize + a) * 4 + 3] < 128) {
-                            for (int i = -1; i <= 1; i++) {
-                                for (int j = -1; j <= 1; j++) {
-                                    if ((a + i >= 0) && (a + i < rttsize) && (b + j >= 0) && (b + j < rttsize)) {
-                                        if (pixels[l][((b + j) * rttsize + a + i) * 4 + 3] > 128) {
-                                            for (int k = 0; k < 3; k++) {
-                                                pixels[l][(b * rttsize + a) * 4 + k] = pixels[l][((b + j) * rttsize + a + i) * 4 + k];
-                                            }
-                                            pixels[l][(b * rttsize + a) * 4 + 3] = 128;
-                                        }
-                                    }
-                                    if (pixels[l][(b * rttsize + a) * 4 + 3] == 128) {
-                                        break;
-                                    }
-                                }
-                                if (pixels[l][(b * rttsize + a) * 4 + 3] == 128) {
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-                /// copy pixels
-                unsigned char* pixels2 = new unsigned char[rttsize * rttsize * 4];
-                for (unsigned int i = 0; i < rttsize * rttsize * 4; i++) {
-                    pixels2[i] = pixels[l][i];
-                }
-                /// blur
-                for (int a = 0; a < rttsize; a++) {
-                    for (int b = 0; b < rttsize; b++) {
-                        for (int k = 0; k < 3; k++) {
-                            int count = 1;
-                            int value = pixels[l][(b * rttsize + a) * 4 + k];
-                            for (int i = -1; i <= 1; i++) {
-                                for (int j = -1; j <= 1; j++) {
-                                    if ((b + j >= 0) && (b + j < rttsize))
-                                        if ((a + i >= 0) && (a + i < rttsize))
-                                            if (pixels[l][((b + j) * rttsize + a + i) * 4 + 3] > 128) {
-                                                count++;
-                                                value += pixels2[((b + j) * rttsize + a + i) * 4 + k];
-                                            }
-                                }
-                            }
-                            pixels[l][(b * rttsize + a) * 4 + k] = value / count;
-                        }
-                    }
-                }
-                /// fix alpha channel
-                for (int a = 0; a < rttsize * rttsize; a++) {
-                    pixels[l][a * 4 + 3] = 255;
-                }
-                delete[] pixels2;
-            }
-            stopTimer();
+            fixLM();
+            stopTimer();*/
 
-            /// Save lightmaps into PNGs
-            printf("Saving lightmaps into PNG files...");
+            /// Save lightmaps
+            printf("Saving lightmaps...");
             startTimer();
-            for (int i = 0; i < trackdata->getLMCount(); i++) {
+            /*for (int i = 0; i < trackdata->getLMCount(); i++) {
                 char filename[256];
                 sprintf(filename, "lightmap%d.png", i);
                 writeImage(prefix(filename), rttsize, rttsize, pixels[i]);
-            }
+            }*/
             /// Save VBOs
             FILE* file = fopen(prefix("lights.vbo"), "w");
             fprintf(file,"%d\n", trackdata->getLMCount());

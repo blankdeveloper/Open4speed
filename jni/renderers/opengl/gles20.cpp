@@ -598,7 +598,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
 
     /// standart vertices
     if ((mod->cutX * mod->cutY == 1) || (lmFilter >= 0)) {
-        m->vboData->render(current, 0, m->triangleCount[mod->cutX * mod->cutY], true);
+        m->vboData->render(current, 0, m->triangleCount[mod->cutX * mod->cutY]);
     }
 
     /// culled vertices
@@ -606,11 +606,11 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         for (int i = ym; i <= yp; i++) {
             int l = m->triangleCount[i * mod->cutX + xm];
             int r = m->triangleCount[i * mod->cutX + xp + 1];
-            m->vboData->render(current, l, r - l, true);
+            m->vboData->render(current, l, r - l);
         }
         int l = m->triangleCount[(mod->cutX - 1) * mod->cutY];
         int r = m->triangleCount[mod->cutX * mod->cutY];
-        m->vboData->render(current, l, r - l, true);
+        m->vboData->render(current, l, r - l);
     }
 
     //unbind shader

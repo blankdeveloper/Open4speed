@@ -98,7 +98,7 @@ void DynamicLight::setLight(int index, bool value) {
         if ((lightParam[pIndex + i]->len > 0) && (lightParam[pIndex + i]->enabled != value)) {
             trackdata->lightmaps[i]->bindFBO();
             fboRenderer->uniformFloat4("color", lightParam[pIndex + i]->r, lightParam[pIndex + i]->g, lightParam[pIndex + i]->b, 0);
-            lightVBO[i]->render(fboRenderer, lightParam[pIndex + i]->begin, lightParam[pIndex + i]->len);
+            lightVBO[i]->render(fboRenderer, lightParam[pIndex + i]->begin / 3, lightParam[pIndex + i]->len / 3);
             trackdata->lightmaps[i]->unbindFBO();
         }
         lightParam[pIndex + i]->enabled = value;

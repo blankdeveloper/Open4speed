@@ -127,6 +127,7 @@ shader* getShader(const char* name) {
 
     /// create shader from code
     if (strcmp(screenRenderer, "glsl") == 0) {
+        logi("Compiling shader:", name);
         shader* instance = new glsl(vert_atributes, frag_atributes);
         strcpy(instance->shadername, name);
         shaders->push_back(instance);

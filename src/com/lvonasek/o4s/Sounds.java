@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Sound bridge - it enables me to use Android API from native C++ code(Soundpool MediaPlayer).
  * This access to sounds is also better for game loop interruption(eg.on incoming call)
- * NOTE: if this class is renamed/moved it have to be rewrited in C++ code
+ * NOTE: if this class is renamed/moved it have to be rewritten in C++ code
  * @author Lubos Vonasek
  */
 public class Sounds {

@@ -3,5 +3,5 @@ varying float intensity;
 
 void main()
 {
-  gl_FragColor = color * intensity;  
+  gl_FragColor = color * intensity;
 }

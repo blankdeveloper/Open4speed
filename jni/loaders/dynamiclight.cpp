@@ -92,12 +92,12 @@ void DynamicLight::setLight(int index, bool value) {
     if (value)
         glBlendEquation(GL_FUNC_ADD);
     else
-        glBlendEquation(GL_FUNC_SUBTRACT);
+        glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
 
     for (int i = 0; i < lmCount; i++) {
         if ((lightParam[pIndex + i]->len > 0) && (lightParam[pIndex + i]->enabled != value)) {
             trackdata->lightmaps[i]->bindFBO();
-            fboRenderer->uniformFloat4("color", lightParam[pIndex + i]->r, lightParam[pIndex + i]->g, lightParam[pIndex + i]->b, 1.0f);
+            fboRenderer->uniformFloat4("color", lightParam[pIndex + i]->r, lightParam[pIndex + i]->g, lightParam[pIndex + i]->b, 0);
             lightVBO[i]->render(fboRenderer, lightParam[pIndex + i]->begin, lightParam[pIndex + i]->len);
             trackdata->lightmaps[i]->unbindFBO();
         }

@@ -76,7 +76,7 @@
  interfaces/shader.h interfaces/texture.h \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/vector \
  interfaces/vbo.h loaders/dynamiclight.h loaders/pngloader.h \
- physics/bullet.h \
+ loaders/rgb.h physics/bullet.h \
  ../support/bullet-2.81-rev2613/src/BulletDynamics/Vehicle/btRaycastVehicle.h \
  ../support/bullet-2.81-rev2613/src/BulletDynamics/Dynamics/btRigidBody.h \
  ../support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h \
@@ -475,6 +475,8 @@ interfaces/vbo.h:
 loaders/dynamiclight.h:
 
 loaders/pngloader.h:
+
+loaders/rgb.h:
 
 physics/bullet.h:
 

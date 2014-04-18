@@ -1,5 +1,7 @@
 attribute vec3 v_vertex;
+attribute vec2 v_coords;
 varying float intensity;
+
 void main()
 {
     intensity = v_vertex.z;

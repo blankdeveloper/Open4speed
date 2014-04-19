@@ -27,12 +27,13 @@ public:
     int lmIndex;
     long tIndex;
     long testID;
+    bool subtriangle;
     Texture* txt;
     Texture* txtmap;
     std::vector<Point*> points;
 
     triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c,
-             glm::vec2 aID, glm::vec2 bID, glm::vec2 cID,
+             glm::ivec2 aID, glm::ivec2 bID, glm::ivec2 cID,
              glm::vec3 na, glm::vec3 nb, glm::vec3 nc,
              glm::vec2 ta, glm::vec2 tb, glm::vec2 tc,
              int lmIndex, long tIndex, Texture* txt, Texture* txtmap);
@@ -46,6 +47,8 @@ public:
     glm::vec3 ClosestPtPointTriangle(glm::vec3 p);
 
     PLP* getPointLight(glm::vec3 p);
+
+    bool isInside(glm::vec3 p);
 
     bool isIntersectedByRay(glm::vec3 raybegin, glm::vec3 rayend, long testID);
 };

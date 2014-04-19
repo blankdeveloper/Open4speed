@@ -15,7 +15,7 @@ int ignore2 = 0;
 
 
 triangle::triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c,
-         glm::vec2 aID, glm::vec2 bID, glm::vec2 cID,
+         glm::ivec2 aID, glm::ivec2 bID, glm::ivec2 cID,
          glm::vec3 na, glm::vec3 nb, glm::vec3 nc,
          glm::vec2 ta, glm::vec2 tb, glm::vec2 tc,
          int lmIndex, long tIndex, Texture* txt, Texture* txtmap) {
@@ -24,9 +24,9 @@ triangle::triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c,
     this->c = c;
     this->txt = txt;
     this->txtmap = txtmap;
-    this->aID = glm::ivec2((int)(aID.x * rttsize + 0.5f), (int)(aID.y * rttsize + 0.5f));
-    this->bID = glm::ivec2((int)(bID.x * rttsize + 0.5f), (int)(bID.y * rttsize + 0.5f));
-    this->cID = glm::ivec2((int)(cID.x * rttsize + 0.5f), (int)(cID.y * rttsize + 0.5f));
+    this->aID = aID;
+    this->bID = bID;
+    this->cID = cID;
     this->na = na;
     this->nb = nb;
     this->nc = nc;
@@ -44,6 +44,7 @@ triangle::triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c,
     addPointToAABB(a);
     addPointToAABB(b);
     addPointToAABB(c);
+    subtriangle = false;
 }
 
 
@@ -77,7 +78,7 @@ void triangle::addLMPoint(int u, int v, glm::ivec2 t) {
     glm::vec3 n = glm::normalize(na * lena + nb * lenb + nc * lenc);
     glm::vec2 c = ta * lena + tb * lenb + tc * lenc;
 
-    points.push_back(new Point{vert, t, n, c, glm::vec3(lena, lenb, lenc)});
+    points.push_back(new Point{vert, t, n, c, glm::vec3(lena, lenb, lenc), glm::vec2(P.x, P.y)});
 }
 
 float triangle::countDistanceTo(triangle* t) {
@@ -155,6 +156,14 @@ glm::vec3 triangle::ClosestPtPointTriangle(glm::vec3 p) {
     float v = vb / (va + vb + vc);
     float w = 1.0f - u - v; // = vc / (va + vb + vc)
     return u * a + v * b + w * c;
+}
+
+bool triangle::isInside(glm::vec3 p) {
+    float abc = triangleArea(a,b,c);
+    float pbc = triangleArea(p,b,c);
+    float apc = triangleArea(a,p,c);
+    float abp = triangleArea(a,b,p);
+    return fabs(abc - pbc - apc - abp) < 0.005;
 }
 
 bool triangle::isIntersectedByRay(glm::vec3 raybegin, glm::vec3 rayend, long testID) {

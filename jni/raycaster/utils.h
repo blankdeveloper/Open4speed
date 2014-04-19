@@ -10,6 +10,7 @@ struct Point {
     glm::vec3 n;
     glm::vec2 c;
     glm::vec3 bary;
+    glm::vec2 uv;
 };
 
 struct PLP {

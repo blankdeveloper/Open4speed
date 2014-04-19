@@ -1,0 +1,115 @@
+﻿//Open4speed configuration file. DO NOT MODIFY BEFORE READING DOCUMENTATION
+
+#import config/lang/english.txt
+#import config/physics/bullet.txt
+#import config/menus.txt
+#import config/races.txt
+#import config/resources.txt
+#import config/utils.txt
+
+//definovani konfiguracniho souboru config
+//0 - index aktualne vybraneho auta
+//1 - index aktualne hrane trate
+//2 - hlasitost hudby
+//3 - hlasitost zvuku
+//4 - index posledni odemknute trate
+//5 - level detailu
+
+CONFIG
+aiCameraDistance 1.5
+aiRacerFutureStep 3
+aiRacerFutureStepCount 5
+aiRacerReverseDelay 50
+aiRacerReverseDuration 30
+aiRacerSafeAngle 120
+aiRacerSafeDistance 1
+aiRacerSafeDistanceSpeedDependency 5
+aiRacerSafeGapGas 15
+aiRacerSafeGapSteering 15
+aiRacerSafeSpeed 35
+aiRacerSteeringGapLevel1 5
+aiRacerSteeringGapLevel2 15
+aiRacerTrackUpdate 10
+aiRacerTrackUpdateSpeedDependency 5
+aiTrafficFutureStep 3
+aiTrafficSafeAngle 120
+aiTrafficSafeDistance 1
+aiTrafficSafeDistanceSpeedDependency 5
+aiTrafficSafeGap 20
+aiTrafficSafeSpeed 25
+aiTrafficSpeedBrake 60
+aiTrafficSpeedNoGas 50
+aiTrafficSteeringGapLevel1 5
+aiTrafficSteeringGapLevel2 10
+aiTrafficTrackUpdate 15
+fontMoveX 1.25
+fontMoveY 5.5
+fontRows 16
+fontSize 0.08
+fontSpaces 2.7
+fontTexture gfx/font.png
+//gameMode 1024x768:32@60
+inputController keyboard
+keyBack 155
+keyCameraDown 171
+keyCameraUp 173
+keyDown 103
+keyGearDown 225
+keyGearUp 250
+keyLeft 100
+keyRight 102
+keyUp 101
+minimalPerspective 90
+maximalPerspective 90
+perspectiveSpeedDependency 0.4
+perspectiveSpeedFollow 2
+playerCameraMaximalDistance 50
+playerCameraMinimalDistance 1
+playerCameraStep 0.3
+playerDefaultCameraDistance 1.5
+playerTrackUpdate 80
+physicalEngine bullet
+renderer glsl
+screenWidth 640
+screenHeight 480
+sound fmod
+soundCrash sfx/crash.ogg
+soundCrashMinimalSpeed 5
+soundCrashOnSpeedChange 0.7
+soundEngine sfx/engine.ogg
+soundEngineFreqAspect 15
+soundMaximalDistance 25
+speedAspect 50
+viewDistance 400
+END
+
+INIT
+esc NONE
+debug 0
+addImage gfx/logo.png
+getCfg 5
+detail
+clearButtons
+mouse 0
+addImage gfx/back.png
+setBackground 1
+wait 1
+addImage gfx/button.png
+addImage gfx/HUD.png
+addImage gfx/HUD1.png
+addImage gfx/HUD2.png
+addImage gfx/HUD3.png
+addImage gfx/indicator.png
+addImage gfx/lock.png
+initSound
+set 0
+//musicPlay
+getCfg 2
+//musicSetVolume
+getCfg 3
+setVolume
+set 1
+transmission
+//include LOADCAR
+include MAINMENU
+END

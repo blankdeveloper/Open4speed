@@ -1,0 +1,44 @@
+BULLETCFG
+// pomer brzdeni
+brakeAspect 0.5
+// maximalni rychlost kterou engine zpracuje(pouziva se k vypoctu promenlive akcelerace)
+engineMaxSpeed 300
+// pomer zrychleni rychlosti engine
+engineSpeedMultiply 1
+// pomer akcelerace
+gasAspect 0.005
+// gravitace
+gravitation 10
+// brzdeni pri pretoceni
+overSpeedBraking 10
+// prevraceni auta pri odstredivej sile
+rollInfluence 0.001
+// treni karoserie
+skinFriction 0.05
+// zpomalovani pri neutralu
+speedDecrease 20
+// vyvazi urovne zataceni
+steeringAspect 30
+// procento zavislosti urovne zataceni na rychlosti(zhruba desetina predchozi hodnoty)
+steeringSpeedDependency 4
+// stlaceni tlumicu
+suspensionCompression 0.2
+// uroven tlumeni
+suspensionDamping 0.0001
+// tuhost tlumicu
+suspensionStiffness 2
+// brzdeni motorem pri nizkych otackach
+underSpeedBraking 400
+// pomer vahy vozidla
+vehicleMassAspect 2
+// casovy krok vozidla
+vehicleStep 1
+// treni vozidla(nizka hodna umozni driftovat->UI nezvladne trat)
+wheelFriction 10
+// maximalni velikost sveta
+worldLimit 1000
+// casovy krok sceny
+worldStep 1
+// maximalni pocet mezikroku sceny
+worldSubStep 4
+END

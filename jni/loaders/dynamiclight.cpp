@@ -95,13 +95,31 @@ void DynamicLight::setLight(int index, bool value) {
         glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
 
     for (int i = 0; i < lmCount; i++) {
-        if ((lightParam[pIndex + i]->len > 0) && (lightParam[pIndex + i]->enabled != value)) {
-            trackdata->lightmaps[i]->bindFBO();
-            fboRenderer->uniformFloat4("color", lightParam[pIndex + i]->r, lightParam[pIndex + i]->g, lightParam[pIndex + i]->b, 0);
-            lightVBO[i]->render(fboRenderer, lightParam[pIndex + i]->begin / 3, lightParam[pIndex + i]->len / 3);
-            trackdata->lightmaps[i]->unbindFBO();
+        //one light
+        if (index >= 0) {
+            if ((lightParam[pIndex + i]->len > 0) && (lightParam[pIndex + i]->enabled != value)) {
+                trackdata->lightmaps[i]->bindFBO();
+                fboRenderer->uniformFloat4("color", lightParam[pIndex + i]->r, lightParam[pIndex + i]->g, lightParam[pIndex + i]->b, 0);
+                lightVBO[i]->render(fboRenderer, lightParam[pIndex + i]->begin / 3, lightParam[pIndex + i]->len / 3);
+                trackdata->lightmaps[i]->unbindFBO();
+                lightParam[pIndex + i]->enabled = value;
+            }
         }
-        lightParam[pIndex + i]->enabled = value;
+        //all lights
+        else {
+            int lightCount = lightParam.size() / lmCount;
+            int last = (lightCount - 1) * lmCount + i;
+            if (lightParam[last]->enabled != value) {
+                int len = lightParam[last]->begin / 3 + lightParam[last]->len / 3;
+                trackdata->lightmaps[i]->bindFBO();
+                fboRenderer->uniformFloat4("color", lightParam[last]->r, lightParam[last]->g, lightParam[last]->b, 0);
+                lightVBO[i]->render(fboRenderer, 0, len);
+                trackdata->lightmaps[i]->unbindFBO();
+                for (int j = 0; j < lightCount; j++) {
+                    lightParam[j * lmCount + i]->enabled = value;
+                }
+            }
+        }
     }
     glDisable(GL_BLEND);
     glBlendEquation(GL_FUNC_ADD);

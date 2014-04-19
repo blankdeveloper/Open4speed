@@ -410,8 +410,9 @@ void displayScene() {
         if (trackdata->dynamicLight != 0) {
             bool v = lamp[(xrenderer->frame/2) % 100];
             trackdata->dynamicLight->fboRenderer->bind();
-            for (int l = 0; l < trackdata->dynamicLight->lightCount; l++)
-                trackdata->dynamicLight->setLight(l, v);
+            /*for (int l = 0; l < trackdata->dynamicLight->lightCount; l++)
+                trackdata->dynamicLight->setLight(l, v);*/
+            trackdata->dynamicLight->setLight(-1, v);
             trackdata->dynamicLight->fboRenderer->unbind();
         }
 

@@ -879,3 +879,23 @@ void gles20::resetLM(int count) {
         lm[i]->unbindFBO();
     }
 }
+
+/**
+ * @brief setLMPatchState sets renderer state for LM patch
+ * @param enable is true to prepare for LM patch
+ * @param add is true to add LM patch, false to subtract LM patch
+ */
+void gles20::setLMPatchState(bool enable, bool add) {
+    if (enable) {
+        glDisable(GL_DEPTH_TEST);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_ONE, GL_ONE);
+        if (add)
+            glBlendEquation(GL_FUNC_ADD);
+        else
+            glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
+    } else {
+        glDisable(GL_BLEND);
+        glBlendEquation(GL_FUNC_ADD);
+    }
+}

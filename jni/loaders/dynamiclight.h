@@ -56,6 +56,15 @@ public:
      * @param value is true for light on, false for light off
      */
     void setLight(int index, bool value);
+
+
+    /**
+     * @brief setLights update lightmaps by loaded data
+     * @param beginIndex is index of the first light
+     * @param endIndex is index of the last light
+     * @param value is true for light on, false for light off
+     */
+    void setLights(int beginIndex, int endIndex, bool value);
 };
 
 #endif // DYNAMICLIGHT_H

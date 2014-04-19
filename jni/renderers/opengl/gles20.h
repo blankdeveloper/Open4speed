@@ -234,6 +234,13 @@ public:
      */
     void resetLM(int count);
 
+    /**
+     * @brief setLMPatchState sets renderer state for LM patch
+     * @param enable is true to prepare for LM patch
+     * @param add is true to add LM patch, false to subtract LM patch
+     */
+    void setLMPatchState(bool enable, bool add);
+
 };
 
 #endif // GLES20_H

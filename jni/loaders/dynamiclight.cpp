@@ -86,41 +86,61 @@ DynamicLight::DynamicLight(char* filename) {
  */
 void DynamicLight::setLight(int index, bool value) {
     int pIndex = index * lmCount;
-    glDisable(GL_DEPTH_TEST);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_ONE, GL_ONE);
-    if (value)
-        glBlendEquation(GL_FUNC_ADD);
-    else
-        glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
+    xrenderer->setLMPatchState(true, value);
 
     for (int i = 0; i < lmCount; i++) {
-        //one light
-        if (index >= 0) {
-            if ((lightParam[pIndex + i]->len > 0) && (lightParam[pIndex + i]->enabled != value)) {
-                trackdata->lightmaps[i]->bindFBO();
-                fboRenderer->uniformFloat4("color", lightParam[pIndex + i]->r, lightParam[pIndex + i]->g, lightParam[pIndex + i]->b, 0);
-                lightVBO[i]->render(fboRenderer, lightParam[pIndex + i]->begin / 3, lightParam[pIndex + i]->len / 3);
-                trackdata->lightmaps[i]->unbindFBO();
-                lightParam[pIndex + i]->enabled = value;
-            }
+        if ((lightParam[pIndex + i]->len > 0) && (lightParam[pIndex + i]->enabled != value)) {
+            trackdata->lightmaps[i]->bindFBO();
+            fboRenderer->uniformFloat4("color", lightParam[pIndex + i]->r, lightParam[pIndex + i]->g, lightParam[pIndex + i]->b, 0);
+            lightVBO[i]->render(fboRenderer, lightParam[pIndex + i]->begin / 3, lightParam[pIndex + i]->len / 3);
+            trackdata->lightmaps[i]->unbindFBO();
+            lightParam[pIndex + i]->enabled = value;
         }
-        //all lights
-        else {
-            int lightCount = lightParam.size() / lmCount;
-            int last = (lightCount - 1) * lmCount + i;
-            if (lightParam[last]->enabled != value) {
-                int len = lightParam[last]->begin / 3 + lightParam[last]->len / 3;
-                trackdata->lightmaps[i]->bindFBO();
-                fboRenderer->uniformFloat4("color", lightParam[last]->r, lightParam[last]->g, lightParam[last]->b, 0);
-                lightVBO[i]->render(fboRenderer, 0, len);
-                trackdata->lightmaps[i]->unbindFBO();
-                for (int j = 0; j < lightCount; j++) {
-                    lightParam[j * lmCount + i]->enabled = value;
-                }
+    }
+    xrenderer->setLMPatchState(false, value);
+}
+
+/**
+ * @brief setLights update lightmaps by loaded data
+ * @param beginIndex is index of the first light
+ * @param endIndex is index of the last light
+ * @param value is true for light on, false for light off
+ */
+void DynamicLight::setLights(int beginIndex, int endIndex, bool value) {
+    /// detect lights states
+    bool ok = true;
+    bool koAll = true;
+    for (int i = 0; i < lmCount; i++) {
+        for (int j = beginIndex; j <= endIndex; j++) {
+            if (lightParam[j * lmCount + i]->enabled == value) {
+                ok = false;
+            } else {
+                koAll = false;
             }
         }
     }
-    glDisable(GL_BLEND);
-    glBlendEquation(GL_FUNC_ADD);
+
+    /// invidual access
+    if (!ok) {
+        if (koAll)
+            return;
+        for (int j = beginIndex; j <= endIndex; j++) {
+            setLight(j, value);
+        }
+    }
+
+    /// apply all lights
+    xrenderer->setLMPatchState(true, value);
+    for (int i = 0; i < lmCount; i++) {
+        int last = endIndex * lmCount + i;
+        int len = lightParam[last]->begin / 3 + lightParam[last]->len / 3;
+        trackdata->lightmaps[i]->bindFBO();
+        fboRenderer->uniformFloat4("color", lightParam[last]->r, lightParam[last]->g, lightParam[last]->b, 0);
+        lightVBO[i]->render(fboRenderer, lightParam[beginIndex]->begin / 3, len);
+        trackdata->lightmaps[i]->unbindFBO();
+        for (int j = beginIndex; j <= endIndex; j++) {
+            lightParam[j * lmCount + i]->enabled = value;
+        }
+    }
+    xrenderer->setLMPatchState(false, value);
 }

@@ -234,6 +234,13 @@ public:
      * @param count is amount of lightmaps
      */
     virtual void resetLM(int count) = 0;
+
+    /**
+     * @brief setLMPatchState sets renderer state for LM patch
+     * @param enable is true to prepare for LM patch
+     * @param add is true to add LM patch, false to subtract LM patch
+     */
+    virtual void setLMPatchState(bool enable, bool add) = 0;
 };
 
 #endif // RENDERER_H

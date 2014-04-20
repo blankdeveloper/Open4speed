@@ -33,6 +33,12 @@ struct LightParam {
     float b;
 };
 
+struct VBOTriangle {
+    glm::ivec3 a;
+    glm::ivec3 b;
+    glm::ivec3 c;
+};
+
 /// center barycentric coordinates
 glm::vec3 A = glm::vec3(0, 0, 1);
 glm::vec3 B = glm::vec3(1, 0, 1);
@@ -276,7 +282,6 @@ void display(void) {
             stopTimer();
             root->debug(false);
 
-                        clearLMs();
             /// render dynamic point lights into lightmaps
             printf("Rendering dynamic point lights into lightmaps...");
             startTimer();
@@ -334,6 +339,7 @@ void display(void) {
                         }
 
                         /// create ray and raycast
+                        clearLMs();
                         glm::vec3 begin = swizle(xrenderer->light.u_light);
                         for (unsigned long i = 0; i < triangles.size(); i++) {
                             ignore1 = triangles[i]->tIndex;
@@ -356,38 +362,26 @@ void display(void) {
                             fflush(stdout);
                         }
 
-                        /// render triangles
-                        /*fixLM();
+                        /// render triangles into VBO
+                        fixLM();
                         for (int y = 0; y < trackdata->getLMCount(); y++) {
                             int oldCount = lcount[y];
-                            std::queue<triangle*> q;
+                            std::queue<VBOTriangle> q;
                             for (unsigned long i = 0; i < triangles.size(); i++) {
                                 if (triangles[i]->lmIndex == y) {
-                                    /// count triangle color in vertices
-                                    glm::ivec2 a = triangles[i]->aID;
-                                    glm::ivec2 b = triangles[i]->bID;
-                                    glm::ivec2 c = triangles[i]->cID;
-                                    int ia = pixels[y][(a.y * rttsize + a.x) * 4 + highIndex];
-                                    int ib = pixels[y][(b.y * rttsize + b.x) * 4 + highIndex];
-                                    int ic = pixels[y][(c.y * rttsize + c.x) * 4 + highIndex];
-                                    bool black = true;
-                                    /// if one of vertices is not black then triangle is not black
-                                    if ((ia > 2) || (ib > 2) || (ic > 2))
-                                        black = false;
                                     /// check if all points of triangle is black
-                                    if (black) {
-                                        for (unsigned int j = 0; j < triangles[i]->points.size(); j++) {
-                                            glm::ivec2 t = triangles[i]->points[j]->t;
-                                            int ita = pixels[y][(t.y * rttsize + t.x) * 4 + highIndex];
-                                            if (ita > 2) {
-                                                black = false;
-                                                break;
-                                            }
+                                    bool black = true;
+                                    for (unsigned int j = 0; j < triangles[i]->points.size(); j++) {
+                                        if (pixels[y][( triangles[i]->points[j]->t.y * rttsize + triangles[i]->points[j]->t.x) * 4 + highIndex] > 16) {
+                                            black = false;
+                                            break;
                                         }
                                     }
                                     /// add triangle into queue
                                     if (!black) {
-                                        q.push(triangles[i]);
+                                        q.push({glm::ivec3(triangles[i]->aID, pixels[y][(triangles[i]->aID.y * rttsize + triangles[i]->aID.x) * 4 + highIndex]),
+                                                glm::ivec3(triangles[i]->bID, pixels[y][(triangles[i]->bID.y * rttsize + triangles[i]->bID.x) * 4 + highIndex]),
+                                                glm::ivec3(triangles[i]->cID, pixels[y][(triangles[i]->cID.y * rttsize + triangles[i]->cID.x) * 4 + highIndex])});
                                     }
 
                                     bool overload = false;
@@ -398,26 +392,22 @@ void display(void) {
 
                                         bool ok = true;
                                         if (!overload) {
-                                            /// count triangle color in vertices
-                                            glm::ivec2 a = q.front()->aID;
-                                            glm::ivec2 b = q.front()->bID;
-                                            glm::ivec2 c = q.front()->cID;
-                                            int ia = pixels[y][(a.y * rttsize + a.x) * 4 + highIndex];
-                                            int ib = pixels[y][(b.y * rttsize + b.x) * 4 + highIndex];
-                                            int ic = pixels[y][(c.y * rttsize + c.x) * 4 + highIndex];
-
                                             /// count difference between interpolated and original point color
-                                            for (unsigned int j = 0; j < q.front()->points.size(); j++) {
+                                            for (unsigned int j = 0; j < triangles[i]->points.size(); j++) {
                                                 bool check = false;
-                                                if (q.front()->isInside(q.front()->points[j]->v))
+                                                if (PointInTriangle(glm::ivec3(triangles[i]->points[j]->t, 0), q.front().a, q.front().b, q.front().c))
                                                     check = true;
+                                                else
+                                                    ok = false;
 
                                                 if (check) {
-                                                    glm::ivec2 t = q.front()->points[j]->t;
-                                                    glm::vec3 ba = q.front()->points[j]->bary;
+                                                    glm::ivec2 t = triangles[i]->points[j]->t;
+                                                    glm::vec3 ba = triangles[i]->points[j]->bary;
                                                     int ita = pixels[y][(t.y * rttsize + t.x) * 4 + highIndex];
-                                                    int itb = ba.x * ia + ba.y * ib + ba.z * ic;
-                                                    if (abs(ita - itb) > 32) {
+                                                    int itb = ba.x * pixels[y][(q.front().a.y * rttsize + q.front().a.x) * 4 + highIndex]
+                                                            + ba.y * pixels[y][(q.front().b.y * rttsize + q.front().b.x) * 4 + highIndex]
+                                                            + ba.z * pixels[y][(q.front().c.y * rttsize + q.front().c.x) * 4 + highIndex];
+                                                    if (abs(ita - itb) > 16) {
                                                         ok = false;
                                                         break;
                                                     }
@@ -427,74 +417,27 @@ void display(void) {
 
                                         /// store triangle into VBO
                                         if (ok || overload) {
-                                            glm::ivec2 center = (a + b + c) / 3;
-                                            if (a.x > center.x)
-                                                a.x++;
-                                            else
-                                                a.x-=2;
-                                            if (b.x > center.x)
-                                                b.x+=2;
-                                            else
-                                                b.x-=2;
-                                            if (c.x > center.x)
-                                                c.x+=2;
-                                            else
-                                                c.x-=2;
-                                            if (a.y > center.y)
-                                                a.y+=2;
-                                            else
-                                                a.y-=2;
-                                            if (b.x > center.y)
-                                                b.y+=2;
-                                            else
-                                                b.y-=2;
-                                            if (c.y > center.y)
-                                                c.y+=2;
-                                            else
-                                                c.y-=2;
-                                            outputVBO[y].push_back({a.x / (float)rttsize, a.y / (float)rttsize, ia / 255.0f / highVal});
-                                            outputVBO[y].push_back({b.x / (float)rttsize, b.y / (float)rttsize, ib / 255.0f / highVal});
-                                            outputVBO[y].push_back({c.x / (float)rttsize, c.y / (float)rttsize, ic / 255.0f / highVal});
+                                            outputVBO[y].push_back({q.front().a.x / (float)rttsize, q.front().a.y / (float)rttsize, q.front().a.z / 255.0f / highVal});
+                                            outputVBO[y].push_back({q.front().b.x / (float)rttsize, q.front().b.y / (float)rttsize, q.front().b.z / 255.0f / highVal});
+                                            outputVBO[y].push_back({q.front().c.x / (float)rttsize, q.front().c.y / (float)rttsize, q.front().c.z / 255.0f / highVal});
                                             lcount[y]+=3;
                                             q.pop();
                                         }
                                         /// subdivide triangle
                                         else {
-                                            glm::vec3 p = q.front()->a * lena + q.front()->b * lenb + q.front()->c * lenc;
-                                            glm::vec3 np = glm::normalize(q.front()->na * lena + q.front()->nb * lenb + q.front()->nc * lenc);
-                                            glm::vec2 tp = q.front()->ta * lena + q.front()->tb * lenb + q.front()->tc * lenc;
-                                            glm::ivec2 pID = glm::ivec2(glm::vec2(q.front()->aID) * lena + glm::vec2(q.front()->bID) * lenb + glm::vec2(q.front()->cID) * lenc);
-
-                                            triangle* t1 = new triangle(p, q.front()->b, q.front()->c,
-                                                                        pID, q.front()->bID, q.front()->cID,
-                                                                        np, q.front()->nb, q.front()->nc,
-                                                                        tp, q.front()->tb, q.front()->tc,
-                                                                        q.front()->lmIndex, q.front()->tIndex, 0, 0);
-                                            triangle* t2 = new triangle(q.front()->a, p, q.front()->c,
-                                                                        q.front()->aID, pID, q.front()->cID,
-                                                                        q.front()->na, np, q.front()->nc,
-                                                                        q.front()->ta, tp, q.front()->tc,
-                                                                        q.front()->lmIndex, q.front()->tIndex, 0, 0);
-                                            triangle* t3 = new triangle(q.front()->a, q.front()->b, p,
-                                                                        q.front()->aID, q.front()->bID, pID,
-                                                                        q.front()->na, q.front()->nb, np,
-                                                                        q.front()->ta, q.front()->tb, tp,
-                                                                        q.front()->lmIndex, q.front()->tIndex, 0, 0);
+                                            glm::ivec3 p = glm::ivec3(glm::vec3(q.front().a) * lena + glm::vec3(q.front().b) * lenb + glm::vec3(q.front().c) * lenc);
 
                                             /// push points into subdivided triangles
-                                            t1->points = q.front()->points;
-                                            t2->points = q.front()->points;
-                                            t3->points = q.front()->points;
+                                            q.push({p, q.front().b, q.front().c});
+                                            q.push({q.front().a, p, q.front().c});
+                                            q.push({q.front().a, q.front().b, p});
                                             q.pop();
-                                            q.push(t1);
-                                            q.push(t2);
-                                            q.push(t3);
                                         }
                                     }
                                 }
                             }
                             lightInfo[y].push_back({oldCount, lcount[y] - oldCount, getConfig("R", lights), getConfig("G", lights), getConfig("B", lights)});
-                        }*/
+                        }
 
                         status += 100 / (float)count;
                     }
@@ -673,11 +616,11 @@ void display(void) {
             /// Save lightmaps
             printf("Saving lightmaps...");
             startTimer();
-            for (int i = 0; i < trackdata->getLMCount(); i++) {
+            /*for (int i = 0; i < trackdata->getLMCount(); i++) {
                 char filename[256];
                 sprintf(filename, "lightmap%d.png", i);
                 writeImage(prefix(filename), rttsize, rttsize, pixels[i]);
-            }
+            }*/
             /// Save VBOs
             FILE* file = fopen(prefix("lights.vbo"), "w");
             fprintf(file,"%d\n", trackdata->getLMCount());

@@ -42,7 +42,19 @@ glm::vec4 getColor(Point *p, glm::vec3 raybegin, glm::vec3 rayend) {
       return glm::vec4(0, 0, 0, 0);
     }
 }
+float sign(glm::ivec3 p1, glm::ivec3 p2, glm::ivec3 p3)
+{
+  return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
+}
 
+bool PointInTriangle(glm::ivec3 pt, glm::ivec3 v1, glm::ivec3 v2, glm::ivec3 v3)
+{
+  bool b1 = sign(pt, v1, v2) < 0;
+  bool b2 = sign(pt, v2, v3) < 0;
+  bool b3 = sign(pt, v3, v1) < 0;
+
+  return ((b1 == b2) && (b2 == b3));
+}
 void startTimer() {
     fflush(stdout);
     clock_gettime(CLOCK_REALTIME, &ts_start);

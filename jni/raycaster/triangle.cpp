@@ -157,14 +157,6 @@ glm::vec3 triangle::ClosestPtPointTriangle(glm::vec3 p) {
     return u * a + v * b + w * c;
 }
 
-bool triangle::isInside(glm::vec3 p) {
-    float abc = triangleArea(a,b,c);
-    float pbc = triangleArea(p,b,c);
-    float apc = triangleArea(a,p,c);
-    float abp = triangleArea(a,b,p);
-    return fabs(abc - pbc - apc - abp) < 0.005;
-}
-
 bool triangle::isIntersectedByRay(glm::vec3 raybegin, glm::vec3 rayend, long testID) {
 
     /// skip on test itself or it was already tested

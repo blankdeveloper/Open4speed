@@ -24,6 +24,8 @@ float countLightMaxDistance(float att);
 
 glm::vec4 getColor(Point *p, glm::vec3 raybegin, glm::vec3 rayend);
 
+bool PointInTriangle(glm::ivec3 pt, glm::ivec3 v1, glm::ivec3 v2, glm::ivec3 v3);
+
 void startTimer();
 
 void stopTimer();

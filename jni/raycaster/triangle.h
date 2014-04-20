@@ -47,8 +47,6 @@ public:
 
     PLP* getPointLight(glm::vec3 p);
 
-    bool isInside(glm::vec3 p);
-
     bool isIntersectedByRay(glm::vec3 raybegin, glm::vec3 rayend, long testID);
 };
 

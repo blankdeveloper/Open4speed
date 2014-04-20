@@ -44,7 +44,6 @@ triangle::triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c,
     addPointToAABB(a);
     addPointToAABB(b);
     addPointToAABB(c);
-    subtriangle = false;
 }
 
 

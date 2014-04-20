@@ -393,7 +393,7 @@ void display(void) {
                                     bool overload = false;
                                     while (!q.empty()) {
 
-                                        if (q.size() >= 256)
+                                        if (q.size() >= 64)
                                             overload = true;
 
                                         bool ok = true;
@@ -409,9 +409,7 @@ void display(void) {
                                             /// count difference between interpolated and original point color
                                             for (unsigned int j = 0; j < q.front()->points.size(); j++) {
                                                 bool check = false;
-                                                if (!q.front()->subtriangle)
-                                                    check = true;
-                                                else if (q.front()->isInside(q.front()->points[j]->v))
+                                                if (q.front()->isInside(q.front()->points[j]->v))
                                                     check = true;
 
                                                 if (check) {
@@ -419,7 +417,7 @@ void display(void) {
                                                     glm::vec3 ba = q.front()->points[j]->bary;
                                                     int ita = pixels[y][(t.y * rttsize + t.x) * 4 + highIndex];
                                                     int itb = ba.x * ia + ba.y * ib + ba.z * ic;
-                                                    if (abs(ita - itb) > 5) {
+                                                    if (abs(ita - itb) > 32) {
                                                         ok = false;
                                                         break;
                                                     }
@@ -454,9 +452,9 @@ void display(void) {
                                                 c.y+=2;
                                             else
                                                 c.y-=2;
-                                            outputVBO[y].push_back({a.x / (float)rttsize, a.y / (float)rttsize, ia / 255.0f});
-                                            outputVBO[y].push_back({b.x / (float)rttsize, b.y / (float)rttsize, ib / 255.0f});
-                                            outputVBO[y].push_back({c.x / (float)rttsize, c.y / (float)rttsize, ic / 255.0f});
+                                            outputVBO[y].push_back({a.x / (float)rttsize, a.y / (float)rttsize, ia / 255.0f / highVal});
+                                            outputVBO[y].push_back({b.x / (float)rttsize, b.y / (float)rttsize, ib / 255.0f / highVal});
+                                            outputVBO[y].push_back({c.x / (float)rttsize, c.y / (float)rttsize, ic / 255.0f / highVal});
                                             lcount[y]+=3;
                                             q.pop();
                                         }
@@ -465,7 +463,7 @@ void display(void) {
                                             glm::vec3 p = q.front()->a * lena + q.front()->b * lenb + q.front()->c * lenc;
                                             glm::vec3 np = glm::normalize(q.front()->na * lena + q.front()->nb * lenb + q.front()->nc * lenc);
                                             glm::vec2 tp = q.front()->ta * lena + q.front()->tb * lenb + q.front()->tc * lenc;
-                                            glm::ivec2 pID = glm::ivec2(glm::vec2(a) * lena + glm::vec2(b) * lenb + glm::vec2(c) * lenc);
+                                            glm::ivec2 pID = glm::ivec2(glm::vec2(q.front()->aID) * lena + glm::vec2(q.front()->bID) * lenb + glm::vec2(q.front()->cID) * lenc);
 
                                             triangle* t1 = new triangle(p, q.front()->b, q.front()->c,
                                                                         pID, q.front()->bID, q.front()->cID,
@@ -484,14 +482,9 @@ void display(void) {
                                                                         q.front()->lmIndex, q.front()->tIndex, 0, 0);
 
                                             /// push points into subdivided triangles
-                                            t1->subtriangle = true;
-                                            t2->subtriangle = true;
-                                            t3->subtriangle = true;
                                             t1->points = q.front()->points;
                                             t2->points = q.front()->points;
                                             t3->points = q.front()->points;
-                                            if (q.front()->subtriangle)
-                                                delete q.front();
                                             q.pop();
                                             q.push(t1);
                                             q.push(t2);

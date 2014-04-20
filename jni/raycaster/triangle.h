@@ -27,7 +27,6 @@ public:
     int lmIndex;
     long tIndex;
     long testID;
-    bool subtriangle;
     Texture* txt;
     Texture* txtmap;
     std::vector<Point*> points;

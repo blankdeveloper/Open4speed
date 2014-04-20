@@ -276,6 +276,7 @@ void display(void) {
             stopTimer();
             root->debug(false);
 
+                        clearLMs();
             /// render dynamic point lights into lightmaps
             printf("Rendering dynamic point lights into lightmaps...");
             startTimer();
@@ -334,7 +335,6 @@ void display(void) {
 
                         /// create ray and raycast
                         glm::vec3 begin = swizle(xrenderer->light.u_light);
-                        clearLMs();
                         for (unsigned long i = 0; i < triangles.size(); i++) {
                             ignore1 = triangles[i]->tIndex;
                             ignore2 = triangles[i]->tIndex;
@@ -357,7 +357,7 @@ void display(void) {
                         }
 
                         /// render triangles
-                        fixLM();
+                        /*fixLM();
                         for (int y = 0; y < trackdata->getLMCount(); y++) {
                             int oldCount = lcount[y];
                             std::queue<triangle*> q;
@@ -494,7 +494,7 @@ void display(void) {
                                 }
                             }
                             lightInfo[y].push_back({oldCount, lcount[y] - oldCount, getConfig("R", lights), getConfig("G", lights), getConfig("B", lights)});
-                        }
+                        }*/
 
                         status += 100 / (float)count;
                     }
@@ -673,11 +673,11 @@ void display(void) {
             /// Save lightmaps
             printf("Saving lightmaps...");
             startTimer();
-            /*for (int i = 0; i < trackdata->getLMCount(); i++) {
+            for (int i = 0; i < trackdata->getLMCount(); i++) {
                 char filename[256];
                 sprintf(filename, "lightmap%d.png", i);
                 writeImage(prefix(filename), rttsize, rttsize, pixels[i]);
-            }*/
+            }
             /// Save VBOs
             FILE* file = fopen(prefix("lights.vbo"), "w");
             fprintf(file,"%d\n", trackdata->getLMCount());

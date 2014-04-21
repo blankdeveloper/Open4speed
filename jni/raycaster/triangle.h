@@ -17,6 +17,9 @@ public:
     glm::ivec2 aID;
     glm::ivec2 bID;
     glm::ivec2 cID;
+    glm::ivec2 aIDU;
+    glm::ivec2 bIDU;
+    glm::ivec2 cIDU;
     glm::vec3 na;
     glm::vec3 nb;
     glm::vec3 nc;

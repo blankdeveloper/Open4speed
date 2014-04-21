@@ -353,7 +353,7 @@ void display(void) {
                         }
 
                         /// render triangles into VBO
-                        //fixLM();
+                        fixLM();
                         for (int y = 0; y < trackdata->getLMCount(); y++) {
                             int oldCount = lcount[y];
                             std::queue<VBOTriangle> q;
@@ -422,7 +422,6 @@ void display(void) {
                                         }
                                         /// subdivide triangle
                                         else {
-                                            /// push points into subdivided triangles
                                             q.push({q.front().a, (q.front().a + q.front().b) / 2, (q.front().a + q.front().c) / 2});
                                             q.push({q.front().b, (q.front().a + q.front().b) / 2, (q.front().b + q.front().c) / 2});
                                             q.push({q.front().c, (q.front().a + q.front().c) / 2, (q.front().b + q.front().c) / 2});

@@ -39,16 +39,6 @@ struct VBOTriangle {
     glm::ivec3 c;
 };
 
-/// center barycentric coordinates
-glm::vec3 A = glm::vec3(0, 0, 1);
-glm::vec3 B = glm::vec3(1, 0, 1);
-glm::vec3 C = glm::vec3(0, 1, 1);
-glm::vec3 P = glm::vec3(0.5f, 0.5f, 1);
-float area = triangleArea(A, B, C);
-float lena = triangleArea(P, B, C) / area;
-float lenb = triangleArea(P, A, C) / area;
-float lenc = triangleArea(P, A, B) / area;
-
 /// lightmap generator objects
 std::vector<LMPixel> *outputVBO;
 std::vector<LightParam> *lightInfo;
@@ -363,7 +353,7 @@ void display(void) {
                         }
 
                         /// render triangles into VBO
-                        fixLM();
+                        //fixLM();
                         for (int y = 0; y < trackdata->getLMCount(); y++) {
                             int oldCount = lcount[y];
                             std::queue<VBOTriangle> q;
@@ -386,6 +376,11 @@ void display(void) {
 
                                     bool overload = false;
                                     while (!q.empty()) {
+
+                                        /// fix triangle vertices colors
+                                        q.front().a.z =  pixels[y][(q.front().a.y * rttsize + q.front().a.x) * 4 + highIndex];
+                                        q.front().b.z =  pixels[y][(q.front().b.y * rttsize + q.front().b.x) * 4 + highIndex];
+                                        q.front().c.z =  pixels[y][(q.front().c.y * rttsize + q.front().c.x) * 4 + highIndex];
 
                                         if (q.size() >= 64)
                                             overload = true;
@@ -417,20 +412,21 @@ void display(void) {
 
                                         /// store triangle into VBO
                                         if (ok || overload) {
-                                            outputVBO[y].push_back({q.front().a.x / (float)rttsize, q.front().a.y / (float)rttsize, q.front().a.z / 255.0f / highVal});
-                                            outputVBO[y].push_back({q.front().b.x / (float)rttsize, q.front().b.y / (float)rttsize, q.front().b.z / 255.0f / highVal});
-                                            outputVBO[y].push_back({q.front().c.x / (float)rttsize, q.front().c.y / (float)rttsize, q.front().c.z / 255.0f / highVal});
-                                            lcount[y]+=3;
+                                            if ((q.front().a.z > 0) || (q.front().b.z > 0) || (q.front().c.z > 0)) {
+                                                outputVBO[y].push_back({q.front().a.x / (float)rttsize, q.front().a.y / (float)rttsize, q.front().a.z / 255.0f / highVal});
+                                                outputVBO[y].push_back({q.front().b.x / (float)rttsize, q.front().b.y / (float)rttsize, q.front().b.z / 255.0f / highVal});
+                                                outputVBO[y].push_back({q.front().c.x / (float)rttsize, q.front().c.y / (float)rttsize, q.front().c.z / 255.0f / highVal});
+                                                lcount[y]+=3;
+                                            }
                                             q.pop();
                                         }
                                         /// subdivide triangle
                                         else {
-                                            glm::ivec3 p = glm::ivec3(glm::vec3(q.front().a) * lena + glm::vec3(q.front().b) * lenb + glm::vec3(q.front().c) * lenc);
-
                                             /// push points into subdivided triangles
-                                            q.push({p, q.front().b, q.front().c});
-                                            q.push({q.front().a, p, q.front().c});
-                                            q.push({q.front().a, q.front().b, p});
+                                            q.push({q.front().a, (q.front().a + q.front().b) / 2, (q.front().a + q.front().c) / 2});
+                                            q.push({q.front().b, (q.front().a + q.front().b) / 2, (q.front().b + q.front().c) / 2});
+                                            q.push({q.front().c, (q.front().a + q.front().c) / 2, (q.front().b + q.front().c) / 2});
+                                            q.push({(q.front().a + q.front().b) / 2, (q.front().b + q.front().c) / 2, (q.front().a + q.front().c) / 2});
                                             q.pop();
                                         }
                                     }

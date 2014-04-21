@@ -369,9 +369,15 @@ void display(void) {
                                     }
                                     /// add triangle into queue
                                     if (!black) {
-                                        q.push({glm::ivec3(triangles[i]->aID, pixels[y][(triangles[i]->aID.y * rttsize + triangles[i]->aID.x) * 4 + highIndex]),
-                                                glm::ivec3(triangles[i]->bID, pixels[y][(triangles[i]->bID.y * rttsize + triangles[i]->bID.x) * 4 + highIndex]),
-                                                glm::ivec3(triangles[i]->cID, pixels[y][(triangles[i]->cID.y * rttsize + triangles[i]->cID.x) * 4 + highIndex])});
+                                        glm::ivec3 a = glm::ivec3(triangles[i]->aID, pixels[y][(triangles[i]->aID.y * rttsize + triangles[i]->aID.x) * 4 + highIndex]);
+                                        glm::ivec3 b = glm::ivec3(triangles[i]->bID, pixels[y][(triangles[i]->bID.y * rttsize + triangles[i]->bID.x) * 4 + highIndex]);
+                                        glm::ivec3 c = glm::ivec3(triangles[i]->cID, pixels[y][(triangles[i]->cID.y * rttsize + triangles[i]->cID.x) * 4 + highIndex]);
+                                        glm::vec3 center = glm::vec3(a + b + c) / 3.0f;
+                                        a += 4.0f * glm::normalize(glm::vec3(a) - center);
+                                        b += 4.0f * glm::normalize(glm::vec3(b) - center);
+                                        c += 4.0f * glm::normalize(glm::vec3(c) - center);
+                                        q.push({a, b, c});
+
                                     }
 
                                     bool overload = false;

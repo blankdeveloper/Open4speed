@@ -8,7 +8,7 @@ Quit game
 \   Yes
 \    No
       Loading
-      version 1.2.1
+      version 1.2.5
 \rst
   You have unlocked new track
 //12

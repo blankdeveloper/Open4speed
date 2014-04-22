@@ -37,6 +37,7 @@ struct VBOTriangle {
     glm::ivec3 a;
     glm::ivec3 b;
     glm::ivec3 c;
+    int depth;
 };
 
 /// lightmap generator objects
@@ -307,6 +308,7 @@ void display(void) {
                     xrenderer->light.u_light_diffuse = glm::vec4(getConfig("R", lights), getConfig("G", lights), getConfig("B", lights), 0);
                     xrenderer->light.u_light_cut = cos(getConfig("cut", lights) * 3.14 / 180.0);
                     xrenderer->light.u_light_att = glm::vec4(getConfig("att0", lights), getConfig("att1", lights), getConfig("att2", lights), 0);
+                    xrenderer->light.u_light_spot_eff = getConfig("spot", lights);
 
                     /// apply all lights
                     for (unsigned int x = 0; x < trackdata->edges[lightGroup].size(); x++) {
@@ -338,7 +340,7 @@ void display(void) {
                                 glm::vec3 end = triangles[i]->points[j]->v;
                                 int index = triangles[i]->points[j]->t.y * rttsize + triangles[i]->points[j]->t.x;
                                 glm::vec4 color = getColor(triangles[i]->points[j], begin, end);
-                                if (color.w > 0.5f) {
+                                if (color.w > 0.005f) {
                                     if (!root->isIntersected(begin, end, testID++)) {
                                         pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 255.0f));
                                         pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 255.0f));
@@ -356,13 +358,14 @@ void display(void) {
                         fixLM();
                         for (int y = 0; y < trackdata->getLMCount(); y++) {
                             int oldCount = lcount[y];
-                            std::queue<VBOTriangle> q;
                             for (unsigned long i = 0; i < triangles.size(); i++) {
                                 if (triangles[i]->lmIndex == y) {
+                                    std::queue<VBOTriangle> q;
+
                                     /// check if all points of triangle is black
                                     bool black = true;
                                     for (unsigned int j = 0; j < triangles[i]->points.size(); j++) {
-                                        if (pixels[y][( triangles[i]->points[j]->t.y * rttsize + triangles[i]->points[j]->t.x) * 4 + highIndex] > 16) {
+                                        if (pixels[y][(triangles[i]->points[j]->t.y * rttsize + triangles[i]->points[j]->t.x) * 4 + highIndex] > 1) {
                                             black = false;
                                             break;
                                         }
@@ -372,15 +375,13 @@ void display(void) {
                                         glm::ivec3 a = glm::ivec3(triangles[i]->aID, pixels[y][(triangles[i]->aID.y * rttsize + triangles[i]->aID.x) * 4 + highIndex]);
                                         glm::ivec3 b = glm::ivec3(triangles[i]->bID, pixels[y][(triangles[i]->bID.y * rttsize + triangles[i]->bID.x) * 4 + highIndex]);
                                         glm::ivec3 c = glm::ivec3(triangles[i]->cID, pixels[y][(triangles[i]->cID.y * rttsize + triangles[i]->cID.x) * 4 + highIndex]);
-                                        glm::vec3 center = glm::vec3(a + b + c) / 3.0f;
+                                        /*glm::vec3 center = glm::vec3(a + b + c) / 3.0f;
                                         a += 4.0f * glm::normalize(glm::vec3(a) - center);
                                         b += 4.0f * glm::normalize(glm::vec3(b) - center);
-                                        c += 4.0f * glm::normalize(glm::vec3(c) - center);
-                                        q.push({a, b, c});
-
+                                        c += 4.0f * glm::normalize(glm::vec3(c) - center);*/
+                                        q.push({a, b, c, 0});
                                     }
 
-                                    bool overload = false;
                                     while (!q.empty()) {
 
                                         /// fix triangle vertices colors
@@ -388,27 +389,18 @@ void display(void) {
                                         q.front().b.z =  pixels[y][(q.front().b.y * rttsize + q.front().b.x) * 4 + highIndex];
                                         q.front().c.z =  pixels[y][(q.front().c.y * rttsize + q.front().c.x) * 4 + highIndex];
 
-                                        if (q.size() >= 64)
-                                            overload = true;
-
                                         bool ok = true;
-                                        if (!overload) {
+                                        if (q.front().depth < 3) {
                                             /// count difference between interpolated and original point color
                                             for (unsigned int j = 0; j < triangles[i]->points.size(); j++) {
-                                                bool check = false;
-                                                if (PointInTriangle(glm::ivec3(triangles[i]->points[j]->t, 0), q.front().a, q.front().b, q.front().c))
-                                                    check = true;
-                                                else
-                                                    ok = false;
-
-                                                if (check) {
+                                                if (PointInTriangle(glm::ivec3(triangles[i]->points[j]->t, 0), q.front().a, q.front().b, q.front().c)) {
                                                     glm::ivec2 t = triangles[i]->points[j]->t;
                                                     glm::vec3 ba = triangles[i]->points[j]->bary;
                                                     int ita = pixels[y][(t.y * rttsize + t.x) * 4 + highIndex];
                                                     int itb = ba.x * pixels[y][(q.front().a.y * rttsize + q.front().a.x) * 4 + highIndex]
                                                             + ba.y * pixels[y][(q.front().b.y * rttsize + q.front().b.x) * 4 + highIndex]
                                                             + ba.z * pixels[y][(q.front().c.y * rttsize + q.front().c.x) * 4 + highIndex];
-                                                    if (abs(ita - itb) > 16) {
+                                                    if (abs(ita - itb) > 32) {
                                                         ok = false;
                                                         break;
                                                     }
@@ -417,7 +409,7 @@ void display(void) {
                                         }
 
                                         /// store triangle into VBO
-                                        if (ok || overload) {
+                                        if (ok) {
                                             if ((q.front().a.z > 0) || (q.front().b.z > 0) || (q.front().c.z > 0)) {
                                                 outputVBO[y].push_back({q.front().a.x / (float)rttsize, q.front().a.y / (float)rttsize, q.front().a.z / 255.0f / highVal});
                                                 outputVBO[y].push_back({q.front().b.x / (float)rttsize, q.front().b.y / (float)rttsize, q.front().b.z / 255.0f / highVal});
@@ -428,10 +420,10 @@ void display(void) {
                                         }
                                         /// subdivide triangle
                                         else {
-                                            q.push({q.front().a, (q.front().a + q.front().b) / 2, (q.front().a + q.front().c) / 2});
-                                            q.push({q.front().b, (q.front().a + q.front().b) / 2, (q.front().b + q.front().c) / 2});
-                                            q.push({q.front().c, (q.front().a + q.front().c) / 2, (q.front().b + q.front().c) / 2});
-                                            q.push({(q.front().a + q.front().b) / 2, (q.front().b + q.front().c) / 2, (q.front().a + q.front().c) / 2});
+                                            q.push({q.front().a, (q.front().a + q.front().b) / 2, (q.front().a + q.front().c) / 2, q.front().depth + 1});
+                                            q.push({q.front().b, (q.front().a + q.front().b) / 2, (q.front().b + q.front().c) / 2, q.front().depth + 1});
+                                            q.push({q.front().c, (q.front().a + q.front().c) / 2, (q.front().b + q.front().c) / 2, q.front().depth + 1});
+                                            q.push({(q.front().a + q.front().b) / 2, (q.front().b + q.front().c) / 2, (q.front().a + q.front().c) / 2, q.front().depth + 1});
                                             q.pop();
                                         }
                                     }
@@ -479,6 +471,7 @@ void display(void) {
                     xrenderer->light.u_light_diffuse = glm::vec4(getConfig("R", lights), getConfig("G", lights), getConfig("B", lights), 0);
                     xrenderer->light.u_light_cut = cos(getConfig("cut", lights) * 3.14 / 180.0);
                     xrenderer->light.u_light_att = glm::vec4(getConfig("att0", lights), getConfig("att1", lights), getConfig("att2", lights), 0);
+                    xrenderer->light.u_light_spot_eff = getConfig("spot", lights);
 
                     /// apply all lights
                     for (unsigned int x = 0; x < trackdata->edges[lightGroup].size(); x++) {

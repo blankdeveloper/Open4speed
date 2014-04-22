@@ -29,7 +29,7 @@ glm::vec4 getColor(Point *p, glm::vec3 raybegin, glm::vec3 rayend) {
       color.w = 1;
       //light attenuation
       float d = glm::length(raydir);
-      color *= sEff / glm::dot(xrenderer->light.u_light_att, glm::vec4(1.0, d, d * d, 0));
+      color *= pow(sEff, xrenderer->light.u_light_spot_eff) / glm::dot(xrenderer->light.u_light_att, glm::vec4(1.0, d, d * d, 0));
       // add to previous lightmap
       color = glm::clamp(color, glm::vec4(0, 0, 0, 1), glm::vec4(1, 1, 1, 1));
 

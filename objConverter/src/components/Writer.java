@@ -194,7 +194,7 @@ public class Writer {
       System.out.println(Common.missingCoord
               + " vertices haven't texture coords.");
     }
-    System.out.println(Unwrapper.mtls.size() + " lightmaps generated");
+    System.out.println(Unwrapper.lm.size() + " lightmaps generated");
     
     if (facesCount > 0) {
       System.out.println("Converted " + facesCount + " triangle objects");

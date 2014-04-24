@@ -210,19 +210,20 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
                     b = 2;
                     c = 4;
                 }
+                float lmRes = 1024;
                 if (u > 0) {
-                    m->tid[j * 6 + c] = (x + u) / 256.0 - 2 / (float)rttsize;
-                    m->tid[j * 6 + c + 1] = y / 256.0 + 2 / (float)rttsize;
-                    m->tid[j * 6 + b] = x / 256.0 + 2 / (float)rttsize;
-                    m->tid[j * 6 + b + 1] = (y + v) / 256.0 - 2 / (float)rttsize;
-                    m->tid[j * 6 + a] = x / 256.0 + 2 / (float)rttsize;
-                    m->tid[j * 6 + a + 1] = y / 256.0 + 2 / (float)rttsize;
+                    m->tid[j * 6 + c] = (x + u) / 256.0 - 2 / lmRes;
+                    m->tid[j * 6 + c + 1] = y / 256.0 + 2 / lmRes;
+                    m->tid[j * 6 + b] = x / 256.0 + 2 / lmRes;
+                    m->tid[j * 6 + b + 1] = (y + v) / 256.0 - 2 / lmRes;
+                    m->tid[j * 6 + a] = x / 256.0 + 2 / lmRes;
+                    m->tid[j * 6 + a + 1] = y / 256.0 + 2 / lmRes;
                 } else {
                     m->tid[j * 6 + c] = x / 256.0;
-                    m->tid[j * 6 + c + 1] = (y + v) / 256.0 + 4 / (float)rttsize;
+                    m->tid[j * 6 + c + 1] = (y + v) / 256.0 + 4 / lmRes;
                     m->tid[j * 6 + a] = x / 256.0;
                     m->tid[j * 6 + a + 1] = y / 256.0;
-                    m->tid[j * 6 + b] = (x + u) / 256.0 + 4 / (float)rttsize;
+                    m->tid[j * 6 + b] = (x + u) / 256.0 + 4 / lmRes;
                     m->tid[j * 6 + b + 1] = y / 256.0;
                 }
                 if (renderLightmap) {

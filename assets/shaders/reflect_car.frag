@@ -44,11 +44,11 @@ void main()
     }
   
     //reflect
-    gl_FragColor += 8.0 * texture2D(EnvMap1, vec2(0.5 + v_Normal.x * 0.25, 1.5 - gl_FragCoord.z * 1.0 + v_Normal.y * 0.25) * u_view) * clamp(0.0, (v_Vertex2.y - 0.4), 1.0);
+    gl_FragColor += 6.0 * texture2D(EnvMap1, vec2(0.5 + v_Normal.x * 0.25, 1.5 - gl_FragCoord.z * 1.0 + v_Normal.y * 0.25) * u_view) * clamp(0.0, (v_Vertex2.y - 0.4), 1.0);
   
     //dynamic shadow
     float a = texture2D(EnvMap1, u_model_position.xy).a;
-    gl_FragColor *= min(a + 0.05, 0.75);
+    gl_FragColor *= min(a + 0.15, 0.75);
   } else {
     gl_FragColor.rgb *= (v_Coords.t > 0.3) ? 1.0 : 1.0 + u_brake * 1.5;
   }

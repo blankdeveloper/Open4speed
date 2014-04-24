@@ -12,35 +12,40 @@ import geometry.Triangle;
 
 public class Unwrapper {
 
-  final static double LIGHTMAP_PRECISION = 8.5;
+  final static boolean LIGHTMAP_OPTIMALIZE   = true;
+  final static int     LIGHTMAP_MAX_TRIANGLE = 32;
+  final static double  LIGHTMAP_PRECISION    = 8.0;
   static int res;
   static KDNode root;
 
-  static ArrayList<MTLPair> mtls = new ArrayList<>();
+  static ArrayList<MTLPair> lm = new ArrayList<>();
   static ArrayList<MTLLoader> skipped = new ArrayList<>();
 
   public static void unwrap() throws Exception {
-    System.out.print("Generating lightmap coordinates...");
+    System.out.println("Generating lightmap coordinates...");
     int last = Integer.MAX_VALUE;
-    while (true) {
+    do {
       action();
-      if (last != mtls.size()) {
-        last = mtls.size();
-        for (int i = 0; i < mtls.size(); i++) {
-          if (mtls.get(i).render != null) {
-            mtls.get(i).render.show(false);
+      System.out.println("Actual lightmap count: " + lm.size());
+      if (last != lm.size()) {
+        last = lm.size();
+        for (int i = 0; i < lm.size(); i++) {
+          if (lm.get(i).render != null) {
+            lm.get(i).render.show(false);
           }
         }
-        mtls = new ArrayList<>();
-        skipped = new ArrayList<>();
+        if (LIGHTMAP_OPTIMALIZE) {
+          lm = new ArrayList<>();
+          skipped = new ArrayList<>();
+        }
       } else {
         break;
       }
-    }
+    } while (LIGHTMAP_OPTIMALIZE);
 
-    for (int i = 0; i < mtls.size(); i++) {
-      for (int j = 0; j < mtls.get(i).mtls.size(); j++) {
-        mtls.get(i).mtls.get(j).parameters += "lm " + i;
+    for (int i = 0; i < lm.size(); i++) {
+      for (int j = 0; j < lm.get(i).mtls.size(); j++) {
+        lm.get(i).mtls.get(j).parameters += "lm " + i;
       }
     }
 
@@ -108,6 +113,7 @@ public class Unwrapper {
       scale /= res / LIGHTMAP_PRECISION;
 
       // create nodes for triangles
+      int size = 0;
       for (int i = 0; i < faces.size(); i++) {
         Triangle t = faces.get(i);
         double a = Edge.dist(t.b, t.c);
@@ -123,15 +129,20 @@ public class Unwrapper {
           t.node = new KDNode((int) (a * scale + 1), (int) (b * scale + 1), true);
         }
         t.node.landscape();
-        if (t.node.width > 128) {
-          t.node.width = 128;
+        if (t.node.width > LIGHTMAP_MAX_TRIANGLE) {
+          t.node.width = LIGHTMAP_MAX_TRIANGLE;
         }
         t.node.landscape();
-        if (t.node.width > 128) {
-          t.node.width = 128;
+        if (t.node.width > LIGHTMAP_MAX_TRIANGLE) {
+          t.node.width = LIGHTMAP_MAX_TRIANGLE;
         }
+        size += t.node.width * t.node.height / 2;
       }
 
+      // do not build tree if instance is too heavy
+      if (size > 256 * 256)
+        return false;
+      
       // sort triangles
       Collections.sort(faces, new Comparator<Triangle>() {
         @Override
@@ -167,6 +178,7 @@ public class Unwrapper {
   public static void join(ArrayList<MTLLoader> materials, int start)
           throws Exception {
 
+    System.out.print("Solving " + (materials.size() - start) + " objects");
     MTLPair p = new MTLPair();
     for (int j = start; j < materials.size(); j++) {
       ArrayList<Triangle> faces = materials.get(j).faces;
@@ -176,12 +188,15 @@ public class Unwrapper {
         // create lightmap
         if (create(p.getFaces())) {
           p.apply(res);
+          System.out.print(",");
         } else {
           skipped.add(p.mat);
+          System.out.print(".");
         }
       }
     }
-    mtls.add(p);
+    System.out.println();
+    lm.add(p);
 
     // show texture coordinates
     create(p.faces);

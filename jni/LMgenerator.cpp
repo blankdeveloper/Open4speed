@@ -375,10 +375,10 @@ void display(void) {
                                         glm::ivec3 a = glm::ivec3(triangles[i]->aID, pixels[y][(triangles[i]->aID.y * rttsize + triangles[i]->aID.x) * 4 + highIndex]);
                                         glm::ivec3 b = glm::ivec3(triangles[i]->bID, pixels[y][(triangles[i]->bID.y * rttsize + triangles[i]->bID.x) * 4 + highIndex]);
                                         glm::ivec3 c = glm::ivec3(triangles[i]->cID, pixels[y][(triangles[i]->cID.y * rttsize + triangles[i]->cID.x) * 4 + highIndex]);
-                                        /*glm::vec3 center = glm::vec3(a + b + c) / 3.0f;
-                                        a += 4.0f * glm::normalize(glm::vec3(a) - center);
-                                        b += 4.0f * glm::normalize(glm::vec3(b) - center);
-                                        c += 4.0f * glm::normalize(glm::vec3(c) - center);*/
+                                        glm::vec3 center = glm::vec3(a + b + c) / 3.0f;
+                                        a += 2.0f * glm::normalize(glm::vec3(a) - center);
+                                        b += 2.0f * glm::normalize(glm::vec3(b) - center);
+                                        c += 2.0f * glm::normalize(glm::vec3(c) - center);
                                         q.push({a, b, c, 0});
                                     }
 
@@ -442,7 +442,7 @@ void display(void) {
             stopTimer();
 
             /// render static point lights into lightmaps
-            /*printf("Rendering static point lights into lightmaps...");
+            printf("Rendering static point lights into lightmaps...");
             startTimer();
             clearLMs();
             count = 0;
@@ -490,7 +490,7 @@ void display(void) {
                                 glm::vec3 end = triangles[i]->points[j]->v;
                                 int index = triangles[i]->points[j]->t.y * rttsize + triangles[i]->points[j]->t.x;
                                 glm::vec4 color = getColor(triangles[i]->points[j], begin, end);
-                                if (color.w > 0.5f) {
+                                if (color.w > 0.005f) {
                                     if (!root->isIntersected(begin, end, testID++)) {
                                         pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 255.0f));
                                         pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 255.0f));
@@ -605,16 +605,16 @@ void display(void) {
             printf("Fixing holes in lightmaps...");
             startTimer();
             fixLM();
-            stopTimer();*/
+            stopTimer();
 
             /// Save lightmaps
             printf("Saving lightmaps...");
             startTimer();
-            /*for (int i = 0; i < trackdata->getLMCount(); i++) {
+            for (int i = 0; i < trackdata->getLMCount(); i++) {
                 char filename[256];
                 sprintf(filename, "lightmap%d.png", i);
                 writeImage(prefix(filename), rttsize, rttsize, pixels[i]);
-            }*/
+            }
             /// Save VBOs
             FILE* file = fopen(prefix("lights.vbo"), "w");
             fprintf(file,"%d\n", trackdata->getLMCount());

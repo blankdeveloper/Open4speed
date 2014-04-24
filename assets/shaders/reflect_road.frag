@@ -55,7 +55,7 @@ void main()
   if (v_Normal.y > 0.0) {
     float y = u_view - gl_FragCoord.y * u_res;
     y += gl_FragCoord.z * 0.1 + gl_FragCoord.z * (1.0 - v_Normal.y) * 2.0;
-    gl_FragColor.rgb += 0.25 * texture2D(EnvMap1, vec2(gl_FragCoord.x * u_res, y)).rgb * max(gl_FragCoord.y * u_res / u_view * 2.0 - 0.5, 0.0);
+    gl_FragColor.rgb += 0.33 * texture2D(EnvMap1, vec2(gl_FragCoord.x * u_res, y)).rgb * clamp(gl_FragCoord.y * u_res * 3.0 - 0.5, 0.0, 1.0);
   }
 
   //blur

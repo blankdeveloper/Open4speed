@@ -1,10 +1,6 @@
 CARS
+cars/carHD.ini
 cars/car1.ini
-cars/car2.ini
-cars/car3.ini
-cars/car4.ini
-cars/car5.ini
-cars/car6.ini
 END
 
 MUSIC
@@ -12,5 +8,6 @@ END
 
 TRACKS
 tracks/track1.ini
+tracks/tokyo.ini
 tracks/track.ini
 END

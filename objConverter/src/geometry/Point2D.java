@@ -10,7 +10,11 @@ public class Point2D {
 	}
 	
 	public static double dist(Vertex a, Vertex b) {
+      try {
 		return Edge.dist(a.t.u, a.t.v, 1, b.t.u, b.t.v, 1);
+      } catch(Exception e) {
+        return 1;
+      }
 	}
 	
 }

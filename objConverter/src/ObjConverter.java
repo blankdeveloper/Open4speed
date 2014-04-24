@@ -14,9 +14,9 @@ import components.Writer;
 public class ObjConverter {
 
   public static void main(String[] args) throws Exception {
-    /*args = new String[2];
-    args[0] = "3drt1.obj";
-    args[1] = "tracks/city1b.o4s";*/
+    args = new String[2];
+    args[0] = "tokyop.obj";
+    args[1] = "tracks/tokyo/physics.o4s";
 
     if (Common.init(args)) {
       ObjLoader.loadObj(args);

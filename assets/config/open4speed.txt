@@ -80,7 +80,7 @@ soundEngine sfx/engine.ogg
 soundEngineFreqAspect 15
 soundMaximalDistance 25
 speedAspect 50
-viewDistance 400
+viewDistance 600
 END
 
 INIT

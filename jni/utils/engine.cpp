@@ -291,9 +291,9 @@ void displayScene() {
     for (int i = carCount - 1; i >= 0; i--) {
 
         /// find nearest light
-        xrenderer->light.u_nearest1 = glm::vec4(99999,99999,99999,99999);
+        xrenderer->light.u_nearest1 = glm::vec4(99999,99999,99999,1);
         xrenderer->model_position = glm::vec4(allCar[i]->transform->value[12], allCar[i]->transform->value[13], allCar[i]->transform->value[14], 1);
-        for (int j = !lamp[(xrenderer->frame/2) % 100]; j < trackdata->edgesCount; j++) {
+        for (int j = 0; j < trackdata->edgesCount; j++) {
             for (unsigned int x = 0; x < trackdata->edges[j].size() / 2; x++) {
                 edge e = trackdata->edges[j][x];
                 glm::vec4 pos = glm::vec4(e.bx, e.by, e.bz, 1);
@@ -406,13 +406,13 @@ void displayScene() {
         eff[currentFrame].frame = 0;
         currentFrame++;
 
-        if (trackdata->dynamicLight != 0) {
+/*        if (trackdata->dynamicLight != 0) {
             bool v = lamp[(xrenderer->frame/2) % 100];
             trackdata->dynamicLight->fboRenderer->bind();
             trackdata->dynamicLight->setLights(0, trackdata->dynamicLight->lightCount - 1, v);
             trackdata->dynamicLight->fboRenderer->unbind();
         }
-
+*/
         if (currentFrame >= effLen) {
             currentFrame = 0;
         }

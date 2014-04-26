@@ -1,5 +1,4 @@
 CARS
-cars/carHD.ini
 cars/car1.ini
 END
 
@@ -8,6 +7,5 @@ END
 
 TRACKS
 tracks/track1.ini
-tracks/tokyo.ini
 tracks/track.ini
 END

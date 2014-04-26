@@ -288,12 +288,12 @@ END
 
 HUD
 setBackground 3
-addButton img 7 mon 0 -1x-5-101x17 NONE
-addButton img 0 mon 1 34x8.5-0x0 NONE
-addButton img 0 mon 2 65x8.5-0x0 NONE
-addButton img 0 mon 3 84x8.5-0x0 NONE
-addButton img 0 mon 4 12x8.5-0x0 NONE
-addButton img -1 text 21 0.1x8.5-60x5 NONE
+addButton img 7 mon 0 -1x-5-101x7 NONE
+addButton img 0 mon 1 34x0.5-0x0 NONE
+addButton img 0 mon 2 65x0.5-0x0 NONE
+addButton img 0 mon 3 84x0.5-0x0 NONE
+addButton img 0 mon 4 12x0.5-0x0 NONE
+addButton img -1 text 21 0.1x0.5-60x5 NONE
 addButton img 2 text 10 1x24-15x25 RESET
 addButton img 0 mon 5 45x20-0x0 NONE
 END

@@ -42,15 +42,15 @@ void main()
     gl_FragColor.rgb += color;
   }
 
+  //dynamic shadow
+  if (texture2D(EnvMap1, vec2(gl_FragCoord.x * u_res, gl_FragCoord.y * u_res + 0.5 * (1.0 - gl_FragCoord.z))).a == 1.0)
+    diffuse.rgb *= 0.5;
+
   //static shadow
   vec4 shadow = 1.5 * texture2D(Lightmap, v_T);
   gl_FragColor.rgb += diffuse.rgb * shadow.rgb;
   gl_FragColor.a = min(length(shadow.rgb), 0.9);
-  
-  //dynamic shadow
-  if (texture2D(EnvMap1, vec2(gl_FragCoord.x * u_res, gl_FragCoord.y * u_res + 0.5 * (1.0 - gl_FragCoord.z))).a == 1.0)
-    gl_FragColor.rgb -= 0.1;
-  
+
   //reflect
   if (v_Normal.y > 0.0) {
     float y = u_view - gl_FragCoord.y * u_res;

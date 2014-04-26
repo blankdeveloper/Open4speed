@@ -210,7 +210,7 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
                     b = 2;
                     c = 4;
                 }
-                float lmRes = 1024;
+                float lmRes = 2048;
                 if (u > 0) {
                     m->tid[j * 6 + c] = (x + u) / 256.0 - 2 / lmRes;
                     m->tid[j * 6 + c + 1] = y / 256.0 + 2 / lmRes;

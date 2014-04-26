@@ -7,7 +7,6 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
-import com.google.ads.*;
 import com.lvonasek.o4s.controllers.HWKeys;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,7 +25,6 @@ public class O4SActivity extends Activity {
     private static final String configFile = path + "config";
     private static final String versionFile = path + "open4speed.1.20";
     //various instances
-    private AdView mAdView = null;
     private O4SJNI mO4SJNI;
     public static O4SActivity mO4SActivity;
 
@@ -86,13 +84,6 @@ public class O4SActivity extends Activity {
         params.addRule(RelativeLayout.ALIGN_TOP |
         RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
 
-        //add ad banner
-        if (mAdView != null) {
-            layout.addView(mAdView, params);
-            AdRequest request = new AdRequest();
-            mAdView.loadAd(request);
-        }
-
         //enable renderer
         setContentView(layout);
         mO4SJNI.setRenderer(mO4SJNI);
@@ -118,18 +109,6 @@ public class O4SActivity extends Activity {
         }
         //another keys(e.g.volume buttons)
         return super.dispatchKeyEvent(event);
-    }
-
-    @Override
-    /**
-     * Called automatically when game is killed or it is called exit(0) from C++
-     */
-    public void onDestroy() {
-        // destroy ad banner
-        if (mAdView != null) {
-            mAdView.destroy();
-        }
-        super.onDestroy();
     }
 
     @Override

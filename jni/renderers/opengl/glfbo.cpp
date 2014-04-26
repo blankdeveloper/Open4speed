@@ -104,7 +104,7 @@ glfbo::glfbo(int width, int height, bool depthbuffer) {
     else {
         glGenRenderbuffers(1, rboID);
         glBindRenderbuffer(GL_RENDERBUFFER, rboID[0]);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, res, res);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, res, res);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
     }
 

@@ -15,8 +15,8 @@ public class ObjConverter {
 
   public static void main(String[] args) throws Exception {
     args = new String[2];
-    args[0] = "tokyop.obj";
-    args[1] = "tracks/tokyo/physics.o4s";
+    args[0] = "tokyo.obj";
+    args[1] = "tracks/tokyo/visual.o4s";
 
     if (Common.init(args)) {
       ObjLoader.loadObj(args);

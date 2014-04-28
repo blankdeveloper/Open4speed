@@ -99,7 +99,7 @@ void display(void) {
 
     /// stop messuring time
     clock_gettime(CLOCK_REALTIME, &ts_end);
-    frameTime += (ts_end.tv_nsec - ts_start.tv_nsec) * 0.000001f;
+    frameTime += (ts_end.tv_sec - ts_start.tv_sec + (ts_end.tv_nsec - ts_start.tv_nsec) * 0.000000001f) * 1000.0f;
 }
 
 /**

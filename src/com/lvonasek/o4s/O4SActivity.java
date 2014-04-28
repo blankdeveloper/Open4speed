@@ -3,19 +3,26 @@ package com.lvonasek.o4s;
 import android.app.Activity;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Debug;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+
 import com.lvonasek.o4s.controllers.HWKeys;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static android.os.Debug.*;
+
 /**
  * Runnable class - it sets environment and run everything needed. It also manages interruptions of
  * sounds and game loop(e.g.during incoming call)
+ *
  * @author Lubos Vonasek
  */
 public class O4SActivity extends Activity {
@@ -80,9 +87,9 @@ public class O4SActivity extends Activity {
         //add main view
         layout.addView(mO4SJNI);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
-        (RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                (RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_TOP |
-        RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+                RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
 
         //enable renderer
         setContentView(layout);
@@ -153,11 +160,17 @@ public class O4SActivity extends Activity {
      * Implement Android back button into game
      */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        //change back key function(KEYCODE_MENU is since Android 4.0 unused)
+        //change back key function
         if ((keyCode == KeyEvent.KEYCODE_BACK) || (keyCode == KeyEvent.KEYCODE_MENU)) {
             O4SJNI.nativeBack();
             return true;
         }
+        final MemoryInfo memoryInfo = new MemoryInfo();
+        getMemoryInfo(memoryInfo);
+        Log.i("Mem-dalvik", "PD:" + memoryInfo.dalvikPrivateDirty + ",PSS:" + memoryInfo.dalvikPss + ",SD:" + memoryInfo.dalvikSharedDirty);
+        Log.i("Mem-native", "PD:" + memoryInfo.nativePrivateDirty + ",PSS:" + memoryInfo.nativePss + ",SD:" + memoryInfo.nativeSharedDirty);
+        Log.i("Mem-other", "PD:" + memoryInfo.otherPrivateDirty + ",PSS:" + memoryInfo.otherPss + ",SD:" + memoryInfo.otherSharedDirty);
+        Log.i("Mem-total", "PD:" + memoryInfo.getTotalPrivateDirty() + ",PSS:" + memoryInfo.getTotalPss() + ",SD:" + memoryInfo.getTotalSharedDirty());
         return super.onKeyDown(keyCode, event);
     }
 }

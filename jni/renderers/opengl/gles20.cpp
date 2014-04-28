@@ -738,7 +738,7 @@ unsigned char* gles20::getLMPixels(int i, bool fix, bool blur) {
         }
     }
 
-    /// blur
+    /// filter
     if (blur) {
         for (int a = 0; a < rttsize; a++) {
             for (int b = 0; b < rttsize; b++) {

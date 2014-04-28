@@ -43,6 +43,9 @@ public:
      */
     octreenode(AABB *r, int depth);
 
+    /**
+     * addTriangleToDebug adds current triangle into debug status
+     */
     void addTriangleToDebug();
 
     /**
@@ -50,6 +53,10 @@ public:
      */
     void createSubNodes();
 
+    /**
+     * debug prints info about octree
+     * @param tests is true to print amount of test, false to print structure
+     */
     void debug(bool test);
 
     /**
@@ -61,8 +68,22 @@ public:
      */
     AABB* getSubregion(bool x, bool y, bool z);
 
+    /**
+     * isIntersected is intersection test of ray and triangle scene with optimalization
+     * @param raybegin is 3D vector of ray begin
+     * @param rayend is 3D vector of ray end
+     * @param testID is index of test
+     * @return true if ray is intersected
+     */
     bool isIntersected(glm::vec3 raybegin, glm::vec3 rayend, long testID);
 
+    /**
+     * isIntersected is standard intersection test of ray and triangle scene without optimalization
+     * @param raybegin is 3D vector of ray begin
+     * @param rayend is 3D vector of ray end
+     * @param testID is index of test
+     * @return true if ray is intersected
+     */
     bool isIntersectedEx(glm::vec3 raybegin, glm::vec3 rayend, long testID);
 };
 

@@ -11,6 +11,9 @@
 #include "raycaster/utils.h"
 #include "common.h"
 
+/// object for testing
+long AABBTests = 0;
+long triangleTests = 0;
 std::vector<int> octreeStatus;
 
 /**
@@ -50,6 +53,9 @@ octreenode::octreenode(AABB *r, std::vector<triangle*> geom) {
     createSubNodes();
 }
 
+/**
+ * addTriangleToDebug adds current triangle into debug status
+ */
 void octreenode::addTriangleToDebug() {
     if (depth + 1 == octreeStatus.size()) {
         octreeStatus.push_back(1);
@@ -112,9 +118,10 @@ void octreenode::createSubNodes() {
     }
 }
 
-long AABBTests = 0;
-long triangleTests = 0;
-
+/**
+ * debug prints info about octree
+ * @param tests is true to print amount of test, false to print structure
+ */
 void octreenode::debug(bool tests) {
     if (tests) {
         printf("%d AABBs tested, %d triangles tested\n", AABBTests, triangleTests);
@@ -158,6 +165,13 @@ AABB* octreenode::getSubregion(bool x, bool y, bool z) {
     return r;
 }
 
+/**
+ * isIntersected is intersection test of ray and triangle scene with optimalization
+ * @param raybegin is 3D vector of ray begin
+ * @param rayend is 3D vector of ray end
+ * @param testID is index of test
+ * @return true if ray is intersected
+ */
 bool octreenode::isIntersected(glm::vec3 raybegin, glm::vec3 rayend, long testID) {
 
     /// cached data test
@@ -181,6 +195,13 @@ bool octreenode::isIntersected(glm::vec3 raybegin, glm::vec3 rayend, long testID
     isIntersectedEx(raybegin, rayend, testID);
 }
 
+/**
+ * isIntersected is standard intersection test of ray and triangle scene without optimalization
+ * @param raybegin is 3D vector of ray begin
+ * @param rayend is 3D vector of ray end
+ * @param testID is index of test
+ * @return true if ray is intersected
+ */
 bool octreenode::isIntersectedEx(glm::vec3 raybegin, glm::vec3 rayend, long testID) {
 
     /// current node test

@@ -10,7 +10,11 @@
 #include "renderers/opengl/glsl.h"
 #include "utils/io.h"
 
+#ifdef ANDROID
 const char* header = "#version 100\nprecision highp float;\n";      ///< Shader header
+#else
+const char* header = "#version 130\nprecision highp float;\n";      ///< Shader header
+#endif
 
 /**
  * @brief initShader creates shader from code

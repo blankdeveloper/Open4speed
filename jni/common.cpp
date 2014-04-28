@@ -157,6 +157,7 @@ float *mat = new float[16];     ///< Temp matrix
 char *string = new char[1024];  ///< Temp string
 bool matrixLock = 0;            ///< Lock for replacing car matrices
 bool renderLightmap = false;    ///< Render lightmap mode enability
+int rttsize = 2048;             ///< RTT texture size
 
 int config[configSize];                      ///< Temporary config data
 std::vector<char*> *configText[configSize];  ///< Config texts

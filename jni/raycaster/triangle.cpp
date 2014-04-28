@@ -6,14 +6,32 @@
 #include "utils/io.h"
 #include "common.h"
 
-triangle* lastIntersectedTriangle = 0;
-triangle* lastIntersectedTriangle2 = 0;
+triangle* lastIntersectedTriangle = 0;  ///< Last intersected triangle
+triangle* lastIntersectedTriangle2 = 0; ///< Last intersected triangle
 
-float step = 1 / 255.0f;
-int ignore1 = 0;
-int ignore2 = 0;
+float step = 1 / 255.0f; ///< Minimal color step
+int ignore1 = 0;         ///< index of triangle to ignore
+int ignore2 = 0;         ///< index of triangle to ignore
 
-
+/**
+ * triangle is constructor of triangle
+ * @param a is 3D coord of first point
+ * @param b is 3D coord of second point
+ * @param c is 3D coord of third point
+ * @param aID is lightmap coord of first point
+ * @param bID is lightmap coord of second point
+ * @param cID is lightmap coord of third point
+ * @param na is normal of first point
+ * @param nb is normal of second point
+ * @param nc is normal of third point
+ * @param ta is texture coord of first point
+ * @param tb is texture coord of second point
+ * @param tc is texture coord of third point
+ * @param lmIndex is index of lightmap
+ * @param tIndex is triangle index
+ * @param txt is triangle texture
+ * @param txtmap is triangle map
+ */
 triangle::triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c,
          glm::ivec2 aID, glm::ivec2 bID, glm::ivec2 cID,
          glm::vec3 na, glm::vec3 nb, glm::vec3 nc,
@@ -46,7 +64,10 @@ triangle::triangle(glm::vec3 a, glm::vec3 b, glm::vec3 c,
     addPointToAABB(c);
 }
 
-
+/**
+ * addPointToAABB adds point into triangle AABB (resize AABB by point)
+ * @param p is point to add
+ */
 void triangle::addPointToAABB(glm::vec3 p) {
     if (reg.min.x > p.x)
         reg.min.x = p.x;
@@ -63,6 +84,12 @@ void triangle::addPointToAABB(glm::vec3 p) {
         reg.max.z = p.z;
 }
 
+/**
+ * addLMPoint adds point into triangle
+ * @param u is u vector of point in triangle (from 0 to 255)
+ * @param v is v vector of point in triangle (from 0 to 255)
+ * @param t is position in lightmap
+ */
 void triangle::addLMPoint(int u, int v, glm::ivec2 t) {
     glm::vec3 A = glm::vec3(0, 0, 1);
     glm::vec3 B = glm::vec3(1, 0, 1);
@@ -80,6 +107,11 @@ void triangle::addLMPoint(int u, int v, glm::ivec2 t) {
     points.push_back(new Point{vert, t, n, c, glm::vec3(lena, lenb, lenc), glm::vec2(P.x, P.y)});
 }
 
+/**
+ * countDistanceTo counts distance between two triangles (aproximate)
+ * @param t is second triangle to count distance
+ * @return distance between triangles
+ */
 float triangle::countDistanceTo(triangle* t) {
     float min = glm::length(t->a - a);
     min = glm::min(min, glm::length(t->a - b));
@@ -93,6 +125,11 @@ float triangle::countDistanceTo(triangle* t) {
     return min;
 }
 
+/**
+ * getPointLight gets point lightmap from map
+ * @param p is 3D point in space
+ * @return point light in PLP structure
+ */
 PLP* triangle::getPointLight(glm::vec3 p) {
     float area = triangleArea(a, b, c);
     float lena = triangleArea(p, b, c) / area;
@@ -112,6 +149,11 @@ PLP* triangle::getPointLight(glm::vec3 p) {
     return plp;
 }
 
+/**
+ * ClosestPtPointTriangle count closest point on triangle from point
+ * @param p is point to count
+ * @return closest point on triangle
+ */
 glm::vec3 triangle::ClosestPtPointTriangle(glm::vec3 p) {
     glm::vec3 ab = b - a;
     glm::vec3 ac = c - a;
@@ -157,6 +199,13 @@ glm::vec3 triangle::ClosestPtPointTriangle(glm::vec3 p) {
     return u * a + v * b + w * c;
 }
 
+/**
+ * isIntersectedByRay tests triangle intersection with ray
+ * @param raybegin is ray begin
+ * @param rayend is ray end
+ * @param testID is index of test
+ * @return true if it is intersected
+ */
 bool triangle::isIntersectedByRay(glm::vec3 raybegin, glm::vec3 rayend, long testID) {
 
     /// skip on test itself or it was already tested

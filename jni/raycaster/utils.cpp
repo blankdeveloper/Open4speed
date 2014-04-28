@@ -1,11 +1,15 @@
 #include "raycaster/utils.h"
 #include "common.h"
 
-const float EPSILON = 0.00001f;
+const float EPSILON = 0.00001f;     ///< Small number used for float comparation
 timespec ts_start, ts_end;          ///< Time messurement
+float cstep = 1 / 255.0f;           ///< Minimal color step
 
-float cstep = 1 / 255.0f;
-
+/**
+ * countLightMaxDistance counts maximal distance of light
+ * @param att is quadratic attenuation
+ * @return distance
+ */
 float countLightMaxDistance(float att) {
     float maxColor = xrenderer->light.u_light_diffuse.x;
     maxColor = glm::max(maxColor, xrenderer->light.u_light_diffuse.y);
@@ -13,6 +17,13 @@ float countLightMaxDistance(float att) {
     return glm::sqrt(255.0f * maxColor / att);
 }
 
+/**
+ * getColor gets color of 3D point for current point ray
+ * @param p is 3D point
+ * @param raybegin is ray begin
+ * @param rayend is ray end
+ * @return RGB color + intensity in A channel
+ */
 glm::vec4 getColor(Point *p, glm::vec3 raybegin, glm::vec3 rayend) {
 
     //count effectivity
@@ -42,11 +53,27 @@ glm::vec4 getColor(Point *p, glm::vec3 raybegin, glm::vec3 rayend) {
       return glm::vec4(0, 0, 0, 0);
     }
 }
+
+/**
+ * sign is method for PointInTriangle check
+ * @param p1 is pt vector
+ * @param p2 is vx1 vector
+ * @param p3 is vx2 vector
+ * @return float value
+ */
 float sign(glm::ivec3 p1, glm::ivec3 p2, glm::ivec3 p3)
 {
   return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
 }
 
+/**
+ * PointInTriangle check if 2D point is in triangle
+ * @param pt is point to check
+ * @param v1 is first vertex of triangle
+ * @param v2 is second vertex of triangle
+ * @param v3 is triangle vertex of triangle
+ * @return true if it is inside
+ */
 bool PointInTriangle(glm::ivec3 pt, glm::ivec3 v1, glm::ivec3 v2, glm::ivec3 v3)
 {
   bool b1 = sign(pt, v1, v2) < 0;
@@ -55,20 +82,38 @@ bool PointInTriangle(glm::ivec3 pt, glm::ivec3 v1, glm::ivec3 v2, glm::ivec3 v3)
 
   return ((b1 == b2) && (b2 == b3));
 }
+
+/**
+ * startTimer starts timer
+ */
 void startTimer() {
     fflush(stdout);
     clock_gettime(CLOCK_REALTIME, &ts_start);
 }
 
+/**
+ * stopTimer stops timer
+ */
 void stopTimer() {
     clock_gettime(CLOCK_REALTIME, &ts_end);
     printf("%0.3fs\n", ts_end.tv_sec - ts_start.tv_sec + (ts_end.tv_nsec - ts_start.tv_nsec) * 0.000000001f);
 }
 
+/**
+ * swizle swizles vec4 to vec3
+ * @param v is vec4
+ * @return vec3
+ */
 glm::vec3 swizle(glm::vec4 v) {
     return glm::vec3(v.x, v.y, v.z);
 }
 
+/**
+ * TestAABBAABB test if two AABBs intersecting
+ * @param a is first AABB
+ * @param b is second AABB
+ * @return true if it is intersecting
+ */
 bool TestAABBAABB(AABB* a, AABB* b) {
     // Exit with no intersection if separated along an axis
     if (a->max[0] < b->min[0] || a->min[0] > b->max[0]) return 0;
@@ -78,7 +123,13 @@ bool TestAABBAABB(AABB* a, AABB* b) {
     return 1;
 }
 
-// Test if segment intersects AABB b
+/**
+ * TestSegmentAABB tests if segment intersects AABB b
+ * @param b is AABB to test
+ * @param raybegin is ray begin
+ * @param rayend is ray end
+ * @return 1 if segment intersects AABB
+ */
 int TestSegmentAABB(AABB* b, glm::vec3 raybegin, glm::vec3 rayend) {
     glm::vec3 c = (b->min + b->max) * 0.5f; // Box center-point
     glm::vec3 e = b->max - c; // Box halflength extents
@@ -103,6 +154,13 @@ int TestSegmentAABB(AABB* b, glm::vec3 raybegin, glm::vec3 rayend) {
     return 1;
 }
 
+/**
+ * triangleArea counts area of triangle
+ * @param a is first point of triangle
+ * @param b is second point of triangle
+ * @param c is third point of triangle
+ * @return area of triangle
+ */
 float triangleArea(glm::vec3 a, glm::vec3 b, glm::vec3 c) {
     return glm::length(glm::cross(c - a, c - b)) * 0.5f;
 }

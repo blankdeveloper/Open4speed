@@ -25,11 +25,12 @@ struct Dynamic {
     int frame;
 };
 
-int currentFrame = 0;
-const int effLen = 6;
-Dynamic eff[effLen];
+bool testingState = false;                   ///< Update VBO testing state
+int currentFrame = 0;                        ///< Frame index
+const int effLen = 6;                        ///< Length of water effect
+Dynamic eff[effLen];                         ///< 3D water effect object
 model* arrow = 0;                            ///< GPS arrow model
-model* water = 0;
+model* water = 0;                            ///< Water effect model
 
 /**
  * @brief displayMenu displaies menu
@@ -406,13 +407,14 @@ void displayScene() {
         eff[currentFrame].frame = 0;
         currentFrame++;
 
-/*        if (trackdata->dynamicLight != 0) {
+        if (trackdata->dynamicLight != 0) {
             bool v = lamp[(xrenderer->frame/2) % 100];
+            //v = !testingState; testingState = v; //testing
             trackdata->dynamicLight->fboRenderer->bind();
             trackdata->dynamicLight->setLights(0, trackdata->dynamicLight->lightCount - 1, v);
             trackdata->dynamicLight->fboRenderer->unbind();
         }
-*/
+
         if (currentFrame >= effLen) {
             currentFrame = 0;
         }

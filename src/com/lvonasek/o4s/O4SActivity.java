@@ -165,6 +165,7 @@ public class O4SActivity extends Activity {
             O4SJNI.nativeBack();
             return true;
         }
+        //get memory usage state
         final MemoryInfo memoryInfo = new MemoryInfo();
         getMemoryInfo(memoryInfo);
         Log.i("Mem-dalvik", "PD:" + memoryInfo.dalvikPrivateDirty + ",PSS:" + memoryInfo.dalvikPss + ",SD:" + memoryInfo.dalvikSharedDirty);

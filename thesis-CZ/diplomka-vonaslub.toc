@@ -6,30 +6,30 @@
 \contentsline {subsection}{\numberline {2.1.1}Mapy osv\IeC {\v e}tlen\IeC {\'\i }}{4}{subsection.2.1.1}
 \contentsline {subsection}{\numberline {2.1.2}Statick\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i } s dynamick\IeC {\'y}mi objekty ve sc\IeC {\'e}n\IeC {\v e}}{5}{subsection.2.1.2}
 \contentsline {section}{\numberline {2.2}C\IeC {\'\i }lov\IeC {\'a} platforma Android}{6}{section.2.2}
-\contentsline {section}{\numberline {2.3}Existuj\IeC {\'\i }c\IeC {\'\i } implementace}{7}{section.2.3}
+\contentsline {section}{\numberline {2.3}Souvisej\IeC {\'\i }c\IeC {\'\i } metody}{7}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}Projekty zab\IeC {\'y}vaj\IeC {\'\i }c\IeC {\'\i } se vykreslov\IeC {\'a}n\IeC {\'\i } no\IeC {\v c}n\IeC {\'\i } sc\IeC {\'e}ny}{7}{subsection.2.3.1}
-\contentsline {subsubsection}{\numberline {2.3.1.1}Proceduraln\IeC {\'\i } modelov\IeC {\'a}n\IeC {\'\i } m\IeC {\v e}sta a osv\IeC {\v e}tlen\IeC {\'\i } no\IeC {\v c}n\IeC {\'\i }ho m\IeC {\v e}sta}{7}{subsubsection.2.3.1.1}
-\contentsline {subsubsection}{\numberline {2.3.1.2}Imperfektn\IeC {\'\i } st\IeC {\'\i }nov\IeC {\'e} mapy pro v\IeC {\'y}po\IeC {\v c}et nep\IeC {\v r}\IeC {\'\i }m\IeC {\'e}ho osv\IeC {\v e}tlen\IeC {\'\i }}{8}{subsubsection.2.3.1.2}
+\contentsline {paragraph}{Proceduraln\IeC {\'\i } modelov\IeC {\'a}n\IeC {\'\i } m\IeC {\v e}sta a osv\IeC {\v e}tlen\IeC {\'\i } no\IeC {\v c}n\IeC {\'\i }ho m\IeC {\v e}sta}{7}{section*.6}
+\contentsline {paragraph}{Imperfektn\IeC {\'\i } st\IeC {\'\i }nov\IeC {\'e} mapy pro v\IeC {\'y}po\IeC {\v c}et nep\IeC {\v r}\IeC {\'\i }m\IeC {\'e}ho osv\IeC {\v e}tlen\IeC {\'\i }}{8}{section*.7}
 \contentsline {subsection}{\numberline {2.3.2}Z\IeC {\'a}vodn\IeC {\'\i } simul\IeC {\'a}tory s no\IeC {\v c}n\IeC {\'\i } sc\IeC {\'e}nou pro platformu Android}{8}{subsection.2.3.2}
-\contentsline {subsubsection}{\numberline {2.3.2.1}Asphalt Urban od Gameloftu}{8}{subsubsection.2.3.2.1}
-\contentsline {subsubsection}{\numberline {2.3.2.2}Need for Speed Most Wanted od EA Games a Firemonkeys}{9}{subsubsection.2.3.2.2}
-\contentsline {subsubsection}{\numberline {2.3.2.3}GT Racing 2 od Gameloftu}{9}{subsubsection.2.3.2.3}
-\contentsline {subsubsection}{\numberline {2.3.2.4}Sports Car Challenge od Fishlabs}{9}{subsubsection.2.3.2.4}
-\contentsline {subsubsection}{\numberline {2.3.2.5}Track Racing od v\IeC {\'y}voj\IeC {\'a}\IeC {\v r}e Soulkey}{9}{subsubsection.2.3.2.5}
-\contentsline {chapter}{\numberline {3}Teoretick\IeC {\'a} \IeC {\v c}\IeC {\'a}st}{11}{chapter.3}
+\contentsline {paragraph}{Asphalt Urban}{8}{section*.8}
+\contentsline {paragraph}{Need for Speed Most Wanted}{9}{section*.9}
+\contentsline {paragraph}{GT Racing 2}{9}{section*.10}
+\contentsline {paragraph}{Sports Car Challenge}{9}{section*.11}
+\contentsline {paragraph}{Track Racing}{9}{section*.12}
+\contentsline {chapter}{\numberline {3}Teoretick\IeC {\'y} \IeC {\'u}vod}{11}{chapter.3}
 \contentsline {section}{\numberline {3.1}Osv\IeC {\v e}tlovac\IeC {\'\i } model}{11}{section.3.1}
 \contentsline {section}{\numberline {3.2}V\IeC {\'y}po\IeC {\v c}et osv\IeC {\v e}tlen\IeC {\'\i }}{13}{section.3.2}
 \contentsline {section}{\numberline {3.3}St\IeC {\'\i }nov\IeC {\'a}n\IeC {\'\i }}{14}{section.3.3}
 \contentsline {section}{\numberline {3.4}M\IeC {\'\i }ch\IeC {\'a}n\IeC {\'\i } textur}{15}{section.3.4}
-\contentsline {section}{\numberline {3.5}V\IeC {\'y}po\IeC {\v c}et st\IeC {\'\i }n\IeC {\r u} v re\IeC {\'a}ln\IeC {\'e}m \IeC {\v c}ase}{16}{section.3.5}
+\contentsline {section}{\numberline {3.5}V\IeC {\'y}po\IeC {\v c}et st\IeC {\'\i }n\IeC {\r u}}{16}{section.3.5}
 \contentsline {section}{\numberline {3.6}P\IeC {\v r}edpo\IeC {\v c}ten\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i }}{19}{section.3.6}
 \contentsline {subsection}{\numberline {3.6.1}Vytvo\IeC {\v r}en\IeC {\'\i } texturovac\IeC {\'\i }ch sou\IeC {\v r}adnic}{19}{subsection.3.6.1}
-\contentsline {subsection}{\numberline {3.6.2}Oprava chyby soused\IeC {\'\i }c\IeC {\'\i }ch troj\IeC {\'u}heln\IeC {\'\i }k\IeC {\r u}}{21}{subsection.3.6.2}
-\contentsline {subsection}{\numberline {3.6.3}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{21}{subsection.3.6.3}
-\contentsline {subsection}{\numberline {3.6.4}Spekul\IeC {\'a}rn\IeC {\'\i } slo\IeC {\v z}ka osv\IeC {\v e}tlovac\IeC {\'\i } modelu}{22}{subsection.3.6.4}
+\contentsline {paragraph}{Oprava chyby soused\IeC {\'\i }c\IeC {\'\i }ch troj\IeC {\'u}heln\IeC {\'\i }k\IeC {\r u}}{21}{section*.13}
+\contentsline {subsection}{\numberline {3.6.2}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{21}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.6.3}Spekul\IeC {\'a}rn\IeC {\'\i } slo\IeC {\v z}ka osv\IeC {\v e}tlovac\IeC {\'\i } modelu}{22}{subsection.3.6.3}
 \contentsline {section}{\numberline {3.7}Odlesky povrch\IeC {\r u}}{22}{section.3.7}
-\contentsline {chapter}{\numberline {4}Realizace}{25}{chapter.4}
-\contentsline {section}{\numberline {4.1}Simul\IeC {\'a}tor}{25}{section.4.1}
+\contentsline {chapter}{\numberline {4}Implementace}{25}{chapter.4}
+\contentsline {section}{\numberline {4.1}Testovac\IeC {\'\i } aplikace - simul\IeC {\'a}tor}{25}{section.4.1}
 \contentsline {section}{\numberline {4.2}Realizace na platform\IeC {\v e} Android}{27}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Problematika Android API}{27}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Vyu\IeC {\v z}it\IeC {\'\i } vl\IeC {\'a}ken}{29}{subsection.4.2.2}
@@ -47,18 +47,18 @@
 \contentsline {subsection}{\numberline {4.4.3}Odlesky}{40}{subsection.4.4.3}
 \contentsline {chapter}{\numberline {5}Testov\IeC {\'a}n\IeC {\'\i }}{43}{chapter.5}
 \contentsline {section}{\numberline {5.1}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{44}{section.5.1}
-\contentsline {paragraph}{Bodov\IeC {\'e} zdroje sv\IeC {\v e}tla}{44}{section*.6}
-\contentsline {paragraph}{Plo\IeC {\v s}n\IeC {\'e} zdroje sv\IeC {\v e}tla}{44}{section*.7}
+\contentsline {paragraph}{Bodov\IeC {\'e} zdroje sv\IeC {\v e}tla}{44}{section*.14}
+\contentsline {paragraph}{Plo\IeC {\v s}n\IeC {\'e} zdroje sv\IeC {\v e}tla}{44}{section*.15}
 \contentsline {section}{\numberline {5.2}Simul\IeC {\'a}tor}{45}{section.5.2}
 \contentsline {chapter}{\numberline {6}Z\IeC {\'a}v\IeC {\v e}r}{49}{chapter.6}
-\contentsline {chapter}{Literatura}{51}{chapter*.8}
+\contentsline {chapter}{Literatura}{51}{chapter*.16}
 \contentsline {chapter}{\numberline {A}Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{53}{appendix.A}
 \contentsline {chapter}{\numberline {B}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{55}{appendix.B}
 \contentsline {chapter}{\numberline {C}U\IeC {\v z}ivatelsk\IeC {\'a} p\IeC {\v r}\IeC {\'\i }ru\IeC {\v c}ka}{57}{appendix.C}
 \contentsline {section}{\numberline {C.1}Instalace simul\IeC {\'a}toru}{57}{section.C.1}
-\contentsline {paragraph}{Linux}{57}{section*.9}
-\contentsline {paragraph}{Android}{57}{section*.10}
+\contentsline {paragraph}{Linux}{57}{section*.17}
+\contentsline {paragraph}{Android}{57}{section*.18}
 \contentsline {section}{\numberline {C.2}Pou\IeC {\v z}\IeC {\'\i }v\IeC {\'a}n\IeC {\'\i } simul\IeC {\'a}toru}{58}{section.C.2}
-\contentsline {paragraph}{Menu}{58}{section*.11}
-\contentsline {paragraph}{Ovl\IeC {\'a}d\IeC {\'a}n\IeC {\'\i } simul\IeC {\'a}toru}{58}{section*.12}
+\contentsline {paragraph}{Menu}{58}{section*.19}
+\contentsline {paragraph}{Ovl\IeC {\'a}d\IeC {\'a}n\IeC {\'\i } simul\IeC {\'a}toru}{58}{section*.20}
 \contentsline {section}{\numberline {C.3}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{58}{section.C.3}

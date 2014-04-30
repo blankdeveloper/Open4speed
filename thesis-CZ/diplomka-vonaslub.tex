@@ -350,20 +350,20 @@ Obecně platí, že během vykreslování 3D scény se některé výpočty cykli
 
 %*****************************************************************************
 \chapter{Specifikace práce}
-Cílem práce bylo realizovat efektivní vykreslování rozsáhlých nočních scén na platformě Android za použití grafické knihovny OpenGL. Rozhodl jsem se práci realizovat v podobě závodního simulátoru, který obsahuje několik pohybujících se vozidel a blikajících světel. Tato podoba realizace plně využívá veškeré grafické techniky, které jsem implementoval\linebreak a zároveň umožní lépe zhodnotit použitelnost projektu, než kdybych zvolil podobu technického dema.
+Cílem práce bylo realizovat efektivní vykreslování rozsáhlých nočních scén na platformě Android za použití grafické knihovny OpenGL. Rozhodl jsem se práci realizovat v podobě závodního simulátoru, který obsahuje několik pohybujících se vozidel a několik zhasínajících světel. Tato podoba realizace plně využívá veškeré grafické techniky, které jsem implementoval a zároveň umožní lépe zhodnotit použitelnost projektu, než kdybych zvolil podobu technického dema.
 
 Důraz byl kladen na co nejvyšší optimalizaci vykreslování. Kromě hlavní grafické techniky map osvětlení (anglicky lightmap) bylo použito několik dalších technik řešící jednotlivé problémy, které vznikají při použití map osvětlení. Problémy nastávají hlavně při použití dynamických objektů nebo při změně osvětlení. Technika map osvětlení řeší pouze statickou scénu\linebreak a v případě použití dynamické scény je potřeba metodu značně rozšířit.
 
 \section{Požadavky na funkčnost}
-Zádání předpokládá, že projekt bude rozdělen do dvou samostatných částí. První částí bude předzpracování, ve kterém se budou vytvářet mapy osvětlení. Druhou částí projektu bude závodní simulátor, který mapy osvětlení využije. Fázi předzpracování by teoreticky bylo možné provádět i na platformě Android. Vzhledem k tomu, že klasické počítače dosahují vyššího výkonu než mobilní zařízení, bude daleko efektivnější provést předzpracování\linebreak na počítači.
+Zadání předpokládá, že projekt bude rozdělen do dvou samostatných částí. První částí bude předzpracování, ve kterém se budou vytvářet mapy osvětlení. Druhou částí projektu bude aplikace, která mapy osvětlení využije. Fázi předzpracování by teoreticky bylo možné provádět i na platformě Android. Vzhledem k tomu, že klasické počítače dosahují vyššího výkonu než mobilní zařízení, bude efektivnější provést předzpracování na stolním počítači.
 
-Simulátor bude využívat vlastní formát, který bude umožňovat mít v sobě jak souřadnice standardních textur, tak i souřadnice v mapách osvětlení. Formát bude zachovávat veškeré informace o modelu. I když je třeba výsledný simulátor nevyužije, bude dobré tyto informace ponechat pro případ dalšího vývoje. Formát bude schopen uložit některé další informace\linebreak o materiálu a shaderu.
+Předpočtené osvětlení bude využívat vlastní formát, který bude umožňovat mít v sobě jak souřadnice standardních textur, tak i souřadnice v mapách osvětlení. Formát bude zachovávat veškeré informace o modelu. I když je třeba výsledný simulátor nevyužije, bude dobré tyto informace ponechat pro případ dalšího vývoje. Formát bude schopen uložit některé další informace o materiálu a shaderu.
 
 Plocha map osvětlení bude co možná nejvíce využita z důvodu očekávané malé paměti vymezeny pro velké textury. Aby bylo možné určit nejvhodnější rozlišení těchto textur, bude umožněno škálování map osvětlení.
 \newpage
 
 \subsection{Mapy osvětlení}
-Mapy osvětlení jsou textury 3D modelů, které obsahují informace o difúzním osvětlení. Difúzní osvětlení je závislé pouze na poloze světla, směru světla a povrchu tělesa, lze jej tedy pro statickou část modelu předpočítat.
+Mapy osvětlení jsou textury 3D modelů, které obsahují informace o difúzní složce osvětlovacího modelu. Difúzní složka je závislá pouze na poloze světla, směru světla a povrchu tělesa, lze jí tedy pro statickou část modelu předpočítat.
 
 \begin{center}
 \begin{figure}[h!]
@@ -374,7 +374,7 @@ Mapy osvětlení jsou textury 3D modelů, které obsahují informace o difúzní
 
 Aby bylo možné mapy osvětlení dynamicky aktualizovat, je potřeba mít do map rychlý zapisovací přístup. Rychlé zapisování do textur se v OpenGL realizuje pomocí Frame Buffer Objektu (FBO). Pro aktualizaci musíme mít předpočítanou tzv. záplatu. Záplatou se rozumí menší textura, která se přidá do současné osvětlovací mapy. Přidáním záplaty lze tedy přidat do scény další světlo, které máme předpočítané. Záplata jde z FBO opět odebrat (provede se odečet stejné záplaty).
 
-Protože uchovávání záplat v paměti by bylo příliš paměťově náročné, jsou uloženy\linebreak ve vektorové podobě přímo na GPU pomocí Vertex Buffer Objektu (VBO). 
+Protože uchovávání záplat v paměti by bylo příliš paměťově náročné, jsou komprimovány ve vektorové podobě přímo na GPU pomocí Vertex Buffer Objektu (VBO). 
 \newpage
 
 \begin{center}
@@ -387,13 +387,13 @@ Protože uchovávání záplat v paměti by bylo příliš paměťově náročn�
 \subsection{Statické osvětlení s dynamickými objekty ve scéně}
 Při použití dynamických objektů ve scéně se statickém osvětlením vznikají dva základní problémy. Prvním problém je, že dynamické objekty mají jiné osvětlení než statická scéna\linebreak a to vypadá velice nepřirozeně. Druhým problémem je, že pokud dynamický objekt zastíní zdroj světla, tak nevznikne stín na statických objektech.
 
-Oba problémy lze vyřešit jen částečně. V prvním případě lze přečíst informaci o intenzitě osvětlení z nejbližšího bodu na statickém objektu a tuto intenzitu aplikovat na dynamický objekt. V druhém případě při vykreslování jednotlivých pixelů lze zjistit, zda se v okolí vykreslovaného bodu nenachází dynamický objekt a tím aproximačně zjistit, zda byl vykreslovaný bod zastíněn.
+Oba problémy lze vyřešit jen částečně. V prvním případě lze přečíst informaci o intenzitě osvětlení z nejbližšího bodu na statickém objektu a tuto intenzitu aplikovat na dynamický objekt. V druhém případě při vykreslování jednotlivých pixelů lze zjistit, zda se v okolí vykreslovaného bodu nenachází dynamický objekt a tím zjistit, zda byl vykreslovaný bod zastíněn.
 \newpage
 
 \section{Cílová platforma Android}
 Platforma Android je postavena na Linuxovém jádře a využívá knihovny, které bývají součástí unixových systémů. Od klasického desktopového Linuxu se odlišuje hlavně v tom, že jako hlavní programovací jazyk využívá Javu. Pomocí Javy je naprogramováno celé Android API, které zprostředkovává téměř veškeré služby systému.
 
-Na Androidu je téměř nemožné spustit C/C++ program přímo. Standardně se to řeší tak, že se vytvoří z programu knihovna, kterou spustí kód napsaný v Javě. Pak je nutné veškeré vstupy/výstupy obsluhovat v jazyce Java a to velice komplikuje portování programů z desktopového Linuxu na Android. Výjimku tvoří OpenGL, které umožňuje vykreslovat\linebreak na displej přímo z C/C++ kódu.
+Na Androidu je velice problematické spustit C/C++ program přímo. Standardně se problém řeší tak, že se vytvoří z programu knihovna, kterou spustí kód napsaný v Javě. Pak je nutné veškeré vstupy/výstupy obsluhovat v jazyce Java a to velice komplikuje portování programů z desktopového Linuxu na Android. Výjimku tvoří OpenGL, které umožňuje vykreslovat na displej přímo z C/C++ kódu.
 
 \begin{center}
 \begin{figure}[h!]
@@ -404,16 +404,17 @@ Na Androidu je téměř nemožné spustit C/C++ program přímo. Standardně se 
 
 Pro platformu Android existuje nepřeberné množství aplikací a toho začínají využívat ostatní platformy. V současné době platformy BlackBerry a Jolla umožňují spouštět Android aplikace, dále existuje platforma NokiaX, která je postavena přímo na operačním systému Android.
 
-\section{Existující implementace}
+\section{Související metody}
 
-Rešerši existujících implementací jsem zaměřil na dvě různé kategorie. První kategorie jsou implementace pro PC, kde je nejčastěji řešeno nepřímé osvětlení, které by na mobilních zařízeních zatím použít nešlo. Druhá kategorie jsou závodní simulátory s noční jízdou pro platformu Android. V této kategorii bývají nejčastěji použity techniky jako v této práci.
+Rešerši souvisejících metod jsem zaměřil na dvě různé kategorie. První kategorie jsou implementace pro PC, kde je nejčastěji řešeno nepřímé osvětlení, které by na mobilních zařízeních zatím použít nešlo. Druhá kategorie jsou závodní simulátory s noční jízdou pro platformu Android. V této kategorii bývají nejčastěji použity techniky jako v této práci.
 
 \subsection{Projekty zabývající se vykreslování noční scény}
 
-V této sekci jsem vybral co nejrealističtější implementace, ke kterým existuje nějaký článek o tom, jak bylo výsledku dosaženo. Existuje sice několik implementací, které vypadají ještě více realističtěji. To jsou ale většinou komerční produkty, které nesdílejí ostatním, jakým způsobem byla implementace realizována.
+V této sekci jsem vybral co nejrealističtější implementace, ke kterým existuje nějaký článek o tom, jak bylo výsledku dosaženo. Existuje sice několik implementací, které vypadají realističtěji. To jsou ale většinou komerční produkty, které nesdílejí ostatním, jakým způsobem byla implementace realizována.
 
-\subsubsection{Proceduralní modelování města a osvětlení nočního města}
-Tato implementace je z roku 1999 a zabývá se proceduálním modelováním města (konkrétně Bostonu) a následně jej vykresluje pomocí sledování paprsku za využití algoritmu Monte Carlo. Implementace pochopitelně neběží v reálném čase. Výsledek je při detailním záběru po grafické stránce velice realistický. Vytknul bych jen, že reflektory vozidla osvítí pouze blízké okolí. Při záběru na město z výšky výsledek nebudí tolik realistický dojem jako při detailním záběru.
+\paragraph{Proceduralní modelování města a osvětlení nočního města}\mbox{}\\
+
+Tato implementace je z roku 1999 a zabývá se proceduálním modelováním města (konkrétně Bostonu) a následně jej vykresluje pomocí sledování paprsku za využití algoritmu Monte Carlo. Implementace neběží v reálném čase. Výsledek je při detailním záběru po grafické stránce velice realistický. Reflektory vozidla osvětlují pouze blízké okolí. Při záběru\linebreak na město z výšky výsledek nebudí tolik realistický dojem jako při detailním záběru.
 
 \begin{center}
 \begin{figure}[h!]
@@ -423,7 +424,8 @@ Tato implementace je z roku 1999 a zabývá se proceduálním modelováním měs
 \end{center}
 \newpage
 
-\subsubsection{Imperfektní stínové mapy pro výpočet nepřímého osvětlení}
+\paragraph{Imperfektní stínové mapy pro výpočet nepřímého osvětlení}\mbox{}\\
+
 Tato implementace, představená roku 2008, se nezabývá přímo noční scénou, zabývá se nepřímým osvětlením, které s noční scénou souvisí. Implementace běží v reálném čase a její výsledky jsou srovnatelné se snímky, které se vykreslují několik hodin.
 
 V této implementaci se nevyužívá předpočtených dat. Využívá se zde virtuálních bodových světel (VPL), která simulují odrazy světla. Z každého VPL se vytvoří stínová mapa o malém rozlišení a při vykreslování výsledné scény se vyhodnocuje viditelnost ze všech VPL.
@@ -440,29 +442,34 @@ Implementace podporuje více typů zdrojů světla, včetně plošných. Nemá p
 \subsection{Závodní simulátory s noční scénou pro platformu Android}
 V této sekci jsem vyhledával i implementace, u kterých není uvedeno, jak bylo výsledků dosaženo. Je to z důvodu malého počtu implementací odpovídající dané kategorii.
 
-\subsubsection{Asphalt Urban od Gameloftu}
+\paragraph{Asphalt Urban}\mbox{}\\
+
 Asphalt Urban je série mobilních závodních simulátorů, jejíchž první díl byl publikován spolu s herním smartphonem Nokia N-Gage. Jedná se o úspěšnou sérii, která přitahuje hráče všech možných platforem.
 
 Zmíním 7.díl ze série Asphalt Urban, který osobně považuji za nejúspěšnější díl. Osvětlení z pouličních lamp je součástí textur, reflektor vozidla je tvořen zřejmě pomocí projektivní textury. Povrch zrcadlově odráží 3D objekty. Po bližším zkoumání lze zjistit, že některé tyto odražené objekty jsou odlišné. Domnívám se, že zde byl použit duplicitní objekt.
 
 Další díl ze série Asphalt Urban už odlesky řeší lépe. Odráží se hlavně světla a odlesk je lépe přizpůsoben povrchu. Vzniká zde dojem mokré silnice. Dochází i k rozmazání brzdových světel. Osvětlení od lamp je opět řešeno texturou. Nepříjemnou změnou je absence reflektoru vozidla a přidání rušivého chvění kamery během jízdy.
 
-\subsubsection{Need for Speed Most Wanted od EA Games a Firemonkeys}
+\paragraph{Need for Speed Most Wanted}\mbox{}\\
+
 Simulátor, který je spíše známý z PC, na mobilním trhu takový úspěch nemá. Od PC verze je velice odlišný, ale rozhodně se nejedná o nějakou lacinou napodobeninu. Jedná se o první závodní simulátor pro mobilní zařízení, který disponuje modelem ničení vozidla (je možné vozidlo poškrábat, rozbít mu okna apod).
 
 Oproti Asphalt 8 má navíc efekt Depth-of-field. To znamená, že vzdálené modely jsou rozmazané a zabarveny do barvy pozadí. Tento efekt vytváří příjemný mlhovitý dojem. Jinak bych řekl, že tyto dva simulátory jsou si sobě velice podobné. Na stejném enginu funguje\linebreak i známý simulátor Real Racing 3, který ale noční jízdu nemá.
 
-\subsubsection{GT Racing 2 od Gameloftu}
+\paragraph{GT Racing 2}\mbox{}\\
+
 Úspěšným závodním simulátorem je v současné době GT Racing 2, je to hlavně díky jeho zpracování. Jako jediný z uvedených simulátorů má při noční jízdě nízké ambientní osvětlení a scéna je osvětlena hlavně reflektorem vozidla.
 
 Nejsem si jist, zda osvětlení lampami je přímo součástí textur nebo jestli jsou zde použity mapy osvětlení.
 
-\subsubsection{Sports Car Challenge od Fishlabs}
+\paragraph{Sports Car Challenge}\mbox{}\\
+
 Asi nejdetailnější model vozidla má právě Sports Car Challenge. Vývojář spolupracuje s předními výrobci automobilů a to se odrazilo právě na modelech vozidel. Modely jsou realistické a to včetně interiérů.
 
 Projekt trpí slabší kompatibilitou s mobilními zařízeními, i když náročnost enginu je nízká. Co se týká noční jízdy, je realizována stejnými technikami jako denní jízda. Jsou zde použity pouze tmavé textury a halo efekt pouličních lamp.
 
-\subsubsection{Track Racing od vývojáře Soulkey}
+\paragraph{Track Racing}\mbox{}\\
+
 I když tento projekt není závodní simulátor s noční jízdou, zmiňuji ho hlavně kvůli ovládání. Jedná se o neoficiální remake hry Trackmania známé z PC. Projekt běží na Unity3D enginu a je dostupný na mnoha platformách, nedá se ale stáhnout přímo z Marketu či Storu.
 
 U výše uvedených simulátorů vozidlo automaticky zrychluje a u některých i samo brzdí. Hráč nemá tedy nad vozidlem takovou kontrolu. V případě Track Racing má hráč nad vozidlem plnou kontrolu a zážitek ze hry se dá srovnat se zážitkem z původní PC hry.
@@ -476,7 +483,7 @@ U výše uvedených simulátorů vozidlo automaticky zrychluje a u některých i
 \end{center}
 
 %*****************************************************************************
-\chapter{Teoretická část}
+\chapter{Teoretický úvod}
 
 \section{Osvětlovací model}
 Existuje několik osvětlovacích modelů, asi nejpoužívanější lokální osvětlovací model je Phongův. Phongův model se skládá ze tří typů osvětlení.
@@ -627,7 +634,7 @@ Příklad použití blendingu je technika poloprůhledného materiálu. Nejdří
 \caption{Ukázka problému při vykreslení poloprůhledného materiálu před neprůhledným}
 \end{figure}
 
-\section{Výpočet stínů v reálném čase}
+\section{Výpočet stínů}
 Stíny v počítačové grafice napomáhají k vnímání souvislostí ve scéně. Pokud ve scéně stíny nepoužijeme, nebudeme například schopni poznat, zda se těleso dotýká povrchu nebo se vznáší (výjimku tvoří pohled, při kterém vzniká viditelná mezera mezi objektem a povrchem).
 
 Abychom mohli stín spočítat, musíme znát informace o okolí aktuálně vykreslovaného primitiva. To je v OpenGL problém, protože při vykreslování primitiv nemáme standardně žádné informace o okolí. Problém se řeší pomocí tzv. stínových map. 
@@ -731,7 +738,8 @@ V prvním kroku se spočítá Eulerovská délka jednotlivých hran, nejdelší 
 V dalším kroku hledáme párové trojúhelníky se stejnými délky stran $a, b$ (s určitou tolerancí), párové se spojí přeponou k sobě. Pro nepárové trojúhelníky vytvoříme AABB\linebreak o velikosti $a, b$ a tím máme vyřešený problém párování trojúhelníků.
 \newpage
 
-\subsection{Oprava chyby sousedících trojúhelníků}
+\paragraph{Oprava chyby sousedících trojúhelníků}\mbox{}\\
+
 Při použití výše uvedeného postupu vzniká problém při vykreslování, protože není\linebreak u texelů kolem přepon jednoznačné, ke kterému trojúhelníku texel patří a proto vznikají ve výsledné scéně artefakty. Stává se to, protože sousedící trojúhelníky v mapě osvětlení spolu nesousedí ve scéně.
 
 \begin{center}
@@ -768,7 +776,7 @@ Spekulární složka osvětlovacího modelu je závislá na pohledu kamery a nel
 Nutno podotknout, že tento přístup neřeší viditelnost světla. Stejný přístup lze použít\linebreak i pro difúzní osvětlení, ale předpočtené osvětlení je efektivnější.
 
 \section{Odlesky povrchů}
-Odlesky dodávají scéně lepší vzhled, dodávají dojem buď kovového nebo mokrého povrchu. V rasterizačním řetězci jsou odlesky drobet problematické, protože grafická karta vždy zpracovává pouze aktuální geometrii a nemá informace o okolí.
+Odlesky dodávají scéně lepší vzhled, dodávají dojem buď kovového nebo mokrého povrchu. V rasterizačním řetězci jsou odlesky problematické, protože grafická karta vždy zpracovává pouze aktuální geometrii a nemá informace o okolí.
 
 Standardně se odlesk realizuje dalším průchodem, ve kterém se vykreslí okolí do textury\linebreak a tato textura se poté aplikuje na model s odleskem. U menších objektů, jako je například auto, se vykreslí okolí pomocí cube mapování do FBO. Výsledná textura se následně namapuje na objekt a tím se získá dojem lesklého povrchu.
 \newpage
@@ -819,10 +827,10 @@ $color_r = RM[\vec{p}_x, \vec{p}_y]$
 
 
 %*****************************************************************************
-\chapter{Realizace}
+\chapter{Implementace}
 Realizace projektu byla provedena ve třech fázích. Nejdříve byla vytvořena verze pro PC bez předpočteného osvětlení, dále bylo provedeno portování projektu na Android\linebreak a v poslední fázi jsem se zabýval předpočteným osvětlením a problémy s ním spojené.
 
-\section{Simulátor}
+\section{Testovací aplikace - simulátor}
 Simulátor je navržen tak, aby fungoval na X11-Linuxu a Androidu. Znamená to výběr multiplatformních knihoven nebo ve výjimečných případech rozdílných implementací pro jednotlivé platformy. K vykreslování jsem vybral OpenGL ES 2.0 (jedná se o odlehčené OpenGL 3.0) a GLSL core verzi 1.0 (to zaručuje maximální možnou kompatibilitu).
 
 Fyzikální vlastnosti vozidel jsou realizovány pomocí enginu Bullet Physics (tento engine používá mnoho známých firem zabývajících se vývojem mobilních her). Zvuk je realizován na mobilních zařízeních pomocí Android API a na Linuxu pomocí knihovny FMOD API. Správce oken je na Androidu třeba doprogramovat, aby fungovalo dotykové ovládání a pozastavení simulátoru (např. při hovoru). Na Linuxu je použitá knihovna freeglut.

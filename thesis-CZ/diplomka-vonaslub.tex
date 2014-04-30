@@ -699,12 +699,62 @@ Filtrování PCF je snadno implementovatelné, vrací dobré výsledky, ale mů�
 \end{center}
 \newpage
 
-\section{Předpočtené osvětlení}
+
+\section{Odlesky povrchů}
+Odlesky dodávají scéně lepší vzhled, dodávají dojem buď kovového nebo mokrého povrchu. V rasterizačním řetězci jsou odlesky problematické, protože grafická karta vždy zpracovává pouze aktuální geometrii a nemá informace o okolí.
+
+Standardně se odlesk realizuje dalším průchodem, ve kterém se vykreslí okolí do textury\linebreak a tato textura se poté aplikuje na model s odleskem. U menších objektů, jako je například auto, se vykreslí okolí pomocí cube mapování do FBO. Výsledná textura se následně namapuje na objekt a tím se získá dojem lesklého povrchu.
+
+V případě rovných povrchů je nutné použít jiný přístup, scéna se vykreslí do textury\linebreak z pohledu pod povrchem, který je na obrázku 3.13 označen jako $P'$. Pohled snímá objekty jakoby z povrchu a při vykreslování na obrazovku se spočítá pozice daného pixelu povrchu ve vykreslené textuře a z té se aplikuje barva pixelu.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=80mm]{figures/reflection-diagram.png}
+\caption{Diagram odrazu vodní hladiny \cite{Kaplinski11}}
+\end{center}
+\end{figure}
+
+Pohled $P$ je MVP matice, pro získání pohledu $P'$ potřebujeme vypočítat reflexní matici $R$, která převrátí pohled podle normály povrchu $\vec{N}$ a parametru $d$ spočítaného z rovnice roviny.
+              
+\begin{center}
+$d = -(xN_x + yN_y + zN_z)$
+\end{center}
+\begin{center}
+$R = \begin{pmatrix}
+1 -2 \cdot {\vec{N}_x}^2 & -2 \cdot \vec{N}_x \cdot \vec{N}_y & -2 \cdot \vec{N}_x \cdot \vec{N}_z & -2 \cdot \vec{N}_x \cdot d\\
+-2 \cdot \vec{N}_y \cdot \vec{N}_x & 1 -2 \cdot {\vec{N}_y}^2 & -2 \cdot \vec{N}_y \cdot \vec{N}_z & -2 \cdot \vec{N}_y \cdot d\\
+-2 \cdot \vec{N}_z \cdot \vec{N}_x & -2 \cdot \vec{N}_z \cdot \vec{N}_y & 1 -2 \cdot {\vec{N}_z}^2 & -2 \cdot \vec{N}_z \cdot d\\
+0 & 0 & 0 & 1
+\end{pmatrix}$
+\end{center}
+
+Vynásobením matice $R$ s maticí $P$ získáme reflekční matici, která otáčí obraz o $180^{\circ}$, abychom získali korektní pohled, musíme provést ještě rotaci kolem osy Z.
+\begin{center}
+$P' = R \cdot P \cdot \begin{pmatrix}
+-1 & 0 & 0 & 0\\
+0 & -1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{pmatrix}$
+\end{center}
+
+Při vykreslování reflexního pohledu je nutné provést ořez scény pod povrchem a nevykreslovat odvrácené trojúhelníky. Pro finální vykreslování si označím reflexní mapu jako $RM$ a vykreslovaný vrchol jako $\vec{v}$. Barva odlesku $color_r$ se spočítá dle níže uvedeného vzorce.
+\begin{center}
+$\vec{p} = P' \cdot \begin{pmatrix}
+\vec{v}\\
+1
+\end{pmatrix}$
+\end{center}
+\begin{center}
+$color_r = RM[\vec{p}_x, \vec{p}_y]$
+\end{center}
+
+\chapter{Předpočtené osvětlení}
 Předpočtené osvětlení je z hlediska vykreslování poměrně jednoduchá technika. Na 3D model se aplikuje další textura či textury, které mají vlastní texturovací souřadnice a nesou v sobě informaci o osvětlení jednotlivých trojúhelníků. Jak již bylo uvedeno, těmto texturám se říká mapy osvětlení a dalo by se říct, že se jedná o techniku, která rozšiřuje techniku předpočtených stínů.
 
 Z hlediska generování těchto textur je tato technika náročnější než výsledné vykreslování, skládá se z několika kroků. V prvním kroku je třeba vytvořit texturovací souřadnice pro jednotlivé trojúhelníky.
 
-\subsection{Vytvoření texturovacích souřadnic}
+\section{Vytvoření texturovacích souřadnic}
 Pro mapy osvětlení není vhodné použít standardní texturovací souřadnice. V osvětlovacích mapách je potřeba zajistit, aby každý texel mapy odpovídal právě jednomu bodu\linebreak v prostoru. Pokud by tomu tak nebylo, stalo by se, že při osvětlení jednoho bodu se rozzáří\linebreak i jiný bod než ten osvětlený.
 
 Obsah povrchu 3D modelu v ideálním případě odpovídá obsahu ploch map osvětlení. Abychom se tomuto případu přiblížili, musíme plochu map co nejvíce využít. Maximálním využitím 2D plochy se zabývá problém batohu, který patří do kategorie problémů NP-hard (obtížný nedeterministický problém řešitelný v polynomiálním čase).
@@ -751,7 +801,7 @@ Při použití výše uvedeného postupu vzniká problém při vykreslování, p
 
 Provádí se zde posun texturovacích souřadnic směrem dovnitř trojúhelníku, aby k tomuto problému nedocházelo. Posouvají se i osově zarovnané hrany, protože při použití lineárního filtrování textur by docházelo k obdobným artefaktům jako v případě přepon.
 
-\subsection{Generování map osvětlení}
+\section{Generování map osvětlení}
 Existují dvě základní metody generování map osvětlení, pomocí vrhání či sledování paprsku a pomocí rasterizace. V této kapitole popisuji rasterizační metodu (tedy pomocí OpenGL). Lze využít stínových map stejným způsobem, jako se používají k výpočtu zastínění v reálném čase. Rozdíl je pouze v transformování vrcholů a ve výpočtu barvy (nechceme vykreslovat texturu do světelných map, vedlo by to ke ztrátě kvality textur).
 
 Nejdříve si vložíme ke každému vrcholu do VBO jeho souřadnice v osvětlovací mapě. Transformujeme vrchol do souřadnic mapy osvětlení. To se provede přiřazením souřadnic $u, v$ jako pozici ve FBO (s pozicí vrcholu se počítá pouze při výpočtu osvětlení).
@@ -761,70 +811,19 @@ Výslednou barvu texelu $C_t$ vypočteme z difúzního osvětlení pomocí níž
 $C_t = E_r \cdot F_a \cdot C_l \cdot k_d \cdot (\vec{L} \cdot \vec{N})$
 \end{center}
 
-Pokud bychom chtěli použit i bodové zdroje světla, musíme mít stínovou mapu pro všechny možné směry světelných paprsků. K tomu lze využít tzv. cube mapování. Cube mapování je mapování scény na krychli, při kterém se na každou stěnu vykreslí pohled v jednom směru s perspektivním úhlem $90^{\circ}$. V případě využití cube mapování na stínové mapy, se pro každou stranu provádí výpočet jakoby se jednalo o samostatné světlo (efektivita reflektoru $E_r = 1$).
+Pokud bychom chtěli použit i bodové zdroje světla, musíme mít stínovou mapu pro všechny možné směry světelných paprsků. K tomu lze využít tzv. mapování na krychli. Mapování na krychli je mapování scény, při kterém se na každou stěnu krychle vykreslí pohled v jednom směru s perspektivním úhlem $90^{\circ}$. V případě použití stínových map při mapování na krychli, se pro každou stranu provádí výpočet jakoby se jednalo o samostatné světlo (efektivita reflektoru $E_r = 1$).
 
 \begin{center}
 \begin{figure}[h]
 \includegraphics[width=150mm]{figures/cubemap.png}
-\caption{Využití cube mapování na stínové mapy u bodových osvětlení, vlevo dva náhledy scény, vpravo stínová mapa}
+\caption{Využití stínových map při mapování na krychli u bodových světel, vlevo dva náhledy scény, vpravo stínová mapa}
 \end{figure}
 \end{center}
 
-\subsection{Spekulární složka osvětlovací modelu}
+\section{Spekulární složka osvětlovací modelu}
 Spekulární složka osvětlovacího modelu je závislá na pohledu kamery a nelze jí tedy předpočítat a také nelze počítat v reálném čase spekulární složky pro desítky světel. Tento problém se dá řešit vypnutím vzdálených světel. Světla se seřadí podle vzdálenosti\linebreak od kamery a provede se započítání $n$ nejbližších (konstantu $n$ je vhodné mít co nejnižší, protože spekulární složka je poměrně náročná na výpočet). 
 
 Nutno podotknout, že tento přístup neřeší viditelnost světla. Stejný přístup lze použít\linebreak i pro difúzní osvětlení, ale předpočtené osvětlení je efektivnější.
-
-\section{Odlesky povrchů}
-Odlesky dodávají scéně lepší vzhled, dodávají dojem buď kovového nebo mokrého povrchu. V rasterizačním řetězci jsou odlesky problematické, protože grafická karta vždy zpracovává pouze aktuální geometrii a nemá informace o okolí.
-
-Standardně se odlesk realizuje dalším průchodem, ve kterém se vykreslí okolí do textury\linebreak a tato textura se poté aplikuje na model s odleskem. U menších objektů, jako je například auto, se vykreslí okolí pomocí cube mapování do FBO. Výsledná textura se následně namapuje na objekt a tím se získá dojem lesklého povrchu.
-\newpage
-
-V případě rovných povrchů je nutné použít jiný přístup, scéna se vykreslí do textury\linebreak z pohledu pod povrchem, který je na obrázku 3.17 označen jako $P'$. Pohled snímá objekty jakoby z povrchu a při vykreslování na obrazovku se spočítá pozice daného pixelu povrchu ve vykreslené textuře a z té se aplikuje barva pixelu.
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=80mm]{figures/reflection-diagram.png}
-\caption{Diagram odrazu vodní hladiny \cite{Kaplinski11}}
-\end{center}
-\end{figure}
-
-Pohled $P$ je MVP matice, pro získání pohledu $P'$ potřebujeme vypočítat reflexní matici $R$, která převrátí pohled podle normály povrchu $\vec{N}$ a parametru $d$ spočítaného z rovnice roviny.
-              
-\begin{center}
-$d = -(xN_x + yN_y + zN_z)$
-\end{center}
-\begin{center}
-$R = \begin{pmatrix}
-1 -2 \cdot {\vec{N}_x}^2 & -2 \cdot \vec{N}_x \cdot \vec{N}_y & -2 \cdot \vec{N}_x \cdot \vec{N}_z & -2 \cdot \vec{N}_x \cdot d\\
--2 \cdot \vec{N}_y \cdot \vec{N}_x & 1 -2 \cdot {\vec{N}_y}^2 & -2 \cdot \vec{N}_y \cdot \vec{N}_z & -2 \cdot \vec{N}_y \cdot d\\
--2 \cdot \vec{N}_z \cdot \vec{N}_x & -2 \cdot \vec{N}_z \cdot \vec{N}_y & 1 -2 \cdot {\vec{N}_z}^2 & -2 \cdot \vec{N}_z \cdot d\\
-0 & 0 & 0 & 1
-\end{pmatrix}$
-\end{center}
-
-Vynásobením matice $R$ s maticí $P$ získáme reflekční matici, která otáčí obraz o $180^{\circ}$, abychom získali korektní pohled, musíme provést ještě rotaci kolem osy Z.
-\begin{center}
-$P' = R \cdot P \cdot \begin{pmatrix}
--1 & 0 & 0 & 0\\
-0 & -1 & 0 & 0\\
-0 & 0 & 1 & 0\\
-0 & 0 & 0 & 1
-\end{pmatrix}$
-\end{center}
-
-Při vykreslování reflexního pohledu je nutné provést ořez scény pod povrchem a nevykreslovat odvrácené trojúhelníky. Pro finální vykreslování si označím reflexní mapu jako $RM$ a vykreslovaný vrchol jako $\vec{v}$. Barva odlesku $color_r$ se spočítá dle níže uvedeného vzorce.
-\begin{center}
-$\vec{p} = P' \cdot \begin{pmatrix}
-\vec{v}\\
-1
-\end{pmatrix}$
-\end{center}
-\begin{center}
-$color_r = RM[\vec{p}_x, \vec{p}_y]$
-\end{center}
-
 
 %*****************************************************************************
 \chapter{Implementace}

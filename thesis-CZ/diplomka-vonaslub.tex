@@ -338,11 +338,11 @@ Očekávají se cca 1 -- 2 odstavce, maximálně půl stránky.
 
 %*****************************************************************************
 \chapter{Úvod}
-V minulosti se výrobci počítačového hardwaru primárně soustředili na dosažení nejvyššího výpočetního výkonu na trhu. Během posledních let v tomto konkurenčním boji nastala změna. Už tolik nedochází ke zvyšování výkonu hardwaru, výrobci se soustředí spíše\linebreak na miniaturizaci. S miniaturizaci hardwaru souvisí stoupající výpočetní výkon mobilních zařízení. 
+V minulosti se výrobci počítačového hardwaru primárně soustředili na dosažení nejvyššího výpočetního výkonu na trhu. Během posledních let v tomto konkurenčním boji nastala změna. Už tolik nedochází ke zvyšování výkonu hardwaru, výrobci se soustředí spíše\linebreak na miniaturizaci hardwaru a paralelizaci výpočtů. S miniaturizaci hardwaru souvisí stoupající výpočetní výkon mobilních zařízení. 
 
 Mobilní telefony a tablety jsou zatím v porovnání s výkonem osobních počítačů slabší, ale to za několik let nemusí platit. Chytré mobilní telefony postupně přebírají funkce jiných zařízení. Některé mobilní telefony lze použít jako dálkový ovladač k televizi, platební kartu, autonavigaci a další.
 
-Trend udělat z mobilního telefonu univerzální zařízení zasahuje i do oblasti počítačových her. To souvisí s odvětvím počítačové grafiky. Výrobci her se předhánějí, kdo vytvoří nejrealističtější grafiku ve svých hrách. Tím nepřímo přispívají k rozvoji počítačové grafiky.
+Trend udělat z mobilního telefonu univerzální zařízení zasahuje i do oblasti počítačových her. To souvisí s odvětvím počítačové grafiky. Výrobci her konkurují v tom, kdo vytvoří nejrealističtější grafiku ve svých hrách. Tím nepřímo přispívají k rozvoji počítačové grafiky.
 
 Vývoj her pro mobilní zařízení je v porovnání s vývojem her pro osobní počítače rozdílný z několika hledisek. Používá se rozdílné ovládání, mobilní zařízení je menší a je zde různý výpočetní výkon. V mé práci se zabývám problematikou výpočetního výkonu z hlediska grafického výpočtu.
 
@@ -352,7 +352,7 @@ Obecně platí, že během vykreslování 3D scény se některé výpočty cykli
 \chapter{Specifikace práce}
 Cílem práce bylo realizovat efektivní vykreslování rozsáhlých nočních scén na platformě Android za použití grafické knihovny OpenGL. Rozhodl jsem se práci realizovat v podobě závodního simulátoru, který obsahuje několik pohybujících se vozidel a několik zhasínajících světel. Tato podoba realizace plně využívá veškeré grafické techniky, které jsem implementoval a zároveň umožní lépe zhodnotit použitelnost projektu, než kdybych zvolil podobu technického dema.
 
-Důraz byl kladen na co nejvyšší optimalizaci vykreslování. Kromě hlavní grafické techniky map osvětlení (anglicky lightmap) bylo použito několik dalších technik řešící jednotlivé problémy, které vznikají při použití map osvětlení. Problémy nastávají hlavně při použití dynamických objektů nebo při změně osvětlení. Technika map osvětlení řeší pouze statickou scénu\linebreak a v případě použití dynamické scény je potřeba metodu značně rozšířit.
+Důraz byl kladen na co nejvyšší optimalizaci vykreslování. Kromě hlavní grafické techniky map osvětlení (anglicky lightmap) bylo použito několik dalších technik řešící jednotlivé problémy, které vznikají při použití map osvětlení. Problematické je použití dynamických objektů a dynamická aktualizace osvětlení. Technika map osvětlení řeší pouze statickou scénu a v případě použití dynamické scény je potřeba metodu značně rozšířit.
 
 \section{Požadavky na funkčnost}
 Zadání předpokládá, že projekt bude rozdělen do dvou samostatných částí. První částí bude předzpracování, ve kterém se budou vytvářet mapy osvětlení. Druhou částí projektu bude aplikace, která mapy osvětlení využije. Fázi předzpracování by teoreticky bylo možné provádět i na platformě Android. Vzhledem k tomu, že klasické počítače dosahují vyššího výkonu než mobilní zařízení, bude efektivnější provést předzpracování na stolním počítači.
@@ -360,49 +360,18 @@ Zadání předpokládá, že projekt bude rozdělen do dvou samostatných část
 Předpočtené osvětlení bude využívat vlastní formát, který bude umožňovat mít v sobě jak souřadnice standardních textur, tak i souřadnice v mapách osvětlení. Formát bude zachovávat veškeré informace o modelu. I když je třeba výsledný simulátor nevyužije, bude dobré tyto informace ponechat pro případ dalšího vývoje. Formát bude schopen uložit některé další informace o materiálu a shaderu.
 
 Plocha map osvětlení bude co možná nejvíce využita z důvodu očekávané malé paměti vymezeny pro velké textury. Aby bylo možné určit nejvhodnější rozlišení těchto textur, bude umožněno škálování map osvětlení.
-\newpage
 
-\subsection{Mapy osvětlení}
 Mapy osvětlení jsou textury 3D modelů, které obsahují informace o difúzní složce osvětlovacího modelu. Difúzní složka je závislá pouze na poloze světla, směru světla a povrchu tělesa, lze jí tedy pro statickou část modelu předpočítat.
-
-\begin{center}
-\begin{figure}[h!]
-\includegraphics[width=100mm]{figures/lmapply.png}
-\caption{Ukázka mapy osvětlení na jednoduchém 3D modelu}
-\end{figure}
-\end{center}
-
-Aby bylo možné mapy osvětlení dynamicky aktualizovat, je potřeba mít do map rychlý zapisovací přístup. Pro aktualizaci musíme mít předpočítanou tzv. záplatu. Záplatou se rozumí menší textura, která se přidá do současné osvětlovací mapy. Přidáním záplaty lze tedy přidat do scény další světlo, které máme předpočítané. Záplata jde z mapy osvětlení opět odebrat (provede se odečet stejné záplaty).
-
-Protože uchovávání záplat v paměti by bylo příliš paměťově náročné, jsou komprimovány ve vektorové podobě přímo na GPU. Vektorová podoba záplaty je množina trojúhelníků,\linebreak u kterých jsou vrcholy definovány 2D polohou v mapě osvětlení a intenzitou světla. Intenzita světla se při aplikování násobí barvou, která je pro celou záplatu konstantní.
-\newpage
-
-\begin{center}
-\begin{figure}[h!]
-\includegraphics[width=105mm]{figures/lmupdate.png}
-\caption{Ukázka aktualizace map osvětlení na jednoduchém 3D modelu, žlutou barvou je znázorněna část záplaty, která nenese informaci o změně osvětlení}
-\end{figure}
-\end{center}
 
 \subsection{Statické osvětlení s dynamickými objekty ve scéně}
 Při použití dynamických objektů ve scéně se statickém osvětlením vznikají dva základní problémy. Prvním problém je, že dynamické objekty mají jiné osvětlení než statická scéna\linebreak a to vypadá velice nepřirozeně. Druhým problémem je, že pokud dynamický objekt zastíní zdroj světla, tak nevznikne stín na statických objektech.
 
 Oba problémy lze vyřešit jen částečně. V prvním případě lze přečíst informaci o intenzitě osvětlení z nejbližšího bodu na statickém objektu a tuto intenzitu aplikovat na dynamický objekt. V druhém případě při vykreslování jednotlivých pixelů lze zjistit, zda se v okolí vykreslovaného bodu nenachází dynamický objekt a tím zjistit, zda byl vykreslovaný bod zastíněn.
-\newpage
 
 \section{Cílová platforma Android}
 Platforma Android je postavena na Linuxovém jádře a využívá knihovny, které bývají součástí unixových systémů. Od klasického desktopového Linuxu se odlišuje hlavně v tom, že jako hlavní programovací jazyk využívá Javu. Pomocí Javy je naprogramováno celé Android API, které zprostředkovává téměř veškeré služby systému.
 
-Na Androidu je velice problematické spustit C/C++ program přímo. Standardně se problém řeší tak, že se vytvoří z programu knihovna, kterou spustí kód napsaný v Javě. Pak je nutné veškeré vstupy/výstupy obsluhovat v jazyce Java a to velice komplikuje portování programů z desktopového Linuxu na Android. Výjimku tvoří OpenGL, které umožňuje vykreslovat na displej přímo z C/C++ kódu.
-
-\begin{center}
-\begin{figure}[h!]
-\includegraphics[width=120mm]{figures/android.png}
-\caption{Komponenty platformy Android, komponenty vyznačené modrou barvou jsou napsané v jazyce Java, žlutou barvou je virtuální stroj, který umožňuje běh Java aplikací, zelenou barvou jsou C/C++ knihovny a červenou je Linuxové jádro}
-\end{figure}
-\end{center}
-
-Pro platformu Android existuje nepřeberné množství aplikací a toho začínají využívat ostatní platformy. V současné době platformy BlackBerry a Jolla umožňují spouštět Android aplikace, dále existuje platforma NokiaX, která je postavena přímo na operačním systému Android.
+Pro platformu Android existuje nepřeberné množství aplikací a toho začínají využívat ostatní platformy. V současné době platformy BlackBerry a Jolla umožňují spouštět Android aplikace. Dále existuje platforma NokiaX, která je postavena přímo na operačním systému Android.
 
 \section{Související metody}
 
@@ -422,7 +391,6 @@ Tato implementace je z roku 1999 a zabývá se proceduálním modelováním měs
 \caption{Ukázka nočního renderingu}
 \end{figure}
 \end{center}
-\newpage
 
 \paragraph{Imperfect shadow maps pro výpočet nepřímého osvětlení}\mbox{}\\
 
@@ -438,6 +406,7 @@ Implementace podporuje více typů zdrojů světla, včetně plošných. Nemá p
 \caption{Ukázka výsledků techniky imperfektních stínových map pro efektivní výpočet nepřímého osvětlení \cite{Ritschel:2008:ISM}}
 \end{center}
 \end{figure}
+\newpage
 
 \subsection{Závodní simulátory s noční scénou pro platformu Android}
 V této sekci jsem vyhledával i implementace, u kterých není uvedeno, jak bylo výsledků dosaženo. Je to z důvodu malého počtu implementací odpovídající dané kategorii.
@@ -475,7 +444,6 @@ Simulátor disponuje asi nejdetailnějšími modely vozidel. Vývojář spolupra
 I když tento projekt není závodní simulátor s noční jízdou, zmiňuji ho hlavně kvůli ovládání. Jedná se o neoficiální remake hry Trackmania známé z PC. Projekt běží na Unity3D enginu a je dostupný na mnoha platformách, nedá se ale stáhnout přímo z Marketu či Storu.
 
 U výše uvedených simulátorů vozidlo automaticky zrychluje a u některých i samo brzdí. Hráč nemá tedy nad vozidlem takovou kontrolu. V případě Track Racing má hráč nad vozidlem plnou kontrolu a zážitek ze hry se dá srovnat se zážitkem z původní PC hry.
-\newpage
 
 \begin{center}
 \begin{figure}[h!]
@@ -762,6 +730,27 @@ Předpočtené osvětlení je z hlediska vykreslování poměrně jednoduchá te
 
 Z hlediska generování těchto textur je tato technika náročnější než výsledné vykreslování, skládá se z několika kroků. V prvním kroku je třeba vytvořit texturovací souřadnice pro jednotlivé trojúhelníky.
 
+\section{Mapy osvětlení}
+\begin{center}
+\begin{figure}[h!]
+\includegraphics[width=80mm]{figures/lmapply.png}
+\caption{Ukázka mapy osvětlení na jednoduchém 3D modelu}
+\end{figure}
+\end{center}
+\newpage
+
+Aby bylo možné mapy osvětlení dynamicky aktualizovat, je potřeba mít do map rychlý zapisovací přístup. Pro aktualizaci musíme mít předpočítanou tzv. záplatu. Záplatou se rozumí menší textura, která se přidá do současné osvětlovací mapy. Přidáním záplaty lze tedy přidat do scény další světlo, které máme předpočítané. Záplata jde z mapy osvětlení opět odebrat (provede se odečet stejné záplaty).
+
+Protože uchovávání záplat v paměti by bylo příliš paměťově náročné, jsou komprimovány ve vektorové podobě přímo na GPU. Vektorová podoba záplaty je množina trojúhelníků,\linebreak u kterých jsou vrcholy definovány 2D polohou v mapě osvětlení a intenzitou světla. Intenzita světla se při aplikování násobí barvou, která je pro celou záplatu konstantní.
+
+\begin{center}
+\begin{figure}[h!]
+\includegraphics[width=90mm]{figures/lmupdate.png}
+\caption{Ukázka aktualizace map osvětlení na jednoduchém 3D modelu, žlutou barvou je znázorněna část záplaty, která nenese informaci o změně osvětlení}
+\end{figure}
+\end{center}
+\newpage
+
 \section{Vytvoření texturovacích souřadnic}
 Pro mapy osvětlení není vhodné použít standardní texturovací souřadnice. V osvětlovacích mapách je potřeba zajistit, aby každý texel mapy odpovídal právě jednomu bodu\linebreak v prostoru. Pokud by tomu tak nebylo, stalo by se, že při osvětlení jednoho bodu se rozzáří\linebreak i jiný bod než ten osvětlený.
 
@@ -771,11 +760,10 @@ Běžně se problém batohu zabývá pouze osově zarovnanými obálkovými těl
 
 \begin{center}
 \begin{figure}[h]
-\includegraphics[width=80mm]{figures/lmcoords.png}
+\includegraphics[width=130mm]{figures/lmcoords.png}
 \caption{Výsledek řešení problému batohu se spárovanými trojúhelníky}
 \end{figure}
 \end{center}
-\newpage
 
 Problém batohu lze řešit pomocí ILP (Integer Linear programming). Problém lze přeformulovat pomocí kolizí dvou AABB. Pokud si všechny levé horní body AABB označím souřadnicemi $[minx, miny]$ a pravé dolní souřadnicemi $[maxx, maxy]$, platí poté následující výraz, pomocí kterého lze sestrojit ILP řešení (toto řešení neuvažuje otáčení AABB).
 
@@ -837,163 +825,6 @@ Nutno podotknout, že tento přístup neřeší viditelnost světla. Stejný př
 \chapter{Implementace}
 Realizace projektu byla provedena ve třech fázích. Nejdříve byla vytvořena verze pro PC bez předpočteného osvětlení, dále bylo provedeno portování projektu na Android\linebreak a v poslední fázi jsem se zabýval předpočteným osvětlením a problémy s ním spojené.
 
-\section{Testovací aplikace - simulátor}
-Simulátor je navržen tak, aby fungoval na X11-Linuxu a Androidu. Znamená to výběr multiplatformních knihoven nebo ve výjimečných případech rozdílných implementací pro jednotlivé platformy. K vykreslování jsem vybral OpenGL ES 2.0 (jedná se o odlehčené OpenGL 3.0) a GLSL core verzi 1.0 (to zaručuje maximální možnou kompatibilitu).
-
-Fyzikální vlastnosti vozidel jsou realizovány pomocí enginu Bullet Physics (tento engine používá mnoho známých firem zabývajících se vývojem mobilních her). Zvuk je realizován na mobilních zařízeních pomocí Android API a na Linuxu pomocí knihovny FMOD API. Správce oken je na Androidu třeba doprogramovat, aby fungovalo dotykové ovládání a pozastavení simulátoru (např. při hovoru). Na Linuxu je použitá knihovna freeglut.
-
-Samotný simulátor je rozdělen do dvou oddělených částí. První část je abstraktní\linebreak a řeší logickou část projektu. Abstrakce je realizována pomocí rozhraní, které definují společné metody abstraktních objektů. Druhá část implementuje jednotlivá rozhraní a řeší také načítání dat ze souborů.
-\lstset{language=C++} 
-\begin{lstlisting}[caption=Načtení 3D modelu vozidla pomocí abstraktního přístupu]
-    /// load models
-    skin = getModel(getConfigStr("skin_model", atributes), false);
-    wheel = getModel(getConfigStr("wheel_model", atributes), false);
-
-    /// set car wheels position
-    wheelX = getConfig("wheel_x", atributes);
-    wheelY = getConfig("wheel_y", atributes);
-    wheelZ1 = getConfig("wheel_back", atributes);
-    wheelZ2 = getConfig("wheel_front", atributes);
-\end{lstlisting}
-\newpage
-
-Důvodem oddělení částí je, že implementace jednotlivých rozhraní může být v budoucnu snadno nahrazena anebo mohou být použité různé implementace pro různé platformy. Příkladem různých implementací rozhraní pro různé platformy může být například renderer.\linebreak V simulátoru je využita knihovna OpenGL, která například na platformě Windows Phone není dostupná a bylo by potřeba na této platformě použit Direct3D.
-
-\begin{figure}[h]
-\begin{center}
-\includegraphics[width=160mm]{figures/o4suml.png}
-\caption{UML diagram projektu, horní část je abstraktní, dolní část implementuje jednotlivá rozhraní a načítá data do paměti, spustitelné soubory jsou označeny tečkou}
-\end{center}
-\end{figure}
-Jak je vidět na obrázku 4.1, simulátor je rozdělen do dalších dílčích částí. Část \ul{raycaster} a třída \ul{LMgenerator} realizují předzpracování. Třída \ul{open4speed} se zabývá správou okna\linebreak a spouštění dílčích součástí. \ul{Common} uchovává veškeré objekty a proměnné, je to z důvodu, že jinak by v třídách \ul{open4speed} a \ul{LMgenerator} musel být obsah struktury \ul{common} duplicitně.
-
-Třída \ul{car} je v první řadě struktura uchovávající veškeré proměnné realizující vozidlo, dále zajišťuje propojení mezi fyzikálním enginem, vykreslováním, zvukem, vstupem umělé inteligence a uživatele.
-\\ \\
-Část \ul{utils} je balík příkazů tvořící simulátor.
-\begin{itemize}
-\item \ul{engine} realizuje GUI a 3D scénu
-\item \ul{io} obstarává práci se soubory
-\item \ul{math} poskytuje sadu matematických příkazů pro práci s 3D objekty
-\item \ul{scripting} interpretuje skriptování GUI
-\item \ul{switch} obstarává objekty jednotlivých rozhraní a naplňuje je daty
-\end{itemize}
-
-Jednotlivá rozhraní mají různé funkce. Rozhraní \ul{fbo}, \ul{renderer}, \ul{shader}, \ul{texture} a \ul{vbo} vytváří abstraktní přístup k OpenGL, \ul{input} je rozhraní pro ovládání vozidla (implementací může být buď klávesnice anebo umělá inteligence), rozhraní \ul{physics} reprezentuje fyzikální engine a rozhraní \ul{sound} umožňuje přehrávat zvuky. Implementace rozhraní \ul{sound} jsou příkladem použití různých implementací na různých platformách.
-
-\section{Realizace na platformě Android}
-Platforma Android je postavená na Linuxovém jádře a využívá mnohé komponenty\linebreak z projektu GNU, nicméně celé Android API je v jazyku Java za využiti virtuálního stroje Dalwik. Pomocí Android NDK(native development kit) je možné zkompilovat C/C++ kód jako knihovnu, kterou je možné zavolat z jazyku Java. Toto je prováděno pomocí JNI(Java native interface).
-
-Snažší by bylo naprogramovat simulátor přímo v Javě, ale tím bych ztratil možnost portovat simulátor na další platformy, které virtuální stroj Dalwik nemají. Dále by byl problém s použitím fyzikálního enginu, který je napsaný v jazyce C++. Musel bych napsat interface pro fyzikální engine, který by mi umožnil komunikaci mezi C++ a Java kódem.
-
-\subsection{Problematika Android API}
-Java native interface je rozhraní, které umožňuje spustit C++ kód z jazyku Java a obráceně. Největší problém je, že neexistuje použitelný port freeglut knihovny pro Android. Udělal jsem tedy JNI rozhraní, které odpovídá handlerům knihovny freeglut. Tedy nahrazuji veškeré funkce této knihovny svou implementací. Knihovna implementuje správu oken, vstup klávesnice a myši a volání idle a display funkcí. Klávesnice a myš byla pochopitelně plně nahrazena dotykovým ovládáním, ale pokud do Android zařízení připojíme klávesnici nebo myš, bude plně funkční. Funkčnost myši zařizuje sám systém, klávesnice stačila namapovat.
-
-Aby bylo možné volat C++ metody přímo z Javy musí být pojmenovány ve formátu Java\_\textit{package}\_\textit{třída}\_\textit{metoda}. C++ knihovna bude tedy možné spustit pouze z jedné Java třídy.
-\lstset{language=C++} 
-\begin{lstlisting}[caption=Volání metod pomocí JNI v C++ pro nahrazení freeglut knihovny]
-void Java_com_cvut_o4s_O4SJNI_nativeInit(JNIEnv* e) { main(0, 0); }
-void Java_com_cvut_o4s_O4SJNI_nativeKey(JNIEnv* e, jint i) { key(i); }
-void Java_com_cvut_o4s_O4SJNI_nativeDisplay(JNIEnv* e) { display(); }
-\end{lstlisting}
-
-Dále je potřeba C++ knihovnu načíst pomocí volání System.loadLibrary a metody deklarovat v dané Java třídě pomocí klíčového slova native.
-
-\lstset{language=Java} 
-\begin{lstlisting}[caption=Ukázka deklarování C++ metod v Java kódu]
-static native void nativeInit();
-static native void nativeKey(int i);
-static native void nativeDisplay();
-\end{lstlisting}
-\newpage
-
-Dalším problémem je volání Android API z C++ kódu (tzn. volání Java kódu z C++). Příkladem je přehrávání zvuků pomocí Android API, ovládání zvuku je nutno řídit z C++, ale API je přímo přístupné pouze z Javy. Na obrázku 4.2 je znázorněn případ třídy Sounds. Problém se řeší také pomocí JNI, pouze volání jsou prováděny v opačném směru.
-
-\begin{center}
-\begin{figure}[h]
-\includegraphics[width=80mm]{figures/jni.png}
-\caption{UML diagram spustitelného klienta pro Android, kde libopen4speed.so je zkompilovaná C++ knihovna projektu}
-\end{figure}
-\end{center}
-
-\lstset{language=C++} 
-\begin{lstlisting}[caption=Volání Java metody pro přehrání zvuku z C++ kódu]
-void soundpool::play(int index) {
-  jclass clazz = instance->FindClass("com/cvut/o4s/Sounds");
-  //get method "void soundPlay(int, int)"
-  jmethodID method = instance->GetStaticMethodID(clazz, "soundPlay", "(II)V");
-  instance->CallStaticVoidMethod(clazz, method, index, (int)looping);
-}
-\end{lstlisting}
-
-V Javě se poté musí ještě rozlišovat přehrávání zvuků od přehrávání hudby. Hudba bývá řádově náročnější na paměť a nemá smysl jí celou držet v paměti, když na ni není potřeba aplikovat další zvukové efekty.
-
-\lstset{language=Java} 
-\begin{lstlisting}[caption=Přehrání zvuku v Javě pomocí Android API]  
-public static void soundPlay(int index, int loop) {
-  //instance is a music
-  if (list.get(index).id == TYPE_MUSIC) {
-    music.setLooping(loop == 1);
-    music.start();
-  }
-
-  //audio clip
-  else {
-    Sound s = list.get(index);
-    snd.play(s.id, s.volume, s.volume, 1, loop, s.rate);
-  }
-}
-\end{lstlisting}
-
-\subsection{Využití vláken}
-Většina zařízení, které dnes už spadají do střední třídy, je vybavena aspoň dvěma procesory, je proto vhodné rozdělit činnost do více vláken, aby bylo dosaženo maximálního výkonu. Třída GLSurfaceView, která umožňuje vykreslovat OpenGL scénu z C++ umožňuje volat OpenGL příkazy pouze z jednoho vlákna. Z tohoto důvodu jsem rozdělil kód na grafické\linebreak a negrafické vlákno.
-
-V menu simulátoru se používá pouze grafické vlákno, negrafické vlákno je primárně použito pro fyzikální výpočty, které zařízení vytěžují nejvíce. Vlákna jsou synchronizovaná, aby nedocházelo k použití transformace vozidla z předešlého snímku(to by bylo velmi rušivé).
-
-Dále provádím regulaci rychlosti simulátoru v závislosti na výkonu hardwaru. Je potřeba, aby obě vlákna prováděla výpočet co nejvíce paralelně, pokud by negrafické vlákno příliš dlouho nedodávalo novou transformaci vozidla, docházelo by k trhanému vykreslování (některý snímek by se vykresloval víckrát a to by se projevilo tak, že by se snímková frekvence zdála být na krátký okamžik poloviční). Pokud k tomuto případu dojde, je vhodné snížit frekvenci volání obou vláken a tím snížit rychlost simulátoru.
-
-Problém je, že nelze snižovat rychlost simulátoru do nekonečna, proto je zde nastavena minimální hodnota, na kterou se může simulátor zpomalit. Je zde i horní limit, aby nedocházelo k zrychlené jízdě a tedy i ke zvýšené spotřebě energie.
-
-\subsection{Práce se soubory}
-V Androidu se aplikace publikují v APK balíčku. Jedná se o ZIP soubor, který má nějakou danou strukturu. V Java kódu je možné na veškeré soubory uvnitř balíčku přistupovat,\linebreak v C++ tato možnost není. Někteří vývojáři toto řeší, že po prvním spuštění si aplikace stáhne ze serveru přídavná data a ty si uloží například na paměťovou kartu. Lze také rozbalit soubory z APK balíčku a s těmi pak v C++ pracovat. To se moc nepoužívá, protože jsou potom data v zařízení dvakrát.
-
-Další možnou variantou je přistupovat k APK balíčku jako k ZIP souboru. Knihovna libZIP umožňuje zpracovávat data ze ZIP souboru jako kdyby byla uložena normálně na disku nebo na paměťové kartě. To má výhodu, že data jsou komprimovaná a zároveň přístupná.
-\lstset{language=C++} 
-\begin{lstlisting}[caption=Čtení řádky z APK balíčku (vlevo) a ze souboru (vpravo)]
-void gets(char* line, zip_file* f) {   |  void gets(char* line, FILE* f) {
-  for (int i=0; i<MAX_LENGTH; i++) {   |    for (int i=0; i<MAX_LENGTH; i++) {
-    zip_fread(f, character, 1);        |      fread(character, 1, 1, f);
-    line[i] = character[0];            |      line[i] = character[0];
-    if (line[i] == '\n') {             |      if (line[i] == '\n') {
-      line[i + 1] = '\000';            |        line[i + 1] = '\000';
-      return;                          |        return;
-    }                                  |      }  
-  }                                    |    }      
-}                                      |  }   
-\end{lstlisting}
-
-Problém může nastat při použití externích knihoven, které čtou ze souborů. To je případ knihovny libPNG, která načítá ze souborů PNG rastrová data. Tato knihovna umožňuje použití vlastní čtecí funkce a tím umožňuje číst data přímo z APK, kdyby tomu tak nebylo, nemohli bychom touto knihovnou načítat data přímo z APK balíčku.
-
-\lstset{language=C++} 
-\begin{lstlisting}[caption=Použití vlastní čtecí funkce při použití knihovny libPNG]
-void png_read(png_structp png_ptr, png_bytep data, png_size_t length) {
-#ifdef USE_APK_PACKAGE
-  zip_fread(zipFile, data, length);
-#else
-  fread(data, length, 1, file);
-#endif
-}
-
-Texture* loadPNG(const char* filename) {
-#ifdef USE_APK_PACKAGE
-  zipFile = zip_fopen(APKArchive, prefix(filename), 0);
-#else
-  file = fopen(prefix(filename), "rb");
-#endif
-  png_set_read_fn(png_ptr, NULL, png_read);
-  ...
-}
-\end{lstlisting}
-
 \section{Předpočtené osvětlení}
 Předpočtené osvětlení umožňuje velmi rychle zobrazovat stínování a stíny na statických objektech. Problémem je, že je potřeba aplikovat tento efekt i na dynamických objektech. Úroveň osvětlení lze přečíst z nejbližšího statického objektu, tedy za předpokladu, že budeme mít tuto hodnotu někde k dispozici. Tuto hodnotu lze mít uloženou v alfa kanálu aktuálního snímku a jen jí přečíst před tím, než se vykreslí dynamické objekty.
 
@@ -1005,7 +836,7 @@ Předpočtené osvětlení umožňuje velmi rychle zobrazovat stínování a st�
 \end{figure}
 
 \subsection{Vytváření map osvětlení}
-Vytváření map osvětlení je realizováno dvěma přístupy, první je rasterizační (pomocí OpenGL) a druhý je vrhání paprsku. Pro rasterizační přistup jsou k dispozici dva druhy světel: bodové světlo a reflektor. Tyto světla jsou definovaná přímo v 3D modelovacím software. Dosah světel je omezen na 300metrů (je to z důvodu chyb, které vznikají u osvětlení\linebreak na velkou vzdálenost). Světla pochopitelně nepoužívají spekulární složku, protože tato složka je závislá na pohledu kamery a tudíž jí nelze předpočítat.
+Vytváření map osvětlení je realizováno dvěma přístupy, prvním je rasterizační (pomocí OpenGL) a druhým je vrhání paprsku. Pro rasterizační přistup jsou k dispozici dva druhy světel: bodové světlo a reflektor. Tyto světla jsou definovaná přímo v 3D modelovacím software. Dosah světel je omezen na 300metrů (je to z důvodu chyb, které vznikají u osvětlení\linebreak na velkou vzdálenost). Světla pochopitelně nepoužívají spekulární složku, protože tato složka je závislá na pohledu kamery a tudíž jí nelze předpočítat.
 
 I maximální možné rozlišení map osvětlení pro použitou scénu není dostatečné a stíny jsou kostičkované. Z tohoto důvodu se používají dva druhy filtrování. Prvním je rozmazání map osvětlení, které se provádí přímo po generování mapy osvětlení a druhým je lineární filtrování, které se aplikuje až při aplikování mapy osvětlení. Tato kombinace filtrování značně zvýší výslednou kvalitu stínů.
 
@@ -1118,7 +949,7 @@ Ukázka rekurzivního hledání v octree je na obrázku 4.6 (na obrázku je pouz
 
 Aby hledání ve stromu bylo ještě rychlejší, lze použít ještě několik optimalizací. Může se například ukládat $n$ posledních průsečíků a testovat, jestli další paprsek nemá stejný průsečík se stejným trojúhelníkem jako předešlý paprsek. Tato optimalizace má smysl pouze pro malé $n$. V mém projektu jsem nastavil $n = 2$. Paprsky testuji v pořadí podle indexu cílového trojúhelníku.
 
-Dále je vhodné přeskakovat testy stejných trojúhelníků. Podle zvoleného kritéria dělení stromu při jeho stavbě může dojít k tomu, že některé trojúhelníky jsou uloženy ve stromu víckrát (pokud jejich AABB proniká s více uzly stejné hloubky). Řešit to lze jednoduše. Stačí si u trojúhelníku vždy pamatovat ID paprsku, s kterým byl proveden poslední test průsečíku. Díky tomu lze zjistit, jestli některý paprsek není testován víckrát a případně tento test přeskočit.
+Dále je vhodné přeskakovat testy stejných trojúhelníků. Podle zvoleného kritéria dělení stromu při jeho stavbě může dojít k tomu, že některé trojúhelníky jsou uloženy ve stromu ve více uzlech (pokud AABB trojúhelníku náleží více uzlům stejné hloubky). Řešit to lze jednoduše. Stačí si u trojúhelníku vždy pamatovat ID paprsku, s kterým byl proveden poslední test průsečíku. Díky tomu lze zjistit, jestli některý paprsek není testován víckrát a případně tento test přeskočit. Této optimalizaci se říká mailboxing technika.
 
 Další možnost urychlení generování map osvětlení je přeskakování testování paprsků,\linebreak u kterých je délka paprsku delší než vzdálenost, na kterou dosvítí zdroj světla. Tuto vzdálenost lze spočítat pomocí vzorce pro útlum (viz. kapitola 3.2). Minimální přípustnou hodnotu si označím $\epsilon$ a maximálně délku paprsku jako $d$.
 \begin{center}
@@ -1128,7 +959,7 @@ Po dosazení a otočení rovnice získáme výraz
 \begin{center}
 $k_c + k_l \cdot d + k_q \cdot d^2 = \frac{1}{\epsilon}$
 \end{center}
-Kvadratickou funkci spočteme pomocí diskriminantu
+Vzdálenost $d$ spočteme pomocí diskriminantu
 \begin{center}
 $D = {k_l}^2 - 4 \cdot k_q \cdot (k_c - \frac{1}{\epsilon})$\\
 $d = \frac{-k_l \pm \sqrt{D}}{2 \cdot (k_c - \frac{1}{\epsilon})}$
@@ -1150,53 +981,168 @@ Abychom získali záplaty v této podobě musíme nejdříve pro každý dynamic
 \end{figure}
 \end{center}
 
-\subsection{Statické osvětlení a dynamické objekty}
+\section{Testovací aplikace - simulátor}
+Simulátor je navržen tak, aby fungoval na X11-Linuxu a Androidu. Znamená to výběr multiplatformních knihoven nebo ve výjimečných případech rozdílných implementací pro jednotlivé platformy. K vykreslování jsem vybral OpenGL ES 2.0 (jedná se o odlehčené OpenGL 3.0) a GLSL core verzi 1.0 (to zaručuje maximální možnou kompatibilitu).
 
-Pokud máme ve scéně předpočtené stíny, je vhodné tyto statické stíny aplikovat\linebreak i na dynamické objekty. V případě vozidla lze přečíst intenzitu osvětlení z některých bodů na silnici pod vozidlem. Intenzitu osvětlení lze jednoduše ukládat do alfa kanálu textury,\linebreak ve které se nachází aktuální scéna.
+Fyzikální vlastnosti vozidel jsou realizovány pomocí enginu Bullet Physics (tento engine používá mnoho známých firem zabývajících se vývojem mobilních her). Zvuk je realizován na mobilních zařízeních pomocí Android API a na Linuxu pomocí knihovny FMOD API. Správce oken je na Androidu třeba doprogramovat, aby fungovalo dotykové ovládání a pozastavení simulátoru (např. při hovoru). Na Linuxu je použitá knihovna freeglut.
 
-Výpočet pozice bodu na obrazovce se provádí na CPU. Fyzikální engine vrací pozici středu vozidla $\vec{p}$, tu lze vynásobit maticí $MVP$ a po perspektivním dělením získáme pozici vozidla na obrazovce označenou jako $sp$. 
-\begin{center}
-$s = MVP \cdot \vec{p}$\\
-$sp = s / s_w$
-\end{center}
-Pozice je v rozmezí $<-1, 1>$. Pro čtení z textury je třeba pozici přepočítat do rozmezí $<0, 1>$.
-\begin{center}
-$sp' = sp \cdot 0.5 + 0.5$
-\end{center}
+Samotný simulátor je rozdělen do dvou oddělených částí. První část je abstraktní\linebreak a řeší logickou část projektu. Abstrakce je realizována pomocí rozhraní, které definují společné metody abstraktních objektů. Druhá část implementuje jednotlivá rozhraní a řeší také načítání dat ze souborů.
+\lstset{language=C++} 
+\begin{lstlisting}[caption=Načtení 3D modelu vozidla pomocí abstraktního přístupu]
+    /// load models
+    skin = getModel(getConfigStr("skin_model", atributes), false);
+    wheel = getModel(getConfigStr("wheel_model", atributes), false);
 
-Tím jsme získali pozici vozidla, pokud chceme pozici pod vozidlem, musíme vypočítat pozici o něco níž. Úroveň posunu označím jako $a$. Velikost posunu je dále závislá na vzdálenosti vozidla od kamery. Vzdálenost je uložená v proměnné $s_z$.
-\begin{center}
-$sp''_x = sp'_x$\\
-$sp''_y = sp'_y - a / s_z$
-\end{center}
-
-Tím jsme získali pozici texelu nesoucí informaci o intenzitě osvětlení. Vzniká zde ale problém s barevným světlem. Jsou zde dvě možnosti řešení. Prvním je přidání další textury, ve kterém by byla barevná intenzita světla (tím by došlo ke zvýšení náročnosti na hardware a ke zvýšení paměťové náročnosti). Druhým možným řešením je omezit barevná světla\linebreak do nějaké sytosti (pokud se slabě zabarvené světlo aplikuje jako bílé, není to tolik rušivé).
+    /// set car wheels position
+    wheelX = getConfig("wheel_x", atributes);
+    wheelY = getConfig("wheel_y", atributes);
+    wheelZ1 = getConfig("wheel_back", atributes);
+    wheelZ2 = getConfig("wheel_front", atributes);
+\end{lstlisting}
 \newpage
 
-Dalším problémem je, že dynamické objekty (tedy vozidla) by měly zastínit statický model. Tento problém lze řešit opět pomocí screen-space přístupu. Ve screen-space textuře si můžeme označit texely, na kterých je vykreslené vozidlo. V době vykreslování vozovky se vždy díváme o několik texelů výše, než je aktuální vykreslovaný fragment, a pokud je texel označen, ztmavíme aktuálně vykreslovaný fragment. Důležitou poznámkou je, že texely kol vozidla se neoznačují (tím by vznikal chybný stín).
+Důvodem oddělení částí je, že implementace jednotlivých rozhraní může být v budoucnu snadno nahrazena anebo mohou být použité různé implementace pro různé platformy. Příkladem různých implementací rozhraní pro různé platformy může být například renderer.\linebreak V simulátoru je využita knihovna OpenGL, která například na platformě Windows Phone není dostupná a bylo by potřeba na této platformě použit Direct3D.
 
-Stín je kvalitou srovnatelný s projektivním stínem. Bylo by možné zjišťovat pozice světel, aby vznikl měkký stín, ale tím by se simulátor značně zpomalil. Při rychlém otáčení lze zpozorovat chybu, která vzniká kvůli použitému screen-space přístupu. V noční scéně to moc není vidět, nicméně ve světlých scénách by to mohlo být značně rušivé.
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=160mm]{figures/o4suml.png}
+\caption{UML diagram projektu, horní část je abstraktní, dolní část implementuje jednotlivá rozhraní a načítá data do paměti, spustitelné soubory jsou označeny tečkou}
+\end{center}
+\end{figure}
+Jak je vidět na obrázku 4.1, simulátor je rozdělen do dalších dílčích částí. Část \ul{raycaster} a třída \ul{LMgenerator} realizují předzpracování. Třída \ul{open4speed} se zabývá správou okna\linebreak a spouštění dílčích součástí. \ul{Common} uchovává veškeré objekty a proměnné, je to z důvodu, že jinak by v třídách \ul{open4speed} a \ul{LMgenerator} musel být obsah struktury \ul{common} duplicitně.
+
+Třída \ul{car} je v první řadě struktura uchovávající veškeré proměnné realizující vozidlo, dále zajišťuje propojení mezi fyzikálním enginem, vykreslováním, zvukem, vstupem umělé inteligence a uživatele.
+\\ \\
+Část \ul{utils} je balík příkazů tvořící simulátor.
+\begin{itemize}
+\item \ul{engine} realizuje GUI a 3D scénu
+\item \ul{io} obstarává práci se soubory
+\item \ul{math} poskytuje sadu matematických příkazů pro práci s 3D objekty
+\item \ul{scripting} interpretuje skriptování GUI
+\item \ul{switch} obstarává objekty jednotlivých rozhraní a naplňuje je daty
+\end{itemize}
+
+Jednotlivá rozhraní mají různé funkce. Rozhraní \ul{fbo}, \ul{renderer}, \ul{shader}, \ul{texture} a \ul{vbo} vytváří abstraktní přístup k OpenGL, \ul{input} je rozhraní pro ovládání vozidla (implementací může být buď klávesnice anebo umělá inteligence), rozhraní \ul{physics} reprezentuje fyzikální engine a rozhraní \ul{sound} umožňuje přehrávat zvuky. Implementace rozhraní \ul{sound} jsou příkladem použití různých implementací na různých platformách.
+
+\section{Realizace na platformě Android}
+Platforma Android je postavená na Linuxovém jádře a využívá mnohé komponenty\linebreak z projektu GNU, nicméně celé Android API je v jazyku Java za využiti virtuálního stroje Dalwik. Pomocí Android NDK(native development kit) je možné zkompilovat C/C++ kód jako knihovnu, kterou je možné zavolat z jazyku Java. Toto je prováděno pomocí JNI(Java native interface).
 
 \begin{center}
-\begin{figure}[h]
-\includegraphics[width=120mm]{figures/nearshadow.png}
-\caption{Vržený stín vozidla}
+\begin{figure}[h!]
+\includegraphics[width=120mm]{figures/android.png}
+\caption{Komponenty platformy Android, komponenty vyznačené modrou barvou jsou napsané v jazyce Java, žlutou barvou je virtuální stroj, který umožňuje běh Java aplikací, zelenou barvou jsou C/C++ knihovny a červenou je Linuxové jádro}
 \end{figure}
 \end{center}
 
-\subsection{Světla vozidel}
+Snažší by bylo naprogramovat simulátor přímo v Javě, ale tím bych ztratil možnost portovat simulátor na další platformy, které virtuální stroj Dalwik nemají. Dále by byl problém s použitím fyzikálního enginu, který je napsaný v jazyce C++. Musel bych napsat interface pro fyzikální engine, který by mi umožnil komunikaci mezi C++ a Java kódem.
 
-Dle předběžných měření jsem zjistil, že na mobilních zařízeních lze za běhu počítat jedno až dvě světla (bez výpočtu zastínění zdroje světla). U vozidla ovládané hráčem není potřeba řešit viditelnost světla, prakticky zde nedochází k situacím, že by světlo osvětlovalo neviditelné objekty (je to z důvodu těsné vazby světla hráčova vozidla a kamery).
+\subsection{Problematika Android API}
+Java native interface je rozhraní, které umožňuje spustit C++ kód z jazyku Java a obráceně. Největší problém je, že neexistuje použitelný port freeglut knihovny pro Android. Udělal jsem tedy JNI rozhraní, které odpovídá handlerům knihovny freeglut. Tedy nahrazuji veškeré funkce této knihovny svou implementací. Knihovna implementuje správu oken, vstup klávesnice a myši a volání idle a display funkcí. Klávesnice a myš byla pochopitelně plně nahrazena dotykovým ovládáním, ale pokud do Android zařízení připojíme klávesnici nebo myš, bude plně funkční. Funkčnost myši zařizuje sám systém, klávesnice stačila namapovat.
 
-U ostatních vozidel je třeba osvětlení zjednodušit, aby to mobilní hardware zvládal. Zvolil jsem metodu vykreslování poloprůhledných kuželů do scény, k tomu je použita OpenGL funkce blending, která umožňuje kreslit objekty s částečnou průhledností. Je zde počítán útlum světla stejně jako u standardních světel.
-\newpage
+Aby bylo možné volat C++ metody přímo z Javy musí být pojmenovány ve formátu Java\_\textit{package}\_\textit{třída}\_\textit{metoda}. C++ knihovna bude tedy možné spustit pouze z jedné Java třídy.
+\lstset{language=C++} 
+\begin{lstlisting}[caption=Volání metod pomocí JNI v C++ pro nahrazení freeglut knihovny]
+void Java_com_cvut_o4s_O4SJNI_nativeInit(JNIEnv* e) { main(0, 0); }
+void Java_com_cvut_o4s_O4SJNI_nativeKey(JNIEnv* e, jint i) { key(i); }
+void Java_com_cvut_o4s_O4SJNI_nativeDisplay(JNIEnv* e) { display(); }
+\end{lstlisting}
+
+Dále je potřeba C++ knihovnu načíst pomocí volání System.loadLibrary a metody deklarovat v dané Java třídě pomocí klíčového slova native.
+
+\lstset{language=Java} 
+\begin{lstlisting}[caption=Ukázka deklarování C++ metod v Java kódu]
+static native void nativeInit();
+static native void nativeKey(int i);
+static native void nativeDisplay();
+\end{lstlisting}
+
+Dalším problémem je volání Android API z C++ kódu (tzn. volání Java kódu z C++). Příkladem je přehrávání zvuků pomocí Android API, ovládání zvuku je nutno řídit z C++, ale API je přímo přístupné pouze z Javy. Na obrázku 4.2 je znázorněn případ třídy Sounds. Problém se řeší také pomocí JNI, pouze volání jsou prováděny v opačném směru.
 
 \begin{center}
 \begin{figure}[h]
-\includegraphics[width=60mm]{figures/carlight.png}
-\caption{Ukázka světel pomocí poloprůhledných kuželů}
+\includegraphics[width=80mm]{figures/jni.png}
+\caption{UML diagram spustitelného klienta pro Android, kde libopen4speed.so je zkompilovaná C++ knihovna projektu}
 \end{figure}
 \end{center}
+
+\lstset{language=C++} 
+\begin{lstlisting}[caption=Volání Java metody pro přehrání zvuku z C++ kódu]
+void soundpool::play(int index) {
+  jclass clazz = instance->FindClass("com/cvut/o4s/Sounds");
+  //get method "void soundPlay(int, int)"
+  jmethodID method = instance->GetStaticMethodID(clazz, "soundPlay", "(II)V");
+  instance->CallStaticVoidMethod(clazz, method, index, (int)looping);
+}
+\end{lstlisting}
+
+V Javě se poté musí ještě rozlišovat přehrávání zvuků od přehrávání hudby. Hudba bývá řádově náročnější na paměť a nemá smysl jí celou držet v paměti, když na ni není potřeba aplikovat další zvukové efekty.
+
+\lstset{language=Java} 
+\begin{lstlisting}[caption=Přehrání zvuku v Javě pomocí Android API]  
+public static void soundPlay(int index, int loop) {
+  //instance is a music
+  if (list.get(index).id == TYPE_MUSIC) {
+    music.setLooping(loop == 1);
+    music.start();
+  }
+
+  //audio clip
+  else {
+    Sound s = list.get(index);
+    snd.play(s.id, s.volume, s.volume, 1, loop, s.rate);
+  }
+}
+\end{lstlisting}
+
+\subsection{Využití vláken}
+Většina zařízení, které dnes už spadají do střední třídy, je vybavena aspoň dvěma procesory, je proto vhodné rozdělit činnost do více vláken, aby bylo dosaženo maximálního výkonu. Třída GLSurfaceView, která umožňuje vykreslovat OpenGL scénu z C++ umožňuje volat OpenGL příkazy pouze z jednoho vlákna. Z tohoto důvodu jsem rozdělil kód na grafické\linebreak a negrafické vlákno.
+
+V menu simulátoru se používá pouze grafické vlákno, negrafické vlákno je primárně použito pro fyzikální výpočty, které zařízení vytěžují nejvíce. Vlákna jsou synchronizovaná, aby nedocházelo k použití transformace vozidla z předešlého snímku(to by bylo velmi rušivé).
+
+Dále provádím regulaci rychlosti simulátoru v závislosti na výkonu hardwaru. Je potřeba, aby obě vlákna prováděla výpočet co nejvíce paralelně, pokud by negrafické vlákno příliš dlouho nedodávalo novou transformaci vozidla, docházelo by k trhanému vykreslování (některý snímek by se vykresloval víckrát a to by se projevilo tak, že by se snímková frekvence zdála být na krátký okamžik poloviční). Pokud k tomuto případu dojde, je vhodné snížit frekvenci volání obou vláken a tím snížit rychlost simulátoru.
+
+Problém je, že nelze snižovat rychlost simulátoru do nekonečna, proto je zde nastavena minimální hodnota, na kterou se může simulátor zpomalit. Je zde i horní limit, aby nedocházelo k zrychlené jízdě a tedy i ke zvýšené spotřebě energie.
+
+\subsection{Práce se soubory}
+V Androidu se aplikace publikují v APK balíčku. Jedná se o ZIP soubor, který má nějakou danou strukturu. V Java kódu je možné na veškeré soubory uvnitř balíčku přistupovat,\linebreak v C++ tato možnost není. Někteří vývojáři toto řeší, že po prvním spuštění si aplikace stáhne ze serveru přídavná data a ty si uloží například na paměťovou kartu. Lze také rozbalit soubory z APK balíčku a s těmi pak v C++ pracovat. To se moc nepoužívá, protože jsou potom data v zařízení dvakrát.
+
+Další možnou variantou je přistupovat k APK balíčku jako k ZIP souboru. Knihovna libZIP umožňuje zpracovávat data ze ZIP souboru jako kdyby byla uložena normálně na disku nebo na paměťové kartě. To má výhodu, že data jsou komprimovaná a zároveň přístupná.
+\lstset{language=C++} 
+\begin{lstlisting}[caption=Čtení řádky z APK balíčku (vlevo) a ze souboru (vpravo)]
+void gets(char* line, zip_file* f) {   |  void gets(char* line, FILE* f) {
+  for (int i=0; i<MAX_LENGTH; i++) {   |    for (int i=0; i<MAX_LENGTH; i++) {
+    zip_fread(f, character, 1);        |      fread(character, 1, 1, f);
+    line[i] = character[0];            |      line[i] = character[0];
+    if (line[i] == '\n') {             |      if (line[i] == '\n') {
+      line[i + 1] = '\000';            |        line[i + 1] = '\000';
+      return;                          |        return;
+    }                                  |      }  
+  }                                    |    }      
+}                                      |  }   
+\end{lstlisting}
+
+Problém může nastat při použití externích knihoven, které čtou ze souborů. To je případ knihovny libPNG, která načítá ze souborů PNG rastrová data. Tato knihovna umožňuje použití vlastní čtecí funkce a tím umožňuje číst data přímo z APK, kdyby tomu tak nebylo, nemohli bychom touto knihovnou načítat data přímo z APK balíčku.
+
+\lstset{language=C++} 
+\begin{lstlisting}[caption=Použití vlastní čtecí funkce při použití knihovny libPNG]
+void png_read(png_structp png_ptr, png_bytep data, png_size_t length) {
+#ifdef USE_APK_PACKAGE
+  zip_fread(zipFile, data, length);
+#else
+  fread(data, length, 1, file);
+#endif
+}
+
+Texture* loadPNG(const char* filename) {
+#ifdef USE_APK_PACKAGE
+  zipFile = zip_fopen(APKArchive, prefix(filename), 0);
+#else
+  file = fopen(prefix(filename), "rb");
+#endif
+  png_set_read_fn(png_ptr, NULL, png_read);
+  ...
+}
+\end{lstlisting}
 
 \section{Screen-space přístup}
 Při běhu jakéhokoliv simulátoru je největší zátěž mobilního hardware způsobena vykreslováním 3D scény, proto je nutné tuto část co nejvíce zefektivnit. Pro mnoho efektů se používají takzvané víceprůchodové přístupy (scéna se vykreslí víckrát z různých pohledů nebo pomocí různých shaderů), ale na mobilním zařízení je zatím z hlediska výkonu možné použít pouze jednoprůchodový přístup.
@@ -1221,7 +1167,7 @@ Není ale nutné vykreslovat do celé textury, pomocí příkazu \textit{glViewp
 Dále je možné zvolit nižší rozlišení viewportu než je rozlišení displeje. Mobilní zařízení obvykle disponují obrovskou hustotou pixelů a pokud zařízení nebude stíhat vykreslovat scénu v plném rozlišení, lze vykreslovat v rozlišení menším. U počítačových 3D her se také setkáváme s možností změnit rozlišení, tam řeší změnu přímo hardware displeje nebo jeho ovladač.
 
 \subsection{Motion-blur}
-Jedním z velmi rychlých efektů ve screen-space je motion-blur. Jedná efekt rozmáznutí obrazu rychlým pohybem. Motion-blur se používá ve většině závodních simulátorů, rozmáznutí dodává dojem rychlosti.
+Jedním z efektů využívající screen-space přístup je motion-blur. Jedná efekt rozmáznutí obrazu rychlým pohybem. Motion-blur se používá ve většině závodních simulátorů, rozostření pohybem dodává dojem rychlosti.
 \lstset{language=GLSL} 
 \begin{lstlisting}[caption=Motion blur fragment shader dle rychlosti vozidla]
 uniform sampler2D color_texture, pFrm;
@@ -1240,8 +1186,7 @@ void main() {
 
 $Speed$ je rychlost vozidla od 0 do 1, $pFrm$ je textura předchozího snímku a $res$ je\linebreak 1 / \textit{plné rozlišení textury} (pro jednoduchost je použitý čtvercový rozměr textury).
 
-Tento kód je použit přímo při renderování modelů, nikoliv při postprocesu. Výhodou je, že rozmáznutí se projeví po několik snímků za sebou pomocí jednoho čtení textury navíc. Nevýhodou je, že tento kód musí být vložen do každého shaderu vykreslující 3D model.
-\newpage
+Tento kód využívá screen-space informaci (texturu $pFrm$). Rozostření se projeví po několik snímků za sebou (efekt zůstává na obrazovce a postupně se utlumuje v závislosti na rychlosti vozdila). Nevýhodou je, že tento kód musí být vložen do každého shaderu vykreslující 3D model, aby motion-blur fungoval tak jak má.
 
 \subsection{Odlesky}
 Dále je možné ve screen-space řešit odlesky. Existuje obecný (složitý) postup jak tyto odlesky vypočítat, který by mobilní hardware nezvládl. Problém jsem rozdělil podle typu ploch. Vzhledem k tomu, že v simulátoru dochází pouze k rotaci pohledu podle osy y (rotace yaw), je možné řešit pro odlesky pro různé tvary povrchů zvlášť.
@@ -1284,6 +1229,53 @@ $r = [s_x + \vec{n}_x \cdot f, s_y + \vec{n}_y \cdot f]$
 \begin{figure}[h!]
 \includegraphics[width=130mm]{figures/reflect-car.png}
 \caption{Ukázka výsledných odlesků na vozidle, vlevo bez odlesků, vpravo s odlesky}
+\end{figure}
+\end{center}
+
+\subsection{Statické osvětlení a dynamické objekty}
+
+Pokud máme ve scéně předpočtené stíny, je vhodné tyto statické stíny aplikovat\linebreak i na dynamické objekty. V případě vozidla lze přečíst intenzitu osvětlení z některých bodů na silnici pod vozidlem. Intenzitu osvětlení lze jednoduše ukládat do alfa kanálu textury,\linebreak ve které se nachází aktuální scéna.
+
+Výpočet pozice bodu na obrazovce se provádí na CPU. Fyzikální engine vrací pozici středu vozidla $\vec{p}$, tu lze vynásobit maticí $MVP$ a po perspektivním dělením získáme pozici vozidla na obrazovce označenou jako $sp$. 
+\begin{center}
+$s = MVP \cdot \vec{p}$\\
+$sp = s / s_w$
+\end{center}
+Pozice je v rozmezí $<-1, 1>$. Pro čtení z textury je třeba pozici přepočítat do rozmezí $<0, 1>$.
+\begin{center}
+$sp' = sp \cdot 0.5 + 0.5$
+\end{center}
+
+Tím jsme získali pozici vozidla, pokud chceme pozici pod vozidlem, musíme vypočítat pozici o něco níž. Úroveň posunu označím jako $a$. Velikost posunu je dále závislá na vzdálenosti vozidla od kamery. Vzdálenost je uložená v proměnné $s_z$.
+\begin{center}
+$sp''_x = sp'_x$\\
+$sp''_y = sp'_y - a / s_z$
+\end{center}
+
+Tím jsme získali pozici texelu nesoucí informaci o intenzitě osvětlení. Vzniká zde ale problém s barevným světlem. Jsou zde dvě možnosti řešení. Prvním je přidání další textury, ve kterém by byla barevná intenzita světla (tím by došlo ke zvýšení náročnosti na hardware a ke zvýšení paměťové náročnosti). Druhým možným řešením je omezit barevná světla\linebreak do nějaké sytosti (pokud se slabě zabarvené světlo aplikuje jako bílé, není to tolik rušivé).
+\newpage
+
+Dalším problémem je, že dynamické objekty (tedy vozidla) by měly zastínit statický model. Tento problém lze řešit opět pomocí screen-space přístupu. Ve screen-space textuře si můžeme označit texely (odpovídajících pixelům na obrazovce), na kterých je vykreslené vozidlo. V době vykreslování vozovky se vždy díváme o několik texelů výše, než je aktuální vykreslovaný fragment, a pokud je texel označen, ztmavíme aktuálně vykreslovaný fragment. Důležitou poznámkou je, že texely kol vozidla se neoznačují (tím by vznikal chybný stín).
+
+Stín je kvalitou srovnatelný s projektivním stínem. Bylo by možné zjišťovat pozice světel, aby vznikl měkký stín, ale tím by se simulátor značně zpomalil. Při rychlém otáčení lze zpozorovat chybu, která vzniká kvůli použitému screen-space přístupu. V noční scéně to moc není vidět, nicméně ve světlých scénách by to mohlo být značně rušivé.
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=120mm]{figures/nearshadow.png}
+\caption{Vržený stín vozidla}
+\end{figure}
+\end{center}
+
+\subsection{Světla vozidel}
+
+Dle předběžných měření jsem zjistil, že na mobilních zařízeních lze za běhu počítat jedno až dvě světla (bez výpočtu zastínění zdroje světla). U vozidla ovládané hráčem není potřeba řešit viditelnost světla, prakticky zde nedochází k situacím, že by světlo osvětlovalo neviditelné objekty (je to z důvodu těsné vazby světla hráčova vozidla a kamery).
+
+U ostatních vozidel je třeba osvětlení zjednodušit, aby to mobilní hardware zvládal. Zvolil jsem metodu vykreslování poloprůhledných kuželů do scény, k tomu je použita OpenGL funkce blending, která umožňuje kreslit objekty s částečnou průhledností. Je zde počítán útlum světla stejně jako u standardních světel.
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=60mm]{figures/carlight.png}
+\caption{Ukázka světel pomocí poloprůhledných kuželů}
 \end{figure}
 \end{center}
 

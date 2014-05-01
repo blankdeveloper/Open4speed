@@ -9,7 +9,7 @@
 \contentsline {section}{\numberline {2.3}Souvisej\IeC {\'\i }c\IeC {\'\i } metody}{7}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}Projekty zab\IeC {\'y}vaj\IeC {\'\i }c\IeC {\'\i } se vykreslov\IeC {\'a}n\IeC {\'\i } no\IeC {\v c}n\IeC {\'\i } sc\IeC {\'e}ny}{7}{subsection.2.3.1}
 \contentsline {paragraph}{Proceduraln\IeC {\'\i } modelov\IeC {\'a}n\IeC {\'\i } m\IeC {\v e}sta a osv\IeC {\v e}tlen\IeC {\'\i } no\IeC {\v c}n\IeC {\'\i }ho m\IeC {\v e}sta}{7}{section*.6}
-\contentsline {paragraph}{Imperfektn\IeC {\'\i } st\IeC {\'\i }nov\IeC {\'e} mapy pro v\IeC {\'y}po\IeC {\v c}et nep\IeC {\v r}\IeC {\'\i }m\IeC {\'e}ho osv\IeC {\v e}tlen\IeC {\'\i }}{8}{section*.7}
+\contentsline {paragraph}{Imperfect shadow maps pro v\IeC {\'y}po\IeC {\v c}et nep\IeC {\v r}\IeC {\'\i }m\IeC {\'e}ho osv\IeC {\v e}tlen\IeC {\'\i }}{8}{section*.7}
 \contentsline {subsection}{\numberline {2.3.2}Z\IeC {\'a}vodn\IeC {\'\i } simul\IeC {\'a}tory s no\IeC {\v c}n\IeC {\'\i } sc\IeC {\'e}nou pro platformu Android}{8}{subsection.2.3.2}
 \contentsline {paragraph}{Asphalt Urban}{8}{section*.8}
 \contentsline {paragraph}{Need for Speed Most Wanted}{9}{section*.9}

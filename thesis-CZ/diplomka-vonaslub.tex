@@ -372,9 +372,9 @@ Mapy osvětlení jsou textury 3D modelů, které obsahují informace o difúzní
 \end{figure}
 \end{center}
 
-Aby bylo možné mapy osvětlení dynamicky aktualizovat, je potřeba mít do map rychlý zapisovací přístup. Rychlé zapisování do textur se v OpenGL realizuje pomocí Frame Buffer Objektu (FBO). Pro aktualizaci musíme mít předpočítanou tzv. záplatu. Záplatou se rozumí menší textura, která se přidá do současné osvětlovací mapy. Přidáním záplaty lze tedy přidat do scény další světlo, které máme předpočítané. Záplata jde z FBO opět odebrat (provede se odečet stejné záplaty).
+Aby bylo možné mapy osvětlení dynamicky aktualizovat, je potřeba mít do map rychlý zapisovací přístup. Pro aktualizaci musíme mít předpočítanou tzv. záplatu. Záplatou se rozumí menší textura, která se přidá do současné osvětlovací mapy. Přidáním záplaty lze tedy přidat do scény další světlo, které máme předpočítané. Záplata jde z mapy osvětlení opět odebrat (provede se odečet stejné záplaty).
 
-Protože uchovávání záplat v paměti by bylo příliš paměťově náročné, jsou komprimovány ve vektorové podobě přímo na GPU pomocí Vertex Buffer Objektu (VBO). 
+Protože uchovávání záplat v paměti by bylo příliš paměťově náročné, jsou komprimovány ve vektorové podobě přímo na GPU. Vektorová podoba záplaty je množina trojúhelníků,\linebreak u kterých jsou vrcholy definovány 2D polohou v mapě osvětlení a intenzitou světla. Intenzita světla se při aplikování násobí barvou, která je pro celou záplatu konstantní.
 \newpage
 
 \begin{center}
@@ -406,7 +406,7 @@ Pro platformu Android existuje nepřeberné množství aplikací a toho začína
 
 \section{Související metody}
 
-Rešerši souvisejících metod jsem zaměřil na dvě různé kategorie. První kategorie jsou implementace pro PC, kde je nejčastěji řešeno nepřímé osvětlení, které by na mobilních zařízeních zatím použít nešlo. Druhá kategorie jsou závodní simulátory s noční jízdou pro platformu Android. V této kategorii bývají nejčastěji použity techniky jako v této práci.
+Rešerši souvisejících metod jsem zaměřil na dvě různé kategorie. První kategorie jsou implementace pro PC, kde je nejčastěji řešeno nepřímé osvětlení, které by pro mobilní zařízení bylo příliš náročné na výpočet. Druhá kategorie jsou závodní simulátory s noční jízdou pro platformu Android. V této kategorii bývají nejčastěji použity techniky jako v této práci.
 
 \subsection{Projekty zabývající se vykreslování noční scény}
 
@@ -424,7 +424,7 @@ Tato implementace je z roku 1999 a zabývá se proceduálním modelováním měs
 \end{center}
 \newpage
 
-\paragraph{Imperfektní stínové mapy pro výpočet nepřímého osvětlení}\mbox{}\\
+\paragraph{Imperfect shadow maps pro výpočet nepřímého osvětlení}\mbox{}\\
 
 Tato implementace, představená roku 2008, se nezabývá přímo noční scénou, zabývá se nepřímým osvětlením, které s noční scénou souvisí. Implementace běží v reálném čase a její výsledky jsou srovnatelné se snímky, které se vykreslují několik hodin.
 
@@ -452,21 +452,23 @@ Další díl ze série Asphalt Urban už odlesky řeší lépe. Odráží se hla
 
 \paragraph{Need for Speed Most Wanted}\mbox{}\\
 
-Simulátor, který je spíše známý z PC, na mobilním trhu takový úspěch nemá. Od PC verze je velice odlišný, ale rozhodně se nejedná o nějakou lacinou napodobeninu. Jedná se o první závodní simulátor pro mobilní zařízení, který disponuje modelem ničení vozidla (je možné vozidlo poškrábat, rozbít mu okna apod).
+V tomto simulátoru je osvětlení řešeno hlavně konstantním osvětlením pro celou scénu, pouliční lampy využívají bilboardů a neosvětlují okolí. Výrazný je odraz světla na vozovce v kombinaci s bump mapováním vytváří dojem hrubého povrchu.
 
-Oproti Asphalt 8 má navíc efekt Depth-of-field. To znamená, že vzdálené modely jsou rozmazané a zabarveny do barvy pozadí. Tento efekt vytváří příjemný mlhovitý dojem. Jinak bych řekl, že tyto dva simulátory jsou si sobě velice podobné. Na stejném enginu funguje\linebreak i známý simulátor Real Racing 3, který ale noční jízdu nemá.
+Simulátor je spíše známý z PC, na mobilním trhu takový úspěch nemá. Od PC verze je velice odlišný, ale rozhodně se nejedná o nějakou lacinou napodobeninu. Jedná se o první závodní simulátor pro mobilní zařízení, který disponuje modelem ničení vozidla (je možné vozidlo poškrábat, rozbít mu okna apod).
+
+Oproti Asphalt 8 má navíc efekt Depth-of-field. To znamená, že vzdálené modely jsou rozmazané a zabarveny do barvy pozadí. Tento efekt vytváří příjemný mlhovitý dojem. Jinak bych řekl, že tyto dva simulátory jsou si sobě velice podobné. Na stejném enginu funguje\linebreak i známý simulátor Real Racing 3, který noční jízdou nedisponuje.
 
 \paragraph{GT Racing 2}\mbox{}\\
 
 Úspěšným závodním simulátorem je v současné době GT Racing 2, je to hlavně díky jeho zpracování. Jako jediný z uvedených simulátorů má při noční jízdě nízké ambientní osvětlení a scéna je osvětlena hlavně reflektorem vozidla.
 
-Nejsem si jist, zda osvětlení lampami je přímo součástí textur nebo jestli jsou zde použity mapy osvětlení.
+Osvětlení lampami je pravděpodobně přímo součástí textur, použití map osvětlení by bylo pro použité 3D modely příliš náročné.
 
 \paragraph{Sports Car Challenge}\mbox{}\\
 
-Asi nejdetailnější model vozidla má právě Sports Car Challenge. Vývojář spolupracuje s předními výrobci automobilů a to se odrazilo právě na modelech vozidel. Modely jsou realistické a to včetně interiérů.
+Noční jízda je v tomto projektu realizována stejnými technikami jako denní jízda. Jsou zde použity pouze tmavé textury a halo efekt pouličních lamp.
 
-Projekt trpí slabší kompatibilitou s mobilními zařízeními, i když náročnost enginu je nízká. Co se týká noční jízdy, je realizována stejnými technikami jako denní jízda. Jsou zde použity pouze tmavé textury a halo efekt pouličních lamp.
+Simulátor disponuje asi nejdetailnějšími modely vozidel. Vývojář spolupracuje s předními výrobci automobilů a to se odrazilo právě na modelech vozidel. Modely jsou realistické a to včetně interiérů. Projekt trpí slabší kompatibilitou s mobilními zařízeními, i když náročnost enginu je nízká.
 
 \paragraph{Track Racing}\mbox{}\\
 
@@ -624,9 +626,9 @@ $p = a \cdot \frac{S_{PBC}}{S_{ABC}} + b \cdot \frac{S_{APC}}{S_{ABC}} + c \cdot
 
 Míchání textur se v OpenGL provádí pomocí blendingu. Tato technika míchá cílový obraz (ten již vykreslený ve FBO) a zdrojový obraz, tedy texturu namapovanou na nějaký model.
 
-Vstupem pro blending funkci je zdrojová barva $C_s$, cílová barva $C_d$ a parametry $B_s$\linebreak a $B_d$, které určují pro každý kanál, jak se má hodnota míchat. Výstupem funkce je nová cílová barva $C_d$.
+Vstupem pro blending funkci je zdrojová barva $C_s$, cílová barva $C_d$ a parametry $\alpha_s$\linebreak a $\alpha_d$, které určují pro každý kanál, jak se má hodnota míchat. Výstupem funkce je nová cílová barva $C_d$.
 \begin{center}
-$C_d = C_s \cdot B_s + C_d \cdot B_d$
+$C_d = C_s \cdot \alpha_s + C_d \cdot \alpha_d$
 \end{center}
 
 Příklad použití blendingu je technika poloprůhledného materiálu. Nejdříve se vykreslí neprůhledná část scény (tím se vykreslí i hloubkový buffer). Poté se vypne zápis do hloubkového bufferu a vykreslí se geometrie s částečnou průhledností.

@@ -13,7 +13,8 @@
 % Two-page layout: final printing
 \documentclass[11pt,twoside,a4paper]{book}   
 
-\usepackage{wrapfig, floatrow, amsmath, url, graphicx, array}
+\usepackage{wrapfig, floatrow, amsmath, url, graphicx, array, breakurl}
+%\usepackage[breaklinks]{hyperref}
 
 \usepackage[czech, english]{babel}
 \usepackage[T1]{fontenc} % pouzije EC fonty 
@@ -266,7 +267,8 @@ unicode=true,
 \end{itemize}
 }
 %to print missing literature in reference
-\cite{OpenGL10} \cite{Hawkins01} \cite{Buss03} \cite{Ericson04}  
+\cite{Fast03} \cite{Interact12}
+\cite{OpenGL10} \cite{Hawkins01} \cite{Buss03} \cite{Ericson04} \cite{Modern04}
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%    Titulni stranka / Title page 
@@ -1445,7 +1447,6 @@ Práci do budoucna hodlám dále vyvíjet. Chci se soustředit hlavně na dalš�
 %\bibliographystyle{abbrv}
 \bibliographystyle{plain}
 %\bibliographystyle{psc}
-%\bibliographystyle{alpha}
 {
 %JZ: 11.12.2008 Kdo chce mit v techto ukazkovych odkazech take odkaz na CSTeX:
 %\def\CS{$\cal C\kern-0.1667em\lower.5ex\hbox{$\cal S$}\kern-0.075em $}

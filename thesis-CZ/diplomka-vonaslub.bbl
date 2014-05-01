@@ -1,41 +1,56 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{Hawkins01}
+Kevin Hawkins{,}~Dave Astle.
+\newblock {\em {O}penGL Game Programing}.
+\newblock Cengage Learning, 2001.
 
 \bibitem{Buss03}
 Samuel~R. Buss.
 \newblock {\em {3}-D Computer Graphics: A Mathematical Introduction with
   OpenGL}.
-\newblock 2003.
+\newblock Cambridge University Press, 2003.
 
 \bibitem{Ericson04}
 Christer Ericson.
 \newblock {\em {R}eal Time Collision Detection}.
-\newblock 2004.
+\newblock CRC Press, 2004.
 
 \bibitem{OpenGL10}
-Richard S. Wright Jr. a Nicholas~Haemel Graham~Sellers.
+Graham Sellers{,} Richard S. Wright Jr.{,}~Nicholas Haemel.
 \newblock {\em {O}penGL SuperBible}.
-\newblock 2010.
+\newblock Addison-Wesley Professional; 5 edition (August 2, 2010), 2010.
 
 \bibitem{Kaplinski11}
 Lauris Kaplinski.
 \newblock {R}eflective water with glsl.
-\newblock \url{khayyam.kaplinski.com/2011/09}, 2011.
-
-\bibitem{Hawkins01}
-Dave~Astle Kevin~Hawkins.
-\newblock {\em {O}penGL Game Programing}.
-\newblock 2001.
+\newblock \url{http://khayyam.kaplinski.com/2011/09}, 2011.
 
 \bibitem{Ritschel:2008:ISM}
-Tobias Ritschel, Thorsten Grosch, Min~H. Kim, Hans-Peter Seidel, Carsten
-  Dachsbacher, and Jan Kautz.
+Tobias Ritschel{,} Thorsten Grosch{,} Min H. Kim{,} Hans-Peter Seidel{,}
+  Carsten Dachsbacher{,}~Jan Kautz.
 \newblock {Imperfect Shadow Maps for Efficient Computation of Indirect
   Illumination}.
-\newblock {\em ACM Trans. Graph. (Proc. of SIGGRAPH ASIA 2008)}, 27(5), 2008.
+\newblock {\em ACM Trans. Graph. (Proc. of SIGGRAPH ASIA)}, 27(5), 2008.
+
+\bibitem{Interact12}
+Oscar Argudo{,} Carlos Andujar{,}~Gustavo Patow.
+\newblock {Interactive rendering of urban models with global illumination}.
+\newblock {\em Proceedings of Computer Graphics International}, 2012.
 
 \bibitem{Scott02}
 Jim Scott.
 \newblock {P}acking lightmaps.
-\newblock \url{www.blackpawn.com/texts/lightmaps}, 2002.
+\newblock \url{http://www.blackpawn.com/texts/lightmaps}, 2002.
+
+\bibitem{Fast03}
+Andrey Iones{,} Anton Krupkin{,} Mateu Sbert{,}~Sergey Zhukov.
+\newblock {Fast, Realistic Lighting for Video Games}.
+\newblock {\em IEEE Comput. Graph. Appl. 23, 3 (May 2003)}, 2003.
+
+\bibitem{Modern04}
+Jiří Žára{,} Bedřich Beneš{,} Jiří Sochor{,} Petr~Felkel.
+\newblock {\em {M}oderní počítačová grafika}.
+\newblock Computer Press, 2004.
 
 \end{thebibliography}

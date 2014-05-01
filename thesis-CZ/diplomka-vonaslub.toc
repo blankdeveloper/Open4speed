@@ -20,14 +20,14 @@
 \contentsline {section}{\numberline {3.1}Osv\IeC {\v e}tlovac\IeC {\'\i } model}{11}{section.3.1}
 \contentsline {section}{\numberline {3.2}V\IeC {\'y}po\IeC {\v c}et osv\IeC {\v e}tlen\IeC {\'\i }}{13}{section.3.2}
 \contentsline {section}{\numberline {3.3}St\IeC {\'\i }nov\IeC {\'a}n\IeC {\'\i }}{14}{section.3.3}
-\contentsline {section}{\numberline {3.4}M\IeC {\'\i }ch\IeC {\'a}n\IeC {\'\i } textur}{15}{section.3.4}
+\contentsline {section}{\numberline {3.4}M\IeC {\'\i }ch\IeC {\'a}n\IeC {\'\i } textur}{16}{section.3.4}
 \contentsline {section}{\numberline {3.5}V\IeC {\'y}po\IeC {\v c}et st\IeC {\'\i }n\IeC {\r u}}{16}{section.3.5}
 \contentsline {section}{\numberline {3.6}Odlesky povrch\IeC {\r u}}{19}{section.3.6}
 \contentsline {chapter}{\numberline {4}P\IeC {\v r}edpo\IeC {\v c}ten\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i }}{21}{chapter.4}
 \contentsline {section}{\numberline {4.1}Vytvo\IeC {\v r}en\IeC {\'\i } texturovac\IeC {\'\i }ch sou\IeC {\v r}adnic}{21}{section.4.1}
 \contentsline {paragraph}{Oprava chyby soused\IeC {\'\i }c\IeC {\'\i }ch troj\IeC {\'u}heln\IeC {\'\i }k\IeC {\r u}}{23}{section*.13}
 \contentsline {section}{\numberline {4.2}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{24}{section.4.2}
-\contentsline {section}{\numberline {4.3}Spekul\IeC {\'a}rn\IeC {\'\i } slo\IeC {\v z}ka osv\IeC {\v e}tlovac\IeC {\'\i } modelu}{24}{section.4.3}
+\contentsline {section}{\numberline {4.3}Spekul\IeC {\'a}rn\IeC {\'\i } slo\IeC {\v z}ka osv\IeC {\v e}tlovac\IeC {\'\i }ho modelu}{24}{section.4.3}
 \contentsline {chapter}{\numberline {5}Implementace}{25}{chapter.5}
 \contentsline {section}{\numberline {5.1}Testovac\IeC {\'\i } aplikace - simul\IeC {\'a}tor}{25}{section.5.1}
 \contentsline {section}{\numberline {5.2}Realizace na platform\IeC {\v e} Android}{27}{section.5.2}

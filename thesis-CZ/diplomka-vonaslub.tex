@@ -484,19 +484,23 @@ U výše uvedených simulátorů vozidlo automaticky zrychluje a u některých i
 
 %*****************************************************************************
 \chapter{Teoretický úvod}
+V této kapitole se zabývám teoretickým základem pro výpočet osvětlení povrchu těles, jejich stínování, použití míchání stínů, výpočet stínů a odlesků povrchů. Teoretický základ je nezbytný pro pochopení řešení problematiky předpočteného osvětlení.
 
 \section{Osvětlovací model}
-Existuje několik osvětlovacích modelů, asi nejpoužívanější lokální osvětlovací model je Phongův. Phongův model se skládá ze tří typů osvětlení.
+Osvětlovací model je funkce, která definuje odraz světla a tím i vzhled povrchů těles.\linebreak V počítačové grafice se používají lokální osvětlovací modely, které se vyznačují tím, že vypočítávají vždy pouze jeden bod na povrchu tělesa. Asi nejpoužívanější lokální osvětlovací model je Phongův. Phongův model se skládá ze tří typů osvětlení.
+
+Výsledná intenzita osvětlení povrchu $I$ je součtem ambientní složky ($I_a$), difúzní složky ($I_d$) a spekulární složky ($I_s$).
+\begin{center}
+$I = I_a + I_d + I_s$\\
+(Znázorněno na obrázku 3.1)
+\end{center}
+
 \begin{itemize}
 \item ambientní osvětlení - nahrazuje nepřímé osvětlení konstantní hodnotou osvětlení
 \item difúzní osvětlení - osvětlení nezávislé na pohledu kamery, Odpovídá ideálně matnému povrchu
 \item spekulární osvětlení - osvětlení závislé na pohledu kamery, odpovídá ideálně odrazivému povrchu
 \end{itemize}
-
-Jak je patrné z obrázku 3.1, výsledná intenzita osvětlení povrchu $I$ je součtem ambientní složky ($I_a$), difúzní složky ($I_d$) a spekulární složky ($I_s$).
-\begin{center}
-$I = I_a + I_d + I_s$
-\end{center}
+\newpage
 
 \begin{center}
 \begin{figure}[h!]
@@ -505,7 +509,7 @@ $I = I_a + I_d + I_s$
 \end{figure}
 \end{center}
 
-Všesměrové osvětlení je ve Phongovo osvětlovacím modelu konstantní pro daný objekt\linebreak a říká se jí ambientní osvětlení $I_a$. Výsledná intenzita se spočte jako součin barvy ambientního světla $C_a$, koeficientem ambientního odrazu $k_a$ a barvou povrchu $C_d$, která je shodná i pro difúzní složku.
+Všesměrové osvětlení je ve Phongovo osvětlovacím modelu konstantní pro daný objekt\linebreak a říká se mu ambientní osvětlení $I_a$. Výsledná intenzita se spočte jako součin barvy ambientního světla $C_a$, koeficientem ambientního odrazu $k_a$ a barvou povrchu $C_d$, která je shodná\linebreak i pro difúzní složku.
 \begin{center}
 $I_a = C_a \cdot k_a \cdot C_d$
 \end{center}
@@ -513,7 +517,7 @@ $I_a = C_a \cdot k_a \cdot C_d$
 Difúzní složka odpovídá ideálně matnému (Lambertovskému) povrchu a závisí na úhlu $\alpha$ mezi vektory $\vec{L}$ a $\vec{N}$.
 \begin{center}
 \begin{figure}[h!]
-\includegraphics[width=60mm]{figures/phongD.png}
+\includegraphics[width=70mm]{figures/phongD.png}
 \caption{Vektory k výpočtu difúzního osvětlení, $\vec{L}$ je normalizovaný směr světla, $\vec{N}$ je normalizovaná normála povrchu, $\alpha$ je úhel, který tyto vektory svírají, $\vec{E}$ je normalizovaný směr pohledu kamery (eye vektor) a $\vec{P}$ je bod na povrchu tělesa}
 \end{figure}
 \end{center}
@@ -530,7 +534,7 @@ $I_d = C_l \cdot k_d \cdot C_d \cdot (\vec{L} \cdot \vec{N})$
 Spekulární (zrcadlová) složka odpovídá ideálně odrazivému tělesu a závisí na úhlu $\beta$ mezi vektory $\vec{E}$ a $\vec{R}$. 
 \begin{center}
 \begin{figure}[h!]
-\includegraphics[width=60mm]{figures/phongS.png}
+\includegraphics[width=70mm]{figures/phongS.png}
 \caption{Vektory k výpočtu spekulárního osvětlení, $\vec{E}$ je normalizovaný směr pohledu kamery (eye vektor), $\vec{R}$ je normalizovaný směr odrazu světla, $\beta$ je ůhel, který tyto vektory svírají a $\vec{P}$ je bod na povrchu tělesa}
 \end{figure}
 \end{center}
@@ -545,12 +549,14 @@ $I_s = C_l \cdot k_s \cdot C_s \cdot (\vec{E} \cdot \vec{R})^h$
 
 \section{Výpočet osvětlení}
 
-Pro výpočet osvětlení konkrétního bodu na obrazovce je potřeba nejdříve spočítat příspěvky jednotlivých světel pro tento bod. Příspěvky jednotlivých světel spočteme jako součin efektivity reflektoru pro daný vertex $E_r$, faktoru útlumu $F_a$ a součtu složek Phongova osvětlovacího modelu.
+Pro výpočet osvětlení konkrétního bodu na obrazovce je potřeba nejdříve spočítat příspěvky jednotlivých světel pro tento bod. Příspěvky jednotlivých světel $I_{Li}$ spočteme jako součin efektivity reflektoru pro daný vertex $E_r$, faktoru útlumu $F_a$ a součtu složek Phongova osvětlovacího modelu.
 \begin{center}
-$light_i = E_r \cdot F_a \cdot (I_a + I_d + I_s)$
+$I_{Li} = E_r \cdot F_a \cdot (I_a + I_d + I_s)$
 \end{center}
 
-Efektivita reflektoru $E_r$ je parametr určující intenzitu osvětlení zdroje světla typu reflektor. Příkladem takového zdroje světla je například baterka.
+Efektivita reflektoru $E_r$ je parametr určující intenzitu osvětlení zdroje světla typu reflektor (znázorněno na obrázku 3.4). Příkladem takového zdroje světla je například baterka.
+\newpage
+
 \begin{center}
 \begin{figure}[h!]
 \includegraphics[width=60mm]{figures/cutoff.png}
@@ -558,11 +564,13 @@ Efektivita reflektoru $E_r$ je parametr určující intenzitu osvětlení zdroje
 \end{figure}
 \end{center}
 
-Hodnota efektivity reflektoru se spočte podle následujících podmínek.\\
-Pokud světlo není reflektor, poté $E_r = 1$.\\
-Pokud bod leží mimo světelný kužel, tedy $(\vec{V} \cdot \vec{D}) < cos(\alpha)$, poté $E_r = 0$.\\
-Pro ostatní případy $E_r = max(0, cos(\vec{V} \cdot \vec{D}))^{k_{se}}$, kde $k_{se}$ je parametr spot efektu.
-\newpage
+\noindent Hodnota efektivity reflektoru se spočte podle následujících podmínek.
+\begin{itemize}
+\item Pokud světlo není reflektor, poté $E_r = 1$.
+\item Pokud bod leží mimo světelný kužel, tedy $(\vec{V} \cdot \vec{D}) < cos(\alpha)$, poté $E_r = 0$.
+\item Pro ostatní případy $E_r = max(0, cos(\vec{V} \cdot \vec{D}))^{k_{se}}$, kde $k_{se}$ je parametr spot efektu.
+\end{itemize}
+\bigskip
 
 Faktor útlumu $F_a$ řeší, jak moc má být intenzita světla utlumena s rostoucí vzdáleností $d$ od zdroje světla. Konstantní útlum určuje parametr $k_c$, lineární útlum parametr $k_l$\linebreak a kvadratický útlum parametr $k_q$.
 \begin{center}
@@ -570,16 +578,16 @@ $F_a = \frac{1}{k_c + k_l \cdot d + k_q \cdot d^2}$
 \end{center}
 \bigskip
 
-Výsledná barva bodu na obrazovce se spočítá jako součet barvy emisního světla $C_e$, barvy globálního ambientního světla $C_{ag}$ a sumy příspěvků jednotlivých světel.
+Výsledná barva bodu na obrazovce $I$ se spočítá jako součet barvy emisního světla $I_e$, barvy globálního ambientního světla $I_{ag}$ a sumy příspěvků jednotlivých světel $I_{Li}$.
 \begin{center}
-$color = C_e + C_{ag} + \sum_{}{} light_i$
+$I = I_e + I_{ag} + \sum_{}{} I_{Li}$
 \end{center}
 
 \section{Stínování}
-Pojem stínování v počítačové grafice znamená postup vybarvování trojúhelníků. Existují tři typy stínování.
+Pojem stínování v počítačové grafice znamená postup vybarvování trojúhelníků. Existují tři základní typy stínování.
 \begin{itemize}
 \item Konstantní stínování - celý polygon se vybarví jednou barvou dle normály povrchu. Používá se ve scénách, ve kterých se nacházejí pouze směrové zdroje světla.
-\item Gouraudovo stínování - spočítá se osvětlení ve vrcholech a následně se interpolují hodnoty mezi vrcholy. Toto stínování je velmi rychlé. Problém nastane, pokud světlo osvětluje střed polygonu a zároveň neosvětluje nebo jen částečně osvětluje vrchol. Osvětlení je po té ve vrcholech velmi nízké a nemůže tedy vzniknout korektně osvětlený obraz.
+\item Gouraudovo stínování - spočítá se osvětlení ve vrcholech a následně se interpolují hodnoty mezi vrcholy. Toto stínování je velmi rychlé. Problém nastane, pokud světlo osvětluje střed polygonu a zároveň neosvětluje nebo jen částečně osvětluje vrchol. Osvětlení je po té ve vrcholech minimální a nemůže tedy vzniknout korektně osvětlený obraz.
 \item Phongovo stínování - spočítá se osvětlení pro každý pixel polygonu na obrazovce. Dnes je to asi nejpoužívanější stínování. V OpenGL se toto stínování provádí pomocí shaderů. Vstupem do vertexového shaderu je pozice vrcholu a jeho normála. Ve vertex shaderu se provede transformace do pohledu kamery a určí se, že pozice vrcholu a normála se mají interpolovat. Po rasterizaci získáme interpolované hodnoty jako vstup ve fragment shaderu a zde provedeme výpočet podle výše uvedeného osvětlovacího modelu.
 \end{itemize}
 
@@ -589,7 +597,6 @@ Pojem stínování v počítačové grafice znamená postup vybarvování trojú
 \caption{Ukázka jednotlivých typů stínování}
 \end{figure}
 \end{center}
-\newpage
 
 Interpolaci provádí OpenGL automaticky. Jeden ze způsobů jak provést interpolaci ručně je provést rasterizaci(tím získat všechny body uvnitř trojúhelníka) a poté provést barycentrickou interpolaci.
 
@@ -671,7 +678,6 @@ Nakonec zjistíme, jak se tyto hodnoty liší pomocí podmínky $|\vec{p}_z - d|
 \bigskip
 
 Výše uvedeným postupem jsou řešeny ostré stíny pro bodové zdroje světla, případně světelné reflektory. Dále je potřeba řešit měkké stíny, které vznikají z plošných zdrojů světla. Rozdíl mezi ostrými a měkkými stíny je znázorněn na obrázku 3.10.
-\newpage
 
 \begin{center}
 \begin{figure}[h]
@@ -820,7 +826,7 @@ Pokud bychom chtěli použit i bodové zdroje světla, musíme mít stínovou ma
 \end{figure}
 \end{center}
 
-\section{Spekulární složka osvětlovací modelu}
+\section{Spekulární složka osvětlovacího modelu}
 Spekulární složka osvětlovacího modelu je závislá na pohledu kamery a nelze jí tedy předpočítat a také nelze počítat v reálném čase spekulární složky pro desítky světel. Tento problém se dá řešit vypnutím vzdálených světel. Světla se seřadí podle vzdálenosti\linebreak od kamery a provede se započítání $n$ nejbližších (konstantu $n$ je vhodné mít co nejnižší, protože spekulární složka je poměrně náročná na výpočet). 
 
 Nutno podotknout, že tento přístup neřeší viditelnost světla. Stejný přístup lze použít\linebreak i pro difúzní osvětlení, ale předpočtené osvětlení je efektivnější.

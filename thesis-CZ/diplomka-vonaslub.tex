@@ -1278,116 +1278,139 @@ U ostatních vozidel je třeba osvětlení zjednodušit, aby to mobilní hardwar
 
 %*****************************************************************************
 \chapter{Testování}
-Testování probíhalo na smartphonu, tabletu a laptopu, které jsou blíže popsány v tabulce 5.1. Zařízení byla během testování plně nabita, byla připojena ke zdroji napájení a byly vypnuty volby úspory energie. Veškeré testy byly prováděny v režimu \uv{free ride} a za stejných podmínek.
+Testování aplikace probíhalo na smartphonu, tabletu a laptopu, které jsou blíže popsány v tabulce 5.1. Zařízení byla během testování plně nabita, byla připojena ke zdroji napájení a byly vypnuty volby úspory energie. Veškeré testy byly prováděny v režimu \uv{free ride} a za stejných podmínek.
 
 \begin{table}[h!]
 \begin{center}
-\begin{tabular}{|p{35mm}|p{35mm}|p{35mm}|p{35mm}|}
+\begin{tabular}{|p{29mm}|p{38mm}|p{38mm}|p{38mm}|}
 \hline
 & \textbf{Samsung Galaxy S3 mini (mobil)} & \textbf{Google Nexus 7 2012 (tablet)} & \textbf{Acer TravelMate P253-e (laptop)} \\
 \hline
-Procesor & NovaThor U8500 & ARM Cortex-A9 & Intel 1005M \\ \hline
+Procesor & NovaThor U8500 & ARM Cortex-A9 & Intel Pentium 2020M \\ \hline
 Počet jader & 2 & 4+1* & 2 \\ \hline
 Frekvence CPU & 1.0GHz & 1.3GHz & 2.4GHz \\ \hline
-Operační paměť & 1GB & 1GB & 4GB \\ \hline
-Grafická karta & ARM Mali-400 MP & Nvidia Tegra 3 & Intel HD Graphics \\ \hline
+Operační paměť & 1GB & 1GB & 4GB DDR3 1066 MHz \\ \hline
+Grafická karta & ARM Mali-400 MP & Nvidia Tegra 3 & Intel HD 4000 \\ \hline
 Rozlišení displeje & 800x480 & 1280x800 & 1366x768 \\ \hline
 Operační systém & Android 4.1.2 & Android 4.4.2 & Kubuntu 14.04 32bit \\ \hline
 \end{tabular}
-\caption{Parametry zařízení, na kterých jsem projekt testoval}
+\caption{Parametry zařízení, na kterých jsem projekt testoval. U Android zařízení nebyly nalezeny bližší informace o typu operační paměti}
 *tablet má extra procesor pro nižší spotřebu během nečinnosti
 \end{center}
 \end{table}
 \newpage
 
 \section{Generování map osvětlení}
-TODO okomentovat výsledky
+Před testováním samotné aplikace jsem provedl testování generátoru map osvětlení. Testování bylo prováděno na laptopu Acer TravelMate P253-e jehož parametry jsou uvedeny na předchozí straně.
+
 \paragraph{Bodové zdroje světla}\ \ \\
+
+Při vykreslování bodových světel jsem testoval techniky generování map osvětlení. Techniky se nedají srovnat na nižší instanci, protože se principiálně odlišují. Provedl jsem tedy měření doby trvání celkového výpočtu pro malou instanci dat - scéna s 106ti bodovými světly.
 \begin{table}[h!]
 \begin{center}
 \begin{tabular}{|p{50mm}|c|}
 \hline
-\textbf{Nastavení} & \textbf{Čas vykreslování} \\
+\textbf{Generátor map osvětlení} & \textbf{Čas vykreslování} \\
 \hline
-OpenGL bez PCF & 2.25min\\ \hline
-OpenGL s PCF8x8 & 19.267min\\ \hline
-raycasting & 28.176min\\ \hline
+rasterizační bez PCF & 2.25min\\ \hline
+rasterizační s PCF8x8 & 19.267min\\ \hline
+vrhání paprsku & 28.176min\\ \hline
 \end{tabular}
 \caption{Vykreslování 106 bodových zdrojů světla pomocí OpenGL a pomocí raycastingu}
 \end{center}
 \end{table}
 
+Rasterizační technika (za využití OpenGL) dosahuje výsledku o poznání rychleji. Pravděpodobně by výsledek nebyl tak rychlý bez hardwarové akcelerace a paralizace výpočtu, která u techniky vrhání paprsku není.
+
 \paragraph{Plošné zdroje světla}\ \ \\
+
+V případě plošných zdrojů je vhodnější použití techniky map osvětlení. Paprsky bývají souběžné a lze tedy jedním testem detekovat průsečík více paprsků najednou. V níže uvedeném testu se ukázala efektivita filtrování paprsků, u kterých je jejich délka delší než vzdálenost, ve které je světlo zcela utlumeno.
 \begin{table}[h!]
 \begin{center}
 \begin{tabular}{|p{80mm}|c|c|}
 \hline
-\textbf{Nastavení} & \textbf{1 paprsek} & \textbf{všechny mapy osv.} \\
+\textbf{Nastavení} & \textbf{MegaRays/s} & \textbf{Všechny mapy osv.} \\
 \hline
-kvadratický útlum 0.2 & 1.52ns & 10.276s\\ \hline
-kvadratický útlum 0.1 & 2.87ns & 19.483s\\ \hline
-kvadratický útlum 0.05 & 5.44ns & 36.875s\\ \hline
-neseřazené trojúhelníky & 141.71ns & 960.546s\\ \hline
-neseřazené trojúhelníky, spot efekt 0.5 & 1899.48ns & 12874.661s\\ \hline
+kvadratický útlum 0.2 & 657.89 & 10.276s\\ \hline
+kvadratický útlum 0.1 & 348.43 & 19.483s\\ \hline
+kvadratický útlum 0.05 & 183.82 & 36.875s\\ \hline
+neseřazené trojúhelníky & 7.06 & 960.546s\\ \hline
+neseřazené trojúhelníky, spot efekt 0.5 & 0.53 & 12874.661s\\ \hline
 \end{tabular}
-\caption{Vykreslování několika plošných zdrojů světel navzorkovaných na 202 bodových světel, neseřazené trojúhelníky znamená, že paprsky byly testovány neoptimálním pořadí, v každém testu bylo testováno přibližně 6.5 miliard paprsků }
+\caption{Vykreslování několika plošných zdrojů světel navzorkovaných na 202 bodových světel, neseřazené trojúhelníky znamená, že paprsky byly testovány neoptimálním pořadí }
 \end{center}
 \end{table}
+\newpage
+
+V dalším testu jsem zvolil větší instanci dat - 150306 bodových světel. Hrubým odhadem by vypočtení této instance pomocí rasterizace trvalo cca 50 hodin (100 světel/2 minuty, což je přímou úměrou 150000 světel/3000 minut). Vrhání paprsků pro tuto instanci dopadlo mnohem lépe.
 
 \begin{table}[h!]
 \begin{center}
 \begin{tabular}{|p{80mm}|c|c|}
 \hline
-\textbf{Nastavení} & \textbf{1 paprsek} & \textbf{všechny mapy osv.} \\
+\textbf{Nastavení} & \textbf{MegaRays/s} & \textbf{Všechny mapy osv.} \\
 \hline
-kvadratický útlum 0.2 & 0.87ns & 1.219h\\ \hline
-kvadratický útlum 0.2 dupl.test & 0.94ns & 1.322h\\ \hline
-kvadratický útlum 0.1 & 1.71ns & 2.398h\\ \hline
-kvadratický útlum 0.1 dupl.test & 1.88ns & 2.635h\\ \hline
-kvadratický útlum 0.05 & 3.39ns & 4.746h\\ \hline
-kvadratický útlum 0.05 dupl.test & 3.73ns & 5.222h\\ \hline
-bez detekování dosahu & 14.68ns & 20.561h\\ \hline
+kvadratický útlum 0.2 & 1149.43 & 1.219h\\ \hline
+kvadratický útlum 0.2 dupl.test & 1063.83 & 1.322h\\ \hline
+kvadratický útlum 0.1 & 584.80 & 2.398h\\ \hline
+kvadratický útlum 0.1 dupl.test & 531.91 & 2.635h\\ \hline
+kvadratický útlum 0.05 & 294.99 & 4.746h\\ \hline
+kvadratický útlum 0.05 dupl.test & 268.09 & 5.222h\\ \hline
+bez detekování dosahu & 68.12 & 20.561h\\ \hline
 \end{tabular}
-\caption{Vykreslování všech plošných zdrojů světel navzorkovaných na 150306 bodových světel, duplicitní test znamená filtrování trojúhelníků, které byly pro daný paprsky již testovány, v každém testu bylo testováno přibližně 4.8 biliónu paprsků }
+\caption{Vykreslování všech plošných zdrojů světel navzorkovaných na 150306 bodových světel, duplicitní test znamená filtrování trojúhelníků, které byly pro daný paprsky již testovány }
 \end{center}
 \end{table}
-\newpage
 
 \begin{figure}[h!]
 \includegraphics[width=150mm]{figures/graf3.png}
 \caption{Závislost rychlosti vykreslování paprsku na dosahu zdrojů světel, testování různě osvětlených scén}
 \end{figure}
+\newpage
 
-\section{Simulátor}
-TODO provést nové měření, přepsat
+\paragraph{Paměťová náročnost generátoru map osvětlení}\ \ \\
 
-V prvním testu zjišťuji, jak je vykreslování rychlé při různém počtu vykreslovaných fragmentů. Jedná se v podstatě o snížení rozlišení displeje k zvýšení výkonu.
+Paměťová náročnost byla naměřena pomocí Linuxového měřiče paměti KSysGuard. Generátor map osvětlení byl za běhu několikrát pozastaven a bylo provedeno měření celkového využití paměti generátorem. Z naměřených informací poté byly vypočteny hodnoty pro jednotlivé data. K vykreslení 8 map osvětlení o rozlišení 2048x2048 bylo použito celkem 1.94GB operační paměti.
+\begin{figure}[h!]
+\includegraphics[width=150mm]{figures/lmgen-mem-usage.png}
+\caption{Paměťová náročnost generátoru map osvětlení využívající vrhání paprsků. Scénou byl 3D model nočního města složený z přibližně 40000 trojúhelníků, vykreslováno bylo 8 map osvětlení o rozlišení 2048x2048 }
+\end{figure}
+
+\section{Testovací aplikace - simulátor}
+
+U testovací aplikace jsem nejdříve testoval rychlost vykreslování stejné sekvence snímků na testovaných zařízeních bez aktualizování map osvětlení. Sekvence byla dlouhá 1 vteřinu a u každé konfigurace bylo provedeno cca 10 měření. V tabulce 6.5 je vždy uvedena nejlepší hodnota měření. Testovací aplikace disponuje omezovačem snímkovací frekvence, která je nastavena na 20FPS. U Android verze je oproti verzi pro Linux použita paralelizace výpočtů na CPU. Vlákna na CPU musí být synchronizována a proto Android zařízení nedosahují horního limitu snímkovací frekvence.
+\newpage
 
 \begin{table}[h!]
 \begin{center}
-\begin{tabular}{|p{35mm}|p{35mm}|p{35mm}|p{35mm}|}
+\begin{tabular}{||p{25mm}||c|c||c|c||c|c||}
 \hline
-& \textbf{Samsung Galaxy S3 mini (mobil)} & \textbf{Google Nexus 7 2012 (tablet)} & \textbf{Acer TravelMate P253-e (laptop)} \\
+& \multicolumn{2}{c||}{\textbf{Samsung Galaxy}}
+& \multicolumn{2}{c||}{\textbf{Google Nexus 7}}
+& \multicolumn{2}{c||}{\textbf{Acer TravelMate}} \\
+& \multicolumn{2}{c||}{\textbf{S3 mini (mobil)}}
+& \multicolumn{2}{c||}{\textbf{2012 (tablet)}}
+& \multicolumn{2}{c||}{\textbf{P253-e (laptop)}} \\
+& FPS & snímek[ms] & FPS & snímek [ms] & FPS & snímek [ms] \\
 \hline
-0.2x (poor) & 27.3ms - 29.9ms & 22.4ms - 28.4ms & 10.1ms - 10.6ms \\ \hline
-0.4x (low) & 39.7ms - 42.7ms & 24.3ms - 33.2ms & 12.5ms - 13.0ms \\ \hline
-0.6x (normal) & 47.6ms - 59.9ms & 42.1ms - 45.4ms & 15.5ms - 15.9ms \\ \hline
-0.8x (high) & 76.9ms - 85.1ms & 62.1ms - 64.4ms & 21.4ms - 21.7ms \\ \hline
-1.0x (ultra) & 91.3ms - 97.9ms & 80.7ms - 81.8ms & 26.7ms - 27.0ms \\ \hline
+0.4x (poor)   & 18 & 53.661 & \textbf{18} & \textbf{28.970} & \textbf{20} & \textbf{3.965} \\ \hline
+0.5x (low)    & 17 & 50.898 & 18 & 37.547 & 20 & 4.010 \\ \hline
+0.6x (normal) & 14 & 67.660 & 18 & 42.598 & 20 & 3.957 \\ \hline
+0.8x (high)   & 11 & 90.710 & 17 & 60.187 & 20 & 4.432 \\ \hline
+1.0x (ultra)  & \textbf{10} & \textbf{99.546} & 13 & 80.480 & 20 & 4.422 \\ \hline
 \end{tabular}
-\caption{Závislost rychlosti vykreslování scény na zařízení a poměru rozlišení oproti nativnímu(v závorce je uvedena konfigurace v nastavení simulátoru). Z každého měření je uvedená minimální a maximální hodnota}
+\caption{Závislost rychlosti vykreslování scény na zařízení a úrovni rozlišení oproti nativnímu(v závorce je uvedena konfigurace v nastavení simulátoru). Tučně jsou zvýrazněny konfigurace, u kterých je přibližně stejný počet vykreslovaných pixelů}
 \end{center}
 \end{table}
+
+Z výsledku je patrně vidět výkonový rozdíl mezi laptopem proti tabletu a mobilu. Laptop je přibližně 10x rychlejší než tablet při použití srovnatelného rozlišení.
 
 \begin{figure}[h!]
 \includegraphics[width=150mm]{figures/graf2.png}
 \caption{Závislost rychlosti vykreslování scény na zařízení a poměru rozlišení oproti nativnímu}
 \end{figure}
 
-Z výsledku je patrně vidět výkonový rozdíl mezi laptopem proti tabletu a mobilu. Laptop je přibližně 3x až 4x rychlejší při použití srovnatelného rozlišení, což je menší rozdíl než jsem očekával.
-\\
-
-Dále jsem testoval závislost rozlišení textury mapy osvětlení a rychlosti vykreslování. Naměřené údaje jsou v tabulce 5.3.
+Dále jsem měřil rychlost aktualizace 13ti dynamických světel najednou. Měření bylo provedeno na všech testovacích zařízeních pro dvě různé rozlišení map osvětlení. Ve všech případech se světla rozkládala na osmi mapách osvětlení.
 
 \begin{table}[h!]
 \begin{center}
@@ -1395,40 +1418,25 @@ Dále jsem testoval závislost rozlišení textury mapy osvětlení a rychlosti 
 \hline
 & \textbf{Samsung Galaxy S3 mini (mobil)} & \textbf{Google Nexus 7 2012 (tablet)} & \textbf{Acer TravelMate P253-e (laptop)} \\
 \hline
-512x512 & 45.9ms - 49.7ms & 42.5ms- 44.4ms & 13.1ms - 15.6ms \\ \hline
-1024x1024 & 46.9ms - 48.6ms & 41.5ms - 45.4ms & 13.1ms - 13.3ms \\ \hline
-2048x2048 & 47.6ms - 59.9ms & 42.1ms - 45.4ms & 15.5ms - 15.9ms \\ \hline
+1024x1024 & 41.712 & 9.776 & 1.797 \\ \hline
+2048x2048 & 132.411 & 10.836 & 1.790 \\ \hline
 \end{tabular}
-\caption{Závislost rychlosti vykreslování scény na platformě a rozlišení textur map osvětlení při vizuálních detailech normal(poměr 0.6x ku nativnímu rozlišení). Z každého měření je uvedená minimální a maximální hodnota}
+\caption{Závislost rychlosti aktualizace map osvětlení na platformě a rozlišení textur map osvětlení při vizuálních detailech normal(poměr 0.6x oproti nativnímu rozlišení)}
 \end{center}
 \end{table}
+
+Výrazná závislost rychlosti aktualizace map se projevila pouze na mobilním telefonu,\linebreak u kterého je aktualizace celkově nejpomalejší. 
+
+\paragraph{Paměťová náročnost testovací aplikace}\ \ \\
+
+Paměťová náročnost byla opět naměřena pomocí Linuxového měřiče paměti KSysGuard. Testovací aplikace byla přerušována během načítání dat a z naměřených hodnot byla vypočtená paměť pro jednotlivé komponenty. Scéna využívající 8 map osvětlení o rozlišení 1024x1024 využívá 80.64MB operační paměti.
 
 \begin{figure}[h!]
-\includegraphics[width=150mm]{figures/graf1.png}
-\caption{Závislost rychlosti vykreslování scény na platformě a rozlišení textur map osvětlení při vizuálních detailech normal}
+\includegraphics[width=150mm]{figures/sim-mem-usage.png}
+\caption{Paměťová náročnost generátoru map osvětlení využívající vrhání paprsků. Scénou byl 3D model nočního města složený z přibližně 40000 trojúhelníků, vykreslováno bylo 8 map osvětlení o rozlišení 2048x2048 }
 \end{figure}
 
-Z měření vyplývá relativně malá závislost na rozlišení textury. Pokud pominu nepřesnost v měření, jedná se o rozdíl přibližně 2ms u všech zařízení.
-\\
-
-V dalším testu jsem se zaměřil na paměťovou náročnost. Tento test bohužel nebylo možné provést na platformě Android, ale zřejmě bych došel ke stejnému výsledku pro obě platformy.
-
-\begin{table}[h!]
-\begin{center}
-\begin{tabular}{|p{35mm}|p{35mm}|p{35mm}|}
-\hline
-& \textbf{Paměť} & \textbf{Sdílená paměť} \\
-\hline
-512x512 & 29780kB & 35424kB \\ \hline
-1024x1024 & 29776kB & 56928kB \\ \hline
-2048x2048 & 29776kB & 159328kB \\ \hline
-\end{tabular}
-\caption{Závislost využití paměti na rozlišení textur map osvětlení. Testováno na Acer TravelMate P253-e (laptop)}
-\end{center}
-\end{table}
-\pagebreak
-
-Nakonec jsem otestoval kompatibilitu s dalšími zařízeními, v testu uspěl tablet Google\linebreak Nexus 7 2013, Samsung Galaxy S4 a smartTV set-top-boxu eGreat U8. V případě\linebreak set-top-boxu bylo nutné ještě implementovat ovládání hardwarovými tlačítky. Další zařízení nebyla testována. Uvedená zařízení byla testována pouze na kompatibilitu, měl jsem je zapůjčená pouze na několik desítek minut.
+V posledním testu jsem testoval kompatibilitu s dalšími zařízeními, v testu uspěl tablet Google Nexus 7 2013, Samsung Galaxy S4 a smartTV za použití Android set-top-boxu eGreat U8. V případě set-top-boxu bylo nutné ještě implementovat ovládání hardwarovými tlačítky. Další zařízení nebyla testována. Uvedená zařízení byla testována pouze na kompatibilitu, byla zapůjčena pouze na několik desítek minut.
 
 %*****************************************************************************
 \chapter{Závěr}

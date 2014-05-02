@@ -49,16 +49,18 @@
 \contentsline {section}{\numberline {6.1}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{44}{section.6.1}
 \contentsline {paragraph}{Bodov\IeC {\'e} zdroje sv\IeC {\v e}tla}{44}{section*.14}
 \contentsline {paragraph}{Plo\IeC {\v s}n\IeC {\'e} zdroje sv\IeC {\v e}tla}{44}{section*.15}
-\contentsline {section}{\numberline {6.2}Simul\IeC {\'a}tor}{45}{section.6.2}
+\contentsline {paragraph}{Pam\IeC {\v e}\IeC {\v t}ov\IeC {\'a} n\IeC {\'a}ro\IeC {\v c}nost gener\IeC {\'a}toru map osv\IeC {\v e}tlen\IeC {\'\i }}{46}{section*.16}
+\contentsline {section}{\numberline {6.2}Testovac\IeC {\'\i } aplikace - simul\IeC {\'a}tor}{46}{section.6.2}
+\contentsline {paragraph}{Pam\IeC {\v e}\IeC {\v t}ov\IeC {\'a} n\IeC {\'a}ro\IeC {\v c}nost testovac\IeC {\'\i } aplikace}{48}{section*.17}
 \contentsline {chapter}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{49}{chapter.7}
-\contentsline {chapter}{Literatura}{51}{chapter*.16}
+\contentsline {chapter}{Literatura}{51}{chapter*.18}
 \contentsline {chapter}{\numberline {A}Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{53}{appendix.A}
 \contentsline {chapter}{\numberline {B}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{55}{appendix.B}
 \contentsline {chapter}{\numberline {C}U\IeC {\v z}ivatelsk\IeC {\'a} p\IeC {\v r}\IeC {\'\i }ru\IeC {\v c}ka}{57}{appendix.C}
 \contentsline {section}{\numberline {C.1}Instalace simul\IeC {\'a}toru}{57}{section.C.1}
-\contentsline {paragraph}{Linux}{57}{section*.17}
-\contentsline {paragraph}{Android}{57}{section*.18}
+\contentsline {paragraph}{Linux}{57}{section*.19}
+\contentsline {paragraph}{Android}{57}{section*.20}
 \contentsline {section}{\numberline {C.2}Pou\IeC {\v z}\IeC {\'\i }v\IeC {\'a}n\IeC {\'\i } simul\IeC {\'a}toru}{58}{section.C.2}
-\contentsline {paragraph}{Menu}{58}{section*.19}
-\contentsline {paragraph}{Ovl\IeC {\'a}d\IeC {\'a}n\IeC {\'\i } simul\IeC {\'a}toru}{58}{section*.20}
+\contentsline {paragraph}{Menu}{58}{section*.21}
+\contentsline {paragraph}{Ovl\IeC {\'a}d\IeC {\'a}n\IeC {\'\i } simul\IeC {\'a}toru}{58}{section*.22}
 \contentsline {section}{\numberline {C.3}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{58}{section.C.3}

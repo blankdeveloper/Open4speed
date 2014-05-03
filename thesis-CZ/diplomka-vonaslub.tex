@@ -335,15 +335,13 @@ Cílem této diplomové práce je zobrazování rozsáhlých scén s předpočte
 
 %*****************************************************************************
 \chapter{Úvod}
-V minulosti se výrobci počítačového hardwaru primárně soustředili na dosažení nejvyššího výpočetního výkonu na trhu. Během posledních let v tomto konkurenčním boji nastala změna. Už tolik nedochází ke zvyšování výkonu hardwaru, výrobci se soustředí spíše\linebreak na miniaturizaci hardwaru a paralelizaci výpočtů. S miniaturizaci hardwaru souvisí stoupající výpočetní výkon mobilních zařízení. 
+V minulosti se výrobci počítačového hardwaru primárně soustředili na dosažení nejvyššího výpočetního výkonu na trhu. Během posledních let v tomto konkurenčním boji nastala změna. Už tolik nedochází ke zvyšování výkonu hardwaru, výrobci se soustředí spíše\linebreak na miniaturizaci hardwaru a paralelizaci výpočtů.
 
-Mobilní telefony a tablety jsou zatím v porovnání s výkonem osobních počítačů slabší, ale to za několik let nemusí platit. Chytré mobilní telefony postupně přebírají funkce jiných zařízení. Některé mobilní telefony lze použít jako dálkový ovladač k televizi, platební kartu, autonavigaci a další.
+Kromě vylepšování hardwaru se vylepšují také metody pro optimalizaci výpočtu, jedna z těchto metod je předpočtení dat. Tato práce se zabývá předpočtením dat pro vykreslování scény nočního města. Scéna obsahuje jak bodové, tak plošné zdroje světla, pro které by výpočet v reálném čase byl příliš náročný. 
 
-Trend udělat z mobilního telefonu univerzální zařízení zasahuje i do oblasti počítačových her. To souvisí s odvětvím počítačové grafiky. Výrobci her konkurují v tom, kdo vytvoří nejrealističtější grafiku ve svých hrách. Tím nepřímo přispívají k rozvoji počítačové grafiky.
+Práce obsahuje přehled souvisejících metod zabývajících se vykreslováním noční scény, utváří přehled teorie výpočtu osvětlení a doplňujících grafických efektů. Rozebírá tématiku předpočteného osvětlení, zaměřuje se na řešení dílčích problémů předpočteného osvětlení. Následuje popis implementace použité metody, která řeší také dynamické aktualizování osvětlení.
 
-Vývoj her pro mobilní zařízení je v porovnání s vývojem her pro osobní počítače rozdílný z několika hledisek. Používá se rozdílné ovládání, mobilní zařízení je menší a je zde různý výpočetní výkon. V mé práci se zabývám problematikou výpočetního výkonu z hlediska grafického výpočtu.
-
-Obecně platí, že během vykreslování 3D scény se některé výpočty cyklicky opakují.\linebreak V práci většinu těchto výpočtů předpočítávám a tím získám ve výsledné implementaci daleko lepší výsledky, než kdybych předpočítání nepoužil.
+Na závěr práce je provedeno testování aplikace pro předpočtení osvětlení a testovací aplikace, která zobrazuje výsledky práce. Je zde provedena stručná diskuze nad výsledky testování a shrnutí celkových výsledků. 
 
 %*****************************************************************************
 \chapter{Specifikace práce}

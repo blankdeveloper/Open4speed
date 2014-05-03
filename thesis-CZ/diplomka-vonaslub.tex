@@ -1440,9 +1440,12 @@ V posledním testu jsem testoval kompatibilitu s dalšími zařízeními, v test
 
 %*****************************************************************************
 \chapter{Závěr}
-Vzniklý simulátor sice není po grafické stránce schopen konkurovat komerčním simulátorům na platformě Android. Nicméně disponuje několika grafickými technikami, které mnoho komerčních simulátorů postrádá. Předzpracované osvětlení dodává scéně lepší vzhled a povedlo se dokonce částečně aplikovat předzpracované osvětlení i na dynamické objekty.
 
-Zadání bylo splněno, úspěšně jsem realizoval generování map osvětlení pomocí vrhání paprsku. Realizoval jsem závodní simulátor, který mapy osvětlení využívá a nad rámec zadání jsem aplikoval statické osvětlení na dynamické objekty. Vylepšil jsem výsledek aplikováním odlesků a motion-blur. Výsledek jsem úspěšně otestoval na několika zařízeních. Podle měření je simulátor poměrně náročný na výkon, nicméně mobilní zařízení střední a vyšší třídy\linebreak s tímto nemají problém.
+Úspěšně jsem realizoval generování map osvětlení pomocí vrhání paprsku a rasterizace. Generování map osvětlení pomocí vrhání paprsků umožňuje vykreslování plošných zdrojů světel definovaných pomocí osvětlovacích textur. Je podporováno dynamické aktualizování map osvětlení pomocí záplat, které jsou komprimovány ve vektorové podobě v paměti grafické karty.
+
+Realizoval jsem testovací aplikaci, která mapy osvětlení využívá a nad rámec zadání jsem aplikoval statické osvětlení na dynamické objekty. Vylepšil jsem výsledek aplikováním odlesků a motion-blur. Výsledek jsem úspěšně otestoval na několika zařízeních. Podle měření je testovací aplikace poměrně náročná na výkon, nicméně mobilní zařízení střední a vyšší třídy s aplikací nemají problém.
+
+Vzniklá aplikace sice není po grafické stránce schopna konkurovat komerčním simulátorům na platformě Android. Nicméně disponuje několika grafickými technikami, které mnoho komerčních simulátorů postrádá. Předzpracované osvětlení dodává scéně lepší vzhled a povedlo se dokonce aplikovat předzpracované osvětlení i na dynamické objekty.
 
 Práci do budoucna hodlám dále vyvíjet. Chci se soustředit hlavně na další možnosti optimalizace jako je například ořez scény pohledovým jehlanem, použití techniky Level-of-detail a dynamické načítání scény.
 

@@ -1476,12 +1476,14 @@ Práci do budoucna hodlám dále vyvíjet. Chci se soustředit hlavně na dalš�
 \chapter{Seznam použitých zkratek}
 \begin{itemize}
 \item 3D (Three-dimensional) - trojrozměrné
-\item API (Application Interface) - rozhraní aplikace neboli šablona, která říká, jaké má mít aplikace metody
-\item GLSL (openGL Shading Language) - jazyk pracující s grafickou kartou k výpočtu stínování
-\item GPS (Global Positioning System) - systém pro určení polohy kdekoliv na světě
+\item API (Application Interface) - aplikační rozhraní
+\item CPU (Central Processing Unit) - centrální výpočetní jednotka - procesor
+\item FBO (Fragment Buffer Object) - buffer určený pro vykreslování scény
+\item GLSL (OpenGL Shading Language) - jazyk pracující s grafickou kartou k výpočtu stínování
+\item GPU (Graphics processing unit) - grafická výpočetní jednotka - grafická karta
 \item UML (Unified Modeling Language) - vizuální jazyk pro modelování softwaru
+\item VBO (Vertex Buffer Object) - geometrie uložená na GPU
 \end{itemize}
-TODO
 
 \chapter{Obsah přiloženého CD}
 
@@ -1515,9 +1517,78 @@ readme.txt & informace potřebné k používání simulátoru\\
 TODO
 
 \chapter{Uživatelská příručka}
-Simulátor vyžaduje minimálně jednojádrový procesor o taktu 1GHz, 1GB RAM paměti, grafickou kartu s pamětí 64MB. Dále vyžaduje OpenGL ES 2.0 (nebo OpenGL 3.0) a GLSL 1.0. Binární soubor pro Android je kompatibilní s Android 4.0+. Projekt lze zkompilovat\linebreak i na Android 2.3 (zařízení s touto verzí systému obvykle nedosahují potřebného výkonu).
 
-\section{Instalace simulátoru}
+\section{Generování map osvětlení}
+Nejdříve třeba nadefinovat světelné zdroje 3D modelu. Bodové zdroje světla se definují pomocí 3D hran. Každé světlo se skládá z jedné hrany (zdroje světla a směru). Každá skupina světel musí být samostatný objekt. Plošné zdroje světla se definují pomocí osvětlovacích textur (viz kapitola 5.1.1). Osvětlovací textury musí být vytvořeny pro každou texturu 3D scény, musí být uloženy ve stejné cestě a mít místo přípony \textbf{png}, příponu \textbf{png-map}.
+
+Aby bylo možné generovat mapy osvětlení je nutné mít 3D scénu ve formátu O4S. O4S formát modely se vytvoří konvertováním scény z formátu OBJ pomocí příkazu
+\begin{center}
+java -jar objConverter $<model>$.obj $<cesta$ $exportu>$/scene.o4s
+\end{center}
+
+Dále je třeba definovat konfiguraci generátoru map osvětlení pomocí souboru \textbf{lights.ini}.
+
+\begin{lstlisting}[caption=Konfigurace generátoru map osvětlení]
+CONFIG
+//uhel orezu plosneho zdroje svetla
+area_light_cutoff 90
+//kvadraticky utlum plosneho zdroje svetla
+area_light_att 0.2
+//intenzita plosneho zdroje svetla
+area_light_intensity 10
+//rozliseni mapy osvetleni
+lightmap_size 2048
+//vykreslovani plosnych zdroju svetla(1=zapnuto, 0=vypnuto)
+render_area_lights 1
+//vykreslovani zaplat map osvetleni(1=zapnuto, 0=vypnuto)
+render_dynamic_lights 1
+//vykreslovani mapt osvetleni(1=zapnuto, 0=vypnuto)
+render_lightmap 1
+//scena pro generovani map - cesta k 3D modelu je v config/resources.txt
+render_scene RACE2
+END
+\end{lstlisting}
+
+Nakonec je potřeba definovat parametry jednotlivých skupin světel a po té již lze spustit generátor map osvětlení.
+\begin{lstlisting}[caption=Konfigurace světla pro generátor map osvětlení]
+LIGHT0
+//shader pro vykresleni mapy osvetleni - pouze rasterizacni generator map
+shader lightmap_spot
+//informace, ze svetlo ma byt dynamicke(1=zapnuto, 0=vypnuto)
+blink 1
+//barva svetla, cervena slozka
+R 4.0
+//barva svetla, zelena slozka
+G 4.0
+//barva svetla, modra slozka
+B 2.0
+//orez reflektoru ve stupnich - zaporne cislo vykresli bodove svetlo
+cut 60
+//ignorovani blizkych objektu - pouze rasterizacni generator map
+near 3
+//spot efekt svetla
+spot 0.5
+//konstantni utlum svetla
+att0 0.01
+//linearni utlum svetla
+att1 0.02
+//kvadraticky utlum svetla
+att2 0.05
+END
+\end{lstlisting}
+
+Světla jsou indexována podle pozice objektu v modelu (indexováno od nuly, objekty neobsahující hrany jsou ignorovány).
+
+Doporučuji použít generátor map osvětlení využívající vrhání paprsků (LMGenerator), rasterizační generátor (GLLMGenerator) nepodporuje plošné zdroje světel a dynamická světla.
+
+\section{Testovací aplikace}
+Testovací aplikace vyžaduje minimálně jednojádrový procesor o taktu 1GHz, 1GB RAM paměti, grafickou kartu s pamětí 64MB. Dále vyžaduje OpenGL ES 2.0 (nebo OpenGL 3.0) a GLSL 1.0. Binární soubor pro Android je kompatibilní s Android 4.0+.
+
+\noindent Aplikace je ke stažení na adrese:\ \ \\
+\textbf{http://play.google.com/store/apps/details?id=com.lvonasek.o4s}
+\newpage
+
+\subsection{Kompilování}
 
 \paragraph{Linux}\ \ \\
 Před kompilováním je potřeba mít nainstalované následující balíčky:\ \ \\
@@ -1534,7 +1605,7 @@ qmake open4speed.pro\ \ \\
 make
 
 \paragraph{Android}\ \ \\
-Pro Android je k dispozici spustitelný binární soubor Open4speed.apk.\ \ \\
+Součástí CD je několik verzí pro Android s různými konfiguracemi.\ \ \\
 Pro kompilování je potřeba mít nainstalované následující software:\ \ \\
 Android Studio, Android NDK(v případě potřeby kompilovat C++ kód)\ \ \\
 \ \ \\
@@ -1544,7 +1615,7 @@ cd jni\ \ \\
 \ \ \\
 Pro zbytek stačí otevřít projekt v Android Studiu a klepnout na Run
 
-\section{Používání simulátoru}
+\subsection{Používání}
 \paragraph{Menu}\ \ \\
 \begin{itemize}
 \item Start race - herní mód, je zde vytyčen okruh, závodí se s vozidly ovládané umělou inteligencí
@@ -1553,14 +1624,11 @@ Pro zbytek stačí otevřít projekt v Android Studiu a klepnout na Run
 \item Quit game - ukončí simulátor
 \end{itemize}
 
-\paragraph{Ovládání simulátoru}\ \ \\
+\paragraph{Ovládání}\ \ \\
 \begin{itemize}
 \item šipky nahoru/dolu - plyn/brzda
 \item šipky vlevo/vpravo - zatáčení
 \item klávesa esc/zpět - pauza, menu pro restart závodu, ukončení závodu
 \end{itemize}
-
-\section{Generování map osvětlení}
-TODO
 
 \end{document}

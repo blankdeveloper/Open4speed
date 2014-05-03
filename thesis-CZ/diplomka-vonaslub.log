@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.2.17)  3 MAY 2014 09:03
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.2.17)  3 MAY 2014 10:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1094,94 +1094,87 @@ Package pdftex.def Info: figures/jni.png used on input line 1060.
 Underfull \vbox (badness 1237) has occurred while \output is active []
 
  [36]
-<figures/render-schema.png, id=831, 752.8125pt x 451.6875pt>
-File: figures/render-schema.png Graphic file (type png)
+<figures/screenspace.png, id=831, 1304.875pt x 662.475pt>
+File: figures/screenspace.png Graphic file (type png)
 
-<use figures/render-schema.png>
-Package pdftex.def Info: figures/render-schema.png used on input line 1153.
-(pdftex.def)             Requested size: 241.84842pt x 145.10811pt.
- [37 <./figures/render-schema.png>] [38]
+<use figures/screenspace.png>
+Package pdftex.def Info: figures/screenspace.png used on input line 1153.
+(pdftex.def)             Requested size: 398.33858pt x 202.23148pt.
+ [37 <./figures/screenspace.png>] [38]
 <figures/reflect-horizont.png, id=855, 963.6pt x 481.8pt>
 File: figures/reflect-horizont.png Graphic file (type png)
 
 <use figures/reflect-horizont.png>
 Package pdftex.def Info: figures/reflect-horizont.png used on input line 1210.
-(pdftex.def)             Requested size: 369.88582pt x 184.9385pt.
-
-<figures/reflect-car.png, id=856, 564.60938pt x 225.84375pt>
+(pdftex.def)             Requested size: 398.33858pt x 199.16399pt.
+ [39 <./figures/reflect-horizont.png>]
+<figures/reflect-car.png, id=862, 564.60938pt x 225.84375pt>
 File: figures/reflect-car.png Graphic file (type png)
 
 <use figures/reflect-car.png>
 Package pdftex.def Info: figures/reflect-car.png used on input line 1227.
-(pdftex.def)             Requested size: 369.88582pt x 147.95802pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[39 <./figures/reflect-horizont.png>] [40 <./figures/reflect-car.png>]
+(pdftex.def)             Requested size: 426.79134pt x 170.71947pt.
+ [40 <./figures/reflect-car.png>]
 <figures/nearshadow.png, id=868, 481.8pt x 301.125pt>
 File: figures/nearshadow.png Graphic file (type png)
 
 <use figures/nearshadow.png>
-Package pdftex.def Info: figures/nearshadow.png used on input line 1261.
-(pdftex.def)             Requested size: 341.43306pt x 213.40048pt.
-
-<figures/carlight.png, id=869, 361.35pt x 240.9pt>
+Package pdftex.def Info: figures/nearshadow.png used on input line 1260.
+(pdftex.def)             Requested size: 398.33858pt x 248.96877pt.
+ [41 <./figures/nearshadow.png>]
+<figures/carlight.png, id=874, 361.35pt x 240.9pt>
 File: figures/carlight.png Graphic file (type png)
  <use figures/carlight.png>
-Package pdftex.def Info: figures/carlight.png used on input line 1274.
+Package pdftex.def Info: figures/carlight.png used on input line 1273.
 (pdftex.def)             Requested size: 170.71652pt x 113.81114pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[41 <./figures/nearshadow.png>] [42 <./figures/carlight.png>]
+[42 <./figures/carlight.png>]
 Kapitola 6.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1287--1287
+Underfull \hbox (badness 10000) in paragraph at lines 1286--1286
 []|\T1/cmr/bx/n/10.95 Google Ne-xus 7
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1287--1288
+Underfull \hbox (badness 10000) in paragraph at lines 1286--1287
 []|\T1/cmr/bx/n/10.95 Acer Tra-vel-Mate
  []
 
 
-Overfull \hbox (21.35922pt too wide) in paragraph at lines 1285--1297
+Overfull \hbox (21.35922pt too wide) in paragraph at lines 1284--1296
  [] 
  []
 
 [43
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1306--1307
+Underfull \hbox (badness 10000) in paragraph at lines 1305--1306
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1325--1326
+Underfull \hbox (badness 10000) in paragraph at lines 1324--1325
 
  []
 
 
-Overfull \hbox (2.20663pt too wide) in paragraph at lines 1330--1340
+Overfull \hbox (2.20663pt too wide) in paragraph at lines 1329--1339
  [] 
  []
 
 [44]
-Overfull \hbox (2.20663pt too wide) in paragraph at lines 1349--1361
+Overfull \hbox (2.20663pt too wide) in paragraph at lines 1348--1360
  [] 
  []
 
 <figures/graf3.png, id=890, 462.528pt x 260.172pt>
 File: figures/graf3.png Graphic file (type png)
  <use figures/graf3.png>
-Package pdftex.def Info: figures/graf3.png used on input line 1366.
+Package pdftex.def Info: figures/graf3.png used on input line 1365.
 (pdftex.def)             Requested size: 426.79134pt x 240.08365pt.
 
 [45 <./figures/graf3.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1371--1372
+Underfull \hbox (badness 10000) in paragraph at lines 1370--1371
 
  []
 
@@ -1189,36 +1182,36 @@ Underfull \hbox (badness 10000) in paragraph at lines 1371--1372
 File: figures/lmgen-mem-usage.png Graphic file (type png)
 
 <use figures/lmgen-mem-usage.png>
-Package pdftex.def Info: figures/lmgen-mem-usage.png used on input line 1375.
+Package pdftex.def Info: figures/lmgen-mem-usage.png used on input line 1374.
 (pdftex.def)             Requested size: 426.79134pt x 167.16745pt.
  [46 <./figures/lmgen-mem-usage.png>]
 <figures/graf2.png, id=904, 722.7pt x 231.264pt>
 File: figures/graf2.png Graphic file (type png)
  <use figures/graf2.png>
-Package pdftex.def Info: figures/graf2.png used on input line 1409.
+Package pdftex.def Info: figures/graf2.png used on input line 1408.
 (pdftex.def)             Requested size: 426.79134pt x 136.57513pt.
 
-Underfull \hbox (badness 6063) in paragraph at lines 1419--1419
+Underfull \hbox (badness 6063) in paragraph at lines 1418--1418
 []|\T1/cmr/bx/n/10.95 Samsung Ga-laxy
  []
 
 
-Underfull \hbox (badness 2932) in paragraph at lines 1419--1419
+Underfull \hbox (badness 2932) in paragraph at lines 1418--1418
 []|\T1/cmr/bx/n/10.95 Google Ne-xus 7
  []
 
 
-Underfull \hbox (badness 4518) in paragraph at lines 1419--1420
+Underfull \hbox (badness 4518) in paragraph at lines 1418--1419
 []|\T1/cmr/bx/n/10.95 Acer Tra-vel-Mate
  []
 
 
-Overfull \hbox (12.8234pt too wide) in paragraph at lines 1417--1424
+Overfull \hbox (12.8234pt too wide) in paragraph at lines 1416--1423
  [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1430--1431
+Underfull \hbox (badness 10000) in paragraph at lines 1429--1430
 
  []
 
@@ -1230,7 +1223,7 @@ Underfull \vbox (badness 2521) has occurred while \output is active []
 File: figures/sim-mem-usage.png Graphic file (type png)
 
 <use figures/sim-mem-usage.png>
-Package pdftex.def Info: figures/sim-mem-usage.png used on input line 1435.
+Package pdftex.def Info: figures/sim-mem-usage.png used on input line 1434.
 (pdftex.def)             Requested size: 426.79134pt x 170.72421pt.
  [48 <./figures/sim-mem-usage.png>]
 Kapitola 7.
@@ -1252,7 +1245,7 @@ P\v {r}\'{\i }loha A.
 ]
 P\v {r}\'{\i }loha B.
 
-Overfull \hbox (16.47618pt too wide) in paragraph at lines 1490--1515
+Overfull \hbox (16.47618pt too wide) in paragraph at lines 1489--1514
  [] 
  []
 
@@ -1261,49 +1254,49 @@ Overfull \hbox (16.47618pt too wide) in paragraph at lines 1490--1515
 ]
 P\v {r}\'{\i }loha C.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1523--1536
+Underfull \hbox (badness 10000) in paragraph at lines 1522--1535
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1523--1536
+Underfull \hbox (badness 10000) in paragraph at lines 1522--1535
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1537--1547
+Underfull \hbox (badness 10000) in paragraph at lines 1536--1546
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1537--1547
+Underfull \hbox (badness 10000) in paragraph at lines 1536--1546
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1549--1550
+Underfull \hbox (badness 10000) in paragraph at lines 1548--1549
 
  []
 
 [57]
-Underfull \hbox (badness 10000) in paragraph at lines 1557--1558
+Underfull \hbox (badness 10000) in paragraph at lines 1556--1557
 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1567.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1566.
 [58]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1567.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1566.
  (./diplomka-vonaslub.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1567.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1567.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1566.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1566.
 
 Package rerunfilecheck Info: File `diplomka-vonaslub.out' has not changed.
 (rerunfilecheck)             Checksum: 81217FB64B7F992120AA39F3306CE4A8;8784.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1567.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1566.
  ) 
 Here is how much of TeX's memory you used:
  14320 strings out of 494953
- 200134 string characters out of 6179185
+ 200124 string characters out of 6179185
  495595 words of memory out of 5000000
  16991 multiletter control sequences out of 15000+600000
  20508 words of font info for 48 fonts, out of 8000000 for 9000
@@ -1329,7 +1322,7 @@ e/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/
 public/cm-super/sfsl1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti
 1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1440.pfb></usr/share
 /texmf/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on diplomka-vonaslub.pdf (74 pages, 14648740 bytes).
+Output written on diplomka-vonaslub.pdf (74 pages, 14704343 bytes).
 PDF statistics:
  1115 PDF objects out of 1200 (max. 8388607)
  925 compressed objects within 10 object streams

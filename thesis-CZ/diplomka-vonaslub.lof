@@ -35,7 +35,7 @@
 \contentsline {figure}{\numberline {5.6}{\ignorespaces UML diagram projektu, horn\IeC {\'\i } \IeC {\v c}\IeC {\'a}st je abstraktn\IeC {\'\i }, doln\IeC {\'\i } \IeC {\v c}\IeC {\'a}st implementuje jednotliv\IeC {\'a} rozhran\IeC {\'\i } a na\IeC {\v c}\IeC {\'\i }t\IeC {\'a} data do pam\IeC {\v e}ti, spustiteln\IeC {\'e} soubory jsou ozna\IeC {\v c}eny te\IeC {\v c}kou}}{32}{figure.5.6}
 \contentsline {figure}{\numberline {5.7}{\ignorespaces Komponenty platformy Android, komponenty vyzna\IeC {\v c}en\IeC {\'e} modrou barvou jsou napsan\IeC {\'e} v jazyce Java, \IeC {\v z}lutou barvou je virtu\IeC {\'a}ln\IeC {\'\i } stroj, kter\IeC {\'y} umo\IeC {\v z}\IeC {\v n}uje b\IeC {\v e}h Java aplikac\IeC {\'\i }, zelenou barvou jsou C/C++ knihovny a \IeC {\v c}ervenou je Linuxov\IeC {\'e} j\IeC {\'a}dro}}{33}{figure.5.7}
 \contentsline {figure}{\numberline {5.8}{\ignorespaces UML diagram spustiteln\IeC {\'e}ho klienta pro Android, kde libopen4speed.so je zkompilovan\IeC {\'a} C++ knihovna projektu}}{34}{figure.5.8}
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Vykreslovac\IeC {\'\i } \IeC {\v r}et\IeC {\v e}zec simul\IeC {\'a}toru}}{37}{figure.5.9}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Vykreslovac\IeC {\'\i } \IeC {\v r}et\IeC {\v e}zec screen-space p\IeC {\v r}\IeC {\'\i }stupu}}{37}{figure.5.9}
 \contentsline {figure}{\numberline {5.10}{\ignorespaces Odlesky na povrchu vozovky}}{39}{figure.5.10}
 \contentsline {figure}{\numberline {5.11}{\ignorespaces Uk\IeC {\'a}zka v\IeC {\'y}sledn\IeC {\'y}ch odlesk\IeC {\r u} na vozidle, vlevo bez odlesk\IeC {\r u}, vpravo s odlesky}}{40}{figure.5.11}
 \contentsline {figure}{\numberline {5.12}{\ignorespaces Vr\IeC {\v z}en\IeC {\'y} st\IeC {\'\i }n vozidla}}{41}{figure.5.12}

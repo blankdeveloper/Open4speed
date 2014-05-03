@@ -1146,12 +1146,12 @@ Při běhu jakéhokoliv simulátoru je největší zátěž mobilního hardware 
 
 Abych částečně nahradil ve svém simulátoru víceprůchodový přístup, použil jsem screen-space přístup (to je obecně jakákoliv technika využívající data z pohledu kamery, jinými slovy máme pouze výsledný snímek a na něm provádíme další operace). V praxi se používá hlavně pro zrcadlové plochy. Potřeboval jsem přistupovat do aktuálně vykreslovaného snímku. To je ale problém, protože tento snímek není kompletní a kdybych vykresloval přímo do něj\linebreak a zároveň z něj četl způsobilo by to chyby ve výsledném obraze.
 
-Řešením je vykreslování střídavě do dvou různých textur. To znamená, že při lichém snímku kreslím do textury 1 a čtu z textury 2. Při sudém snímku je tomu obráceně. Tímto způsobem získám přístup do vykreslené scény, sice s drobným zpožděním, ale při dostatečně rychlém vykreslování si toho uživatel nevšimne (za předpokladu, že textura bude použita\linebreak na efekty jako jsou odlesky nebo stíny).
+Řešením je vykreslování střídavě do dvou různých frame buffer objektů (viz obrázek 5.9). To znamená, že při lichém snímku kreslím do FBO 1 a čtu z FBO 2. Při sudém snímku je tomu obráceně. Tímto způsobem získám přístup do vykreslené scény, sice s drobným zpožděním, ale při dostatečně rychlém vykreslování to nebude rušivé (za předpokladu, že textura FBO bude použita na efekty jako jsou odlesky nebo stíny).
 
 \begin{center}
 \begin{figure}[h!]
-\includegraphics[width=85mm]{figures/render-schema.png}
-\caption{Vykreslovací řetězec simulátoru}
+\includegraphics[width=140mm]{figures/screenspace.png}
+\caption{Vykreslovací řetězec screen-space přístupu}
 \end{figure}
 \end{center}
 
@@ -1207,7 +1207,7 @@ $r'' = [f_x, 1 - f_y + f_z \cdot a + f_z \cdot (1 - \vec{n}_y) \cdot b]$
 
 \begin{center}
 \begin{figure}[h!]
-\includegraphics[width=130mm]{figures/reflect-horizont.png}
+\includegraphics[width=140mm]{figures/reflect-horizont.png}
 \caption{Odlesky na povrchu vozovky}
 \end{figure}
 \end{center}
@@ -1224,7 +1224,7 @@ $r = [s_x + \vec{n}_x \cdot f, s_y + \vec{n}_y \cdot f]$
 
 \begin{center}
 \begin{figure}[h!]
-\includegraphics[width=130mm]{figures/reflect-car.png}
+\includegraphics[width=150mm]{figures/reflect-car.png}
 \caption{Ukázka výsledných odlesků na vozidle, vlevo bez odlesků, vpravo s odlesky}
 \end{figure}
 \end{center}
@@ -1250,7 +1250,6 @@ $sp''_y = sp'_y - a / s_z$
 \end{center}
 
 Tím jsme získali pozici texelu nesoucí informaci o intenzitě osvětlení. Vzniká zde ale problém s barevným světlem. Jsou zde dvě možnosti řešení. Prvním je přidání další textury, ve kterém by byla barevná intenzita světla (tím by došlo ke zvýšení náročnosti na hardware a ke zvýšení paměťové náročnosti). Druhým možným řešením je omezit barevná světla\linebreak do nějaké sytosti (pokud se slabě zabarvené světlo aplikuje jako bílé, není to tolik rušivé).
-\newpage
 
 Dalším problémem je, že dynamické objekty (tedy vozidla) by měly zastínit statický model. Tento problém lze řešit opět pomocí screen-space přístupu. Ve screen-space textuře si můžeme označit texely (odpovídajících pixelům na obrazovce), na kterých je vykreslené vozidlo. V době vykreslování vozovky se vždy díváme o několik texelů výše, než je aktuální vykreslovaný fragment, a pokud je texel označen, ztmavíme aktuálně vykreslovaný fragment. Důležitou poznámkou je, že texely kol vozidla se neoznačují (tím by vznikal chybný stín).
 
@@ -1258,7 +1257,7 @@ Stín je kvalitou srovnatelný s projektivním stínem. Bylo by možné zjišťo
 
 \begin{center}
 \begin{figure}[h]
-\includegraphics[width=120mm]{figures/nearshadow.png}
+\includegraphics[width=140mm]{figures/nearshadow.png}
 \caption{Vržený stín vozidla}
 \end{figure}
 \end{center}

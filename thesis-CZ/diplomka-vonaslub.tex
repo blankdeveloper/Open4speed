@@ -723,7 +723,7 @@ $color_r = RM[\vec{p}_x, \vec{p}_y]$
 \end{center}
 
 \chapter{Předpočtené osvětlení}
-Předpočtené osvětlení je z hlediska vykreslování poměrně jednoduchá technika. Na 3D model se aplikuje další textura či textury, které mají vlastní texturovací souřadnice a nesou v sobě informaci o osvětlení jednotlivých trojúhelníků. Jak již bylo uvedeno, těmto texturám se říká mapy osvětlení a dalo by se říct, že se jedná o techniku, která rozšiřuje techniku předpočtených stínů.
+Předpočtené osvětlení je z hlediska vykreslování poměrně jednoduchá technika. Na 3D model se aplikuje další textura či textury, které mají vlastní texturovací souřadnice a nesou v sobě informaci o osvětlení jednotlivých trojúhelníků. Těmto texturám se říká mapy osvětlení\cite{Advanced05} a dalo by se říct, že se jedná o techniku, která rozšiřuje techniku předpočtených stínů.
 
 Z hlediska generování těchto textur je tato technika náročnější než výsledné vykreslování, skládá se z několika kroků. V prvním kroku je třeba vytvořit texturovací souřadnice pro jednotlivé trojúhelníky.
 
@@ -749,7 +749,7 @@ Protože uchovávání záplat v paměti by bylo příliš paměťově náročn�
 \newpage
 
 \section{Vytvoření texturovacích souřadnic}
-Pro mapy osvětlení není vhodné použít standardní texturovací souřadnice. V osvětlovacích mapách je potřeba zajistit, aby každý texel mapy odpovídal právě jednomu bodu\linebreak v prostoru. Pokud by tomu tak nebylo, stalo by se, že při osvětlení jednoho bodu se rozzáří\linebreak i jiný bod než ten osvětlený.
+Pro mapy osvětlení není vhodné použít standardní texturovací souřadnice. V osvětlovacích mapách je potřeba zajistit, aby každý texel mapy odpovídal právě jednomu bodu\linebreak v prostoru. Pokud by tomu tak nebylo, stalo by se, že při osvětlení jednoho bodu se rozzáří\linebreak i jiný bod než ten osvětlený. Problém vytváření texturovacích souřadnic se nazývá problém rozvinutí modelu\cite{Creating13} (anglicky unwrap).
 
 Obsah povrchu 3D modelu v ideálním případě odpovídá obsahu ploch map osvětlení. Abychom se tomuto případu přiblížili, musíme plochu map co nejvíce využít. Maximálním využitím 2D plochy se zabývá problém batohu, který patří do kategorie problémů NP-hard (obtížný nedeterministický problém řešitelný v polynomiálním čase).
 
@@ -757,7 +757,7 @@ Běžně se problém batohu zabývá pouze osově zarovnanými obálkovými těl
 
 \begin{center}
 \begin{figure}[h]
-\includegraphics[width=130mm]{figures/lmcoords.png}
+\includegraphics[width=60mm]{figures/lmcoords.png}
 \caption{Výsledek řešení problému batohu se spárovanými trojúhelníky}
 \end{figure}
 \end{center}
@@ -773,13 +773,12 @@ V prvním kroku se spočítá Eulerovská délka jednotlivých hran, nejdelší 
 
 \begin{center}
 \begin{figure}[h]
-\includegraphics[width=100mm]{figures/triangle.png}
+\includegraphics[width=80mm]{figures/triangle.png}
 \caption{Změna délky přepony trojúhelníka pro vytvoření páru dvou trojúhelníků, vlevo původní nepravoúhlý trojúhelník, vpravo trojúhelník s novou délkou přepony}
 \end{figure}
 \end{center}
 
 V dalším kroku hledáme párové trojúhelníky se stejnými délky stran $a, b$ (s určitou tolerancí), párové se spojí přeponou k sobě. Pro nepárové trojúhelníky vytvoříme AABB\linebreak o velikosti $a, b$ a tím máme vyřešený problém párování trojúhelníků.
-\newpage
 
 \paragraph{Oprava chyby sousedících trojúhelníků}\mbox{}\\
 
@@ -795,7 +794,25 @@ Při použití výše uvedeného postupu vzniká problém při vykreslování, p
 Provádí se zde posun texturovacích souřadnic směrem dovnitř trojúhelníku, aby k tomuto problému nedocházelo. Posouvají se i osově zarovnané hrany, protože při použití lineárního filtrování textur by docházelo k obdobným artefaktům jako v případě přepon.
 
 \section{Generování map osvětlení}
-Existují dvě základní metody generování map osvětlení, pomocí vrhání či sledování paprsku a pomocí rasterizace. V této kapitole popisuji rasterizační metodu (tedy pomocí OpenGL). Lze využít stínových map stejným způsobem, jako se používají k výpočtu zastínění v reálném čase. Rozdíl je pouze v transformování vrcholů a ve výpočtu barvy (nechceme vykreslovat texturu do světelných map, vedlo by to ke ztrátě kvality textur).
+Používají se dvě základní metody generování map osvětlení, pomocí vrhání či sledování paprsku a pomocí rasterizace. V metodě vrhání paprsku se vrhají primární paprsky pro každý pixel na obrazovce (tím se zjistí cílový bod ve scéně, který bude zobrazen na dané pozici). Po té se vrhnou z každého bodu sekundární paprsky do všech zdrojů světel a zjistí se, jak je bod osvětlen. Viz. obrázek 4.6.
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=50mm]{figures/raycasting.png}
+\caption{Metoda vrhání paprsků, červeně jsou zobrazeny primární paprsky, modře stínové paprsky}
+\end{figure}
+\end{center}
+
+Rasterizační metoda vykresluje narozdíl od metody vrhání paprsků scénu kompletně, jednotlivé fragmenty se kreslí přes sebe a prioritu má vždy ten fragment, který je blíže\linebreak ke kameře. Místo stínových paprsků se zde používají stínové mapy (viz. kapitola 3.5).
+
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=50mm]{figures/shadowmapping.png}
+\caption{Rasterizační metoda}
+\end{figure}
+\end{center}
+
+U rasterizační metody lze využít k generování map osvětlení stínových map stejným způsobem, jako se používají k výpočtu zastínění v reálném čase. Rozdíl je pouze v transformování vrcholů a ve výpočtu barvy (nechceme vykreslovat texturu do světelných map, vedlo by to ke ztrátě kvality textur).
 
 Nejdříve si vložíme ke každému vrcholu do VBO jeho souřadnice v osvětlovací mapě. Transformujeme vrchol do souřadnic mapy osvětlení. To se provede přiřazením souřadnic $u, v$ jako pozici ve FBO (s pozicí vrcholu se počítá pouze při výpočtu osvětlení).
 
@@ -808,7 +825,7 @@ Pokud bychom chtěli použit i bodové zdroje světla, musíme mít stínovou ma
 
 \begin{center}
 \begin{figure}[h]
-\includegraphics[width=150mm]{figures/cubemap.png}
+\includegraphics[width=130mm]{figures/cubemap.png}
 \caption{Využití stínových map při mapování na krychli u bodových světel, vlevo dva náhledy scény, vpravo stínová mapa}
 \end{figure}
 \end{center}

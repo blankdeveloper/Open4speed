@@ -33,6 +33,11 @@ Tobias Ritschel{,} Thorsten Grosch{,} Min H. Kim{,} Hans-Peter Seidel{,}
   Illumination}.
 \newblock {\em ACM Trans. Graph. (Proc. of SIGGRAPH ASIA)}, 27(5), 2008.
 
+\bibitem{Advanced05}
+Tom McReynolds.
+\newblock {\em {A}dvanced Graphics Programming Using OpenGL}.
+\newblock Morgan Kaufmann; 1 edition (February 16, 2005), 2005.
+
 \bibitem{Interact12}
 Oscar Argudo{,} Carlos Andujar{,}~Gustavo Patow.
 \newblock {Interactive rendering of urban models with global illumination}.
@@ -42,6 +47,11 @@ Oscar Argudo{,} Carlos Andujar{,}~Gustavo Patow.
 Jim Scott.
 \newblock {P}acking lightmaps.
 \newblock \url{http://www.blackpawn.com/texts/lightmaps}, 2002.
+
+\bibitem{Creating13}
+Brad Strong.
+\newblock {\em {C}reating Game Art for 3D Engines}.
+\newblock Course Technology PTR; 1 edition (February 1, 2013), 2013.
 
 \bibitem{Fast03}
 Andrey Iones{,} Anton Krupkin{,} Mateu Sbert{,}~Sergey Zhukov.

@@ -25,7 +25,7 @@
 \contentsline {chapter}{\numberline {4}P\IeC {\v r}edpo\IeC {\v c}ten\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i }}{19}{chapter.4}
 \contentsline {section}{\numberline {4.1}Mapy osv\IeC {\v e}tlen\IeC {\'\i }}{19}{section.4.1}
 \contentsline {section}{\numberline {4.2}Vytvo\IeC {\v r}en\IeC {\'\i } texturovac\IeC {\'\i }ch sou\IeC {\v r}adnic}{21}{section.4.2}
-\contentsline {paragraph}{Oprava chyby soused\IeC {\'\i }c\IeC {\'\i }ch troj\IeC {\'u}heln\IeC {\'\i }k\IeC {\r u}}{23}{section*.13}
+\contentsline {paragraph}{Oprava chyby soused\IeC {\'\i }c\IeC {\'\i }ch troj\IeC {\'u}heln\IeC {\'\i }k\IeC {\r u}}{22}{section*.13}
 \contentsline {section}{\numberline {4.3}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{23}{section.4.3}
 \contentsline {section}{\numberline {4.4}Spekul\IeC {\'a}rn\IeC {\'\i } slo\IeC {\v z}ka osv\IeC {\v e}tlovac\IeC {\'\i }ho modelu}{24}{section.4.4}
 \contentsline {chapter}{\numberline {5}Implementace}{25}{chapter.5}

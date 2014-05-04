@@ -545,12 +545,13 @@ Výsledná barva bodu na obrazovce $I$ se spočítá jako součet barvy emisníh
 \begin{center}
 $I = I_e + I_{ag} + \sum_{}{} I_{Li}$
 \end{center}
+\newpage
 
 \section{Stínování}
 Pojem stínování v počítačové grafice znamená postup vybarvování trojúhelníků. Existují tři základní typy stínování.
 \begin{itemize}
 \item Konstantní stínování - celý polygon se vybarví jednou barvou dle normály povrchu. Používá se ve scénách, ve kterých se nacházejí pouze směrové zdroje světla.
-\item Gouraudovo stínování - spočítá se osvětlení ve vrcholech a následně se interpolují hodnoty mezi vrcholy. Toto stínování je velmi rychlé. Problém nastane, pokud světlo osvětluje střed polygonu a zároveň neosvětluje nebo jen částečně osvětluje vrchol. Osvětlení je po té ve vrcholech minimální a nemůže tedy vzniknout korektně osvětlený obraz.
+\item Gouraudovo stínování - spočítá se osvětlení ve vrcholech a následně se interpolují hodnoty mezi vrcholy. Toto stínování je velmi rychlé. Problém nastane, pokud světlo osvětluje střed polygonu a zároveň neosvětluje nebo jen částečně osvětluje vrchol. Osvětlení je po té ve vrcholech minimální a nemůže tedy vzniknout korektně osvětlený difúzní odraz. Obdobný problém je i se spekulárním odrazem. Problémy s difúzním a spekulárním odrazem světla obvykle nenastávají současně.
 \item Phongovo stínování - spočítá se osvětlení pro každý pixel polygonu na obrazovce. Dnes je to asi nejpoužívanější stínování. V OpenGL se toto stínování provádí pomocí shaderů. Vstupem do vertexového shaderu je pozice vrcholu a jeho normála. Ve vertex shaderu se provede transformace do pohledu kamery a určí se, že pozice vrcholu a normála se mají interpolovat. Po rasterizaci získáme interpolované hodnoty jako vstup ve fragment shaderu a zde provedeme výpočet podle výše uvedeného osvětlovacího modelu.
 \end{itemize}
 
@@ -561,16 +562,16 @@ Pojem stínování v počítačové grafice znamená postup vybarvování trojú
 \end{figure}
 \end{center}
 
-Interpolaci provádí OpenGL automaticky. Jeden ze způsobů jak provést interpolaci ručně je provést rasterizaci(tím získat všechny body uvnitř trojúhelníka) a poté provést barycentrickou interpolaci.
+Interpolaci provádí OpenGL automaticky za využití barycentrických souřadnic. Barycentrické souřadnice jsou nezávislé na poloze vrcholů, znázorněno na obrázku 3.6.
 
 \begin{center}
 \begin{figure}[h]
-\includegraphics[width=50mm]{figures/interpolation.png}
-\caption{Pomocný obrázek k výpočtu barycentrické interpolace}
+\includegraphics[width=40mm]{figures/bary.png}
+\caption{Barycentrické souřadnice trojúhelníku}
 \end{figure}
 \end{center}
 
-Nejdříve potřebujeme spočítat obsah jednotlivých trojúhelníků, abychom získali váhu hodnot v jednotlivých vrcholech.
+Pokud bychom chtěli získat interpolovanou hodnotu bodu $P$ pomocí barycentrických souřadnic, musíme nejdříve spočítat obsah jednotlivých trojúhelníků, abychom získali váhu hodnot v jednotlivých vrcholech.
 \begin{center} 
 $S_{PBC} = \frac{|\vec{PB} \times \vec{PC}|}{2}$;
 $S_{APC} = \frac{|\vec{AP} \times \vec{AC}|}{2}$; 
@@ -578,21 +579,29 @@ $S_{ABP} = \frac{|\vec{AB} \times \vec{AP}|}{2}$;
 $S_{ABC} = \frac{|\vec{AB} \times \vec{AC}|}{2}$
 \end{center}
 
-Pokud si označím hodnotu u bodu $A$ jako $a$, u bodu $B$ jako $b$ a u bodu $C$ jako $c$, získáme interpolovanou hodnotu $p$ v bodě $P$ následovně.
+\begin{center}
+\begin{figure}[h]
+\includegraphics[width=30mm]{figures/interpolation.png}
+\caption{Pomocný obrázek k výpočtu barycentrické interpolace}
+\end{figure}
+\end{center}
+
+Označíme si hodnotu u bodu $A$ jako $a$, u bodu $B$ jako $b$ a u bodu $C$ jako $c$, poté získáme interpolovanou hodnotu $p$ v bodě $P$ následovně.
 \begin{center}
 $p = a \cdot \frac{S_{PBC}}{S_{ABC}} + b \cdot \frac{S_{APC}}{S_{ABC}} + c \cdot \frac{S_{ABP}}{S_{ABC}}$
 \end{center}
 
 \section{Míchání textur}
 
-Míchání textur se v OpenGL provádí pomocí blendingu. Tato technika míchá cílový obraz (ten již vykreslený ve FBO) a zdrojový obraz, tedy texturu namapovanou na nějaký model.
+Míchání textur neboli blending je technika, která míchá cílový obraz (ten již vykreslený na obrazovce) a zdrojový obraz, tedy texturu namapovanou na nějaký model.
 
 Vstupem pro blending funkci je zdrojová barva $C_s$, cílová barva $C_d$ a parametry $\alpha_s$\linebreak a $\alpha_d$, které určují pro každý kanál, jak se má hodnota míchat. Výstupem funkce je nová cílová barva $C_d$.
 \begin{center}
 $C_d = C_s \cdot \alpha_s + C_d \cdot \alpha_d$
 \end{center}
 
-Příklad použití blendingu je technika poloprůhledného materiálu. Nejdříve se vykreslí neprůhledná část scény (tím se vykreslí i hloubkový buffer). Poté se vypne zápis do hloubkového bufferu a vykreslí se geometrie s částečnou průhledností.
+U blendingu je důležité zda kreslíme odzadu dopředu nebo obráceně. Při kreslení odzadu dopředu nejdříve vykreslíme neprůhlednou část scény bez blendingu a se zápisem do hloubkového bufferu. Potom vypneme zápis do hloubkového bufferu a vykreslíme geometrii s částečnou průhledností (se zapnutým blendingem). Při kreslení odpředu dozadu kreslíme objekty v opačném pořadí s tím rozdílem, že musíme u neprůhledného materiálu použít blending, abychom nepřekreslili poloprůhledné objekty v popředí.
+\newpage
 
 \begin{figure}[h]
 \begin{center}$
@@ -601,7 +610,7 @@ Příklad použití blendingu je technika poloprůhledného materiálu. Nejdří
 \includegraphics[width=60mm]{figures/blendon.png}
 \end{array}$
 \end{center}
-\caption{Ukázka problému při vykreslení poloprůhledného materiálu před neprůhledným}
+\caption{Ukázka problému při vykreslení poloprůhledného materiálu se špatnou konfigurací}
 \end{figure}
 
 \section{Výpočet stínů}

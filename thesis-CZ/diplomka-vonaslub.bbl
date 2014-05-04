@@ -1,5 +1,11 @@
 \begin{thebibliography}{10}
 
+\bibitem{Ambroz12}
+David Ambrož.
+\newblock {S}hadows for real-time graphics.
+\newblock Přednáška z předmětu Programování grafiky II ČVUT FEL Praha,
+  2012.
+
 \bibitem{Hawkins01}
 Kevin Hawkins{,}~Dave Astle.
 \newblock {\em {O}penGL Game Programing}.
@@ -10,6 +16,12 @@ Samuel~R. Buss.
 \newblock {\em {3}-D Computer Graphics: A Mathematical Introduction with
   OpenGL}.
 \newblock Cambridge University Press, 2003.
+
+\bibitem{Chen99}
+Max Chen{,} Gernot Schaufler{,} Stephen Duck{,} Byong Mok Oh{,} Henrik Wann
+  Jensen{,}~Julie Dorsey.
+\newblock {P}rocedural city modeling and night city lighting.
+\newblock \url{http://groups.csail.mit.edu/graphics/nclighting/}, 1999.
 
 \bibitem{Ericson04}
 Christer Ericson.

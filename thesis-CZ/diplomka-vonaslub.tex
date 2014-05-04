@@ -861,9 +861,11 @@ V přístupu využívající vrhání paprsku jsou navíc k dispozici plošné z
 \end{center}
 \caption{Ukázka difúzní textury modelu (vlevo) a osvětlovací textury (vpravo)}
 \end{figure}
+
+V obou přístupech je výsledná mapa osvětlení 24-bitová RGB bitmapa uložená ve formátu PNG. Formát PNG zajišťuje bezztrátovou kompresi bitmapy.
 \newpage
 
-\subsubsection{Generování texturovacích souřadnic pro mapy osvětlení}
+\subsection{Generování texturovacích souřadnic pro mapy osvětlení}
 V teoretické části byl popsán postup generování texturovacích souřadnic pomocí ILP.\linebreak V praxi toto řešení nelze použít, protože jeho výpočetní složitost metody je $O(m^2 \cdot n^2)$, kde $m$ je počet trojúhelníků a $n$ počet texelů v lightmapě.  Pomocí ILP se tedy dají řešit pouze velice malé instance problému. V této práci problém řeším pomocí metody Packing Lightmaps \cite{Scott02}, což je metoda řešící problém batohu za použití datové struktury kD stromu, která dělí $k$-rozměrný objekt půlením.
 
 V případě Packing Lightmaps dělíme rovinu horizontálním nebo vertikálním řezem. kD strom je typ binárního stromu, jehož kořen reprezentuje k-rozměrný objekt (v našem případě mapu osvětlení). Vnitřní uzly jsou dělící, určují podle které osy se provede řez a je v nich zapsána také pozice řezu. Listy stromu reprezentují objekty uložené ve struktuře, v mém případě AABB - tedy dva párové trojúhelníky (viz kapitola 3.6.1).
@@ -921,7 +923,7 @@ public boolean addAABB(AABB aabb) {
 }
 \end{lstlisting}
 
-\subsubsection{Generování map osvětlení}
+\subsection{Generování map osvětlení}
 Generování map osvětlení znamená v podstatě vykreslení celé scény v souřadnicích map osvětlení (tím se vykreslí celá scéna, aniž by docházelo k zakrývání objektů). Generování je\linebreak v práci řešeno dvěma různými přístupy. Prvním přístupem je rasterizační (pomocí OpenGL) a druhým je vrhání paprsku. V obou přístupech se provede výpočet difúzního osvětlení stejným způsobem jako se provádí při běžném vykreslování scény. 
 
 Aby mapa osvětlení obsahovala stíny, musí se provést test viditelnosti jednotlivých bodů pro jednotlivá světla. V rasterizačním přístupu se toto provádí pomocí stínových map (viz. kapitola 3.6.3).
@@ -976,13 +978,29 @@ $d = \frac{-k_l \pm \sqrt{D}}{2 \cdot (k_c - \frac{1}{\epsilon})}$
 \end{center}
 
 
+\paragraph{Akumulace výsledků}\ \ \\
+
+Výsledky od jednotlivých statických zdrojů světel se sčítají do jedné skupiny map osvětlení a provádí se ořez maximální hodnoty barvy, aby nedocházelo k přetečení hodnoty.\linebreak U všech příspěvků se zapisuje pouze $1/8$ jeho hodnoty, je to z důvodu potřeby rozšíření rozsahu intenzity světla. 
+
+U plošných zdrojů světel se provádí vzorkování na bodové zdroje světla. Vzorkování se provádí tak, aby každý vzniklý bodový zdroj odpovídal jednomu texelu v mapě osvětlení.\linebreak Z toho důvodu je třeba při změně cílového rozlišení mapy osvětlení změnit i parametr intenzity vygenerovaných bodových zdrojů světel, aby pro různé rozlišení nebyla scéna osvětlena jinak.
+
+U dynamických zdrojů světel se provádí pro každé světlo vykreslení skupiny map osvětlení, ty se zkomprimují do vektorové podoby a pro další dynamický zdroj světla se použije opět nová skupina map osvětlení. Jednotlivé dynamické zdroje světla nejsou na sobě tedy závislé.
+
 \subsection{Příprava dat pro dynamickou aktualizaci map osvětlení}
 Data pro dynamickou aktualizaci map osvětlení se nazývají záplaty. Záplata je v podstatě také mapa osvětlení, ale pouze pro jeden zdroj světla. Problém je, že tyto záplaty by byly příliš paměťově náročné, proto používám vektorovou podobu těchto dat.
 
-Data záplaty jsou při běhu simulátoru uloženy jako trojúhelníky ve VBO (tedy na GPU). Každý vrchol má dva atributy a to pozici v mapě osvětlení a barvu světla vynásobenou intenzitou. Lze tedy snadno a rychle mapy osvětlení aktualizovat, pokud máme záplaty\linebreak v této podobě uloženy.
+Data záplaty jsou při běhu testovací aplikace uloženy jako trojúhelníky ve VBO (tedy na GPU). Každý vrchol má dva atributy a to pozici v mapě osvětlení a barvu světla vynásobenou intenzitou. Lze tedy snadno a rychle mapy osvětlení aktualizovat, pokud máme záplaty v této podobě uloženy.
 
-Abychom získali záplaty v této podobě musíme nejdříve pro každý dynamický zdroj světla vykreslit mapu osvětlení a poté tyto data zvektorizovat. Pro zvektorizování lze využít informaci o souřadnicích jednotlivých trojúhelníků v mapě osvětlení. V prvním kroku se přečtou informace o osvětlení ve vrcholech trojúhelníků. Poté se provede interpolace těchto hodnot (vždy pouze v rámci jednoho trojúhelníku) a zkontroluje se, zda hodnota s nějakou tolerancí odpovídá. Pokud ano, přidá se geometrie trojúhelníku do vektorových dat záplaty. Pokud ne, rozdělí se trojúhelník podle jeho středu a provádí se znovu stejný postup.
-\newpage
+Abychom získali záplaty v této podobě musíme nejdříve pro každý dynamický zdroj světla vykreslit mapu osvětlení a poté tyto data zvektorizovat. Pro zvektorizování lze využít informaci o souřadnicích jednotlivých trojúhelníků v mapě osvětlení. Pokud barycentricky interpolujeme barvu světla z vrcholů trojúhelníku, měla by odpovídat barvě uložené v map osvětlení $lm$. 
+
+Pro $\forall$ body $p$ náležící trojúhelníku, lze ověřit interpolaci barvy ve vrcholech $a$, $b$ a $c$ pokud známe barycentrické váhy $Wp$ pro body $p$ níže uvedeným vzorcem ($\epsilon$ je tolerance odchylky barvy).
+\begin{center}
+$I_k = lm[\vec{p}_u][\vec{p}_v]$\\
+$I_l = Wp_a \cdot lm[\vec{a}_u][\vec{a}_v] + Wp_b \cdot lm[\vec{b}_u][\vec{b}_v] + Wp_c \cdot lm[\vec{c}_u][\vec{c}_v]$\\
+$|I_k - I_l| < \epsilon$
+\end{center}
+
+Pokud byl test úspěšný, přidá se geometrie trojúhelníku do vektorových dat záplaty. Pokud ne, rozdělí se trojúhelník na čtyři menší trojúhelníky a znovu se provádí testování (viz. obrázek 5.5).
 
 \begin{center}
 \begin{figure}[h]
@@ -990,6 +1008,7 @@ Abychom získali záplaty v této podobě musíme nejdříve pro každý dynamic
 \caption{Ukázka převodu záplaty osvětlovací mapy do vektorové podoby, vlevo původní mapa osvětlení, uprostřed první iterace algoritmu a vpravo další iterace}
 \end{figure}
 \end{center}
+\newpage
 
 \section{Testovací aplikace - simulátor}
 Simulátor je navržen tak, aby fungoval na X11-Linuxu a Androidu. Znamená to výběr multiplatformních knihoven nebo ve výjimečných případech rozdílných implementací pro jednotlivé platformy. K vykreslování jsem vybral OpenGL ES 2.0 (jedná se o odlehčené OpenGL 3.0) a GLSL core verzi 1.0 (to zaručuje maximální možnou kompatibilitu).
@@ -1009,9 +1028,9 @@ Samotný simulátor je rozdělen do dvou oddělených částí. První část je
     wheelZ1 = getConfig("wheel_back", atributes);
     wheelZ2 = getConfig("wheel_front", atributes);
 \end{lstlisting}
-\newpage
 
 Důvodem oddělení částí je, že implementace jednotlivých rozhraní může být v budoucnu snadno nahrazena anebo mohou být použité různé implementace pro různé platformy. Příkladem různých implementací rozhraní pro různé platformy může být například renderer.\linebreak V simulátoru je využita knihovna OpenGL, která například na platformě Windows Phone není dostupná a bylo by potřeba na této platformě použit Direct3D.
+\newpage
 
 \begin{figure}[h]
 \begin{center}
@@ -1019,7 +1038,7 @@ Důvodem oddělení částí je, že implementace jednotlivých rozhraní může
 \caption{UML diagram projektu, horní část je abstraktní, dolní část implementuje jednotlivá rozhraní a načítá data do paměti, spustitelné soubory jsou označeny tečkou}
 \end{center}
 \end{figure}
-Jak je vidět na obrázku 4.1, simulátor je rozdělen do dalších dílčích částí. Část \ul{raycaster} a třída \ul{LMgenerator} realizují předzpracování. Třída \ul{open4speed} se zabývá správou okna\linebreak a spouštění dílčích součástí. \ul{Common} uchovává veškeré objekty a proměnné, je to z důvodu, že jinak by v třídách \ul{open4speed} a \ul{LMgenerator} musel být obsah struktury \ul{common} duplicitně.
+Jak je vidět na obrázku 5.6, simulátor je rozdělen do dalších dílčích částí. Část \ul{raycaster} a třída \ul{LMgenerator} realizují předzpracování. Třída \ul{open4speed} se zabývá správou okna\linebreak a spouštění dílčích součástí. \ul{Common} uchovává veškeré objekty a proměnné, je to z důvodu, že jinak by v třídách \ul{open4speed} a \ul{LMgenerator} musel být obsah struktury \ul{common} duplicitně.
 
 Třída \ul{car} je v první řadě struktura uchovávající veškeré proměnné realizující vozidlo, dále zajišťuje propojení mezi fyzikálním enginem, vykreslováním, zvukem, vstupem umělé inteligence a uživatele.
 \\ \\
@@ -1207,6 +1226,7 @@ Na úrovni přední řezné roviny kamery je horizont povrchu přesně v polovin
 \begin{center}
 $r = [f_x, 1 - f_y]$
 \end{center}
+\newpage
 
 S rostoucí vzdáleností od přední řezné roviny se lineárně posouvá horizont směrem vzhůru. Nalezením konstanty $a$ získáme souřadnice odlesku $r'$ pro kolmý povrch limitovaný úhlem pohledu kamery.
 \begin{center}
@@ -1270,7 +1290,7 @@ Stín je kvalitou srovnatelný s projektivním stínem. Bylo by možné zjišťo
 
 \begin{center}
 \begin{figure}[h]
-\includegraphics[width=140mm]{figures/nearshadow.png}
+\includegraphics[width=120mm]{figures/nearshadow.png}
 \caption{Vržený stín vozidla}
 \end{figure}
 \end{center}
@@ -1280,13 +1300,6 @@ Stín je kvalitou srovnatelný s projektivním stínem. Bylo by možné zjišťo
 Dle předběžných měření jsem zjistil, že na mobilních zařízeních lze za běhu počítat jedno až dvě světla (bez výpočtu zastínění zdroje světla). U vozidla ovládané hráčem není potřeba řešit viditelnost světla, prakticky zde nedochází k situacím, že by světlo osvětlovalo neviditelné objekty (je to z důvodu těsné vazby světla hráčova vozidla a kamery).
 
 U ostatních vozidel je třeba osvětlení zjednodušit, aby to mobilní hardware zvládal. Zvolil jsem metodu vykreslování poloprůhledných kuželů do scény, k tomu je použita OpenGL funkce blending, která umožňuje kreslit objekty s částečnou průhledností. Je zde počítán útlum světla stejně jako u standardních světel.
-
-\begin{center}
-\begin{figure}[h]
-\includegraphics[width=60mm]{figures/carlight.png}
-\caption{Ukázka světel pomocí poloprůhledných kuželů}
-\end{figure}
-\end{center}
 
 %*****************************************************************************
 \chapter{Testování}
@@ -1549,6 +1562,8 @@ area_light_cutoff 90
 area_light_att 0.2
 //intenzita plosneho zdroje svetla
 area_light_intensity 10
+//tolerance pro rozdelovani trojuhelniku
+interpolation_tolerancy 32
 //rozliseni mapy osvetleni
 lightmap_size 2048
 //vykreslovani plosnych zdroju svetla(1=zapnuto, 0=vypnuto)

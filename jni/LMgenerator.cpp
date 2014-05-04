@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------------------
 /**
- * \file       open4speed.cpp
+ * \file       LMGenerator.cpp
  * \author     Vonasek Lubos
  * \date       2014/03/02
  * \brief      Runable code of project.
@@ -53,6 +53,7 @@ octreenode* root;
 float att;
 float area_cut;
 float area_intensity;
+int interpolation_tolerancy;
 bool render_area_lights;
 bool render_dynamic_lights;
 bool render_lightmap;
@@ -376,9 +377,9 @@ void display(void) {
                                     glm::vec4 color = getColor(triangles[i]->points[j], begin, end);
                                     if (color.w > 0.005f) {
                                         if (!root->isIntersected(begin, end, testID++)) {
-                                            pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 255.0f));
-                                            pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 255.0f));
-                                            pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 255.0f));
+                                            pixels[triangles[i]->lmIndex][index * 4 + 0] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 0] + (int)(color.x * 32.0f));
+                                            pixels[triangles[i]->lmIndex][index * 4 + 1] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 1] + (int)(color.y * 32.0f));
+                                            pixels[triangles[i]->lmIndex][index * 4 + 2] = min(255, pixels[triangles[i]->lmIndex][index * 4 + 2] + (int)(color.z * 32.0f));
                                         }
                                     }
                                     pixels[triangles[i]->lmIndex][index * 4 + 3] = 255;
@@ -434,7 +435,7 @@ void display(void) {
                                                         int itb = ba.x * pixels[y][(q.front().a.y * rttsize + q.front().a.x) * 4 + highIndex]
                                                                 + ba.y * pixels[y][(q.front().b.y * rttsize + q.front().b.x) * 4 + highIndex]
                                                                 + ba.z * pixels[y][(q.front().c.y * rttsize + q.front().c.x) * 4 + highIndex];
-                                                        if (abs(ita - itb) > 32) {
+                                                        if (abs(ita - itb) > interpolation_tolerancy) {
                                                             ok = false;
                                                             break;
                                                         }
@@ -732,6 +733,7 @@ int main(int argc, char** argv) {
     att = getConfig("area_light_att", lights);
     area_cut = getConfig("area_light_cutoff", lights);
     area_intensity = getConfig("area_light_intensity", lights);
+    interpolation_tolerancy = getConfig("interpolation_tolerancy", lights);
     render_area_lights = getConfig("render_area_lights", lights) > 0.1f;
     render_dynamic_lights = getConfig("render_dynamic_lights", lights) > 0.1f;
     render_lightmap = getConfig("render_lightmap", lights) > 0.1f;
@@ -770,6 +772,8 @@ int main(int argc, char** argv) {
 
     /// set screen mode
     glutInitWindowSize(1,1);
+    glutInitContextVersion(3,0);
+    glutInitContextProfile(GLUT_CORE_PROFILE);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
     glutCreateWindow("Open4speed");
 

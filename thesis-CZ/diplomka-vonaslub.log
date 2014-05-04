@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.2.17)  3 MAY 2014 22:04
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.2.17)  4 MAY 2014 12:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1039,14 +1039,14 @@ Package pdftex.def Info: figures/buildz3-e.png used on input line 859.
 <figures/kd.png, id=675, 1543.26563pt x 828.09375pt>
 File: figures/kd.png Graphic file (type png)
  <use figures/kd.png>
-Package pdftex.def Info: figures/kd.png used on input line 873.
+Package pdftex.def Info: figures/kd.png used on input line 875.
 (pdftex.def)             Requested size: 341.43306pt x 183.20468pt.
 
 [27 <./figures/kd.png>]
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2013/08/26 1.5b listings language file
 )
-Underfull \hbox (badness 2269) in paragraph at lines 929--930
+Underfull \hbox (badness 2269) in paragraph at lines 931--932
 \T1/cmr/m/n/10.95 lení (pa-prsky mají de-fi-no-váno, kde kon£í). Po-kud pa-prse
 k pro-tne mezi po-£át-kem
  []
@@ -1061,186 +1061,184 @@ File: lstlang1.sty 2013/08/26 1.5b listings language file
 File: lstmisc.sty 2013/08/26 1.5b (Carsten Heinz)
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 941.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 943.
 
 <figures/quadtree.png, id=729, 4516.875pt x 1027.84pt>
 File: figures/quadtree.png Graphic file (type png)
 
 <use figures/quadtree.png>
-Package pdftex.def Info: figures/quadtree.png used on input line 955.
+Package pdftex.def Info: figures/quadtree.png used on input line 957.
 (pdftex.def)             Requested size: 426.79134pt x 97.11256pt.
- [29 <./figures/quadtree.png>] [30]
-<figures/lmpatch.png, id=747, 1580.90625pt x 481.8pt>
+ [29 <./figures/quadtree.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 981--982
+
+ []
+
+[30] <figures/lmpatch.png, id=748, 1580.90625pt x 481.8pt>
 File: figures/lmpatch.png Graphic file (type png)
 
 <use figures/lmpatch.png>
-Package pdftex.def Info: figures/lmpatch.png used on input line 989.
+Package pdftex.def Info: figures/lmpatch.png used on input line 1007.
 (pdftex.def)             Requested size: 426.79134pt x 130.06567pt.
- [31 <./figures/lmpatch.png>]
-<figures/o4suml.png, id=763, 790.45313pt x 395.22656pt>
+ [31 <./figures/lmpatch.png>] [32]
+<figures/o4suml.png, id=768, 790.45313pt x 395.22656pt>
 File: figures/o4suml.png Graphic file (type png)
 
 <use figures/o4suml.png>
-Package pdftex.def Info: figures/o4suml.png used on input line 1018.
+Package pdftex.def Info: figures/o4suml.png used on input line 1037.
 (pdftex.def)             Requested size: 455.24408pt x 227.62137pt.
 
-Overfull \hbox (19.72894pt too wide) in paragraph at lines 1018--1019
+Overfull \hbox (19.72894pt too wide) in paragraph at lines 1037--1038
  [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1024--1027
+Underfull \hbox (badness 10000) in paragraph at lines 1043--1046
 
  []
 
-[32 <./figures/o4suml.png>]
-<figures/android.png, id=769, 1606.803pt x 1303.269pt>
+[33 <./figures/o4suml.png>]
+<figures/android.png, id=775, 1606.803pt x 1303.269pt>
 File: figures/android.png Graphic file (type png)
 
 <use figures/android.png>
-Package pdftex.def Info: figures/android.png used on input line 1042.
+Package pdftex.def Info: figures/android.png used on input line 1061.
 (pdftex.def)             Requested size: 341.43306pt x 276.93604pt.
- [33 <./figures/android.png>]
-<figures/jni.png, id=776, 376.40625pt x 225.84375pt>
+ [34 <./figures/android.png>]
+<figures/jni.png, id=781, 376.40625pt x 225.84375pt>
 File: figures/jni.png Graphic file (type png)
  <use figures/jni.png>
-Package pdftex.def Info: figures/jni.png used on input line 1073.
+Package pdftex.def Info: figures/jni.png used on input line 1092.
 (pdftex.def)             Requested size: 227.62204pt x 136.57558pt.
 
-[34 <./figures/jni.png>] [35]
-Underfull \vbox (badness 1237) has occurred while \output is active []
-
- [36]
-<figures/screenspace.png, id=849, 1304.875pt x 662.475pt>
+[35 <./figures/jni.png>] [36] [37]
+<figures/screenspace.png, id=855, 1304.875pt x 662.475pt>
 File: figures/screenspace.png Graphic file (type png)
 
 <use figures/screenspace.png>
-Package pdftex.def Info: figures/screenspace.png used on input line 1166.
+Package pdftex.def Info: figures/screenspace.png used on input line 1185.
 (pdftex.def)             Requested size: 398.33858pt x 202.23148pt.
- [37 <./figures/screenspace.png>] [38]
-<figures/reflect-horizont.png, id=873, 963.6pt x 481.8pt>
+ [38 <./figures/screenspace.png>] [39]
+<figures/reflect-horizont.png, id=879, 963.6pt x 481.8pt>
 File: figures/reflect-horizont.png Graphic file (type png)
 
 <use figures/reflect-horizont.png>
-Package pdftex.def Info: figures/reflect-horizont.png used on input line 1223.
+Package pdftex.def Info: figures/reflect-horizont.png used on input line 1243.
 (pdftex.def)             Requested size: 398.33858pt x 199.16399pt.
- [39 <./figures/reflect-horizont.png>]
+
 <figures/reflect-car.png, id=880, 564.60938pt x 225.84375pt>
 File: figures/reflect-car.png Graphic file (type png)
 
 <use figures/reflect-car.png>
-Package pdftex.def Info: figures/reflect-car.png used on input line 1240.
+Package pdftex.def Info: figures/reflect-car.png used on input line 1260.
 (pdftex.def)             Requested size: 426.79134pt x 170.71947pt.
- [40 <./figures/reflect-car.png>]
-<figures/nearshadow.png, id=886, 481.8pt x 301.125pt>
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[40 <./figures/reflect-horizont.png>] [41 <./figures/reflect-car.png>]
+<figures/nearshadow.png, id=891, 481.8pt x 301.125pt>
 File: figures/nearshadow.png Graphic file (type png)
 
 <use figures/nearshadow.png>
-Package pdftex.def Info: figures/nearshadow.png used on input line 1273.
-(pdftex.def)             Requested size: 398.33858pt x 248.96877pt.
- [41 <./figures/nearshadow.png>]
-<figures/carlight.png, id=892, 361.35pt x 240.9pt>
-File: figures/carlight.png Graphic file (type png)
- <use figures/carlight.png>
-Package pdftex.def Info: figures/carlight.png used on input line 1286.
-(pdftex.def)             Requested size: 170.71652pt x 113.81114pt.
-
-[42 <./figures/carlight.png>]
+Package pdftex.def Info: figures/nearshadow.png used on input line 1293.
+(pdftex.def)             Requested size: 341.43306pt x 213.40048pt.
+ [42 <./figures/nearshadow.png>]
 Kapitola 6.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1299--1299
+Underfull \hbox (badness 10000) in paragraph at lines 1312--1312
 []|\T1/cmr/bx/n/10.95 Google Ne-xus 7
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1299--1300
+Underfull \hbox (badness 10000) in paragraph at lines 1312--1313
 []|\T1/cmr/bx/n/10.95 Acer Tra-vel-Mate
  []
 
 
-Overfull \hbox (21.35922pt too wide) in paragraph at lines 1297--1309
+Overfull \hbox (21.35922pt too wide) in paragraph at lines 1310--1322
  [] 
  []
 
 [43
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1318--1319
+Underfull \hbox (badness 10000) in paragraph at lines 1331--1332
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1337--1338
+Underfull \hbox (badness 10000) in paragraph at lines 1350--1351
 
  []
 
 
-Overfull \hbox (2.20663pt too wide) in paragraph at lines 1342--1352
+Overfull \hbox (2.20663pt too wide) in paragraph at lines 1355--1365
  [] 
  []
 
 [44]
-Overfull \hbox (2.20663pt too wide) in paragraph at lines 1361--1373
+Overfull \hbox (2.20663pt too wide) in paragraph at lines 1374--1386
  [] 
  []
 
-<figures/graf3.png, id=908, 462.528pt x 260.172pt>
+<figures/graf3.png, id=907, 462.528pt x 260.172pt>
 File: figures/graf3.png Graphic file (type png)
  <use figures/graf3.png>
-Package pdftex.def Info: figures/graf3.png used on input line 1378.
+Package pdftex.def Info: figures/graf3.png used on input line 1391.
 (pdftex.def)             Requested size: 426.79134pt x 240.08365pt.
 
 [45 <./figures/graf3.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1383--1384
+Underfull \hbox (badness 10000) in paragraph at lines 1396--1397
 
  []
 
-<figures/lmgen-mem-usage.png, id=915, 433.62pt x 169.8345pt>
+<figures/lmgen-mem-usage.png, id=914, 433.62pt x 169.8345pt>
 File: figures/lmgen-mem-usage.png Graphic file (type png)
 
 <use figures/lmgen-mem-usage.png>
-Package pdftex.def Info: figures/lmgen-mem-usage.png used on input line 1387.
+Package pdftex.def Info: figures/lmgen-mem-usage.png used on input line 1400.
 (pdftex.def)             Requested size: 426.79134pt x 167.16745pt.
  [46 <./figures/lmgen-mem-usage.png>]
-<figures/graf2.png, id=922, 722.7pt x 231.264pt>
+<figures/graf2.png, id=921, 722.7pt x 231.264pt>
 File: figures/graf2.png Graphic file (type png)
  <use figures/graf2.png>
-Package pdftex.def Info: figures/graf2.png used on input line 1421.
+Package pdftex.def Info: figures/graf2.png used on input line 1434.
 (pdftex.def)             Requested size: 426.79134pt x 136.57513pt.
 
-Underfull \hbox (badness 6063) in paragraph at lines 1431--1431
+Underfull \hbox (badness 6063) in paragraph at lines 1444--1444
 []|\T1/cmr/bx/n/10.95 Samsung Ga-laxy
  []
 
 
-Underfull \hbox (badness 2932) in paragraph at lines 1431--1431
+Underfull \hbox (badness 2932) in paragraph at lines 1444--1444
 []|\T1/cmr/bx/n/10.95 Google Ne-xus 7
  []
 
 
-Underfull \hbox (badness 4518) in paragraph at lines 1431--1432
+Underfull \hbox (badness 4518) in paragraph at lines 1444--1445
 []|\T1/cmr/bx/n/10.95 Acer Tra-vel-Mate
  []
 
 
-Overfull \hbox (12.8234pt too wide) in paragraph at lines 1429--1436
+Overfull \hbox (12.8234pt too wide) in paragraph at lines 1442--1449
  [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1442--1443
+Underfull \hbox (badness 10000) in paragraph at lines 1455--1456
 
  []
 
 
 Underfull \vbox (badness 2521) has occurred while \output is active []
 
- [47 <./figures/graf2.png>] <figures/sim-mem-usage.png, id=928, 433.62pt x 173.
+ [47 <./figures/graf2.png>] <figures/sim-mem-usage.png, id=927, 433.62pt x 173.
 448pt>
 File: figures/sim-mem-usage.png Graphic file (type png)
 
 <use figures/sim-mem-usage.png>
-Package pdftex.def Info: figures/sim-mem-usage.png used on input line 1447.
+Package pdftex.def Info: figures/sim-mem-usage.png used on input line 1460.
 (pdftex.def)             Requested size: 426.79134pt x 170.72421pt.
  [48 <./figures/sim-mem-usage.png>]
 Kapitola 7.
@@ -1262,7 +1260,7 @@ P\v {r}\'{\i }loha A.
 ]
 P\v {r}\'{\i }loha B.
 
-Overfull \hbox (16.47618pt too wide) in paragraph at lines 1504--1529
+Overfull \hbox (16.47618pt too wide) in paragraph at lines 1517--1542
  [] 
  []
 
@@ -1271,78 +1269,81 @@ Overfull \hbox (16.47618pt too wide) in paragraph at lines 1504--1529
 ]
 P\v {r}\'{\i }loha C.
 [57] [58]
-Underfull \hbox (badness 10000) in paragraph at lines 1606--1619
+Underfull \hbox (badness 10000) in paragraph at lines 1621--1634
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1606--1619
+Underfull \hbox (badness 10000) in paragraph at lines 1621--1634
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1620--1630
+Underfull \hbox (badness 10000) in paragraph at lines 1635--1645
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1620--1630
+Underfull \hbox (badness 10000) in paragraph at lines 1635--1645
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1632--1633
+Underfull \hbox (badness 10000) in paragraph at lines 1647--1648
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1640--1641
+Underfull \hbox (badness 10000) in paragraph at lines 1655--1656
 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1647.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1662.
 [59]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1647.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1662.
  (./diplomka-vonaslub.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1647.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1647.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1662.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1662.
 
 Package rerunfilecheck Info: File `diplomka-vonaslub.out' has not changed.
-(rerunfilecheck)             Checksum: C777A4681AA57F361DC72132DEC257C3;8842.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1647.
+(rerunfilecheck)             Checksum: 265AC15A12A187D5BBC79E4CE0842210;8822.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1662.
  ) 
 Here is how much of TeX's memory you used:
  14431 strings out of 494953
- 201828 string characters out of 6179185
- 496861 words of memory out of 5000000
- 17050 multiletter control sequences out of 15000+600000
+ 201796 string characters out of 6179185
+ 495820 words of memory out of 5000000
+ 17048 multiletter control sequences out of 15000+600000
  20508 words of font info for 48 fonts, out of 8000000 for 9000
  50 hyphenation exceptions out of 8191
- 45i,12n,97p,763b,1925s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
-0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/sh
-are/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type
-1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sf
-bx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2074.pfb></usr/sha
-re/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1
-/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfr
-m0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/shar
-e/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/
-public/cm-super/sfsl1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti
-1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1440.pfb></usr/share
-/texmf/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on diplomka-vonaslub.pdf (75 pages, 14765416 bytes).
+ 45i,12n,97p,763b,1401s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{figure.5.13} has been referenced but does not exi
+st, replaced by a fixed one
+
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/shar
+e/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/
+public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx
+1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share
+/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/p
+ublic/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0
+900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/
+texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/pu
+blic/cm-super/sfsl1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti10
+95.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1440.pfb></usr/share/t
+exmf/fonts/type1/public/cm-super/sftt1095.pfb>
+Output written on diplomka-vonaslub.pdf (75 pages, 14705589 bytes).
 PDF statistics:
- 1190 PDF objects out of 1200 (max. 8388607)
- 995 compressed objects within 10 object streams
- 377 named destinations out of 1000 (max. 500000)
- 613 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1192 PDF objects out of 1200 (max. 8388607)
+ 999 compressed objects within 10 object streams
+ 380 named destinations out of 1000 (max. 500000)
+ 608 words of extra memory for PDF output out of 10000 (max. 10000000)
 

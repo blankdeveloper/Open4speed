@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------------------
 /**
- * \file       open4speed.cpp
+ * \file       GLLMGenerator.cpp
  * \author     Vonasek Lubos
  * \date       2014/01/05
  * \brief      Runable code of project.
@@ -169,6 +169,8 @@ int main(int argc, char** argv) {
 
     /// set screen mode
     glutInitWindowSize(1,1);
+    glutInitContextVersion(3,0);
+    glutInitContextProfile(GLUT_CORE_PROFILE);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
     glutCreateWindow("Open4speed");
 

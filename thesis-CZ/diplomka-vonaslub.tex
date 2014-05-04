@@ -372,11 +372,29 @@ Rešerši souvisejících metod jsem zaměřil na dvě různé kategorie. První
 
 \subsection{Projekty zabývající se vykreslování noční scény}
 
-V této sekci jsem vybral co nejrealističtější implementace, ke kterým existuje nějaký článek o tom, jak bylo výsledku dosaženo. Existuje sice několik implementací, které vypadají realističtěji. To jsou ale většinou komerční produkty, které nesdílejí ostatním, jakým způsobem byla implementace realizována.
+V této sekci jsem vybral co nejrealističtější implementace, ke kterým existuje článek o tom, jak bylo výsledku dosaženo. Existuje sice několik implementací, které vypadají realističtěji. To jsou ale většinou komerční produkty, které nesdílejí ostatním, jakým způsobem byla implementace realizována.
+
+\paragraph{Interaktivní vykreslování modelů měst s globálním osvětlením}\mbox{}\\
+
+Technika založená na fotonovém mapování, používá 2D buffery pro uložení fotonové energie jdoucí směrem k povrchu modelu. Tyto buffery jsou namapovány na neviditelné válce, které umožňují rychle vypočítat globální osvětlení v jeho okolí.
+
+Metoda umožňuje zobrazování zrcadlových odlesků, ostrých stínů a umožňuje aktualizovat předpočtenou informaci za běhu aplikace. Projekt je specifický tím, že umožňuje vykreslovat rozsáhle scény s globálním osvětlením v reálném čase. 
+
+Autoři projektu neuvádí použitelnost metody s noční scénou. Pravděpodobně by při použití noční scény nastal problém s aktualizováním fotonových map.
+
+\begin{center}
+\begin{figure}[h!]
+\includegraphics[width=100mm]{figures/PM.png}
+\caption{Ukázka vykreslené scény pomocí fotonového mapování}
+\end{figure}
+\end{center}
+
 
 \paragraph{Proceduralní modelování města a osvětlení nočního města}\mbox{}\\
 
-Tato implementace je z roku 1999 a zabývá se proceduálním modelováním města (konkrétně Bostonu) a následně jej vykresluje pomocí sledování paprsku za využití algoritmu Monte Carlo. Implementace neběží v reálném čase. Výsledek je při detailním záběru po grafické stránce velice realistický. Reflektory vozidla osvětlují pouze blízké okolí. Při záběru\linebreak na město z výšky výsledek nebudí tolik realistický dojem jako při detailním záběru.
+Tato implementace je z roku 1999 a zabývá se proceduálním modelováním města (konkrétně Bostonu) a následně jej vykresluje pomocí sledování paprsku za využití metody Monte Carlo. Metoda pro každý bod na obrazovce nalezne odpovídající 3D bod v prostoru, z něj vyšle několik náhodných paprsků a vyhodnotí výsledné osvětlení.
+
+Implementace neběží v reálném čase. Výsledek je při detailním záběru po grafické stránce velice realistický. Reflektory vozidla osvětlují pouze blízké okolí. Při záběru\linebreak na město z výšky výsledek nebudí tolik realistický dojem jako při detailním záběru.
 
 \begin{center}
 \begin{figure}[h!]
@@ -384,12 +402,13 @@ Tato implementace je z roku 1999 a zabývá se proceduálním modelováním měs
 \caption{Ukázka nočního renderingu}
 \end{figure}
 \end{center}
+\newpage
 
 \paragraph{Imperfect shadow maps pro výpočet nepřímého osvětlení}\mbox{}\\
 
 Tato implementace, představená roku 2008, se nezabývá přímo noční scénou, zabývá se nepřímým osvětlením, které s noční scénou souvisí. Implementace běží v reálném čase a její výsledky jsou srovnatelné se snímky, které se vykreslují několik hodin.
 
-V této implementaci se nevyužívá předpočtených dat. Využívá se zde virtuálních bodových světel (VPL), která simulují odrazy světla. Z každého VPL se vytvoří stínová mapa o malém rozlišení a při vykreslování výsledné scény se vyhodnocuje viditelnost ze všech VPL.
+V této implementaci se nevyužívá předpočtených dat. Využívá se zde virtuálních bodových světel (VPL) převzorkovaných do bodů ve scéně, která simulují odrazy světla.\linebreak Z každého VPL se vytvoří stínová mapa o malém rozlišení a při vykreslování výsledné scény se vyhodnocuje viditelnost ze všech VPL.
 
 Implementace podporuje více typů zdrojů světla, včetně plošných. Nemá problémy\linebreak s barevným světlem ani s kaustiky.
 
@@ -399,7 +418,6 @@ Implementace podporuje více typů zdrojů světla, včetně plošných. Nemá p
 \caption{Ukázka výsledků techniky imperfektních stínových map pro efektivní výpočet nepřímého osvětlení \cite{Ritschel:2008:ISM}}
 \end{center}
 \end{figure}
-\newpage
 
 \subsection{Závodní simulátory s noční scénou pro platformu Android}
 V této sekci jsem vyhledával i implementace, u kterých není uvedeno, jak bylo výsledků dosaženo. Je to z důvodu malého počtu implementací odpovídající dané kategorii.
@@ -437,6 +455,7 @@ Simulátor disponuje asi nejdetailnějšími modely vozidel. Vývojář spolupra
 I když tento projekt není závodní simulátor s noční jízdou, zmiňuji ho hlavně kvůli ovládání. Jedná se o neoficiální remake hry Trackmania známé z PC. Projekt běží na Unity3D enginu a je dostupný na mnoha platformách, nedá se ale stáhnout přímo z Marketu či Storu.
 
 U výše uvedených simulátorů vozidlo automaticky zrychluje a u některých i samo brzdí. Hráč nemá tedy nad vozidlem takovou kontrolu. V případě Track Racing má hráč nad vozidlem plnou kontrolu a zážitek ze hry se dá srovnat se zážitkem z původní PC hry.
+\newpage
 
 \begin{center}
 \begin{figure}[h!]

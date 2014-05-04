@@ -8,7 +8,7 @@ LIBS += -lGL \
     -lBulletDynamics \
     -lBulletCollision \
     -lLinearMath \
-    ../support/fmodapi-4.44.08/libfmodex-4.44.08.so
+    ./libfmodex-4.44.08.so
 TARGET = open4speed
 CONFIG += console
 CONFIG -= app_bundle

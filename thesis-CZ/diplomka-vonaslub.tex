@@ -285,7 +285,7 @@ Rád bych poděkoval panu Jiřímu Bittnerovi za vedení této diplomové práce
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%    Abstract 
 \abstractpage
-The goal of this Master's thesis is a rendering large scenes with precomputed illumination on smartphones. Precomputed illumination is generated using raycasting and it is stored in form of lightmaps. Lightmaps are dynamically updated by patches depended on change of lights status. Precomputed illumination is also applied to dynamic object in scene. The project is written in C++ language and it is using OpenGL library. The thesis contains testing of performance and memory consumption in different levels of detail. Thesis also contains performance comparation of laptop, tablet a smartphone.
+The goal of this Master's thesis is a rendering large scenes with precomputed illumination on smartphones. Precomputed illumination is generated using raycasting and it is stored in form of lightmaps. Lightmaps are dynamically updated by patches depended on change of lights status. Precomputed illumination is also applied to dynamic object in scene. The project is written in C++ language and it is using OpenGL library. The thesis contains testing of performance and memory consumption in different levels of detail. The thesis also contains performance comparation of laptop, tablet a smartphone.
 % Prace v cestine musi krome abstraktu v anglictine obsahovat i
 % abstrakt v cestine.
 \vglue60mm
@@ -294,7 +294,7 @@ The goal of this Master's thesis is a rendering large scenes with precomputed il
 \vskip 2.75\baselineskip
 
 \noindent
-Cílem této diplomové práce je zobrazování rozsáhlých scén s předpočteným osvětlením na mobilních zařízeních. Předpočtené osvětlení je generováno za pomocí vrhání paprsků a je ukládáno ve formě map osvětlení. Mapy osvětlení jsou dynamicky aktualizovány pomocí záplat v závislosti na změně stavu světel. Předpočtené osvětlení je také aplikováno na dynamické objekty ve scéně. Projekt je psaný jazyce C++ a používá knihovnu OpenGL. Práce obsahuje testování výpočetní a paměťové náročnosti při různých úrovních detailu. Práce také obsahuje porovnání výkonu notebooku, tabletu a mobilního zařízení.
+Cílem této diplomové práce je zobrazování rozsáhlých scén s předpočteným osvětlením\linebreak na mobilních zařízeních. Předpočtené osvětlení je generováno za pomocí vrhání paprsků a je ukládáno ve formě map osvětlení. Mapy osvětlení jsou dynamicky aktualizovány pomocí záplat v závislosti na změně stavu světel. Předpočtené osvětlení je také aplikováno na dynamické objekty ve scéně. Projekt je psaný v jazyce C++ a používá knihovnu OpenGL. Práce obsahuje testování výpočetní a paměťové náročnosti při různých úrovních detailu. Práce také obsahuje porovnání výkonu notebooku, tabletu a mobilního zařízení.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Obsah / Table of Contents 
@@ -636,9 +636,9 @@ Stíny v počítačové grafice napomáhají k vnímání souvislostí ve scén�
 
 Abychom mohli stín spočítat, musíme znát informace o okolí aktuálně vykreslovaného primitiva. To je v OpenGL problém, protože při vykreslování primitiv nemáme standardně žádné informace o okolí. Problém se řeší pomocí tzv. stínových map. 
 
-Stínová mapa je textura, do které se vykreslí scéna z pohledu zdroje světla. Do stínové mapy se nekreslí barevná informace, kreslí se do ní vzdálenost od zdroje světla (na obrázku 3.9 je tato vzdálenost namapovaná na odstíny šedi).
+Stínová mapa je textura, do které se vykreslí scéna z pohledu zdroje světla. Do stínové mapy se nekreslí barevná informace, kreslí se do ní vzdálenost od zdroje světla (na obrázku 3.10 je tato vzdálenost namapovaná na odstíny šedi).
 
-Princip stínových map je naznačen na obrázku 3.8. Při vyhodnocování bodu P se spočítá vzdálenost bodu od zdroje světla a porovná se s hodnotou uloženou ve stínové mapě.\linebreak V případě bodu P je vzdálenost vyšší než hodnota ve stínové mapě a bod je vyhodnocen jako zastíněný. V případě bodu Q je vzdálenost stejná jako ve stínové mapě (s numerickou tolerancí) a bod je tedy viditelný.
+Princip stínových map je naznačen na obrázku 3.9. Při vyhodnocování bodu P se spočítá vzdálenost bodu od zdroje světla a porovná se s hodnotou uloženou ve stínové mapě.\linebreak V případě bodu P je vzdálenost vyšší než hodnota ve stínové mapě a bod je vyhodnocen jako zastíněný. V případě bodu Q je vzdálenost stejná jako ve stínové mapě (s numerickou tolerancí) a bod je tedy viditelný.
 
 \begin{center}
 \begin{figure}[h]
@@ -667,7 +667,7 @@ $d = SM[\vec{p}_x, \vec{p}_y]$
 Nakonec zjistíme, jak se tyto hodnoty liší pomocí podmínky $|\vec{p}_z - d| < \epsilon$, kde $\epsilon$ je malé číslo filtrující numerickou chybu. Pokud je podmínka splněna, je bod osvětlený daným zdrojem světla.
 \bigskip
 
-Výše uvedeným postupem jsou řešeny ostré stíny pro bodové zdroje světla, případně světelné reflektory. Dále je potřeba řešit měkké stíny, které vznikají z plošných zdrojů světla. Rozdíl mezi ostrými a měkkými stíny je znázorněn na obrázku 3.10.
+Výše uvedeným postupem jsou řešeny ostré stíny pro bodové zdroje světla, případně světelné reflektory. Dále je potřeba řešit měkké stíny, které vznikají z plošných zdrojů světla. Rozdíl mezi ostrými a měkkými stíny je znázorněn na obrázku 3.11.
 
 \begin{center}
 \begin{figure}[h]
@@ -701,7 +701,7 @@ Odlesky dodávají scéně lepší vzhled, dodávají dojem buď kovového nebo 
 
 Standardně se odlesk realizuje dalším průchodem, ve kterém se vykreslí okolí do textury\linebreak a tato textura se poté aplikuje na model s odleskem. U menších objektů, jako je například auto, se vykreslí okolí pomocí cube mapování do FBO. Výsledná textura se následně namapuje na objekt a tím se získá dojem lesklého povrchu.
 
-V případě rovných povrchů je nutné použít jiný přístup, scéna se vykreslí do textury\linebreak z pohledu pod povrchem, který je na obrázku 3.13 označen jako $P'$. Pohled snímá objekty jakoby z povrchu a při vykreslování na obrazovku se spočítá pozice daného pixelu povrchu ve vykreslené textuře a z té se aplikuje barva pixelu.
+V případě rovných povrchů je nutné použít jiný přístup, scéna se vykreslí do textury\linebreak z pohledu pod povrchem, který je na obrázku 3.14 označen jako $P'$. Pohled snímá objekty jakoby z povrchu a při vykreslování na obrazovku se spočítá pozice daného pixelu povrchu ve vykreslené textuře a z té se aplikuje barva pixelu.
 
 \begin{figure}[h!]
 \begin{center}
@@ -895,7 +895,7 @@ V obou přístupech je výsledná mapa osvětlení 24-bitová RGB bitmapa ulože
 \subsection{Generování texturovacích souřadnic pro mapy osvětlení}
 V teoretické části byl popsán postup generování texturovacích souřadnic pomocí ILP.\linebreak V praxi toto řešení nelze použít, protože jeho výpočetní složitost metody je $O(m^2 \cdot n^2)$, kde $m$ je počet trojúhelníků a $n$ počet texelů v lightmapě.  Pomocí ILP se tedy dají řešit pouze velice malé instance problému. V této práci problém řeším pomocí metody Packing Lightmaps \cite{Scott02}, což je metoda řešící problém batohu za použití datové struktury kD stromu, která dělí $k$-rozměrný objekt půlením.
 
-V případě Packing Lightmaps dělíme rovinu horizontálním nebo vertikálním řezem. kD strom je typ binárního stromu, jehož kořen reprezentuje k-rozměrný objekt (v našem případě mapu osvětlení). Vnitřní uzly jsou dělící, určují podle které osy se provede řez a je v nich zapsána také pozice řezu. Listy stromu reprezentují objekty uložené ve struktuře, v mém případě AABB - tedy dva párové trojúhelníky (viz kapitola 3.6.1).
+V případě Packing Lightmaps dělíme rovinu horizontálním nebo vertikálním řezem. kD strom je typ binárního stromu, jehož kořen reprezentuje k-rozměrný objekt (v našem případě mapu osvětlení). Vnitřní uzly jsou dělící, určují podle které osy se provede řez a je v nich zapsána také pozice řezu. Listy stromu reprezentují objekty uložené ve struktuře, v mém případě AABB - tedy dva párové trojúhelníky (viz kapitola 4.2).
 
 \begin{center}
 \begin{figure}[h]
@@ -953,7 +953,7 @@ public boolean addAABB(AABB aabb) {
 \subsection{Generování map osvětlení}
 Generování map osvětlení znamená v podstatě vykreslení celé scény v souřadnicích map osvětlení (tím se vykreslí celá scéna, aniž by docházelo k zakrývání objektů). Generování je\linebreak v práci řešeno dvěma různými přístupy. Prvním přístupem je rasterizační (pomocí OpenGL) a druhým je vrhání paprsku. V obou přístupech se provede výpočet difúzního osvětlení stejným způsobem jako se provádí při běžném vykreslování scény. 
 
-Aby mapa osvětlení obsahovala stíny, musí se provést test viditelnosti jednotlivých bodů pro jednotlivá světla. V rasterizačním přístupu se toto provádí pomocí stínových map (viz. kapitola 3.6.3).
+Aby mapa osvětlení obsahovala stíny, musí se provést test viditelnosti jednotlivých bodů pro jednotlivá světla. V rasterizačním přístupu se toto provádí pomocí stínových map (viz. kapitola 4.3).
 
 V druhém přístupu se pro každý zdroj světla vrhají paprsky do všech bodů v mapě osvětlení (paprsky mají definováno, kde končí). Pokud paprsek protne mezi počátkem\linebreak a destinací nějaký trojúhelník, nepřipočte se pro bod v osvětlovací mapě příspěvek z daného zdroje světla.
 
@@ -977,7 +977,7 @@ bool TestAABBAABB(AABB* a, AABB* b) {
 
 Po sestavení stromu máme tedy rozdělené trojúhelníky do segmentů, které jsou definované pomocí AABB. Abychom nalezli průsečík paprsku s nějakým trojúhelníkem ve scéně, musíme strom procházet. Nejdříve provedeme test průniku paprsku s AABB potomků kořene. U každého potomka, u kterého byl test pozitivní, provedeme test jeho potomků. Tímto způsobem pokračujeme dokud se nedostaneme na úroveň listů. V každém uzlu, u kterého byl test pozitivní, provedeme také test průsečíku se všemi trojúhelníky, které má v seznamu. Pokud test jakéhokoliv trojúhelníku je pozitivní, vrátíme test paprsku jako pozitivní.
 
-Ukázka rekurzivního hledání v octree je na obrázku 4.6 (na obrázku je pouze quadtree, což je obdoba octree ve 2D).
+Ukázka rekurzivního hledání v octree je na obrázku 5.4 (na obrázku je pouze quadtree, což je obdoba octree ve 2D).
 
 \begin{center}
 \begin{figure}[h]
@@ -1112,7 +1112,7 @@ static native void nativeKey(int i);
 static native void nativeDisplay();
 \end{lstlisting}
 
-Dalším problémem je volání Android API z C++ kódu (tzn. volání Java kódu z C++). Příkladem je přehrávání zvuků pomocí Android API, ovládání zvuku je nutno řídit z C++, ale API je přímo přístupné pouze z Javy. Na obrázku 4.2 je znázorněn případ třídy Sounds. Problém se řeší také pomocí JNI, pouze volání jsou prováděny v opačném směru.
+Dalším problémem je volání Android API z C++ kódu (tzn. volání Java kódu z C++). Příkladem je přehrávání zvuků pomocí Android API, ovládání zvuku je nutno řídit z C++, ale API je přímo přístupné pouze z Javy. Na obrázku 5.8 je znázorněn případ třídy Sounds. Problém se řeší také pomocí JNI, pouze volání jsou prováděny v opačném směru.
 
 \begin{center}
 \begin{figure}[h]
@@ -1272,7 +1272,7 @@ $r'' = [f_x, 1 - f_y + f_z \cdot a + f_z \cdot (1 - \vec{n}_y) \cdot b]$
 \end{figure}
 \end{center}
 
-Pro můj zvolený pohled jsem zvolil konstanty $a = 0.1; b = 2$. Odlesk vizuálně odpovídá a vykresluje se velice rychle. Problém je při nízké snímkovací frekvenci, kdy dochází k posunu odlesku (jak je vidět na obrázku 4.11). Posun není nijak výrazný, ale pokud se na něj soustředíme, vidíme jej. Dále při mísení efektů odlesků s motion-blurem dochází k rozmazání odlesku více než původního obrazu. Motion-blur je pro odlesky dvojnásobný, protože se aplikuje jak na původní objekt, tak na zrcadlový povrch.
+Pro můj zvolený pohled jsem zvolil konstanty $a = 0.1; b = 2$. Odlesk vizuálně odpovídá a vykresluje se velice rychle. Problém je při nízké snímkovací frekvenci, kdy dochází k posunu odlesku (jak je vidět na obrázku 5.10). Posun není nijak výrazný, ale pokud se na něj soustředíme, vidíme jej. Dále při mísení efektů odlesků s motion-blurem dochází k rozmazání odlesku více než původního obrazu. Motion-blur je pro odlesky dvojnásobný, protože se aplikuje jak na původní objekt, tak na zrcadlový povrch.
 \bigskip
 
 U vozidel by se optimálně měl odlesk řešit pomocí víceprůchodového algoritmu za využití cube mapování. Vzhledem k tomu, že potřebuji maximální možný výkon a Android zařízení mají typicky malý displej, použil jsem jednodušší variantu.

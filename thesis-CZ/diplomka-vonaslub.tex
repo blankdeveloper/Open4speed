@@ -618,7 +618,7 @@ Vstupem pro blending funkci je zdrojová barva $C_s$, cílová barva $C_d$ a par
 $C_d = C_s \cdot \alpha_s + C_d \cdot \alpha_d$
 \end{center}
 
-U blendingu je důležité zda kreslíme odzadu dopředu nebo obráceně. Při kreslení odzadu dopředu nejdříve vykreslíme neprůhlednou část scény bez blendingu a se zápisem do hloubkového bufferu. Potom vypneme zápis do hloubkového bufferu a vykreslíme geometrii s částečnou průhledností (se zapnutým blendingem). Při kreslení odpředu dozadu kreslíme objekty v opačném pořadí s tím rozdílem, že musíme u neprůhledného materiálu použít blending, abychom nepřekreslili poloprůhledné objekty v popředí.
+U blendingu je důležité, zda kreslíme odzadu dopředu nebo obráceně. Při kreslení odzadu dopředu nejdříve vykreslíme neprůhlednou část scény bez blendingu a se zápisem do hloubkového bufferu. Potom vypneme zápis do hloubkového bufferu a vykreslíme geometrii s částečnou průhledností (se zapnutým blendingem). Při kreslení odpředu dozadu kreslíme objekty v opačném pořadí s tím rozdílem, že musíme u neprůhledného materiálu použít blending, abychom nepřekreslili poloprůhledné objekty v popředí.
 \newpage
 
 \begin{figure}[h]
@@ -805,7 +805,7 @@ V dalším kroku hledáme párové trojúhelníky se stejnými délky stran $a, 
 
 \paragraph{Oprava chyby sousedících trojúhelníků}\mbox{}\\
 
-Při použití výše uvedeného postupu vzniká problém při vykreslování, protože není\linebreak u texelů kolem přepon jednoznačné, ke kterému trojúhelníku texel patří a proto vznikají ve výsledné scéně artefakty. Stává se to, protože sousedící trojúhelníky v mapě osvětlení spolu nesousedí ve scéně.
+Při použití výše uvedeného postupu vzniká problém při vykreslování, protože není\linebreak u texelů kolem přepon jednoznačné, ke kterému trojúhelníku texel patří, a proto vznikají ve výsledné scéně artefakty. Stává se to, protože sousedící trojúhelníky v mapě osvětlení spolu nesousedí ve scéně.
 
 \begin{center}
 \begin{figure}[h]
@@ -844,7 +844,7 @@ Výslednou barvu texelu $C_t$ vypočteme z difúzního osvětlení pomocí níž
 $C_t = E_r \cdot F_a \cdot C_l \cdot k_d \cdot (\vec{L} \cdot \vec{N})$
 \end{center}
 
-Pokud bychom chtěli použit i bodové zdroje světla, musíme mít stínovou mapu pro všechny možné směry světelných paprsků. K tomu lze využít tzv. mapování na krychli. Mapování na krychli je mapování scény, při kterém se na každou stěnu krychle vykreslí pohled v jednom směru s perspektivním úhlem $90^{\circ}$. V případě použití stínových map při mapování na krychli, se pro každou stranu provádí výpočet jakoby se jednalo o samostatné světlo (efektivita reflektoru $E_r = 1$).
+Pokud bychom chtěli použit i bodové zdroje světla, musíme mít stínovou mapu pro všechny možné směry světelných paprsků. K tomu lze využít tzv. mapování na krychli. Mapování na krychli je mapování scény, při kterém se na každou stěnu krychle vykreslí pohled v jednom směru s perspektivním úhlem $90^{\circ}$. V případě použití stínových map při mapování na krychli, se pro každou stranu provádí výpočet, jakoby se jednalo o samostatné světlo (efektivita reflektoru $E_r = 1$).
 
 \begin{center}
 \begin{figure}[h]
@@ -904,7 +904,7 @@ V případě Packing Lightmaps dělíme rovinu horizontálním nebo vertikální
 \end{figure}
 \end{center}
 
-Metoda Packing Lightmaps nejdříve seřadí AABB podle jejich plochy a postupně je vkládá do kD stromu. Při každém vložení se nejdříve hledají neobsazené listy, zda neexistuje takový, který by odpovídal rozměrům AABB. Pokud takový neexistuje pokusí se algoritmus nalézt takový neobsazený list, kterému odpovídá aspoň jeden rozměr. V případě úspěšného hledání se AABB vloží do listu, v ostatních případech se najde větší list, provede se jeho rozdělení a následně se AABB do jednoho z potomků vloží.
+Metoda Packing Lightmaps nejdříve seřadí AABB podle jejich plochy a postupně je vkládá do kD stromu. Při každém vložení se nejdříve hledají neobsazené listy, zda neexistuje takový, který by odpovídal rozměrům AABB. Pokud takový neexistuje, pokusí se algoritmus nalézt takový neobsazený list, kterému odpovídá aspoň jeden rozměr. V případě úspěšného hledání se AABB vloží do listu, v ostatních případech se najde větší list, provede se jeho rozdělení a následně se AABB do jednoho z potomků vloží.
 \newpage
 
 \lstset{language=Java} 
@@ -1151,7 +1151,7 @@ public static void soundPlay(int index, int loop) {
 \end{lstlisting}
 
 \subsection{Využití vláken}
-Většina zařízení, které dnes už spadají do střední třídy, je vybavena aspoň dvěma procesory, je proto vhodné rozdělit činnost do více vláken, aby bylo dosaženo maximálního výkonu. Třída GLSurfaceView, která umožňuje vykreslovat OpenGL scénu z C++ umožňuje volat OpenGL příkazy pouze z jednoho vlákna. Z tohoto důvodu jsem rozdělil kód na grafické\linebreak a negrafické vlákno.
+Většina zařízení, které dnes už spadají do střední třídy, je vybavena alespoň dvěma procesory, je proto vhodné rozdělit činnost do více vláken, aby bylo dosaženo maximálního výkonu. Třída GLSurfaceView, která umožňuje vykreslovat OpenGL scénu z C++ umožňuje volat OpenGL příkazy pouze z jednoho vlákna. Z tohoto důvodu jsem rozdělil kód na grafické\linebreak a negrafické vlákno.
 
 V menu simulátoru se používá pouze grafické vlákno, negrafické vlákno je primárně použito pro fyzikální výpočty, které zařízení vytěžují nejvíce. Vlákna jsou synchronizovaná, aby nedocházelo k použití transformace vozidla z předešlého snímku(to by bylo velmi rušivé).
 
@@ -1203,7 +1203,7 @@ Texture* loadPNG(const char* filename) {
 \section{Screen-space přístup}
 Při běhu jakéhokoliv simulátoru je největší zátěž mobilního hardware způsobena vykreslováním 3D scény, proto je nutné tuto část co nejvíce zefektivnit. Pro mnoho efektů se používají takzvané víceprůchodové přístupy (scéna se vykreslí víckrát z různých pohledů nebo pomocí různých shaderů), ale na mobilním zařízení je zatím z hlediska výkonu možné použít pouze jednoprůchodový přístup.
 
-Abych částečně nahradil ve svém simulátoru víceprůchodový přístup, použil jsem screen-space přístup (to je obecně jakákoliv technika využívající data z pohledu kamery, jinými slovy máme pouze výsledný snímek a na něm provádíme další operace). V praxi se používá hlavně pro zrcadlové plochy. Potřeboval jsem přistupovat do aktuálně vykreslovaného snímku. To je ale problém, protože tento snímek není kompletní a kdybych vykresloval přímo do něj\linebreak a zároveň z něj četl způsobilo by to chyby ve výsledném obraze.
+Abych částečně nahradil ve svém simulátoru víceprůchodový přístup, použil jsem screen-space přístup (to je obecně jakákoliv technika využívající data z pohledu kamery, jinými slovy máme pouze výsledný snímek a na něm provádíme další operace). V praxi se používá hlavně pro zrcadlové plochy. Potřeboval jsem přistupovat do aktuálně vykreslovaného snímku. To je ale problém, protože tento snímek není kompletní a kdybych vykresloval přímo do něj\linebreak a zároveň z něj četl, způsobilo by to chyby ve výsledném obraze.
 
 Řešením je vykreslování střídavě do dvou různých frame buffer objektů (viz obrázek 5.9). To znamená, že při lichém snímku kreslím do FBO 1 a čtu z FBO 2. Při sudém snímku je tomu obráceně. Tímto způsobem získám přístup do vykreslené scény, sice s drobným zpožděním, ale při dostatečně rychlém vykreslování to nebude rušivé (za předpokladu, že textura FBO bude použita na efekty jako jsou odlesky nebo stíny).
 
@@ -1247,7 +1247,7 @@ Tento kód využívá screen-space informaci (texturu $pFrm$). Rozostření se p
 \subsection{Odlesky}
 Dále je možné ve screen-space řešit odlesky. Existuje obecný (složitý) postup jak tyto odlesky vypočítat, který by mobilní hardware nezvládl. Problém jsem rozdělil podle typu ploch. Vzhledem k tomu, že v simulátoru dochází pouze k rotaci pohledu podle osy y (rotace yaw), je možné řešit pro odlesky pro různé tvary povrchů zvlášť.
 
-Abychom vytvořili odlesk povrchu vozovky optimálně, potřebovali bychom informaci\linebreak o hloubce scény. To by bylo opět výpočetně náročné a proto jsem zvolil jednodušší postup. Odlesk funguje pouze pro jeden úhel pohledu mezi vozovkou a směrovým vektorem kamery.
+Abychom vytvořili odlesk povrchu vozovky optimálně, potřebovali bychom informaci\linebreak o hloubce scény. To by bylo opět výpočetně náročné, a proto jsem zvolil jednodušší postup. Odlesk funguje pouze pro jeden úhel pohledu mezi vozovkou a směrovým vektorem kamery.
 
 Na úrovni přední řezné roviny kamery je horizont povrchu přesně v polovině obrazovky. Pokud budeme tedy mít normálu povrchu směřující kolmo nahoru, jsme schopni realizovat odlesk pomocí převrácení aktuální vykreslovací textury. Pro souřadnice aktuálně vykreslovaného fragmentu $[f_x, f_y, f_z]$ vypočteme souřadnice odlesku $r$ převrácením y hodnoty. Tím získáme odlesk na úrovni  přední řezné roviny.
 \begin{center}
@@ -1430,7 +1430,7 @@ Paměťová náročnost byla naměřena pomocí Linuxového měřiče paměti KS
 
 \section{Testovací aplikace - simulátor}
 
-U testovací aplikace jsem nejdříve testoval rychlost vykreslování stejné sekvence snímků na testovaných zařízeních bez aktualizování map osvětlení. Sekvence byla dlouhá 1 vteřinu a u každé konfigurace bylo provedeno cca 10 měření. V tabulce 6.5 je vždy uvedena nejlepší hodnota měření. Testovací aplikace disponuje omezovačem snímkovací frekvence, která je nastavena na 20FPS. U Android verze je oproti verzi pro Linux použita paralelizace výpočtů na CPU. Vlákna na CPU musí být synchronizována a proto Android zařízení nedosahují horního limitu snímkovací frekvence.
+U testovací aplikace jsem nejdříve testoval rychlost vykreslování stejné sekvence snímků na testovaných zařízeních bez aktualizování map osvětlení. Sekvence byla dlouhá 1 vteřinu a u každé konfigurace bylo provedeno cca 10 měření. V tabulce 6.5 je vždy uvedena nejlepší hodnota měření. Testovací aplikace disponuje omezovačem snímkovací frekvence, která je nastavena na 20FPS. U Android verze je oproti verzi pro Linux použita paralelizace výpočtů na CPU. Vlákna na CPU musí být synchronizována, a proto Android zařízení nedosahují horního limitu snímkovací frekvence.
 \newpage
 
 \begin{table}[h!]
@@ -1499,7 +1499,7 @@ Realizoval jsem testovací aplikaci, která mapy osvětlení využívá a nad r�
 
 Vzniklá aplikace sice není po grafické stránce schopna konkurovat komerčním simulátorům na platformě Android. Nicméně disponuje několika grafickými technikami, které mnoho komerčních simulátorů postrádá. Předzpracované osvětlení dodává scéně lepší vzhled a povedlo se dokonce aplikovat předzpracované osvětlení i na dynamické objekty.
 
-Práci do budoucna hodlám dále vyvíjet. Chci se soustředit hlavně na další možnosti optimalizace jako je například ořez scény pohledovým jehlanem, použití techniky Level-of-detail a dynamické načítání scény.
+Práci do budoucna hodlám dále vyvíjet. Chci se soustředit hlavně na další možnosti optimalizace, jako je například ořez scény pohledovým jehlanem, použití techniky Level-of-detail a dynamické načítání scény.
 
 %*****************************************************************************
 % Seznam literatury je v samostatnem souboru reference.bib. Ten

@@ -285,7 +285,7 @@ Rád bych poděkoval panu Jiřímu Bittnerovi za vedení této diplomové práce
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%    Abstract 
 \abstractpage
-The goal of this Master's thesis is a rendering large scenes with precomputed illumination on smartphones. Precomputed illumination is generated using raycasting and it is stored in form of lightmaps. Lightmaps are dynamically updated by patches depended on change of lights status. Precomputed illumination is also applied to dynamic object in scene. The project is written in C++ language and it is using OpenGL library. The thesis contains testing of performance and memory consumption in different levels of detail. The thesis also contains performance comparation of laptop, tablet a smartphone.
+The goal of this Master's thesis is a rendering large scenes with precomputed illumination on smartphones. Precomputed illumination is generated using rasterisation or raycasting. Results are stored in form of lightmaps. Lightmaps are dynamically updated by patches depended on change of lights status. Precomputed illumination is also applied to dynamic object in scene. The project is written in C++ language and it is using OpenGL library. The thesis contains testing of performance and memory consumption in different levels of detail. The thesis also contains performance comparation of laptop, tablet a smartphone.
 % Prace v cestine musi krome abstraktu v anglictine obsahovat i
 % abstrakt v cestine.
 \vglue60mm
@@ -294,7 +294,7 @@ The goal of this Master's thesis is a rendering large scenes with precomputed il
 \vskip 2.75\baselineskip
 
 \noindent
-Cílem této diplomové práce je zobrazování rozsáhlých scén s předpočteným osvětlením\linebreak na mobilních zařízeních. Předpočtené osvětlení je generováno za pomocí vrhání paprsků a je ukládáno ve formě map osvětlení. Mapy osvětlení jsou dynamicky aktualizovány pomocí záplat v závislosti na změně stavu světel. Předpočtené osvětlení je také aplikováno na dynamické objekty ve scéně. Projekt je psaný v jazyce C++ a používá knihovnu OpenGL. Práce obsahuje testování výpočetní a paměťové náročnosti při různých úrovních detailu. Práce také obsahuje porovnání výkonu notebooku, tabletu a mobilního zařízení.
+Cílem této diplomové práce je zobrazování rozsáhlých scén s předpočteným osvětlením\linebreak na mobilních zařízeních. Předpočtené osvětlení je generováno pomocí rasterizace nebo vrhání paprsků. Výsledky jsou ukládány ve formě map osvětlení. Mapy osvětlení jsou dynamicky aktualizovány pomocí záplat v závislosti na změně stavu světel. Předpočtené osvětlení je také aplikováno na dynamické objekty ve scéně. Projekt je psaný v jazyce C++ a používá knihovnu OpenGL. Práce obsahuje testování výpočetní a paměťové náročnosti při různých úrovních detailu. Práce také obsahuje porovnání výkonu notebooku, tabletu a mobilního zařízení.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Obsah / Table of Contents 
@@ -353,7 +353,7 @@ Zadání předpokládá, že projekt bude rozdělen do dvou samostatných část
 
 Metoda bude navržena tak, aby bylo umožněno některá světla v reálném čase zhasínat\linebreak a znovu rozsvěcovat nezávisle na sobě. Veškerá bodová světla budou vrhat spekulární odlesky na dynamické objekty.
 
-Předpočtené osvětlení bude využívat dva formáty dat - rastrový a vektorový. Rastrový bude určen pro statické osvětlení scény a vektorové pro dynamická světla. Plocha map osvětlení bude co možná nejvíce využita z důvodu očekávané malé paměti vymezeny pro velké textury. Aby bylo možné určit nejvhodnější rozlišení těchto textur, bude umožněno škálování map osvětlení.
+Předpočtené osvětlení bude využívat dva formáty dat - rastrový a vektorový. Rastrový bude určen pro statické osvětlení scény a vektorové pro dynamická světla. Využití plochy map osvětlení bude maximalizováno z důvodu očekávané malé paměti vymezené pro velké textury. Aby bylo možné určit nejvhodnější rozlišení těchto textur, bude umožněno škálování map osvětlení.
 
 \subsection{Statické osvětlení s dynamickými objekty ve scéně}
 Při použití dynamických objektů ve scéně se statickém osvětlením vznikají dva základní problémy. Prvním problém je, že dynamické objekty mají jiné osvětlení než statická scéna\linebreak a to vypadá velice nepřirozeně. Druhým problémem je, že pokud dynamický objekt zastíní zdroj světla, tak nevznikne stín na statických objektech.
@@ -369,13 +369,13 @@ Pro platformu Android existuje nepřeberné množství aplikací a toho začína
 
 Rešerši souvisejících metod jsem zaměřil na dvě různé kategorie. První kategorie jsou implementace pro PC, kde je nejčastěji řešeno nepřímé osvětlení, které by pro mobilní zařízení bylo příliš náročné na výpočet. Druhá kategorie jsou závodní simulátory s noční jízdou pro platformu Android. V této kategorii bývají nejčastěji použity techniky jako v této práci.
 
-\subsection{Projekty zabývající se vykreslování noční scény}
+\subsection{Vykreslování noční scény}
 
 V této sekci jsem vybral co nejrealističtější implementace, ke kterým existuje článek o tom, jak bylo výsledku dosaženo. Existuje sice několik implementací, které vypadají realističtěji. To jsou ale většinou komerční produkty, které nesdílejí ostatním, jakým způsobem byla implementace realizována.
 
 \paragraph{Interaktivní vykreslování modelů měst s globálním osvětlením}\mbox{}\\
 
-Technika založená na fotonovém mapování, používá 2D buffery pro uložení fotonové energie jdoucí směrem k povrchu modelu. Tyto buffery jsou namapovány na neviditelné válce, které umožňují rychle vypočítat globální osvětlení v jeho okolí.
+Interaktivní vykreslování modelů měst\cite{Interact12} je technika založená na fotonovém mapování, která používá 2D buffery pro uložení fotonové energie jdoucí směrem k povrchu modelu. Tyto buffery jsou namapovány na neviditelné válce, které umožňují rychle vypočítat globální osvětlení v jeho okolí.
 
 Metoda umožňuje zobrazování zrcadlových odlesků, ostrých stínů a umožňuje aktualizovat předpočtenou informaci za běhu aplikace. Projekt je specifický tím, že umožňuje vykreslovat rozsáhle scény s globálním osvětlením v reálném čase. 
 
@@ -391,7 +391,7 @@ Autoři projektu neuvádí použitelnost metody s noční scénou. Pravděpodobn
 
 \paragraph{Proceduralní modelování města a osvětlení nočního města}\mbox{}\\
 
-Tato implementace je z roku 1999 a zabývá se proceduálním modelováním města (konkrétně Bostonu) a následně jej vykresluje pomocí sledování paprsku za využití metody Monte Carlo. Metoda pro každý bod na obrazovce nalezne odpovídající 3D bod v prostoru, z něj vyšle několik náhodných paprsků a vyhodnotí výsledné osvětlení.
+Projekt \uv{Proceduralní modelování města a osvětlení nočního města}\cite{Chen99} byl představen roku 1999 a zabývá se proceduálním modelováním města (konkrétně Bostonu), který je vykreslován pomocí sledování paprsku za využití metody Monte Carlo. Metoda pro každý bod na obrazovce nalezne odpovídající 3D bod v prostoru, z něj vyšle několik náhodných paprsků a vyhodnotí výsledné osvětlení.
 
 Implementace neběží v reálném čase. Výsledek je při detailním záběru po grafické stránce velice realistický. Reflektory vozidla osvětlují pouze blízké okolí. Při záběru\linebreak na město z výšky výsledek nebudí tolik realistický dojem jako při detailním záběru.
 
@@ -405,7 +405,7 @@ Implementace neběží v reálném čase. Výsledek je při detailním záběru 
 
 \paragraph{Imperfect shadow maps pro výpočet nepřímého osvětlení}\mbox{}\\
 
-Tato implementace, představená roku 2008, se nezabývá přímo noční scénou, zabývá se nepřímým osvětlením, které s noční scénou souvisí. Implementace běží v reálném čase a její výsledky jsou srovnatelné se snímky, které se vykreslují několik hodin.
+Technika imperfect shadow maps\cite{Ritschel:2008:ISM}, představená roku 2008, se nezabývá přímo noční scénou, zabývá se nepřímým osvětlením, které s noční scénou souvisí. Implementace běží\linebreak v reálném čase a její výsledky jsou srovnatelné se snímky, které se vykreslují několik hodin.
 
 V této implementaci se nevyužívá předpočtených dat. Využívá se zde virtuálních bodových světel (VPL) převzorkovaných do bodů ve scéně, která simulují odrazy světla.\linebreak Z každého VPL se vytvoří stínová mapa o malém rozlišení a při vykreslování výsledné scény se vyhodnocuje viditelnost ze všech VPL.
 
@@ -661,10 +661,10 @@ $\vec{p} = MVP_{light} \cdot \begin{pmatrix}\vec{v}\\ 1\\\end{pmatrix}$
 
 Pomocí tohoto postupu získáme stínovou mapu, kterou využijeme při vykreslování scény z pohledu kamery. Vypočteme $\vec{p}$ stejně jako při výpočtu stínové mapy a získáme vzdálenost $d$ ze stínové mapy $SM$.
 \begin{center}
-$d = SM[\vec{p}_x, \vec{p}_y]$
+$d = SM[p_x, p_y]$
 \end{center}
 
-Nakonec zjistíme, jak se tyto hodnoty liší pomocí podmínky $|\vec{p}_z - d| < \epsilon$, kde $\epsilon$ je malé číslo filtrující numerickou chybu. Pokud je podmínka splněna, je bod osvětlený daným zdrojem světla.
+Nakonec zjistíme, jak se tyto hodnoty liší pomocí podmínky $|p_z - d| < \epsilon$, kde $\epsilon$ je malé číslo filtrující numerickou chybu. Pokud je podmínka splněna, je bod osvětlený daným zdrojem světla.
 \bigskip
 
 Výše uvedeným postupem jsou řešeny ostré stíny pro bodové zdroje světla, případně světelné reflektory. Dále je potřeba řešit měkké stíny, které vznikají z plošných zdrojů světla. Rozdíl mezi ostrými a měkkými stíny je znázorněn na obrázku 3.11.
@@ -717,9 +717,9 @@ $d = -(xN_x + yN_y + zN_z)$
 \end{center}
 \begin{center}
 $R = \begin{pmatrix}
-1 -2 \cdot {\vec{N}_x}^2 & -2 \cdot \vec{N}_x \cdot \vec{N}_y & -2 \cdot \vec{N}_x \cdot \vec{N}_z & -2 \cdot \vec{N}_x \cdot d\\
--2 \cdot \vec{N}_y \cdot \vec{N}_x & 1 -2 \cdot {\vec{N}_y}^2 & -2 \cdot \vec{N}_y \cdot \vec{N}_z & -2 \cdot \vec{N}_y \cdot d\\
--2 \cdot \vec{N}_z \cdot \vec{N}_x & -2 \cdot \vec{N}_z \cdot \vec{N}_y & 1 -2 \cdot {\vec{N}_z}^2 & -2 \cdot \vec{N}_z \cdot d\\
+1 -2 \cdot {\vec{N}_x}^2 & -2 \cdot N_x \cdot N_y & -2 \cdot N_x \cdot N_z & -2 \cdot N_x \cdot d\\
+-2 \cdot N_y \cdot N_x & 1 -2 \cdot {N_y}^2 & -2 \cdot N_y \cdot N_z & -2 \cdot N_y \cdot d\\
+-2 \cdot N_z \cdot N_x & -2 \cdot N_z \cdot N_y & 1 -2 \cdot {N_z}^2 & -2 \cdot N_z \cdot d\\
 0 & 0 & 0 & 1
 \end{pmatrix}$
 \end{center}
@@ -734,7 +734,7 @@ $P' = R \cdot P \cdot \begin{pmatrix}
 \end{pmatrix}$
 \end{center}
 
-Při vykreslování reflexního pohledu je nutné provést ořez scény pod povrchem a nevykreslovat odvrácené trojúhelníky. Pro finální vykreslování si označím reflexní mapu jako $RM$ a vykreslovaný vrchol jako $\vec{v}$. Barva odlesku $color_r$ se spočítá dle níže uvedeného vzorce.
+Při vykreslování reflexního pohledu je nutné provést ořez scény pod povrchem a nevykreslovat odvrácené trojúhelníky. Pro finální vykreslování si označím reflexní mapu jako $RM$ a vykreslovaný vrchol jako $\vec{v}$. Barva odlesku $I_r$ se spočítá dle níže uvedeného vzorce.
 \begin{center}
 $\vec{p} = P' \cdot \begin{pmatrix}
 \vec{v}\\
@@ -742,7 +742,7 @@ $\vec{p} = P' \cdot \begin{pmatrix}
 \end{pmatrix}$
 \end{center}
 \begin{center}
-$color_r = RM[\vec{p}_x, \vec{p}_y]$
+$I_r = RM[p_x, p_y]$
 \end{center}
 
 \chapter{Předpočtené osvětlení}
@@ -1022,8 +1022,8 @@ Abychom získali záplaty v této podobě musíme nejdříve pro každý dynamic
 
 Pro $\forall$ body $p$ náležící trojúhelníku, lze ověřit interpolaci barvy ve vrcholech $a$, $b$ a $c$ pokud známe barycentrické váhy $Wp$ pro body $p$ níže uvedeným vzorcem ($\epsilon$ je tolerance odchylky barvy).
 \begin{center}
-$I_k = lm[\vec{p}_u][\vec{p}_v]$\\
-$I_l = Wp_a \cdot lm[\vec{a}_u][\vec{a}_v] + Wp_b \cdot lm[\vec{b}_u][\vec{b}_v] + Wp_c \cdot lm[\vec{c}_u][\vec{c}_v]$\\
+$I_k = lm[p_u][p_v]$\\
+$I_l = Wp_a \cdot lm[a_u][a_v] + Wp_b \cdot lm[b_u][b_v] + Wp_c \cdot lm[c_u][c_v]$\\
 $|I_k - I_l| < \epsilon$
 \end{center}
 
@@ -1262,7 +1262,7 @@ $r' = [f_x, 1 - f_y + f_z \cdot a]$
 
 Dále je potřeba podporovat i nekolmé povrchy. To se provede nalezením další konstanty $b$, která bude měnit lineární posun odlesku podle normály povrchu $\vec{n}$. Tím získáme souřadnice odlesku $r''$ limitované pouze úhlem pohledu kamery.
 \begin{center}
-$r'' = [f_x, 1 - f_y + f_z \cdot a + f_z \cdot (1 - \vec{n}_y) \cdot b]$
+$r'' = [f_x, 1 - f_y + f_z \cdot a + f_z \cdot (1 - n_y) \cdot b]$
 \end{center}
 
 \begin{center}
@@ -1279,7 +1279,7 @@ U vozidel by se optimálně měl odlesk řešit pomocí víceprůchodového algo
 
 Souřadnice odlesku $r$ u vozidel se provádí pouze podle normály. Pro výpočet pozice odraženého obrazu se vezme střed vozidla $s$ v souřadnicích kamery a přičte se k němu normála $\vec{n}$ vynásobena určitým faktorem $f$ (toto platí pouze pro vozidla, které uživatel ovládá).
 \begin{center}
-$r = [s_x + \vec{n}_x \cdot f, s_y + \vec{n}_y \cdot f]$
+$r = [s_x + n_x \cdot f, s_y + n_y \cdot f]$
 \end{center}
 
 \begin{center}
@@ -1330,7 +1330,7 @@ U ostatních vozidel je třeba osvětlení zjednodušit, aby to mobilní hardwar
 
 %*****************************************************************************
 \chapter{Testování}
-Testování aplikace probíhalo na smartphonu, tabletu a laptopu, které jsou blíže popsány v tabulce 5.1. Zařízení byla během testování plně nabita, byla připojena ke zdroji napájení a byly vypnuty volby úspory energie. Veškeré testy byly prováděny v režimu \uv{free ride} a za stejných podmínek.
+Testování aplikace probíhalo na smartphonu, tabletu a laptopu, které jsou blíže popsány v tabulce 5.1. Zařízení byla během testování plně nabita, byla připojena ke zdroji napájení a byly vypnuty volby úspory energie. Veškeré testy byly prováděny za stejných podmínek.
 
 \begin{table}[h!]
 \begin{center}
@@ -1376,7 +1376,7 @@ Rasterizační technika (za využití OpenGL) dosahuje výsledku o poznání ryc
 
 \paragraph{Plošné zdroje světla}\ \ \\
 
-V případě plošných zdrojů je vhodnější použití techniky map osvětlení. Paprsky bývají souběžné a lze tedy jedním testem detekovat průsečík více paprsků najednou. V níže uvedeném testu se ukázala efektivita filtrování paprsků, u kterých je jejich délka delší než vzdálenost, ve které je světlo zcela utlumeno.
+V případě plošných zdrojů je vhodnější použití techniky vrhání paprsků. Paprsky bývají téměř rovnoběžné a lze tedy jedním testem detekovat průsečík více paprsků najednou (za využití mailboxingu). V níže uvedeném testu se ukázala efektivita filtrování paprsků, u kterých je jejich délka delší než vzdálenost, ve které je světlo zcela utlumeno.
 \begin{table}[h!]
 \begin{center}
 \begin{tabular}{|p{80mm}|c|c|}
@@ -1416,7 +1416,7 @@ bez detekování dosahu & 68.12 & 20.561h\\ \hline
 
 \begin{figure}[h!]
 \includegraphics[width=150mm]{figures/graf3.png}
-\caption{Závislost rychlosti vykreslování paprsku na dosahu zdrojů světel, testování různě osvětlených scén}
+\caption{Závislost rychlosti zpracování paprsku na dosahu zdrojů světel, testování různě osvětlených scén}
 \end{figure}
 \newpage
 
@@ -1424,7 +1424,7 @@ bez detekování dosahu & 68.12 & 20.561h\\ \hline
 
 Paměťová náročnost byla naměřena pomocí Linuxového měřiče paměti KSysGuard. Generátor map osvětlení byl za běhu několikrát pozastaven a bylo provedeno měření celkového využití paměti generátorem. Z naměřených informací poté byly vypočteny hodnoty pro jednotlivé data. K vykreslení 8 map osvětlení o rozlišení 2048x2048 bylo použito celkem 1.94GB operační paměti.
 \begin{figure}[h!]
-\includegraphics[width=150mm]{figures/lmgen-mem-usage.png}
+\includegraphics[width=120mm]{figures/lmgen-mem-usage.png}
 \caption{Paměťová náročnost generátoru map osvětlení využívající vrhání paprsků. Scénou byl 3D model nočního města složený z přibližně 40000 trojúhelníků, vykreslováno bylo 8 map osvětlení o rozlišení 2048x2048 }
 \end{figure}
 
@@ -1437,13 +1437,13 @@ U testovací aplikace jsem nejdříve testoval rychlost vykreslování stejné s
 \begin{center}
 \begin{tabular}{||p{25mm}||c|c||c|c||c|c||}
 \hline
-& \multicolumn{2}{c||}{\textbf{Samsung Galaxy}}
+Poměr & \multicolumn{2}{c||}{\textbf{Samsung Galaxy}}
 & \multicolumn{2}{c||}{\textbf{Google Nexus 7}}
 & \multicolumn{2}{c||}{\textbf{Acer TravelMate}} \\
-& \multicolumn{2}{c||}{\textbf{S3 mini (mobil)}}
+rozlišení proti & \multicolumn{2}{c||}{\textbf{S3 mini (mobil)}}
 & \multicolumn{2}{c||}{\textbf{2012 (tablet)}}
 & \multicolumn{2}{c||}{\textbf{P253-e (laptop)}} \\
-& FPS & snímek[ms] & FPS & snímek [ms] & FPS & snímek [ms] \\
+nativnímu & FPS & snímek [ms] & FPS & snímek [ms] & FPS & snímek [ms] \\
 \hline
 0.4x (poor)   & 18 & 53.661 & \textbf{18} & \textbf{28.970} & \textbf{20} & \textbf{3.965} \\ \hline
 0.5x (low)    & 17 & 50.898 & 18 & 37.547 & 20 & 4.010 \\ \hline
@@ -1484,7 +1484,7 @@ Výrazná závislost rychlosti aktualizace map se projevila pouze na mobilním t
 Paměťová náročnost byla opět naměřena pomocí Linuxového měřiče paměti KSysGuard. Testovací aplikace byla přerušována během načítání dat a z naměřených hodnot byla vypočtená paměť pro jednotlivé komponenty. Scéna využívající 8 map osvětlení o rozlišení 1024x1024 využívá 80.64MB operační paměti.
 
 \begin{figure}[h!]
-\includegraphics[width=150mm]{figures/sim-mem-usage.png}
+\includegraphics[width=120mm]{figures/sim-mem-usage.png}
 \caption{Paměťová náročnost simulátoru se scénou 3D modelu nočního města složeného z přibližně 40000 trojúhelníků }
 \end{figure}
 
@@ -1493,7 +1493,7 @@ V posledním testu jsem testoval kompatibilitu s dalšími zařízeními, v test
 %*****************************************************************************
 \chapter{Závěr}
 
-Úspěšně jsem realizoval generování map osvětlení pomocí vrhání paprsku a rasterizace. Generování map osvětlení pomocí vrhání paprsků umožňuje vykreslování plošných zdrojů světel definovaných pomocí osvětlovacích textur. Je podporováno dynamické aktualizování map osvětlení pomocí záplat, které jsou komprimovány ve vektorové podobě v paměti grafické karty.
+Úspěšně jsem realizoval generování map osvětlení pomocí vrhání paprsku a rasterizace. Generování map osvětlení pomocí vrhání paprsků umožňuje zpracování plošných zdrojů světel definovaných pomocí osvětlovacích textur. Je podporováno dynamické aktualizování map osvětlení pomocí záplat, které jsou komprimovány ve vektorové podobě v paměti grafické karty.
 
 Realizoval jsem testovací aplikaci, která mapy osvětlení využívá a nad rámec zadání jsem aplikoval statické osvětlení na dynamické objekty. Vylepšil jsem výsledek aplikováním odlesků a motion-blur. Výsledek jsem úspěšně otestoval na několika zařízeních. Podle měření je testovací aplikace poměrně náročná na výkon, nicméně mobilní zařízení střední a vyšší třídy s aplikací nemají problém.
 

@@ -6,7 +6,7 @@
 \contentsline {subsection}{\numberline {2.1.1}Statick\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i } s dynamick\IeC {\'y}mi objekty ve sc\IeC {\'e}n\IeC {\v e}}{4}{subsection.2.1.1}
 \contentsline {section}{\numberline {2.2}C\IeC {\'\i }lov\IeC {\'a} platforma Android}{4}{section.2.2}
 \contentsline {section}{\numberline {2.3}Souvisej\IeC {\'\i }c\IeC {\'\i } metody}{4}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Projekty zab\IeC {\'y}vaj\IeC {\'\i }c\IeC {\'\i } se vykreslov\IeC {\'a}n\IeC {\'\i } no\IeC {\v c}n\IeC {\'\i } sc\IeC {\'e}ny}{4}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.1}Vykreslov\IeC {\'a}n\IeC {\'\i } no\IeC {\v c}n\IeC {\'\i } sc\IeC {\'e}ny}{4}{subsection.2.3.1}
 \contentsline {paragraph}{Interaktivn\IeC {\'\i } vykreslov\IeC {\'a}n\IeC {\'\i } model\IeC {\r u} m\IeC {\v e}st s glob\IeC {\'a}ln\IeC {\'\i }m osv\IeC {\v e}tlen\IeC {\'\i }m}{4}{section*.6}
 \contentsline {paragraph}{Proceduraln\IeC {\'\i } modelov\IeC {\'a}n\IeC {\'\i } m\IeC {\v e}sta a osv\IeC {\v e}tlen\IeC {\'\i } no\IeC {\v c}n\IeC {\'\i }ho m\IeC {\v e}sta}{5}{section*.7}
 \contentsline {paragraph}{Imperfect shadow maps pro v\IeC {\'y}po\IeC {\v c}et nep\IeC {\v r}\IeC {\'\i }m\IeC {\'e}ho osv\IeC {\v e}tlen\IeC {\'\i }}{6}{section*.8}

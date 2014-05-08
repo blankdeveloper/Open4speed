@@ -41,30 +41,31 @@
 \contentsline {subsection}{\numberline {5.3.1}Problematika Android API}{36}{subsection.5.3.1}
 \contentsline {subsection}{\numberline {5.3.2}Vyu\IeC {\v z}it\IeC {\'\i } vl\IeC {\'a}ken}{38}{subsection.5.3.2}
 \contentsline {subsection}{\numberline {5.3.3}Pr\IeC {\'a}ce se soubory}{38}{subsection.5.3.3}
-\contentsline {section}{\numberline {5.4}Screen-space p\IeC {\v r}\IeC {\'\i }stup}{39}{section.5.4}
-\contentsline {subsection}{\numberline {5.4.1}Rozm\IeC {\v e}r textur na OpenGL ES 2.0}{40}{subsection.5.4.1}
-\contentsline {subsection}{\numberline {5.4.2}Motion-blur}{41}{subsection.5.4.2}
-\contentsline {subsection}{\numberline {5.4.3}Odlesky}{41}{subsection.5.4.3}
-\contentsline {subsection}{\numberline {5.4.4}Statick\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i } a dynamick\IeC {\'e} objekty}{43}{subsection.5.4.4}
-\contentsline {subsection}{\numberline {5.4.5}Sv\IeC {\v e}tla vozidel}{44}{subsection.5.4.5}
-\contentsline {chapter}{\numberline {6}Testov\IeC {\'a}n\IeC {\'\i }}{45}{chapter.6}
-\contentsline {section}{\numberline {6.1}Testovac\IeC {\'\i } sc\IeC {\'e}na}{46}{section.6.1}
-\contentsline {section}{\numberline {6.2}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{47}{section.6.2}
-\contentsline {paragraph}{Bodov\IeC {\'e} zdroje sv\IeC {\v e}tla}{47}{section*.16}
-\contentsline {paragraph}{Plo\IeC {\v s}n\IeC {\'e} zdroje sv\IeC {\v e}tla}{47}{section*.17}
-\contentsline {paragraph}{Pam\IeC {\v e}\IeC {\v t}ov\IeC {\'a} n\IeC {\'a}ro\IeC {\v c}nost gener\IeC {\'a}toru map osv\IeC {\v e}tlen\IeC {\'\i }}{49}{section*.18}
-\contentsline {section}{\numberline {6.3}Testovac\IeC {\'\i } aplikace - simul\IeC {\'a}tor}{49}{section.6.3}
-\contentsline {paragraph}{Pam\IeC {\v e}\IeC {\v t}ov\IeC {\'a} n\IeC {\'a}ro\IeC {\v c}nost testovac\IeC {\'\i } aplikace}{51}{section*.19}
-\contentsline {chapter}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{53}{chapter.7}
-\contentsline {chapter}{Literatura}{55}{chapter*.20}
-\contentsline {chapter}{\numberline {A}Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{57}{appendix.A}
-\contentsline {chapter}{\numberline {B}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{59}{appendix.B}
-\contentsline {chapter}{\numberline {C}U\IeC {\v z}ivatelsk\IeC {\'a} p\IeC {\v r}\IeC {\'\i }ru\IeC {\v c}ka}{61}{appendix.C}
-\contentsline {section}{\numberline {C.1}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{61}{section.C.1}
-\contentsline {section}{\numberline {C.2}Testovac\IeC {\'\i } aplikace}{62}{section.C.2}
-\contentsline {subsection}{\numberline {C.2.1}Kompilov\IeC {\'a}n\IeC {\'\i }}{63}{subsection.C.2.1}
-\contentsline {paragraph}{Linux}{63}{section*.21}
-\contentsline {paragraph}{Android}{63}{section*.22}
-\contentsline {subsection}{\numberline {C.2.2}Pou\IeC {\v z}\IeC {\'\i }v\IeC {\'a}n\IeC {\'\i }}{63}{subsection.C.2.2}
-\contentsline {paragraph}{Menu}{63}{section*.23}
-\contentsline {paragraph}{Ovl\IeC {\'a}d\IeC {\'a}n\IeC {\'\i }}{63}{section*.24}
+\contentsline {section}{\numberline {5.4}Optimalizace vykreslov\IeC {\'a}n\IeC {\'\i } sc\IeC {\'e}ny}{39}{section.5.4}
+\contentsline {section}{\numberline {5.5}Screen-space p\IeC {\v r}\IeC {\'\i }stup}{41}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Rozm\IeC {\v e}r textur na OpenGL ES 2.0}{41}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.2}Motion-blur}{42}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.5.3}Odlesky}{42}{subsection.5.5.3}
+\contentsline {subsection}{\numberline {5.5.4}Statick\IeC {\'e} osv\IeC {\v e}tlen\IeC {\'\i } a dynamick\IeC {\'e} objekty}{44}{subsection.5.5.4}
+\contentsline {subsection}{\numberline {5.5.5}Sv\IeC {\v e}tla vozidel}{45}{subsection.5.5.5}
+\contentsline {chapter}{\numberline {6}Testov\IeC {\'a}n\IeC {\'\i }}{47}{chapter.6}
+\contentsline {section}{\numberline {6.1}Testovac\IeC {\'\i } sc\IeC {\'e}na}{48}{section.6.1}
+\contentsline {section}{\numberline {6.2}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{49}{section.6.2}
+\contentsline {paragraph}{Bodov\IeC {\'e} zdroje sv\IeC {\v e}tla}{49}{section*.16}
+\contentsline {paragraph}{Plo\IeC {\v s}n\IeC {\'e} zdroje sv\IeC {\v e}tla}{49}{section*.17}
+\contentsline {paragraph}{Pam\IeC {\v e}\IeC {\v t}ov\IeC {\'a} n\IeC {\'a}ro\IeC {\v c}nost gener\IeC {\'a}toru map osv\IeC {\v e}tlen\IeC {\'\i }}{51}{section*.18}
+\contentsline {section}{\numberline {6.3}Testovac\IeC {\'\i } aplikace - simul\IeC {\'a}tor}{51}{section.6.3}
+\contentsline {paragraph}{Pam\IeC {\v e}\IeC {\v t}ov\IeC {\'a} n\IeC {\'a}ro\IeC {\v c}nost testovac\IeC {\'\i } aplikace}{53}{section*.19}
+\contentsline {chapter}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{55}{chapter.7}
+\contentsline {chapter}{Literatura}{57}{chapter*.20}
+\contentsline {chapter}{\numberline {A}Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{59}{appendix.A}
+\contentsline {chapter}{\numberline {B}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{61}{appendix.B}
+\contentsline {chapter}{\numberline {C}U\IeC {\v z}ivatelsk\IeC {\'a} p\IeC {\v r}\IeC {\'\i }ru\IeC {\v c}ka}{63}{appendix.C}
+\contentsline {section}{\numberline {C.1}Generov\IeC {\'a}n\IeC {\'\i } map osv\IeC {\v e}tlen\IeC {\'\i }}{63}{section.C.1}
+\contentsline {section}{\numberline {C.2}Testovac\IeC {\'\i } aplikace}{64}{section.C.2}
+\contentsline {subsection}{\numberline {C.2.1}Kompilov\IeC {\'a}n\IeC {\'\i }}{65}{subsection.C.2.1}
+\contentsline {paragraph}{Linux}{65}{section*.21}
+\contentsline {paragraph}{Android}{65}{section*.22}
+\contentsline {subsection}{\numberline {C.2.2}Pou\IeC {\v z}\IeC {\'\i }v\IeC {\'a}n\IeC {\'\i }}{65}{subsection.C.2.2}
+\contentsline {paragraph}{Menu}{65}{section*.23}
+\contentsline {paragraph}{Ovl\IeC {\'a}d\IeC {\'a}n\IeC {\'\i }}{65}{section*.24}

@@ -1,12 +1,4 @@
-%% History:
-% Pavel Tvrdik (26.12.2004)
-%  + initial version for PhD Report
-%
-% Daniel Sykora (27.01.2005)
-%
-% Michal Valenta (3.12.2008)
-% rada zmen ve formatovani (diky M. Duškovi, J. Holubovi a J. Žďárkovi)
-% sjednoceni zdrojoveho kodu pro anglickou, ceskou, bakalarskou a diplomovou praci
+% USE PDFLATEX COMPILER
 
 % One-page layout: (proof-)reading on display
 %%%% \documentclass[11pt,oneside,a4paper]{book}
@@ -259,13 +251,6 @@ unicode=true,
 {
 \pagenumbering{roman} \cleardoublepage \thispagestyle{empty}
 \chapter*{Na tomto místě bude oficiální zadání vaší práce}
-\begin{itemize}
-\item Toto zadání je podepsané děkanem a vedoucím katedry,
-\item musíte si ho vyzvednout na studiijním oddělení Katedry počítačů na Karlově náměstí,
-\item v jedné odevzdané práci bude originál tohoto zadání (originál zůstává po obhajobě na katedře),
-\item ve druhé bude na stejném místě neověřená kopie tohoto dokumentu (tato se vám vrátí po obhajobě).
-\end{itemize}
-}
 %to print missing literature in reference
 \cite{Fast03} \cite{OpenGL10} \cite{Hawkins01} \cite{Buss03} \cite{Ericson04} \cite{Modern04}
 \newpage
@@ -371,7 +356,7 @@ Rešerši souvisejících metod jsem zaměřil na dvě různé kategorie. První
 
 \subsection{Vykreslování noční scény}
 
-V této sekci jsem vybral co nejrealističtější implementace, ke kterým existuje článek o tom, jak bylo výsledku dosaženo. Existuje sice několik implementací, které vypadají realističtěji. To jsou ale většinou komerční produkty, které nesdílejí ostatním, jakým způsobem byla implementace realizována.
+V této sekci jsem vybral co nejrealističtější implementace, ke kterým existuje článek\linebreak o tom, jak bylo výsledku dosaženo. Existuje sice několik implementací, které vypadají realističtěji. To jsou ale většinou komerční produkty, které nesdílejí ostatním, jakým způsobem byla implementace realizována.
 
 \paragraph{Interaktivní vykreslování modelů měst s globálním osvětlením}\mbox{}\\
 
@@ -431,7 +416,7 @@ Další díl ze série Asphalt Urban už odlesky řeší lépe. Odráží se hla
 
 \paragraph{Need for Speed Most Wanted}\mbox{}\\
 
-V tomto simulátoru je osvětlení řešeno hlavně konstantním osvětlením pro celou scénu, pouliční lampy využívají bilboardů a neosvětlují okolí. Výrazný je odraz světla na vozovce v kombinaci s bump mapováním vytváří dojem hrubého povrchu.
+V tomto simulátoru je osvětlení řešeno hlavně konstantním osvětlením pro celou scénu, pouliční lampy využívají bilboardů a neosvětlují okolí. Výrazný je odraz světla na vozovce\linebreak v kombinaci s bump mapováním vytváří dojem hrubého povrchu.
 
 Simulátor je spíše známý z PC, na mobilním trhu takový úspěch nemá. Od PC verze je velice odlišný, ale rozhodně se nejedná o nějakou lacinou napodobeninu. Jedná se o první závodní simulátor pro mobilní zařízení, který disponuje modelem ničení vozidla (je možné vozidlo poškrábat, rozbít mu okna apod).
 
@@ -988,7 +973,7 @@ Ukázka rekurzivního hledání v octree je na obrázku 5.4 (na obrázku je pouz
 
 Aby hledání ve stromu bylo ještě rychlejší, lze použít ještě několik optimalizací. Může se například ukládat $n$ posledních průsečíků a testovat, jestli další paprsek nemá stejný průsečík se stejným trojúhelníkem jako předešlý paprsek. Tato optimalizace má smysl pouze pro malé $n$. V mém projektu jsem nastavil $n = 2$. Paprsky testuji v pořadí podle indexu cílového trojúhelníku.
 
-Dále je vhodné přeskakovat testy stejných trojúhelníků. Podle zvoleného kritéria dělení stromu při jeho stavbě může dojít k tomu, že některé trojúhelníky jsou uloženy ve stromu ve více uzlech (pokud AABB trojúhelníku náleží více uzlům stejné hloubky). Řešit to lze jednoduše. Stačí si u trojúhelníku vždy pamatovat ID paprsku, s kterým byl proveden poslední test průsečíku. Díky tomu lze zjistit, jestli některý paprsek není testován víckrát a případně tento test přeskočit. Této optimalizaci se říká mailboxing technika.
+Dále je vhodné přeskakovat testy stejných trojúhelníků. Podle zvoleného kritéria dělení stromu při jeho stavbě může dojít k tomu, že některé trojúhelníky jsou uloženy ve stromu\linebreak ve více uzlech (pokud AABB trojúhelníku náleží více uzlům stejné hloubky). Řešit to lze jednoduše. Stačí si u trojúhelníku vždy pamatovat ID paprsku, s kterým byl proveden poslední test průsečíku. Díky tomu lze zjistit, jestli některý paprsek není testován víckrát a případně tento test přeskočit. Této optimalizaci se říká mailboxing technika.
 
 Další možnost urychlení generování map osvětlení je přeskakování testování paprsků,\linebreak u kterých je délka paprsku delší než vzdálenost, na kterou dosvítí zdroj světla. Tuto vzdálenost lze spočítat pomocí vzorce pro útlum (viz. kapitola 3.2). Minimální přípustnou hodnotu si označím $\epsilon$ a maximálně délku paprsku jako $d$.
 \begin{center}
@@ -1016,7 +1001,7 @@ U dynamických zdrojů světel se provádí pro každé světlo vykreslení skup
 \subsection{Příprava dat pro dynamickou aktualizaci map osvětlení}
 Data pro dynamickou aktualizaci map osvětlení se nazývají záplaty. Záplata je v podstatě také mapa osvětlení, ale pouze pro jeden zdroj světla. Problém je, že tyto záplaty by byly příliš paměťově náročné, proto používám vektorovou podobu těchto dat.
 
-Data záplaty jsou při běhu testovací aplikace uloženy jako trojúhelníky ve VBO (tedy na GPU). Každý vrchol má dva atributy a to pozici v mapě osvětlení a barvu světla vynásobenou intenzitou. Lze tedy snadno a rychle mapy osvětlení aktualizovat, pokud máme záplaty v této podobě uloženy.
+Data záplaty jsou při běhu testovací aplikace uloženy jako trojúhelníky ve VBO (tedy\linebreak na GPU). Každý vrchol má dva atributy a to pozici v mapě osvětlení a barvu světla vynásobenou intenzitou. Lze tedy snadno a rychle mapy osvětlení aktualizovat, pokud máme záplaty\linebreak v této podobě uloženy.
 
 Abychom získali záplaty v této podobě musíme nejdříve pro každý dynamický zdroj světla vykreslit mapu osvětlení a poté tyto data zvektorizovat. Pro zvektorizování lze využít informaci o souřadnicích jednotlivých trojúhelníků v mapě osvětlení. Pokud barycentricky interpolujeme barvu světla z vrcholů trojúhelníku, měla by odpovídat barvě uložené v map osvětlení $lm$. 
 
@@ -1038,11 +1023,11 @@ Pokud byl test úspěšný, přidá se geometrie trojúhelníku do vektorových 
 \newpage
 
 \section{Testovací aplikace - simulátor}
-Simulátor je navržen tak, aby fungoval na X11-Linuxu a Androidu. Znamená to výběr multiplatformních knihoven nebo ve výjimečných případech rozdílných implementací pro jednotlivé platformy. K vykreslování jsem vybral OpenGL ES 2.0 (jedná se o odlehčené OpenGL 3.0) a GLSL core verzi 1.0 (to zaručuje maximální možnou kompatibilitu).
+Testovací aplikace je navržená tak, aby fungovala na X11-Linuxu a Androidu. Znamená to výběr multiplatformních knihoven nebo ve výjimečných případech rozdílných implementací pro jednotlivé platformy. K vykreslování jsem vybral OpenGL ES 2.0 (jedná se o odlehčené OpenGL 3.0) a GLSL core verzi 1.0 (to zaručuje maximální možnou kompatibilitu).
 
-Fyzikální vlastnosti vozidel jsou realizovány pomocí enginu Bullet Physics (tento engine používá mnoho známých firem zabývajících se vývojem mobilních her). Zvuk je realizován na mobilních zařízeních pomocí Android API a na Linuxu pomocí knihovny FMOD API. Správce oken je na Androidu třeba doprogramovat, aby fungovalo dotykové ovládání a pozastavení simulátoru (např. při hovoru). Na Linuxu je použitá knihovna freeglut.
+Fyzikální vlastnosti vozidel jsou realizovány pomocí enginu Bullet Physics (tento engine používá mnoho známých firem zabývajících se vývojem mobilních her). Zvuk je realizován na mobilních zařízeních pomocí Android API a na Linuxu pomocí knihovny FMOD API. Správce oken je na Androidu třeba doprogramovat, aby fungovalo dotykové ovládání a pozastavení aplikace (např. při hovoru). Na Linuxu je použitá knihovna freeglut.
 
-Samotný simulátor je rozdělen do dvou oddělených částí. První část je abstraktní\linebreak a řeší logickou část projektu. Abstrakce je realizována pomocí rozhraní, které definují společné metody abstraktních objektů. Druhá část implementuje jednotlivá rozhraní a řeší také načítání dat ze souborů.
+Samotná aplikace je rozdělená do dvou oddělených částí. První část je abstraktní\linebreak a řeší logickou část projektu. Abstrakce je realizována pomocí rozhraní, které definují společné metody abstraktních objektů. Druhá část implementuje jednotlivá rozhraní a řeší také načítání dat ze souborů.
 \lstset{language=C++} 
 \begin{lstlisting}[caption=Načtení 3D modelu vozidla pomocí abstraktního přístupu]
     /// load models
@@ -1056,7 +1041,7 @@ Samotný simulátor je rozdělen do dvou oddělených částí. První část je
     wheelZ2 = getConfig("wheel_front", atributes);
 \end{lstlisting}
 
-Důvodem oddělení částí je, že implementace jednotlivých rozhraní může být v budoucnu snadno nahrazena anebo mohou být použité různé implementace pro různé platformy. Příkladem různých implementací rozhraní pro různé platformy může být například renderer.\linebreak V simulátoru je využita knihovna OpenGL, která například na platformě Windows Phone není dostupná a bylo by potřeba na této platformě použit Direct3D.
+Důvodem oddělení částí je, že implementace jednotlivých rozhraní může být v budoucnu snadno nahrazena anebo mohou být použité různé implementace pro různé platformy. Příkladem různých implementací rozhraní pro různé platformy může být například renderer.\linebreak V aplikace je využita knihovna OpenGL, která například na platformě Windows Phone není dostupná a bylo by potřeba na této platformě použit Direct3D.
 \newpage
 
 \begin{figure}[h]
@@ -1065,7 +1050,7 @@ Důvodem oddělení částí je, že implementace jednotlivých rozhraní může
 \caption{UML diagram projektu, horní část je abstraktní, dolní část implementuje jednotlivá rozhraní a načítá data do paměti, spustitelné soubory jsou označeny tečkou}
 \end{center}
 \end{figure}
-Jak je vidět na obrázku 5.6, simulátor je rozdělen do dalších dílčích částí. Část \ul{raycaster} a třída \ul{LMgenerator} realizují předzpracování. Třída \ul{open4speed} se zabývá správou okna\linebreak a spouštění dílčích součástí. \ul{Common} uchovává veškeré objekty a proměnné, je to z důvodu, že jinak by v třídách \ul{open4speed} a \ul{LMgenerator} musel být obsah struktury \ul{common} duplicitně.
+Jak je vidět na obrázku 5.6, Aplikace je rozdělená do dalších dílčích částí. Část \ul{raycaster} a třída \ul{LMgenerator} realizují předzpracování. Třída \ul{open4speed} se zabývá správou okna\linebreak a spouštění dílčích součástí. \ul{Common} uchovává veškeré objekty a proměnné, je to z důvodu, že jinak by v třídách \ul{open4speed} a \ul{LMgenerator} musel být obsah struktury \ul{common} duplicitně.
 
 Třída \ul{car} je v první řadě struktura uchovávající veškeré proměnné realizující vozidlo, dále zajišťuje propojení mezi fyzikálním enginem, vykreslováním, zvukem, vstupem umělé inteligence a uživatele.
 \\ \\
@@ -1090,7 +1075,7 @@ Platforma Android je postavená na Linuxovém jádře a využívá mnohé kompon
 \end{figure}
 \end{center}
 
-Snažší by bylo naprogramovat simulátor přímo v Javě, ale tím bych ztratil možnost portovat simulátor na další platformy, které virtuální stroj Dalwik nemají. Dále by byl problém s použitím fyzikálního enginu, který je napsaný v jazyce C++. Musel bych napsat interface pro fyzikální engine, který by mi umožnil komunikaci mezi C++ a Java kódem.
+Snažší by bylo naprogramovat simulátor přímo v Javě, ale tím bych ztratil možnost portovat aplikaci na další platformy, které virtuální stroj Dalwik nemají. Dále by byl problém s použitím fyzikálního enginu, který je napsaný v jazyce C++. Musel bych napsat interface pro fyzikální engine, který by mi umožnil komunikaci mezi C++ a Java kódem.
 
 \subsection{Problematika Android API}
 Java native interface je rozhraní, které umožňuje spustit C++ kód z jazyku Java a obráceně. Největší problém je, že neexistuje použitelný port freeglut knihovny pro Android. Udělal jsem tedy JNI rozhraní, které odpovídá handlerům knihovny freeglut. Tedy nahrazuji veškeré funkce této knihovny svou implementací. Knihovna implementuje správu oken, vstup klávesnice a myši a volání idle a display funkcí. Klávesnice a myš byla pochopitelně plně nahrazena dotykovým ovládáním, ale pokud do Android zařízení připojíme klávesnici nebo myš, bude plně funkční. Funkčnost myši zařizuje sám systém, klávesnice stačila namapovat.
@@ -1153,11 +1138,11 @@ public static void soundPlay(int index, int loop) {
 \subsection{Využití vláken}
 Většina zařízení, které dnes už spadají do střední třídy, je vybavena alespoň dvěma procesory, je proto vhodné rozdělit činnost do více vláken, aby bylo dosaženo maximálního výkonu. Třída GLSurfaceView, která umožňuje vykreslovat OpenGL scénu z C++ umožňuje volat OpenGL příkazy pouze z jednoho vlákna. Z tohoto důvodu jsem rozdělil kód na grafické\linebreak a negrafické vlákno.
 
-V menu simulátoru se používá pouze grafické vlákno, negrafické vlákno je primárně použito pro fyzikální výpočty, které zařízení vytěžují nejvíce. Vlákna jsou synchronizovaná, aby nedocházelo k použití transformace vozidla z předešlého snímku(to by bylo velmi rušivé).
+V menu aplikace se používá pouze grafické vlákno, negrafické vlákno je primárně použito pro fyzikální výpočty, které zařízení vytěžují nejvíce. Vlákna jsou synchronizovaná, aby nedocházelo k použití transformace vozidla z předešlého snímku(to by bylo velmi rušivé).
 
-Dále provádím regulaci rychlosti simulátoru v závislosti na výkonu hardwaru. Je potřeba, aby obě vlákna prováděla výpočet co nejvíce paralelně, pokud by negrafické vlákno příliš dlouho nedodávalo novou transformaci vozidla, docházelo by k trhanému vykreslování (některý snímek by se vykresloval víckrát a to by se projevilo tak, že by se snímková frekvence zdála být na krátký okamžik poloviční). Pokud k tomuto případu dojde, je vhodné snížit frekvenci volání obou vláken a tím snížit rychlost simulátoru.
+Dále provádím regulaci rychlosti aplikace v závislosti na výkonu hardwaru. Je potřeba, aby obě vlákna prováděla výpočet co nejvíce paralelně, pokud by negrafické vlákno příliš dlouho nedodávalo novou transformaci vozidla, docházelo by k trhanému vykreslování (některý snímek by se vykresloval víckrát a to by se projevilo tak, že by se snímková frekvence zdála být na krátký okamžik poloviční). Pokud k tomuto případu dojde, je vhodné snížit frekvenci volání obou vláken a tím snížit rychlost aplikace.
 
-Problém je, že nelze snižovat rychlost simulátoru do nekonečna, proto je zde nastavena minimální hodnota, na kterou se může simulátor zpomalit. Je zde i horní limit, aby nedocházelo k zrychlené jízdě a tedy i ke zvýšené spotřebě energie.
+Problém je, že nelze snižovat rychlost aplikace do nekonečna, proto je zde nastavena minimální hodnota, na kterou se může aplikace zpomalit. Je zde i horní limit, aby nedocházelo k zrychlené jízdě a tedy i ke zvýšené spotřebě energie.
 
 \subsection{Práce se soubory}
 V Androidu se aplikace publikují v APK balíčku. Jedná se o ZIP soubor, který má nějakou danou strukturu. V Java kódu je možné na veškeré soubory uvnitř balíčku přistupovat,\linebreak v C++ tato možnost není. Někteří vývojáři toto řeší, že po prvním spuštění si aplikace stáhne ze serveru přídavná data a ty si uloží například na paměťovou kartu. Lze také rozbalit soubory z APK balíčku a s těmi pak v C++ pracovat. To se moc nepoužívá, protože jsou potom data v zařízení dvakrát.
@@ -1200,12 +1185,31 @@ Texture* loadPNG(const char* filename) {
 }
 \end{lstlisting}
 
+\section{Optimalizace vykreslování scény}
+Při běhu jakékoliv 3D aplikace je největší zátěž mobilního hardware způsobena vykreslováním 3D scény, proto je nutné tuto část co nejvíce zefektivnit. Obecně platí, že čím rozsáhlejší scéna je vykreslována, tím je výpočet náročnější. Scéna může být rozsáhlá podle dvou kritérií. Prvním je celkový počet trojúhelníků ve scéně a druhým je rozloha scény. Počet trojúhelníků lze redukovat pomocí metody Level-of-detail neboli LOD \cite{Modern04}. LOD snižuje počet trojúhelníků pro objekty dle vzdáleností od kamery. Problém s rozsáhlou scénou se řeší ořezáváním scény (anglicky culling). Ořezávání scény redukuje vykreslování objektů, které nejsou vidět ve výsledném snímku.
+
+V mé aplikaci řeším ořezávání scény pomocí uniformní mřížky, to znamená, že scénu rozdělím na pole segmentů a vykresluji pouze segmenty v okolí kamery. Konkrétně vykreslím segment, ve kterém se nachází kamera a segmenty, na které je namířen pohled. To kam je namířen pohled a jaké segmenty se mají vykreslit se řeší tabulkově. Například pro směr pohledu $45^{\circ}$ až $135^{\circ}$ (což je případ obrázku 5.9), se vykreslí segment o jednu pozici napravo, o jednu pozici dolů a jednu pozici napravo dolů.
+
+\begin{center}
+\begin{figure}[h!]
+\includegraphics[width=80mm]{figures/grid.png}
+\caption{Uniformní mřížka, červená značka označuje polohu kamery, zeleně jsou označeny segmenty, které se vykreslí}
+\end{figure}
+\end{center}
+
+Výše uvedeným způsobem by se 3D model vykresloval pomocí čtyř volání \textit{glDrawArrays} (to je příkaz pro vykreslování geometrie v OpenGL). Počet vykreslování je dobré redukovat, protože je rychlejší vykreslovat geometrii najednou. Pokud máme segmenty uloženy v jednom VBO, je možné vykreslit jen některé trojúhelníky. Tyto trojúhelníky musí být v paměti\linebreak za sebou. 
+
+Je možné trojúhelníky seřadit podle sloupců segmentů a trojúhelníky se stejným sloupcem podle řádek segmentů. Po seřazení trojúhelníků můžeme vytvořit VBO, u kterého lze vykreslovat horizontálně sousedící segmenty najednou. 
+
+Ořezanou scénu tedy vykreslím pomocí dvou volání \textit{glDrawArrays}. Problém nastává\linebreak s trojúhelníky náležících více segmentům. U malých trojúhelníků toto řešit nemusíme, stačí je přiřadit segmentu, ve kterém je většina plochy trojúhelníku. U velkých trojúhelníků musíme buď vykreslovat tyto trojúhelníky vždy anebo použít komplexnější řešení. V případě testovací aplikace jsou tyto trojúhelníky vykreslovány vždy.
+\newpage
+
 \section{Screen-space přístup}
-Při běhu jakéhokoliv simulátoru je největší zátěž mobilního hardware způsobena vykreslováním 3D scény, proto je nutné tuto část co nejvíce zefektivnit. Pro mnoho efektů se používají takzvané víceprůchodové přístupy (scéna se vykreslí víckrát z různých pohledů nebo pomocí různých shaderů), ale na mobilním zařízení je zatím z hlediska výkonu možné použít pouze jednoprůchodový přístup.
+Pro mnoho grafických efektů se používají takzvané víceprůchodové přístupy (scéna se vykreslí víckrát z různých pohledů nebo pomocí různých shaderů), ale na mobilním zařízení je zatím z hlediska výkonu možné použít pouze jednoprůchodový přístup.
 
-Abych částečně nahradil ve svém simulátoru víceprůchodový přístup, použil jsem screen-space přístup (to je obecně jakákoliv technika využívající data z pohledu kamery, jinými slovy máme pouze výsledný snímek a na něm provádíme další operace). V praxi se používá hlavně pro zrcadlové plochy. Potřeboval jsem přistupovat do aktuálně vykreslovaného snímku. To je ale problém, protože tento snímek není kompletní a kdybych vykresloval přímo do něj\linebreak a zároveň z něj četl, způsobilo by to chyby ve výsledném obraze.
+Abych částečně nahradil ve své aplikaci víceprůchodový přístup, použil jsem screen-space přístup (to je obecně jakákoliv technika využívající data z pohledu kamery, jinými slovy máme pouze výsledný snímek a na něm provádíme další operace). V praxi se používá hlavně pro zrcadlové plochy. Potřeboval jsem přistupovat do aktuálně vykreslovaného snímku. To je ale problém, protože tento snímek není kompletní a kdybych vykresloval přímo do něj\linebreak a zároveň z něj četl, způsobilo by to chyby ve výsledném obraze.
 
-Řešením je vykreslování střídavě do dvou různých frame buffer objektů (viz obrázek 5.9). To znamená, že při lichém snímku kreslím do FBO 1 a čtu z FBO 2. Při sudém snímku je tomu obráceně. Tímto způsobem získám přístup do vykreslené scény, sice s drobným zpožděním, ale při dostatečně rychlém vykreslování to nebude rušivé (za předpokladu, že textura FBO bude použita na efekty jako jsou odlesky nebo stíny).
+Řešením je vykreslování střídavě do dvou různých frame buffer objektů (viz obrázek 5.10). To znamená, že při lichém snímku kreslím do FBO 1 a čtu z FBO 2. Při sudém snímku je tomu obráceně. Tímto způsobem získám přístup do vykreslené scény, sice s drobným zpožděním, ale při dostatečně rychlém vykreslování to nebude rušivé (za předpokladu, že textura FBO bude použita na efekty jako jsou odlesky nebo stíny).
 
 \begin{center}
 \begin{figure}[h!]
@@ -1220,7 +1224,7 @@ Pro vykreslování do textury, která bude výsledně umístěna na obrazovku je
 
 Není ale nutné vykreslovat do celé textury, pomocí příkazu \textit{glViewport} se dá nastavit část textury, do které má OpenGL vykreslovat a nedojde tedy k plýtvání výkonem.
 
-Dále je možné zvolit nižší rozlišení viewportu než je rozlišení displeje. Mobilní zařízení obvykle disponují obrovskou hustotou pixelů a pokud zařízení nebude stíhat vykreslovat scénu v plném rozlišení, lze vykreslovat v rozlišení menším. U počítačových 3D her se také setkáváme s možností změnit rozlišení, tam řeší změnu přímo hardware displeje nebo jeho ovladač.
+Dále je možné zvolit nižší rozlišení viewportu než je rozlišení displeje. Mobilní zařízení obvykle disponují obrovskou hustotou pixelů a pokud zařízení nebude stíhat vykreslovat scénu v plném rozlišení, lze vykreslovat v rozlišení menším. U počítačových 3D her se také setkáváme s možností změnit rozlišení, tam řeší změnu rozlišení ovladač displeje.
 
 \subsection{Motion-blur}
 Jedním z efektů využívající screen-space přístup je motion-blur. Jedná efekt rozmáznutí obrazu rychlým pohybem. Motion-blur se používá ve většině závodních simulátorů, rozostření pohybem dodává dojem rychlosti.
@@ -1233,7 +1237,6 @@ varying vec2 v_Coords;
 void main() {
 	//apply color texture
 	gl_FragColor = texture2D(color_texture, v_Coords); 
-
 	//apply motion blur
 	gl_FragColor *= (1.0 - speed);
 	gl_FragColor += speed * texture2D(pFrm, gl_FragCoord.xy * res);
@@ -1242,10 +1245,10 @@ void main() {
 
 $Speed$ je rychlost vozidla od 0 do 1, $pFrm$ je textura předchozího snímku a $res$ je\linebreak 1 / \textit{plné rozlišení textury} (pro jednoduchost je použitý čtvercový rozměr textury).
 
-Tento kód využívá screen-space informaci (texturu $pFrm$). Rozostření se projeví po několik snímků za sebou (efekt zůstává na obrazovce a postupně se utlumuje v závislosti na rychlosti vozdila). Nevýhodou je, že tento kód musí být vložen do každého shaderu vykreslující 3D model, aby motion-blur fungoval tak jak má.
+Tento kód využívá screen-space informaci (texturu $pFrm$). Rozostření se projeví\linebreak po několik snímků za sebou (efekt zůstává na obrazovce a postupně se utlumuje v závislosti\linebreak na rychlosti vozdila). Nevýhodou je, že tento kód musí být vložen do každého shaderu vykreslující 3D model, aby motion-blur fungoval tak jak má.
 
 \subsection{Odlesky}
-Dále je možné ve screen-space řešit odlesky. Existuje obecný (složitý) postup jak tyto odlesky vypočítat, který by mobilní hardware nezvládl. Problém jsem rozdělil podle typu ploch. Vzhledem k tomu, že v simulátoru dochází pouze k rotaci pohledu podle osy y (rotace yaw), je možné řešit pro odlesky pro různé tvary povrchů zvlášť.
+Dále je možné ve screen-space řešit odlesky. Existuje obecný (složitý) postup jak tyto odlesky vypočítat, který by mobilní hardware nezvládl. Problém jsem rozdělil podle typu ploch. Vzhledem k tomu, že v aplikaci dochází pouze k rotaci pohledu podle osy y (rotace yaw), je možné řešit pro odlesky pro různé tvary povrchů zvlášť.
 
 Abychom vytvořili odlesk povrchu vozovky optimálně, potřebovali bychom informaci\linebreak o hloubce scény. To by bylo opět výpočetně náročné, a proto jsem zvolil jednodušší postup. Odlesk funguje pouze pro jeden úhel pohledu mezi vozovkou a směrovým vektorem kamery.
 
@@ -1253,7 +1256,6 @@ Na úrovni přední řezné roviny kamery je horizont povrchu přesně v polovin
 \begin{center}
 $r = [f_x, 1 - f_y]$
 \end{center}
-\newpage
 
 S rostoucí vzdáleností od přední řezné roviny se lineárně posouvá horizont směrem vzhůru. Nalezením konstanty $a$ získáme souřadnice odlesku $r'$ pro kolmý povrch limitovaný úhlem pohledu kamery.
 \begin{center}
@@ -1272,7 +1274,7 @@ $r'' = [f_x, 1 - f_y + f_z \cdot a + f_z \cdot (1 - n_y) \cdot b]$
 \end{figure}
 \end{center}
 
-Pro můj zvolený pohled jsem zvolil konstanty $a = 0.1; b = 2$. Odlesk vizuálně odpovídá a vykresluje se velice rychle. Problém je při nízké snímkovací frekvenci, kdy dochází k posunu odlesku (jak je vidět na obrázku 5.10). Posun není nijak výrazný, ale pokud se na něj soustředíme, vidíme jej. Dále při mísení efektů odlesků s motion-blurem dochází k rozmazání odlesku více než původního obrazu. Motion-blur je pro odlesky dvojnásobný, protože se aplikuje jak na původní objekt, tak na zrcadlový povrch.
+Pro můj zvolený pohled jsem zvolil konstanty $a = 0.1; b = 2$. Odlesk vizuálně odpovídá a vykresluje se velice rychle. Problém je při nízké snímkovací frekvenci, kdy dochází k posunu odlesku (jak je vidět na obrázku 5.11). Posun není nijak výrazný, ale pokud se na něj soustředíme, vidíme jej. Dále při mísení efektů odlesků s motion-blurem dochází k rozmazání odlesku více než původního obrazu. Motion-blur je pro odlesky dvojnásobný, protože se aplikuje jak na původní objekt, tak na zrcadlový povrch.
 \bigskip
 
 U vozidel by se optimálně měl odlesk řešit pomocí víceprůchodového algoritmu za využití cube mapování. Vzhledem k tomu, že potřebuji maximální možný výkon a Android zařízení mají typicky malý displej, použil jsem jednodušší variantu.
@@ -1313,7 +1315,7 @@ Tím jsme získali pozici texelu nesoucí informaci o intenzitě osvětlení. Vz
 
 Dalším problémem je, že dynamické objekty (tedy vozidla) by měly zastínit statický model. Tento problém lze řešit opět pomocí screen-space přístupu. Ve screen-space textuře si můžeme označit texely (odpovídajících pixelům na obrazovce), na kterých je vykreslené vozidlo. V době vykreslování vozovky se vždy díváme o několik texelů výše, než je aktuální vykreslovaný fragment, a pokud je texel označen, ztmavíme aktuálně vykreslovaný fragment. Důležitou poznámkou je, že texely kol vozidla se neoznačují (tím by vznikal chybný stín).
 
-Stín je kvalitou srovnatelný s projektivním stínem. Bylo by možné zjišťovat pozice světel, aby vznikl měkký stín, ale tím by se simulátor značně zpomalil. Při rychlém otáčení lze zpozorovat chybu, která vzniká kvůli použitému screen-space přístupu. V noční scéně to moc není vidět, nicméně ve světlých scénách by to mohlo být značně rušivé.
+Stín je kvalitou srovnatelný s projektivním stínem. Bylo by možné zjišťovat pozice světel, aby vznikl měkký stín, ale tím by se aplikace značně zpomalila. Při rychlém otáčení lze zpozorovat chybu, která vzniká kvůli použitému screen-space přístupu. V noční scéně to moc není vidět, nicméně ve světlých scénách by to mohlo být značně rušivé.
 
 \begin{center}
 \begin{figure}[h]
@@ -1370,7 +1372,7 @@ Další testovací scénou bylo podobné noční město o přibližné rozloze $
 \end{figure}
 
 \section{Generování map osvětlení}
-Před testováním samotné aplikace jsem provedl testování generátoru map osvětlení. Testování bylo prováděno na laptopu Acer TravelMate P253-e jehož parametry jsou uvedeny na předchozí straně.
+Před testováním samotné aplikace jsem provedl testování generátoru map osvětlení. Testování bylo prováděno na laptopu Acer TravelMate P253-e jehož parametry jsou uvedeny\linebreak na předchozí straně.
 
 \paragraph{Bodové zdroje světla}\ \ \\
 
@@ -1393,7 +1395,7 @@ Rasterizační technika (za využití OpenGL) dosahuje výsledku o poznání ryc
 
 \paragraph{Plošné zdroje světla}\ \ \\
 
-V případě plošných zdrojů je vhodnější použití techniky vrhání paprsků. Paprsky bývají téměř rovnoběžné a lze tedy jedním testem detekovat průsečík více paprsků najednou (za využití mailboxingu). V níže uvedeném testu se ukázala efektivita filtrování paprsků, u kterých je jejich délka delší než vzdálenost, ve které je světlo zcela utlumeno.
+V případě plošných zdrojů je vhodnější použití techniky vrhání paprsků. Paprsky bývají téměř rovnoběžné a lze tedy jedním testem detekovat průsečík více paprsků najednou (za využití mailboxingu). V níže uvedeném testu se ukázala efektivita filtrování paprsků,\linebreak u kterých je jejich délka delší než vzdálenost, ve které je světlo zcela utlumeno.
 \begin{table}[h!]
 \begin{center}
 \begin{tabular}{|p{80mm}|c|c|}
@@ -1472,7 +1474,7 @@ nativnímu & FPS & snímek [ms] & FPS & snímek [ms] & FPS & snímek [ms] \\
 0.8x (high)   & 11 & 90.710 & 17 & 60.187 & 20 & 4.432 \\ \hline
 1.0x (ultra)  & \textbf{10} & \textbf{99.546} & 13 & 80.480 & 20 & 4.422 \\ \hline
 \end{tabular}
-\caption{Závislost rychlosti vykreslování scény na zařízení a úrovni rozlišení oproti nativnímu(v závorce je uvedena konfigurace v nastavení simulátoru). Tučně jsou zvýrazněny konfigurace, u kterých je přibližně stejný počet vykreslovaných pixelů}
+\caption{Závislost rychlosti vykreslování scény na zařízení a úrovni rozlišení oproti nativnímu(v závorce je uvedena konfigurace v nastavení aplikace). Tučně jsou zvýrazněny konfigurace, u kterých je přibližně stejný počet vykreslovaných pixelů}
 \end{center}
 \end{table}
 
@@ -1506,7 +1508,7 @@ Paměťová náročnost byla opět naměřena pomocí Linuxového měřiče pam�
 
 \begin{figure}[h!]
 \includegraphics[width=120mm]{figures/sim-mem-usage.png}
-\caption{Paměťová náročnost simulátoru se scénou 3D modelu nočního města složeného z přibližně 40000 trojúhelníků }
+\caption{Paměťová náročnost aplikace se scénou 3D modelu nočního města obsahující přibližně 40000 trojúhelníků }
 \end{figure}
 
 V posledním testu jsem testoval kompatibilitu s dalšími zařízeními, v testu uspěl tablet Google Nexus 7 2013, Samsung Galaxy S4 a smartTV za použití Android set-top-boxu eGreat U8. V případě set-top-boxu bylo nutné ještě implementovat ovládání hardwarovými tlačítky. Další zařízení nebyla testována. Uvedená zařízení byla testována pouze na kompatibilitu, byla zapůjčena pouze na několik desítek minut.
@@ -1555,6 +1557,7 @@ Práci do budoucna hodlám dále vyvíjet. Chci se soustředit hlavně na dalš�
 \item FBO (Fragment Buffer Object) - buffer určený pro vykreslování scény
 \item GLSL (OpenGL Shading Language) - jazyk pracující s grafickou kartou k výpočtu stínování
 \item GPU (Graphics processing unit) - grafická výpočetní jednotka - grafická karta
+\item LOD (Level of detail) - úroveň detailu 3D modelu
 \item UML (Unified Modeling Language) - vizuální jazyk pro modelování softwaru
 \item VBO (Vertex Buffer Object) - geometrie uložená na GPU
 \end{itemize}
@@ -1576,9 +1579,9 @@ bin/linux/objConverter.jar & konvertor modelů\\
 \hline
 bin/linux/testapp & spustitelná verze testovací aplikace pro Linux\\
 \hline
-doc/latex & editovatelná dokumentace simulátoru\\
+doc/latex & editovatelná dokumentace projektu\\
 \hline
-doc/text.pdf & dokumentace simulátoru\\
+doc/text.pdf & dokumentace projektu\\
 \hline
 src/lmgenerator & zdrojové kódy generátorů map osvětlení\\
 \hline
@@ -1586,7 +1589,7 @@ src/objconverter & zdrojové kódy konvertoru modelů\\
 \hline
 src/testapp & zdrojové kódy testovací aplikace\\
 \hline
-src/support & knihovny potřebné ke zkompilování simulátoru\\
+src/support & knihovny potřebné ke zkompilování projektu\\
 \hline
 install.txt & návod k instalaci\\
 \hline
@@ -1702,7 +1705,7 @@ Pro zbytek stačí otevřít projekt v Android Studiu a klepnout na Run
 \item Start race - herní mód, je zde vytyčen okruh, závodí se s vozidly ovládané umělou inteligencí
 \item Free ride - volná jízda po městě
 \item Options - přejde do nabídky nastavení
-\item Quit game - ukončí simulátor
+\item Quit game - ukončí aplikaci
 \end{itemize}
 
 \paragraph{Ovládání}\ \ \\

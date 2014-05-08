@@ -1352,6 +1352,23 @@ Operační systém & Android 4.1.2 & Android 4.4.2 & Kubuntu 14.04 32bit \\ \hli
 \end{table}
 \newpage
 
+\section{Testovací scéna}
+Testovací scéna je rozlehlé noční město o přibližné rozloze $4km^2$. Scéna je složena z 39198 trojúhelníků a využívá 12 detailních textur. Textury jsou o převážně v rozlišení 1024x1024 o barevné hloubce 24bitů. Scéna je otevřená (světelné paprsky mohou být mimo AABB modelu).
+
+\begin{figure}[h!]
+\includegraphics[width=70mm]{figures/scene.png}
+\caption{Hlavní testovací scéna zobrazena seshora}
+\end{figure}
+
+Scéna obsahuje tunel, který sloužil pro testování metody v uzavřeném prostoru. Přes město vede dálnice, na které bylo testováno, zda světelné paprsky neprochází skrz objekty.
+\bigskip
+
+Další testovací scénou bylo podobné noční město o přibližné rozloze $1.5km^2$. Model se skládá z 27878 trojúhelníků, využívá stejné textury jako výše uvedený model. Na této scéně bylo testováno vykreslování map osvětlení s nižším detailem. Pro hlavní testovací scénu bylo použito 8 map osvětlení, pro tuto scénu pouze jedna. Výsledky jsou vizuálně srovnatelné (kvůli filtrování), nicméně v této scéně se objevují nepříjemné artefakty v místech, kde bylo málo hodnot pro interpolaci barvy.
+\begin{figure}[h!]
+\includegraphics[width=60mm]{figures/scene2.png}
+\caption{Sekundární testovací scéna zobrazena seshora}
+\end{figure}
+
 \section{Generování map osvětlení}
 Před testováním samotné aplikace jsem provedl testování generátoru map osvětlení. Testování bylo prováděno na laptopu Acer TravelMate P253-e jehož parametry jsou uvedeny na předchozí straně.
 
@@ -1439,14 +1456,14 @@ U testovací aplikace jsem nejdříve testoval rychlost vykreslování stejné s
 
 \begin{table}[h!]
 \begin{center}
-\begin{tabular}{||p{25mm}||c|c||c|c||c|c||}
+\begin{tabular}{|p{25mm}|c|c|c|c|c|c|}
 \hline
-Poměr & \multicolumn{2}{c||}{\textbf{Samsung Galaxy}}
-& \multicolumn{2}{c||}{\textbf{Google Nexus 7}}
-& \multicolumn{2}{c||}{\textbf{Acer TravelMate}} \\
-rozlišení proti & \multicolumn{2}{c||}{\textbf{S3 mini (mobil)}}
-& \multicolumn{2}{c||}{\textbf{2012 (tablet)}}
-& \multicolumn{2}{c||}{\textbf{P253-e (laptop)}} \\
+Poměr & \multicolumn{2}{c|}{\textbf{Samsung Galaxy}}
+& \multicolumn{2}{c|}{\textbf{Google Nexus 7}}
+& \multicolumn{2}{c|}{\textbf{Acer TravelMate}} \\
+rozlišení proti & \multicolumn{2}{c|}{\textbf{S3 mini (mobil)}}
+& \multicolumn{2}{c|}{\textbf{2012 (tablet)}}
+& \multicolumn{2}{c|}{\textbf{P253-e (laptop)}} \\
 nativnímu & FPS & snímek [ms] & FPS & snímek [ms] & FPS & snímek [ms] \\
 \hline
 0.4x (poor)   & 18 & 53.661 & \textbf{18} & \textbf{28.970} & \textbf{20} & \textbf{3.965} \\ \hline
@@ -1472,7 +1489,7 @@ Dále jsem měřil rychlost aktualizace 13ti dynamických světel najednou. Mě�
 \begin{center}
 \begin{tabular}{|p{35mm}|p{35mm}|p{35mm}|p{35mm}|}
 \hline
-& \textbf{Samsung Galaxy S3 mini (mobil)} & \textbf{Google Nexus 7 2012 (tablet)} & \textbf{Acer TravelMate P253-e (laptop)} \\
+Rozlišení\linebreak map osvětlení & \textbf{Samsung Galaxy S3 mini (mobil)} & \textbf{Google Nexus 7 2012 (tablet)} & \textbf{Acer TravelMate P253-e (laptop)} \\
 \hline
 1024x1024 & 41.712 & 9.776 & 1.797 \\ \hline
 2048x2048 & 132.411 & 10.836 & 1.790 \\ \hline
@@ -1575,7 +1592,7 @@ install.txt & návod k instalaci\\
 \hline
 readme.txt & informace potřebné k používání\\
 \hline
-video.mp4 & ukázkové video testovací aplikace\\
+video.avi & ukázkové video testovací aplikace\\
 \hline
 \end{tabular}
 \end{center}
@@ -1585,12 +1602,10 @@ video.mp4 & ukázkové video testovací aplikace\\
 \section{Generování map osvětlení}
 Nejdříve třeba nadefinovat světelné zdroje 3D modelu. Bodové zdroje světla se definují pomocí 3D hran. Každé světlo se skládá z jedné hrany (zdroje světla a směru). Každá skupina světel musí být samostatný objekt. Plošné zdroje světla se definují pomocí osvětlovacích textur (viz kapitola 5.1.1). Osvětlovací textury musí být vytvořeny pro každou texturu 3D scény, musí být uloženy ve stejné cestě a mít místo přípony \textbf{png}, příponu \textbf{png-map}.
 
-Aby bylo možné generovat mapy osvětlení je nutné mít 3D scénu ve formátu O4S. O4S formát modely se vytvoří konvertováním scény z formátu OBJ pomocí příkazu
-\begin{center}
-java -jar objConverter $<model>$.obj $<cesta$ $exportu>$/scene.o4s
-\end{center}
+Aby bylo možné generovat mapy osvětlení je nutné mít 3D scénu ve formátu O4S. O4S formát modely se vytvoří konvertováním scény z formátu OBJ pomocí příkazu\\
+\textsf{java -jar objConverter.jar model.obj tracks/3d.o4s \textit{<počet texelů na 1m v mapě osvětlení>}}
 
-Dále je třeba definovat konfiguraci generátoru map osvětlení pomocí souboru \textbf{lights.ini}.
+Důležité je, aby byly po exportu všechny textury modelu v pořádku. Aby bylo možné načíst scénu musí se vytvořit konfigurace scény viz. soubor tracks/track.ini. Dále je třeba definovat konfiguraci generátoru map osvětlení pomocí souboru \textbf{lights.ini} dle ukázky C.1.
 
 \begin{lstlisting}[caption=Konfigurace generátoru map osvětlení]
 CONFIG

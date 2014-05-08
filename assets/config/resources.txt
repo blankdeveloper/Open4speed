@@ -8,4 +8,5 @@ END
 TRACKS
 tracks/track1.ini
 tracks/track.ini
+tracks/city2.ini
 END

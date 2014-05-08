@@ -62,16 +62,26 @@ public class Common {
 				"|            Open4speed by L.Vonásek OBJ converter          |",
 				"|                      version 1.00                         |",
 				"|___________________________________________________________|",
-				"     usage: java ObjConverter <input.obj> <xxx/yyy.o4s>      ",
+				"usage:   java -jar ObjConverter.jar <input.obj> <xxx/yyy.o4s>",
+                "           [lightmap precision] [lightmap max. triangle size]",
 				"" };
-      for (String text1 : text) {
-        System.out.println(text1);
-      }
+        
+        for (String text1 : text) {
+            System.out.println(text1);
+        }
 
 		// check arguments
-		if (args.length != 2) {
+		if (args.length < 2) {
 			System.err.println("Invalid arguments");
 			return false;
+		}
+        
+		if (args.length > 2) {
+			Unwrapper.LIGHTMAP_PRECISION = Float.valueOf(args[2]);
+		}
+
+		if (args.length > 3) {
+			Unwrapper.LIGHTMAP_MAX_TRIANGLE = Integer.valueOf(args[3]);
 		}
 
 		// Unix absolute path report

@@ -12,9 +12,9 @@ import geometry.Triangle;
 
 public class Unwrapper {
 
-  final static boolean LIGHTMAP_OPTIMALIZE   = true;
-  final static int     LIGHTMAP_MAX_TRIANGLE = 32;
-  final static double  LIGHTMAP_PRECISION    = 4.5;
+  public static boolean LIGHTMAP_OPTIMALIZE   = true;
+  public static int     LIGHTMAP_MAX_TRIANGLE = 32;
+  public static double  LIGHTMAP_PRECISION    = 8.5;
   static int res;
   static KDNode root;
 

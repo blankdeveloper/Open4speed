@@ -1,105 +1,10 @@
 TESTMENU
 fxFlyOut
-include TESTMENU1
-END
-
-LOCK1
-addButton img 8 none 0 66x30-30x33 NONE
-END
-
-LOCK2
-addButton img 8 none 0 34x30-30x33 NONE
-addButton img 8 none 0 66x30-30x33 NONE
-END
-
-LOCK3
-addButton img 8 none 0 3x30-30x33 NONE
-addButton img 8 none 0 34x30-30x33 NONE
-addButton img 8 none 0 66x30-30x33 NONE
-END
-
-TESTMENU1
 esc MAINMENU_NOFX
 clearButtons
 setBackground 1
-addButton img 2 text 27 1x85-18x10 NONE
-addButton img -1 text 44 21x85-0x0 NONE
-addButton img 2 text 28 45x85-18x10 TESTMENU2
-addButton img 9 text 29 3x30-30x33 RACE1
-addButton img 10 text 30 34x30-30x33 RACE2
-addButton img 11 text 31 66x30-30x33 RACE3
-getCfg 4
-ifSml 0 LOCK3
-ifSml 1 LOCK2
-ifSml 2 LOCK1
-addButton img 2 text 13 68x80-30x18 MAINMENU_NOFX
-END
-
-TESTMENU2
-esc MAINMENU_NOFX
-clearButtons
-setBackground 1
-addButton img 2 text 27 1x85-18x10 TESTMENU1
-addButton img -1 text 45 21x85-0x0 NONE
-addButton img 2 text 28 45x85-18x10 TESTMENU3
-addButton img 12 text 32 3x30-30x33 RACE4
-addButton img 13 text 33 34x30-30x33 RACE5
-addButton img 14 text 34 66x30-30x33 RACE6
-getCfg 4
-ifSml 3 LOCK3
-ifSml 4 LOCK2
-ifSml 5 LOCK1
-addButton img 2 text 13 68x80-30x18 MAINMENU_NOFX
-END
-
-TESTMENU3
-esc MAINMENU_NOFX
-clearButtons
-setBackground 1
-addButton img 2 text 27 1x85-18x10 TESTMENU2
-addButton img -1 text 46 21x85-0x0 NONE
-addButton img 2 text 28 45x85-18x10 TESTMENU4
-addButton img 15 text 35 3x30-30x33 RACE7
-addButton img 16 text 36 34x30-30x33 RACE8
-addButton img 17 text 37 66x30-30x33 RACE9
-getCfg 4
-ifSml 6 LOCK3
-ifSml 7 LOCK2
-ifSml 8 LOCK1
-addButton img 2 text 13 68x80-30x18 MAINMENU_NOFX
-END
-
-TESTMENU4
-esc MAINMENU_NOFX
-clearButtons
-setBackground 1
-addButton img 2 text 27 1x85-18x10 TESTMENU3
-addButton img -1 text 47 21x85-0x0 NONE
-addButton img 2 text 28 45x85-18x10 TESTMENU5
-addButton img 18 text 38 3x30-30x33 RACE10
-addButton img 19 text 39 34x30-30x33 RACE11
-addButton img 20 text 40 66x30-30x33 RACE12
-getCfg 4
-ifSml 9 LOCK3
-ifSml 10 LOCK2
-ifSml 11 LOCK1
-addButton img 2 text 13 68x80-30x18 MAINMENU_NOFX
-END
-
-TESTMENU5
-esc MAINMENU_NOFX
-clearButtons
-setBackground 1
-addButton img 2 text 27 1x85-18x10 TESTMENU4
-addButton img -1 text 48 21x85-0x0 NONE
-addButton img 2 text 28 45x85-18x10 TESTMENU6
-addButton img 21 text 41 3x30-30x33 RACE13
-addButton img 22 text 42 34x30-30x33 RACE14
-addButton img 23 text 43 66x30-30x33 RACE15
-getCfg 4
-ifSml 12 LOCK3
-ifSml 13 LOCK2
-ifSml 14 LOCK1
+addButton img 2 text 29 20x30-30x33 RACE2
+addButton img 2 text 30 50x30-30x33 RACE3
 addButton img 2 text 13 68x80-30x18 MAINMENU_NOFX
 END
 
@@ -128,7 +33,7 @@ setBackground 1
 addButton img 0 none 0 38x5-60x85 NONE
 //addButton img 2 text 0 3x20-32x10 TESTMENU
 addButton img 2 text 0 3x20-32x10 RACE1
-addButton img 2 text 1 3x32-32x10 RACE2
+addButton img 2 text 1 3x32-32x10 TESTMENU
 addButton img 2 text 2 3x44-32x10 OPTIONSMENU
 //addButton img 2 text 3 3x56-32x10 CREDITS
 addButton img 2 text 4 3x56-32x10 QUITMENU

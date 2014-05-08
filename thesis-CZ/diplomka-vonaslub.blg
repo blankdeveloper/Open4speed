@@ -1,11 +1,11 @@
 This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: diplomka-vonaslub.aux
-The style file: plain.bst
+The style file: my-plain.bst
 Database file #1: reference.bib
 You've used 14 entries,
             2118 wiz_defined-function locations,
-            581 strings with 5986 characters,
+            581 strings with 5989 characters,
 and the built_in function-call counts, 3126 in all, are:
 = -- 293
 > -- 98

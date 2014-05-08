@@ -32,8 +32,8 @@ pos:   speed:        gear:   dst:
   <
   >
 //29
-HQ City
-LQ City
+\\\\\  HQ City
+\\\\\  LQ City
 \\\\\3 Darkness
 \\\\\4 Evening
 \\\\\5 Runaway

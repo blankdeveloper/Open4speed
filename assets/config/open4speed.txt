@@ -100,7 +100,8 @@ addImage gfx/HUD1.png
 addImage gfx/HUD2.png
 addImage gfx/HUD3.png
 addImage gfx/indicator.png
-addImage gfx/lock.png
+addImage gfx/cityHQ.png
+addImage gfx/cityLQ.png
 initSound
 set 0
 //musicPlay

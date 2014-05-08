@@ -334,7 +334,7 @@ Cílem této diplomové práce je zobrazování rozsáhlých scén s předpočte
 
 %*****************************************************************************
 \chapter{Úvod}
-V minulosti se výrobci počítačového hardwaru primárně soustředili na dosažení nejvyššího výpočetního výkonu na trhu. Během posledních let v tomto konkurenčním boji nastala změna. Už tolik nedochází ke zvyšování výkonu hardwaru, výrobci se soustředí spíše\linebreak na miniaturizaci hardwaru a paralelizaci výpočtů.
+Za posledních deset let se výkon hardwaru mobilních zařízeních několikanásobně zvýšil. Mobilní zařízení disponují procesory s více jádry, grafickou kartu umožňující paralelizaci grafických výpočtů a mají gigabajty operační paměti. 
 
 Kromě vylepšování hardwaru se vylepšují také metody pro optimalizaci výpočtu, jedna z těchto metod je předpočtení dat. Tato práce se zabývá předpočtením dat pro vykreslování scény nočního města. Scéna obsahuje jak bodové, tak plošné zdroje světla, pro které by výpočet v reálném čase byl příliš náročný. 
 
@@ -1424,9 +1424,13 @@ bez detekování dosahu & 68.12 & 20.561h\\ \hline
 
 Paměťová náročnost byla naměřena pomocí Linuxového měřiče paměti KSysGuard. Generátor map osvětlení byl za běhu několikrát pozastaven a bylo provedeno měření celkového využití paměti generátorem. Z naměřených informací poté byly vypočteny hodnoty pro jednotlivé data. K vykreslení 8 map osvětlení o rozlišení 2048x2048 bylo použito celkem 1.94GB operační paměti.
 \begin{figure}[h!]
-\includegraphics[width=120mm]{figures/lmgen-mem-usage.png}
+\includegraphics[width=100mm]{figures/lmgen-mem-usage.png}
 \caption{Paměťová náročnost generátoru map osvětlení využívající vrhání paprsků. Scénou byl 3D model nočního města složený z přibližně 40000 trojúhelníků, vykreslováno bylo 8 map osvětlení o rozlišení 2048x2048 }
 \end{figure}
+
+Mapy osvětlení využívají více paměti než v testovací aplikaci, protože kromě informace o barvě uchovávají indexy jednotlivých trojúhelníků a barycentrické souřadnice pro každý texel. Struktura trojúhelníků zabírá také více paměti, protože uchovává pomocné informace pro rychlejší zpracování jako je například seznam 3D bodů (navzorkovaných podle rozlišení mapy osvětlení), které trojúhelník tvoří. 
+
+3D body trojúhelníků obsahují interpolované hodnoty, které využijí o řád více paměti než samotné trojúhelníky. Interpolované hodnoty by bylo možné počítat za běhu aplikace, ale to by způsobilo značné zpomalení generování map osvětlení.
 
 \section{Testovací aplikace - simulátor}
 

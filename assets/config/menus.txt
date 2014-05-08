@@ -3,8 +3,8 @@ fxFlyOut
 esc MAINMENU_NOFX
 clearButtons
 setBackground 1
-addButton img 2 text 29 20x30-30x33 RACE2
-addButton img 2 text 30 50x30-30x33 RACE3
+addButton img 8 text 29 15x30-30x33 RACE2
+addButton img 9 text 30 55x30-30x33 RACE3
 addButton img 2 text 13 68x80-30x18 MAINMENU_NOFX
 END
 

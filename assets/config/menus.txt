@@ -31,9 +31,8 @@ mouse 1
 clearButtons
 setBackground 1
 addButton img 0 none 0 38x5-60x85 NONE
-//addButton img 2 text 0 3x20-32x10 TESTMENU
 addButton img 2 text 0 3x20-32x10 RACE1
-addButton img 2 text 1 3x32-32x10 TESTMENU
+addButton img 2 text 1 3x32-32x10 RACE2
 addButton img 2 text 2 3x44-32x10 OPTIONSMENU
 //addButton img 2 text 3 3x56-32x10 CREDITS
 addButton img 2 text 4 3x56-32x10 QUITMENU

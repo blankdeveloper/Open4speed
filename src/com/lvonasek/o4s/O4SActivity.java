@@ -150,7 +150,7 @@ public class O4SActivity extends Activity {
                 mO4SJNI.paused = false;
                 //resume sounds
                 Sounds.snd.autoResume();
-                Sounds.music.start();
+                Sounds. music.start();
             }
         }
     }

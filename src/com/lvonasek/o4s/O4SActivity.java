@@ -3,8 +3,6 @@ package com.lvonasek.o4s;
 import android.app.Activity;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Debug;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,8 +14,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-import static android.os.Debug.*;
 
 /**
  * Runnable class - it sets environment and run everything needed. It also manages interruptions of
@@ -56,7 +52,7 @@ public class O4SActivity extends Activity {
 
         //check if the game is installed
         if (!new File(versionFile).exists()) {
-            //install config file on sdcard
+            //install config file on sd card
             try {
                 //unpack initial configuration
                 if (!new File(configFile).exists()) {
@@ -165,13 +161,6 @@ public class O4SActivity extends Activity {
             O4SJNI.nativeBack();
             return true;
         }
-        //get memory usage state
-        final MemoryInfo memoryInfo = new MemoryInfo();
-        getMemoryInfo(memoryInfo);
-        Log.i("Mem-dalvik", "PD:" + memoryInfo.dalvikPrivateDirty + ",PSS:" + memoryInfo.dalvikPss + ",SD:" + memoryInfo.dalvikSharedDirty);
-        Log.i("Mem-native", "PD:" + memoryInfo.nativePrivateDirty + ",PSS:" + memoryInfo.nativePss + ",SD:" + memoryInfo.nativeSharedDirty);
-        Log.i("Mem-other", "PD:" + memoryInfo.otherPrivateDirty + ",PSS:" + memoryInfo.otherPss + ",SD:" + memoryInfo.otherSharedDirty);
-        Log.i("Mem-total", "PD:" + memoryInfo.getTotalPrivateDirty() + ",PSS:" + memoryInfo.getTotalPss() + ",SD:" + memoryInfo.getTotalSharedDirty());
         return super.onKeyDown(keyCode, event);
     }
 }

@@ -67,8 +67,8 @@ public class O4SJNI extends GLSurfaceView implements Renderer {
         //check if it is ran first time
         if (!init) {
             //get package assets object
-            String apkFilePath = null;
-            ApplicationInfo appInfo = null;
+            String apkFilePath;
+            ApplicationInfo appInfo;
             PackageManager packMgmr = O4SActivity.mO4SActivity.getPackageManager();
 
             //try to get assets

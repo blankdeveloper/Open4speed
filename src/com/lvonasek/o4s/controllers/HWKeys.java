@@ -7,7 +7,7 @@ package com.lvonasek.o4s.controllers;
 public class HWKeys {
 
     /**
-     * Remap Android key codes into GLUT key codes. This method is used for gamepads and USB keybs.
+     * Remap Android key codes into GLUT key codes. This method is used for game pads and USB keys.
      * @param code is received code from controller
      * @return code for GLUT
      */

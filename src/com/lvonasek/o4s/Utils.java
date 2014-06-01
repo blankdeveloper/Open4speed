@@ -36,18 +36,18 @@ public class Utils {
                     new File(location + ze.getName().substring(0, lastIndex)).mkdirs();
                 }
 
-                // open file output strem for decompression
+                // open file output stream for decompression
                 Log.i("Decompress", location + ze.getName());
-                FileOutputStream fout = new FileOutputStream(location + ze.getName());
+                FileOutputStream fileOut = new FileOutputStream(location + ze.getName());
 
                 // unpack data
                 byte[] buffer = new byte[4096];
                 int bytes_read;
                 while ((bytes_read = zin.read(buffer)) != -1) {
-                    fout.write(buffer, 0, bytes_read);
+                    fileOut.write(buffer, 0, bytes_read);
                 }
 
-                fout.close();
+                fileOut.close();
             }
             zin.closeEntry();
         }

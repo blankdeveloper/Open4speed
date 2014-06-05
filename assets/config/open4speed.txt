@@ -2,18 +2,6 @@
 
 #import config/lang/english.txt
 #import config/physics/bullet.txt
-#import config/menus.txt
-#import config/races.txt
-#import config/resources.txt
-#import config/utils.txt
-
-//definovani konfiguracniho souboru config
-//0 - index aktualne vybraneho auta
-//1 - index aktualne hrane trate
-//2 - hlasitost hudby
-//3 - hlasitost zvuku
-//4 - index posledni odemknute trate
-//5 - level detailu
 
 CONFIG
 aiCameraDistance 1.5
@@ -83,34 +71,12 @@ speedAspect 50
 viewDistance 600
 END
 
-INIT
-esc NONE
-debug 1
-addImage gfx/logo.png
-getCfg 5
-detail
-clearButtons
-mouse 0
-addImage gfx/back.png
-setBackground 1
-wait 1
-addImage gfx/button.png
-addImage gfx/HUD.png
-addImage gfx/HUD1.png
-addImage gfx/HUD2.png
-addImage gfx/HUD3.png
-addImage gfx/indicator.png
-addImage gfx/cityHQ.png
-addImage gfx/cityLQ.png
-initSound
-set 0
-//musicPlay
-getCfg 2
-//musicSetVolume
-getCfg 3
-setVolume
-set 1
-transmission
-//include LOADCAR
-include RACE2
+CARS
+cars/car1.ini
+END
+
+TRACKS
+tracks/track1.ini
+tracks/track.ini
+tracks/city2.ini
 END

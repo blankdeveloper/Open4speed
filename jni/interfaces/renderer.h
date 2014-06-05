@@ -43,6 +43,7 @@ public:
     bool oddFrame;              ///< Odd frame info
     fbo* rtt[2];                ///< Screen-space framebuffer
     Light light;                ///< One light information(for lightmap rendering)
+    int overmode;               ///< Special mode
     shader* overshader;         ///< Shader to be applied over current shader
     shader* scene_shader;       ///< Scene shader
     glm::vec4 model_position;   ///< Uniform of dynamic model 3D position
@@ -159,6 +160,28 @@ public:
      * @param gamma is requested render gamma
      */
     virtual void renderSubModel(model* mod, model3d* m) = 0;
+
+    /**
+     * @brief getLMPixels get raw pixels of lightmap
+     * @param i is index of lightmap
+     * @param fix is true to fix lightmap holes
+     * @param blur is true to filter lightmap data
+     * @return raw pixels
+     */
+    virtual unsigned char* getLMPixels(int i, bool fix, bool blur) = 0;
+
+
+    /**
+     * @brief prepareLM prepare rendering of lightmaps
+     * @param count is amount of lightmaps
+     */
+    virtual void prepareLM(int count) = 0;
+
+    /**
+     * @brief renderLM render light into lightmap
+     * @param lightrenderer is shader to use
+     */
+    virtual void renderLM(shader* lightrenderer) = 0;
 };
 
 #endif // RENDERER_H

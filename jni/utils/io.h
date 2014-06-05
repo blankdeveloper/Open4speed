@@ -117,13 +117,6 @@ void logi(const char* value1, const char* value2);
 char* prefix(const char* filename);
 
 /**
-* @brief prefix prefixes file name with config path
-* @param filename is original file name
-* @return prefixed file name
-*/
-char* prefixEx(const char* filename);
-
-/**
  * @brief scandec read number from chars
  * @param line is chars to read
  * @return number as int

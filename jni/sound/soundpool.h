@@ -53,13 +53,6 @@ public:
     void setFrequency(int index, float hz);
 
     /**
-     * @brief setPan sets pan of sound
-     * @param index is index of instance to set
-     * @param pan is stereo position
-     */
-    void setPan(int index, float pan);
-
-    /**
      * @brief setVolume sets volume of sound
      * @param index is index of instance to set
      * @param volume is amount of volume

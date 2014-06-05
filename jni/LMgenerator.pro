@@ -7,8 +7,7 @@ LIBS += -lGL \
     -lzip \
     -lBulletDynamics \
     -lBulletCollision \
-    -lLinearMath \
-    ./libfmodex-4.44.08.so
+    -lLinearMath
 TARGET = LMgenerator
 CONFIG += console
 CONFIG -= app_bundle
@@ -19,7 +18,6 @@ SOURCES += \
     input/airacer.cpp \
     input/aitraffic.cpp \
     LMgenerator.cpp \
-    loaders/dynamiclight.cpp \
     loaders/rgb.cpp \
     loaders/modelo4s.cpp \
     utils/switch.cpp \
@@ -29,12 +27,10 @@ SOURCES += \
     renderers/opengl/gles20.cpp \
     renderers/opengl/glsl.cpp \
     renderers/opengl/gltexture.cpp \
-    sound/fmodapi.cpp \
     car.cpp \
     loaders/pngloader.cpp \
     common.cpp \
     sound/soundpool.cpp \
-    utils/scripting.cpp \
     interfaces/model.cpp \
     renderers/opengl/glfbo.cpp \
     renderers/opengl/glvbo.cpp \
@@ -50,7 +46,6 @@ HEADERS += \
     input/aitraffic.h \
     interfaces/renderer.h \
     interfaces/texture.h \
-    loaders/dynamiclight.h \
     loaders/rgb.h \
     interfaces/model.h \
     loaders/modelo4s.h \
@@ -62,18 +57,16 @@ HEADERS += \
     renderers/opengl/gles20.h \
     renderers/opengl/glsl.h \
     renderers/opengl/gltexture.h \
-    sound/fmodapi.h \
     car.h \
     stdafx.h \
     loaders/pngloader.h \
     interfaces/shader.h \
     common.h \
     sound/soundpool.h \
-    utils/scripting.h \
     interfaces/fbo.h \
     renderers/opengl/glfbo.h \
     renderers/opengl/glvbo.h \
     raycaster/octreenode.h \
     raycaster/triangle.h \
     raycaster/utils.h
-INCLUDEPATH += ../support ../support/fmodapi-4.44.08 ../support/bullet-2.81-rev2613/src
+INCLUDEPATH += ../support ../support/bullet3-Bullet-2.83-alpha/src

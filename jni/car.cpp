@@ -310,23 +310,12 @@ void car::updateSound() {
         engine->setFrequency(index - 1,  gearLow * soundEngineFreqAspect);
     }
 
-    /// set stereo sound
-    float pan = gap(allCar[cameraCar],this) / 90.0;
-    if (pan > 1)
-        pan = 2 - pan;
-    if (pan < -1)
-        pan = -2 - pan;
-    if (index == cameraCar + 1) {
-        pan = 0;
-    }
+    /// set sound distance
     float dist = (1 - distance(allCar[cameraCar],this) / soundMaximalDistance);
     if (dist < 0)
         dist = 0;
     dist *= dist;
-    crash->setPan(index - 1, pan);
-    crash->setVolume(index - 1, dist * soundVolume / 10);
-    engine->setPan(index - 1, pan);
-    engine->setVolume(index - 1, dist * soundVolume / 10);
-    noise->setPan(index - 1, pan);
-    noise->setVolume(index - 1, dist * soundVolume / 10);
+    crash->setVolume(index - 1, dist);
+    engine->setVolume(index - 1, dist);
+    noise->setVolume(index - 1, dist);
 }

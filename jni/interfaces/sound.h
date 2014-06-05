@@ -41,13 +41,6 @@ public:
     virtual void setFrequency(int index, float hz) = 0;
 
     /**
-     * @brief setPan sets pan of sound
-     * @param index is index of instance to set
-     * @param pan is stereo position
-     */
-    virtual void setPan(int index, float pan) = 0;
-
-    /**
      * @brief setVolume sets volume of sound
      * @param index is index of instance to set
      * @param volume is amount of volume

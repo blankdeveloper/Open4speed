@@ -72,8 +72,7 @@ sound/soundpool.cpp \
 utils/switch.cpp \
 utils/math.cpp \
 utils/io.cpp \
-utils/engine.cpp \
-utils/scripting.cpp
+utils/engine.cpp
 LOCAL_LDLIBS := -lGLESv2 -ldl -llog -landroid -lz
 
 LOCAL_STATIC_LIBRARIES := libpng \ libbullet \ libzip

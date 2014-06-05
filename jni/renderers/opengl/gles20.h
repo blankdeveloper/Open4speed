@@ -35,6 +35,7 @@ const glm::mat4 matScale = glm::mat4(0.5f, 0.0f, 0.0f, 0.0f,  0.0f, 0.5f, 0.0f, 
  */
 class gles20 : public renderer {
 public:
+    std::vector<fbo*> lm;                 ///< Lightmap framebuffer
     float camX;                           ///< Camera position x
     float camY;                           ///< Camera position y
     float camZ;                           ///< Camera position z
@@ -160,6 +161,27 @@ public:
      * @param gamma is requested render gamma
      */
     void renderSubModel(model* mod, model3d *m);
+
+    /**
+     * @brief getLMPixels get raw pixels of lightmap
+     * @param i is index of lightmap
+     * @param fix is true to fix lightmap holes
+     * @param blur is true to filter lightmap data
+     * @return raw pixels
+     */
+    unsigned char* getLMPixels(int i, bool fix, bool blur);
+
+    /**
+     * @brief prepareLM prepare rendering of lightmaps
+     * @param count is amount of lightmaps
+     */
+    void prepareLM(int count);
+
+    /**
+     * @brief renderLM render light into lightmap
+     * @param lightrenderer is shader to use
+     */
+    void renderLM(shader* lightrenderer);
 };
 
 #endif // GLES20_H

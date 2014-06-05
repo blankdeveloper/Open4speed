@@ -129,6 +129,20 @@ void displayScene() {
     xrenderer->enable[2] = false;
     for (int i = carCount - 1; i >= 0; i--) {
 
+        /// find nearest light
+        xrenderer->light.u_nearest1 = glm::vec4(99999,99999,99999,1);
+        xrenderer->model_position = glm::vec4(allCar[i]->transform->value[12], allCar[i]->transform->value[13], allCar[i]->transform->value[14], 1);
+        for (int j = 0/*!lamp[(xrenderer->frame/2) % 100]*/; j < trackdata->edgesCount; j++) {
+            for (unsigned int x = 0; x < trackdata->edges[j].size() / 2; x++) {
+                edge e = trackdata->edges[j][x];
+                glm::vec4 pos = glm::vec4(e.bx, e.by, e.bz, 1);
+                if (glm::length(xrenderer->model_position - pos) < glm::length(xrenderer->model_position - xrenderer->light.u_nearest1)) {
+                    xrenderer->light.u_nearest1 = pos;
+                }
+            }
+        }
+        xrenderer->light.u_nearest1 = xrenderer->view_matrix * xrenderer->light.u_nearest1;
+
         ///render car skin
         xrenderer->pushMatrix();
         xrenderer->multMatrix(allCar[i]->transform[0].value);
@@ -207,16 +221,14 @@ void displayScene() {
         }
     }
 
-    if (race) {
-        for (int k = 0; k < effLen; k++) {
-            eff[k].frame++;
-        }
-        eff[currentFrame].frame = 0;
-        currentFrame++;
+    for (int k = 0; k < effLen; k++) {
+        eff[k].frame++;
+    }
+    eff[currentFrame].frame = 0;
+    currentFrame++;
 
-        if (currentFrame >= effLen) {
-            currentFrame = 0;
-        }
+    if (currentFrame >= effLen) {
+        currentFrame = 0;
     }
 }
 
@@ -247,7 +259,6 @@ void loadScene(std::vector<char*> *atributes) {
     carCount = 0;
 
     /// load track
-    currentTrack = variable;
     trackdata = getModel(getConfigStr("track_model1", atributes), true);
     int trackIndex = getConfig("race_track", atributes);
     std::vector<edge> e;
@@ -302,40 +313,6 @@ void loadScene(std::vector<char*> *atributes) {
             char filename[256];
             sprintf(filename, getConfigStr("lightmap", atributes), i);
             trackdata->lightmaps.push_back(getTexture(filename, 1.0));
-        }
-    }
-}
-
-/**
- * @brief updateMenu updates menu state
- * @param gui is instance of menu
- * @return updated instance
- */
-void updateMenu() {
-
-    /// check all buttons
-    for (unsigned int i = 0; i < buttons->size(); i++) {
-
-        button *b = &((*buttons)[i]);
-
-        /// input animation
-        if (!busy) {
-            if (b->layer < 0.96)
-                b->layer += 0.15;
-
-        /// output animation
-        } else if (b->image > 0) {
-            b->layer -= 0.15;
-        }
-    }
-
-    /// update busy status
-    if (busy) {
-        busy = false;
-        for (unsigned int i = 0; i < buttons->size(); i++) {
-            button *b = &((*buttons)[i]);
-            if ((b->layer > 0.25) && (b->image > 0))
-                busy = true;
         }
     }
 }

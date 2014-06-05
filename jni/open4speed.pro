@@ -30,7 +30,6 @@ SOURCES += \
     loaders/pngloader.cpp \
     common.cpp \
     sound/soundpool.cpp \
-    utils/scripting.cpp \
     interfaces/model.cpp \
     renderers/opengl/gltexture.cpp \
     renderers/opengl/glfbo.cpp \
@@ -59,7 +58,6 @@ HEADERS += \
     interfaces/shader.h \
     common.h \
     sound/soundpool.h \
-    utils/scripting.h \
     renderers/opengl/gltexture.h \
     renderers/opengl/glfbo.h \
     interfaces/fbo.h \

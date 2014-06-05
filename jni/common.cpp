@@ -14,9 +14,7 @@
  * @brief The game resources
  */
 std::vector<char*> *carList;                                    ///< List of all cars
-std::vector<char*> *textList;                                   ///< List of all texts
 std::vector<char*> *trackList;                                  ///< List of all tracks
-std::vector<char*> *syntaxList;                                 ///< List of syntaxes to do
 std::vector<shader*> *shaders = new std::vector<shader*>();     ///< Shaders storage
 std::vector<texture*> *textures = new std::vector<texture*>();  ///< Textures storage
 texture *gray;                                                  ///< Gray color for meshes without material
@@ -76,37 +74,20 @@ float playerDefaultCameraDistance;                      ///< Camera distance
 float playerTrackUpdate;                                ///< GPS navigation
 char* physicalEngine;                                   ///< Used physical engine
 char* screenRenderer;                                   ///< Used renderer
-char* soundCrash;                                       ///< Crash sound file
 float soundCrashMinimalSpeed;                           ///< Crash sound minimal speed
 float soundCrashOnSpeedChange;                          ///< Crash sound detection value
-char* soundEngine;                                      ///< Engine sound file
 float soundEngineFreqAspect;                            ///< Engine frequency aspect
 float soundMaximalDistance;                             ///< Maximal distance of sounds
 float speedAspect;                                      ///< Speed aspect
 float viewDistance;                                     ///< View distance
 
 /**
- * The menu
- */
-float aspect;                                                ///< Menu aspect
-bool busy;                                                   ///< Busy information
-bool click;                                                  ///< Click information
-std::vector<button> *buttons = new std::vector<button>;      ///< List of buttons
-bool debug;                                                  ///< Debug mode
-char esc[32];                                                ///< Syntax to exec on esc
-int exec;                                                    ///< Exec information
-char finish[32];                                             ///< Syntax to exec on finish
-bool race;                                                   ///< Race mode
-int screen_width;                                            ///< Screen width
-int screen_height;                                           ///< Screen height
-int unlock;                                                  ///< Locking
-int variable;                                                ///< Variable for scripts
-bool updated;                                                ///< Information about updates
-
-/**
  * The scene
  */
-
+float aspect;                   ///< Menu aspect
+bool matrixLock;                ///< Car matrix locking
+int screen_width;               ///< Screen width
+int screen_height;              ///< Screen height
 float cameraDistance;           ///< Camera distance level
 int playerCar;                  ///< Index of player car
 bool active;                    ///< Information if scene is active
@@ -118,18 +99,13 @@ model *trackdata2 = 0;          ///< Track second model
 car *allCar[carLimit];          ///< All cars in scene instances
 int carCount = 0;               ///< Amount of cars in scene
 int cameraCar = 0;              ///< Car camera index
-float soundVolume;              ///< Sound volume
 sound* crash;                   ///< Crash sound
 sound* engine;                  ///< Engine sound
 sound* noise;                   ///< N2O sound
 float *mat = new float[16];     ///< Temp matrix
 char *string = new char[1024];  ///< Temp string
-bool matrixLock = 0;            ///< Lock for replacing car matrices
 bool renderLightmap = false;    ///< Render lightmap mode enability
 int rttsize = 2048;             ///< RTT texture size
-
-int config[configSize];                      ///< Temporary config data
-std::vector<char*> *configText[configSize];  ///< Config texts
 float direction = 0;                         ///< Camera direction
 float mtime;                                 ///< Time stamp
 int lastkey;                                 ///< Last pressed key keycode
@@ -193,10 +169,8 @@ void loadAll() {
     playerTrackUpdate = getConfig("playerTrackUpdate", atributes);
     physicalEngine = getConfigStr("physicalEngine", atributes);
     screenRenderer = getConfigStr("renderer", atributes);
-    soundCrash = getConfigStr("soundCrash", atributes);
     soundCrashMinimalSpeed = getConfig("soundCrashMinimalSpeed", atributes);
     soundCrashOnSpeedChange = getConfig("soundCrashOnSpeedChange", atributes);
-    soundEngine = getConfigStr("soundEngine", atributes);
     soundEngineFreqAspect = getConfig("soundEngineFreqAspect", atributes);
     soundMaximalDistance = getConfig("soundMaximalDistance", atributes);
     speedAspect = getConfig("speedAspect", atributes);

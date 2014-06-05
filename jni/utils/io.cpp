@@ -16,10 +16,8 @@ char* character = new char[2];  ///< temp char
 
 #ifdef ZIP_ARCHIVE
 #ifdef ANDROID
-const char* configPath = "/data/data/com.lvonasek.o4s/";    ///< Path to game config
 const char* gamePath = "assets/";                           ///< Data path
 #else
-const char* configPath = "./";                              ///< Path to game config
 const char* gamePath = "./";                                ///< Data path
 #endif
 
@@ -50,7 +48,6 @@ char* getsEx(char* line, zip_file* file) {
     return line;
 }
 #else
-const char* configPath = "./";          ///< Path to game config
 const char* gamePath = "../assets/";    ///< Data path
 #endif
 
@@ -342,17 +339,6 @@ char* prefix(const char* filename) {
    strcpy(string, gamePath);
    strcat(string, filename);
    return string;
-}
-
-/**
-* @brief prefix prefixes file name with config path
-* @param filename is original file name
-* @return prefixed file name
-*/
-char* prefixEx(const char* filename) {
-    strcpy(string, configPath);
-    strcat(string, filename);
-    return string;
 }
 
 /**

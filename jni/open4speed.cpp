@@ -14,7 +14,6 @@
 #include "utils/engine.h"
 #include "utils/io.h"
 #include "utils/math.h"
-#include "utils/scripting.h"
 #include "utils/switch.h"
 #include "common.h"
 
@@ -35,30 +34,22 @@ void display(void) {
     /// start messuring time
     clock_gettime(CLOCK_REALTIME, &ts_start);
 
-    /// apply all scripts
-    scriptLoop();
-
-    /// update menu
-    updateMenu();
-
     /// display scene
-    if (race) {
+    displayScene();
 
-        displayScene();
+    /// update FPS counter
+    fps++;
+    if (timestamp != time(0)) {
+        lastFrameTime = frameTime / (float)fps;
+        frameTime = 0;
+        lastFPS = fps;
+        timestamp = time(0);
+        fps = 0;
 
-        /// update FPS counter
-        fps++;
-        if (timestamp != time(0)) {
-            lastFrameTime = frameTime / (float)fps;
-            frameTime = 0;
-            lastFPS = fps;
-            timestamp = time(0);
-            fps = 0;
-
-            /// draw FPS
-            if (debug && race)
-                printf("FPS: %d, t: %0.3fms, e: %d, k: %d\n", lastFPS, lastFrameTime, allCar[cameraCar]->currentEdgeIndex, lastkey);
-        }
+        /// draw FPS
+#ifndef ANDROID
+            printf("FPS: %d, t: %0.3fms, e: %d, k: %d\n", lastFPS, lastFrameTime, allCar[cameraCar]->currentEdgeIndex, lastkey);
+#endif
     }
 
     /// update sounds
@@ -98,12 +89,6 @@ void keyboardDown(unsigned char key, int x, int y) {
         key = key - 'A' + 'a';
     /// resend key code
     special((int)key + 128, x, y);
-
-    /// syntax called by escape key
-    if ((syntaxList->size() == 0) & (key + 128 == (int)keyBack)) {
-        std::vector<char*> *list = getList(esc);
-        syntaxList->assign(list->begin(), list->end());
-    }
 }
 
 /**
@@ -121,46 +106,6 @@ void keyboardUp(unsigned char key, int x, int y) {
 }
 
 /**
- * @brief mouseClick is called on mouse click
- * @param button is index of pressed button
- * @param state is state of pressed button
- * @param x is mouse position x
- * @param y is mouse position y
- */
-void mouseClick(int button, int state, int x, int y) {
-    /// cancel if script is in progress
-    if (syntaxList->size() > 0)
-        return;
-
-    /// set mouse button state
-    if (button==0 && state==0)
-        click = true;
-
-    /// action on mouse button release
-    if (button==0 && state==1 && click) {
-        click = false;
-
-        /// count position on screen
-        x = x * 100 / (float)screen_width;
-        y = y * 100 / (float)screen_height;
-
-        /// check all buttons
-        for (unsigned int i = 0; i < buttons->size(); i++) {
-
-            /// check if button is clicked
-            if ((x > (*buttons)[i].x) & (y > (*buttons)[i].y) & (x < (*buttons)[i].x + (*buttons)[i].width)
-                & (y < (*buttons)[i].y + (*buttons)[i].height)) {
-                exec = i;
-                for (unsigned int j = 0; j < syntaxList->size(); j++) {
-                    delete (*syntaxList)[j];
-                }
-                syntaxList = getList((*buttons)[i].syntax);
-            }
-        }
-    }
-}
-
-/**
  * @brief idle is non-graphical thread and it is called automatically by GLUT
  * @param v is time information
  */
@@ -175,31 +120,22 @@ void idle(int v) {
 
         /// if race finished show result
         if (allCar[0]->lapsToGo == -1) {
-            variable = 0;
+            int variable = 0;
             /// count player place
             for (int j = 0; j < carCount; j++) {
                 if (allCar[cameraCar]->toFinish >= allCar[j]->toFinish) {
                     variable++;
                 }
             }
-            /// remove todolist
-            for (unsigned int j = 0; j < syntaxList->size(); j++) {
-                delete[] (*syntaxList)[j];
-            }
-            /// add finish action into todolist
-            syntaxList = getList(finish);
+
+            //TODO what happend if player finish race
         }
         /// another test if race is finished(solve finish line position problem)
         if (allCar[0]->lapsToGo == -1) {
             if (distance(allCar[cameraCar]->x, allCar[cameraCar]->z,
                          allCar[cameraCar]->currentGoalEdge.bx, allCar[cameraCar]->currentGoalEdge.bz) < 25) {
 
-                /// remove todolist
-                for (unsigned int j = 0; j < syntaxList->size(); j++) {
-                    delete[] (*syntaxList)[j];
-                }
-                /// add finish action into todolist
-                syntaxList = getList(finish);
+                //TODO what happend if player finish race
             }
         }
 
@@ -254,28 +190,8 @@ int main(int argc, char** argv) {
 #endif
 #endif
 
-    /// load game config
-    if (exists(prefixEx("config"))) {
-        FILE* file = fopen(prefixEx("config"), "r");
-        for (int i = 0; i < configSize; i++) {
-            fscanf(file,"%d\n", &config[i]);
-        }
-        fclose(file);
-    } else {
-        for (int i = 0; i < configSize; i++) {
-            config[i] = 0;
-        }
-    }
-    for (int i = 0; i < configSize; i++) {
-        configText[i] = getList(getTag(i, "TEXTCFG%d"));
-    }
-
     /// set menu variables
-    busy = false;
-    click = false;
-    debug = false;
-    race = false;
-    unlock = 0;
+    active = true;
 
     /// load configuration
     loadAll();
@@ -296,14 +212,34 @@ int main(int argc, char** argv) {
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboardDown);
     glutKeyboardUpFunc(keyboardUp);
-    glutMouseFunc(mouseClick);
 #endif
 
     /// load menu data
     carList = getList("CARS");
-    syntaxList = getList("INIT");
-    textList = getList("TEXTS");
     trackList = getList("TRACKS");
+
+    delete physic;
+    currentTrack = 1;
+#ifdef ZIP_ARCHIVE
+    std::vector<char*> *atributes = getFullList(zip_fopen(APKArchive, prefix((*trackList)[currentTrack]), 0));
+#else
+    std::vector<char*> *atributes = getFullList(fopen(prefix((*trackList)[currentTrack]), "r"));
+#endif
+    loadScene(atributes);
+
+    /// init sound
+    crash = getSound("sfx/crash.ogg", false, 8);
+    engine = getSound("sfx/engine.ogg", true, 8);
+    noise = getSound("sfx/n2o.ogg", true, 8);
+
+    /// create instance of physical engine
+    physic = getPhysics(trackdata);
+    if (trackdata2 != 0) {
+        physic->addModel(trackdata2);
+    }
+    for (int i = 0; i <= opponentCount; i++)
+        physic->addCar(allCar[i]);
+    physic->locked = false;
 
     /// start loop
 #ifndef ANDROID
@@ -340,18 +276,6 @@ void Java_com_lvonasek_o4s_O4SJNI_nativeInit( JNIEnv*  env, jclass cls, jstring 
  */
 void Java_com_lvonasek_o4s_O4SJNI_nativeResize( JNIEnv*  env, jobject  thiz, jint w, jint h ) {
   reshape(w, h);
-}
-
-/**
- * @brief Java_com_lvonasek_o4s_O4SJNI_nativeClick is click method
- * @param env is instance of JNI
- * @param thiz is asset manager
- * @param x is position x
- * @param y is position y
- */
-void Java_com_lvonasek_o4s_O4SJNI_nativeClick( JNIEnv*  env, jobject  thiz, jint x, jint y ) {
-  mouseClick(0, 0, x, y);
-  mouseClick(0, 1, x, y);
 }
 
 /**

@@ -50,7 +50,4 @@ void main()
   vec4 shadow = 1.5 * texture2D(Lightmap, v_T);
   gl_FragColor.rgb += diffuse.rgb * shadow.rgb;
   gl_FragColor.a = min(length(shadow.rgb), 0.9);
-
-  //blur
-  gl_FragColor = (1.0 - u_speed) * gl_FragColor + u_speed * texture2D(EnvMap1, gl_FragCoord.xy * u_res); 
 }

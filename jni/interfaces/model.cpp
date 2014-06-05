@@ -27,7 +27,7 @@ model::~model() {
         models[i].texture2D->pointerDecrease();
     }
     for (unsigned int i = 0; i < lightmaps.size(); i++) {
-        lightmaps[i]->destroy();
+        lightmaps[i]->pointerDecrease();
     }
     lightmaps.clear();
     models.clear();

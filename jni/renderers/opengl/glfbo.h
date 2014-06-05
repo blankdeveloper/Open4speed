@@ -12,6 +12,7 @@
 #define GLFBO_H
 
 #include "renderers/opengl/gles20.h"
+#include "renderers/opengl/glvbo.h"
 
 class glfbo : public fbo
 {
@@ -21,6 +22,7 @@ public:
     GLuint* rboID;                ///< Render buffer object id
     GLuint* fboID;                ///< Frame buffer object id
     texture* rtt;                 ///< Texture for color buffer loaded from file
+    glvbo* vbo;                   ///< VBO for rendering to screen
     bool depth, rb;               ///< Info about buffers usage
 
     /**

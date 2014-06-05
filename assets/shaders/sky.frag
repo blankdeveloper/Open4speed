@@ -6,7 +6,4 @@ void main()
 {
   gl_FragColor = texture2D(color_texture, v_Coords);
   gl_FragColor.a = 0.0;
-  
-  //blur
-  gl_FragColor = (1.0 - u_speed) * gl_FragColor + u_speed * texture2D(EnvMap1, gl_FragCoord.xy * u_res); 
 }

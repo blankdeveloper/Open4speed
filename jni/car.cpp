@@ -21,10 +21,9 @@
  * @param filename is path to file to load
  * @param automatic is true for automatic transmision
  */
-car::car(input *i, std::vector<edge> *e, const char* filename, bool automatic) {
+car::car(input *i, std::vector<edge> *e, const char* filename) {
 
     /// get car atributes
-    this->automatic = automatic;
 #ifdef ZIP_ARCHIVE
     std::vector<char*> *atributes = getFullList(zip_fopen(APKArchive, prefix(filename), 0));
 #else
@@ -276,23 +275,12 @@ void car::updateSound() {
     float engineFreq = gearLow + (gearHigh - gearLow) * speedPlus / speedDiff;
 
     /// automatic changing gears
-    if (automatic & (currentGear >= 1)) {
+    if (currentGear >= 1) {
         if ((currentGear > 1) & (engineFreq < gearDown))
             currentGear--;
         if (currentGear < gears->size() - 1) {
             if (engineFreq > gearUp)
                 currentGear++;
-        }
-    } else {
-        switch(control->getGearChange()) {
-            case(1):
-                if (currentGear < gears->size() - 1)
-                    currentGear++;
-                break;
-            case(-1):
-                if (currentGear > 1)
-                    currentGear--;
-                break;
         }
     }
 

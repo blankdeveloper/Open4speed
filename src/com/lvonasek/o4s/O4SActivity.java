@@ -10,11 +10,6 @@ import android.widget.RelativeLayout;
 
 import com.lvonasek.o4s.controllers.HWKeys;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 /**
  * Runnable class - it sets environment and run everything needed. It also manages interruptions of
  * sounds and game loop(e.g.during incoming call)
@@ -23,10 +18,6 @@ import java.io.InputStream;
  */
 public class O4SActivity extends Activity {
 
-    //paths(NOTE: static path work on restricted profile but sounds not)
-    private static final String path = "/data/data/com.lvonasek.o4s/";
-    private static final String configFile = path + "config";
-    private static final String versionFile = path + "open4speed.1.20";
     //various instances
     private O4SJNI mO4SJNI;
     public static O4SActivity mO4SActivity;
@@ -49,26 +40,6 @@ public class O4SActivity extends Activity {
 
         //set the hardware buttons to control the game sound
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
-
-        //check if the game is installed
-        if (!new File(versionFile).exists()) {
-            //install config file on sd card
-            try {
-                //unpack initial configuration
-                if (!new File(configFile).exists()) {
-                    InputStream i = getAssets().open("init.zip");
-                    new File(path).mkdirs();
-                    Utils.unzip(i, path);
-                    i.close();
-                }
-
-                //create version file
-                FileOutputStream fout = new FileOutputStream(versionFile);
-                fout.write("Created by Luboš Vonásek".getBytes());
-                fout.close();
-            } catch (IOException ex) {
-            }
-        }
 
         //new instance
         if (mO4SJNI == null) {

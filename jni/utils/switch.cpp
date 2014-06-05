@@ -18,9 +18,6 @@
 #include "renderers/opengl/glsl.h"
 #include "renderers/opengl/gltexture.h"
 #include "renderers/opengl/glvbo.h"
-#ifndef ANDROID
-#include "sound/fmodapi.h"
-#endif
 #include "sound/soundpool.h"
 #include "utils/io.h"
 #include "utils/switch.h"
@@ -145,11 +142,7 @@ shader* getShader(const char* name) {
  */
 sound* getSound(const char* filename, bool loop, int channels) {
     logi("Load sound file:", filename);
-#ifdef ANDROID
     return new soundpool(filename, loop, channels);
-#else
-    return new fmodapi(filename, loop, channels);
-#endif
 }
 
 /**

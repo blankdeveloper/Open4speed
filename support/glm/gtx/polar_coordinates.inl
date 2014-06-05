@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// OpenGL Mathematics Copyright (c) 2005 - 2014 G-Truc Creation (www.g-truc.net)
+// OpenGL Mathematics Copyright (c) 2005 - 2011 G-Truc Creation (www.g-truc.net)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Created : 2007-03-06
 // Updated : 2009-05-01
@@ -7,51 +7,36 @@
 // File    : glm/gtx/polar_coordinates.inl
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-namespace glm
+namespace glm{
+namespace gtx{
+namespace polar_coordinates
 {
-	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER detail::tvec3<T, P> polar
-	(
-		detail::tvec3<T, P> const & euclidean
-	)
+	template <typename T> 
+	GLM_FUNC_QUALIFIER detail::tvec3<T> polar(
+		const detail::tvec3<T>& euclidean)
 	{
-		T const Length(length(euclidean));
-		detail::tvec3<T, P> const tmp(euclidean / Length);
-		T const xz_dist(sqrt(tmp.x * tmp.x + tmp.z * tmp.z));
+		T length = length(euclidean);
+		detail::tvec3<T> tmp = euclidean / length;
+		T xz_dist = sqrt(tmp.x * tmp.x + tmp.z * tmp.z);
 
-#ifdef GLM_FORCE_RADIANS
-		return detail::tvec3<T, P>(
-			atan(xz_dist, tmp.y),	// latitude
-			atan(tmp.x, tmp.z),		// longitude
-			xz_dist);				// xz distance
-#else
-#		pragma message("GLM: polar function returning degrees is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.")
-		return detail::tvec3<T, P>(
+		return detail::tvec3<T>(
 			degrees(atan(xz_dist, tmp.y)),	// latitude
-			degrees(atan(tmp.x, tmp.z)),	// longitude
-			xz_dist);						// xz distance
-#endif
+			degrees(atan(tmp.x, tmp.z)),		// longitude
+			xz_dist);									// xz distance
 	}
 
-	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER detail::tvec3<T, P> euclidean
-	(
-		detail::tvec2<T, P> const & polar
-	)
+	template <typename T> 
+	GLM_FUNC_QUALIFIER detail::tvec3<T> euclidean(
+		const detail::tvec3<T>& polar)
 	{
-#ifdef GLM_FORCE_RADIANS
-		T const latitude(polar.x);
-		T const longitude(polar.y);
-#else
-#		pragma message("GLM: euclidean function taking degrees as parameters is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.")
-		T const latitude(radians(polar.x));
-		T const longitude(radians(polar.y));
-#endif
-
-		return detail::tvec3<T, P>(
+		T latitude = radians(polar.x);
+		T longitude = radians(polar.y);
+		return detail::tvec3<T>(
 			cos(latitude) * sin(longitude),
 			sin(latitude),
 			cos(latitude) * cos(longitude));
 	}
 
+}//namespace polar_coordinates
+}//namespace gtx
 }//namespace glm

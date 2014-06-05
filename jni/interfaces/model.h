@@ -15,7 +15,6 @@
 #include "interfaces/shader.h"
 #include "interfaces/texture.h"
 #include "interfaces/vbo.h"
-#include "loaders/dynamiclight.h"
 
 /**
  * @brief The edge struct
@@ -79,8 +78,7 @@ public:
     std::vector<model3d> models;               ///< All parts of model
     AABB aabb;                                 ///< Extremes of current model
     float width, aplitude, height;             ///< Dimensions of current model
-    std::vector<fbo*> lightmaps;               ///< List of lightmaps
-    DynamicLight *dynamicLight;                ///< Dynamic lights in lightmaps
+    std::vector<texture*> lightmaps;           ///< List of lightmaps
 
     /**
      * @brief getLMCount get amount of lightmaps

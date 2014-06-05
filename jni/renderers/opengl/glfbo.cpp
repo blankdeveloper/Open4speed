@@ -29,9 +29,7 @@ glfbo::glfbo() {
  */
 glfbo::glfbo(texture *texture) {
 
-        //find ideal texture resolution
-        res = 2;
-        res = max(texture->twidth, texture->twidth);
+        //set resolution
         width = texture->twidth;
         height = texture->twidth;
 
@@ -67,12 +65,8 @@ glfbo::glfbo(texture *texture) {
 glfbo::glfbo(int width, int height, bool depthbuffer) {
 
     //find ideal texture resolution
-    res = 2;
     this->width = width;
     this->height = height;
-    while (res < max(width, height)) {
-        res *= 2;
-    }
 
     //create frame buffer
     fboID = new GLuint[1];
@@ -86,7 +80,9 @@ glfbo::glfbo(int width, int height, bool depthbuffer) {
     glBindTexture(GL_TEXTURE_2D, rendertexture[0]);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, res, res, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rendertexture[0], 0);
 
     //create texture for depth buffer
@@ -97,18 +93,14 @@ glfbo::glfbo(int width, int height, bool depthbuffer) {
         glBindTexture(GL_TEXTURE_2D, rendertexture2[0]);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, res, res, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, rendertexture2[0], 0);
     }
     //create render buffer
     else {
         glGenRenderbuffers(1, rboID);
         glBindRenderbuffer(GL_RENDERBUFFER, rboID[0]);
-#ifdef ANDROID
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, res, res);
-#else
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, res, res);
-#endif
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
     }
 
@@ -187,15 +179,14 @@ void glfbo::drawOnScreen(shader* screen_shader) {
 
     /// coords
     GLfloat coords[] = {0, 0,
-                        width / (float)res, 0,
-                        width / (float)res, height / (float)res,
-                        0, height / (float)res
+                        1, 0,
+                        1, 1,
+                        0, 1
     };
 
     /// texture
     glBindTexture(GL_TEXTURE_2D, rendertexture[0]);
     screen_shader->attrib(vertices, coords);
-    screen_shader->uniformFloat("u_res", 1 / (float)res);
 
     /// render
     glDisable(GL_DEPTH_TEST);

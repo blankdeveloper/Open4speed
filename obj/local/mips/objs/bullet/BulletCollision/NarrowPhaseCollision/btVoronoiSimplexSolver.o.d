@@ -1,9 +1,9 @@
 /home/lubos/Plocha/Open4speed/obj/local/mips/objs/bullet/BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.o: \
- ../support/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.cpp \
- ../support/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btSimplexSolverInterface.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btVector3.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btScalar.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.cpp \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/NarrowPhaseCollision/btSimplexSolverInterface.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btVector3.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btScalar.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/math.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/cdefs.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/cdefs_elf.h \
@@ -35,16 +35,16 @@
  /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/strings.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/memory.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/assert.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btMinMax.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedAllocator.h
 
-../support/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btSimplexSolverInterface.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/NarrowPhaseCollision/btSimplexSolverInterface.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btVector3.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btVector3.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btScalar.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btScalar.h:
 
 /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/math.h:
 
@@ -108,6 +108,6 @@
 
 /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/assert.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btMinMax.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedAllocator.h:

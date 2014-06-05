@@ -25,173 +25,11 @@ struct Dynamic {
     int frame;
 };
 
-bool testingState = false;                   ///< Update VBO testing state
 int currentFrame = 0;                        ///< Frame index
 const int effLen = 6;                        ///< Length of water effect
 Dynamic eff[effLen];                         ///< 3D water effect object
 model* arrow = 0;                            ///< GPS arrow model
 model* water = 0;                            ///< Water effect model
-
-/**
- * @brief displayMenu displaies menu
- * @param gui is instance of menu
- * @param renderer is instance of renderer
- * @param images is storage of textures
- * @param textList is storage of strings
- */
-void displayMenu() {
-
-    /// Render background
-    if (background >= 0) {
-        if (!race) {
-            xrenderer->rtt[xrenderer->oddFrame]->bindFBO();
-            xrenderer->rtt[xrenderer->oddFrame]->clear(false);
-            xrenderer->rtt[xrenderer->oddFrame]->drawOnScreen(xrenderer->scene_shader);
-        }
-        xrenderer->renderImage(0, 0, 100, 100, 1, (*images)[background]);
-    }
-
-    /// render car
-    if (viewCar) {
-        xrenderer->perspective(60, aspect, 0.1, 10);
-
-        /// set camera
-        xrenderer->lookAt(cos(allCar[0]->rot * 3.14 / 180.0),2 + sin(allCar[0]->rot * 3.14 / 180.0),-3.5,0,0,0,0,1,0);
-
-        /// render car
-        xrenderer->enable[1] = false;
-        xrenderer->enable[2] = false;
-        xrenderer->clear(false);
-        xrenderer->pushMatrix();
-        xrenderer->rotateY(allCar[0]->rot);
-
-        /// render car skin
-        xrenderer->light.u_nearest1 = glm::vec4(0,0,0,1);
-        xrenderer->pushMatrix();
-        xrenderer->translate(0,0.4 + allCar[0]->wheelY,0);
-        xrenderer->renderModel(allCar[0]->skin);
-        xrenderer->popMatrix();
-
-        /// render rear right wheel
-        xrenderer->pushMatrix();
-        xrenderer->translate(-allCar[0]->wheelX,0.0,-allCar[0]->wheelZ1);
-        xrenderer->renderModel(allCar[0]->wheel);
-        xrenderer->popMatrix();
-
-        /// render rear left wheel
-        xrenderer->pushMatrix();
-        xrenderer->translate(allCar[0]->wheelX,0.0,-allCar[0]->wheelZ1);
-        xrenderer->rotateY(180);
-        xrenderer->renderModel(allCar[0]->wheel);
-        xrenderer->popMatrix();
-
-        /// render front right wheel
-        xrenderer->pushMatrix();
-        xrenderer->translate(-allCar[0]->wheelX,0.0,allCar[0]->wheelZ2);
-        xrenderer->renderModel(allCar[0]->wheel);
-        xrenderer->popMatrix();
-
-        /// render front left wheel
-        xrenderer->pushMatrix();
-        xrenderer->translate(allCar[0]->wheelX,0.0,allCar[0]->wheelZ2);
-        xrenderer->rotateY(180);
-        xrenderer->renderModel(allCar[0]->wheel);
-        xrenderer->popMatrix();
-
-        xrenderer->popMatrix();
-    }
-
-    /// Render buttons
-    for (unsigned int i = 0; i < buttons->size(); i++) {
-
-        button *b = &((*buttons)[i]);
-
-        /// Get button layer
-        float layer = b->layer;
-        if (layer > 1)
-            layer = 1;
-
-        /// Special text on config button
-        if (b->type == 2) {
-            char text[128];
-
-            /// amount of n2o
-            if (b->text == 0) {
-                float w = b->width * allCar[cameraCar]->n2o / 150.0f;
-                xrenderer->renderImage(b->x, b->y, w, b->height, layer, (*images)[b->image]);
-            }
-
-            // car speed
-            else if (b->text == 1) {
-                sprintf(text, "%dkmh", (int)allCar[cameraCar]->speed);
-                xrenderer->renderText(b->x, b->y, layer, text);
-            }
-
-            // car gear
-            else if (b->text == 2) {
-                sprintf(text, "%d", (int)allCar[cameraCar]->currentGear);
-                if (allCar[cameraCar]->speed < 5) {
-                    text[0] = 'N';
-                } else if (allCar[cameraCar]->reverse) {
-                    text[0] = 'R';
-                }
-                xrenderer->renderText(b->x, b->y, layer, text);
-            }
-
-            // to finish distance
-            else if (b->text == 3) {
-                float dst = allCar[cameraCar]->toFinish;
-                dst += distance(allCar[cameraCar]->x, allCar[cameraCar]->z,
-                                allCar[cameraCar]->currentGoalEdge.bx, allCar[cameraCar]->currentGoalEdge.bz);
-                sprintf(text, "%d.%dkm", (int)(dst / 1000), (int)(dst / 100) % 10);
-                xrenderer->renderText(b->x, b->y, layer, text);
-            }
-
-            // car position
-            else if (b->text == 4) {
-                int pos = 0;
-                for (int j = 0; j < carCount; j++) {
-                    if (allCar[cameraCar]->toFinish >= allCar[j]->toFinish) {
-                        pos++;
-                    }
-                }
-                sprintf(text, "%d.", pos);
-                xrenderer->renderText(b->x, b->y, layer, text);
-            }
-
-            // timeout
-            else if (b->text == 5) {
-                if (timeout >= 0) {
-                    sprintf(text, "%d:%d%d", timeout / 60, (timeout % 60) / 10, timeout % 10);
-                    xrenderer->renderText(b->x, b->y, layer, text);
-                }
-            }
-
-        } else if (b->type == 1) {
-            xrenderer->renderButton(b->x, b->y, b->width, b->height, layer, (*images)[b->image], (*configText[b->text])[config[b->text]]);
-
-        /// Standart text
-        } else if (b->type == 0) {
-
-            /// reset case
-            if (strcmp(b->syntax, "RESET") != 0) {
-                if (b->image < 0) {
-                    xrenderer->renderText(b->x, b->y, layer, (*textList)[b->text]);
-                } else if (b->text >= 0)
-                    xrenderer->renderButton(b->x, b->y, b->width, b->height, layer, (*images)[b->image], (*textList)[b->text]);
-            } else if (allCar[cameraCar]->resetAllowed) {
-                if ((allCar[cameraCar]->speed < 5) && active && !physic->locked) {
-                    if (b->image < 0) {
-                        xrenderer->renderText(b->x, b->y, layer, (*textList)[b->text]);
-                    } else if (b->text >= 0)
-                        xrenderer->renderButton(b->x, b->y, b->width, b->height, layer, (*images)[b->image], (*textList)[b->text]);
-                }
-            }
-        } else {
-            xrenderer->renderButton(b->x, b->y, b->width, b->height, layer, (*images)[b->image], "");
-        }
-    }
-}
 
 /**
  * @brief displayScene displaies race scene
@@ -291,20 +129,6 @@ void displayScene() {
     xrenderer->enable[2] = false;
     for (int i = carCount - 1; i >= 0; i--) {
 
-        /// find nearest light
-        xrenderer->light.u_nearest1 = glm::vec4(99999,99999,99999,1);
-        xrenderer->model_position = glm::vec4(allCar[i]->transform->value[12], allCar[i]->transform->value[13], allCar[i]->transform->value[14], 1);
-        for (int j = 0/*!lamp[(xrenderer->frame/2) % 100]*/; j < trackdata->edgesCount; j++) {
-            for (unsigned int x = 0; x < trackdata->edges[j].size() / 2; x++) {
-                edge e = trackdata->edges[j][x];
-                glm::vec4 pos = glm::vec4(e.bx, e.by, e.bz, 1);
-                if (glm::length(xrenderer->model_position - pos) < glm::length(xrenderer->model_position - xrenderer->light.u_nearest1)) {
-                    xrenderer->light.u_nearest1 = pos;
-                }
-            }
-        }
-        xrenderer->light.u_nearest1 = xrenderer->view_matrix * xrenderer->light.u_nearest1;
-
         ///render car skin
         xrenderer->pushMatrix();
         xrenderer->multMatrix(allCar[i]->transform[0].value);
@@ -324,23 +148,6 @@ void displayScene() {
             xrenderer->popMatrix();
         }
     }
-
-    /// render car lights
-    xrenderer->enable[0] = false;
-    xrenderer->enable[1] = false;
-    xrenderer->enable[2] = true;
-    for (int i = carCount - 1; i >= 0; i--) {
-        if (i != cameraCar) {
-            xrenderer->overmode = 1;
-            xrenderer->pushMatrix();
-            xrenderer->multMatrix(allCar[i]->transform[0].value);
-            xrenderer->translate(0, allCar[i]->wheelY, 0);
-            xrenderer->renderModel(allCar[i]->skin);
-            xrenderer->popMatrix();
-            xrenderer->overmode = 0;
-        }
-    }
-    xrenderer->enable[0] = true;
 
     /// render smoke effects
     if (water == 0) {
@@ -379,18 +186,18 @@ void displayScene() {
     for (int i = carCount - 1; i >= 0; i--) {
         for (int j = 1; j <= 4; j++) {
             if (active) {
-                for (int k = 0; k < allCar[i]->speed / 25 - 1; k++) {
-                    float x = allCar[i]->transform[j].value[12] + (rand() % 50 - 25) * 0.01f + sin(allCar[i]->rot * 3.14 / 180) * k * 0.5f;
+                for (int k = 0; k < allCar[i]->speed / 5 - 1; k++) {
+                    float x = allCar[i]->transform[j].value[12] + (rand() % 50 - 25) * 0.01f + sin(allCar[i]->rot * 3.14 / 180) * k * 0.1f;
                     float y = allCar[i]->transform[j].value[13] - 0.2f;
-                    float z = allCar[i]->transform[j].value[14] + (rand() % 50 - 25) * 0.01f + cos(allCar[i]->rot * 3.14 / 180) * k * 0.5f;
+                    float z = allCar[i]->transform[j].value[14] + (rand() % 50 - 25) * 0.01f + cos(allCar[i]->rot * 3.14 / 180) * k * 0.1f;
                     float s = 2;
                     if (allCar[i]->speed > 150) {
                         s = allCar[i]->speed / 75.0f;
                     }
                     for (int l = 0; l < water->models[0].triangleCount[1] * 3; l++) {
-                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 0] = x + s * (water->models[0].vertices[l * 3 + 0] + water->models[0].reg->min.x);
-                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 1] = y + s * (water->models[0].vertices[l * 3 + 1] + water->models[0].reg->min.y);
-                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 2] = z + s * (water->models[0].vertices[l * 3 + 2] + water->models[0].reg->min.z);
+                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 0] = x;
+                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 1] = y;
+                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 2] = z;
                         eff[currentFrame].coords[eff[currentFrame].count * 2 + 0] = water->models[0].coords[l * 2 + 0];
                         eff[currentFrame].coords[eff[currentFrame].count * 2 + 1] = water->models[0].coords[l * 2 + 1];
                         eff[currentFrame].count++;
@@ -406,14 +213,6 @@ void displayScene() {
         }
         eff[currentFrame].frame = 0;
         currentFrame++;
-
-        if (trackdata->dynamicLight != 0) {
-            bool v = lamp[(xrenderer->frame/2) % 100];
-            //v = !testingState; testingState = v; //testing
-            trackdata->dynamicLight->fboRenderer->bind();
-            trackdata->dynamicLight->setLights(0, trackdata->dynamicLight->lightCount - 1, v);
-            trackdata->dynamicLight->fboRenderer->unbind();
-        }
 
         if (currentFrame >= effLen) {
             currentFrame = 0;
@@ -434,7 +233,7 @@ void loadScene(std::vector<char*> *atributes) {
     /// clear previous scene
     if (trackdata != 0) {
         while(!trackdata->lightmaps.empty()) {
-            trackdata->lightmaps[0]->destroy();
+            trackdata->lightmaps[0]->pointerDecrease();
             trackdata->lightmaps.erase(trackdata->lightmaps.begin());
         }
         for (int i = 0; i < carCount; i++)
@@ -467,7 +266,7 @@ void loadScene(std::vector<char*> *atributes) {
     //arrow->models[0].texture2D = skydome->models[1].texture2D;
 
     /// load player car
-    allCar[0] = new car(getInput(), &e, (*carList)[playerCar], transmission);
+    allCar[0] = new car(getInput(), &e, (*carList)[playerCar]);
 
     /// load race informations
     allCar[0]->lapsToGo = getConfig("laps", atributes) - 1;
@@ -481,7 +280,7 @@ void loadScene(std::vector<char*> *atributes) {
 
         /// racer ai
         if (getConfig(getTag(i + 1, "opponent%d_type"), atributes) == 0) {
-            allCar[i + 1] = new car(new airacer(), &e, (*carList)[getConfig(getTag(i + 1, "opponent%d_car"), atributes)], true);
+            allCar[i + 1] = new car(new airacer(), &e, (*carList)[getConfig(getTag(i + 1, "opponent%d_car"), atributes)]);
             allCar[i + 1]->finishEdge = allCar[0]->finishEdge;
             allCar[i + 1]->lapsToGo = allCar[0]->lapsToGo;
             allCar[i + 1]->setStart(allCar[i + 1]->edges[getConfig(getTag(i + 1, "opponent%d_start"), atributes)], 0);
@@ -490,7 +289,7 @@ void loadScene(std::vector<char*> *atributes) {
         /// traffic ai
         } else {
             allCar[i + 1] = new car(new aitraffic(), &trackdata->edges[(int)getConfig(getTag(i + 1, "opponent%d_track"), atributes)],
-                                    (*carList)[getConfig(getTag(i + 1, "opponent%d_car"), atributes)], true);
+                                    (*carList)[getConfig(getTag(i + 1, "opponent%d_car"), atributes)]);
             allCar[i + 1]->finishEdge = -1;
             allCar[i + 1]->lapsToGo = 32768;
             allCar[i + 1]->setStart(allCar[i + 1]->edges[getConfig(getTag(i + 1, "opponent%d_start"), atributes)], 3);
@@ -502,12 +301,8 @@ void loadScene(std::vector<char*> *atributes) {
         for (int i = 0; i < trackdata->getLMCount(); i++) {
             char filename[256];
             sprintf(filename, getConfigStr("lightmap", atributes), i);
-            trackdata->lightmaps.push_back(getFBO(getTexture(filename, 1.0)));
+            trackdata->lightmaps.push_back(getTexture(filename, 1.0));
         }
-        if (strlen(getConfigStr("dynamicLight", atributes)) > 0 )
-            trackdata->dynamicLight = new DynamicLight(getConfigStr("dynamicLight", atributes));
-        else
-            trackdata->dynamicLight = 0;
     }
 }
 
@@ -517,9 +312,6 @@ void loadScene(std::vector<char*> *atributes) {
  * @return updated instance
  */
 void updateMenu() {
-    /// rotate car if it is avaible
-    if (viewCar)
-        allCar[0]->rot++;
 
     /// check all buttons
     for (unsigned int i = 0; i < buttons->size(); i++) {
@@ -531,30 +323,10 @@ void updateMenu() {
             if (b->layer < 0.96)
                 b->layer += 0.15;
 
-        /// get mouse pointer position
-        float x = mouseX * 100 / (float)screen_width;
-        float y = mouseY * 100 / (float)screen_height;
-
-        /// focus button if it is selected
-        if ((x > b->x) & (y > b->y) & (x < b->x + b->width)
-            & (y < b->y + b->height) & (strcmp(b->syntax, "NONE") != 0)) {
-#ifndef ANDROID
-            b->layer -= 0.01;
-#endif
-            if ((b->layer > 0.96) & (b->layer < 0.97))
-                b->layer = 0.97;
-        } else {
-#ifndef ANDROID
-            b->layer += 0.01;
-#endif
-            if (b->layer > 1)
-                b->layer = 1;
+        /// output animation
+        } else if (b->image > 0) {
+            b->layer -= 0.15;
         }
-
-      /// output animation
-      } else if (b->image > 0) {
-          b->layer -= 0.15;
-      }
     }
 
     /// update busy status

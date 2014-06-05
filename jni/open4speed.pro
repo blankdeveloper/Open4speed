@@ -7,8 +7,7 @@ LIBS += -lGL \
     -lzip \
     -lBulletDynamics \
     -lBulletCollision \
-    -lLinearMath \
-    ./libfmodex-4.44.08.so
+    -lLinearMath
 TARGET = open4speed
 CONFIG += console
 CONFIG -= app_bundle
@@ -27,7 +26,6 @@ SOURCES += \
     utils/engine.cpp \
     renderers/opengl/gles20.cpp \
     renderers/opengl/glsl.cpp \
-    sound/fmodapi.cpp \
     car.cpp \
     loaders/pngloader.cpp \
     common.cpp \
@@ -36,8 +34,7 @@ SOURCES += \
     interfaces/model.cpp \
     renderers/opengl/gltexture.cpp \
     renderers/opengl/glfbo.cpp \
-    renderers/opengl/glvbo.cpp \
-    loaders/dynamiclight.cpp
+    renderers/opengl/glvbo.cpp
 HEADERS += \
     input/keyboard.h \
     interfaces/input.h \
@@ -57,7 +54,6 @@ HEADERS += \
     utils/engine.h \
     renderers/opengl/gles20.h \
     renderers/opengl/glsl.h \
-    sound/fmodapi.h \
     car.h \
     loaders/pngloader.h \
     interfaces/shader.h \
@@ -68,6 +64,5 @@ HEADERS += \
     renderers/opengl/glfbo.h \
     interfaces/fbo.h \
     interfaces/vbo.h \
-    renderers/opengl/glvbo.h \
-    loaders/dynamiclight.h
-INCLUDEPATH += ../support ../support/fmodapi-4.44.08 ../support/bullet-2.81-rev2613/src
+    renderers/opengl/glvbo.h
+INCLUDEPATH += ../support ../support/bullet3-Bullet-2.83-alpha/src

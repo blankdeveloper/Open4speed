@@ -52,7 +52,4 @@ void main()
   //dynamic shadow
   if (texture2D(EnvMap1, vec2(gl_FragCoord.x * u_res, gl_FragCoord.y * u_res + 0.5 * (1.0 - gl_FragCoord.z))).a == 1.0)
     gl_FragColor.rgb -= 0.05;
-
-  //blur
-  gl_FragColor = (1.0 - u_speed) * gl_FragColor + u_speed * texture2D(EnvMap1, gl_FragCoord.xy * u_res); 
 }

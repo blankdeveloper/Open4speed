@@ -41,7 +41,6 @@ public:
     float gearUp, gearDown, gearLow, gearHigh, gearNitro;                 ///< Gear extremes
     std::vector<gear> *gears;                                             ///< Transmision gears
     unsigned int currentGear;                                             ///< Current gear
-    bool automatic;                                                       ///< Transmission
     bool reverse;                                                         ///< Car direction
     input* control;                                                       ///< Car control device(or script)
     edge currentEdge;                                                     ///< Current track part
@@ -77,7 +76,7 @@ public:
      * @param filename is path to file to load
      * @param automatic is true for automatic transmision
      */
-    car(input *i, std::vector<edge> *e, const char* filename, bool automatic);
+    car(input *i, std::vector<edge> *e, const char* filename);
 
     /**
      * @brief getView gets perspective view of car

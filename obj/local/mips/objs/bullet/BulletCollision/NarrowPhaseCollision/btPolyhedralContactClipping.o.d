@@ -1,8 +1,8 @@
 /home/lubos/Plocha/Open4speed/obj/local/mips/objs/bullet/BulletCollision/NarrowPhaseCollision/btPolyhedralContactClipping.o: \
- ../support/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btPolyhedralContactClipping.cpp \
- ../support/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btPolyhedralContactClipping.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btScalar.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/NarrowPhaseCollision/btPolyhedralContactClipping.cpp \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/NarrowPhaseCollision/btPolyhedralContactClipping.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedObjectArray.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btScalar.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/math.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/cdefs.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/sys/cdefs_elf.h \
@@ -34,24 +34,24 @@
  /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/strings.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/memory.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/assert.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedAllocator.h \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/new \
- ../support/bullet-2.81-rev2613/src/LinearMath/btTransform.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btMatrix3x3.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btVector3.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btQuaternion.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btQuadWord.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btTransform.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btMatrix3x3.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btVector3.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btMinMax.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btQuaternion.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btQuadWord.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/stdio.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btVector3.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConvexPolyhedron.h
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btVector3.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btConvexPolyhedron.h
 
-../support/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btPolyhedralContactClipping.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/NarrowPhaseCollision/btPolyhedralContactClipping.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedObjectArray.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btScalar.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btScalar.h:
 
 /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/math.h:
 
@@ -115,26 +115,26 @@
 
 /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/assert.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedAllocator.h:
 
 /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/new:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btTransform.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btTransform.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btMatrix3x3.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btMatrix3x3.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btVector3.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btVector3.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btMinMax.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btQuaternion.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btQuaternion.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btQuadWord.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btQuadWord.h:
 
 /opt/android-ndk-r9c/platforms/android-14/arch-mips/usr/include/stdio.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btVector3.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btVector3.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConvexPolyhedron.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btConvexPolyhedron.h:

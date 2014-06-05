@@ -1,8 +1,8 @@
 /home/lubos/Plocha/Open4speed/obj/local/x86/objs/bullet/BulletCollision/CollisionDispatch/btUnionFind.o: \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btUnionFind.cpp \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btUnionFind.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btScalar.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionDispatch/btUnionFind.cpp \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionDispatch/btUnionFind.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedObjectArray.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btScalar.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-x86/usr/include/math.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-x86/usr/include/sys/cdefs.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-x86/usr/include/sys/cdefs_elf.h \
@@ -35,14 +35,14 @@
  /opt/android-ndk-r9c/platforms/android-14/arch-x86/usr/include/strings.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-x86/usr/include/memory.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-x86/usr/include/assert.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedAllocator.h \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/new
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btUnionFind.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionDispatch/btUnionFind.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedObjectArray.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btScalar.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btScalar.h:
 
 /opt/android-ndk-r9c/platforms/android-14/arch-x86/usr/include/math.h:
 
@@ -108,6 +108,6 @@
 
 /opt/android-ndk-r9c/platforms/android-14/arch-x86/usr/include/assert.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedAllocator.h:
 
 /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/new:

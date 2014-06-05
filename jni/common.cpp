@@ -29,7 +29,6 @@ bool lamp[] = {0,0,0,0,1,0,1,1,0,1,
  */
 std::vector<char*> *carList;                                    ///< List of all cars
 std::vector<texture*> *images = new std::vector<texture*>();    ///< List of all images
-std::vector<char*> *musicList;                                  ///< List of all songs
 std::vector<char*> *textList;                                   ///< List of all texts
 std::vector<char*> *trackList;                                  ///< List of all tracks
 std::vector<char*> *syntaxList;                                 ///< List of syntaxes to do
@@ -71,13 +70,6 @@ float aiTrafficSpeedNoGas;                              ///< AI navigation param
 float aiTrafficSteeringGapLevel1;                       ///< AI navigation parameter
 float aiTrafficSteeringGapLevel2;                       ///< AI navigation parameter
 float aiTrafficTrackUpdate;                             ///< AI navigation parameter
-float fontMoveX;                                        ///< Font spaces
-float fontMoveY;                                        ///< Font spaces
-float fontRows;                                         ///< Font rows in texture file
-float fontSize;                                         ///< Font size
-float fontSpaces;                                       ///< Font spaces
-char* fontTexture;                                      ///< Texture for font
-char* gameMode;                                         ///< Screen mode
 char* inputController;                                  ///< Input controller
 float keyBack;                                          ///< Keycode
 float keyCameraDown;                                    ///< Keycode
@@ -112,7 +104,6 @@ float viewDistance;                                     ///< View distance
  * The menu
  */
 float aspect;                                                ///< Menu aspect
-int background;                                              ///< Menu background index
 bool busy;                                                   ///< Busy information
 bool click;                                                  ///< Click information
 std::vector<button> *buttons = new std::vector<button>;      ///< List of buttons
@@ -120,16 +111,11 @@ bool debug;                                                  ///< Debug mode
 char esc[32];                                                ///< Syntax to exec on esc
 int exec;                                                    ///< Exec information
 char finish[32];                                             ///< Syntax to exec on finish
-int mouseX;                                                  ///< Mouse position
-int mouseY;                                                  ///< Mouse position
 bool race;                                                   ///< Race mode
 int screen_width;                                            ///< Screen width
 int screen_height;                                           ///< Screen height
-char timeoutAction[32];                                      ///< Syntax called after timeout
-bool transmission;                                           ///< Transmision state
 int unlock;                                                  ///< Locking
 int variable;                                                ///< Variable for scripts
-bool viewCar;                                                ///< View car in menu
 bool updated;                                                ///< Information about updates
 
 /**
@@ -137,15 +123,13 @@ bool updated;                                                ///< Information ab
  */
 
 float cameraDistance;           ///< Camera distance level
-int timeout = 0;                ///< Timeout clock
 int playerCar;                  ///< Index of player car
-float antialiasing = 0.5f;      ///< antialiasing level
 bool active;                    ///< Information if scene is active
 int currentTrack;               ///< Current track index
 int opponentCount;              ///< Opponent count
+model *skydome;                 ///< Skydome model
 model *trackdata = 0;           ///< Track first model
 model *trackdata2 = 0;          ///< Track second model
-model *skydome;                 ///< Skydome model
 car *allCar[carLimit];          ///< All cars in scene instances
 int carCount = 0;               ///< Amount of cars in scene
 int cameraCar = 0;              ///< Car camera index
@@ -167,7 +151,6 @@ int lastkey;                                 ///< Last pressed key keycode
 
 physics *physic;     ///< Physical engine instance
 renderer *xrenderer; ///< Renderer instance
-sound *music = 0;    ///< Current song
 #ifndef ANDROID
 zip* APKArchive;     ///< Access to APK archive
 #endif
@@ -204,13 +187,6 @@ void loadAll() {
     aiTrafficSteeringGapLevel1 = getConfig("aiTrafficSteeringGapLevel1", atributes);
     aiTrafficSteeringGapLevel2 = getConfig("aiTrafficSteeringGapLevel2", atributes);
     aiTrafficTrackUpdate = getConfig("aiTrafficTrackUpdate", atributes);
-    fontMoveX = getConfig("fontMoveX", atributes);
-    fontMoveY = getConfig("fontMoveY", atributes);
-    fontRows = getConfig("fontRows", atributes);
-    fontSize = getConfig("fontSize", atributes);
-    fontSpaces = getConfig("fontSpaces", atributes);
-    fontTexture = getConfigStr("fontTexture", atributes);
-    gameMode = getConfigStr("gameMode", atributes);
     inputController = getConfigStr("inputController", atributes);
     keyBack = getConfig("keyBack", atributes);
     keyCameraDown = getConfig("keyCameraDown", atributes);

@@ -43,11 +43,8 @@ public:
     bool oddFrame;              ///< Odd frame info
     fbo* rtt[2];                ///< Screen-space framebuffer
     Light light;                ///< One light information(for lightmap rendering)
-    texture *glslfont;          ///< Font texture
-    shader* gui_shader;         ///< GUI shader
     shader* overshader;         ///< Shader to be applied over current shader
     shader* scene_shader;       ///< Scene shader
-    int overmode;               ///< Special mode
     glm::vec4 model_position;   ///< Uniform of dynamic model 3D position
     glm::mat4x4 proj_matrix;    ///< Scene projection matrix
     glm::mat4x4 view_matrix;    ///< View matrix
@@ -67,18 +64,6 @@ public:
     virtual void lookAt(float eyex, float eyey, float eyez,
                         float centerx, float centery, float centerz,
                         float upx, float upy, float upz) = 0;
-
-    /**
-     * @brief lookAt implements GLUlookAt without up vector
-     * @param eyex is eye vector coordinate
-     * @param eyey is eye vector coordinate
-     * @param eyez is eye vector coordinate
-     * @param centerx is camera center coordinate
-     * @param centery is camera center coordinate
-     * @param centerz is camera center coordinate
-     */
-    virtual void lookAt(float eyex, float eyey, float eyez,
-                        float centerx, float centery, float centerz) = 0;
 
     /**
      * @brief perspective implements GLUPerspective
@@ -150,18 +135,6 @@ public:
     virtual void translate(float x, float y, float z) = 0;
 
     /**
-     * @brief renderButton renders button in GUI mode
-     * @param x is position x
-     * @param y is position y
-     * @param w is width
-     * @param h is height
-     * @param layer is distance from camera
-     * @param button is button texture
-     * @param text is button text
-     */
-    virtual void renderButton(float x, float y, float w, float h, float layer, texture* button, const char* text) = 0;
-
-    /**
      * @brief renderDynamic render dynamic objects
      * @param vertices is vertices
      * @param coords is texture coords
@@ -170,17 +143,6 @@ public:
      * @param triangleCount is triangle count
      */
     virtual void renderDynamic(float *vertices, float *coords, shader* sh, texture* txt, int triangleCount) = 0;
-
-    /**
-     * @brief renderImage renders image in GUI mode
-     * @param x is position x
-     * @param y is position y
-     * @param w is width
-     * @param h is height
-     * @param layer is distance from camera
-     * @param image is image texture
-     */
-    virtual void renderImage(float x, float y, float w, float h, float layer, texture* image) = 0;
 
     /**
      * @brief renderModel renders model into scene
@@ -197,50 +159,6 @@ public:
      * @param gamma is requested render gamma
      */
     virtual void renderSubModel(model* mod, model3d* m) = 0;
-
-    /**
-     * @brief renderText renders text in GUI mode
-     * @param x is position x
-     * @param y is position y
-     * @param layer is distance from camera
-     * @param text is button text
-     */
-    virtual void renderText(float x, float y, float layer, const char* text) = 0;
-
-    /**
-     * @brief getLMPixels get raw pixels of lightmap
-     * @param i is index of lightmap
-     * @param fix is true to fix lightmap holes
-     * @param blur is true to filter lightmap data
-     * @return raw pixels
-     */
-    virtual unsigned char* getLMPixels(int i, bool fix, bool blur) = 0;
-
-    /**
-     * @brief prepareLM prepare rendering of lightmaps
-     * @param count is amount of lightmaps
-     */
-    virtual void prepareLM(int count) = 0;
-
-    /**
-     * @brief renderLMLight render light into lightmap
-     * @param lightrenderer is shader to use
-     * @param checkVisibility is true to check light visibility
-     */
-    virtual void renderLM(shader* lightrenderer, bool checkVisibility) = 0;
-
-    /**
-     * @brief resetLM clear lightmaps
-     * @param count is amount of lightmaps
-     */
-    virtual void resetLM(int count) = 0;
-
-    /**
-     * @brief setLMPatchState sets renderer state for LM patch
-     * @param enable is true to prepare for LM patch
-     * @param add is true to add LM patch, false to subtract LM patch
-     */
-    virtual void setLMPatchState(bool enable, bool add) = 0;
 };
 
 #endif // RENDERER_H

@@ -112,5 +112,5 @@ setVolume
 set 1
 transmission
 //include LOADCAR
-include MAINMENU
+include RACE2
 END

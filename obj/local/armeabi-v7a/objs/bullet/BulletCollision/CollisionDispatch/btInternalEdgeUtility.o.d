@@ -1,9 +1,9 @@
 /home/lubos/Plocha/Open4speed/obj/local/armeabi-v7a/objs/bullet/BulletCollision/CollisionDispatch/btInternalEdgeUtility.o: \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btInternalEdgeUtility.cpp \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btInternalEdgeUtility.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btHashMap.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btScalar.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionDispatch/btInternalEdgeUtility.cpp \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionDispatch/btInternalEdgeUtility.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btHashMap.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedObjectArray.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btScalar.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/math.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/cdefs.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -34,58 +34,57 @@
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/strings.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/memory.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/assert.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedAllocator.h \
  /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/new \
- ../support/bullet-2.81-rev2613/src/LinearMath/btVector3.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTriangleInfoMap.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btSerializer.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btStackAlloc.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btHashMap.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTriangleMeshShape.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConcaveShape.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btCollisionShape.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btTransform.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btMatrix3x3.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btVector3.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btQuaternion.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btQuadWord.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btVector3.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btMinMax.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btTriangleInfoMap.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btSerializer.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btHashMap.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btTriangleMeshShape.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btConcaveShape.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btCollisionShape.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btTransform.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btMatrix3x3.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btVector3.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btQuaternion.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btQuadWord.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/stdio.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btMatrix3x3.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btBroadphaseProxy.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btScalar.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTriangleCallback.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btStridingMeshInterface.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btOptimizedBvh.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btQuantizedBvh.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTriangleInfoMap.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btScaledBvhTriangleMeshShape.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTriangleShape.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConvexShape.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btCollisionMargin.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btBoxShape.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btPolyhedralConvexShape.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConvexInternalShape.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btAabbUtil2.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btTransform.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btCollisionObject.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btMotionState.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btManifoldPoint.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btTransformUtil.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btIDebugDraw.h \
- ../support/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btMatrix3x3.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/BroadphaseCollision/btBroadphaseProxy.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btScalar.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedAllocator.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btTriangleCallback.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btStridingMeshInterface.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btOptimizedBvh.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/BroadphaseCollision/btQuantizedBvh.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedObjectArray.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btTriangleInfoMap.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btScaledBvhTriangleMeshShape.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btTriangleShape.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btConvexShape.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btCollisionMargin.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btBoxShape.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btPolyhedralConvexShape.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btConvexInternalShape.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAabbUtil2.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btTransform.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btMinMax.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionDispatch/btCollisionObject.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btMotionState.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/NarrowPhaseCollision/btManifoldPoint.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btTransformUtil.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btIDebugDraw.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btInternalEdgeUtility.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionDispatch/btInternalEdgeUtility.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btHashMap.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btHashMap.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedObjectArray.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btScalar.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btScalar.h:
 
 /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/math.h:
 
@@ -147,90 +146,88 @@
 
 /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/assert.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedAllocator.h:
 
 /opt/android-ndk-r9c/sources/cxx-stl/gnu-libstdc++/4.6/include/new:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btVector3.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btVector3.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btMinMax.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTriangleInfoMap.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btTriangleInfoMap.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btSerializer.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btSerializer.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btStackAlloc.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btHashMap.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btHashMap.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btTriangleMeshShape.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTriangleMeshShape.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btConcaveShape.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConcaveShape.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btCollisionShape.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btCollisionShape.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btTransform.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btTransform.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btMatrix3x3.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btMatrix3x3.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btVector3.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btVector3.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btQuaternion.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btQuaternion.h:
-
-../support/bullet-2.81-rev2613/src/LinearMath/btQuadWord.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btQuadWord.h:
 
 /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/stdio.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btMatrix3x3.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btMatrix3x3.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btBroadphaseProxy.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/BroadphaseCollision/btBroadphaseProxy.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btScalar.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btScalar.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedAllocator.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTriangleCallback.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btTriangleCallback.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btStridingMeshInterface.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btStridingMeshInterface.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btOptimizedBvh.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btOptimizedBvh.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btQuantizedBvh.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/BroadphaseCollision/btQuantizedBvh.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btAlignedObjectArray.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAlignedObjectArray.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTriangleInfoMap.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btTriangleInfoMap.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btScaledBvhTriangleMeshShape.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btScaledBvhTriangleMeshShape.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTriangleShape.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btTriangleShape.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConvexShape.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btConvexShape.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btCollisionMargin.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btCollisionMargin.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btBoxShape.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btBoxShape.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btPolyhedralConvexShape.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btPolyhedralConvexShape.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConvexInternalShape.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionShapes/btConvexInternalShape.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btAabbUtil2.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btAabbUtil2.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btTransform.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btTransform.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btMinMax.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btMinMax.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btCollisionObject.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionDispatch/btCollisionObject.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btMotionState.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btMotionState.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btManifoldPoint.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/NarrowPhaseCollision/btManifoldPoint.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btTransformUtil.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btTransformUtil.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btIDebugDraw.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btIDebugDraw.h:
 
-../support/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h:

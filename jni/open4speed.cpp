@@ -54,15 +54,10 @@ void display(void) {
             lastFPS = fps;
             timestamp = time(0);
             fps = 0;
-            if (active) {
-                if (!physic->locked) {
-                    timeout--;
-                    if (timeout == 0) {
-                        std::vector<char*> *list = getList(timeoutAction);
-                        syntaxList->assign(list->begin(), list->end());
-                    }
-                }
-            }
+
+            /// draw FPS
+            if (debug && race)
+                printf("FPS: %d, t: %0.3fms, e: %d, k: %d\n", lastFPS, lastFrameTime, allCar[cameraCar]->currentEdgeIndex, lastkey);
         }
     }
 
@@ -71,17 +66,6 @@ void display(void) {
         for (int i = 0; i < carCount; i++) {
             allCar[i]->updateSound();
         }
-    }
-
-    /// display GUI
-    displayMenu();
-
-    /// draw FPS
-    if (debug && race) {
-        char text[100];
-        sprintf(text, "FPS: %d, t: %0.3fms, e: %d, k: %d", lastFPS, lastFrameTime,
-                allCar[cameraCar]->currentEdgeIndex, lastkey);
-        xrenderer->renderText(0, 5, 1, text);
     }
 
 #ifndef ANDROID
@@ -120,22 +104,6 @@ void keyboardDown(unsigned char key, int x, int y) {
         std::vector<char*> *list = getList(esc);
         syntaxList->assign(list->begin(), list->end());
     }
-
-    /* special hints for debugging
-    if (key == 'a')
-        physic->resetCar(allCar[cameraCar]);
-    if (key == 's')
-        testUniform--;
-    if (key == 'd')
-        testUniform++;
-    if (key == 'q')
-        cameraCar++;
-    if (key == 'w')
-        cameraCar--;
-    if (cameraCar == -1)
-        cameraCar = carCount - 1;
-    if (cameraCar == carCount)
-        cameraCar = 0;*/
 }
 
 /**
@@ -190,16 +158,6 @@ void mouseClick(int button, int state, int x, int y) {
             }
         }
     }
-}
-
-/**
- * @brief mouseMove is called when mouse moves
- * @param x is mouse position x
- * @param y is mouse position y
- */
-void mouseMove(int x, int y) {
-    mouseX = x;
-    mouseY = y;
 }
 
 /**
@@ -313,7 +271,6 @@ int main(int argc, char** argv) {
     }
 
     /// set menu variables
-    background = -1;
     busy = false;
     click = false;
     debug = false;
@@ -328,17 +285,11 @@ int main(int argc, char** argv) {
     glutInit(&argc, argv);
 
     /// set screen mode
-    if (strlen(gameMode) > 0) {
-        glutGameModeString(gameMode);
-        glutEnterGameMode();
-    } else {
-        glutInitWindowSize(960,640);
-        glutInitContextVersion(3,0);
-        glutInitContextProfile(GLUT_CORE_PROFILE);
-        glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
-        glutCreateWindow("Open4speed");
-        //glutFullScreen();
-    }
+    glutInitWindowSize(960,640);
+    glutInitContextVersion(3,0);
+    glutInitContextProfile(GLUT_CORE_PROFILE);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
+    glutCreateWindow("Open4speed");
 
     /// set handlers
     glutReshapeFunc(reshape);
@@ -346,12 +297,10 @@ int main(int argc, char** argv) {
     glutKeyboardFunc(keyboardDown);
     glutKeyboardUpFunc(keyboardUp);
     glutMouseFunc(mouseClick);
-    glutPassiveMotionFunc(mouseMove);
 #endif
 
     /// load menu data
     carList = getList("CARS");
-    musicList = getList("MUSIC");
     syntaxList = getList("INIT");
     textList = getList("TEXTS");
     trackList = getList("TRACKS");

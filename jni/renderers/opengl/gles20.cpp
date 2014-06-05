@@ -20,38 +20,6 @@
 #include "utils/switch.h"
 #include "common.h"
 
-const int culling = 300;              ///< View culling distance in meters
-
-/**
- * GUI projection matrix
- */
-const glm::mat4x4 gui_projection_matrix(
-    (float)(1 / tan(45 * (3.1415926535 / 180))), 0, 0, 0,
-    0, (float)(1 / tan(45 * (3.1415926535 / 180))), 0, 0,
-    0, 0, -1, -1,
-    0, 0, -1, 0
-);
-
-/**
- * Eye matrix
- */
-const glm::mat4x4 eye = glm::mat4x4(
-            1,0,0,0,
-            0,1,0,0,
-            0,0,1,0,
-            0,0,0,1
-);
-
-/**
- * Bias matrix to transform world coordinates into texture coordinates
- */
-const glm::mat4 matScale = glm::mat4(
-            0.5f, 0.0f, 0.0f, 0.0f,
-            0.0f, 0.5f, 0.0f, 0.0f,
-            0.0f, 0.0f, 0.5f, 0.0f,
-            0.5f, 0.5f, 0.5f, 1.0f
-);
-
 /**
  * @brief gles20 constructor
  */
@@ -67,13 +35,10 @@ gles20::gles20() {
     camX = 0;
     camY = 0;
     camZ = 0;
-    overmode = 0;
     overshader = 0;
     frame = 0;
     lmFilter = -1;
     oddFrame = true;
-    renderShadowMap = false;
-    glslfont = getTexture(fontTexture, 1);
 
     /// set open-gl
     if (renderLightmap)
@@ -84,20 +49,12 @@ gles20::gles20() {
     glDisable(GL_CULL_FACE);
 
     //set shaders
-    gui_shader = getShader("gui");
     scene_shader = getShader("scene");
-    shadowmap = getShader("shadowmap");
     gray = new gltexture(*createRGB(1, 1, 0.5, 0.5, 0.5), 1.0);
-
-    //find ideal texture resolution
-    int resolution = 2;
-    while (resolution < screen_width * antialiasing) {
-        resolution *= 2;
-    }
 
     //create render texture
     for (int i = 0; i < 2; i++) {
-        rtt[i] = new glfbo(screen_width * antialiasing, screen_height * antialiasing, renderLightmap);
+        rtt[i] = new glfbo(screen_width, screen_height, renderLightmap);
     }
 
     //set viewport
@@ -125,46 +82,6 @@ void gles20::lookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
     camX = eyex;
     camY = eyey;
     camZ = eyez;
-    view_matrix = glm::lookAt(glm::vec3(eyex, eyey, eyez),
-                              glm::vec3(centerx, centery, centerz),
-                              glm::vec3(upx, upy, upz));
-    matrix_result = eye;
-}
-
-/**
- * @brief lookAt implements GLUlookAt without up vector
- * @param eyex is eye vector coordinate
- * @param eyey is eye vector coordinate
- * @param eyez is eye vector coordinate
- * @param centerx is camera center coordinate
- * @param centery is camera center coordinate
- * @param centerz is camera center coordinate
- */
-void gles20::lookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
-                     GLfloat centerx, GLfloat centery, GLfloat centerz) {
-
-    camX = eyex;
-    camY = eyey;
-    camZ = eyez;
-    float upx = 0;
-    float upy = 0;
-    float upz = 0;
-
-    /// set up vector
-    if (fabsf(eyex - centerx) > fabsf(eyey - centery)) {
-        upy = 1;
-    } else if (fabsf(eyex - centerx) == fabsf(eyey - centery)) {
-        if (fabsf(eyex - centerx) > fabsf(eyez - centerz)) {
-            upz = 1;
-        } else {
-            upx = 1;
-        }
-    } else {
-        upx = 1;
-    }
-
-
-    /// set matrices
     view_matrix = glm::lookAt(glm::vec3(eyex, eyey, eyez),
                               glm::vec3(centerx, centery, centerz),
                               glm::vec3(upx, upy, upz));
@@ -322,21 +239,6 @@ void gles20::translate(float x, float y, float z) {
 }
 
 /**
- * @brief renderButton renders button in GUI mode
- * @param x is position x
- * @param y is position y
- * @param w is width
- * @param h is height
- * @param layer is distance from camera
- * @param button is button texture
- * @param text is button text
- */
-void gles20::renderButton(float x, float y, float w, float h, float layer, texture* button, const char* text) {
-    renderImage(x, y, w, h, layer, button);
-    renderText(x, y, layer, text);
-}
-
-/**
  * @brief renderDynamic render dynamic objects
  * @param vertices is vertices
  * @param coords is texture coords
@@ -366,52 +268,6 @@ void gles20::renderDynamic(GLfloat *vertices, GLfloat *coords, shader* sh, textu
     sh->unbind();
     glDisable(GL_BLEND);
     glDepthMask(true);
-}
-
-/**
- * @brief renderImage renders image in GUI mode
- * @param x is position x
- * @param y is position y
- * @param w is width
- * @param h is height
- * @param layer is distance from camera
- * @param image is image texture
- */
-void gles20::renderImage(float x, float y, float w, float h, float layer, texture* image) {
-    /// indicies
-    GLubyte indices[] = {3,0,1,3,1,2};
-
-    /// vertices
-    GLfloat vertices[] = {
-        -w / 100, -h / 100, 0,
-        +w / 100, -h / 100, 0,
-        +w / 100, +h / 100, 0,
-        -w / 100, +h / 100, 0
-    };
-
-    GLfloat coords[] = {0,0,1,0,1,1,0,1};
-
-    glDisable(GL_DEPTH_TEST);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    image->apply();
-
-    /// render
-    glm::mat4x4 gui_modelview_matrix(
-        1, 0, 0, 0,
-        0, 1, 0, 0,
-        0, 0, 1, 0,
-        w / 100 - 1 + x / 50, -h / 100 + 1 - y / 50, -layer, 1
-    );
-    // mult current maxtrix
-    matrix_result = gui_projection_matrix * gui_modelview_matrix;
-
-    gui_shader->bind();
-    gui_shader->uniformMatrix("u_Matrix", glm::value_ptr(matrix_result));
-    gui_shader->attrib(vertices, coords);
-    glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLubyte), GL_UNSIGNED_BYTE, indices);
-    glDisable(GL_BLEND);
-    gui_shader->unbind();
 }
 
 /**
@@ -479,17 +335,6 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         glDisable(GL_CULL_FACE);
     }
 
-    /// set special cases
-    /*if (renderShadowMap && !m->texture2D->transparent) {
-        glEnable(GL_CULL_FACE);
-        glCullFace(GL_FRONT);
-    } else if (m->texture2D->transparent || (lmFilter >= 0)) {
-        glDisable(GL_CULL_FACE);
-    } else {
-        glEnable(GL_CULL_FACE);
-        glCullFace(GL_BACK);
-    }*/
-
     /// set shader and VBO
     shader* current = m->material;
     if (overshader != 0) {
@@ -508,7 +353,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     /// apply lightmap
     if (!mod->lightmaps.empty()) {
         glActiveTexture( GL_TEXTURE3 );
-        mod->lightmaps[m->lmIndex]->bindTexture();
+        mod->lightmaps[m->lmIndex]->apply();
         current->uniformInt("Lightmap", 3);
     }
 
@@ -534,15 +379,12 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     float y = mpos.y * 0.5 + 0.5 - 2 / z;
     current->uniformFloat("u_Time", frame / 1000.0f);
     current->uniformFloat4("u_model_position", glm::clamp(mpos.x * 0.5f + 0.5f, 0.0f, 1.0f), glm::max(0.0f, y), 0, 1);
-    current->uniformFloat("u_res", 1 / (float)rtt[oddFrame]->res);
     current->uniformFloat("u_width", 1 / (float)screen_width);
     current->uniformFloat("u_height", 1 / (float)screen_height);
     current->uniformFloat4("camera", camX, camY, camZ, 1);
-    current->uniformFloat("u_view", rtt[oddFrame]->height / (float)rtt[oddFrame]->res);
     current->uniformFloat4("u_kA", m->colora[0], m->colora[1], m->colora[2], 1);
     current->uniformFloat4("u_kD", m->colord[0], m->colord[1], m->colord[2], 1);
     current->uniformFloat4("u_kS", m->colors[0], m->colors[1], m->colors[2], 1);
-    current->uniformFloat("u_speed", allCar[cameraCar]->speed / 500.0f + 0.35f);
     if (enable[9])
         current->uniformFloat("u_brake", 1);
     else
@@ -569,14 +411,6 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         current->uniformFloat("u_Alpha", 1);
     }*/
 
-    if (overmode == 0) {
-        glDepthMask(true);
-        glDisable(GL_BLEND);
-    } else if (overmode == 1) {
-        glDepthMask(false);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_ONE, GL_ONE);
-    }
     if (current->shadername[0] == '0') {
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE);
@@ -617,285 +451,4 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     current->unbind();
     glDepthMask(true);
     glDisable(GL_BLEND);
-}
-
-/**
- * @brief renderText renders text in GUI mode
- * @param x is position x
- * @param y is position y
- * @param layer is distance from camera
- * @param text is button text
- */
-void gles20::renderText(float x, float y, float layer, const char* text) {
-    int minus = 0;
-
-    /// set OpenGL
-    glDisable(GL_DEPTH_TEST);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    /// draw characters
-    for (unsigned int i = 0; i < strlen(text); i++) {
-        /// indicies
-        GLubyte indices[] = {3,0,1,3,1,2};
-
-        /// vertices
-        GLfloat vertices[] = {
-            x / 50 - 1, 1 - y / 50 - 1, 0,
-            x / 50, 1 - y / 50 - 1, 0,
-            x / 50, 1 - y / 50, 0,
-            x / 50 - 1, 1 - y / 50, 0
-        };
-
-        /// new line
-        if (text[i] == '\\') {
-            minus = i + 1;
-            y += 5;
-        }
-
-        /// still same line
-        else {
-
-            /// get character position
-            int cx = text[i] % (int)fontRows;
-            int cy = text[i] / (int)fontRows;
-            float size = 1 / fontRows;
-
-            /// set coordinates
-            GLfloat coords[] = {cx * size, 1 - cy * size - size,
-                                cx * size + size, 1 - cy * size - size,
-                                cx * size + size, 1 - cy * size,
-                                cx * size, 1 - cy * size};
-
-            glslfont->apply();
-
-            /// set matrix
-            glm::mat4x4 gui_modelview_matrix(
-                fontSize / 1.1, 0, 0, 0,
-                0, fontSize / 1.1, 0, 0,
-                0, 0, 1, 0,
-                (x / 1.1 + (i - minus) * fontSpaces / 1.1 + fontMoveX + 5) / 50 - 1,
-                        1 - (y / 1.1 + fontMoveY + 2) / 50, -layer, 1
-            );
-            matrix_result = gui_projection_matrix * gui_modelview_matrix;
-
-            /// render
-            gui_shader->bind();
-            gui_shader->uniformMatrix("u_Matrix", glm::value_ptr(matrix_result));
-            gui_shader->attrib(vertices, coords);
-            glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLubyte), GL_UNSIGNED_BYTE, indices);
-        }
-    }
-    glDisable(GL_BLEND);
-    gui_shader->unbind();
-}
-
-/**
- * @brief getLMPixels get raw pixels of lightmap
- * @param i is index of lightmap
- * @param fix is true to fix lightmap holes
- * @param blur is true to filter lightmap data
- * @return raw pixels
- */
-unsigned char* gles20::getLMPixels(int i, bool fix, bool blur) {
-
-    GLubyte* pixels = new GLubyte[rttsize * rttsize * 4];
-
-#ifndef ANDROID
-    GLubyte* pixels2 = new GLubyte[rttsize * rttsize * 4];
-
-    /// get pixels
-    rtt[0]->unbindFBO();
-    lm[i]->bindTexture();
-    glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-    glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels2);
-
-    /// fill holes
-    if (fix) {
-        for (int a = 0; a < rttsize; a++) {
-            for (int b = 0; b < rttsize; b++) {
-                if (pixels[(b * rttsize + a) * 4 + 3] < 128) {
-                    for (int i = -1; i <= 1; i++) {
-                        for (int j = -1; j <= 1; j++) {
-                            if ((a + i >= 0) && (a + i < rttsize) && (b + j >= 0) && (b + j < rttsize)) {
-                                if (pixels[((b + j) * rttsize + a + i) * 4 + 3] > 128) {
-                                    for (int k = 0; k < 3; k++) {
-                                        pixels[(b * rttsize + a) * 4 + k] = pixels[((b + j) * rttsize + a + i) * 4 + k];
-                                    }
-                                    pixels[(b * rttsize + a) * 4 + 3] = 128;
-                                }
-                            }
-                            if (pixels[(b * rttsize + a) * 4 + 3] == 128) {
-                                break;
-                            }
-                        }
-                        if (pixels[(b * rttsize + a) * 4 + 3] == 128) {
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /// filter
-    if (blur) {
-        for (int a = 0; a < rttsize; a++) {
-            for (int b = 0; b < rttsize; b++) {
-                for (int k = 0; k < 3; k++) {
-                    int count = 1;
-                    int value = pixels[(b * rttsize + a) * 4 + k];
-                    for (int i = -1; i <= 1; i++) {
-                        for (int j = -1; j <= 1; j++) {
-                            if ((b + j >= 0) && (b + j < rttsize))
-                                if ((a + i >= 0) && (a + i < rttsize))
-                                    if (pixels[((b + j) * rttsize + a + i) * 4 + 3] > 128) {
-                                        count++;
-                                        value += pixels2[((b + j) * rttsize + a + i) * 4 + k];
-                                    }
-                        }
-                    }
-                    pixels[(b * rttsize + a) * 4 + k] = value / count;
-                }
-            }
-        }
-    }
-
-    /// fix alpha channel
-    if (fix) {
-        for (int a = 0; a < rttsize * rttsize; a++) {
-            pixels[a * 4 + 3] = 255;
-        }
-    }
-    delete[] pixels2;
-#endif
-    return (unsigned char*)pixels;
-}
-
-/**
- * @brief prepareLM prepare rendering of lightmaps
- * @param count is amount of lightmaps
- */
-void gles20::prepareLM(int count) {
-
-    /// set cube framebuffers
-    for (int i = 0; i < 6; i++) {
-        cube.push_back(new glfbo(rttsize, rttsize, true));
-    }
-
-    /// set lightmaps framebuffers
-    for (int i = 0; i < count; i++) {
-        lm.push_back(new glfbo(rttsize, rttsize, false));
-        lm[i]->bindFBO();
-        lm[i]->clear(true);
-        lm[i]->unbindFBO();
-    }
-}
-
-/**
- * @brief renderLM render light into lightmap
- * @param lightrenderer is shader to use
- * @param checkVisibility is true to check light visibility
- */
-void gles20::renderLM(shader* lightrenderer, bool checkVisibility) {
-    enable[1] = false;
-    glm::vec4 pos = light.u_light;
-    glm::vec4 dir = light.u_light_dir;
-
-    float x = pos.x;
-    float y = pos.y;
-    float z = pos.z;
-
-    /// lightmap cycle
-    for (int i = 0; i < trackdata->getLMCount(); i++) {
-
-        /// cubemap sides
-        for (int v = 0; v < (checkVisibility ? 6 : 1); v++) {
-
-            if (checkVisibility) {
-                /// set view
-                perspective(90, 1, 0.1, 300);
-                switch(v) {
-                    case(0):
-                        lookAt(x, y, z, x, y + 1, z, 1, 0, 0);
-                        break;
-                    case(1):
-                        lookAt(x, y, z, x, y - 1, z, 1, 0, 0);
-                        break;
-                    case(2):
-                        lookAt(x, y, z, x - 1, y, z, 0, 1, 0);
-                        break;
-                    case(3):
-                        lookAt(x, y, z, x + 1, y, z, 0, 1, 0);
-                        break;
-                    case(4):
-                        lookAt(x, y, z, x, y, z - 1, 0, 1, 0);
-                        break;
-                    case(5):
-                        lookAt(x, y, z, x, y, z + 1, 0, 1, 0);
-                        break;
-                }
-
-                /// render shadowmap
-                if (i == 0) {
-                    renderShadowMap = true;
-                    cube[v]->bindFBO();
-                    cube[v]->clear(true);
-                    overshader = shadowmap;
-                    renderModel(trackdata);
-                    overshader = 0;
-                    renderShadowMap = false;
-                    cube[v]->unbindFBO();
-                }
-
-                /// update lightmap
-                light.u_light = view_matrix * pos;
-                light.u_light_dir = view_matrix * dir;
-                glActiveTexture( GL_TEXTURE2 );
-                cube[v]->bindTexture();
-            }
-            lmFilter = i;
-            lm[i]->bindFBO();
-            overmode = 1;
-            overshader = lightrenderer;
-            glActiveTexture( GL_TEXTURE0 );
-            renderModel(trackdata);
-            overmode = 0;
-            overshader = 0;
-            lmFilter = -1;
-            lm[i]->unbindFBO();
-        }
-    }
-}
-
-/**
- * @brief resetLM clear lightmaps
- * @param count is amount of lightmaps
- */
-void gles20::resetLM(int count) {
-    for (int i = 0; i < count; i++) {
-        lm[i]->bindFBO();
-        lm[i]->clear(true);
-        lm[i]->unbindFBO();
-    }
-}
-
-/**
- * @brief setLMPatchState sets renderer state for LM patch
- * @param enable is true to prepare for LM patch
- * @param add is true to add LM patch, false to subtract LM patch
- */
-void gles20::setLMPatchState(bool enable, bool add) {
-    if (enable) {
-        glDisable(GL_DEPTH_TEST);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_ONE, GL_ONE);
-        if (add)
-            glBlendEquation(GL_FUNC_ADD);
-        else
-            glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
-    } else {
-        glDisable(GL_BLEND);
-        glBlendEquation(GL_FUNC_ADD);
-    }
 }

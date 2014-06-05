@@ -1,6 +1,6 @@
 uniform sampler2D color_texture;
 uniform sampler2D EnvMap1;
-uniform float u_res, u_speed, u_view;
+uniform float u_width, u_height;
 varying vec3 v_Vertex;
 varying vec3 v_Normal;
 varying vec2 v_Coords;
@@ -43,7 +43,7 @@ void main()
   }
 
   //dynamic shadow
-  if (texture2D(EnvMap1, vec2(gl_FragCoord.x * u_res, gl_FragCoord.y * u_res + 0.5 * (1.0 - gl_FragCoord.z))).a == 1.0)
+  if (texture2D(EnvMap1, vec2(gl_FragCoord.x * u_width, gl_FragCoord.y * u_height + 0.5 * (1.0 - gl_FragCoord.z))).a == 1.0)
     diffuse.rgb *= 0.5;
 
   //static shadow
@@ -53,11 +53,8 @@ void main()
 
   //reflect
   if (v_Normal.y > 0.0) {
-    float y = u_view - gl_FragCoord.y * u_res;
-    y += gl_FragCoord.z * 0.1 + gl_FragCoord.z * (1.0 - v_Normal.y) * 2.0;
-    gl_FragColor.rgb += 0.33 * texture2D(EnvMap1, vec2(gl_FragCoord.x * u_res, y)).rgb * clamp(gl_FragCoord.y * u_res * 3.0 - 0.5, 0.0, 1.0);
+    float y = 1.0 - gl_FragCoord.y * u_height;
+    y += gl_FragCoord.z * 0.125 + gl_FragCoord.z * (1.0 - v_Normal.y) * 2.0;
+    gl_FragColor.rgb += 0.1 * texture2D(EnvMap1, vec2(gl_FragCoord.x * u_width, y)).rgb * clamp(gl_FragCoord.y * u_height * 3.0 - 0.5, 0.0, 1.0);
   }
-
-  //blur
-  gl_FragColor = (1.0 - u_speed) * gl_FragColor + u_speed * texture2D(EnvMap1, gl_FragCoord.xy * u_res); 
 }

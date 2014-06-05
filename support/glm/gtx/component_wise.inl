@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// OpenGL Mathematics Copyright (c) 2005 - 2014 G-Truc Creation (www.g-truc.net)
+// OpenGL Mathematics Copyright (c) 2005 - 2011 G-Truc Creation (www.g-truc.net)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Created : 2007-05-21
 // Updated : 2010-02-12
@@ -7,41 +7,46 @@
 // File    : gtx_component_wise.inl
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-namespace glm
+namespace glm{
+namespace gtx{
+namespace component_wise
 {
-	template <typename T, precision P, template <typename, precision> class vecType>
-	GLM_FUNC_QUALIFIER T compAdd(vecType<T, P> const & v)
+	template <typename genType>
+	GLM_FUNC_QUALIFIER typename genType::value_type compAdd(genType const & v)
 	{
-		T result(0);
-		for(length_t i = 0; i < v.length(); ++i)
+        typename genType::size_type result = typename genType::value_type(0);
+		for(typename genType::size_type i = 0; i < genType::value_size(); ++i)
 			result += v[i];
 		return result;
 	}
 
-	template <typename T, precision P, template <typename, precision> class vecType>
-	GLM_FUNC_QUALIFIER T compMul(vecType<T, P> const & v)
+	template <typename genType>
+	GLM_FUNC_QUALIFIER typename genType::value_type compMul(genType const & v)
 	{
-		T result(1);
-		for(length_t i = 0; i < v.length(); ++i)
+        typename genType::value_type result = typename genType::value_type(1);
+		for(typename genType::size_type i = 0; i < genType::value_size(); ++i)
 			result *= v[i];
 		return result;
 	}
 
-	template <typename T, precision P, template <typename, precision> class vecType>
-	GLM_FUNC_QUALIFIER T compMin(vecType<T, P> const & v)
+	template <typename genType>
+	GLM_FUNC_QUALIFIER typename genType::value_type compMin(genType const & v)
 	{
-		T result(v[0]);
-		for(length_t i = 1; i < v.length(); ++i)
+        typename genType::value_type result = typename genType::value_type(v[0]);
+		for(typename genType::size_type i = 1; i < genType::value_size(); ++i)
 			result = min(result, v[i]);
 		return result;
 	}
 
-	template <typename T, precision P, template <typename, precision> class vecType>
-	GLM_FUNC_QUALIFIER T compMax(vecType<T, P> const & v)
+	template <typename genType>
+	GLM_FUNC_QUALIFIER typename genType::value_type compMax(genType const & v)
 	{
-		T result(v[0]);
-		for(length_t i = 1; i < v.length(); ++i)
+        typename genType::value_type result = typename genType::value_type(v[0]);
+		for(typename genType::size_type i = 1; i < genType::value_size(); ++i)
 			result = max(result, v[i]);
 		return result;
 	}
+
+}//namespace component_wise
+}//namespace gtx
 }//namespace glm

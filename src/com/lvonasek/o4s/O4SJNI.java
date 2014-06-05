@@ -23,7 +23,7 @@ public class O4SJNI extends GLSurfaceView implements Renderer {
     public Timer timer;
     public TimerTask game;
     //Thread timing
-    private final long DEFAULT_SCHEDULE = 1000 / 17;
+    private final long DEFAULT_SCHEDULE = 1000 / 20;
     private long schedule = DEFAULT_SCHEDULE;
     private long lastSchedule = DEFAULT_SCHEDULE;
     //Game state
@@ -82,6 +82,7 @@ public class O4SJNI extends GLSurfaceView implements Renderer {
             //send APK file path into C++ code
             apkFilePath = appInfo.sourceDir;
             nativeInit(apkFilePath);
+            setRenderMode(RENDERMODE_CONTINUOUSLY);
         }
         init = true;
     }
@@ -104,7 +105,7 @@ public class O4SJNI extends GLSurfaceView implements Renderer {
      */
     public void onDrawFrame(GL10 gl) {
         //check if game is not paused
-        if (!paused) {
+        if (!paused && init) {
 
             //if non-graphical thread is not exist then create it and start it
             if (game == null) {
@@ -118,17 +119,6 @@ public class O4SJNI extends GLSurfaceView implements Renderer {
 
             //run graphical code
             nativeDisplay();
-
-            //reschedule non-graphical thread(it is needed to end it and start again)
-            if (timer != null) {
-                if (Math.abs(Math.max(lastSchedule, DEFAULT_SCHEDULE) - schedule) > 2) {
-                    schedule = Math.max(lastSchedule, DEFAULT_SCHEDULE);
-                    timer.cancel();
-                    game = new Game();
-                    timer = new Timer();
-                    timer.schedule(game, 1, schedule);
-                }
-            }
         }
     }
 

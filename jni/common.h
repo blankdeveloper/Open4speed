@@ -75,12 +75,6 @@ extern float aiTrafficSpeedNoGas;                              ///< AI navigatio
 extern float aiTrafficSteeringGapLevel1;                       ///< AI navigation parameter
 extern float aiTrafficSteeringGapLevel2;                       ///< AI navigation parameter
 extern float aiTrafficTrackUpdate;                             ///< AI navigation parameter
-extern float fontMoveX;                                        ///< Font spaces
-extern float fontMoveY;                                        ///< Font spaces
-extern float fontRows;                                         ///< Font rows in texture file
-extern float fontSize;                                         ///< Font size
-extern float fontSpaces;                                       ///< Font spaces
-extern char* fontTexture;                                      ///< Texture for font
 extern char* gameMode;                                         ///< Screen mode
 extern char* inputController;                                  ///< Input controller
 extern float keyBack;                                          ///< Keycode
@@ -129,8 +123,6 @@ extern int mouseY;                                                  ///< Mouse p
 extern bool race;                                                   ///< Race mode
 extern int screen_width;                                            ///< Screen width
 extern int screen_height;                                           ///< Screen height
-extern char timeoutAction[32];                                      ///< Syntax called after timeout
-extern bool transmission;                                           ///< Transmision state
 extern int unlock;                                                  ///< Locking
 extern int variable;                                                ///< Variable for scripts
 extern bool viewCar;                                                ///< View car in menu
@@ -139,17 +131,14 @@ extern bool updated;                                                ///< Informa
 /**
  * The scene
  */
-
 extern float cameraDistance;                        ///< Camera distance level
-extern int timeout;                                 ///< Timeout clock
 extern int playerCar;                               ///< Index of player car
-extern float antialiasing;                          ///< antialiasing level
 extern bool active;                                 ///< Information if scene is active
 extern int currentTrack;                            ///< Current track index
 extern int opponentCount;                           ///< Opponent count
+extern model *skydome;                              ///< Skydome model
 extern model *trackdata;                            ///< Track first model
 extern model *trackdata2;                           ///< Track second model
-extern model *skydome;                              ///< Skydome model
 const int carLimit = 8;                             ///< Maximum cars in game
 extern car *allCar[carLimit];                       ///< All cars in scene instances
 extern int carCount;                                ///< Amount of cars in scene
@@ -172,7 +161,6 @@ extern int rttsize;                                 ///< RTT texture size
 
 extern physics *physic;     ///< Physical engine instance
 extern renderer *xrenderer; ///< Renderer instance
-extern sound *music;        ///< Current song
 #ifndef ANDROID
 extern zip* APKArchive;     ///< Access to APK archive
 #endif

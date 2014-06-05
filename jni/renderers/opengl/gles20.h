@@ -26,14 +26,15 @@
 #include "interfaces/renderer.h"
 
 
+const int culling = 300;              ///< View culling distance in meters
+const glm::mat4x4 eye = glm::mat4x4(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1);
+const glm::mat4 matScale = glm::mat4(0.5f, 0.0f, 0.0f, 0.0f,  0.0f, 0.5f, 0.0f, 0.0f,  0.0f, 0.0f, 0.5f, 0.0f,  0.5f, 0.5f, 0.5f, 1.0f);
+
 /**
  * @brief The gles20 class is implementation of OpenGL ES 2.0
  */
 class gles20 : public renderer {
 public:
-
-    std::vector<fbo*> cube;               ///< Cubemap framebuffer
-    std::vector<fbo*> lm;                 ///< Lightmap framebuffer
     float camX;                           ///< Camera position x
     float camY;                           ///< Camera position y
     float camZ;                           ///< Camera position z
@@ -42,8 +43,6 @@ public:
     glm::mat4x4 matrix_result;            ///< Temp matrix for calculations
     std::stack<glm::mat4x4> matrixBuffer; ///< Matrix stack
     GLushort dynindices[4095];            ///< Indicies for dynamic rendering
-    bool renderShadowMap;                 ///< Special state for rendering shadowmap
-    shader* shadowmap;                    ///< Shadowmap shader
     int lmFilter;                         ///< Filtering of objects to render
 
     /**
@@ -66,18 +65,6 @@ public:
     void lookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
                 GLfloat centerx, GLfloat centery, GLfloat centerz,
                 GLfloat upx, GLfloat upy, GLfloat upz);
-
-    /**
-     * @brief lookAt implements GLUlookAt without up vector
-     * @param eyex is eye vector coordinate
-     * @param eyey is eye vector coordinate
-     * @param eyez is eye vector coordinate
-     * @param centerx is camera center coordinate
-     * @param centery is camera center coordinate
-     * @param centerz is camera center coordinate
-     */
-    void lookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
-                GLfloat centerx, GLfloat centery, GLfloat centerz);
 
     /**
      * @brief perspective implements GLUPerspective
@@ -149,18 +136,6 @@ public:
     void translate(float x, float y, float z);
 
     /**
-     * @brief renderButton renders button in GUI mode
-     * @param x is position x
-     * @param y is position y
-     * @param w is width
-     * @param h is height
-     * @param layer is distance from camera
-     * @param button is button texture
-     * @param text is button text
-     */
-    void renderButton(float x, float y, float w, float h, float layer, texture* button, const char* text);
-
-    /**
      * @brief renderDynamic render dynamic objects
      * @param vertices is vertices
      * @param coords is texture coords
@@ -169,17 +144,6 @@ public:
      * @param triangleCount is triangle count
      */
     void renderDynamic(GLfloat *vertices, GLfloat *coords, shader* sh, texture* txt, int triangleCount);
-
-    /**
-     * @brief renderImage renders image in GUI mode
-     * @param x is position x
-     * @param y is position y
-     * @param w is width
-     * @param h is height
-     * @param layer is distance from camera
-     * @param image is image texture
-     */
-    void renderImage(float x, float y, float w, float h, float layer, texture* image);
 
     /**
      * @brief renderModel renders model into scene
@@ -196,51 +160,6 @@ public:
      * @param gamma is requested render gamma
      */
     void renderSubModel(model* mod, model3d *m);
-
-    /**
-     * @brief renderText renders text in GUI mode
-     * @param x is position x
-     * @param y is position y
-     * @param layer is distance from camera
-     * @param text is button text
-     */
-    void renderText(float x, float y, float layer, const char* text);
-
-    /**
-     * @brief getLMPixels get raw pixels of lightmap
-     * @param i is index of lightmap
-     * @param fix is true to fix lightmap holes
-     * @param blur is true to filter lightmap data
-     * @return raw pixels
-     */
-    unsigned char* getLMPixels(int i, bool fix, bool blur);
-
-    /**
-     * @brief prepareLM prepare rendering of lightmaps
-     * @param count is amount of lightmaps
-     */
-    void prepareLM(int count);
-
-    /**
-     * @brief renderLMLight render light into lightmap
-     * @param lightrenderer is shader to use
-     * @param checkVisibility is true to check light visibility
-     */
-    void renderLM(shader* lightrenderer, bool checkVisibility);
-
-    /**
-     * @brief resetLM clear lightmaps
-     * @param count is amount of lightmaps
-     */
-    void resetLM(int count);
-
-    /**
-     * @brief setLMPatchState sets renderer state for LM patch
-     * @param enable is true to prepare for LM patch
-     * @param add is true to add LM patch, false to subtract LM patch
-     */
-    void setLMPatchState(bool enable, bool add);
-
 };
 
 #endif // GLES20_H

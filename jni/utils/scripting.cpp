@@ -74,22 +74,6 @@ void scriptLoop() {
                     debug = false;
             }
 
-            /// Set detail level
-            if (strcmp("detail", syntax) == 0) {
-                if (variable == 0) {
-                    antialiasing = 0.4f;
-                } else if (variable == 1) {
-                    antialiasing = 0.5f;
-                } else if (variable == 2) {
-                    antialiasing = 0.6f;
-                } else if (variable == 3) {
-                    antialiasing = 0.8f;
-                } else if (variable == 4) {
-                    antialiasing = 1.0f;
-                }
-                xrenderer = getRenderer();
-            }
-
             /// Set on esc key listener
             if (strcmp("esc", syntax) == 0) {
                 sscanf((*syntaxList)[0], "%s %s", &syntax[0], &esc[0]);
@@ -197,17 +181,11 @@ void scriptLoop() {
 
             /// load car
             if (strcmp("loadCar", syntax) == 0) {
-                float rotation = 0;
-                if (allCar[0] != 0) {
-                    rotation = allCar[0]->rot;
-                }
                 for (int i = 0; i < carCount; i++) {
                     delete allCar[i];
                 }
                 carCount = 0;
                 playerCar = variable;
-                allCar[0] = new car(0, new std::vector<edge>(), (*carList)[variable], false);
-                allCar[0]->rot = rotation;
             }
 
             /// load game scene
@@ -259,22 +237,6 @@ void scriptLoop() {
                 char value[32];
                 sscanf((*syntaxList)[0], "%s %s", &syntax[0], &value[0]);
                 variable -= getList(value)->size();
-            }
-
-            /// play music
-            if (strcmp("musicPlay", syntax) == 0) {
-                music = getSound((*musicList)[variable], true, 1);
-                music->play(0);
-            }
-
-            /// set music volume
-            if (strcmp("musicSetVolume", syntax) == 0) {
-                music->setVolume(0, variable / 10.0);
-            }
-
-            /// stop music
-            if (strcmp("musicStop", syntax) == 0) {
-                music->stop(0);
             }
 
             /// mute all sounds
@@ -357,24 +319,9 @@ void scriptLoop() {
                 config[value] = variable;
             }
 
-            /// set GUI background
-            if (strcmp("setBackground", syntax) == 0) {
-                sscanf((*syntaxList)[0], "%s %d", &syntax[0], &background);
-            }
-
             /// set sound volume
             if (strcmp("setVolume", syntax) == 0) {
                 soundVolume = variable;
-            }
-
-            /// sleep few seconds
-            if (strcmp("sleep", syntax) == 0) {
-                int value;
-                sscanf((*syntaxList)[0], "%s %d", &syntax[0], &value);
-                usleep(value * 1000);
-                delete[] (*syntaxList)[0];
-                syntaxList->erase(syntaxList->begin());
-                break;
             }
 
             /// multiply variable
@@ -382,39 +329,6 @@ void scriptLoop() {
                 float value;
                 sscanf((*syntaxList)[0], "%s %f", &syntax[0], &value);
                 variable = (int)(variable * value);
-            }
-
-            /// timeout listener
-            if (strcmp("timeout", syntax) == 0) {
-                sscanf((*syntaxList)[0], "%s %d %s", &syntax[0], &timeout, &timeoutAction[0]);
-            }
-
-            /// set transmission type
-            if (strcmp("transmission", syntax) == 0) {
-                if (variable == 1)
-                    transmission = true;
-                else
-                    transmission = false;
-            }
-
-            /// view car in GUI
-            if (strcmp("viewCar", syntax) == 0) {
-                int value;
-                sscanf((*syntaxList)[0], "%s %d", &syntax[0], &value);
-                if (value == 1)
-                    viewCar = true;
-                else
-                    viewCar = false;
-            }
-
-            /// wait few seconds
-            if (strcmp("wait", syntax) == 0) {
-                int value;
-                sscanf((*syntaxList)[0], "%s %d", &syntax[0], &value);
-                unlock = time(NULL) + value;
-                delete[] (*syntaxList)[0];
-                syntaxList->erase(syntaxList->begin());
-                break;
             }
 
             delete[] (*syntaxList)[0];

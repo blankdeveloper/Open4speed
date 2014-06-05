@@ -17,7 +17,6 @@ class fbo
 {
 public:
 
-    unsigned int res;                  ///< Resolution of texture
     unsigned int width;                ///< Image width
     unsigned int height;               ///< Image height
 

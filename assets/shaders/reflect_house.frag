@@ -49,8 +49,5 @@ void main()
   
   //reflect
   //gl_FragColor = texture2D(color_texture, v_Coords).a < 0.8 ? gl_FragColor + 0.5 * texture2D(EnvMap1, vec2(v_Normal.x * 0.5 + 0.5, gl_FragCoord.y * u_res)) : gl_FragColor;
-  
-  //blur
-  gl_FragColor = (1.0 - u_speed) * gl_FragColor + u_speed * texture2D(EnvMap1, gl_FragCoord.xy * u_res); 
 }
 

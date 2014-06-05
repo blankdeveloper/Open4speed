@@ -1,7 +1,7 @@
 /home/lubos/Plocha/Open4speed/obj/local/armeabi-v7a/objs/bullet/BulletCollision/BroadphaseCollision/btDispatcher.o: \
- ../support/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btDispatcher.cpp \
- ../support/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btDispatcher.h \
- ../support/bullet-2.81-rev2613/src/LinearMath/btScalar.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/BroadphaseCollision/btDispatcher.cpp \
+ ../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/BroadphaseCollision/btDispatcher.h \
+ ../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btScalar.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/math.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/cdefs.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -33,9 +33,9 @@
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/memory.h \
  /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/assert.h
 
-../support/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btDispatcher.h:
+../support/bullet3-Bullet-2.83-alpha/src/BulletCollision/BroadphaseCollision/btDispatcher.h:
 
-../support/bullet-2.81-rev2613/src/LinearMath/btScalar.h:
+../support/bullet3-Bullet-2.83-alpha/src/LinearMath/btScalar.h:
 
 /opt/android-ndk-r9c/platforms/android-14/arch-arm/usr/include/math.h:
 

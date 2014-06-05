@@ -31,13 +31,11 @@ extern zip* APKArchive;             ///< APK archive instance
  * @brief renderLightmap render lightmaps and exit when it is true
  */
 extern bool renderLightmap;
-extern bool lamp[];
 
 /**
  * @brief The game resources
  */
 extern std::vector<char*> *carList;                                    ///< List of all cars
-extern std::vector<texture*> *images;                                  ///< List of all images
 extern std::vector<char*> *musicList;                                  ///< List of all songs
 extern std::vector<char*> *textList;                                   ///< List of all texts
 extern std::vector<char*> *trackList;                                  ///< List of all tracks

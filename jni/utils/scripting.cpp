@@ -51,14 +51,6 @@ void scriptLoop() {
                 buttons->push_back(b);
             }
 
-            /// Add image into list
-            if (strcmp("addImage", syntax) == 0) {
-                char value[64];
-                sscanf((*syntaxList)[0], "%s %s", &syntax[0], &value[0]);
-                texture* image = getTexture(value, 1);
-                images->push_back(image);
-            }
-
             /// Clear all buttons from GUI
             if (strcmp("clearButtons", syntax) == 0) {
                 buttons->clear();

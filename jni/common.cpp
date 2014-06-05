@@ -11,24 +11,9 @@
 #include "common.h"
 
 /**
-  * Enabling and disabling lamps in time
-  */
-bool lamp[] = {0,0,0,0,1,0,1,1,0,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,0,0,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,1,1,1,1,1,
-               1,1,1,1,1,0,0,1,0,1};
-
-/**
  * @brief The game resources
  */
 std::vector<char*> *carList;                                    ///< List of all cars
-std::vector<texture*> *images = new std::vector<texture*>();    ///< List of all images
 std::vector<char*> *textList;                                   ///< List of all texts
 std::vector<char*> *trackList;                                  ///< List of all tracks
 std::vector<char*> *syntaxList;                                 ///< List of syntaxes to do

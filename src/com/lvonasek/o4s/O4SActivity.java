@@ -19,7 +19,7 @@ import com.lvonasek.o4s.controllers.HWKeys;
 public class O4SActivity extends Activity {
 
     //various instances
-    private O4SJNI mO4SJNI;
+    private GameLoop mO4SJNI;
     public static O4SActivity mO4SActivity;
 
     @Override
@@ -29,7 +29,9 @@ public class O4SActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         //init
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.race);
         mO4SActivity = this;
+        mO4SJNI = (GameLoop) findViewById(R.id.game_screen);
 
         //keep screen on
         final Window win = getWindow();
@@ -42,15 +44,15 @@ public class O4SActivity extends Activity {
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         //new instance
-        if (mO4SJNI == null) {
+        /*if (mO4SJNI == null) {
             //Main screen
-            mO4SJNI = new O4SJNI(this);
+            mO4SJNI = new GameLoop(this, null);
             //Ad banner
             //mAdView = new AdView(this, AdSize.SMART_BANNER, "a152250049be91b");
-        }
+        }*/
 
         //create screen layout
-        RelativeLayout layout = new RelativeLayout(mO4SActivity);
+        /*RelativeLayout layout = new RelativeLayout(mO4SActivity);
         //add main view
         layout.addView(mO4SJNI);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
@@ -59,9 +61,7 @@ public class O4SActivity extends Activity {
                 RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
 
         //enable renderer
-        setContentView(layout);
-        mO4SJNI.setRenderer(mO4SJNI);
-        mO4SJNI.setRenderMode(mO4SJNI.RENDERMODE_WHEN_DIRTY);
+        setContentView(layout);*/
     }
 
     @Override
@@ -71,13 +71,13 @@ public class O4SActivity extends Activity {
     public boolean dispatchKeyEvent(KeyEvent event) {
         //press
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
-            O4SJNI.nativeKey(HWKeys.mapKeyCode(event.getKeyCode()));
+            Native.key(HWKeys.mapKeyCode(event.getKeyCode()));
             if (HWKeys.mapKeyCode(event.getKeyCode()) != event.getKeyCode())
                 return true;
         }
         //release
         if (event.getAction() == KeyEvent.ACTION_UP) {
-            O4SJNI.nativeKeyUp(HWKeys.mapKeyCode(event.getKeyCode()));
+            Native.keyUp(HWKeys.mapKeyCode(event.getKeyCode()));
             if (HWKeys.mapKeyCode(event.getKeyCode()) != event.getKeyCode())
                 return true;
         }
@@ -129,7 +129,7 @@ public class O4SActivity extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         //change back key function
         if ((keyCode == KeyEvent.KEYCODE_BACK) || (keyCode == KeyEvent.KEYCODE_MENU)) {
-            O4SJNI.nativeBack();
+            Native.back();
             return true;
         }
         return super.onKeyDown(keyCode, event);

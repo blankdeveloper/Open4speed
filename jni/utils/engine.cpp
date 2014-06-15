@@ -48,12 +48,12 @@ void displayScene() {
     matrixLock = false;
 
     /// update camera direction
+    if (direction * 180 / 3.14 - allCar[cameraCar]->rot > 180)
+        direction -= 6.28;
+    else if (direction * 180 / 3.14 - allCar[cameraCar]->rot < -180)
+        direction += 6.28;
+    float gap = allCar[cameraCar]->rot * 3.14 / 180.0 - direction;
     if (active) {
-        if (direction * 180 / 3.14 - allCar[cameraCar]->rot > 180)
-            direction -= 6.28;
-        else if (direction * 180 / 3.14 - allCar[cameraCar]->rot < -180)
-            direction += 6.28;
-        float gap = allCar[cameraCar]->rot * 3.14 / 180.0 - direction;
         if (allCar[cameraCar]->control->getDistance() < 0) {
             direction += gap / 2.0;
         } else {
@@ -163,6 +163,33 @@ void displayScene() {
         }
     }
 
+    // update water
+    eff[currentFrame].count = 0;
+    for (int i = carCount - 1; i >= 0; i--) {
+        for (int j = 1; j <= 4; j++) {
+            if (active) {
+                float effect = fmin(fmax(fabs(allCar[i]->speed * gap) * 0.003f, fabs(allCar[i]->speed - allCar[i]->lspeed) * 0.01f), 0.1f);
+                for (int k = 0; k < fabs(allCar[i]->speed) * effect - 5; k++) {
+                    float x = allCar[i]->transform[j].value[12] + (rand() % 50 - 25) * 0.01f + sin(allCar[i]->rot * 3.14 / 180) * k * 0.1f;
+                    float y = allCar[i]->transform[j].value[13] - 0.2f;
+                    float z = allCar[i]->transform[j].value[14] + (rand() % 50 - 25) * 0.01f + cos(allCar[i]->rot * 3.14 / 180) * k * 0.1f;
+                    float s = 2;
+                    if (allCar[i]->speed > 150) {
+                        s = allCar[i]->speed / 75.0f;
+                    }
+                    for (int l = 0; l < water->models[0].triangleCount[1] * 3; l++) {
+                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 0] = x;
+                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 1] = y;
+                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 2] = z;
+                        eff[currentFrame].coords[eff[currentFrame].count * 2 + 0] = water->models[0].coords[l * 2 + 0];
+                        eff[currentFrame].coords[eff[currentFrame].count * 2 + 1] = water->models[0].coords[l * 2 + 1];
+                        eff[currentFrame].count++;
+                    }
+                }
+            }
+        }
+    }
+
     /// render smoke effects
     if (water == 0) {
         water = getModel("gfx/water.o4s", false);
@@ -194,32 +221,6 @@ void displayScene() {
     xrenderer->popMatrix();*/
     xrenderer->popMatrix();
 
-
-    // update water
-    eff[currentFrame].count = 0;
-    for (int i = carCount - 1; i >= 0; i--) {
-        for (int j = 1; j <= 4; j++) {
-            if (active) {
-                for (int k = 0; k < allCar[i]->speed / 5 - 1; k++) {
-                    float x = allCar[i]->transform[j].value[12] + (rand() % 50 - 25) * 0.01f + sin(allCar[i]->rot * 3.14 / 180) * k * 0.1f;
-                    float y = allCar[i]->transform[j].value[13] - 0.2f;
-                    float z = allCar[i]->transform[j].value[14] + (rand() % 50 - 25) * 0.01f + cos(allCar[i]->rot * 3.14 / 180) * k * 0.1f;
-                    float s = 2;
-                    if (allCar[i]->speed > 150) {
-                        s = allCar[i]->speed / 75.0f;
-                    }
-                    for (int l = 0; l < water->models[0].triangleCount[1] * 3; l++) {
-                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 0] = x;
-                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 1] = y;
-                        eff[currentFrame].vertices[eff[currentFrame].count * 3 + 2] = z;
-                        eff[currentFrame].coords[eff[currentFrame].count * 2 + 0] = water->models[0].coords[l * 2 + 0];
-                        eff[currentFrame].coords[eff[currentFrame].count * 2 + 1] = water->models[0].coords[l * 2 + 1];
-                        eff[currentFrame].count++;
-                    }
-                }
-            }
-        }
-    }
 
     for (int k = 0; k < effLen; k++) {
         eff[k].frame++;

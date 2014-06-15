@@ -219,7 +219,7 @@ int main(int argc, char** argv) {
     trackList = getList("TRACKS");
 
     delete physic;
-    currentTrack = 1;
+    currentTrack = 0;
 #ifdef ZIP_ARCHIVE
     std::vector<char*> *atributes = getFullList(zip_fopen(APKArchive, prefix((*trackList)[currentTrack]), 0));
 #else
@@ -256,11 +256,11 @@ int main(int argc, char** argv) {
 extern "C" {
 
 /**
- * @brief Java_com_lvonasek_o4s_O4SJNI_nativeInit is init method
+ * @brief Java_com_lvonasek_o4s_Native_init is init method
  * @param env is instance of JNI
  * @param am is asset manager
  */
-void Java_com_lvonasek_o4s_O4SJNI_nativeInit( JNIEnv*  env, jclass cls, jstring apkPath ) {
+void Java_com_lvonasek_o4s_Native_init( JNIEnv*  env, jclass cls, jstring apkPath ) {
   instance = env;
   jboolean isCopy;
   APKArchive = zip_open(env->GetStringUTFChars(apkPath, &isCopy), 0, NULL);
@@ -268,60 +268,60 @@ void Java_com_lvonasek_o4s_O4SJNI_nativeInit( JNIEnv*  env, jclass cls, jstring 
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_O4SJNI_nativeResize is resize method
+ * @brief Java_com_lvonasek_o4s_Native_resize is resize method
  * @param env is instance of JNI
  * @param thiz is asset manager
  * @param w is display width
  * @param h is display height
  */
-void Java_com_lvonasek_o4s_O4SJNI_nativeResize( JNIEnv*  env, jobject  thiz, jint w, jint h ) {
+void Java_com_lvonasek_o4s_Native_resize( JNIEnv*  env, jobject  thiz, jint w, jint h ) {
   reshape(w, h);
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_O4SJNI_nativeKey is key press method
+ * @brief Java_com_lvonasek_o4s_Native_key is key press method
  * @param env is instance of JNI
  * @param thiz is asset manager
  * @param code is key code
  */
-void Java_com_lvonasek_o4s_O4SJNI_nativeKey( JNIEnv*  env, jobject  thiz, jint code ) {
+void Java_com_lvonasek_o4s_Native_key( JNIEnv*  env, jobject  thiz, jint code ) {
   special(code, 0, 0);
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_O4SJNI_nativeKeyUp is key release method
+ * @brief Java_com_lvonasek_o4s_Native_keyUp is key release method
  * @param env is instance of JNI
  * @param thiz is asset manager
  * @param code is key code
  */
-void Java_com_lvonasek_o4s_O4SJNI_nativeKeyUp( JNIEnv*  env, jobject  thiz, jint code ) {
+void Java_com_lvonasek_o4s_Native_keyUp( JNIEnv*  env, jobject  thiz, jint code ) {
   specialUp(code, 0, 0);
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_O4SJNI_nativeLoop is loop method
+ * @brief Java_com_lvonasek_o4s_Native_display is loop method
  * @param env is instance of JNI
  * @param thiz is asset manager
  */
-void Java_com_lvonasek_o4s_O4SJNI_nativeDisplay( JNIEnv*  env, jobject  thiz ) {
+void Java_com_lvonasek_o4s_Native_display( JNIEnv*  env, jobject  thiz ) {
   display();
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_O4SJNI_nativeLoop is loop method
+ * @brief Java_com_lvonasek_o4s_Native_loop is loop method
  * @param env is instance of JNI
  * @param thiz is asset manager
  */
-void Java_com_lvonasek_o4s_O4SJNI_nativeLoop( JNIEnv*  env, jobject  thiz ) {
+void Java_com_lvonasek_o4s_Native_loop( JNIEnv*  env, jobject  thiz ) {
   idle(0);
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_O4SJNI_nativeBack is back key method
+ * @brief Java_com_lvonasek_o4s_Native_back is back key method
  * @param env is instance of JNI
  * @param thiz is asset manager
  */
-void Java_com_lvonasek_o4s_O4SJNI_nativeBack( JNIEnv*  env, jobject  thiz ) {
+void Java_com_lvonasek_o4s_Native_back( JNIEnv*  env, jobject  thiz ) {
   keyboardDown(27, 0, 0);
 }
 }

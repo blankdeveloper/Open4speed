@@ -5,8 +5,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLSurfaceView.Renderer;
-import android.view.MotionEvent;
-import com.lvonasek.o4s.controllers.VirtualKeys;
+import android.util.AttributeSet;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.microedition.khronos.egl.EGLConfig;
@@ -17,7 +16,7 @@ import javax.microedition.khronos.opengles.GL10;
  * and non-graphical processes. Main function of this class is calling C++ methods.
  * @author Lubos Vonasek
  */
-public class O4SJNI extends GLSurfaceView implements Renderer {
+public class GameLoop extends GLSurfaceView implements Renderer {
 
     //Thread objects
     public Timer timer;
@@ -25,7 +24,6 @@ public class O4SJNI extends GLSurfaceView implements Renderer {
     //Thread timing
     private final long DEFAULT_SCHEDULE = 1000 / 15;
     private long schedule = DEFAULT_SCHEDULE;
-    private long lastSchedule = DEFAULT_SCHEDULE;
     //Game state
     boolean init = false;
     boolean paused = false;
@@ -33,24 +31,16 @@ public class O4SJNI extends GLSurfaceView implements Renderer {
     /**
      * Constructor which creates support for all incoming events
      * @param context
+     * @param attrs
      */
-    public O4SJNI(Context context) {
+    public GameLoop(Context context, AttributeSet attrs) {
         super(context);
         //enable OpenGL ES 2.0 support
-        setEGLContextClientVersion(2);
-    }
-
-    @Override
-    /**
-     * Method automatically called on any touch event
-     */
-    public boolean onTouchEvent(final MotionEvent e) {
-        super.onTouchEvent(e);
-
-        //click on virtual buttons
-        VirtualKeys.click(e, getWidth(), getHeight());
-
-        return true;
+        if (!isInEditMode()) {
+            setEGLContextClientVersion(2);
+            setRenderer(this);
+            setRenderMode(RENDERMODE_WHEN_DIRTY);
+        }
     }
 
     /**
@@ -60,7 +50,7 @@ public class O4SJNI extends GLSurfaceView implements Renderer {
      */
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         //check if it is ran first time
-        if (!init) {
+        if (!init && !isInEditMode()) {
             //get package assets object
             String apkFilePath;
             ApplicationInfo appInfo;
@@ -76,13 +66,13 @@ public class O4SJNI extends GLSurfaceView implements Renderer {
 
             //send APK file path into C++ code
             apkFilePath = appInfo.sourceDir;
-            nativeInit(apkFilePath);
+            Native.init(apkFilePath);
         }
         init = true;
     }
 
     /**
-     * Screen resized(or rotated)
+     * Screen was resided
      * Game is forced into landscape mode so this method may not be called
      * @param gl is java OpenGL instance
      * @param w is width in pixels
@@ -90,7 +80,8 @@ public class O4SJNI extends GLSurfaceView implements Renderer {
      */
     public void onSurfaceChanged(GL10 gl, int w, int h) {
         //send new screen dimensions into C++ code
-        nativeResize(w, h);
+        if (!isInEditMode())
+          Native.resize(w, h);
     }
 
     /**
@@ -99,7 +90,7 @@ public class O4SJNI extends GLSurfaceView implements Renderer {
      */
     public void onDrawFrame(GL10 gl) {
         //check if game is not paused
-        if (!paused && init) {
+        if (!paused && init && !isInEditMode()) {
 
             //if non-graphical thread is not exist then create it and start it
             if (game == null) {
@@ -112,7 +103,7 @@ public class O4SJNI extends GLSurfaceView implements Renderer {
             }
 
             //run graphical code
-            nativeDisplay();
+            Native.display();
         }
     }
 
@@ -122,30 +113,12 @@ public class O4SJNI extends GLSurfaceView implements Renderer {
     class Game extends TimerTask {
         @Override
         public void run() {
-            //start time
-            long time = System.currentTimeMillis();
             //set priority(helps only on few devices)
             Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
             //run C++ code
-            nativeLoop();
+            Native.loop();
             //request OpenGL thread to run
             requestRender();
-            //get execution time
-            lastSchedule = (System.currentTimeMillis() - time);
         }
     }
-
-    //include native C++ library
-    static {
-        System.loadLibrary("open4speed");
-    }
-
-    //C++ methods
-    public static native void nativeBack();
-    private static native void nativeDisplay();
-    private static native void nativeInit(String str);
-    public static native void nativeKey(int code);
-    public static native void nativeKeyUp(int code);
-    private static native void nativeLoop();
-    private static native void nativeResize(int w, int h);
 }

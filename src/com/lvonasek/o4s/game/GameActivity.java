@@ -1,4 +1,4 @@
-package com.lvonasek.o4s;
+package com.lvonasek.o4s.game;
 
 import android.app.Activity;
 import android.media.AudioManager;
@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.RelativeLayout;
 
+import com.lvonasek.o4s.R;
+import com.lvonasek.o4s.Sounds;
 import com.lvonasek.o4s.controllers.HWKeys;
 
 /**
@@ -16,11 +17,11 @@ import com.lvonasek.o4s.controllers.HWKeys;
  *
  * @author Lubos Vonasek
  */
-public class O4SActivity extends Activity {
+public class GameActivity extends Activity {
 
     //various instances
-    private GameLoop mO4SJNI;
-    public static O4SActivity mO4SActivity;
+    private static GameLoop gameLoop;
+    public static GameActivity instance;
 
     @Override
     /**
@@ -30,8 +31,8 @@ public class O4SActivity extends Activity {
         //init
         super.onCreate(savedInstanceState);
         setContentView(R.layout.race);
-        mO4SActivity = this;
-        mO4SJNI = (GameLoop) findViewById(R.id.game_screen);
+        instance = this;
+        gameLoop = (GameLoop) findViewById(R.id.game_screen);
 
         //keep screen on
         final Window win = getWindow();
@@ -44,17 +45,17 @@ public class O4SActivity extends Activity {
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         //new instance
-        /*if (mO4SJNI == null) {
+        if (gameLoop == null) {
             //Main screen
-            mO4SJNI = new GameLoop(this, null);
+            gameLoop = new GameLoop(this, null);
             //Ad banner
             //mAdView = new AdView(this, AdSize.SMART_BANNER, "a152250049be91b");
-        }*/
+        }
 
         //create screen layout
-        /*RelativeLayout layout = new RelativeLayout(mO4SActivity);
+        /*RelativeLayout layout = new RelativeLayout(instance);
         //add main view
-        layout.addView(mO4SJNI);
+        layout.addView(gameLoop);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
                 (RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_TOP |
@@ -91,16 +92,12 @@ public class O4SActivity extends Activity {
      */
     protected void onPause() {
         //pause game
-        super.onPause();
-        if (mO4SJNI != null) {
-            if (mO4SJNI.init) {
-                //pause
-                mO4SJNI.paused = true;
-                //pause sounds
+        if (gameLoop != null)
+            if (gameLoop.init) {
+                gameLoop.paused = true;
                 Sounds.snd.autoPause();
-                Sounds.music.pause();
             }
-        }
+        super.onPause();
     }
 
     @Override
@@ -110,14 +107,11 @@ public class O4SActivity extends Activity {
     protected void onResume() {
         //resume game
         super.onResume();
-        mO4SActivity = this;
-        if (mO4SJNI != null) {
-            if (mO4SJNI.init) {
-                //unpause
-                mO4SJNI.paused = false;
-                //resume sounds
+        instance = this;
+        if (gameLoop != null) {
+            if (gameLoop.init) {
+                gameLoop.paused = false;
                 Sounds.snd.autoResume();
-                Sounds. music.start();
             }
         }
     }
@@ -129,8 +123,8 @@ public class O4SActivity extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         //change back key function
         if ((keyCode == KeyEvent.KEYCODE_BACK) || (keyCode == KeyEvent.KEYCODE_MENU)) {
-            Native.back();
-            return true;
+            GameLoop.init = false;
+            finish();
         }
         return super.onKeyDown(keyCode, event);
     }

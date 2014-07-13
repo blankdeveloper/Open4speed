@@ -238,6 +238,23 @@ void car::update() {
     if (speedAspect < 0)
         speedAspect = 0;
     acceleration = lowAspect * power + (1 - lowAspect) * power * speedAspect;
+
+
+    /// count engine frequency
+    float speedPlus = speed - (*gears)[currentGear].min;
+    if (speedPlus < 0)
+        speedPlus = 0;
+    float engineFreq = gearLow + (gearHigh - gearLow) * speedPlus / speedDiff;
+
+    /// automatic changing gears
+    if (currentGear >= 1) {
+        if ((currentGear > 1) & (engineFreq < gearDown))
+            currentGear--;
+        if (currentGear < gears->size() - 1) {
+            if (engineFreq > gearUp)
+                currentGear++;
+        }
+    }
 }
 
 /**
@@ -267,22 +284,6 @@ void car::updateMatrices() {
  */
 void car::updateSound() {
 
-    /// count engine frequency
-    float speedDiff = (*gears)[currentGear].max - (*gears)[currentGear].min;
-    float speedPlus = speed - (*gears)[currentGear].min;
-    if (speedPlus < 0)
-        speedPlus = 0;
-    float engineFreq = gearLow + (gearHigh - gearLow) * speedPlus / speedDiff;
-
-    /// automatic changing gears
-    if (currentGear >= 1) {
-        if ((currentGear > 1) & (engineFreq < gearDown))
-            currentGear--;
-        if (currentGear < gears->size() - 1) {
-            if (engineFreq > gearUp)
-                currentGear++;
-        }
-    }
 
     /// play crash
     bool brake = false;
@@ -301,6 +302,13 @@ void car::updateSound() {
     } else {
         noise->stop(index - 1);
     }
+
+    /// count engine frequency
+    float speedPlus = speed - (*gears)[currentGear].min;
+    if (speedPlus < 0)
+        speedPlus = 0;
+    float speedDiff = (*gears)[currentGear].max - (*gears)[currentGear].min;
+    float engineFreq = gearLow + (gearHigh - gearLow) * speedPlus / speedDiff;
 
     /// set engine sound
     if (engineFreq >= gearLow) {

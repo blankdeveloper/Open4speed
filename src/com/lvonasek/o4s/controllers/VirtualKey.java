@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.lvonasek.o4s.Native;
+import com.lvonasek.o4s.game.Native;
 import com.lvonasek.o4s.R;
 
 /**

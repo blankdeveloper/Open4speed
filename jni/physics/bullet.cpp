@@ -402,36 +402,6 @@ void bullet::updateCar(car* c) {
         c->resetAllowed = false;
     }
 
-    /// check if it is possible to replace matrices
-    if (!matrixLock) {
-
-        /// count angle
-        btQuaternion qn = m_vehicle[c->index - 1]->getRigidBody()->getOrientation();
-        float rot = getRotation(qn.x(),qn.y(),qn.z(),qn.w());
-        if (!isnan(rot)) {
-            c->tempRot=rot;
-        }
-
-        /// get position
-        float x = m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getX();
-        float y = m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getY();
-        float z = m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getZ();
-        if (!isnan(x) && !isnan(y) && !isnan(z)) {
-            c->x=x;
-            c->y=y;
-            c->z=z;
-        }
-
-        /// get matrices
-        for (int index = 0; index < 5; index++) {
-            if (index > 0) {
-              m_vehicle[c->index - 1]->getWheelInfo(index - 1).m_worldTransform.getOpenGLMatrix(c->transform[index].temp);
-            } else {
-              m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassTransform().getOpenGLMatrix(c->transform[index].temp);
-            }
-        }
-    }
-
     // reset car
     if (c->resetAllowed && c->resetRequested) {
         for (int i = 0; i < carCount; i++) {
@@ -442,6 +412,39 @@ void bullet::updateCar(car* c) {
             }
         }
         resetCar(c);
+    }
+}
+
+/**
+ * @brief updateCarTransform updates car OpenGL matrices
+ * @param c is instance of car
+ */
+void bullet::updateCarTransform(car* c) {
+
+    /// count angle
+    btQuaternion qn = m_vehicle[c->index - 1]->getRigidBody()->getOrientation();
+    float rot = getRotation(qn.x(),qn.y(),qn.z(),qn.w());
+    if (!isnan(rot)) {
+        c->tempRot=rot;
+    }
+
+    /// get position
+    float x = m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getX();
+    float y = m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getY();
+    float z = m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getZ();
+    if (!isnan(x) && !isnan(y) && !isnan(z)) {
+        c->x=x;
+        c->y=y;
+        c->z=z;
+    }
+
+    /// get matrices
+    for (int index = 0; index < 5; index++) {
+        if (index > 0) {
+          m_vehicle[c->index - 1]->getWheelInfo(index - 1).m_worldTransform.getOpenGLMatrix(c->transform[index].temp);
+        } else {
+          m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassTransform().getOpenGLMatrix(c->transform[index].temp);
+        }
     }
 }
 

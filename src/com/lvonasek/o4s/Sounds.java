@@ -5,6 +5,8 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 
+import com.lvonasek.o4s.game.GameActivity;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -68,7 +70,7 @@ public class Sounds {
         if (filename.endsWith(".ogg")) {
             try {
                 //unzip file(Android java access)
-                AssetFileDescriptor afd = O4SActivity.mO4SActivity.getAssets().openFd(filename);
+                AssetFileDescriptor afd = GameActivity.instance.getAssets().openFd(filename);
                 //use 8 channels per sample - change of channels amount have to be done in C++ too
                 for (int i = 0; i < 8; i++) {
                     //get id
@@ -89,7 +91,7 @@ public class Sounds {
             }
             try {
                 //unzip file(Android java access)
-                AssetFileDescriptor afd = O4SActivity.mO4SActivity.getAssets().openFd(filename);
+                AssetFileDescriptor afd = GameActivity.instance.getAssets().openFd(filename);
                 //prepare audio clip
                 music = new MediaPlayer();
                 music.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());

@@ -58,6 +58,12 @@ public:
     virtual void updateCar(car* c) = 0;
 
     /**
+     * @brief updateCarTransform updates car OpenGL matrices
+     * @param c is instance of car
+     */
+    virtual void updateCarTransform(car* c) = 0;
+
+    /**
      * @brief updateWorld updates world state
      */
     virtual void updateWorld() = 0;

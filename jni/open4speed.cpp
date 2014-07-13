@@ -54,9 +54,7 @@ void display(void) {
 
     /// update sounds
     if (active) {
-        for (int i = 0; i < carCount; i++) {
-            allCar[i]->updateSound();
-        }
+        allCar[0]->updateSound();
     }
 
 #ifndef ANDROID
@@ -117,6 +115,12 @@ void idle(int v) {
             physic->updateCar(allCar[i]);
         /// update scene
         physic->updateWorld();
+
+        /// update car transforms
+        pthread_mutex_lock(&matrixLock);
+        for (int i = 0; i < carCount; i++)
+            physic->updateCarTransform(allCar[i]);
+        pthread_mutex_unlock(&matrixLock);
 
         /// if race finished show result
         if (allCar[0]->lapsToGo == -1) {
@@ -256,11 +260,10 @@ int main(int argc, char** argv) {
 extern "C" {
 
 /**
- * @brief Java_com_lvonasek_o4s_Native_init is init method
+ * @brief Java_com_lvonasek_o4s_game_Native_init is init method
  * @param env is instance of JNI
- * @param am is asset manager
  */
-void Java_com_lvonasek_o4s_Native_init( JNIEnv*  env, jclass cls, jstring apkPath ) {
+void Java_com_lvonasek_o4s_game_Native_init( JNIEnv*  env, jclass cls, jstring apkPath ) {
   instance = env;
   jboolean isCopy;
   APKArchive = zip_open(env->GetStringUTFChars(apkPath, &isCopy), 0, NULL);
@@ -268,61 +271,91 @@ void Java_com_lvonasek_o4s_Native_init( JNIEnv*  env, jclass cls, jstring apkPat
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_Native_resize is resize method
+ * @brief Java_com_lvonasek_o4s_game_Native_resize is resize method
  * @param env is instance of JNI
- * @param thiz is asset manager
  * @param w is display width
  * @param h is display height
  */
-void Java_com_lvonasek_o4s_Native_resize( JNIEnv*  env, jobject  thiz, jint w, jint h ) {
+void Java_com_lvonasek_o4s_game_Native_resize( JNIEnv*  env, jobject  thiz, jint w, jint h ) {
   reshape(w, h);
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_Native_key is key press method
+ * @brief Java_com_lvonasek_o4s_game_Native_key is key press method
  * @param env is instance of JNI
  * @param thiz is asset manager
  * @param code is key code
  */
-void Java_com_lvonasek_o4s_Native_key( JNIEnv*  env, jobject  thiz, jint code ) {
+void Java_com_lvonasek_o4s_game_Native_key( JNIEnv*  env, jobject  thiz, jint code ) {
   special(code, 0, 0);
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_Native_keyUp is key release method
+ * @brief Java_com_lvonasek_o4s_game_Native_keyUp is key release method
  * @param env is instance of JNI
  * @param thiz is asset manager
  * @param code is key code
  */
-void Java_com_lvonasek_o4s_Native_keyUp( JNIEnv*  env, jobject  thiz, jint code ) {
+void Java_com_lvonasek_o4s_game_Native_keyUp( JNIEnv*  env, jobject  thiz, jint code ) {
   specialUp(code, 0, 0);
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_Native_display is loop method
+ * @brief Java_com_lvonasek_o4s_game_Native_display is loop method
  * @param env is instance of JNI
  * @param thiz is asset manager
  */
-void Java_com_lvonasek_o4s_Native_display( JNIEnv*  env, jobject  thiz ) {
+void Java_com_lvonasek_o4s_game_Native_display( JNIEnv*  env, jobject  thiz ) {
   display();
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_Native_loop is loop method
+ * @brief Java_com_lvonasek_o4s_game_Native_loop is loop method
  * @param env is instance of JNI
  * @param thiz is asset manager
  */
-void Java_com_lvonasek_o4s_Native_loop( JNIEnv*  env, jobject  thiz ) {
+void Java_com_lvonasek_o4s_game_Native_loop( JNIEnv*  env, jobject  thiz ) {
   idle(0);
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_Native_back is back key method
+ * @brief Java_com_lvonasek_o4s_game_Native_carCount is amount of cars
  * @param env is instance of JNI
- * @param thiz is asset manager
  */
-void Java_com_lvonasek_o4s_Native_back( JNIEnv*  env, jobject  thiz ) {
-  keyboardDown(27, 0, 0);
+jint Java_com_lvonasek_o4s_game_Native_carCount( JNIEnv*  env ) {
+  return carCount;
+}
+
+/**
+ * @brief Java_com_lvonasek_o4s_game_Native_carState is information about car
+ * @param env is instance of JNI
+ */
+jfloat Java_com_lvonasek_o4s_game_Native_carState( JNIEnv*  env, jobject  thiz, jint index, jint type ) {
+    if (type == 0)
+        return allCar[index]->speed;
+    if (type == 1)
+        return allCar[index]->control->getGas();
+    if (type == 2)
+        return allCar[index]->control->getBrake();
+    if (type == 3)
+        return allCar[index]->reverse ? 1 : -1;
+    if (type == 4)
+        return allCar[index]->lspeed;
+    if (type == 5)
+        return allCar[index]->gearLow;
+    if (type == 6)
+        return allCar[index]->gearHigh;
+    if (type == 7)
+        return allCar[index]->control->getNitro();
+    if (type == 8)
+        return (*allCar[index]->gears)[allCar[index]->currentGear].min;
+    if (type == 9)
+        return (*allCar[index]->gears)[allCar[index]->currentGear].max;
+    if (type == 10)
+        return allCar[index]->n2o;
+    if (type == 11)
+        return distance(allCar[cameraCar], allCar[index]);
+    return 0;
 }
 }
 #endif

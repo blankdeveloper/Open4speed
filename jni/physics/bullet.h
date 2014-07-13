@@ -95,6 +95,12 @@ public:
     void updateCar(car* c);
 
     /**
+     * @brief updateCarTransform updates car OpenGL matrices
+     * @param c is instance of car
+     */
+    void updateCarTransform(car* c);
+
+    /**
      * @brief updateWorld updates world state
      */
     void updateWorld();

@@ -85,7 +85,7 @@ float viewDistance;                                     ///< View distance
  * The scene
  */
 float aspect;                   ///< Menu aspect
-bool matrixLock;                ///< Car matrix locking
+pthread_mutex_t matrixLock;     ///< Car matrix locking
 int screen_width;               ///< Screen width
 int screen_height;              ///< Screen height
 float cameraDistance;           ///< Camera distance level

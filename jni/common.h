@@ -17,6 +17,7 @@
 extern JNIEnv* instance;            ///< JNI instance
 extern zip* APKArchive;             ///< APK archive instance
 #endif
+#include <pthread.h>
 #include <zip.h>
 #include "interfaces/model.h"
 #include "interfaces/physics.h"
@@ -103,7 +104,7 @@ extern float viewDistance;                                     ///< View distanc
  * The scene
  */
 extern float aspect;                                ///< Menu aspect
-extern bool matrixLock;                             ///< Car matrix locking
+extern pthread_mutex_t matrixLock;                  ///< Car matrix locking
 extern int screen_width;                            ///< Screen width
 extern int screen_height;                           ///< Screen height
 extern float cameraDistance;                        ///< Camera distance level

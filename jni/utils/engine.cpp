@@ -41,11 +41,11 @@ model* water = 0;                            ///< Water effect model
 void displayScene() {
 
     /// apply latest matrices
-    matrixLock = true;
+    pthread_mutex_lock(&matrixLock);
     for (int i = carCount - 1; i >= 0; i--) {
         allCar[i]->updateMatrices();
     }
-    matrixLock = false;
+    pthread_mutex_unlock(&matrixLock);
 
     /// update camera direction
     if (direction * 180 / 3.14 - allCar[cameraCar]->rot > 180)
@@ -89,7 +89,7 @@ void displayScene() {
     xrenderer->perspective(view, aspect, 0.1, viewDistance);
     xrenderer->pushMatrix();
     float cameraX = allCar[cameraCar]->transform->value[12] - sin(direction) * allCar[cameraCar]->control->getDistance() * 2 / (view / 90);
-    float cameraY = allCar[cameraCar]->transform->value[13] + allCar[cameraCar]->control->getDistance() / 2 / (view / 90);
+    float cameraY = allCar[cameraCar]->transform->value[13] + allCar[cameraCar]->control->getDistance() / (view / 90);
     float cameraZ = allCar[cameraCar]->transform->value[14] - cos(direction) * allCar[cameraCar]->control->getDistance() * 2 / (view / 90);
     xrenderer->lookAt(cameraX,cameraY,cameraZ,cameraX + sin(direction),cameraY + sin(-10 * 3.14 / 180),cameraZ + cos(direction),0,1,0);
 
@@ -168,15 +168,11 @@ void displayScene() {
     for (int i = carCount - 1; i >= 0; i--) {
         for (int j = 1; j <= 4; j++) {
             if (active) {
-                float effect = fmin(fmax(fabs(allCar[i]->speed * gap) * 0.003f, fabs(allCar[i]->speed - allCar[i]->lspeed) * 0.01f), 0.1f);
+                float effect = fabs(allCar[i]->speed * gap) * 0.001f;
                 for (int k = 0; k < fabs(allCar[i]->speed) * effect - 5; k++) {
                     float x = allCar[i]->transform[j].value[12] + (rand() % 50 - 25) * 0.01f + sin(allCar[i]->rot * 3.14 / 180) * k * 0.1f;
                     float y = allCar[i]->transform[j].value[13] - 0.2f;
                     float z = allCar[i]->transform[j].value[14] + (rand() % 50 - 25) * 0.01f + cos(allCar[i]->rot * 3.14 / 180) * k * 0.1f;
-                    float s = 2;
-                    if (allCar[i]->speed > 150) {
-                        s = allCar[i]->speed / 75.0f;
-                    }
                     for (int l = 0; l < water->models[0].triangleCount[1] * 3; l++) {
                         eff[currentFrame].vertices[eff[currentFrame].count * 3 + 0] = x;
                         eff[currentFrame].vertices[eff[currentFrame].count * 3 + 1] = y;

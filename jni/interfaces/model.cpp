@@ -26,10 +26,6 @@ model::~model() {
         delete[] models[i].triangleCount;
         models[i].texture2D->pointerDecrease();
     }
-    for (unsigned int i = 0; i < lightmaps.size(); i++) {
-        lightmaps[i]->pointerDecrease();
-    }
-    lightmaps.clear();
+    delete[] edges;
     models.clear();
-    //delete dynamicLight;
 }

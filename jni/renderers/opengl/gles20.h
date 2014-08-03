@@ -83,12 +83,6 @@ public:
     void clear(bool colors);
 
     /**
-     * @brief getGrayTexture provides texture for polygons without texture
-     * @return gray texture
-     */
-    texture* getGrayTexture();
-
-    /**
      * @brief multMatrix multiplies with matrix
      * @param matrix is 4x4 matrix in OpenGL format
      */
@@ -161,27 +155,6 @@ public:
      * @param gamma is requested render gamma
      */
     void renderSubModel(model* mod, model3d *m);
-
-    /**
-     * @brief getLMPixels get raw pixels of lightmap
-     * @param i is index of lightmap
-     * @param fix is true to fix lightmap holes
-     * @param blur is true to filter lightmap data
-     * @return raw pixels
-     */
-    unsigned char* getLMPixels(int i, bool fix, bool blur);
-
-    /**
-     * @brief prepareLM prepare rendering of lightmaps
-     * @param count is amount of lightmaps
-     */
-    void prepareLM(int count);
-
-    /**
-     * @brief renderLM render light into lightmap
-     * @param lightrenderer is shader to use
-     */
-    void renderLM(shader* lightrenderer);
 };
 
 #endif // GLES20_H

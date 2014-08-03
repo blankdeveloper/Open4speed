@@ -190,6 +190,7 @@ void glfbo::drawOnScreen(shader* screen_shader) {
 
     /// render
     glDisable(GL_DEPTH_TEST);
+    glDepthMask(false);
     glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLubyte), GL_UNSIGNED_BYTE, indices);
     screen_shader->unbind();
 }

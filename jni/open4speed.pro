@@ -23,7 +23,6 @@ SOURCES += \
     utils/switch.cpp \
     utils/math.cpp \
     utils/io.cpp \
-    utils/engine.cpp \
     renderers/opengl/gles20.cpp \
     renderers/opengl/glsl.cpp \
     car.cpp \
@@ -50,7 +49,6 @@ HEADERS += \
     utils/switch.h \
     utils/math.h \
     utils/io.h \
-    utils/engine.h \
     renderers/opengl/gles20.h \
     renderers/opengl/glsl.h \
     car.h \

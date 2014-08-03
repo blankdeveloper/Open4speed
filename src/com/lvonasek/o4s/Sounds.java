@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.media.SoundPool;
 
 import com.lvonasek.o4s.game.GameActivity;
+import com.lvonasek.o4s.game.GameLoop;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,23 +21,30 @@ public class Sounds {
     // instance of sounds
     private static ArrayList<Sound> list = new ArrayList<Sound>();
     // instance of sound APIs
-    public static MediaPlayer music = new MediaPlayer();
-    public static SoundPool snd = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+    public static MediaPlayer music;
+    public static SoundPool snd;
 
     /**
      * Structure for sound
      */
     static class Sound {
 
-        Integer id;
+        int id;
+        boolean playing;
         float rate;
         float volume;
 
-        Sound(Integer id, float rate, float volume) {
+        Sound(int id, float rate, float volume) {
             this.id = id;
             this.rate = rate;
             this.volume = volume;
+            playing = false;
         }
+    }
+
+    public static void init() {
+        music = new MediaPlayer();
+        snd = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
     }
 
     /**
@@ -55,9 +63,6 @@ public class Sounds {
             if (speed > 2.0) {
                 list.get(index).rate = 2.0f;
             }
-
-            //apply speed
-            snd.setRate(list.get(index).id, speed);
         }
     }
 
@@ -67,14 +72,14 @@ public class Sounds {
      */
     public static void soundLoad(String filename) {
         //load short audio clip(max 15seconds)
-        if (filename.endsWith(".ogg")) {
+        if (filename.endsWith(".ogg") && !GameLoop.paused) {
             try {
                 //unzip file(Android java access)
                 AssetFileDescriptor afd = GameActivity.instance.getAssets().openFd(filename);
-                //use 8 channels per sample - change of channels amount have to be done in C++ too
-                for (int i = 0; i < 8; i++) {
+                //use 1 channel per sample - change of channels amount have to be done in C++ too
+                for (int i = 0; i < 1; i++) {
                     //get id
-                    Integer id = snd.load(afd, 1);
+                    int id = snd.load(afd, 1);
                     //add into list of sounds
                     list.add(new Sound(id, 1, 0));
                 }
@@ -111,7 +116,7 @@ public class Sounds {
      */
     public static void soundPlay(int index, int loop) {
         //sound is a stream
-        if (list.get(index).id == Integer.MAX_VALUE) {
+        if (index == Integer.MAX_VALUE) {
             //set looping
             music.setLooping(loop == 1);
             //start playing
@@ -119,10 +124,13 @@ public class Sounds {
         }
 
         //audio clip
-        else {
+        else if (!GameLoop.paused) {
             //play sound(note:looping is solved in C++ code)
             Sound s = list.get(index);
-            snd.play(s.id, s.volume, s.volume, 1, 0, s.rate);
+            if (s.playing)
+                snd.pause(s.id);
+            snd.play(s.id, s.volume, s.volume, 1, loop, s.rate);
+            s.playing = true;
         }
     }
 
@@ -132,13 +140,14 @@ public class Sounds {
      */
     public static void soundStop(int index) {
         //sound is a stream
-        if (list.get(index).id == Integer.MAX_VALUE) {
+        if (index == Integer.MAX_VALUE) {
             music.pause();
         }
 
         //audio clip
-        else {
+        else if (!GameLoop.paused) {
             snd.stop(list.get(index).id);
+            list.get(index).playing = false;
         }
     }
 
@@ -149,12 +158,13 @@ public class Sounds {
      */
     public static void soundVolume(int index, float volume) {
         //sound is a stream
-        if (list.get(index).id == Integer.MAX_VALUE) {
+        if (index == Integer.MAX_VALUE) {
             music.setVolume(volume, volume);
         }
 
         //audio clip
-        else {
+        else if (!GameLoop.paused) {
+            volume *= 0.25f;
             snd.setVolume(list.get(index).id, volume, volume);
             list.get(index).volume = volume;
         }

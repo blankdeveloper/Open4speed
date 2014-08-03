@@ -25,7 +25,6 @@ extern zip* APKArchive;             ///< APK archive instance
 #include "interfaces/shader.h"
 #include "interfaces/sound.h"
 #include "interfaces/texture.h"
-#include "utils/engine.h"
 #include "car.h"
 
 /**
@@ -121,6 +120,7 @@ extern int carCount;                                ///< Amount of cars in scene
 extern int cameraCar;                               ///< Car camera index
 extern sound* crash;                                ///< Crash sound
 extern sound* engine;                               ///< Engine sound
+extern sound* enginePlus;                           ///< Engine extra sound
 extern sound* noise;                                ///< N2O sound
 extern float *mat;                                  ///< Temp matrix
 extern char *string;                                ///< Temp string

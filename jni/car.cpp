@@ -37,6 +37,7 @@ car::car(input *i, std::vector<edge> *e, const char* filename) {
     n2o = 150;
     onRoof = 0;
     edgeSideMove = 0;
+    extraSound = 0;
     control = i;
     edges = *e;
     rot = 0;
@@ -74,8 +75,8 @@ car::car(input *i, std::vector<edge> *e, const char* filename) {
         control->index = index - 1;
 
     /// load models
-    skin = getModel(getConfigStr("skin_model", atributes), false);
-    wheel = getModel(getConfigStr("wheel_model", atributes), false);
+    skin = getModel(getConfigStr("skin_model", atributes));
+    wheel = getModel(getConfigStr("wheel_model", atributes));
 
     /// set car wheels position
     wheelX = getConfig("wheel_x", atributes);
@@ -238,23 +239,6 @@ void car::update() {
     if (speedAspect < 0)
         speedAspect = 0;
     acceleration = lowAspect * power + (1 - lowAspect) * power * speedAspect;
-
-
-    /// count engine frequency
-    float speedPlus = speed - (*gears)[currentGear].min;
-    if (speedPlus < 0)
-        speedPlus = 0;
-    float engineFreq = gearLow + (gearHigh - gearLow) * speedPlus / speedDiff;
-
-    /// automatic changing gears
-    if (currentGear >= 1) {
-        if ((currentGear > 1) & (engineFreq < gearDown))
-            currentGear--;
-        if (currentGear < gears->size() - 1) {
-            if (engineFreq > gearUp)
-                currentGear++;
-        }
-    }
 }
 
 /**
@@ -310,12 +294,38 @@ void car::updateSound() {
     float speedDiff = (*gears)[currentGear].max - (*gears)[currentGear].min;
     float engineFreq = gearLow + (gearHigh - gearLow) * speedPlus / speedDiff;
 
+    /// automatic changing gears
+    int lastGear = currentGear;
+    if (currentGear >= 1) {
+        if ((currentGear > 1) & (engineFreq < gearDown))
+            currentGear--;
+        if (currentGear < gears->size() - 1) {
+            if (engineFreq > gearUp)
+                currentGear++;
+        }
+    }
+
+    /// update extra sound volume
+    if (speed - lspeed > 0)
+        extraSound += 0.01f;
+    else
+        extraSound -= 0.01f;
+    if (lastGear > currentGear)
+        extraSound = 1;
+    if (extraSound < 0.05)
+        extraSound = 0.05;
+    if (extraSound > 0.25)
+        extraSound = 0.25;
+
     /// set engine sound
     if (engineFreq >= gearLow) {
         engine->play(index - 1);
         engine->setFrequency(index - 1, engineFreq * soundEngineFreqAspect);
+        enginePlus->play(index - 1);
+        enginePlus->setFrequency(index - 1, engineFreq * soundEngineFreqAspect);
     } else if (engineFreq < gearLow) {
         engine->setFrequency(index - 1,  gearLow * soundEngineFreqAspect);
+        enginePlus->setFrequency(index - 1,  gearLow * soundEngineFreqAspect);
     }
 
     /// set sound distance
@@ -324,6 +334,7 @@ void car::updateSound() {
         dist = 0;
     dist *= dist;
     crash->setVolume(index - 1, dist);
-    engine->setVolume(index - 1, dist);
+    engine->setVolume(index - 1, dist * 8.0 * (0.25f - extraSound));
+    enginePlus->setVolume(index - 1, dist * extraSound);
     noise->setVolume(index - 1, dist);
 }

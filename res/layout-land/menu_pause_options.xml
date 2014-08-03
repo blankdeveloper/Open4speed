@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="65536dp"
+    android:minHeight="65536dp"
+    android:orientation="vertical"
+    android:background="@drawable/pause_background">
+
+        <com.lvonasek.o4s.ui.common.BigText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/menu_options"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/title_height"
+            android:gravity="center_horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/title_margin"
+            android:layout_marginBottom="@dimen/title_margin"
+            android:layout_weight="1" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1">
+
+        <com.lvonasek.o4s.ui.common.DarkButton
+            android:id="@+id/menu_pause_options_back"
+            android:text="@string/button_back"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/button_margin"
+            android:layout_marginBottom="@dimen/button_margin"
+            android:textSize="@dimen/button_text"
+            android:gravity="center_vertical|center_horizontal"
+            android:textAlignment="gravity" />
+    </LinearLayout>
+
+</LinearLayout>

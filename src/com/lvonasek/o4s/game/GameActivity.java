@@ -1,15 +1,20 @@
 package com.lvonasek.o4s.game;
 
-import android.app.Activity;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.lvonasek.o4s.R;
 import com.lvonasek.o4s.Sounds;
 import com.lvonasek.o4s.controllers.HWKeys;
+import com.lvonasek.o4s.ui.menus.PauseMenu;
 
 /**
  * Runnable class - it sets environment and run everything needed. It also manages interruptions of
@@ -17,11 +22,16 @@ import com.lvonasek.o4s.controllers.HWKeys;
  *
  * @author Lubos Vonasek
  */
-public class GameActivity extends Activity {
+public class GameActivity extends FragmentActivity {
 
     //various instances
-    private static GameLoop gameLoop;
+    public Object lock = new Object();
+    private GameLoop gameLoop;
     public static GameActivity instance;
+
+    //splash items
+    private ImageView loadingImg;
+    private ProgressBar progressBar;
 
     @Override
     /**
@@ -30,9 +40,15 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         //init
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_PROGRESS);
+        setProgressBarVisibility(true);
+
         setContentView(R.layout.race);
         instance = this;
         gameLoop = (GameLoop) findViewById(R.id.game_screen);
+        loadingImg = (ImageView) findViewById(R.id.loading);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         //keep screen on
         final Window win = getWindow();
@@ -92,11 +108,14 @@ public class GameActivity extends Activity {
      */
     protected void onPause() {
         //pause game
-        if (gameLoop != null)
-            if (gameLoop.init) {
+        synchronized (lock) {
+            if (gameLoop != null)
                 gameLoop.paused = true;
+            if (Sounds.snd != null)
                 Sounds.snd.autoPause();
-            }
+            if (Sounds.music != null)
+                Sounds.music.pause();
+        }
         super.onPause();
     }
 
@@ -108,12 +127,11 @@ public class GameActivity extends Activity {
         //resume game
         super.onResume();
         instance = this;
-        if (gameLoop != null) {
-            if (gameLoop.init) {
-                gameLoop.paused = false;
-                Sounds.snd.autoResume();
-            }
-        }
+        GameLoop.paused = false;
+        if (Sounds.snd != null)
+            Sounds.snd.autoResume();
+        if (Sounds.music != null)
+            Sounds.music.start();
     }
 
     @Override
@@ -123,9 +141,40 @@ public class GameActivity extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         //change back key function
         if ((keyCode == KeyEvent.KEYCODE_BACK) || (keyCode == KeyEvent.KEYCODE_MENU)) {
-            GameLoop.init = false;
-            finish();
+            if (GameLoop.init)
+                pause();
+            return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void finishLoading() {
+        setProgressBarVisibility(false);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                loadingImg.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+        });
+    }
+
+    public void pause() {
+        GameLoop.paused = true;
+        if (Sounds.snd != null)
+            Sounds.snd.autoPause();
+        FragmentManager fm = getSupportFragmentManager();
+        PauseMenu pauseMenu = new PauseMenu();
+        pauseMenu.show(fm, "menu_pause");
+    }
+
+    public void quit() {
+        GameLoop.paused = true;
+        Sounds.music.stop();
+        Sounds.snd.autoPause();
+        Sounds.music = null;
+        Sounds.snd = null;
+        gameLoop = null;
+        System.exit(0);
     }
 }

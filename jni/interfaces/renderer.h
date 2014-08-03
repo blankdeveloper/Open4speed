@@ -82,12 +82,6 @@ public:
     virtual void clear(bool colors) = 0;
 
     /**
-     * @brief getGrayTexture provides texture for polygons without texture
-     * @return gray texture
-     */
-    virtual texture* getGrayTexture() = 0;
-
-    /**
      * @brief multMatrix multiplies with matrix
      * @param matrix is 4x4 matrix in OpenGL format
      */
@@ -160,28 +154,6 @@ public:
      * @param gamma is requested render gamma
      */
     virtual void renderSubModel(model* mod, model3d* m) = 0;
-
-    /**
-     * @brief getLMPixels get raw pixels of lightmap
-     * @param i is index of lightmap
-     * @param fix is true to fix lightmap holes
-     * @param blur is true to filter lightmap data
-     * @return raw pixels
-     */
-    virtual unsigned char* getLMPixels(int i, bool fix, bool blur) = 0;
-
-
-    /**
-     * @brief prepareLM prepare rendering of lightmaps
-     * @param count is amount of lightmaps
-     */
-    virtual void prepareLM(int count) = 0;
-
-    /**
-     * @brief renderLM render light into lightmap
-     * @param lightrenderer is shader to use
-     */
-    virtual void renderLM(shader* lightrenderer) = 0;
 };
 
 #endif // RENDERER_H

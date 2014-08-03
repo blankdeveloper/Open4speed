@@ -38,7 +38,7 @@ input* getInput();
  * @param filename is path and name of file to load
  * @return instance of model
  */
-model* getModel(const char* filename, bool lightmaps);
+model* getModel(const char* filename);
 
 /**
  * @brief getPhysics gets physical engine

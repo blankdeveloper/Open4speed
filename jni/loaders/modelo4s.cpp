@@ -19,11 +19,8 @@ char* line = new char[1024];
 /**
  * @brief Constructor for loading model from file
  * @param filename is path and name of file to load
- * @param lightmaps is true to load lightmaps
  */
-modelo4s::modelo4s(const char* filename, bool lightmaps) {
-
-    models = *(new std::vector<model3d>());
+modelo4s::modelo4s(const char* filename) {
 
     /// open file
 #ifdef ZIP_ARCHIVE
@@ -54,7 +51,6 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
         model3d *m = new model3d();
         m->reg = new AABB();
         m->triangleCount = new int[cutX * cutY + 1];
-        m->usingLightmaps = lightmaps;
         float *colora = new float[4];
         float *colord = new float[4];
         float *colors = new float[4];
@@ -69,17 +65,10 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
         m->lmIndex = -1;
         material[0] = '\0';
         gets(line, file);
-        if (lightmaps) {
-            sscanf(line, "%f %f %f %f %f %f %s %f %f %f %f %f %f %f %f %f %f %s %d",
-                   &m->reg->min.x, &m->reg->min.y, &m->reg->min.z, &m->reg->max.x, &m->reg->max.y, &m->reg->max.z,
-                   &texturePath[0], &colora[0], &colora[1], &colora[2], &colord[0], &colord[1], &colord[2],
-                   &colors[0], &colors[1], &colors[2], &alpha, &material[0], &m->lmIndex);
-        } else {
-            sscanf(line, "%f %f %f %f %f %f %s %f %f %f %f %f %f %f %f %f %f %s",
-                   &m->reg->min.x, &m->reg->min.y, &m->reg->min.z, &m->reg->max.x, &m->reg->max.y, &m->reg->max.z,
-                   &texturePath[0], &colora[0], &colora[1], &colora[2], &colord[0], &colord[1], &colord[2],
-                   &colors[0], &colors[1], &colors[2], &alpha, &material[0]);
-        }
+        sscanf(line, "%f %f %f %f %f %f %s %f %f %f %f %f %f %f %f %f %f %s",
+               &m->reg->min.x, &m->reg->min.y, &m->reg->min.z, &m->reg->max.x, &m->reg->max.y, &m->reg->max.z,
+               &texturePath[0], &colora[0], &colora[1], &colora[2], &colord[0], &colord[1], &colord[2],
+               &colors[0], &colors[1], &colors[2], &alpha, &material[0]);
 
         /// get model size
         m->x = m->reg->min.x;
@@ -157,96 +146,16 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
         for (int j = 0; j < m->triangleCount[cutX * cutY]; j++) {
             /// read triangle parameters
             gets(line, file);
-            if (lightmaps) {
-                int x, y, u, v;
-                sscanf(line, "%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f %d %d %d %d",
-                       &m->coords[j * 3 * 2 + 0], &m->coords[j * 3 * 2 + 1],
-                       &m->normals[j * 3 * 3 + 0], &m->normals[j * 3 * 3 + 1], &m->normals[j * 3 * 3 + 2],
-                       &m->vertices[j * 3 * 3 + 0], &m->vertices[j * 3 * 3 + 1], &m->vertices[j * 3 * 3 + 2],
-                       &m->coords[j * 3 * 2 + 2], &m->coords[j * 3 * 2 + 3],
-                       &m->normals[j * 3 * 3 + 3], &m->normals[j * 3 * 3 + 4], &m->normals[j * 3 * 3 + 5],
-                       &m->vertices[j * 3 * 3 + 3], &m->vertices[j * 3 * 3 + 4], &m->vertices[j * 3 * 3 + 5],
-                       &m->coords[j * 3 * 2 + 4], &m->coords[j * 3 * 2 + 5],
-                       &m->normals[j * 3 * 3 + 6], &m->normals[j * 3 * 3 + 7], &m->normals[j * 3 * 3 + 8],
-                       &m->vertices[j * 3 * 3 + 6], &m->vertices[j * 3 * 3 + 7], &m->vertices[j * 3 * 3 + 8],
-                       &x, &y, &u, &v);
-
-                float d02 = dist(m->vertices[j * 3 * 3 + 0], m->vertices[j * 3 * 3 + 1], m->vertices[j * 3 * 3 + 2],
-                                 m->vertices[j * 3 * 3 + 3], m->vertices[j * 3 * 3 + 4], m->vertices[j * 3 * 3 + 5]);
-                float d04 = dist(m->vertices[j * 3 * 3 + 0], m->vertices[j * 3 * 3 + 1], m->vertices[j * 3 * 3 + 2],
-                                 m->vertices[j * 3 * 3 + 6], m->vertices[j * 3 * 3 + 7], m->vertices[j * 3 * 3 + 8]);
-                float d24 = dist(m->vertices[j * 3 * 3 + 3], m->vertices[j * 3 * 3 + 4], m->vertices[j * 3 * 3 + 5],
-                                 m->vertices[j * 3 * 3 + 6], m->vertices[j * 3 * 3 + 7], m->vertices[j * 3 * 3 + 8]);
-                int a = 0;
-                int b = 2;
-                int c = 4;
-                if ((d02 >= d04) && (d04 >= d24)) {
-                    a = 4;
-                    b = 2;
-                    c = 0;
-                }
-                if ((d02 >= d24) && (d24 >= d04)) {
-                    a = 4;
-                    b = 0;
-                    c = 2;
-                }
-                if ((d04 >= d02) && (d02 >= d24)) {
-                    a = 2;
-                    b = 4;
-                    c = 0;
-                }
-                if ((d04 >= d24) && (d24 >= d02)) {
-                    a = 2;
-                    b = 0;
-                    c = 4;
-                }
-                if ((d24 >= d02) && (d02 >= d04)) {
-                    a = 0;
-                    b = 4;
-                    c = 2;
-                }
-                if ((d24 >= d04) && (d04 >= d02)) {
-                    a = 0;
-                    b = 2;
-                    c = 4;
-                }
-                float lmRes = 2048;
-                if (u > 0) {
-                    m->tid[j * 6 + c] = (x + u) / 256.0 - 2 / lmRes;
-                    m->tid[j * 6 + c + 1] = y / 256.0 + 2 / lmRes;
-                    m->tid[j * 6 + b] = x / 256.0 + 2 / lmRes;
-                    m->tid[j * 6 + b + 1] = (y + v) / 256.0 - 2 / lmRes;
-                    m->tid[j * 6 + a] = x / 256.0 + 2 / lmRes;
-                    m->tid[j * 6 + a + 1] = y / 256.0 + 2 / lmRes;
-                } else {
-                    m->tid[j * 6 + c] = x / 256.0;
-                    m->tid[j * 6 + c + 1] = (y + v) / 256.0 + 4 / lmRes;
-                    m->tid[j * 6 + a] = x / 256.0;
-                    m->tid[j * 6 + a + 1] = y / 256.0;
-                    m->tid[j * 6 + b] = (x + u) / 256.0 + 4 / lmRes;
-                    m->tid[j * 6 + b + 1] = y / 256.0;
-                }
-                if (renderLightmap) {
-                    m->tuv[j * 6 + 0] = 0;
-                    m->tuv[j * 6 + 1] = 0;
-                    m->tuv[j * 6 + 2] = 1;
-                    m->tuv[j * 6 + 3] = 0;
-                    m->tuv[j * 6 + 4] = 0;
-                    m->tuv[j * 6 + 5] = 1;
-                }
-
-            } else {
-                sscanf(line, "%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f",
-                       &m->coords[j * 3 * 2 + 0], &m->coords[j * 3 * 2 + 1],
-                       &m->normals[j * 3 * 3 + 0], &m->normals[j * 3 * 3 + 1], &m->normals[j * 3 * 3 + 2],
-                       &m->vertices[j * 3 * 3 + 0], &m->vertices[j * 3 * 3 + 1], &m->vertices[j * 3 * 3 + 2],
-                       &m->coords[j * 3 * 2 + 2], &m->coords[j * 3 * 2 + 3],
-                       &m->normals[j * 3 * 3 + 3], &m->normals[j * 3 * 3 + 4], &m->normals[j * 3 * 3 + 5],
-                       &m->vertices[j * 3 * 3 + 3], &m->vertices[j * 3 * 3 + 4], &m->vertices[j * 3 * 3 + 5],
-                       &m->coords[j * 3 * 2 + 4], &m->coords[j * 3 * 2 + 5],
-                       &m->normals[j * 3 * 3 + 6], &m->normals[j * 3 * 3 + 7], &m->normals[j * 3 * 3 + 8],
-                       &m->vertices[j * 3 * 3 + 6], &m->vertices[j * 3 * 3 + 7], &m->vertices[j * 3 * 3 + 8]);
-            }
+            sscanf(line, "%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f",
+                   &m->coords[j * 3 * 2 + 0], &m->coords[j * 3 * 2 + 1],
+                   &m->normals[j * 3 * 3 + 0], &m->normals[j * 3 * 3 + 1], &m->normals[j * 3 * 3 + 2],
+                   &m->vertices[j * 3 * 3 + 0], &m->vertices[j * 3 * 3 + 1], &m->vertices[j * 3 * 3 + 2],
+                   &m->coords[j * 3 * 2 + 2], &m->coords[j * 3 * 2 + 3],
+                   &m->normals[j * 3 * 3 + 3], &m->normals[j * 3 * 3 + 4], &m->normals[j * 3 * 3 + 5],
+                   &m->vertices[j * 3 * 3 + 3], &m->vertices[j * 3 * 3 + 4], &m->vertices[j * 3 * 3 + 5],
+                   &m->coords[j * 3 * 2 + 4], &m->coords[j * 3 * 2 + 5],
+                   &m->normals[j * 3 * 3 + 6], &m->normals[j * 3 * 3 + 7], &m->normals[j * 3 * 3 + 8],
+                   &m->vertices[j * 3 * 3 + 6], &m->vertices[j * 3 * 3 + 7], &m->vertices[j * 3 * 3 + 8]);
         }
 
         /// store model in VBO
@@ -266,20 +175,20 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
         gets(line, file);
         int edgeCount = scandec(line);
         for (int j = 0; j < edgeCount; j++) {
-            edge *value = new edge();
+            edge value;
             gets(line, file);
-            sscanf(line, "%f %f %f %f %f %f", &value->ax, &value->ay, &value->az, &value->bx, &value->by, &value->bz);
-            edges[i].push_back(*value);
+            sscanf(line, "%f %f %f %f %f %f", &value.ax, &value.ay, &value.az, &value.bx, &value.by, &value.bz);
+            edges[i].push_back(value);
         }
         for (int j = 0; j < edgeCount; j++) {
-            edge *value = new edge();
-            value->ax = edges[i][j].bx;
-            value->ay = edges[i][j].by;
-            value->az = edges[i][j].bz;
-            value->bx = edges[i][j].ax;
-            value->by = edges[i][j].ay;
-            value->bz = edges[i][j].az;
-            edges[i].push_back(*value);
+            edge value;
+            value.ax = edges[i][j].bx;
+            value.ay = edges[i][j].by;
+            value.az = edges[i][j].bz;
+            value.bx = edges[i][j].ax;
+            value.by = edges[i][j].ay;
+            value.bz = edges[i][j].az;
+            edges[i].push_back(value);
         }
     }
 
@@ -288,18 +197,4 @@ modelo4s::modelo4s(const char* filename, bool lightmaps) {
 #else
     fclose(file);
 #endif
-}
-
-/**
- * @brief getLMCount get amount of lightmaps
- * @return lightmaps count
- */
-int modelo4s::getLMCount() {
-    int max = 0;
-    for (unsigned int i = 0; i < models.size(); i++) {
-        if (max < models[i].lmIndex) {
-            max = models[i].lmIndex;
-        }
-    }
-    return max + 1;
 }

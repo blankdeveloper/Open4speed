@@ -18,8 +18,9 @@
 class soundpool : public sound {
 public:
 
-    int id;         ///< Is sample ID
-    bool looping;   ///< Looping enability
+    int id;          ///< Is sample ID
+    int channelCount;///< Amount of channels
+    bool looping;    ///< Looping enability
 
     /**
      * @brief fmodapi create sound from file

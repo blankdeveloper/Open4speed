@@ -19,7 +19,7 @@ void main()
   vec3 N = normalize(v_Normal);
   
   //front/brake lights
-  if (gl_FragColor.a > 0.99) {
+  if (gl_FragColor.a > 0.9) {
     //player car light
     vec3 lightDir = u_light.xyz - v_Vertex;
     vec3 L = normalize(lightDir);
@@ -42,7 +42,7 @@ void main()
     }
   
     //reflect
-    gl_FragColor += 6.0 * texture2D(EnvMap1, vec2(0.5 + v_Normal.x * 0.25, 1.5 - gl_FragCoord.z * 1.0 + v_Normal.y * 0.25)) * clamp(0.0, (v_Vertex2.y - 0.4), 1.0);
+    gl_FragColor += 2.0 * texture2D(EnvMap1, vec2(0.5 + v_Normal.x * 0.25, 1.5 - gl_FragCoord.z * 1.0 + v_Normal.y * 0.25)) * clamp(0.0, (v_Vertex2.y - 0.4), 1.0);
   
     //dynamic shadow
     float a = texture2D(EnvMap1, u_model_position.xy).a;

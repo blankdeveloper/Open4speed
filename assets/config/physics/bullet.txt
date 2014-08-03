@@ -1,6 +1,6 @@
 BULLETCFG
 // pomer brzdeni
-brakeAspect 0.5
+brakeAspect 1.0
 // maximalni rychlost kterou engine zpracuje(pouziva se k vypoctu promenlive akcelerace)
 engineMaxSpeed 300
 // pomer zrychleni rychlosti engine
@@ -10,13 +10,13 @@ gasAspect 0.005
 // gravitace
 gravitation 10
 // brzdeni pri pretoceni
-overSpeedBraking 10
+overSpeedBraking 20
 // prevraceni auta pri odstredivej sile
 rollInfluence 0.001
 // treni karoserie
 skinFriction 0.05
 // zpomalovani pri neutralu
-speedDecrease 20
+speedDecrease 50
 // vyvazi urovne zataceni
 steeringAspect 30
 // procento zavislosti urovne zataceni na rychlosti(zhruba desetina predchozi hodnoty)
@@ -34,7 +34,7 @@ vehicleMassAspect 2
 // casovy krok vozidla
 vehicleStep 1
 // treni vozidla(nizka hodna umozni driftovat->UI nezvladne trat)
-wheelFriction 10
+wheelFriction 4
 // maximalni velikost sveta
 worldLimit 1000
 // casovy krok sceny

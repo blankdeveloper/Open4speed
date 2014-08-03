@@ -101,6 +101,7 @@ int carCount = 0;               ///< Amount of cars in scene
 int cameraCar = 0;              ///< Car camera index
 sound* crash;                   ///< Crash sound
 sound* engine;                  ///< Engine sound
+sound* enginePlus;              ///< Engine extra sound
 sound* noise;                   ///< N2O sound
 float *mat = new float[16];     ///< Temp matrix
 char *string = new char[1024];  ///< Temp string

@@ -56,10 +56,10 @@ input* getInput() {
  * @param filename is path and name of file to load
  * @return instance of model
  */
-model* getModel(const char* filename, bool lightmaps) {
+model* getModel(const char* filename) {
     logi("Load model:", filename);
     if (strcmp(getExtension(filename), "o4s") == 0) {
-        return new modelo4s(filename, lightmaps);
+        return new modelo4s(filename);
     }
     loge("File is not supported:", filename);
     return 0;

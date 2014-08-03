@@ -62,6 +62,7 @@ public:
     int onRoof;                                                           ///< Time when car is on roof(used for reseting)
     bool resetAllowed, resetRequested;                                    ///< Reset variables
     float n2o;                                                            ///< Amount of N2O
+    float extraSound;                                                     ///< Amount of extra engine sound volume
 
 
     /**

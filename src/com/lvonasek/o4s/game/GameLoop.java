@@ -7,6 +7,8 @@ import android.opengl.GLSurfaceView;
 import android.opengl.GLSurfaceView.Renderer;
 import android.util.AttributeSet;
 
+import com.lvonasek.o4s.Sounds;
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -15,9 +17,8 @@ import javax.microedition.khronos.opengles.GL10;
  * and non-graphical processes. Main function of this class is calling C++ methods.
  * @author Lubos Vonasek
  */
-public class GameLoop extends GLSurfaceView implements Renderer, Runnable {
+public class GameLoop extends GLSurfaceView implements Renderer {
 
-    private static Object lock    = new Object();
     //Game state
     public static boolean init    = false;
     public static boolean paused  = false;
@@ -59,7 +60,13 @@ public class GameLoop extends GLSurfaceView implements Renderer, Runnable {
 
             //send APK file path into C++ code
             apkFilePath = appInfo.sourceDir;
+            Sounds.init();
+            Native.init();
             Native.init(apkFilePath);
+            Sounds.soundLoad("sfx/02-danosongs.com-megacosm.mp3");
+            Sounds.soundPlay(Integer.MAX_VALUE, 1);
+            Sounds.soundVolume(Integer.MAX_VALUE, 1);
+            GameActivity.instance.finishLoading();
         }
 
         init = true;
@@ -83,27 +90,22 @@ public class GameLoop extends GLSurfaceView implements Renderer, Runnable {
      * @param gl is java OpenGL instance
      */
     public void onDrawFrame(GL10 gl) {
+        if (isInEditMode() || !init)
+            return;
         //check if game is not paused
-        if (!paused && init && !isInEditMode()) {
-            //run non-graphical code
-            synchronized (lock) {
-                post(this);
-            }
-            //run graphical code
-            Native.display();
-        }
-    }
-
-    /**
-     * Thread for non-graphical processes
-     */
-    @Override
-    public void run() {
-        //run C++ code
         if (!paused) {
-            synchronized (lock) {
+            long time = System.currentTimeMillis();
+            synchronized (GameActivity.instance.lock) {
                 Native.loop();
             }
-        }
+            long dtime = System.currentTimeMillis() - time;
+            if (dtime < 50)
+                try {
+                    Thread.sleep(50 - dtime);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+        } else
+            Native.display();
     }
 }

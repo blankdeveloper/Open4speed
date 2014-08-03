@@ -11,48 +11,65 @@
         android:id="@+id/game_screen" />
 
     <com.lvonasek.o4s.controllers.VirtualKey
-        android:layout_width="60sp"
-        android:layout_height="60sp"
+        android:layout_width="@dimen/arrow_size"
+        android:layout_height="@dimen/arrow_size"
+        android:layout_margin="@dimen/arrow_margin"
         android:id="@+id/arrow_left"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/arrow_left"
-        android:layout_margin="5sp" />
+        android:background="@drawable/arrow_left" />
 
     <com.lvonasek.o4s.controllers.VirtualKey
-        android:layout_width="60sp"
-        android:layout_height="60sp"
+        android:layout_width="@dimen/arrow_size"
+        android:layout_height="@dimen/arrow_size"
+        android:layout_margin="@dimen/arrow_margin"
         android:id="@+id/arrow_right"
         android:background="@drawable/arrow_right"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/arrow_left"
-        android:layout_margin="5sp"/>
+        android:layout_toRightOf="@+id/arrow_left" />
 
     <com.lvonasek.o4s.controllers.VirtualKey
-        android:layout_width="60sp"
-        android:layout_height="60sp"
+        android:layout_width="@dimen/arrow_size"
+        android:layout_height="@dimen/arrow_size"
+        android:layout_margin="@dimen/arrow_margin"
         android:id="@+id/arrow_down"
         android:background="@drawable/arrow_down"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="5sp"/>
+        android:layout_alignParentRight="true" />
 
     <com.lvonasek.o4s.controllers.VirtualKey
-        android:layout_width="60sp"
-        android:layout_height="60sp"
+        android:layout_width="@dimen/arrow_size"
+        android:layout_height="@dimen/arrow_size"
+        android:layout_margin="@dimen/arrow_margin"
         android:id="@+id/arrow_up"
         android:background="@drawable/arrow_up"
         android:layout_above="@+id/arrow_down"
-        android:layout_alignParentRight="true"
-        android:layout_margin="5sp"/>
+        android:layout_alignParentRight="true" />
 
     <com.lvonasek.o4s.controllers.VirtualKey
-        android:layout_width="60sp"
-        android:layout_height="60sp"
+        android:layout_width="@dimen/arrow_size"
+        android:layout_height="@dimen/arrow_size"
+        android:layout_margin="@dimen/arrow_margin"
         android:id="@+id/arrow_n2o"
         android:background="@drawable/arrow_n2o"
         android:layout_above="@+id/arrow_up"
-        android:layout_alignParentRight="true"
-        android:layout_margin="5sp"/>
+        android:layout_alignParentRight="true" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/loading"
+        android:background="@drawable/loading"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="@dimen/arrow_size"
+        android:layout_height="@dimen/arrow_size"
+        android:layout_margin="@dimen/arrow_margin"
+        android:id="@+id/progressBar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>

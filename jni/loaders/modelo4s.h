@@ -22,15 +22,8 @@ public:
     /**
      * @brief Constructor for loading model from file
      * @param filename is path and name of file to load
-     * @param lightmaps is true to load lightmaps
      */
-    modelo4s(const char* filename, bool lightmaps);
-
-    /**
-     * @brief getLMCount get amount of lightmaps
-     * @return lightmaps count
-     */
-    int getLMCount();
+    modelo4s(const char* filename);
 };
 
 #endif // MODELO4S_H

@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Open4speed by L.Vonásek</string>
+    <string name="app_name">Open4speed test</string>
+
+    <string name="button_back">BACK</string>
+    <string name="button_exit">EXIT</string>
+    <string name="button_options">OPTIONS</string>
+    <string name="button_restart">RESTART</string>
+    <string name="button_resume">RESUME</string>
+    <string name="button_start_game">START GAME</string>
+
+    <string name="menu_pause">PAUSE MENU</string>
+    <string name="menu_options">OPTIONS MENU</string>
+
+    <string name="ui_font">fonts/zerohour.ttf</string>
 </resources>

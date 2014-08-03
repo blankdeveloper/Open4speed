@@ -19,17 +19,17 @@ public class Native {
     public static final int CAR_INFO_CAMERADST = 11;
 
     //include native C++ library
-    static {
+    public static void init() {
         System.loadLibrary("open4speed");
     }
 
     //C++ methods
     public static native int carCount();
     public static native float carState(int index, int type);
-    public static native void display();
     public static native void init(String str);
     public static native void key(int code);
     public static native void keyUp(int code);
+    public static native void display();
     public static native void loop();
     public static native void resize(int w, int h);
 }

@@ -108,6 +108,7 @@ void gles20::perspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zF
     }
     proj_matrix = glm::perspective(fovy, aspect, zNear,zFar);
     glEnable(GL_DEPTH_TEST);
+    glDepthMask(true);
 }
 
 /**
@@ -120,14 +121,6 @@ void gles20::clear(bool colors) {
     } else {
         glClear(GL_DEPTH_BUFFER_BIT);
     }
-}
-
-/**
- * @brief getGrayTexture provides texture for polygons without texture
- * @return gray texture
- */
-texture* gles20::getGrayTexture() {
-    return gray;
 }
 
 /**
@@ -334,14 +327,6 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         modelView = view_matrix * matrix_result * translation;
     }
 
-    /// set depth test
-    if (lmFilter < 0) {
-        glEnable(GL_DEPTH_TEST);
-    } else {
-        glDisable(GL_DEPTH_TEST);
-        glDisable(GL_CULL_FACE);
-    }
-
     /// set shader and VBO
     shader* current = m->material;
     if (overshader != 0) {
@@ -356,13 +341,6 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     matrixScl = matScale * matrix;
     current->uniformMatrix("u_Matrix",glm::value_ptr(matrix));
     current->uniformMatrix("u_MatrixScl",glm::value_ptr(matrixScl));
-
-    /// apply lightmap
-    if (!mod->lightmaps.empty()) {
-        glActiveTexture( GL_TEXTURE3 );
-        mod->lightmaps[m->lmIndex]->apply();
-        current->uniformInt("Lightmap", 3);
-    }
 
     /// previous screen
     if (!renderLightmap) {
@@ -393,6 +371,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     current->uniformFloat4("u_kD", m->colord[0], m->colord[1], m->colord[2], 1);
     current->uniformFloat4("u_kS", m->colors[0], m->colors[1], m->colors[2], 1);
     current->uniformFloat("u_speed", allCar[cameraCar]->speed / 500.0f + 0.35f);
+    current->uniformFloat("u_gamma", 1.0);
     if (enable[9])
         current->uniformFloat("u_brake", 1);
     else
@@ -467,130 +446,4 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     current->unbind();
     glDepthMask(true);
     glDisable(GL_BLEND);
-}
-
-/**
- * @brief getLMPixels get raw pixels of lightmap
- * @param i is index of lightmap
- * @param fix is true to fix lightmap holes
- * @param blur is true to filter lightmap data
- * @return raw pixels
- */
-unsigned char* gles20::getLMPixels(int i, bool fix, bool blur) {
-
-    GLubyte* pixels = new GLubyte[rttsize * rttsize * 4];
-
-#ifndef ANDROID
-    GLubyte* pixels2 = new GLubyte[rttsize * rttsize * 4];
-
-    /// get pixels
-    rtt[0]->unbindFBO();
-    lm[i]->bindTexture();
-    glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-    glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels2);
-
-    /// fill holes
-    if (fix) {
-        for (int a = 0; a < rttsize; a++) {
-            for (int b = 0; b < rttsize; b++) {
-                if (pixels[(b * rttsize + a) * 4 + 3] < 128) {
-                    for (int i = -1; i <= 1; i++) {
-                        for (int j = -1; j <= 1; j++) {
-                            if ((a + i >= 0) && (a + i < rttsize) && (b + j >= 0) && (b + j < rttsize)) {
-                                if (pixels[((b + j) * rttsize + a + i) * 4 + 3] > 128) {
-                                    for (int k = 0; k < 3; k++) {
-                                        pixels[(b * rttsize + a) * 4 + k] = pixels[((b + j) * rttsize + a + i) * 4 + k];
-                                    }
-                                    pixels[(b * rttsize + a) * 4 + 3] = 128;
-                                }
-                            }
-                            if (pixels[(b * rttsize + a) * 4 + 3] == 128) {
-                                break;
-                            }
-                        }
-                        if (pixels[(b * rttsize + a) * 4 + 3] == 128) {
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /// filter
-    if (blur) {
-        for (int a = 0; a < rttsize; a++) {
-            for (int b = 0; b < rttsize; b++) {
-                for (int k = 0; k < 3; k++) {
-                    int count = 1;
-                    int value = pixels[(b * rttsize + a) * 4 + k];
-                    for (int i = -1; i <= 1; i++) {
-                        for (int j = -1; j <= 1; j++) {
-                            if ((b + j >= 0) && (b + j < rttsize))
-                                if ((a + i >= 0) && (a + i < rttsize))
-                                    if (pixels[((b + j) * rttsize + a + i) * 4 + 3] > 128) {
-                                        count++;
-                                        value += pixels2[((b + j) * rttsize + a + i) * 4 + k];
-                                    }
-                        }
-                    }
-                    pixels[(b * rttsize + a) * 4 + k] = value / count;
-                }
-            }
-        }
-    }
-
-    /// fix alpha channel
-    if (fix) {
-        for (int a = 0; a < rttsize * rttsize; a++) {
-            pixels[a * 4 + 3] = 255;
-        }
-    }
-    delete[] pixels2;
-#endif
-    return (unsigned char*)pixels;
-}
-
-/**
- * @brief prepareLM prepare rendering of lightmaps
- * @param count is amount of lightmaps
- */
-void gles20::prepareLM(int count) {
-
-    /// set lightmaps framebuffers
-    for (int i = 0; i < count; i++) {
-        lm.push_back(new glfbo(rttsize, rttsize, false));
-        lm[i]->bindFBO();
-        lm[i]->clear(true);
-        lm[i]->unbindFBO();
-    }
-}
-
-/**
- * @brief renderLM render light into lightmap
- * @param lightrenderer is shader to use
- */
-void gles20::renderLM(shader* lightrenderer) {
-    enable[1] = false;
-    glm::vec4 pos = light.u_light;
-    glm::vec4 dir = light.u_light_dir;
-
-    /// lightmap cycle
-    for (int i = 0; i < trackdata->getLMCount(); i++) {
-
-        /// update lightmap
-        light.u_light = view_matrix * pos;
-        light.u_light_dir = view_matrix * dir;
-        glActiveTexture( GL_TEXTURE2 );
-        lmFilter = i;
-        lm[i]->bindFBO();
-        overmode = 1;
-        overshader = lightrenderer;
-        glActiveTexture( GL_TEXTURE0 );
-        renderModel(trackdata);
-        overmode = 0;
-        overshader = 0;
-        lmFilter = -1;
-        lm[i]->unbindFBO();
-    }
 }

@@ -42,17 +42,6 @@ float aiRacerSteeringGapLevel1;                         ///< AI navigation param
 float aiRacerSteeringGapLevel2;                         ///< AI navigation parameter
 float aiRacerTrackUpdate;                               ///< AI navigation parameter
 float aiRacerTrackUpdateSpeedDependency;                ///< AI navigation parameter
-float aiTrafficFutureStep;                              ///< AI navigation parameter
-float aiTrafficSafeAngle;                               ///< AI navigation parameter
-float aiTrafficSafeDistance;                            ///< AI navigation parameter
-float aiTrafficSafeDistanceSpeedDependency;             ///< AI navigation parameter
-float aiTrafficSafeGap;                                 ///< AI navigation parameter
-float aiTrafficSafeSpeed;                               ///< AI navigation parameter
-float aiTrafficSpeedBrake;                              ///< AI navigation parameter
-float aiTrafficSpeedNoGas;                              ///< AI navigation parameter
-float aiTrafficSteeringGapLevel1;                       ///< AI navigation parameter
-float aiTrafficSteeringGapLevel2;                       ///< AI navigation parameter
-float aiTrafficTrackUpdate;                             ///< AI navigation parameter
 char* inputController;                                  ///< Input controller
 float keyBack;                                          ///< Keycode
 float keyCameraDown;                                    ///< Keycode
@@ -103,8 +92,6 @@ sound* enginePlus;              ///< Engine extra sound
 sound* noise;                   ///< N2O sound
 float *mat = new float[16];     ///< Temp matrix
 char *string = new char[1024];  ///< Temp string
-bool renderLightmap = false;    ///< Render lightmap mode enability
-int rttsize = 2048;             ///< RTT texture size
 float direction = 0;                         ///< Camera direction
 float mtime;                                 ///< Time stamp
 int lastkey;                                 ///< Last pressed key keycode
@@ -136,17 +123,6 @@ void loadAll() {
     aiRacerSteeringGapLevel2 = getConfig("aiRacerSteeringGapLevel2", atributes);
     aiRacerTrackUpdate = getConfig("aiRacerTrackUpdate", atributes);
     aiRacerTrackUpdateSpeedDependency = getConfig("aiRacerTrackUpdateSpeedDependency", atributes);
-    aiTrafficFutureStep = getConfig("aiTrafficFutureStep", atributes);
-    aiTrafficSafeAngle = getConfig("aiTrafficSafeAngle", atributes);
-    aiTrafficSafeDistance = getConfig("aiTrafficSafeDistance", atributes);
-    aiTrafficSafeDistanceSpeedDependency = getConfig("aiTrafficSafeDistanceSpeedDependency", atributes);
-    aiTrafficSafeGap = getConfig("aiTrafficSafeGap", atributes);
-    aiTrafficSafeSpeed = getConfig("aiTrafficSafeSpeed", atributes);
-    aiTrafficSpeedBrake = getConfig("aiTrafficSpeedBrake", atributes);
-    aiTrafficSpeedNoGas = getConfig("aiTrafficSpeedNoGas", atributes);
-    aiTrafficSteeringGapLevel1 = getConfig("aiTrafficSteeringGapLevel1", atributes);
-    aiTrafficSteeringGapLevel2 = getConfig("aiTrafficSteeringGapLevel2", atributes);
-    aiTrafficTrackUpdate = getConfig("aiTrafficTrackUpdate", atributes);
     inputController = getConfigStr("inputController", atributes);
     keyBack = getConfig("keyBack", atributes);
     keyCameraDown = getConfig("keyCameraDown", atributes);

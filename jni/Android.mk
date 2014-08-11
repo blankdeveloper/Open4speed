@@ -58,7 +58,6 @@ common.cpp \
 physics/bullet.cpp \
 input/keyboard.cpp \
 input/airacer.cpp \
-input/aitraffic.cpp \
 interfaces/model.cpp \
 renderers/opengl/gles20.cpp \
 renderers/opengl/glsl.cpp \

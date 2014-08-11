@@ -28,11 +28,6 @@ extern zip* APKArchive;             ///< APK archive instance
 #include "car.h"
 
 /**
- * @brief renderLightmap render lightmaps and exit when it is true
- */
-extern bool renderLightmap;
-
-/**
  * @brief The game resources
  */
 extern std::vector<char*> *carList;                                    ///< List of all cars
@@ -70,7 +65,6 @@ extern float aiTrafficSpeedNoGas;                              ///< AI navigatio
 extern float aiTrafficSteeringGapLevel1;                       ///< AI navigation parameter
 extern float aiTrafficSteeringGapLevel2;                       ///< AI navigation parameter
 extern float aiTrafficTrackUpdate;                             ///< AI navigation parameter
-extern char* gameMode;                                         ///< Screen mode
 extern char* inputController;                                  ///< Input controller
 extern float keyBack;                                          ///< Keycode
 extern float keyCameraDown;                                    ///< Keycode
@@ -128,8 +122,6 @@ extern std::vector<char*> *configText[configSize];  ///< Config texts
 extern float direction;                             ///< Camera direction
 extern float mtime;                                 ///< Time stamp
 extern int lastkey;                                 ///< Last pressed key keycode
-extern bool renderLightmap;                         ///< Render lightmap mode enability
-extern int rttsize;                                 ///< RTT texture size
 
 extern physics *physic;     ///< Physical engine instance
 extern renderer *xrenderer; ///< Renderer instance

@@ -227,13 +227,12 @@ texture* getTexture(float r, float g, float b, float alpha) {
  * @param vertices is vertices array
  * @param normals is normals array
  * @param coords is texture coords array
- * @param tid is special array for lightmaps
  */
-vbo* getVBO(int size, float* vertices, float* normals, float* coords, float* tid) {
+vbo* getVBO(int size, float* vertices, float* normals, float* coords) {
 
     /// create VBO
     if (strcmp(screenRenderer, "glsl") == 0) {
-        vbo* instance = new glvbo(size, vertices, normals, coords, tid);
+        vbo* instance = new glvbo(size, vertices, normals, coords);
         return instance;
     }
     loge("Renderer incompatible VBO", "");

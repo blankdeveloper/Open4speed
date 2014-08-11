@@ -1,11 +1,11 @@
 package components;
 
-import geometry.Edge;
-import geometry.Triangle;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import geometry.Edge;
+import geometry.Triangle;
 
 public class Writer {
 
@@ -194,8 +194,7 @@ public class Writer {
       System.out.println(Common.missingCoord
               + " vertices haven't texture coords.");
     }
-    System.out.println(Unwrapper.lm.size() + " lightmaps generated");
-    
+
     if (facesCount > 0) {
       System.out.println("Converted " + facesCount + " triangle objects");
       if (edgesCount > 0) {

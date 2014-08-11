@@ -48,15 +48,12 @@ struct model3d {
     float *colors;      ///< Specular color
     bool dynamic;       ///< True if object is dynamic
     int dynamicID;      ///< ID of the last dynamic update
-    int lmIndex;        ///< index of lightmap
     AABB *reg;          ///< AABB of the object
     int* triangleCount; ///< Amount of triangles
     texture* texture2D; ///< Object texture
     float* vertices;    ///< Object vertices
     float* normals;     ///< Object normals
     float* coords;      ///< Object texture coordinates
-    float* tid;         ///< Object lightmap coordinates
-    float* tuv;         ///< Object triangle coordinates
     float x,y,z;        ///< Object translation
     vbo* vboData;       ///< VBO of model
 };

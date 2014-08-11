@@ -26,16 +26,15 @@
 #include "interfaces/renderer.h"
 
 
-const int culling = 200;              ///< View culling distance in meters
+const int culling = 150;              ///< View culling distance in meters
 const glm::mat4x4 eye = glm::mat4x4(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1);
-const glm::mat4 matScale = glm::mat4(0.5f, 0.0f, 0.0f, 0.0f,  0.0f, 0.5f, 0.0f, 0.0f,  0.0f, 0.0f, 0.5f, 0.0f,  0.5f, 0.5f, 0.5f, 1.0f);
 
 /**
  * @brief The gles20 class is implementation of OpenGL ES 2.0
  */
 class gles20 : public renderer {
 public:
-    std::vector<fbo*> lm;                 ///< Lightmap framebuffer
+    int xm, xp, ym, yp;                   ///< Current view frustum culling
     float camX;                           ///< Camera position x
     float camY;                           ///< Camera position y
     float camZ;                           ///< Camera position z
@@ -44,7 +43,6 @@ public:
     glm::mat4x4 matrix_result;            ///< Temp matrix for calculations
     std::stack<glm::mat4x4> matrixBuffer; ///< Matrix stack
     GLushort dynindices[4095];            ///< Indicies for dynamic rendering
-    int lmFilter;                         ///< Filtering of objects to render
 
     /**
      * @brief gles20 constructor

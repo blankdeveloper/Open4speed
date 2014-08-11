@@ -22,7 +22,7 @@ steeringAspect 30
 // procento zavislosti urovne zataceni na rychlosti(zhruba desetina predchozi hodnoty)
 steeringSpeedDependency 2.5
 // stlaceni tlumicu
-suspensionCompression 0.2
+suspensionCompression 0.1
 // uroven tlumeni
 suspensionDamping 0.1
 // tuhost tlumicu

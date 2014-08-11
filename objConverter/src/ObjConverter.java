@@ -3,7 +3,6 @@ import components.Common;
 import components.ObjLoader;
 import components.Parser;
 import components.Subdivider;
-import components.Unwrapper;
 import components.Writer;
 
 /**
@@ -17,7 +16,6 @@ public class ObjConverter {
     if (Common.init(args)) {
       ObjLoader.loadObj(args);
       Parser.parseObj(args);
-      Unwrapper.unwrap();
       Subdivider.subdivide();
       Writer.write(args);
     }

@@ -16,9 +16,8 @@
  * @param vertices is vertices array
  * @param normals is normals array
  * @param coords is texture coords array
- * @param tid is special array for lightmaps
  */
-glvbo::glvbo(int size, float* vertices, float* normals, float* coords, float* tid) {
+glvbo::glvbo(int size, float* vertices, float* normals, float* coords) {
     /// count buffer size
     this->size = size;
     int len = 0;
@@ -27,8 +26,6 @@ glvbo::glvbo(int size, float* vertices, float* normals, float* coords, float* ti
     if (normals != 0)
         len += size * 3;
     if (coords != 0)
-        len += size * 2;
-    if (tid != 0)
         len += size * 2;
 
     glGenBuffers(1, &instance);
@@ -45,10 +42,6 @@ glvbo::glvbo(int size, float* vertices, float* normals, float* coords, float* ti
     }
     if (coords != 0) {
         glBufferSubData(GL_ARRAY_BUFFER, len, size * 2, coords);
-        len += size * 2;
-    }
-    if (tid != 0) {
-        glBufferSubData(GL_ARRAY_BUFFER, len, size * 2, tid);
         len += size * 2;
     }
     glBindBuffer(GL_ARRAY_BUFFER, 0);

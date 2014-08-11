@@ -16,7 +16,6 @@ SOURCES += \
     input/keyboard.cpp \
     physics/bullet.cpp \
     input/airacer.cpp \
-    input/aitraffic.cpp \
     open4speed.cpp \
     loaders/rgb.cpp \
     loaders/modelo4s.cpp \
@@ -39,7 +38,6 @@ HEADERS += \
     interfaces/physics.h \
     physics/bullet.h \
     input/airacer.h \
-    input/aitraffic.h \
     interfaces/renderer.h \
     interfaces/texture.h \
     loaders/rgb.h \

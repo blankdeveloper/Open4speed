@@ -1,7 +1,5 @@
 package components;
 
-import geometry.Triangle;
-
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -15,6 +13,8 @@ import java.util.StringTokenizer;
 
 import javax.imageio.ImageIO;
 
+import geometry.Triangle;
+
 // storage for materials
 public class MTLLoader {
 
@@ -26,15 +26,15 @@ public class MTLLoader {
   private MTLLoader() {}
   
   public MTLLoader(String t) {
-    faces = new ArrayList<>();
-    pointers = new ArrayList<>();
+    faces = new ArrayList<Triangle>();
+    pointers = new ArrayList<Integer>();
     parameters = t;
   }
 
   public MTLLoader clone(boolean half) {
     MTLLoader mtl = new MTLLoader();
-    mtl.faces = new ArrayList<>();
-    mtl.pointers = new ArrayList<>();
+    mtl.faces = new ArrayList<Triangle>();
+    mtl.pointers = new ArrayList<Integer>();
     if (half) {
       for (int i = 0; i < this.faces.size() / 2; i++) {
         mtl.faces.add(this.faces.get(i));
@@ -42,12 +42,12 @@ public class MTLLoader {
     } else {
       for (int i = this.faces.size() / 2; i < this.faces.size(); i++) {
         mtl.faces.add(this.faces.get(i));
-      }      
+      }
     }
     mtl.parameters = "" + this.parameters;
     return mtl;
   }
-  
+
   // get material parameters from library
   public static String getMaterial(String lib, String mtl) throws IOException {
 

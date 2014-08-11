@@ -25,9 +25,8 @@ public:
      * @param vertices is vertices array
      * @param normals is normals array
      * @param coords is texture coords array
-     * @param tid is special array for lightmaps
      */
-    glvbo(int size, float* vertices, float* normals, float* coords, float* tid);
+    glvbo(int size, float* vertices, float* normals, float* coords);
 
     /**
      * @brief destroy removes all data from memory

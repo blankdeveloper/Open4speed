@@ -22,7 +22,6 @@ model::~model() {
         delete[] models[i].vertices;
         delete[] models[i].normals;
         delete[] models[i].coords;
-        delete[] models[i].tid;
         delete[] models[i].triangleCount;
         models[i].texture2D->pointerDecrease();
     }

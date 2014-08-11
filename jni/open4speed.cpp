@@ -11,7 +11,6 @@
 #include <GLES2/gl2.h>
 #endif
 #include "input/airacer.h"
-#include "input/aitraffic.h"
 #include "input/keyboard.h"
 #include "utils/io.h"
 #include "utils/math.h"
@@ -284,21 +283,11 @@ void loadScene(std::vector<char*> *atributes) {
     for (int i = 0; i < opponentCount; i++) {
 
         /// racer ai
-        if (getConfig(getTag(i + 1, "opponent%d_type"), atributes) == 0) {
-            allCar[i + 1] = new car(new airacer(), &e, (*carList)[getConfig(getTag(i + 1, "opponent%d_car"), atributes)]);
-            allCar[i + 1]->finishEdge = allCar[0]->finishEdge;
-            allCar[i + 1]->lapsToGo = allCar[0]->lapsToGo;
-            allCar[i + 1]->setStart(allCar[i + 1]->edges[getConfig(getTag(i + 1, "opponent%d_start"), atributes)], 0);
-            allCar[i + 1]->currentEdgeIndex = getConfig(getTag(i + 1, "opponent%d_start"), atributes);
-
-        /// traffic ai
-        } else {
-            allCar[i + 1] = new car(new aitraffic(), &trackdata->edges[(int)getConfig(getTag(i + 1, "opponent%d_track"), atributes)],
-                                    (*carList)[getConfig(getTag(i + 1, "opponent%d_car"), atributes)]);
-            allCar[i + 1]->finishEdge = -1;
-            allCar[i + 1]->lapsToGo = 32768;
-            allCar[i + 1]->setStart(allCar[i + 1]->edges[getConfig(getTag(i + 1, "opponent%d_start"), atributes)], 3);
-        }
+        allCar[i + 1] = new car(new airacer(), &e, (*carList)[getConfig(getTag(i + 1, "opponent%d_car"), atributes)]);
+        allCar[i + 1]->finishEdge = allCar[0]->finishEdge;
+        allCar[i + 1]->lapsToGo = allCar[0]->lapsToGo;
+        allCar[i + 1]->setStart(allCar[i + 1]->edges[getConfig(getTag(i + 1, "opponent%d_start"), atributes)], 0);
+        allCar[i + 1]->currentEdgeIndex = getConfig(getTag(i + 1, "opponent%d_start"), atributes);
     }
 
     /// create instance of physical engine

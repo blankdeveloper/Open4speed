@@ -35,17 +35,11 @@ gles20::gles20() {
     camX = 0;
     camY = 0;
     camZ = 0;
-    overmode = 0;
-    overshader = 0;
     frame = 0;
-    lmFilter = -1;
     oddFrame = true;
 
     /// set open-gl
-    if (renderLightmap)
-        glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
-    else
-        glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
+    glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
     glDepthFunc(GL_LESS);
 
     //set shaders
@@ -60,7 +54,7 @@ gles20::gles20() {
 
     //create render texture
     for (int i = 0; i < 2; i++) {
-        rtt[i] = new glfbo(screen_width, screen_height, renderLightmap);
+        rtt[i] = new glfbo(screen_width, screen_height, false);
     }
 
     //set viewport
@@ -276,17 +270,42 @@ void gles20::renderDynamic(GLfloat *vertices, GLfloat *coords, shader* sh, textu
  * @param gamma is requested render gamma
  */
 void gles20::renderModel(model* m) {
-    glDisable(GL_BLEND);
+
+    /// set culling info positions
+    xm = (camX - m->aabb.min.x) / culling;
+    xp = xm;
+    ym = (camZ - m->aabb.min.z) / culling;
+    yp = ym;
+    for (float view = direction - M_PI * 0.75f; view <= direction + M_PI * 0.75f; view += M_PI * 0.25f)
+    {
+        if (xp < (camX - m->aabb.min.x) / culling + sin(view) * 2)
+            xp = (camX - m->aabb.min.x) / culling + sin(view) * 2;
+        if (xm > (camX - m->aabb.min.x) / culling + sin(view) * 2)
+            xm = (camX - m->aabb.min.x) / culling + sin(view) * 2;
+        if (yp < (camZ - m->aabb.min.z) / culling + cos(view) * 2)
+            yp = (camZ - m->aabb.min.z) / culling + cos(view) * 2;
+        if (ym > (camZ - m->aabb.min.z) / culling + cos(view) * 2)
+            ym = (camZ - m->aabb.min.z) / culling + cos(view) * 2;
+    }
+    if (xm < 0)
+        xm = 0;
+    if (ym < 0)
+        ym = 0;
+    if (xp >= m->cutX)
+        xp = m->cutX - 1;
+    if (yp >= m->cutY)
+        yp = m->cutY - 1;
+
     /// set opengl for rendering models
     for (unsigned int i = 0; i < m->models.size(); i++) {
         if (!m->models[i].texture2D->transparent)
-            if (enable[m->models[i].filter] && ((lmFilter < 0) || (m->models[i].lmIndex == lmFilter))) {
+            if (enable[m->models[i].filter]) {
                 renderSubModel(m, &m->models[i]);
             }
     }
     for (unsigned int i = 0; i < m->models.size(); i++) {
         if (m->models[i].texture2D->transparent)
-            if (enable[m->models[i].filter] && ((lmFilter < 0) || (m->models[i].lmIndex == lmFilter))) {
+            if (enable[m->models[i].filter]) {
                 renderSubModel(m, &m->models[i]);
             }
     }
@@ -333,20 +352,15 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         modelView = view_matrix * matrix_result * translation;
     }
 
-    /// set shader and VBO
+    /// set shader
     shader* current = m->material;
-    if (overshader != 0) {
-        current = overshader;
-    }
 
     /// set matrices
     current->bind();
     current->uniformMatrix("u_ModelViewMatrix",glm::value_ptr(modelView));
     current->uniformMatrix("u_ProjectionMatrix",glm::value_ptr(proj_matrix));
     matrix = proj_matrix * modelView;
-    matrixScl = matScale * matrix;
     current->uniformMatrix("u_Matrix",glm::value_ptr(matrix));
-    current->uniformMatrix("u_MatrixScl",glm::value_ptr(matrixScl));
 
     /// previous screen
     glActiveTexture( GL_TEXTURE1 );
@@ -416,22 +430,8 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         glBlendFunc(GL_ONE, GL_ONE);
     }
 
-    /// set culling info positions
-    int xm = (camX - mod->aabb.min.x) / culling - 1;
-    int xp = xm + 2;
-    int ym = (camZ - mod->aabb.min.z) / culling - 1;
-    int yp = ym + 2;
-    if (xm < 0)
-        xm = 0;
-    if (ym < 0)
-        ym = 0;
-    if (xp >= mod->cutX)
-        xp = mod->cutX - 1;
-    if (yp >= mod->cutY)
-        yp = mod->cutY - 1;
-
     /// standart vertices
-    if ((mod->cutX * mod->cutY == 1) || (lmFilter >= 0)) {
+    if (mod->cutX * mod->cutY == 1) {
         m->vboData->render(current, 0, m->triangleCount[mod->cutX * mod->cutY]);
     }
 

@@ -62,7 +62,6 @@ modelo4s::modelo4s(const char* filename) {
         float alpha = 1;
         char texturePath[255];
         char material[255];
-        m->lmIndex = -1;
         material[0] = '\0';
         gets(line, file);
         sscanf(line, "%f %f %f %f %f %f %s %f %f %f %f %f %f %f %f %f %f %s",
@@ -133,14 +132,6 @@ modelo4s::modelo4s(const char* filename) {
         m->vertices = new float[m->triangleCount[cutX * cutY] * 3 * 3];
         m->normals = new float[m->triangleCount[cutX * cutY] * 3 * 3];
         m->coords = new float[m->triangleCount[cutX * cutY] * 3 * 2];
-        m->tid = new float[m->triangleCount[cutX * cutY] * 3 * 2];
-        if (renderLightmap)
-            m->tuv = new float[m->triangleCount[cutX * cutY] * 3 * 2];
-        for (int j = 0; j < m->triangleCount[cutX * cutY]; j++) {
-            for (int k = 0; k < 6; k++) {
-                m->tid[j * 6 + 0 + k] = 4095 / 4096.0;
-            }
-        }
         m->colora = colora;
         m->colord = colord;
         m->colors = colors;
@@ -161,10 +152,7 @@ modelo4s::modelo4s(const char* filename) {
 
         /// store model in VBO
         int size = sizeof(float)*m->triangleCount[cutX * cutY] * 3;
-        if (renderLightmap)
-            m->vboData = getVBO(size, m->vertices, m->normals, m->tuv, m->tid);
-        else
-            m->vboData = getVBO(size, m->vertices, m->normals, m->coords, m->tid);
+            m->vboData = getVBO(size, m->vertices, m->normals, m->coords);
         models.push_back(*m);
     }
 

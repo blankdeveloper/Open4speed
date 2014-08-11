@@ -43,8 +43,6 @@ public:
     bool oddFrame;              ///< Odd frame info
     fbo* rtt[2];                ///< Screen-space framebuffer
     Light light;                ///< One light information(for lightmap rendering)
-    int overmode;               ///< Special mode
-    shader* overshader;         ///< Shader to be applied over current shader
     shader* scene_shader;       ///< Scene shader
     glm::vec4 model_position;   ///< Uniform of dynamic model 3D position
     glm::mat4x4 proj_matrix;    ///< Scene projection matrix

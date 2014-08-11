@@ -39,13 +39,6 @@ void special(int key, int x, int y) {
         keys[5] = true;
     else if (key == 160)
         keys[6] = true;
-
-    //printf("%d\n", key);
-
-    if (cameraDistance < playerCameraMinimalDistance)
-        cameraDistance = playerCameraMinimalDistance;
-    if (cameraDistance > playerCameraMaximalDistance)
-        cameraDistance = playerCameraMaximalDistance;
 }
 
 /// Key released

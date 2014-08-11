@@ -107,6 +107,7 @@ modelo4s::modelo4s(const char* filename) {
                 cursor++;
             } else if (material[cursor] == '%') {
                 cursor++;
+                m->texture2D->transparent = false;
                 char* shadername = new char[strlen(material) - cursor + 1];
                 for (unsigned int j = cursor; j < strlen(material); j++) {
                     shadername[j - cursor] = material[j];

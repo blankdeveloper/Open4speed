@@ -47,7 +47,6 @@ gles20::gles20() {
     else
         glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
     glDepthFunc(GL_LESS);
-    glDisable(GL_CULL_FACE);
 
     //set shaders
     scene_shader = getShader("scene");
@@ -280,9 +279,16 @@ void gles20::renderModel(model* m) {
     glDisable(GL_BLEND);
     /// set opengl for rendering models
     for (unsigned int i = 0; i < m->models.size(); i++) {
-        if (enable[m->models[i].filter] && ((lmFilter < 0) || (m->models[i].lmIndex == lmFilter))) {
-            renderSubModel(m, &m->models[i]);
-        }
+        if (!m->models[i].texture2D->transparent)
+            if (enable[m->models[i].filter] && ((lmFilter < 0) || (m->models[i].lmIndex == lmFilter))) {
+                renderSubModel(m, &m->models[i]);
+            }
+    }
+    for (unsigned int i = 0; i < m->models.size(); i++) {
+        if (m->models[i].texture2D->transparent)
+            if (enable[m->models[i].filter] && ((lmFilter < 0) || (m->models[i].lmIndex == lmFilter))) {
+                renderSubModel(m, &m->models[i]);
+            }
     }
 }
 
@@ -343,14 +349,9 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     current->uniformMatrix("u_MatrixScl",glm::value_ptr(matrixScl));
 
     /// previous screen
-    if (!renderLightmap) {
-        glActiveTexture( GL_TEXTURE1 );
-        rtt[oddFrame]->bindTexture();
-        current->uniformInt("EnvMap1", 1);
-    } else {
-        glActiveTexture( GL_TEXTURE2 );
-        current->uniformInt("Shadowmap", 2);
-    }
+    glActiveTexture( GL_TEXTURE1 );
+    rtt[oddFrame]->bindTexture();
+    current->uniformInt("EnvMap1", 1);
 
     /// set texture
     glActiveTexture( GL_TEXTURE0 );
@@ -388,24 +389,28 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     current->uniformFloat4("u_nearest1", light.u_nearest1.x, light.u_nearest1.y, light.u_nearest1.z, 1.0);
 
     /// set alpha channel
-    /*if ((m->texture2D->alpha < 0.9) || (m->texture2D->transparent)) {
+    if ((m->texture2D->alpha < 0.9) || (m->texture2D->transparent)) {
         glEnable(GL_BLEND);
         glDepthMask(false);
-        glBlendFunc(GL_SRC_ALPHA,GL_ONE);
+        glDisable(GL_CULL_FACE);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         current->uniformFloat("u_Alpha", m->texture2D->alpha);
     } else {
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
         glDisable(GL_BLEND);
+        glDepthMask(true);
         current->uniformFloat("u_Alpha", 1);
-    }*/
+    }
 
-    if (overmode == 0) {
+    /*if (overmode == 0) {
         glDepthMask(true);
         glDisable(GL_BLEND);
     } else if (overmode == 1) {
         glDepthMask(false);
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE);
-    }
+    }*/
     if (current->shadername[0] == '0') {
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE);
@@ -444,6 +449,4 @@ void gles20::renderSubModel(model* mod, model3d *m) {
 
     //unbind shader
     current->unbind();
-    glDepthMask(true);
-    glDisable(GL_BLEND);
 }

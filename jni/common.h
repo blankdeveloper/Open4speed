@@ -85,8 +85,6 @@ extern float minimalPerspective;                               ///< Minimal pers
 extern float maximalPerspective;                               ///< Maximal perspective
 extern float perspectiveSpeedDependency;                       ///< Perspective change speed dependency
 extern float perspectiveSpeedFollow;                           ///< Perspective change speed
-extern float playerCameraMaximalDistance;                      ///< Canera maximal distance
-extern float playerCameraMinimalDistance;                      ///< Camera minimal distance
 extern float playerCameraStep;                                 ///< Camera move step
 extern float playerDefaultCameraDistance;                      ///< Camera distance
 extern float playerTrackUpdate;                                ///< GPS navigation

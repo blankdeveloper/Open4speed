@@ -26,7 +26,7 @@
 #include "interfaces/renderer.h"
 
 
-const int culling = 300;              ///< View culling distance in meters
+const int culling = 200;              ///< View culling distance in meters
 const glm::mat4x4 eye = glm::mat4x4(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1);
 const glm::mat4 matScale = glm::mat4(0.5f, 0.0f, 0.0f, 0.0f,  0.0f, 0.5f, 0.0f, 0.0f,  0.0f, 0.0f, 0.5f, 0.0f,  0.5f, 0.5f, 0.5f, 1.0f);
 

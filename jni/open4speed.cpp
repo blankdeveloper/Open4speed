@@ -86,15 +86,13 @@ void displayScene() {
 
     /// set camera
     float view = allCar[cameraCar]->getView();
-    if (allCar[cameraCar]->control->getDistance() < 0) {
-        view = maximalPerspective;
-    }
+
     xrenderer->perspective(view, aspect, 0.1, viewDistance);
     xrenderer->pushMatrix();
     float cameraX = allCar[cameraCar]->transform->value[12] - sin(direction) * allCar[cameraCar]->control->getDistance() * 2 / (view / 90);
-    float cameraY = allCar[cameraCar]->transform->value[13] + allCar[cameraCar]->control->getDistance() / 1.25f / (view / 90);
+    float cameraY = allCar[cameraCar]->transform->value[13] + fabs(allCar[cameraCar]->control->getDistance() * 1.25f / (view / 90));
     float cameraZ = allCar[cameraCar]->transform->value[14] - cos(direction) * allCar[cameraCar]->control->getDistance() * 2 / (view / 90);
-    xrenderer->lookAt(cameraX,cameraY,cameraZ,cameraX + sin(direction),cameraY + sin(-10 * 3.14 / 180),cameraZ + cos(direction),0,1,0);
+    xrenderer->lookAt(cameraX,cameraY,cameraZ,cameraX + sin(direction),cameraY + sin(-20 * 3.14 / 180), cameraZ + cos(direction),0,1,0);
 
     /// set light
     xrenderer->light.u_light_diffuse = glm::vec4(1000.0, 1000.0, 900.0, 0);
@@ -114,19 +112,19 @@ void displayScene() {
                                                                                   -allCar[cameraCar]->skin->height, 0);
     xrenderer->popMatrix();
 
+    /// render skydome
+    xrenderer->pushMatrix();
+    xrenderer->translate(cameraX, -50, cameraZ);
+    xrenderer->scale(viewDistance * 0.5);
+    xrenderer->renderModel(skydome);
+    xrenderer->popMatrix();
+
     /// render track
     xrenderer->enable[1] = false;
     xrenderer->renderModel(trackdata);
     if (trackdata2 != 0) {
         xrenderer->renderModel(trackdata2);
     }
-
-    /// render skydome
-    xrenderer->pushMatrix();
-    xrenderer->translate(cameraX, 0, cameraZ);
-    xrenderer->scale(viewDistance * 0.9);
-    xrenderer->renderModel(skydome);
-    xrenderer->popMatrix();
 
     /// render cars
     xrenderer->enable[2] = false;
@@ -212,7 +210,7 @@ void displayScene() {
     xrenderer->pushMatrix();
     float a = angle(allCar[cameraCar]->currentEdge, allCar[cameraCar]);
     float s = fabs(gap(allCar[cameraCar]->currentEdge, allCar[cameraCar]));
-    s = fmin(s / 45.0f, 0.75f);
+    s = fmin(s / 45.0f, 0.01f);
     xrenderer->translate(allCar[cameraCar]->x, allCar[cameraCar]->y + allCar[cameraCar]->control->getDistance() * 1.5, allCar[cameraCar]->z);
     xrenderer->scale(allCar[cameraCar]->control->getDistance() * s);
     xrenderer->rotateY(a * 180 / 3.14);
@@ -304,9 +302,10 @@ void loadScene(std::vector<char*> *atributes) {
     }
 
     /// create instance of physical engine
-    physic = getPhysics(trackdata);
     if (trackdata2 != 0) {
-        physic->addModel(trackdata2);
+        physic = getPhysics(trackdata2);
+    } else {
+        physic = getPhysics(trackdata);
     }
     for (int i = 0; i <= opponentCount; i++)
         physic->addCar(allCar[i]);

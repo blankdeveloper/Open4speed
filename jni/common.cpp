@@ -67,8 +67,6 @@ float minimalPerspective;                               ///< Minimal perspective
 float maximalPerspective;                               ///< Maximal perspective
 float perspectiveSpeedDependency;                       ///< Perspective change speed dependency
 float perspectiveSpeedFollow;                           ///< Perspective change speed
-float playerCameraMaximalDistance;                      ///< Canera maximal distance
-float playerCameraMinimalDistance;                      ///< Camera minimal distance
 float playerCameraStep;                                 ///< Camera move step
 float playerDefaultCameraDistance;                      ///< Camera distance
 float playerTrackUpdate;                                ///< GPS navigation
@@ -163,8 +161,6 @@ void loadAll() {
     minimalPerspective = getConfig("minimalPerspective", atributes);
     perspectiveSpeedDependency = getConfig("perspectiveSpeedDependency", atributes);
     perspectiveSpeedFollow = getConfig("perspectiveSpeedFollow", atributes);
-    playerCameraMaximalDistance = getConfig("playerCameraMaximalDistance", atributes);
-    playerCameraMinimalDistance = getConfig("playerCameraMinimalDistance", atributes);
     playerCameraStep = getConfig("playerCameraStep", atributes);
     playerDefaultCameraDistance = getConfig("playerDefaultCameraDistance", atributes);
     playerTrackUpdate = getConfig("playerTrackUpdate", atributes);

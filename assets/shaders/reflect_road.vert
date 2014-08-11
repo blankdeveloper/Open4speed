@@ -10,7 +10,6 @@ varying vec2 v_Coords;
 void main()
 {
     vec4 view_pos = u_ModelViewMatrix * vec4(v_vertex, 1.0);
-    view_pos.y -= 0.01;
     v_Normal = vec3(u_ModelViewMatrix * vec4(v_normal, 0.0));
     v_Vertex = view_pos.xyz;
     v_Coords = v_coord;

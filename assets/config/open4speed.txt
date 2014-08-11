@@ -50,10 +50,8 @@ minimalPerspective 90
 maximalPerspective 150
 perspectiveSpeedDependency 0.2
 perspectiveSpeedFollow 2
-playerCameraMaximalDistance 50
-playerCameraMinimalDistance 1
 playerCameraStep 0.3
-playerDefaultCameraDistance 2.0
+playerDefaultCameraDistance 2.3
 playerTrackUpdate 80
 physicalEngine bullet
 renderer glsl
@@ -67,16 +65,11 @@ soundEngine sfx/engine.ogg
 soundEngineFreqAspect 15
 soundMaximalDistance 25
 speedAspect 50
-viewDistance 400
+viewDistance 800
 END
 
 CARS
-cars/car1.ini
-cars/car2.ini
-cars/car3.ini
-cars/car4.ini
-cars/car5.ini
-cars/car6.ini
+cars/orange/params.ini
 END
 
 TRACKS

@@ -20,7 +20,7 @@ char* line = new char[1024];
  * @brief Constructor for loading model from file
  * @param filename is path and name of file to load
  */
-modelo4s::modelo4s(const char* filename) {
+modelo4s::modelo4s(const char* filename, bool gpu) {
 
     /// open file
 #ifdef ZIP_ARCHIVE
@@ -129,9 +129,10 @@ modelo4s::modelo4s(const char* filename) {
             gets(line, file);
             m->triangleCount[j] = scandec(line);
         }
-        m->vertices = new float[m->triangleCount[cutX * cutY] * 3 * 3];
-        m->normals = new float[m->triangleCount[cutX * cutY] * 3 * 3];
-        m->coords = new float[m->triangleCount[cutX * cutY] * 3 * 2];
+        m->vertices = new float[m->triangleCount[cutX * cutY] * 9];
+        m->normals = new float[m->triangleCount[cutX * cutY] * 9];
+        m->coords = new float[m->triangleCount[cutX * cutY] * 6];
+        m->tnormals = new float[m->triangleCount[cutX * cutY] * 9];
         m->colora = colora;
         m->colord = colord;
         m->colors = colors;
@@ -139,20 +140,46 @@ modelo4s::modelo4s(const char* filename) {
             /// read triangle parameters
             gets(line, file);
             sscanf(line, "%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f",
-                   &m->coords[j * 3 * 2 + 0], &m->coords[j * 3 * 2 + 1],
-                   &m->normals[j * 3 * 3 + 0], &m->normals[j * 3 * 3 + 1], &m->normals[j * 3 * 3 + 2],
-                   &m->vertices[j * 3 * 3 + 0], &m->vertices[j * 3 * 3 + 1], &m->vertices[j * 3 * 3 + 2],
-                   &m->coords[j * 3 * 2 + 2], &m->coords[j * 3 * 2 + 3],
-                   &m->normals[j * 3 * 3 + 3], &m->normals[j * 3 * 3 + 4], &m->normals[j * 3 * 3 + 5],
-                   &m->vertices[j * 3 * 3 + 3], &m->vertices[j * 3 * 3 + 4], &m->vertices[j * 3 * 3 + 5],
-                   &m->coords[j * 3 * 2 + 4], &m->coords[j * 3 * 2 + 5],
-                   &m->normals[j * 3 * 3 + 6], &m->normals[j * 3 * 3 + 7], &m->normals[j * 3 * 3 + 8],
-                   &m->vertices[j * 3 * 3 + 6], &m->vertices[j * 3 * 3 + 7], &m->vertices[j * 3 * 3 + 8]);
+                   &m->coords[j * 6 + 0], &m->coords[j * 6 + 1],
+                   &m->normals[j * 9 + 0], &m->normals[j * 9 + 1], &m->normals[j * 9 + 2],
+                   &m->vertices[j * 9 + 0], &m->vertices[j * 9 + 1], &m->vertices[j * 9 + 2],
+
+                   &m->coords[j * 6 + 2], &m->coords[j * 6 + 3],
+                   &m->normals[j * 9 + 3], &m->normals[j * 9 + 4], &m->normals[j * 9 + 5],
+                   &m->vertices[j * 9 + 3], &m->vertices[j * 9 + 4], &m->vertices[j * 9 + 5],
+
+                   &m->coords[j * 6 + 4], &m->coords[j * 6 + 5],
+                   &m->normals[j * 9 + 6], &m->normals[j * 9 + 7], &m->normals[j * 9 + 8],
+                   &m->vertices[j * 9 + 6], &m->vertices[j * 9 + 7], &m->vertices[j * 9 + 8]);
+
+            m->tnormals[j * 9 + 0] = glm::normalize(m->normals[j * 9 + 0] + m->normals[j * 9 + 3] + m->normals[j * 9 + 6]);
+            m->tnormals[j * 9 + 1] = glm::normalize(m->normals[j * 9 + 1] + m->normals[j * 9 + 4] + m->normals[j * 9 + 7]);
+            m->tnormals[j * 9 + 2] = glm::normalize(m->normals[j * 9 + 2] + m->normals[j * 9 + 5] + m->normals[j * 9 + 8]);
+            m->tnormals[j * 9 + 3] = m->tnormals[j * 9 + 0];
+            m->tnormals[j * 9 + 4] = m->tnormals[j * 9 + 1];
+            m->tnormals[j * 9 + 5] = m->tnormals[j * 9 + 2];
+            m->tnormals[j * 9 + 6] = m->tnormals[j * 9 + 0];
+            m->tnormals[j * 9 + 7] = m->tnormals[j * 9 + 1];
+            m->tnormals[j * 9 + 8] = m->tnormals[j * 9 + 2];
         }
 
         /// store model in VBO
-        int size = sizeof(float)*m->triangleCount[cutX * cutY] * 3;
-            m->vboData = getVBO(size, m->vertices, m->normals, m->coords);
+        if (gpu) {
+            int size = sizeof(float)*m->triangleCount[cutX * cutY] * 3;
+            if (!m->material->hasAttrib(1)) {
+                delete[] m->normals;
+                m->normals = 0;
+            }
+            if (!m->material->hasAttrib(2)) {
+                delete[] m->coords;
+                m->coords = 0;
+            }
+            if (!m->material->hasAttrib(3)) {
+                delete[] m->tnormals;
+                m->tnormals = 0;
+            }
+            m->vboData = getVBO(size, m->vertices, m->normals, m->coords, m->tnormals);
+        }
         models.push_back(*m);
     }
 

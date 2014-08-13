@@ -20,7 +20,7 @@ public:
     GLint attribute_v_vertex;   ///< VBO vertices
     GLint attribute_v_coord;    ///< VBO coords
     GLint attribute_v_normal;   ///< VBO normals
-    GLint attribute_v_tid;      ///< VBO lightmap position
+    GLint attribute_v_tnormal;  ///< VBO triangle normals
 
     /**
      * @brief Constructor
@@ -46,6 +46,8 @@ public:
      * @brief it binds shader
      */
     void bind();
+
+    bool hasAttrib(int i);
 
     /**
      * @brief it unbinds shader

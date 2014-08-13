@@ -140,16 +140,18 @@ public:
     /**
      * @brief renderModel renders model into scene
      * @param m is instance of model to render
-     * @param physic is physical model instance
-     * @param gamma is requested render gamma
      */
     virtual void renderModel(model* m) = 0;
 
     /**
+     * @brief renderShadow renders shadow of model into scene
+     * @param m is instance of model to render
+     */
+    virtual void renderShadow(model* m) = 0;
+
+    /**
      * @brief renderSubModel renders model into scene
      * @param m is instance of model to render
-     * @param physic is physical model instance
-     * @param gamma is requested render gamma
      */
     virtual void renderSubModel(model* mod, model3d* m) = 0;
 };

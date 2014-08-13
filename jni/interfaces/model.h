@@ -53,6 +53,7 @@ struct model3d {
     texture* texture2D; ///< Object texture
     float* vertices;    ///< Object vertices
     float* normals;     ///< Object normals
+    float* tnormals;    ///< Object triangle normals
     float* coords;      ///< Object texture coordinates
     float x,y,z;        ///< Object translation
     vbo* vboData;       ///< VBO of model

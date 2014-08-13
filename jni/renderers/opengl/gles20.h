@@ -22,8 +22,8 @@
 #endif
 #include <stack>
 #include <vector>
-#include "interfaces/fbo.h"
 #include "interfaces/renderer.h"
+#include "interfaces/shader.h"
 
 
 const int culling = 150;              ///< View culling distance in meters
@@ -39,10 +39,12 @@ public:
     float camY;                           ///< Camera position y
     float camZ;                           ///< Camera position z
     glm::mat4x4 matrix;                   ///< Matrix for dynamic rendering
-    glm::mat4x4 matrixScl;                ///< Matrix for shadow mapping
+    glm::mat4x4 modelMat;                 ///< Model matrix
     glm::mat4x4 matrix_result;            ///< Temp matrix for calculations
     std::stack<glm::mat4x4> matrixBuffer; ///< Matrix stack
     GLushort dynindices[4095];            ///< Indicies for dynamic rendering
+    shader* current;                      ///< Current binded shader
+    shader* shadow;                       ///< Special shader for shadow
 
     /**
      * @brief gles20 constructor
@@ -141,16 +143,18 @@ public:
     /**
      * @brief renderModel renders model into scene
      * @param m is instance of model to render
-     * @param physic is physical model instance
-     * @param gamma is requested render gamma
      */
     void renderModel(model* m);
 
     /**
+     * @brief renderShadow renders shadow of model into scene
+     * @param m is instance of model to render
+     */
+    void renderShadow(model* m);
+
+    /**
      * @brief renderSubModel renders model into scene
      * @param m is instance of model to render
-     * @param physic is physical model instance
-     * @param gamma is requested render gamma
      */
     void renderSubModel(model* mod, model3d *m);
 };

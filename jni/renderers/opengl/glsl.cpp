@@ -105,7 +105,7 @@ glsl::glsl(std::vector<char*> *vert, std::vector<char*> *frag) {
     attribute_v_vertex = glGetAttribLocation(id, "v_vertex");
     attribute_v_coord = glGetAttribLocation(id, "v_coord");
     attribute_v_normal = glGetAttribLocation(id, "v_normal");
-    attribute_v_tid = glGetAttribLocation(id, "v_tid");
+    attribute_v_tnormal = glGetAttribLocation(id, "v_tnormal");
 }
 
 /**
@@ -116,12 +116,19 @@ void glsl::attrib(int size) {
 
     /// apply attributes
     glVertexAttribPointer(attribute_v_vertex, 3, GL_FLOAT, GL_FALSE, 0, ( const GLvoid *) 0);
-    if (attribute_v_normal != -1)
-        glVertexAttribPointer(attribute_v_normal, 3, GL_FLOAT, GL_FALSE, 0, ( const GLvoid *) (size * 3));
-    if (attribute_v_coord != -1)
-        glVertexAttribPointer(attribute_v_coord, 2, GL_FLOAT, GL_FALSE, 0, ( const GLvoid *) (size * 6));
-    if (attribute_v_tid != -1)
-        glVertexAttribPointer(attribute_v_tid, 2, GL_FLOAT, GL_FALSE, 0, ( const GLvoid *) (size * 8));
+    int len = 3;
+    if (attribute_v_normal != -1) {
+        glVertexAttribPointer(attribute_v_normal, 3, GL_FLOAT, GL_FALSE, 0, ( const GLvoid *) (size * len));
+        len += 3;
+    }
+    if (attribute_v_coord != -1) {
+        glVertexAttribPointer(attribute_v_coord, 2, GL_FLOAT, GL_FALSE, 0, ( const GLvoid *) (size * len));
+        len += 2;
+    }
+    if (attribute_v_tnormal != -1) {
+        glVertexAttribPointer(attribute_v_tnormal, 3, GL_FLOAT, GL_TRUE, 0, ( const GLvoid *) (size * len));
+        len += 3;
+    }
 }
 
 /**
@@ -146,12 +153,24 @@ void glsl::bind() {
 
     /// set attributes
     glEnableVertexAttribArray(attribute_v_vertex);
-    if (attribute_v_coord != -1)
-        glEnableVertexAttribArray(attribute_v_coord);
     if (attribute_v_normal != -1)
         glEnableVertexAttribArray(attribute_v_normal);
-    if (attribute_v_tid != -1)
-        glEnableVertexAttribArray(attribute_v_tid);
+    if (attribute_v_coord != -1)
+        glEnableVertexAttribArray(attribute_v_coord);
+    if (attribute_v_tnormal != -1)
+        glEnableVertexAttribArray(attribute_v_tnormal);
+}
+
+bool glsl::hasAttrib(int i) {
+    if ((i == 0) && (attribute_v_vertex == -1))
+        return false;
+    if ((i == 1) && (attribute_v_normal == -1))
+        return false;
+    if ((i == 2) && (attribute_v_coord == -1))
+        return false;
+    if ((i == 3) && (attribute_v_tnormal == -1))
+        return false;
+    return true;
 }
 
 /**

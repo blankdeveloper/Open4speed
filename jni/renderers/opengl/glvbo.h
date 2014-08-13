@@ -25,8 +25,9 @@ public:
      * @param vertices is vertices array
      * @param normals is normals array
      * @param coords is texture coords array
+     * @param tnormals is triangle normals array
      */
-    glvbo(int size, float* vertices, float* normals, float* coords);
+    glvbo(int size, float* vertices, float* normals, float* coords, float* tnormals);
 
     /**
      * @brief destroy removes all data from memory

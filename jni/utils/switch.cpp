@@ -56,10 +56,10 @@ input* getInput() {
  * @param filename is path and name of file to load
  * @return instance of model
  */
-model* getModel(const char* filename) {
+model* getModel(const char* filename, bool gpu) {
     logi("Load model:", filename);
     if (strcmp(getExtension(filename), "o4s") == 0) {
-        return new modelo4s(filename);
+        return new modelo4s(filename, gpu);
     }
     loge("File is not supported:", filename);
     return 0;
@@ -198,7 +198,7 @@ texture* getTexture(const char* filename, float alpha) {
     }
 
     logi("Renderer incompatible texture:",filename);
-    return gray;
+    return getTexture(0.5, 0.5, 0.5, 1);
 }
 
 /**
@@ -217,8 +217,8 @@ texture* getTexture(float r, float g, float b, float alpha) {
        return instance;
     }
 
-    logi("Renderer incompatible RGB texture", "");
-    return gray;
+    loge("Renderer incompatible RGB texture", "");
+    return 0;
 }
 
 /**
@@ -227,12 +227,13 @@ texture* getTexture(float r, float g, float b, float alpha) {
  * @param vertices is vertices array
  * @param normals is normals array
  * @param coords is texture coords array
+ * @param tnormals is triangle normals array
  */
-vbo* getVBO(int size, float* vertices, float* normals, float* coords) {
+vbo* getVBO(int size, float* vertices, float* normals, float* coords, float* tnormals) {
 
     /// create VBO
     if (strcmp(screenRenderer, "glsl") == 0) {
-        vbo* instance = new glvbo(size, vertices, normals, coords);
+        vbo* instance = new glvbo(size, vertices, normals, coords, tnormals);
         return instance;
     }
     loge("Renderer incompatible VBO", "");

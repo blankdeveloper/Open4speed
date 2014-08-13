@@ -34,7 +34,6 @@ extern std::vector<char*> *carList;                                    ///< List
 extern std::vector<char*> *trackList;                                  ///< List of all tracks
 extern std::vector<shader*> *shaders;                                  ///< Shaders storage
 extern std::vector<texture*> *textures;                                ///< Textures storage
-extern texture *gray;                                                  ///< Gray color for meshes without material
 
 /**
  * @brief The engine configs

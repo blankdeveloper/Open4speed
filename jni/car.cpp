@@ -75,8 +75,8 @@ car::car(input *i, std::vector<edge> *e, const char* filename) {
         control->index = index - 1;
 
     /// load models
-    skin = getModel(getConfigStr("skin_model", atributes));
-    wheel = getModel(getConfigStr("wheel_model", atributes));
+    skin = getModel(getConfigStr("skin_model", atributes), true);
+    wheel = getModel(getConfigStr("wheel_model", atributes), true);
 
     /// set car wheels position
     wheelX = getConfig("wheel_x", atributes);

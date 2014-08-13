@@ -55,6 +55,8 @@ void soundpool::close() {
  * @param index is index of instance to play
  */
 void soundpool::play(int index) {
+    if (index != 0)
+        return;
 #ifdef ANDROID
     jclass clazz = instance->FindClass("com/lvonasek/o4s/Sounds");
     jmethodID method = instance->GetStaticMethodID(clazz, "soundPlay", "(II)V");
@@ -68,6 +70,8 @@ void soundpool::play(int index) {
  * @param hz is frequency of sound
  */
 void soundpool::setFrequency(int index, float hz) {
+    if (index != 0)
+        return;
 #ifdef ANDROID
     jclass clazz = instance->FindClass("com/lvonasek/o4s/Sounds");
     jmethodID method = instance->GetStaticMethodID(clazz, "soundFreq", "(IF)V");
@@ -81,6 +85,8 @@ void soundpool::setFrequency(int index, float hz) {
  * @param volume is amount of volume
  */
 void soundpool::setVolume(int index, float volume) {
+    if (index != 0)
+        return;
 #ifdef ANDROID
     jclass clazz = instance->FindClass("com/lvonasek/o4s/Sounds");
     jmethodID method = instance->GetStaticMethodID(clazz, "soundVolume", "(IF)V");
@@ -93,6 +99,8 @@ void soundpool::setVolume(int index, float volume) {
  * @param index is index of instance to stop
  */
 void soundpool::stop(int index) {
+    if (index != 0)
+        return;
 #ifdef ANDROID
     jclass clazz = instance->FindClass("com/lvonasek/o4s/Sounds");
     jmethodID method = instance->GetStaticMethodID(clazz, "soundStop", "(I)V");

@@ -40,11 +40,11 @@ gles20::gles20() {
 
     /// set open-gl
     glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
-    glDepthFunc(GL_LESS);
+    glDepthFunc(GL_LEQUAL);
 
     //set shaders
     scene_shader = getShader("scene");
-    gray = new gltexture(*createRGB(1, 1, 0.5, 0.5, 0.5), 1.0);
+    shadow = getShader("shadow");
 
     //find ideal texture resolution
     int resolution = 2;
@@ -298,13 +298,114 @@ void gles20::renderModel(model* m) {
 
     /// set opengl for rendering models
     for (unsigned int i = 0; i < m->models.size(); i++) {
+        current = m->models[i].material;
+        current->bind();
+        if (!m->models[i].texture2D->transparent)
+            if (enable[m->models[i].filter]) {
+
+                /// set alpha channel
+                if ((m->models[i].texture2D->alpha < 0.9) || (m->models[i].texture2D->transparent)) {
+                    glEnable(GL_BLEND);
+                    glDepthMask(false);
+                    glDisable(GL_CULL_FACE);
+                    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                    current->uniformFloat("u_Alpha", m->models[i].texture2D->alpha);
+                } else {
+                    glEnable(GL_CULL_FACE);
+                    glCullFace(GL_BACK);
+                    glDisable(GL_BLEND);
+                    glDepthMask(true);
+                    current->uniformFloat("u_Alpha", 1);
+                }
+
+                renderSubModel(m, &m->models[i]);
+            }
+    }
+    for (unsigned int i = 0; i < m->models.size(); i++) {
+        current = m->models[i].material;
+        current->bind();
+        if (m->models[i].texture2D->transparent)
+            if (enable[m->models[i].filter]) {
+
+                /// set alpha channel
+                if ((m->models[i].texture2D->alpha < 0.9) || (m->models[i].texture2D->transparent)) {
+                    glEnable(GL_BLEND);
+                    glDepthMask(false);
+                    glDisable(GL_CULL_FACE);
+                    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                    current->uniformFloat("u_Alpha", m->models[i].texture2D->alpha);
+                } else {
+                    glEnable(GL_CULL_FACE);
+                    glCullFace(GL_BACK);
+                    glDisable(GL_BLEND);
+                    glDepthMask(true);
+                    current->uniformFloat("u_Alpha", 1);
+                }
+
+                renderSubModel(m, &m->models[i]);
+            }
+    }
+}
+
+
+/**
+ * @brief renderShadow renders shadow of model into scene
+ * @param m is instance of model to render
+ */
+void gles20::renderShadow(model* m) {
+
+    /// set culling info positions
+    xm = (camX - m->aabb.min.x) / culling;
+    xp = xm;
+    ym = (camZ - m->aabb.min.z) / culling;
+    yp = ym;
+    for (float view = direction - M_PI * 0.75f; view <= direction + M_PI * 0.75f; view += M_PI * 0.25f)
+    {
+        if (xp < (camX - m->aabb.min.x) / culling + sin(view) * 2)
+            xp = (camX - m->aabb.min.x) / culling + sin(view) * 2;
+        if (xm > (camX - m->aabb.min.x) / culling + sin(view) * 2)
+            xm = (camX - m->aabb.min.x) / culling + sin(view) * 2;
+        if (yp < (camZ - m->aabb.min.z) / culling + cos(view) * 2)
+            yp = (camZ - m->aabb.min.z) / culling + cos(view) * 2;
+        if (ym > (camZ - m->aabb.min.z) / culling + cos(view) * 2)
+            ym = (camZ - m->aabb.min.z) / culling + cos(view) * 2;
+    }
+    if (xm < 0)
+        xm = 0;
+    if (ym < 0)
+        ym = 0;
+    if (xp >= m->cutX)
+        xp = m->cutX - 1;
+    if (yp >= m->cutY)
+        yp = m->cutY - 1;
+
+    glDepthMask(false);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_ONE);
+    glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+
+    //TODO rewrite using stencil buffer
+
+    /// set opengl for rendering models
+    for (unsigned int i = 0; i < m->models.size(); i++) {
+        current = shadow;
+        current->bind();
         if (!m->models[i].texture2D->transparent)
             if (enable[m->models[i].filter]) {
                 renderSubModel(m, &m->models[i]);
             }
     }
+
+    glBlendEquation(GL_FUNC_ADD);
+    glCullFace(GL_FRONT);
+
+    /// set opengl for rendering models
     for (unsigned int i = 0; i < m->models.size(); i++) {
-        if (m->models[i].texture2D->transparent)
+        current = shadow;
+        current->bind();
+        if (!m->models[i].texture2D->transparent)
             if (enable[m->models[i].filter]) {
                 renderSubModel(m, &m->models[i]);
             }
@@ -314,8 +415,6 @@ void gles20::renderModel(model* m) {
 /**
  * @brief renderSubModel renders model into scene
  * @param m is instance of model to render
- * @param physic is physical model instance
- * @param gamma is requested render gamma
  */
 void gles20::renderSubModel(model* mod, model3d *m) {
 
@@ -341,7 +440,8 @@ void gles20::renderSubModel(model* mod, model3d *m) {
             mat[8],mat[9],mat[10],mat[11],
             mat[12],mat[13],mat[14],mat[15]
         );
-        modelView = view_matrix * dynamic * translation;
+        modelMat = dynamic * translation;
+        modelView = view_matrix * modelMat;
     } else {
         glm::mat4x4 translation(
             1,0,0,0,
@@ -349,15 +449,16 @@ void gles20::renderSubModel(model* mod, model3d *m) {
             0,0,1,0,
             m->reg->min.x, m->reg->min.y, m->reg->min.z,1
         );
-        modelView = view_matrix * matrix_result * translation;
+        modelMat = matrix_result * translation;
+        modelView = view_matrix * modelMat;
     }
-
-    /// set shader
-    shader* current = m->material;
+    glm::mat4x4 projView = proj_matrix * view_matrix;
 
     /// set matrices
-    current->bind();
+    current->uniformMatrix("u_ModelMatrix",glm::value_ptr(modelMat));
+    current->uniformMatrix("u_ViewMatrix",glm::value_ptr(view_matrix));
     current->uniformMatrix("u_ModelViewMatrix",glm::value_ptr(modelView));
+    current->uniformMatrix("u_ProjViewMatrix",glm::value_ptr(projView));
     current->uniformMatrix("u_ProjectionMatrix",glm::value_ptr(proj_matrix));
     matrix = proj_matrix * modelView;
     current->uniformMatrix("u_Matrix",glm::value_ptr(matrix));
@@ -402,29 +503,6 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     current->uniformFloat4("u_light_dir", light.u_light_dir.x, light.u_light_dir.y, light.u_light_dir.z, 1.0);
     current->uniformFloat4("u_nearest1", light.u_nearest1.x, light.u_nearest1.y, light.u_nearest1.z, 1.0);
 
-    /// set alpha channel
-    if ((m->texture2D->alpha < 0.9) || (m->texture2D->transparent)) {
-        glEnable(GL_BLEND);
-        glDepthMask(false);
-        glDisable(GL_CULL_FACE);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        current->uniformFloat("u_Alpha", m->texture2D->alpha);
-    } else {
-        glEnable(GL_CULL_FACE);
-        glCullFace(GL_BACK);
-        glDisable(GL_BLEND);
-        glDepthMask(true);
-        current->uniformFloat("u_Alpha", 1);
-    }
-
-    /*if (overmode == 0) {
-        glDepthMask(true);
-        glDisable(GL_BLEND);
-    } else if (overmode == 1) {
-        glDepthMask(false);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_ONE, GL_ONE);
-    }*/
     if (current->shadername[0] == '0') {
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE);

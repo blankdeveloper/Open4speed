@@ -16,8 +16,9 @@
  * @param vertices is vertices array
  * @param normals is normals array
  * @param coords is texture coords array
+ * @param tnormals is triangle normals array
  */
-glvbo::glvbo(int size, float* vertices, float* normals, float* coords) {
+glvbo::glvbo(int size, float* vertices, float* normals, float* coords, float* tnormals) {
     /// count buffer size
     this->size = size;
     int len = 0;
@@ -27,6 +28,8 @@ glvbo::glvbo(int size, float* vertices, float* normals, float* coords) {
         len += size * 3;
     if (coords != 0)
         len += size * 2;
+    if (tnormals != 0)
+        len += size * 3;
 
     glGenBuffers(1, &instance);
     glBindBuffer(GL_ARRAY_BUFFER, instance);
@@ -44,6 +47,11 @@ glvbo::glvbo(int size, float* vertices, float* normals, float* coords) {
         glBufferSubData(GL_ARRAY_BUFFER, len, size * 2, coords);
         len += size * 2;
     }
+    if (tnormals != 0) {
+        glBufferSubData(GL_ARRAY_BUFFER, len, size * 3, tnormals);
+        len += size * 3;
+    }
+
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 

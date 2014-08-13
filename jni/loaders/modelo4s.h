@@ -23,7 +23,7 @@ public:
      * @brief Constructor for loading model from file
      * @param filename is path and name of file to load
      */
-    modelo4s(const char* filename);
+    modelo4s(const char* filename, bool gpu);
 };
 
 #endif // MODELO4S_H

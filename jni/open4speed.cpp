@@ -146,7 +146,6 @@ void displayScene() {
         ///render car skin
         xrenderer->pushMatrix();
         xrenderer->multMatrix(allCar[i]->transform[0].value);
-        xrenderer->translate(0, allCar[i]->wheelY, 0);
         xrenderer->enable[1] = allCar[i]->control->getNitro() && (allCar[i]->n2o > 1);
         xrenderer->enable[9] = allCar[i]->control->getBrake() != 0;
         xrenderer->renderModel(allCar[i]->skin);
@@ -163,9 +162,29 @@ void displayScene() {
         }
     }
 
+    /// render car shadows
+    for (int i = carCount - 1; i >= 0; i--) {
+
+        ///render car skin
+        xrenderer->pushMatrix();
+        xrenderer->multMatrix(allCar[i]->transform[0].value);
+        xrenderer->renderShadow(allCar[i]->skin);
+        xrenderer->popMatrix();
+
+        /// render wheels
+        for (int j = 1; j <= 4; j++) {
+            xrenderer->pushMatrix();
+            xrenderer->multMatrix(allCar[i]->transform[j].value);
+            if (j % 2 == 1)
+              xrenderer->rotateY(180);
+            xrenderer->renderShadow(allCar[i]->wheel);
+            xrenderer->popMatrix();
+        }
+    }
+
     /// render smoke effects
     if (water == 0) {
-        water = getModel("gfx/water.o4s");
+        water = getModel("gfx/water.o4s", true);
         for (int i = 0; i < effLen; i++) {
             eff[i].vertices = new float[4095 * 3];
             eff[i].coords = new float[4095 * 2];
@@ -252,20 +271,20 @@ void loadScene(std::vector<char*> *atributes) {
     carCount = 0;
 
     /// load track
-    trackdata = getModel(getConfigStr("track_model1", atributes));
+    trackdata = getModel(getConfigStr("track_model1", atributes), true);
     int trackIndex = getConfig("race_track", atributes);
     std::vector<edge> e;
     if (strlen(getConfigStr("track_model2", atributes)) > 0) {
-        trackdata2 = getModel(getConfigStr("track_model2", atributes));
+        trackdata2 = getModel(getConfigStr("track_model2", atributes), false);
         e = trackdata2->edges[trackIndex];
     } else {
         e = trackdata->edges[trackIndex];
     }
 
     /// load sky
-    skydome = getModel(getConfigStr("sky_model", atributes));
+    skydome = getModel(getConfigStr("sky_model", atributes), true);
     if (arrow == 0) {
-        arrow = getModel("gfx/arrow.o4s");
+        arrow = getModel("gfx/arrow.o4s", true);
     }
     //arrow->models[0].texture2D = skydome->models[1].texture2D;
 
@@ -341,7 +360,7 @@ void idle(int v) {
             }
         }
 
-        /// update cars navigation
+        /// update cars
         for (int i = 0; i < carCount; i++) {
             /// update current edge for navigation
             if (!physic->locked) {

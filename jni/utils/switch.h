@@ -38,7 +38,7 @@ input* getInput();
  * @param filename is path and name of file to load
  * @return instance of model
  */
-model* getModel(const char* filename);
+model* getModel(const char* filename, bool gpu);
 
 /**
  * @brief getPhysics gets physical engine
@@ -88,12 +88,13 @@ texture* getTexture(const char* filename, float alpha);
 texture* getTexture(float r, float g, float b, float alpha);
 
 /**
- * @brief getVBO creates VBO from data
+ * @brief glvbo creates VBO from data
  * @param size is amount of vertices
  * @param vertices is vertices array
  * @param normals is normals array
  * @param coords is texture coords array
+ * @param tnormals is triangle normals array
  */
-vbo* getVBO(int size, float* vertices, float* normals, float* coords);
+vbo* getVBO(int size, float* vertices, float* normals, float* coords, float* tnormals);
 
 #endif // SWITCH_H

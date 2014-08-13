@@ -183,7 +183,7 @@ void bullet::addCar(car* c) {
     /// Set wheels connections
     btVector3 wheelDirectionCS0(0,-1,0);
     btVector3 wheelAxleCS(-1,0,0);
-    btScalar suspensionRestLength(0.1);
+    btScalar suspensionRestLength(0.5);
     btVector3 connectionPointCS0(-c->wheelX, 0, -c->wheelZ1);
     m_vehicle[c->index - 1]->addWheel(connectionPointCS0, wheelDirectionCS0, wheelAxleCS, suspensionRestLength,
                                       c->wheel->aplitude / 2.0f, m_tuning, true);

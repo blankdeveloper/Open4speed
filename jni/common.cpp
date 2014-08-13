@@ -17,7 +17,6 @@ std::vector<char*> *carList;                                    ///< List of all
 std::vector<char*> *trackList;                                  ///< List of all tracks
 std::vector<shader*> *shaders = new std::vector<shader*>();     ///< Shaders storage
 std::vector<texture*> *textures = new std::vector<texture*>();  ///< Textures storage
-texture *gray;                                                  ///< Gray color for meshes without material
 
 #ifdef ANDROID
 JNIEnv* instance;            ///< JNI instance

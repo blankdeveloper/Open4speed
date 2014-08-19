@@ -53,17 +53,6 @@ extern float aiRacerSteeringGapLevel1;                         ///< AI navigatio
 extern float aiRacerSteeringGapLevel2;                         ///< AI navigation parameter
 extern float aiRacerTrackUpdate;                               ///< AI navigation parameter
 extern float aiRacerTrackUpdateSpeedDependency;                ///< AI navigation parameter
-extern float aiTrafficFutureStep;                              ///< AI navigation parameter
-extern float aiTrafficSafeAngle;                               ///< AI navigation parameter
-extern float aiTrafficSafeDistance;                            ///< AI navigation parameter
-extern float aiTrafficSafeDistanceSpeedDependency;             ///< AI navigation parameter
-extern float aiTrafficSafeGap;                                 ///< AI navigation parameter
-extern float aiTrafficSafeSpeed;                               ///< AI navigation parameter
-extern float aiTrafficSpeedBrake;                              ///< AI navigation parameter
-extern float aiTrafficSpeedNoGas;                              ///< AI navigation parameter
-extern float aiTrafficSteeringGapLevel1;                       ///< AI navigation parameter
-extern float aiTrafficSteeringGapLevel2;                       ///< AI navigation parameter
-extern float aiTrafficTrackUpdate;                             ///< AI navigation parameter
 extern char* inputController;                                  ///< Input controller
 extern float keyBack;                                          ///< Keycode
 extern float keyCameraDown;                                    ///< Keycode

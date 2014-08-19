@@ -37,9 +37,6 @@ glfbo::glfbo(texture *texture) {
         fboID = new GLuint[1];
         rboID = new GLuint[1];
         rendertexture = new GLuint[1];
-        rendertexture2 = new GLuint[1];
-        depth = false;
-        rb = false;
 
         rtt = texture;
         rendertexture[0] = rtt->textureID;
@@ -62,7 +59,7 @@ glfbo::glfbo(texture *texture) {
  * @param height is height of framebuffer
  * @param depthbuffer is true to use depthbuffer texture
  */
-glfbo::glfbo(int width, int height, bool depthbuffer) {
+glfbo::glfbo(int width, int height) {
 
     //find ideal texture resolution
     this->width = width;
@@ -70,9 +67,8 @@ glfbo::glfbo(int width, int height, bool depthbuffer) {
 
     //create frame buffer
     fboID = new GLuint[1];
-    rboID = new GLuint[1];
+    rboID = new GLuint[2];
     rendertexture = new GLuint[1];
-    rendertexture2 = new GLuint[1];
 
     glGenFramebuffers(1, fboID);
     glBindFramebuffer(GL_FRAMEBUFFER, fboID[0]);
@@ -85,24 +81,14 @@ glfbo::glfbo(int width, int height, bool depthbuffer) {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rendertexture[0], 0);
 
-    //create texture for depth buffer
-    this->depth = depthbuffer;
-    rb = !depthbuffer;
-    if (depthbuffer) {
-        glGenTextures(1, rendertexture2);
-        glBindTexture(GL_TEXTURE_2D, rendertexture2[0]);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, rendertexture2[0], 0);
-    }
-    //create render buffer
-    else {
-        glGenRenderbuffers(1, rboID);
-        glBindRenderbuffer(GL_RENDERBUFFER, rboID[0]);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
-    }
+    //create render buffers for depth buffer and stencil buffer
+    glGenRenderbuffers(2, rboID);
+    glBindRenderbuffer(GL_RENDERBUFFER, rboID[0]);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
+    glBindRenderbuffer(GL_RENDERBUFFER, rboID[1]);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_STENCIL_INDEX8, width, height);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboID[1]);
 
 
     if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
@@ -145,15 +131,8 @@ void glfbo::clear(bool colors) {
  * @brief destroy removes all data from memory
  */
 void glfbo::destroy() {
-    if (!depth && !rb) {
-        rtt->pointerDecrease();
-    }
-    if (depth) {
-        glDeleteTextures(1, rendertexture2);
-    }
-    if (rb) {
-        glDeleteRenderbuffers(1, rboID);
-    }
+    rtt->pointerDecrease();
+    glDeleteRenderbuffers(2, rboID);
     glDeleteFramebuffers(1, fboID);
 }
 

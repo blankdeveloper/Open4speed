@@ -54,7 +54,7 @@ gles20::gles20() {
 
     //create render texture
     for (int i = 0; i < 2; i++) {
-        rtt[i] = new glfbo(screen_width, screen_height, false);
+        rtt[i] = new glfbo(screen_width, screen_height);
     }
 
     //set viewport
@@ -379,37 +379,41 @@ void gles20::renderShadow(model* m) {
     if (yp >= m->cutY)
         yp = m->cutY - 1;
 
+    //set openGL function
     glDepthMask(false);
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE);
     glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
+    glEnable(GL_STENCIL_TEST);
 
-    //TODO rewrite using stencil buffer
-
-    /// set opengl for rendering models
+    //render shadow
+    glClearStencil(0x0);
+    glClear(GL_STENCIL_BUFFER_BIT);
+    glStencilFunc(GL_EQUAL, 0, 0xFF);
+    glStencilOp(GL_KEEP,GL_KEEP,GL_INCR);
     for (unsigned int i = 0; i < m->models.size(); i++) {
         current = shadow;
         current->bind();
         if (!m->models[i].texture2D->transparent)
-            if (enable[m->models[i].filter]) {
+            if (enable[m->models[i].filter])
                 renderSubModel(m, &m->models[i]);
-            }
     }
 
+
+    ///remove unwanted shadow
     glBlendEquation(GL_FUNC_ADD);
     glCullFace(GL_FRONT);
-
-    /// set opengl for rendering models
+    glStencilOp(GL_KEEP,GL_KEEP,GL_DECR);
     for (unsigned int i = 0; i < m->models.size(); i++) {
         current = shadow;
         current->bind();
         if (!m->models[i].texture2D->transparent)
-            if (enable[m->models[i].filter]) {
+            if (enable[m->models[i].filter])
                 renderSubModel(m, &m->models[i]);
-            }
     }
+    glDisable(GL_STENCIL_TEST);
 }
 
 /**

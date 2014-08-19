@@ -18,12 +18,10 @@ class glfbo : public fbo
 {
 public:
     GLuint* rendertexture;        ///< Texture for color buffer
-    GLuint* rendertexture2;       ///< Texture for depth buffer
     GLuint* rboID;                ///< Render buffer object id
     GLuint* fboID;                ///< Frame buffer object id
     texture* rtt;                 ///< Texture for color buffer loaded from file
     glvbo* vbo;                   ///< VBO for rendering to screen
-    bool depth, rb;               ///< Info about buffers usage
 
     /**
      * @brief glfbo is an empty constructor
@@ -40,9 +38,8 @@ public:
      * @brief constructor init framebuffer and renderbuffer
      * @param width is width of framebuffer
      * @param height is height of framebuffer
-     * @param depthbuffer is true to use depthbuffer texture
      */
-    glfbo(int width, int height, bool depthbuffer);
+    glfbo(int width, int height);
 
     /**
      * @brief bind binds FBO

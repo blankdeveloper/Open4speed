@@ -39,8 +39,6 @@ extern std::vector<texture*> textures;              ///< Textures storage
  */
 extern float aspect;                                ///< Screen aspect
 extern pthread_mutex_t matrixLock;                  ///< Car matrix locking
-extern int screen_width;                            ///< Screen width
-extern int screen_height;                           ///< Screen height
 extern int playerCar;                               ///< Index of player car
 extern bool active;                                 ///< Information if scene is active
 extern int opponentCount;                           ///< Opponent count
@@ -55,10 +53,7 @@ extern sound* crash;                                ///< Crash sound
 extern sound* engine;                               ///< Engine sound
 extern sound* enginePlus;                           ///< Engine extra sound
 extern sound* noise;                                ///< N2O sound
-extern float *mat;                                  ///< Temp matrix
-extern char *string;                                ///< Temp string
 extern float direction;                             ///< Camera direction
-extern float mtime;                                 ///< Time stamp
 
 extern physics *physic;     ///< Physical engine instance
 extern renderer *xrenderer; ///< Renderer instance

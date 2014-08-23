@@ -27,8 +27,6 @@ zip* APKArchive;             ///< APK archive instance
  */
 float aspect;                   ///< Screen aspect
 pthread_mutex_t matrixLock;     ///< Car matrix locking
-int screen_width;               ///< Screen width
-int screen_height;              ///< Screen height
 int playerCar;                  ///< Index of player car
 bool active;                    ///< Information if scene is active
 int opponentCount;              ///< Opponent count
@@ -42,10 +40,7 @@ sound* crash;                   ///< Crash sound
 sound* engine;                  ///< Engine sound
 sound* enginePlus;              ///< Engine extra sound
 sound* noise;                   ///< N2O sound
-float *mat = new float[16];     ///< Temp matrix
-char *string = new char[1024];  ///< Temp string
 float direction = 0;            ///< Camera direction
-float mtime;                    ///< Time stamp
 
 physics *physic;     ///< Physical engine instance
 renderer *xrenderer; ///< Renderer instance

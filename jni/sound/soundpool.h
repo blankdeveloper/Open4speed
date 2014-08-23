@@ -10,6 +10,7 @@
 #ifndef SOUNDPOOL_H
 #define SOUNDPOOL_H
 
+#include <string>
 #include "interfaces/sound.h"
 
 /**
@@ -28,7 +29,7 @@ public:
      * @param loop is true for sound looping
      * @param c is amount of channels
      */
-    soundpool(const char* filename, bool loop, int c);
+    soundpool(std::string filename, bool loop, int c);
 
     /**
      * @brief soundpool destructor

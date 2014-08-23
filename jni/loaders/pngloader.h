@@ -10,6 +10,7 @@
 #ifndef PNGLOADER_H
 #define PNGLOADER_H
 
+#include <string>
 #include "interfaces/texture.h"
 
 /**
@@ -17,16 +18,6 @@
  * @param filename is name of file
  * @return texture instance
  */
-Texture* loadPNG(const char* filename);
-
-/**
- * @brief writeImage writes image into file
- * @param filename is filename of output
- * @param width is image width
- * @param height is image height
- * @param buffer is image data
- * @return 0 if successed
- */
-int writeImage(char* filename, int width, int height, unsigned char *buffer);
+Texture loadPNG(std::string filename);
 
 #endif // PNGLOADER_H

@@ -10,6 +10,7 @@
 #ifndef GLSL_H
 #define GLSL_H
 
+#include <string>
 #include "renderers/opengl/gles20.h"
 #include "interfaces/shader.h"
 
@@ -27,7 +28,7 @@ public:
      * @param vert is vertex shader code
      * @param frag is fragment shader code
      */
-    glsl(std::vector<char*> *vert, std::vector<char*> *frag);
+    glsl(std::vector<std::string> vert, std::vector<std::string> frag);
 
     /**
      * @brief it sets pointer to geometry

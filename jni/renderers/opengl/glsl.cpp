@@ -10,11 +10,7 @@
 #include "renderers/opengl/glsl.h"
 #include "utils/io.h"
 
-#ifdef ANDROID
-const char* header = "#version 100\nprecision highp float;\n";      ///< Shader header
-#else
-const char* header = "#version 130\nprecision highp float;\n";      ///< Shader header
-#endif
+std::string header = "#version 100\nprecision highp float;\n";      ///< Shader header
 
 /**
  * @brief initShader creates shader from code
@@ -73,28 +69,28 @@ unsigned int initShader(const char *vs, const char *fs) {
  * @param vert is vertex shader code
  * @param frag is fragment shader code
  */
-glsl::glsl(std::vector<char*> *vert, std::vector<char*> *frag) {
+glsl::glsl(std::vector<std::string> vert, std::vector<std::string> frag) {
     /// convert vertex shader source code
-    int size = strlen(header);
-    for (unsigned int i = 0; i < vert->size(); i++) {
-        size += strlen((*vert)[i]) + 2;
+    int size = header.length();
+    for (unsigned int i = 0; i < vert.size(); i++) {
+        size += vert[i].length() + 2;
     }
-    char* vs = new char[size];
-    strcpy(vs, header);
-    for (unsigned int i = 0; i < vert->size(); i++) {
-        strcat(vs, (*vert)[i]);
+    char vs[size];
+    strcpy(vs, header.c_str());
+    for (unsigned int i = 0; i < vert.size(); i++) {
+        strcat(vs, vert[i].c_str());
         strcat(vs, "\n");
     }
 
     /// convert fragment shader source code
-    size = strlen(header);
-    for (unsigned int i = 0; i < frag->size(); i++) {
-        size += strlen((*frag)[i]) + 2;
+    size = header.length();
+    for (unsigned int i = 0; i < frag.size(); i++) {
+        size += frag[i].length() + 2;
     }
-    char* fs = new char[size];
-    strcpy(fs, header);
-    for (unsigned int i = 0; i < frag->size(); i++) {
-        strcat(fs, (*frag)[i]);
+    char fs[size];
+    strcpy(fs, header.c_str());
+    for (unsigned int i = 0; i < frag.size(); i++) {
+        strcat(fs, frag[i].c_str());
         strcat(fs, "\n");
     }
 

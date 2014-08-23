@@ -29,7 +29,7 @@ soundpool::~soundpool() {
  * @param loop is true for sound looping
  * @param c is amount of channels
  */
-soundpool::soundpool(const char* filename, bool loop, int channels) {
+soundpool::soundpool(std::string filename, bool loop, int channels) {
 #ifdef ANDROID
     id = samplesCount;
     samplesCount++;
@@ -38,7 +38,7 @@ soundpool::soundpool(const char* filename, bool loop, int channels) {
 
     jclass clazz = instance->FindClass("com/lvonasek/o4s/Sounds");
     jmethodID method = instance->GetStaticMethodID(clazz, "soundLoad", "(Ljava/lang/String;)V");
-    jstring jstr = instance->NewStringUTF(filename);
+    jstring jstr = instance->NewStringUTF(filename.c_str());
     instance->CallStaticVoidMethod(clazz, method, jstr);
 #endif
 }

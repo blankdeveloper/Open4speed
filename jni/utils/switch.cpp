@@ -38,9 +38,9 @@ input* getInput() {
  * @param filename is path and name of file to load
  * @return instance of model
  */
-model* getModel(const char* filename, bool gpu) {
+model* getModel(std::string filename, bool gpu) {
     logi("Load model:", filename);
-    if (strcmp(getExtension(filename), "o4s") == 0) {
+    if (strcmp(getExtension(filename).c_str(), "o4s") == 0) {
         return new modelo4s(filename, gpu);
     }
     loge("File is not supported:", filename);
@@ -64,10 +64,10 @@ physics* getPhysics(model *m) {
  * @brief getRenderer gets renderer
  * @return renderer instance
  */
-renderer* getRenderer() {
+renderer* getRenderer(int w, int h) {
     logi("Init renderer","");
 #ifdef GLES20
-    return new gles20();
+    return new gles20(w, h);
 #endif
     exit(1);
 }
@@ -77,27 +77,27 @@ renderer* getRenderer() {
  * @param name is shader filename
  * @return instance of shader
  */
-shader* getShader(const char* name) {
+shader* getShader(std::string name) {
     /// find previous instance
     for (unsigned int i = 0; i < shaders.size(); i++) {
-        if (strcmp(shaders[i]->shadername, name) == 0) {
+        if (strcmp(shaders[i]->shadername, name.c_str()) == 0) {
             return shaders[i];
         }
     }
 
-    char* filename = new char[256];
+    char filename[256];
     strcpy(filename, "shaders/");
-    strcat(filename, name);
+    strcat(filename, name.c_str());
     strcat(filename, ".glsl");
     logi("Load shader:", filename);
 
-    std::vector<char*> *vert_atributes = getList("VERT", filename);
-    std::vector<char*> *frag_atributes = getList("FRAG", filename);
+    std::vector<std::string> vert_atributes = getList("VERT", filename);
+    std::vector<std::string> frag_atributes = getList("FRAG", filename);
 
     /// create shader from code
 #ifdef GLES20
     shader* instance = new glsl(vert_atributes, frag_atributes);
-    strcpy(instance->shadername, name);
+    strcpy(instance->shadername, name.c_str());
     shaders.push_back(instance);
     return instance;
 #endif
@@ -111,7 +111,7 @@ shader* getShader(const char* name) {
  * @param channels is amount of channels
  * @return sound instance
  */
-sound* getSound(const char* filename, bool loop, int channels) {
+sound* getSound(std::string filename, bool loop, int channels) {
     logi("Load sound file:", filename);
     return new soundpool(filename, loop, channels);
 }
@@ -122,10 +122,10 @@ sound* getSound(const char* filename, bool loop, int channels) {
  * @param alpha is amount of blending
  * @return texture instance
  */
-texture* getTexture(const char* filename, float alpha) {
+texture* getTexture(std::string filename, float alpha) {
     /// find previous instance
     for (unsigned int i = 0; i < textures.size(); i++) {
-        if (strcmp(textures[i]->texturename, filename) == 0) {
+        if (strcmp(textures[i]->texturename, filename.c_str()) == 0) {
           if (textures[i]->instanceCount > 0) {
               textures[i]->instanceCount++;
               return textures[i];
@@ -136,33 +136,33 @@ texture* getTexture(const char* filename, float alpha) {
     /// create new instance
     logi("Load texture:", filename);
 #ifdef GLES20
-    if (strcmp(getExtension(filename), "png") == 0) {
-      texture* instance = new gltexture(*loadPNG(filename), alpha);
+    if (strcmp(getExtension(filename).c_str(), "png") == 0) {
+      texture* instance = new gltexture(loadPNG(filename), alpha);
       instance->instanceCount = 1;
-      strcpy(instance->texturename, filename);
+      strcpy(instance->texturename, filename.c_str());
       textures.push_back(instance);
       return instance;
     } else if (getExtension(filename)[0] == 'p') {
 
         /// get animation frame count
-        char* ext = getExtension(filename);
+        std::string ext = getExtension(filename);
         int count = (ext[1] - '0') * 10 + ext[2] - '0';
-        char file[strlen(filename)];
-        strcpy(file, filename);
+        char file[255];
+        strcpy(file, filename.c_str());
 
         /// load all sequence images
-        std::vector<texture*> anim = *(new std::vector<texture*>());
+        std::vector<texture*> anim;
         for (int i = 0; i <= count; i++) {
-            file[strlen(filename) - 1] = i % 10 + '0';
-            file[strlen(filename) - 2] = i / 10 + '0';
-            anim.push_back(new gltexture(*loadPNG(file), alpha));
+            file[strlen(file) - 1] = i % 10 + '0';
+            file[strlen(file) - 2] = i / 10 + '0';
+            anim.push_back(new gltexture(loadPNG(file), alpha));
             anim[anim.size() - 1]->instanceCount = 1;
             anim[anim.size() - 1]->texturename[0] = '\0';
         }
 
         texture* instance = new gltexture(anim, alpha);
         instance->instanceCount = 1;
-        strcpy(instance->texturename, filename);
+        strcpy(instance->texturename, filename.c_str());
         textures.push_back(instance);
         return instance;
     }

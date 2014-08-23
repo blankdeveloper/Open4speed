@@ -15,10 +15,6 @@
 model::~model() {
     for (unsigned int i = 0; i < models.size(); i++) {
         models[i].vboData->destroy();
-        delete[] models[i].colora;
-        delete[] models[i].colord;
-        delete[] models[i].colors;
-        delete models[i].reg;
         delete[] models[i].vertices;
         delete[] models[i].normals;
         delete[] models[i].coords;

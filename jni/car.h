@@ -11,6 +11,7 @@
 #ifndef CAR_H
 #define CAR_H
 
+#include <string>
 #include "interfaces/input.h"
 #include "interfaces/model.h"
 #include "interfaces/sound.h"
@@ -77,7 +78,7 @@ public:
      * @param filename is path to file to load
      * @param automatic is true for automatic transmision
      */
-    car(input *i, std::vector<edge> *e, const char* filename);
+    car(input *i, std::vector<edge> *e, std::string filename);
 
     /**
      * @brief getView gets perspective view of car

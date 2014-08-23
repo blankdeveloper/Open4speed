@@ -23,7 +23,10 @@
 /**
  * @brief gles20 constructor
  */
-gles20::gles20() {
+gles20::gles20(int w, int h) {
+
+    screen_width = w;
+    screen_height = h;
 
     /// set default values
     for (int i = 0; i < 10; i++) {
@@ -356,7 +359,6 @@ void gles20::renderShadow(model* m) {
             if (enable[m->models[i].filter])
                 renderSubModel(m, &m->models[i]);
     }
-    glBlendEquation(GL_FUNC_ADD);
 }
 
 /**
@@ -368,13 +370,14 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     /// set model matrix
     glm::mat4x4 modelView;
     if (m->dynamic) {
+        float mat[16];
         physic->getTransform(m->dynamicID, mat);
         m->x = mat[12];
         m->y = mat[13];
         m->z = mat[14];
-        float w = m->reg->max.x - m->reg->min.x;
-        float a = m->reg->max.y - m->reg->min.y;
-        float h = m->reg->max.z - m->reg->min.z;
+        float w = m->reg.max.x - m->reg.min.x;
+        float a = m->reg.max.y - m->reg.min.y;
+        float h = m->reg.max.z - m->reg.min.z;
         glm::mat4x4 translation(
             1,0,0,0,
             0,1,0,0,
@@ -394,7 +397,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
             1,0,0,0,
             0,1,0,0,
             0,0,1,0,
-            m->reg->min.x, m->reg->min.y, m->reg->min.z,1
+            m->reg.min.x, m->reg.min.y, m->reg.min.z,1
         );
         modelMat = matrix_result * translation;
         modelView = view_matrix * modelMat;
@@ -489,6 +492,7 @@ void gles20::shadowMode(bool enable) {
       glClearStencil(1);
       glClear(GL_STENCIL_BUFFER_BIT);
   } else {
+      glBlendEquation(GL_FUNC_ADD);
       glDisable(GL_STENCIL_TEST);
       glStencilMask(false);
   }

@@ -12,15 +12,9 @@
 
 #include <cstring>
 #include <stdio.h>
+#include <string>
 #include <vector>
 #include "common.h"
-
-/**
- * @brief exists checks if file exist
- * @param filename is name of file to check
- * @return true if file exists
- */
-bool exists(const char *filename);
 
 /**
  * @brief getConfig gets config value from file
@@ -28,7 +22,7 @@ bool exists(const char *filename);
  * @param source is source storage
  * @return value in float
  */
-float getConfig(const char* item, std::vector<char*> *source);
+float getConfig(std::string item, std::vector<std::string> source);
 
 /**
  * @brief getConfigStr gets config value from file
@@ -36,14 +30,14 @@ float getConfig(const char* item, std::vector<char*> *source);
  * @param source is source storage
  * @return value in char*
  */
-char* getConfigStr(const char* item, std::vector<char*> *source);
+std::string getConfigStr(std::string item, std::vector<std::string> source);
 
 /**
  * @brief getExtension gets file extension of file
  * @param filename is filename to get extension
  * @return extension as char*
  */
-char* getExtension(const char* filename);
+std::string getExtension(std::string filename);
 
 /**
  * @brief getListEx gets list of string from script file
@@ -51,7 +45,7 @@ char* getExtension(const char* filename);
  * @param filename is name of file
  * @return list as vector of char*
  */
-std::vector<char*>* getList(const char* tag, const char* filename);
+std::vector<std::string> getList(std::string tag, std::string filename);
 
 #ifdef ZIP_ARCHIVE
 /**
@@ -75,28 +69,28 @@ void gets(char* line, FILE* file);
  * @param text is tag text with %d
  * @return indexed tag
  */
-char* getTag(int index, const char* text);
+std::string getTag(int index, std::string text);
 
 /**
  * @brief loge logs an error
  * @param value1 is a first value
  * @param value2 is a second value
  */
-void loge(const char* value1, const char* value2);
+void loge(std::string value1, std::string value2);
 
 /**
  * @brief logi logs an information
  * @param value1 is a first value
  * @param value2 is a second value
  */
-void logi(const char* value1, const char* value2);
+void logi(std::string value1, std::string value2);
 
 /**
  * @brief prefix prefixes file name
  * @param filename is original file name
  * @return prefixed file name
  */
-char* prefix(const char* filename);
+std::string prefix(std::string filename);
 
 /**
  * @brief scandec read number from chars

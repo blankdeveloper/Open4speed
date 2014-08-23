@@ -137,7 +137,6 @@ void glfbo::destroy() {
  */
 void glfbo::drawOnScreen(shader* screen_shader) {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glViewport (0, 0, (GLsizei) screen_width, (GLsizei) screen_height);
     screen_shader->bind();
     glBindTexture(GL_TEXTURE_2D, rendertexture[0]);
     glDisable(GL_DEPTH_TEST);
@@ -151,5 +150,4 @@ void glfbo::drawOnScreen(shader* screen_shader) {
  */
 void glfbo::unbindFBO() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glViewport (0, 0, screen_width, screen_height);
 }

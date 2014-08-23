@@ -49,7 +49,7 @@ public:
     /**
      * @brief gles20 constructor
      */
-    gles20();
+    gles20(int w, int h);
 
     /**
      * @brief lookAt implements GLUlookAt

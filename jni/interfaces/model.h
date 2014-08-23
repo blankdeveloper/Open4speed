@@ -43,12 +43,12 @@ struct model3d {
     bool touchable;     ///< info if it is used in physics
     int filter;         ///< filter index
     shader* material;   ///< shader to use
-    float *colora;      ///< Ambient color
-    float *colord;      ///< Diffuse color
-    float *colors;      ///< Specular color
+    float colora[4];    ///< Ambient color
+    float colord[4];    ///< Diffuse color
+    float colors[4];    ///< Specular color
     bool dynamic;       ///< True if object is dynamic
     int dynamicID;      ///< ID of the last dynamic update
-    AABB *reg;          ///< AABB of the object
+    AABB reg;           ///< AABB of the object
     int* triangleCount; ///< Amount of triangles
     texture* texture2D; ///< Object texture
     float* vertices;    ///< Object vertices

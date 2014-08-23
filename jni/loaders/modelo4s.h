@@ -11,6 +11,7 @@
 #ifndef MODELO4S_H
 #define MODELO4S_H
 
+#include <string>
 #include "interfaces/model.h"
 
 /**
@@ -23,7 +24,7 @@ public:
      * @brief Constructor for loading model from file
      * @param filename is path and name of file to load
      */
-    modelo4s(const char* filename, bool gpu);
+    modelo4s(std::string filename, bool gpu);
 };
 
 #endif // MODELO4S_H

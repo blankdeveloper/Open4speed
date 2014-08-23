@@ -257,7 +257,7 @@ void displayScene() {
  * @param playerCar  is index of choosen car
  * @return loaded scene
  */
-void loadScene(char* filename) {
+void loadScene(std::string filename) {
 
     /// clear previous scene
     if (trackdata != 0) {
@@ -272,7 +272,7 @@ void loadScene(char* filename) {
     carCount = 0;
 
     /// load track
-    std::vector<char*> *atributes = getList("", filename);
+    std::vector<std::string> atributes = getList("", filename);
     trackdata = getModel(getConfigStr("track_model1", atributes), true);
     int trackIndex = getConfig("race_track", atributes);
     trackdata2 = getModel(getConfigStr("track_model2", atributes), false);
@@ -494,9 +494,7 @@ void keyboardUp(unsigned char key, int x, int y) {
  */
 void reshape (int w, int h) {
    aspect = (float) w/(float) h;
-   screen_width = w;
-   screen_height = h;
-   xrenderer = getRenderer();
+   xrenderer = getRenderer(w, h);
 }
 
 /**

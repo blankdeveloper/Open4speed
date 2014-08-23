@@ -31,10 +31,10 @@
  * @param filename is path to file to load
  * @param automatic is true for automatic transmision
  */
-car::car(input *i, std::vector<edge> *e, const char* filename) {
+car::car(input *i, std::vector<edge> *e, std::string filename) {
 
     /// get car atributes
-    std::vector<char*> *atributes = getList("", filename);
+    std::vector<std::string> atributes = getList("", filename);
 
     gears = new std::vector<gear>();
 

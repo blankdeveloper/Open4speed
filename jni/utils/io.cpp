@@ -11,14 +11,14 @@
 #include "utils/io.h"
 #include "common.h"
 
-char* string1 = new char[255];
-char* character = new char[2];  ///< temp char
+char string[1024];
+char character[2];
 
 #ifdef ZIP_ARCHIVE
 #ifdef ANDROID
-const char* gamePath = "assets/";                           ///< Data path
+std::string gamePath = "assets/";                           ///< Data path
 #else
-const char* gamePath = "./";                                ///< Data path
+std::string gamePath = "./";                                ///< Data path
 #endif
 
 /**
@@ -48,7 +48,7 @@ char* getsEx(char* line, zip_file* file) {
     return line;
 }
 #else
-const char* gamePath = "../assets/";    ///< Data path
+std::string gamePath = "../assets/";    ///< Data path
 #endif
 
 #ifdef ANDROID
@@ -57,20 +57,7 @@ const char* gamePath = "../assets/";    ///< Data path
 #define LOG_TAG    __FILE__ ":" STRINGIFY(__LINE__)
 #endif
 
-std::vector<char*> imports = *(new std::vector<char*>());     ///< Config data list
-
-/**
-* @brief exists checks if file exist
-* @param filename is name of file to check
-* @return true if file exists
-*/
-bool exists(const char * filename) {
-   if (FILE* file = fopen(filename, "r")) {
-       fclose(file);
-       return true;
-   }
-   return false;
-}
+std::vector<std::string> imports;     ///< Config data list
 
 /**
 * @brief getConfig gets config value from file
@@ -78,12 +65,12 @@ bool exists(const char * filename) {
 * @param source is source storage
 * @return value in float
 */
-float getConfig(const char* item, std::vector<char*> *source) {
-   for (unsigned int i = 0; i < source->size(); i++) {
+float getConfig(std::string item, std::vector<std::string> source) {
+   for (unsigned int i = 0; i < source.size(); i++) {
        float value;
        char name[256];
-       sscanf((*source)[i],"%s %f", &name[0], &value);
-       if (strcmp(name,item) == 0)
+       sscanf(source[i].c_str(), "%s %f", &name[0], &value);
+       if (strcmp(name,item.c_str()) == 0)
            return value;
    }
    return 0;
@@ -95,18 +82,16 @@ float getConfig(const char* item, std::vector<char*> *source) {
 * @param source is source storage
 * @return value in char*
 */
-char* getConfigStr(const char* item, std::vector<char*> *source) {
-   for (unsigned int i = 0; i < source->size(); i++) {
+std::string getConfigStr(std::string item, std::vector<std::string> source) {
+   for (unsigned int i = 0; i < source.size(); i++) {
        char name[256];
-       char* value = new char[256];
-       sscanf((*source)[i],"%s %s", &name[0], value);
-       if (strcmp(name,item) == 0) {
-           return value;
+       char value[256];
+       sscanf(source[i].c_str(), "%s %s", &name[0], value);
+       if (strcmp(name,item.c_str()) == 0) {
+           return std::string(value);
        }
    }
-   char* output = new char[1];
-   output[0] = '\0';
-   return output;
+   return std::string();
 }
 
 /**
@@ -114,13 +99,13 @@ char* getConfigStr(const char* item, std::vector<char*> *source) {
 * @param filename is filename to get extension
 * @return extension as char*
 */
-char* getExtension(const char* filename) {
-   for (int i = strlen(filename) - 1; i > 0; i--) {
+std::string getExtension(std::string filename) {
+   for (int i = filename.length() - 1; i > 0; i--) {
        if (filename[i] == '.') {
-           for (unsigned int j = i + 1; j < strlen(filename); j++) {
+           for (unsigned int j = i + 1; j < filename.length(); j++) {
                string[j - i - 1] = filename[j];
            }
-           string[strlen(filename) - i - 1] = '\0';
+           string[filename.length() - i - 1] = '\0';
            return string;
        }
    }
@@ -134,19 +119,20 @@ char* getExtension(const char* filename) {
 * @param filename is name of file
 * @return list as vector of char*
 */
-std::vector<char*>* getList(const char* tag, const char* filename) {
+std::vector<std::string> getList(std::string tag, std::string filename) {
 #ifdef ZIP_ARCHIVE
-    zip_file* file = zip_fopen(APKArchive, prefix(filename), 0);
+    zip_file* file = zip_fopen(APKArchive, prefix(filename).c_str(), 0);
 #else
-    FILE* file = fopen(prefix(filename), "r");
+    FILE* file = fopen(prefix(filename).c_str(), "r");
 #endif
 
-    std::vector<char*> *output = new std::vector<char*>();
+    std::vector<std::string> output;
     bool hasTag = false;
-    if (strlen(tag) == 0)
+    if (tag.length() == 0)
         hasTag = true;
     while(true) {
-       char *value = new char[1024];
+       char value[1024];
+       strcpy(value, "");
 #ifdef ZIP_ARCHIVE
        getsEx(value, file);
 #else
@@ -154,21 +140,21 @@ std::vector<char*>* getList(const char* tag, const char* filename) {
 #endif
 
        /// fix end of line
-       if (value[strlen(value) - 1] == '\n') {
-           value[strlen(value) - 1] = '\0';
-       }
+       if (strlen(value) > 0)
+           if (value[strlen(value) - 1] == '\n')
+               value[strlen(value) - 1] = '\0';
 
        /// begin of script
-       if (strcmp(value,tag) == 0){
+       if (strcmp(value,tag.c_str()) == 0){
            hasTag = true;
        }
 
        /// import other file
        else if (value[0] == '#') {
            /// import file
-           char* name = new char[1024];
+           char name[1024];
            sscanf(value,"#import %s", name);
-           imports.push_back(name);
+           imports.push_back(std::string(name));
        }
 
        /// load data
@@ -187,13 +173,10 @@ std::vector<char*>* getList(const char* tag, const char* filename) {
 #else
                fclose(file);
 #endif
-               delete[] value;
                return output;
            }
            if (hasTag)
-             output->push_back(value);
-           else
-               delete[] value;
+             output.push_back(value);
        }
 
        /// end of file
@@ -201,16 +184,13 @@ std::vector<char*>* getList(const char* tag, const char* filename) {
        if (value[1023] == '1') {
            if (imports.size() > 0) {
                zip_fclose(file);
-               file = zip_fopen(APKArchive, prefix(imports[0]), 0);
+               file = zip_fopen(APKArchive, prefix(imports[0]).c_str(), 0);
 #else
        if (feof(file)) {
            if (imports.size() > 0) {
                fclose(file);
-               file = fopen(prefix(imports[0]), "r");
+               file = fopen(prefix(imports[0]).c_str(), "r");
 #endif
-               for (unsigned int i = 0; i < imports.size(); i++) {
-                   delete[] imports[i];
-               }
                imports.clear();
                continue;
            } else {
@@ -266,9 +246,10 @@ void gets(char* line, FILE* file) {
 * @param text is tag text with %d
 * @return indexed tag
 */
-char* getTag(int index, const char* text) {
-   sprintf(string1, text, index);
-   return string1;
+std::string getTag(int index, std::string text) {
+   char output[256];
+   sprintf(output, text.c_str(), index);
+   return std::string(output);
 }
 
 /**
@@ -276,10 +257,10 @@ char* getTag(int index, const char* text) {
 * @param value1 is a first value
 * @param value2 is a second value
 */
-void loge(const char* value1, const char* value2) {
- printf("%s %s\n", value1, value2);
+void loge(std::string value1, std::string value2) {
+ printf("%s %s\n", value1.c_str(), value2.c_str());
 #ifdef ANDROID
- __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,"com.lvonasek.o4s:%s %s", value1, value2);
+ __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,"com.lvonasek.o4s:%s %s", value1.c_str(), value2.c_str());
 #endif
  exit(1);
 }
@@ -289,10 +270,10 @@ void loge(const char* value1, const char* value2) {
 * @param value1 is a first value
 * @param value2 is a second value
 */
-void logi(const char* value1, const char* value2) {
- printf("%s %s\n", value1, value2);
+void logi(std::string value1, std::string value2) {
+ printf("%s %s\n", value1.c_str(), value2.c_str());
 #ifdef ANDROID
- __android_log_print(ANDROID_LOG_INFO,LOG_TAG,"com.lvonasek.o4s:%s %s", value1, value2);
+ __android_log_print(ANDROID_LOG_INFO,LOG_TAG,"com.lvonasek.o4s:%s %s", value1.c_str(), value2.c_str());
 #endif
 }
 
@@ -301,9 +282,9 @@ void logi(const char* value1, const char* value2) {
 * @param filename is original file name
 * @return prefixed file name
 */
-char* prefix(const char* filename) {
-   strcpy(string, gamePath);
-   strcat(string, filename);
+std::string prefix(std::string filename) {
+   strcpy(string, gamePath.c_str());
+   strcat(string, filename.c_str());
    return string;
 }
 

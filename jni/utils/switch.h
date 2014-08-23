@@ -11,6 +11,7 @@
 #ifndef SWITCH_H
 #define SWITCH_H
 
+#include <string>
 #include "interfaces/input.h"
 #include "interfaces/model.h"
 #include "interfaces/physics.h"
@@ -31,7 +32,7 @@ input* getInput();
  * @param filename is path and name of file to load
  * @return instance of model
  */
-model* getModel(const char* filename, bool gpu);
+model* getModel(std::string filename, bool gpu);
 
 /**
  * @brief getPhysics gets physical engine
@@ -44,14 +45,14 @@ physics* getPhysics(model *m);
  * @brief getRenderer gets renderer
  * @return renderer instance
  */
-renderer* getRenderer();
+renderer* getRenderer(int w, int h);
 
 /**
  * @brief getShader compile shader from file
  * @param name is shader filename
  * @return instance of shader
  */
-shader* getShader(const char* name);
+shader* getShader(std::string name);
 
 /**
  * @brief getSound gets sound
@@ -60,7 +61,7 @@ shader* getShader(const char* name);
  * @param channels is amount of channels
  * @return sound instance
  */
-sound* getSound(const char* filename, bool loop, int channels);
+sound* getSound(std::string filename, bool loop, int channels);
 
 /**
  * @brief getTexture gets texture
@@ -68,7 +69,7 @@ sound* getSound(const char* filename, bool loop, int channels);
  * @param alpha is amount of blending
  * @return texture instance
  */
-texture* getTexture(const char* filename, float alpha);
+texture* getTexture(std::string filename, float alpha);
 
 /**
  * @brief getTexture gets texture

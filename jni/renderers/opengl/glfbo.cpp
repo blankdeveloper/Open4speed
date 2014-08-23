@@ -15,43 +15,16 @@
 #include "utils/math.h"
 #include "common.h"
 
+
+GLuint* rboID = 0;                ///< Render buffer object id
+glvbo* rect = 0;                  ///< VBO for rendering to screen
+
 /**
  * @brief glfbo is an empty constructor
  */
 glfbo::glfbo() {
 
 }
-
-
-/**
- * @brief glfbo creates framebuffer from raster data
- * @param texture is texture raster instance
- */
-glfbo::glfbo(texture *texture) {
-
-        //set resolution
-        width = texture->twidth;
-        height = texture->twidth;
-
-        //create frame buffer
-        fboID = new GLuint[1];
-        rboID = new GLuint[1];
-        rendertexture = new GLuint[1];
-
-        rtt = texture;
-        rendertexture[0] = rtt->textureID;
-        glGenFramebuffers(1, fboID);
-        glBindFramebuffer(GL_FRAMEBUFFER, fboID[0]);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rendertexture[0], 0);
-
-        if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-            exit(1);
-
-        //clear
-        glViewport (0, 0, width, height);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-}
-
 
 /**
  * @brief constructor init framebuffer and renderbuffer
@@ -67,8 +40,12 @@ glfbo::glfbo(int width, int height) {
 
     //create frame buffer
     fboID = new GLuint[1];
-    rboID = new GLuint[2];
     rendertexture = new GLuint[1];
+    if (rboID == 0)
+    {
+      rboID = new GLuint[2];
+      glGenRenderbuffers(2, rboID);
+    }
 
     glGenFramebuffers(1, fboID);
     glBindFramebuffer(GL_FRAMEBUFFER, fboID[0]);
@@ -82,7 +59,6 @@ glfbo::glfbo(int width, int height) {
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rendertexture[0], 0);
 
     //create render buffers for depth buffer and stencil buffer
-    glGenRenderbuffers(2, rboID);
     glBindRenderbuffer(GL_RENDERBUFFER, rboID[0]);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
@@ -96,8 +72,32 @@ glfbo::glfbo(int width, int height) {
 
     //clear
     glViewport (0, 0, width, height);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+
+    /// vertices
+    float vertices[] = {
+        -1, +1, 0,
+        -1, -1, 0,
+        +1, -1, 0,
+        -1, +1, 0,
+        +1, -1, 0,
+        +1, +1, 0,
+    };
+
+    /// coords
+    float coords[] = {
+        0, 1,
+        0, 0,
+        1, 0,
+        0, 1,
+        1, 0,
+        1, 1,
+    };
+
+    if (rect == 0)
+      rect = new glvbo(6, vertices, 0, coords, 0);
 }
 
 /**
@@ -116,15 +116,10 @@ void glfbo::bindTexture() {
 }
 
 /**
- * @brief clear clears fragmet/depth buffer
- * @param colors true to clear both, false to clear only depth buffer
+ * @brief clear clears stencil/depth buffer
  */
-void glfbo::clear(bool colors) {
-    if (colors) {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    } else {
-        glClear(GL_DEPTH_BUFFER_BIT);
-    }
+void glfbo::clear() {
+    glClear(GL_DEPTH_BUFFER_BIT);
 }
 
 /**
@@ -144,33 +139,10 @@ void glfbo::drawOnScreen(shader* screen_shader) {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glViewport (0, 0, (GLsizei) screen_width, (GLsizei) screen_height);
     screen_shader->bind();
-
-    /// indicies
-    GLubyte indices[] = {3,0,1,3,1,2};
-
-    /// vertices
-    GLfloat vertices[] = {
-        -1, -1, 0,
-        +1, -1, 0,
-        +1, +1, 0,
-        -1, +1, 0
-    };
-
-    /// coords
-    GLfloat coords[] = {0, 0,
-                        1, 0,
-                        1, 1,
-                        0, 1
-    };
-
-    /// texture
     glBindTexture(GL_TEXTURE_2D, rendertexture[0]);
-    screen_shader->attrib(vertices, coords);
-
-    /// render
     glDisable(GL_DEPTH_TEST);
     glDepthMask(false);
-    glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLubyte), GL_UNSIGNED_BYTE, indices);
+    rect->render(screen_shader, 0, 2);
     screen_shader->unbind();
 }
 

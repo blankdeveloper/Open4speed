@@ -18,21 +18,13 @@ class glfbo : public fbo
 {
 public:
     GLuint* rendertexture;        ///< Texture for color buffer
-    GLuint* rboID;                ///< Render buffer object id
     GLuint* fboID;                ///< Frame buffer object id
     texture* rtt;                 ///< Texture for color buffer loaded from file
-    glvbo* vbo;                   ///< VBO for rendering to screen
 
     /**
      * @brief glfbo is an empty constructor
      */
     glfbo();
-
-    /**
-     * @brief glfbo creates framebuffer from raster data
-     * @param texture is texture raster instance
-     */
-    glfbo(texture *texture);
 
     /**
      * @brief constructor init framebuffer and renderbuffer
@@ -53,10 +45,9 @@ public:
 
 
     /**
-     * @brief clear clears fragmet/depth buffer
-     * @param colors true to clear both, false to clear only depth buffer
+     * @brief clear clears stencil/depth buffer
      */
-    void clear(bool colors);
+    void clear();
 
     /**
      * @brief destroy removes all data from memory

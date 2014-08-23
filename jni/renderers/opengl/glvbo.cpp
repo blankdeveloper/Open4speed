@@ -20,6 +20,7 @@
  */
 glvbo::glvbo(int size, float* vertices, float* normals, float* coords, float* tnormals) {
     /// count buffer size
+    size *= sizeof(float);
     this->size = size;
     int len = 0;
     if (vertices != 0)

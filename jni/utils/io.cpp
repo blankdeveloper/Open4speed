@@ -129,123 +129,38 @@ char* getExtension(const char* filename) {
 }
 
 /**
-* @brief getFullList gets list of string from script file
-* @param file is instance of file
-* @return list as vector of char*
-*/
-#ifdef ZIP_ARCHIVE
-std::vector<char*>* getFullList(zip_file* file) {
-#else
-std::vector<char*>* getFullList(FILE* file) {
-#endif
-   std::vector<char*> *output = new std::vector<char*>();
-   while(true) {
-       char* value = new char[1024];
-#ifdef ZIP_ARCHIVE
-       value = getsEx(value, file);
-       if (value[1023] == '1') {
-               zip_fclose(file);
-#else
-
-       /// end of file
-       if (fgets(value, 1024, file) == 0) {
-               fclose(file);
-#endif
-               delete[] value;
-               return output;
-       }
-
-       /// load data
-       if (value[0] != '/') {
-           if (strlen(value) > 1) {
-               while((value[strlen(value) - 1] == '\n') || (value[strlen(value) - 1] == '\r')) {
-                   value[strlen(value) - 1] = '\0';
-                   if (strlen(value) <= 1) {
-                       break;
-                   }
-               }
-           } else {
-               value[0] = '\0';
-           }
-           if (strcmp(value,"END") == 0){
-#ifdef ZIP_ARCHIVE
-               zip_fclose(file);
-#else
-               fclose(file);
-#endif
-               delete[] value;
-               return output;
-           }
-           output->push_back(value);
-       }
-   }
-}
-
-/**
 * @brief getList gets list of string from script file
-* @param tag is tag of script part
-* @return list as vector of char*
-*/
-std::vector<char*>* getList(const char* tag) {
-    for (unsigned int i = 0; i < imports.size(); i++) {
-        delete[] imports[i];
-    }
-    imports.clear();
-    return getListEx(tag, "config/open4speed.txt");
-}
-
-/**
-* @brief getListEx gets list of string from script file
 * @param tag is tag of script part
 * @param filename is name of file
 * @return list as vector of char*
 */
-std::vector<char*>* getListEx(const char* tag, const char* filename) {
+std::vector<char*>* getList(const char* tag, const char* filename) {
 #ifdef ZIP_ARCHIVE
     zip_file* file = zip_fopen(APKArchive, prefix(filename), 0);
 #else
     FILE* file = fopen(prefix(filename), "r");
 #endif
+
+    std::vector<char*> *output = new std::vector<char*>();
+    bool hasTag = false;
+    if (strlen(tag) == 0)
+        hasTag = true;
     while(true) {
-       char value[1024];
+       char *value = new char[1024];
 #ifdef ZIP_ARCHIVE
        getsEx(value, file);
-       if (value[1023] == '1') {
-           if (imports.size() > 0) {
-               zip_fclose(file);
-               file = zip_fopen(APKArchive, prefix(imports[0]), 0);
 #else
        fgets(value, 1024, file);
-
-       /// end of file
-       if (feof(file)) {
-           if (imports.size() > 0) {
-               fclose(file);
-               file = fopen(prefix(imports[0]), "r");
-
 #endif
-               filename = imports[0];
-               delete[] imports[0];
-               imports.erase(imports.begin());
-               continue;
-           } else {
-#ifdef ZIP_ARCHIVE
-               zip_fclose(file);
-#else
-               fclose(file);
-#endif
-               return new std::vector<char*>();
-           }
-       }
 
        /// fix end of line
-       else if (value[strlen(value) - 1] == '\n') {
+       if (value[strlen(value) - 1] == '\n') {
            value[strlen(value) - 1] = '\0';
        }
 
        /// begin of script
        if (strcmp(value,tag) == 0){
-           break;
+           hasTag = true;
        }
 
        /// import other file
@@ -255,8 +170,59 @@ std::vector<char*>* getListEx(const char* tag, const char* filename) {
            sscanf(value,"#import %s", name);
            imports.push_back(name);
        }
+
+       /// load data
+       else if (value[0] != '/') {
+           if (strlen(value) > 1) {
+               while((value[strlen(value) - 1] == '\n') || (value[strlen(value) - 1] == '\r')) {
+                   value[strlen(value) - 1] = '\0';
+                   if (strlen(value) <= 1) {
+                       break;
+                   }
+               }
+           }
+           if (hasTag && strcmp(value,"END") == 0){
+#ifdef ZIP_ARCHIVE
+               zip_fclose(file);
+#else
+               fclose(file);
+#endif
+               return output;
+           }
+           if (hasTag)
+             output->push_back(value);
+           else
+               delete[] value;
+       }
+
+       /// end of file
+#ifdef ZIP_ARCHIVE
+       if (value[1023] == '1') {
+           if (imports.size() > 0) {
+               zip_fclose(file);
+               file = zip_fopen(APKArchive, prefix(imports[0]), 0);
+#else
+       if (feof(file)) {
+           if (imports.size() > 0) {
+               fclose(file);
+               file = fopen(prefix(imports[0]), "r");
+#endif
+               for (unsigned int i = 0; i < imports.size(); i++) {
+                   delete[] imports[i];
+               }
+               imports.clear();
+               continue;
+           } else {
+#ifdef ZIP_ARCHIVE
+               zip_fclose(file);
+#else
+               fclose(file);
+#endif
+               delete[] value;
+               return output;
+           }
+       }
    }
-   return getFullList(file);
 }
 
 #ifdef ZIP_ARCHIVE

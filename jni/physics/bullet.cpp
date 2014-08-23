@@ -27,7 +27,7 @@ float eyemat[16] = {
 bullet::bullet(model *m) {
 
     /// Get configuration
-    std::vector<char*> *atributes = getList("BULLETCFG");
+    std::vector<char*> *atributes = getList("BULLETCFG", "config/open4speed.txt");
     brakeAspect = getConfig("brakeAspect", atributes);
     engineMaxSpeed = getConfig("engineMaxSpeed", atributes);
     gasAspect = getConfig("gasAspect", atributes);

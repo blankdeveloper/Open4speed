@@ -11,7 +11,6 @@
 #ifndef SWITCH_H
 #define SWITCH_H
 
-#include "interfaces/fbo.h"
 #include "interfaces/input.h"
 #include "interfaces/model.h"
 #include "interfaces/physics.h"
@@ -20,12 +19,6 @@
 #include "interfaces/sound.h"
 #include "interfaces/texture.h"
 #include "interfaces/vbo.h"
-
-/**
- * @brief getFBO creates framebuffer from raster data
- * @param texture is texture raster instance
- */
-fbo* getFBO(texture *texture);
 
 /**
  * @brief getInput gets input controller

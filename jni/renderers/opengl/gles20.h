@@ -77,12 +77,6 @@ public:
     void perspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zFar);
 
     /**
-     * @brief clear clears fragmet/depth buffer
-     * @param colors true to clear both, false to clear only depth buffer
-     */
-    void clear(bool colors);
-
-    /**
      * @brief multMatrix multiplies with matrix
      * @param matrix is 4x4 matrix in OpenGL format
      */
@@ -157,6 +151,8 @@ public:
      * @param m is instance of model to render
      */
     void renderSubModel(model* mod, model3d *m);
+
+    void shadowMode(bool enable);
 };
 
 #endif // GLES20_H

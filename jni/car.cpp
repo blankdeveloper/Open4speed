@@ -24,13 +24,8 @@
 car::car(input *i, std::vector<edge> *e, const char* filename) {
 
     /// get car atributes
-#ifdef ZIP_ARCHIVE
-    std::vector<char*> *atributes = getFullList(zip_fopen(APKArchive, prefix(filename), 0));
-#else
-    std::vector<char*> *atributes = getFullList(fopen(prefix(filename), "r"));
-#endif
+    std::vector<char*> *atributes = getList("", filename);
 
-    edges = *(new std::vector<edge>());
     gears = new std::vector<gear>();
 
     /// set default values

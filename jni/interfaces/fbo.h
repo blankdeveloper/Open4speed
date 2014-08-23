@@ -31,10 +31,9 @@ public:
     virtual void bindTexture() = 0;
 
     /**
-     * @brief clear clears fragmet/depth buffer
-     * @param colors true to clear both, false to clear only depth buffer
+     * @brief clear clears stencil/depth buffer
      */
-    virtual void clear(bool colors) = 0;
+    virtual void clear() = 0;
 
     /**
      * @brief destroy removes all data from memory

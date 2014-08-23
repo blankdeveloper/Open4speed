@@ -46,30 +46,12 @@ char* getConfigStr(const char* item, std::vector<char*> *source);
 char* getExtension(const char* filename);
 
 /**
- * @brief getFullList gets list of string from script file
- * @param file is instance of file
- * @return list as vector of char*
- */
-#ifdef ZIP_ARCHIVE
-std::vector<char*>* getFullList(zip_file* file);
-#else
-std::vector<char*>* getFullList(FILE* file);
-#endif
-
-/**
- * @brief getList gets list of string from script file
- * @param tag is tag of script part
- * @return list as vector of char*
- */
-std::vector<char*>* getList(const char* tag);
-
-/**
  * @brief getListEx gets list of string from script file
  * @param tag is tag of script part
  * @param filename is name of file
  * @return list as vector of char*
  */
-std::vector<char*>* getListEx(const char* tag, const char* filename);
+std::vector<char*>* getList(const char* tag, const char* filename);
 
 #ifdef ZIP_ARCHIVE
 /**

@@ -75,7 +75,7 @@ void displayScene() {
     allCar[cameraCar]->rot = rot / 1000.0f;
 
     xrenderer->rtt[xrenderer->oddFrame]->bindFBO();
-    xrenderer->rtt[xrenderer->oddFrame]->clear(true);
+    xrenderer->rtt[xrenderer->oddFrame]->clear();
 
     xrenderer->oddFrame = !xrenderer->oddFrame;
     xrenderer->frame++;
@@ -109,13 +109,6 @@ void displayScene() {
                                                                               allCar[cameraCar]->skin->height * 0.6f, 1);
     xrenderer->light.u_light_dir = xrenderer->view_matrix * bulletMat * glm::vec4(0, allCar[cameraCar]->skin->aplitude * 3.0f,
                                                                                   -allCar[cameraCar]->skin->height, 0);
-    xrenderer->popMatrix();
-
-    /// render skydome
-    xrenderer->pushMatrix();
-    xrenderer->translate(cameraX, -50, cameraZ);
-    xrenderer->scale(viewDistance * 0.5);
-    xrenderer->renderModel(skydome);
     xrenderer->popMatrix();
 
     /// render track
@@ -162,7 +155,8 @@ void displayScene() {
         }
     }
 
-    /// render car shadows
+    /// render shadows
+    xrenderer->shadowMode(true);
     for (int i = carCount - 1; i >= 0; i--) {
 
         ///render car skin
@@ -181,6 +175,14 @@ void displayScene() {
             xrenderer->popMatrix();
         }
     }
+    xrenderer->shadowMode(false);
+
+    /// render skydome
+    xrenderer->pushMatrix();
+    xrenderer->translate(cameraX, -50, cameraZ);
+    xrenderer->scale(viewDistance * 0.9);
+    xrenderer->renderModel(skydome);
+    xrenderer->popMatrix();
 
     /// render smoke effects
     if (water == 0) {
@@ -471,11 +473,7 @@ void keyboardDown(unsigned char key, int x, int y) {
         active = false;
         delete physic;
         currentTrack = 0;
-#ifdef ZIP_ARCHIVE
-        std::vector<char*> *atributes = getFullList(zip_fopen(APKArchive, prefix((*trackList)[currentTrack]), 0));
-#else
-        std::vector<char*> *atributes = getFullList(fopen(prefix((*trackList)[currentTrack]), "r"));
-#endif
+        std::vector<char*> *atributes = getList("", (*trackList)[currentTrack]);
         loadScene(atributes);
         active = true;
     }
@@ -536,7 +534,7 @@ int main(int argc, char** argv) {
     glutInitWindowSize(960,640);
     glutInitContextVersion(3,0);
     glutInitContextProfile(GLUT_CORE_PROFILE);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB | GLUT_STENCIL);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutCreateWindow("Open4speed");
 
     /// set handlers
@@ -547,16 +545,12 @@ int main(int argc, char** argv) {
 #endif
 
     /// load menu data
-    carList = getList("CARS");
-    trackList = getList("TRACKS");
+    carList = getList("CARS", "config/open4speed.txt");
+    trackList = getList("TRACKS", "config/open4speed.txt");
 
     delete physic;
     currentTrack = 0;
-#ifdef ZIP_ARCHIVE
-    std::vector<char*> *atributes = getFullList(zip_fopen(APKArchive, prefix((*trackList)[currentTrack]), 0));
-#else
-    std::vector<char*> *atributes = getFullList(fopen(prefix((*trackList)[currentTrack]), "r"));
-#endif
+    std::vector<char*> *atributes = getList("", (*trackList)[currentTrack]);
     loadScene(atributes);
 
     /// init sound

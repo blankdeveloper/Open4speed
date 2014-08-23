@@ -74,12 +74,6 @@ public:
     virtual void perspective(float fovy, float aspect, float zNear, float zFar) = 0;
 
     /**
-     * @brief clear clears fragmet/depth buffer
-     * @param colors true to clear both, false to clear only depth buffer
-     */
-    virtual void clear(bool colors) = 0;
-
-    /**
      * @brief multMatrix multiplies with matrix
      * @param matrix is 4x4 matrix in OpenGL format
      */
@@ -154,6 +148,8 @@ public:
      * @param m is instance of model to render
      */
     virtual void renderSubModel(model* mod, model3d* m) = 0;
+
+    virtual void shadowMode(bool enable) = 0;
 };
 
 #endif // RENDERER_H

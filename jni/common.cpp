@@ -106,7 +106,7 @@ zip* APKArchive;     ///< Access to APK archive
  * @brief loadAll load all variables from config file
  */
 void loadAll() {
-    std::vector<char*> *atributes = getList("CONFIG");
+    std::vector<char*> *atributes = getList("CONFIG", "config/open4speed.txt");
     aiCameraDistance = getConfig("aiCameraDistance", atributes);
     aiRacerFutureStep = getConfig("aiRacerFutureStep", atributes);
     aiRacerFutureStepCount = getConfig("aiRacerFutureStepCount", atributes);

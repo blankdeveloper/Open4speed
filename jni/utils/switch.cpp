@@ -14,7 +14,6 @@
 #include "loaders/rgb.h"
 #include "physics/bullet.h"
 #include "renderers/opengl/gles20.h"
-#include "renderers/opengl/glfbo.h"
 #include "renderers/opengl/glsl.h"
 #include "renderers/opengl/gltexture.h"
 #include "renderers/opengl/glvbo.h"
@@ -22,21 +21,6 @@
 #include "utils/io.h"
 #include "utils/switch.h"
 #include "common.h"
-
-/**
- * @brief getFBO creates framebuffer from raster data
- * @param texture is texture raster instance
- */
-fbo* getFBO(texture *texture) {
-
-    /// create VBO
-    if (strcmp(screenRenderer, "glsl") == 0) {
-        fbo* instance = new glfbo(texture);
-        return instance;
-    }
-    loge("Renderer incompatible FBO", "");
-    return 0;
-}
 
 /**
  * @brief getInput gets input controller
@@ -105,22 +89,14 @@ shader* getShader(const char* name) {
         }
     }
 
-    char* vert = new char[256];
-    strcpy(vert, "shaders/");
-    strcat(vert, name);
-    strcat(vert, ".vert");
-    char* frag = new char[256];
-    strcpy(frag, "shaders/");
-    strcat(frag, name);
-    strcat(frag, ".frag");
+    char* filename = new char[256];
+    strcpy(filename, "shaders/");
+    strcat(filename, name);
+    strcat(filename, ".glsl");
+    logi("Load shader:", filename);
 
-#ifdef ZIP_ARCHIVE
-    std::vector<char*> *vert_atributes = getFullList(zip_fopen(APKArchive, prefix(vert), 0));
-    std::vector<char*> *frag_atributes = getFullList(zip_fopen(APKArchive, prefix(frag), 0));
-#else
-    std::vector<char*> *vert_atributes = getFullList(fopen(prefix(vert), "r"));
-    std::vector<char*> *frag_atributes = getFullList(fopen(prefix(frag), "r"));
-#endif
+    std::vector<char*> *vert_atributes = getList("VERT", filename);
+    std::vector<char*> *frag_atributes = getList("FRAG", filename);
 
     /// create shader from code
     if (strcmp(screenRenderer, "glsl") == 0) {

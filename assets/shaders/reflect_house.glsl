@@ -1,3 +1,23 @@
+VERT
+uniform mat4 u_ModelViewMatrix;
+uniform mat4 u_ProjectionMatrix;
+attribute vec3 v_vertex;
+attribute vec3 v_normal;
+attribute vec2 v_coord;
+varying vec3 v_Vertex;
+varying vec3 v_Normal;
+varying vec2 v_Coords;
+void main()
+{
+    vec4 view_pos = u_ModelViewMatrix * vec4(v_vertex, 1.0);
+    v_Normal = vec3(u_ModelViewMatrix * vec4(v_normal, 0.0));
+    v_Vertex = view_pos.xyz;
+    v_Coords = v_coord;
+    gl_Position = u_ProjectionMatrix * view_pos;
+}
+END
+
+FRAG
 uniform sampler2D color_texture;
 uniform sampler2D EnvMap1;
 uniform float u_height, u_speed, u_view, u_gamma;
@@ -46,3 +66,4 @@ void main()
   vec4 c = texture2D(EnvMap1, vec2((v_Normal * length(diffuse.rgb)).x * 0.5 + 0.5, gl_FragCoord.y * u_height));
   gl_FragColor = gl_FragColor + (1.0 - abs(v_Normal.y)) * 0.25 * (1.0 - (1.0 - c * c));
 }
+END

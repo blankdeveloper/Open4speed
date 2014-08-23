@@ -165,7 +165,7 @@ modelo4s::modelo4s(const char* filename, bool gpu) {
 
         /// store model in VBO
         if (gpu) {
-            int size = sizeof(float)*m->triangleCount[cutX * cutY] * 3;
+            int size = m->triangleCount[cutX * cutY] * 3;
             if (!m->material->hasAttrib(1)) {
                 delete[] m->normals;
                 m->normals = 0;

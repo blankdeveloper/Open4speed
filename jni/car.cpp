@@ -14,6 +14,16 @@
 #include "car.h"
 #include "common.h"
 
+#define PERSPECTIVE_MIN 90
+#define PERSPECTIVE_MAX 150
+#define PERSPECTIVE_SPEED_DEPENDENCY 0.2
+#define PERSPECTIVE_SPEED_FOLLOW 2
+#define SPEED_ASPECT 50
+#define SOUND_CRASH_MINIMAL_SPEED 5
+#define SOUND_CRASH_ON_SPEED_CHANGE 0.7
+#define SOUND_ENGINE_FREQ_ASPECT 15
+#define SOUND_MAXIMAL_DISTANCE 25
+
 /**
  * @brief car is constructor which loads car model
  * @param i is car control device(or program)
@@ -119,11 +129,11 @@ car::~car() {
  * @return view perspective by car speed
  */
 float car::getView() {
-    view = (view + (minimalPerspective + speed * perspectiveSpeedDependency)) / perspectiveSpeedFollow;
-    if (view < minimalPerspective)
-        view = minimalPerspective;
-    if (view > maximalPerspective)
-        view = maximalPerspective;
+    view = (view + (PERSPECTIVE_MIN + speed * PERSPECTIVE_SPEED_DEPENDENCY)) / PERSPECTIVE_SPEED_FOLLOW;
+    if (view < PERSPECTIVE_MIN)
+        view = PERSPECTIVE_MIN;
+    if (view > PERSPECTIVE_MAX)
+        view = PERSPECTIVE_MAX;
     return view;
 }
 
@@ -186,7 +196,7 @@ void car::update() {
 
     /// count speed
     lspeed = speed;
-    speed = sqrt(sqr(fabsf(lx - x)) + sqr(fabsf(lz - z))) * speedAspect;
+    speed = sqrt(sqr(fabsf(lx - x)) + sqr(fabsf(lz - z))) * SPEED_ASPECT;
 
     /// update current edge for counting laps
     edge cge = currentGoalEdge;
@@ -270,7 +280,7 @@ void car::updateSound() {
         brake = true;
     if (reverse & (control->getGas() < 1))
         brake = true;
-    if ((lspeed * soundCrashOnSpeedChange > speed) & (speed > soundCrashMinimalSpeed) & brake) {
+    if ((lspeed * SOUND_CRASH_ON_SPEED_CHANGE > speed) & (speed > SOUND_CRASH_MINIMAL_SPEED) & brake) {
         crash->play(index - 1);
     }
 
@@ -315,16 +325,16 @@ void car::updateSound() {
     /// set engine sound
     if (engineFreq >= gearLow) {
         engine->play(index - 1);
-        engine->setFrequency(index - 1, engineFreq * soundEngineFreqAspect);
+        engine->setFrequency(index - 1, engineFreq * SOUND_ENGINE_FREQ_ASPECT);
         enginePlus->play(index - 1);
-        enginePlus->setFrequency(index - 1, engineFreq * soundEngineFreqAspect);
+        enginePlus->setFrequency(index - 1, engineFreq * SOUND_ENGINE_FREQ_ASPECT);
     } else if (engineFreq < gearLow) {
-        engine->setFrequency(index - 1,  gearLow * soundEngineFreqAspect);
-        enginePlus->setFrequency(index - 1,  gearLow * soundEngineFreqAspect);
+        engine->setFrequency(index - 1,  gearLow * SOUND_ENGINE_FREQ_ASPECT);
+        enginePlus->setFrequency(index - 1,  gearLow * SOUND_ENGINE_FREQ_ASPECT);
     }
 
     /// set sound distance
-    float dist = (1 - distance(allCar[cameraCar],this) / soundMaximalDistance);
+    float dist = (1 - distance(allCar[cameraCar],this) / SOUND_MAXIMAL_DISTANCE);
     if (dist < 0)
         dist = 0;
     dist *= dist;

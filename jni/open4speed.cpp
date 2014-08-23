@@ -17,6 +17,8 @@
 #include "utils/switch.h"
 #include "common.h"
 
+#define VIEW_DISTANCE 500
+
 /**
  * Counters variables
  */
@@ -86,7 +88,7 @@ void displayScene() {
     /// set camera
     float view = allCar[cameraCar]->getView();
 
-    xrenderer->perspective(view, aspect, 0.1, viewDistance);
+    xrenderer->perspective(view, aspect, 0.1, VIEW_DISTANCE);
     xrenderer->pushMatrix();
     float cameraX = allCar[cameraCar]->transform->value[12] - sin(direction) * allCar[cameraCar]->control->getDistance() * 2 / (view / 90);
     float cameraY = allCar[cameraCar]->transform->value[13] + fabs(allCar[cameraCar]->control->getDistance() * 1.25f / (view / 90));
@@ -111,12 +113,16 @@ void displayScene() {
                                                                                   -allCar[cameraCar]->skin->height, 0);
     xrenderer->popMatrix();
 
+    /// render skydome
+    xrenderer->pushMatrix();
+    xrenderer->translate(cameraX, 0, cameraZ);
+    xrenderer->scale(VIEW_DISTANCE * 0.75);
+    xrenderer->renderModel(skydome);
+    xrenderer->popMatrix();
+
     /// render track
     xrenderer->enable[1] = false;
     xrenderer->renderModel(trackdata);
-    if (trackdata2 != 0) {
-        xrenderer->renderModel(trackdata2);
-    }
 
     /// render cars
     xrenderer->enable[2] = false;
@@ -176,13 +182,6 @@ void displayScene() {
         }
     }
     xrenderer->shadowMode(false);
-
-    /// render skydome
-    xrenderer->pushMatrix();
-    xrenderer->translate(cameraX, -50, cameraZ);
-    xrenderer->scale(viewDistance * 0.9);
-    xrenderer->renderModel(skydome);
-    xrenderer->popMatrix();
 
     /// render smoke effects
     if (water == 0) {
@@ -258,7 +257,7 @@ void displayScene() {
  * @param playerCar  is index of choosen car
  * @return loaded scene
  */
-void loadScene(std::vector<char*> *atributes) {
+void loadScene(char* filename) {
 
     /// clear previous scene
     if (trackdata != 0) {
@@ -273,15 +272,11 @@ void loadScene(std::vector<char*> *atributes) {
     carCount = 0;
 
     /// load track
+    std::vector<char*> *atributes = getList("", filename);
     trackdata = getModel(getConfigStr("track_model1", atributes), true);
     int trackIndex = getConfig("race_track", atributes);
-    std::vector<edge> e;
-    if (strlen(getConfigStr("track_model2", atributes)) > 0) {
-        trackdata2 = getModel(getConfigStr("track_model2", atributes), false);
-        e = trackdata2->edges[trackIndex];
-    } else {
-        e = trackdata->edges[trackIndex];
-    }
+    trackdata2 = getModel(getConfigStr("track_model2", atributes), false);
+    std::vector<edge> e = trackdata2->edges[trackIndex];
 
     /// load sky
     skydome = getModel(getConfigStr("sky_model", atributes), true);
@@ -291,7 +286,7 @@ void loadScene(std::vector<char*> *atributes) {
     //arrow->models[0].texture2D = skydome->models[1].texture2D;
 
     /// load player car
-    allCar[0] = new car(getInput(), &e, (*carList)[playerCar]);
+    allCar[0] = new car(getInput(), &e, carList[playerCar]);
 
     /// load race informations
     allCar[0]->lapsToGo = getConfig("laps", atributes) - 1;
@@ -304,7 +299,7 @@ void loadScene(std::vector<char*> *atributes) {
     for (int i = 0; i < opponentCount; i++) {
 
         /// racer ai
-        allCar[i + 1] = new car(new airacer(), &e, (*carList)[getConfig(getTag(i + 1, "opponent%d_car"), atributes)]);
+        allCar[i + 1] = new car(new airacer(), &e, carList[getConfig(getTag(i + 1, "opponent%d_car"), atributes)]);
         allCar[i + 1]->finishEdge = allCar[0]->finishEdge;
         allCar[i + 1]->lapsToGo = allCar[0]->lapsToGo;
         allCar[i + 1]->setStart(allCar[i + 1]->edges[getConfig(getTag(i + 1, "opponent%d_start"), atributes)], 0);
@@ -428,7 +423,7 @@ void display(void) {
 
         /// draw FPS
 #ifndef ANDROID
-            printf("FPS: %d, t: %0.3fms, e: %d, k: %d\n", lastFPS, lastFrameTime, allCar[cameraCar]->currentEdgeIndex, lastkey);
+        printf("FPS: %d, t: %0.3fms, e: %d\n", lastFPS, lastFrameTime, allCar[cameraCar]->currentEdgeIndex);
 #endif
     }
 
@@ -472,9 +467,7 @@ void keyboardDown(unsigned char key, int x, int y) {
     if (key == 27) {
         active = false;
         delete physic;
-        currentTrack = 0;
-        std::vector<char*> *atributes = getList("", (*trackList)[currentTrack]);
-        loadScene(atributes);
+        loadScene("tracks/track1.ini");
         active = true;
     }
 #endif
@@ -523,9 +516,6 @@ int main(int argc, char** argv) {
     /// set menu variables
     active = true;
 
-    /// load configuration
-    loadAll();
-
 #ifndef ANDROID
     /// init glut
     glutInit(&argc, argv);
@@ -545,13 +535,10 @@ int main(int argc, char** argv) {
 #endif
 
     /// load menu data
-    carList = getList("CARS", "config/open4speed.txt");
-    trackList = getList("TRACKS", "config/open4speed.txt");
+    carList.push_back("cars/orange/params.ini");
 
     delete physic;
-    currentTrack = 0;
-    std::vector<char*> *atributes = getList("", (*trackList)[currentTrack]);
-    loadScene(atributes);
+    loadScene("tracks/track1.ini");
 
     /// init sound
     crash = getSound("sfx/crash.ogg", false, 1);

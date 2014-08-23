@@ -30,66 +30,19 @@ extern zip* APKArchive;             ///< APK archive instance
 /**
  * @brief The game resources
  */
-extern std::vector<char*> *carList;                                    ///< List of all cars
-extern std::vector<char*> *trackList;                                  ///< List of all tracks
-extern std::vector<shader*> *shaders;                                  ///< Shaders storage
-extern std::vector<texture*> *textures;                                ///< Textures storage
-
-/**
- * @brief The engine configs
- */
-extern float aiCameraDistance;                                 ///< AI camera distance
-extern float aiRacerFutureStep;                                ///< AI navigation parameter
-extern float aiRacerFutureStepCount;                           ///< AI navigation parameter
-extern float aiRacerReverseDelay;                              ///< AI navigation parameter
-extern float aiRacerReverseDuration;                           ///< AI navigation parameter
-extern float aiRacerSafeAngle;                                 ///< AI navigation parameter
-extern float aiRacerSafeDistance;                              ///< AI navigation parameter
-extern float aiRacerSafeDistanceSpeedDependency;               ///< AI navigation parameter
-extern float aiRacerSafeGapGas;                                ///< AI navigation parameter
-extern float aiRacerSafeGapSteering;                           ///< AI navigation parameter
-extern float aiRacerSafeSpeed;                                 ///< AI navigation parameter
-extern float aiRacerSteeringGapLevel1;                         ///< AI navigation parameter
-extern float aiRacerSteeringGapLevel2;                         ///< AI navigation parameter
-extern float aiRacerTrackUpdate;                               ///< AI navigation parameter
-extern float aiRacerTrackUpdateSpeedDependency;                ///< AI navigation parameter
-extern char* inputController;                                  ///< Input controller
-extern float keyBack;                                          ///< Keycode
-extern float keyCameraDown;                                    ///< Keycode
-extern float keyCameraUp;                                      ///< Keycode
-extern float keyDown;                                          ///< Keycode
-extern float keyGearDown;                                      ///< Keycode
-extern float keyGearUp;                                        ///< Keycode
-extern float keyLeft;                                          ///< Keycode
-extern float keyRight;                                         ///< Keycode
-extern float keyUp;                                            ///< Keycode
-extern float minimalPerspective;                               ///< Minimal perspective
-extern float maximalPerspective;                               ///< Maximal perspective
-extern float perspectiveSpeedDependency;                       ///< Perspective change speed dependency
-extern float perspectiveSpeedFollow;                           ///< Perspective change speed
-extern float playerCameraStep;                                 ///< Camera move step
-extern float playerDefaultCameraDistance;                      ///< Camera distance
-extern float playerTrackUpdate;                                ///< GPS navigation
-extern char* physicalEngine;                                   ///< Used physical engine
-extern char* screenRenderer;                                   ///< Used renderer
-extern float soundCrashMinimalSpeed;                           ///< Crash sound minimal speed
-extern float soundCrashOnSpeedChange;                          ///< Crash sound detection value
-extern float soundEngineFreqAspect;                            ///< Engine frequency aspect
-extern float soundMaximalDistance;                             ///< Maximal distance of sounds
-extern float speedAspect;                                      ///< Speed aspect
-extern float viewDistance;                                     ///< View distance
+extern std::vector<char*>  carList;                 ///< List of all cars
+extern std::vector<shader*> shaders;                ///< Shaders storage
+extern std::vector<texture*> textures;              ///< Textures storage
 
 /**
  * The scene
  */
-extern float aspect;                                ///< Menu aspect
+extern float aspect;                                ///< Screen aspect
 extern pthread_mutex_t matrixLock;                  ///< Car matrix locking
 extern int screen_width;                            ///< Screen width
 extern int screen_height;                           ///< Screen height
-extern float cameraDistance;                        ///< Camera distance level
 extern int playerCar;                               ///< Index of player car
 extern bool active;                                 ///< Information if scene is active
-extern int currentTrack;                            ///< Current track index
 extern int opponentCount;                           ///< Opponent count
 extern model *skydome;                              ///< Skydome model
 extern model *trackdata;                            ///< Track first model
@@ -104,22 +57,13 @@ extern sound* enginePlus;                           ///< Engine extra sound
 extern sound* noise;                                ///< N2O sound
 extern float *mat;                                  ///< Temp matrix
 extern char *string;                                ///< Temp string
-const int configSize = 32;                          ///< Amount of config variables
-extern int config[configSize];                      ///< Temporary config data
-extern std::vector<char*> *configText[configSize];  ///< Config texts
 extern float direction;                             ///< Camera direction
 extern float mtime;                                 ///< Time stamp
-extern int lastkey;                                 ///< Last pressed key keycode
 
 extern physics *physic;     ///< Physical engine instance
 extern renderer *xrenderer; ///< Renderer instance
 #ifndef ANDROID
 extern zip* APKArchive;     ///< Access to APK archive
 #endif
-
-/**
- * @brief loadAll load all variables from config file
- */
-void loadAll();
 
 #endif // COMMON_H

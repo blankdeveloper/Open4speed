@@ -187,6 +187,7 @@ std::vector<char*>* getList(const char* tag, const char* filename) {
 #else
                fclose(file);
 #endif
+               delete[] value;
                return output;
            }
            if (hasTag)
@@ -218,7 +219,6 @@ std::vector<char*>* getList(const char* tag, const char* filename) {
 #else
                fclose(file);
 #endif
-               delete[] value;
                return output;
            }
        }

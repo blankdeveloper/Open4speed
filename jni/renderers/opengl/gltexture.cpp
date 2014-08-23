@@ -28,9 +28,9 @@ void gltexture::pointerDecrease() {
         instanceCount--;
         if (instanceCount == 0) {
           glDeleteTextures(1, &textureID);
-          for (unsigned int i = 0; i < textures->size(); i++) {
-              if (strcmp(texturename, (*textures)[i]->texturename) == 0) {
-                  (*textures).erase(textures->begin() + i);
+          for (unsigned int i = 0; i < textures.size(); i++) {
+              if (strcmp(texturename, textures[i]->texturename) == 0) {
+                  textures.erase(textures.begin() + i);
               }
           }
         }

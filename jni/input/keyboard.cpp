@@ -10,7 +10,19 @@
 #include "input/keyboard.h"
 #include "common.h"
 
-bool keys[7];            ///< State of keyboard
+#define CAMERA_DISTANCE_DEFAULT 2.3
+#define CAMERA_STEP 0.3
+#define KEY_CAMERA_DOWN 171
+#define KEY_CAMERA_UP 173
+#define KEY_DOWN 103
+#define KEY_LEFT 100
+#define KEY_NITRO 160
+#define KEY_RIGHT 102
+#define KEY_UP 101
+#define TRACK_UPDATE 80
+
+float cameraDistance;    ///< Distance of camera
+bool keys[5];            ///< State of keyboard
 
 /// Key pressed
 /**
@@ -20,25 +32,20 @@ bool keys[7];            ///< State of keyboard
  * @param y is mouse cursor position
  */
 void special(int key, int x, int y) {
-    lastkey = key;
-    if (key == keyCameraDown)
-        cameraDistance-=playerCameraStep;
-    else if (key == keyCameraUp)
-        cameraDistance+=playerCameraStep;
-    else if (key == keyUp)
+    if (key == KEY_CAMERA_DOWN)
+        cameraDistance -= CAMERA_STEP;
+    else if (key == KEY_CAMERA_UP)
+        cameraDistance += CAMERA_STEP;
+    else if (key == KEY_UP)
         keys[0] = true;
-    else if (key == keyDown)
+    else if (key == KEY_DOWN)
         keys[1] = true;
-    else if (key == keyLeft)
+    else if (key == KEY_LEFT)
         keys[2] = true;
-    else if (key == keyRight)
+    else if (key == KEY_RIGHT)
         keys[3] = true;
-    else if (key == keyGearUp)
+    else if (key == KEY_NITRO)
         keys[4] = true;
-    else if (key == keyGearDown)
-        keys[5] = true;
-    else if (key == 160)
-        keys[6] = true;
 }
 
 /// Key released
@@ -50,16 +57,16 @@ void special(int key, int x, int y) {
  */
 void specialUp(int key, int x, int y) {
 
-    if (key == keyUp)
+    if (key == KEY_UP)
         keys[0] = false;
-    else if (key == keyDown)
+    else if (key == KEY_DOWN)
         keys[1] = false;
-    else if (key == keyLeft)
+    else if (key == KEY_LEFT)
         keys[2] = false;
-    else if (key == keyRight)
+    else if (key == KEY_RIGHT)
         keys[3] = false;
-    else if (key == 160)
-        keys[6] = false;
+    else if (key == KEY_NITRO)
+        keys[4] = false;
 }
 
 /**
@@ -67,6 +74,7 @@ void specialUp(int key, int x, int y) {
  */
 keyboard::keyboard()
 {
+    cameraDistance = CAMERA_DISTANCE_DEFAULT;
 #ifndef ANDROID
     glutSpecialFunc(special);
     glutSpecialUpFunc(specialUp);
@@ -97,25 +105,10 @@ float keyboard::getDistance() {
  * @return value between 0 and 1 where 0=unpressed and 1=full pressed
  */
 float keyboard::getGas() {
-    if (keys[0] | keys[6])
+    if (keys[0] || keys[4])
         return 1;
     else
         return 0;
-}
-
-/**
- * @brief getGearChange Get gear change
- * @return 1 to gearUp, -1 to gearDown and 0 to stay
- */
-int keyboard::getGearChange() {
-    int output = 0;
-    if (keys[4])
-        output = -1;
-    if (keys[5])
-        output = 1;
-    keys[4] = false;
-    keys[5] = false;
-    return output;
 }
 
 /**
@@ -123,7 +116,7 @@ int keyboard::getGearChange() {
  * @return 0 if nitro is disable and 1 if it is enabled
  */
 bool keyboard::getNitro() {
-    return keys[6];
+    return keys[4];
 }
 
 /**
@@ -131,7 +124,7 @@ bool keyboard::getNitro() {
  * @return value between -1 and 1 where -1=left, 0=center and 1=right
  */
 float keyboard::getSteer() {
-    if (keys[2] & keys[3])
+    if (keys[2] && keys[3])
         return 0;
     else if (keys[2])
         return 1;
@@ -147,5 +140,5 @@ float keyboard::getSteer() {
  * @return constant distance in float
  */
 float keyboard::getUpdate() {
-    return playerTrackUpdate;
+    return TRACK_UPDATE;
 }

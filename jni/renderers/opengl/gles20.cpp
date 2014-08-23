@@ -290,22 +290,11 @@ void gles20::renderModel(model* m) {
         current->bind();
         if (!m->models[i].texture2D->transparent)
             if (enable[m->models[i].filter]) {
-
-                /// set alpha channel
-                if ((m->models[i].texture2D->alpha < 0.9) || (m->models[i].texture2D->transparent)) {
-                    glEnable(GL_BLEND);
-                    glDepthMask(false);
-                    glDisable(GL_CULL_FACE);
-                    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-                    current->uniformFloat("u_Alpha", m->models[i].texture2D->alpha);
-                } else {
-                    glEnable(GL_CULL_FACE);
-                    glCullFace(GL_BACK);
-                    glDisable(GL_BLEND);
-                    glDepthMask(true);
-                    current->uniformFloat("u_Alpha", 1);
-                }
-
+                glEnable(GL_CULL_FACE);
+                glCullFace(GL_BACK);
+                glDisable(GL_BLEND);
+                glDepthMask(true);
+                current->uniformFloat("u_Alpha", 1);
                 renderSubModel(m, &m->models[i]);
             }
     }
@@ -314,22 +303,12 @@ void gles20::renderModel(model* m) {
         current->bind();
         if (m->models[i].texture2D->transparent)
             if (enable[m->models[i].filter]) {
-
                 /// set alpha channel
-                if ((m->models[i].texture2D->alpha < 0.9) || (m->models[i].texture2D->transparent)) {
-                    glEnable(GL_BLEND);
-                    glDepthMask(false);
-                    glDisable(GL_CULL_FACE);
-                    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-                    current->uniformFloat("u_Alpha", m->models[i].texture2D->alpha);
-                } else {
-                    glEnable(GL_CULL_FACE);
-                    glCullFace(GL_BACK);
-                    glDisable(GL_BLEND);
-                    glDepthMask(true);
-                    current->uniformFloat("u_Alpha", 1);
-                }
-
+                glEnable(GL_BLEND);
+                glDepthMask(false);
+                glDisable(GL_CULL_FACE);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                current->uniformFloat("u_Alpha", m->models[i].texture2D->alpha);
                 renderSubModel(m, &m->models[i]);
             }
     }

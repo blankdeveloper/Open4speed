@@ -22,12 +22,6 @@
 class bullet:public physics {
 public:
 
-    ///< Configuration of physical engine
-    float brakeAspect, engineMaxSpeed, gasAspect, gravitation, overSpeedBraking, rollInfluence,
-    skinFriction, speedDecrease, steeringAspect, steeringSpeedDependency, suspensionCompression,
-    suspensionDamping, suspensionStiffness, underSpeedBraking, vehicleMassAspect, vehicleStep,
-    wheelFriction, worldLimit, worldStep, worldSubStep;
-
     /**
      * Bullet physics objects
      */

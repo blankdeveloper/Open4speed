@@ -22,17 +22,15 @@
 #include "utils/switch.h"
 #include "common.h"
 
+#define BULLET
+#define GLES20
+
 /**
  * @brief getInput gets input controller
  * @return input controller
  */
 input* getInput() {
-    if (strcmp(inputController, "keyboard") == 0) {
-        logi("Init keyboard", "");
-        return new keyboard();
-    }
-    loge("Input controller not found:", inputController);
-    return 0;
+    return new keyboard();
 }
 
 /**
@@ -56,11 +54,10 @@ model* getModel(const char* filename, bool gpu) {
  */
 physics* getPhysics(model *m) {
     logi("Init physical engine","");
-    if (strcmp(physicalEngine, "bullet") == 0) {
-        return new bullet(m);
-    }
-    loge("Physical engine not found:", physicalEngine);
-    return 0;
+#ifdef BULLET
+    return new bullet(m);
+#endif
+    exit(1);
 }
 
 /**
@@ -68,12 +65,11 @@ physics* getPhysics(model *m) {
  * @return renderer instance
  */
 renderer* getRenderer() {
-    logi("Init renderer ",screenRenderer);
-    if (strcmp(screenRenderer, "glsl") == 0) {
-        return new gles20();
-    }
-    loge("Renderer not found:", screenRenderer);
-    return 0;
+    logi("Init renderer","");
+#ifdef GLES20
+    return new gles20();
+#endif
+    exit(1);
 }
 
 /**
@@ -83,9 +79,9 @@ renderer* getRenderer() {
  */
 shader* getShader(const char* name) {
     /// find previous instance
-    for (unsigned int i = 0; i < shaders->size(); i++) {
-        if (strcmp((*shaders)[i]->shadername, name) == 0) {
-            return (*shaders)[i];
+    for (unsigned int i = 0; i < shaders.size(); i++) {
+        if (strcmp(shaders[i]->shadername, name) == 0) {
+            return shaders[i];
         }
     }
 
@@ -99,14 +95,13 @@ shader* getShader(const char* name) {
     std::vector<char*> *frag_atributes = getList("FRAG", filename);
 
     /// create shader from code
-    if (strcmp(screenRenderer, "glsl") == 0) {
-        shader* instance = new glsl(vert_atributes, frag_atributes);
-        strcpy(instance->shadername, name);
-        shaders->push_back(instance);
-        return instance;
-    }
-    loge("Renderer incompatible shader:", name);
-    return 0;
+#ifdef GLES20
+    shader* instance = new glsl(vert_atributes, frag_atributes);
+    strcpy(instance->shadername, name);
+    shaders.push_back(instance);
+    return instance;
+#endif
+    exit(1);
 }
 
 /**
@@ -129,52 +124,50 @@ sound* getSound(const char* filename, bool loop, int channels) {
  */
 texture* getTexture(const char* filename, float alpha) {
     /// find previous instance
-    for (unsigned int i = 0; i < textures->size(); i++) {
-        if (strcmp((*textures)[i]->texturename, filename) == 0) {
-          if ((*textures)[i]->instanceCount > 0) {
-              (*textures)[i]->instanceCount++;
-              return (*textures)[i];
+    for (unsigned int i = 0; i < textures.size(); i++) {
+        if (strcmp(textures[i]->texturename, filename) == 0) {
+          if (textures[i]->instanceCount > 0) {
+              textures[i]->instanceCount++;
+              return textures[i];
           }
         }
     }
 
     /// create new instance
     logi("Load texture:", filename);
-    if (strcmp(screenRenderer, "glsl") == 0) {
-        if (strcmp(getExtension(filename), "png") == 0) {
-          texture* instance = new gltexture(*loadPNG(filename), alpha);
-          instance->instanceCount = 1;
-          strcpy(instance->texturename, filename);
-          textures->push_back(instance);
-          return instance;
-        } else if (getExtension(filename)[0] == 'p') {
+#ifdef GLES20
+    if (strcmp(getExtension(filename), "png") == 0) {
+      texture* instance = new gltexture(*loadPNG(filename), alpha);
+      instance->instanceCount = 1;
+      strcpy(instance->texturename, filename);
+      textures.push_back(instance);
+      return instance;
+    } else if (getExtension(filename)[0] == 'p') {
 
-            /// get animation frame count
-            char* ext = getExtension(filename);
-            int count = (ext[1] - '0') * 10 + ext[2] - '0';
-            char file[strlen(filename)];
-            strcpy(file, filename);
+        /// get animation frame count
+        char* ext = getExtension(filename);
+        int count = (ext[1] - '0') * 10 + ext[2] - '0';
+        char file[strlen(filename)];
+        strcpy(file, filename);
 
-            /// load all sequence images
-            std::vector<texture*> anim = *(new std::vector<texture*>());
-            for (int i = 0; i <= count; i++) {
-                file[strlen(filename) - 1] = i % 10 + '0';
-                file[strlen(filename) - 2] = i / 10 + '0';
-                anim.push_back(new gltexture(*loadPNG(file), alpha));
-                anim[anim.size() - 1]->instanceCount = 1;
-                anim[anim.size() - 1]->texturename[0] = '\0';
-            }
-
-            texture* instance = new gltexture(anim, alpha);
-            instance->instanceCount = 1;
-            strcpy(instance->texturename, filename);
-            textures->push_back(instance);
-            return instance;
+        /// load all sequence images
+        std::vector<texture*> anim = *(new std::vector<texture*>());
+        for (int i = 0; i <= count; i++) {
+            file[strlen(filename) - 1] = i % 10 + '0';
+            file[strlen(filename) - 2] = i / 10 + '0';
+            anim.push_back(new gltexture(*loadPNG(file), alpha));
+            anim[anim.size() - 1]->instanceCount = 1;
+            anim[anim.size() - 1]->texturename[0] = '\0';
         }
-    }
 
-    logi("Renderer incompatible texture:",filename);
-    return getTexture(0.5, 0.5, 0.5, 1);
+        texture* instance = new gltexture(anim, alpha);
+        instance->instanceCount = 1;
+        strcpy(instance->texturename, filename);
+        textures.push_back(instance);
+        return instance;
+    }
+#endif
+    exit(1);
 }
 
 /**
@@ -186,15 +179,10 @@ texture* getTexture(const char* filename, float alpha) {
  * @return texture instance
  */
 texture* getTexture(float r, float g, float b, float alpha) {
-
-    /// create new instance
-    if (strcmp(screenRenderer, "glsl") == 0) {
-        texture* instance = new gltexture(*createRGB(1, 1, r, g, b), alpha);
-       return instance;
-    }
-
-    loge("Renderer incompatible RGB texture", "");
-    return 0;
+#ifdef GLES20
+    return new gltexture(*createRGB(1, 1, r, g, b), alpha);
+#endif
+    exit(1);
 }
 
 /**
@@ -206,12 +194,8 @@ texture* getTexture(float r, float g, float b, float alpha) {
  * @param tnormals is triangle normals array
  */
 vbo* getVBO(int size, float* vertices, float* normals, float* coords, float* tnormals) {
-
-    /// create VBO
-    if (strcmp(screenRenderer, "glsl") == 0) {
-        vbo* instance = new glvbo(size, vertices, normals, coords, tnormals);
-        return instance;
-    }
-    loge("Renderer incompatible VBO", "");
-    return 0;
+#ifdef GLES20
+    return new glvbo(size, vertices, normals, coords, tnormals);
+#endif
+    exit(1);
 }

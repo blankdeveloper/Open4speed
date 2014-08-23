@@ -11,6 +11,16 @@
 #include "utils/math.h"
 #include "common.h"
 
+#define CAMERA_DISTANCE 1.5
+#define REVERSE_DELAY 50
+#define REVERSE_DURATION 30
+#define SAFE_GAP_GAS 15
+#define SAFE_SPEED 35
+#define STEERING_GAP_LOW 5
+#define STEERING_GAP_HIGH 15
+#define TRACK_UPDATE 10
+#define TRACK_UPDATE_SPEED_DEPENDENCY 5
+
 /**
  * @brief airacer Creates new control instance
  */
@@ -35,7 +45,7 @@ float airacer::getBrake() {
  * @ distance in float
  */
 float airacer::getDistance() {
-     return aiCameraDistance;
+     return CAMERA_DISTANCE;
 }
 
 /**
@@ -49,20 +59,12 @@ float airacer::getGas() {
          return 0;
 
     /// check angle of turn
-    if (allCar[index]->speed > aiRacerSafeSpeed)
-        if (fabsf(gap(allCar[index]->currentEdge, allCar[index])) > aiRacerSafeGapGas)
+    if (allCar[index]->speed > SAFE_SPEED)
+        if (fabsf(gap(allCar[index]->currentEdge, allCar[index])) > SAFE_GAP_GAS)
              return 0;
     if ((int)allCar[index]->speed > 5)
         problem = 0;
      return 1;
-}
-
-/**
- * @brief getGearChange Get gear change
- * @ 1 to gearUp, -1 to gearDown and 0 to stay
- */
-int airacer::getGearChange() {
-     return 0;
 }
 
 /**
@@ -83,33 +85,17 @@ float airacer::getSteer() {
     if (reverseMode)
          return 0;
 
-    /// try to prevent collision with other cars
-    /*float safeDistance = aiRacerSafeDistance + allCar[index]->speed / aiRacerSafeDistanceSpeedDependency;
-    for (int x = 0; x < carCount; x++) {
-        if (((index != x) & (allCar[x] != 0)) & !allCar[x]->reverse)
-            if (absf(allCar[x]->y - allCar[index]->y) < 1)
-                if (distance(allCar[x], allCar[index], aiRacerFutureStep) < safeDistance)
-                    if ((int)(allCar[index]->rot - angle(allCar[x], allCar[index]) + 360) % 360 < aiRacerSafeAngle)
-                        for (int i = 0; i < aiRacerFutureStepCount; i++) {
-                            float g1 = gap(allCar[index], allCar[x], i);
-                               if ((g1 > 0) & (g1 < aiRacerSafeGapSteering))
-                                    return -1;
-                               if ((g1 < 0) & (g1 > -aiRacerSafeGapSteering))
-                                    return 1;
-                        }
-    }*/
-
     /// count track direction
     float g2 = gap(allCar[index]->currentEdge, allCar[index]);
 
     /// update direction
-    if (g2 > aiRacerSteeringGapLevel2)
+    if (g2 > STEERING_GAP_HIGH)
          return -1;
-    if (g2 < -aiRacerSteeringGapLevel2)
+    if (g2 < -STEERING_GAP_HIGH)
          return 1;
-    if (g2 > aiRacerSteeringGapLevel1)
+    if (g2 > STEERING_GAP_LOW)
          return -0.5;
-    if (g2 < -aiRacerSteeringGapLevel1)
+    if (g2 < -STEERING_GAP_LOW)
          return 0.5;
      return 0;
 }
@@ -121,16 +107,16 @@ float airacer::getSteer() {
  */
 float airacer::getUpdate() {
 
-    /*if ((this->getGas() > 0) & ((int)allCar[index]->speed <= 5)) {
+    if ((this->getGas() > 0) & ((int)allCar[index]->speed <= 5)) {
         problem++;
     }
-    if (problem >= aiRacerReverseDelay) {
+    if (problem >= REVERSE_DELAY) {
         reverseMode = true;
         problem++;
     }
-    if (problem >= aiRacerReverseDelay + aiRacerReverseDuration) {
+    if (problem >= REVERSE_DELAY + REVERSE_DURATION) {
         reverseMode = false;
         problem = 0;
-    }*/
-     return aiRacerTrackUpdate + allCar[index]->speed / aiRacerTrackUpdateSpeedDependency;
+    }
+    return TRACK_UPDATE + allCar[index]->speed / TRACK_UPDATE_SPEED_DEPENDENCY;
 }

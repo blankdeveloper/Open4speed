@@ -42,12 +42,6 @@ public:
     virtual float getGas() = 0;
 
     /**
-     * @brief getGearChange Get gear change
-     * @return 1 to gearUp, -1 to gearDown and 0 to stay
-     */
-    virtual int getGearChange() = 0;
-
-    /**
      * @brief getNitro get nitro power
      * @return 0 if nitro is disable and 1 if it is enabled
      */

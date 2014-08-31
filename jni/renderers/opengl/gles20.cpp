@@ -43,7 +43,7 @@ gles20::gles20(int w, int h) {
 
     /// set open-gl
     glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
-    glDepthFunc(GL_LEQUAL);
+    glDepthFunc(GL_LESS);
 
     //set shaders
     scene_shader = getShader("scene");
@@ -232,7 +232,7 @@ void gles20::translate(float x, float y, float z) {
  */
 void gles20::renderDynamic(GLfloat *vertices, GLfloat *coords, shader* sh, texture* txt, int triangleCount) {
 
-    /// init OpenGL state
+    /// set OpenGL state
     glEnable(GL_BLEND);
     glDepthMask(false);
     glBlendFunc(GL_SRC_ALPHA,GL_ONE);
@@ -323,6 +323,9 @@ void gles20::renderModel(model* m) {
  * @param m is instance of model to render
  */
 void gles20::renderShadow(model* m) {
+
+    if (!rtt[oddFrame]->complete)
+        return;
 
     /// set culling info positions
     xm = (camX - m->aabb.min.x) / culling;
@@ -480,6 +483,9 @@ void gles20::renderSubModel(model* mod, model3d *m) {
 }
 
 void gles20::shadowMode(bool enable) {
+  if (!rtt[oddFrame]->complete)
+      return;
+
   if (enable) {
       glDepthMask(false);
       glEnable(GL_BLEND);

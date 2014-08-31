@@ -64,6 +64,7 @@ public:
     bool resetAllowed, resetRequested;                                    ///< Reset variables
     float n2o;                                                            ///< Amount of N2O
     float extraSound;                                                     ///< Amount of extra engine sound volume
+    float prevEffect;                                                     ///< Previous smoke effect intensity
 
 
     /**

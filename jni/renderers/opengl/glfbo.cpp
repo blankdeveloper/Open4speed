@@ -11,13 +11,19 @@
 #include <jni.h>
 #endif
 #include <cstdlib>
+#include <string.h>
 #include "renderers/opengl/glfbo.h"
+#include "utils/io.h"
 #include "utils/math.h"
 #include "common.h"
 
-
-GLuint* rboID = 0;                ///< Render buffer object id
-glvbo* rect = 0;                  ///< VBO for rendering to screen
+#ifdef ANDROID
+#define PACKED_EXTENSION "GL_OES_packed_depth_stencil"
+#define PACKED_EXT GL_DEPTH24_STENCIL8_OES
+#else
+#define PACKED_EXTENSION "GL_EXT_packed_depth_stencil"
+#define PACKED_EXT GL_DEPTH24_STENCIL8_EXT
+#endif
 
 /**
  * @brief glfbo is an empty constructor
@@ -40,13 +46,10 @@ glfbo::glfbo(int width, int height) {
 
     //create frame buffer
     fboID = new GLuint[1];
+    rboID = new GLuint[2];
     rendertexture = new GLuint[1];
-    if (rboID == 0)
-    {
-      rboID = new GLuint[2];
-      glGenRenderbuffers(2, rboID);
-    }
 
+    //framebuffer texture
     glGenFramebuffers(1, fboID);
     glBindFramebuffer(GL_FRAMEBUFFER, fboID[0]);
     glGenTextures(1, rendertexture);
@@ -58,23 +61,47 @@ glfbo::glfbo(int width, int height) {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rendertexture[0], 0);
 
-    //create render buffers for depth buffer and stencil buffer
+
+    /// create render buffers for depth buffer and stencil buffer
+    glGenRenderbuffers(2, rboID);
     glBindRenderbuffer(GL_RENDERBUFFER, rboID[0]);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
-    glBindRenderbuffer(GL_RENDERBUFFER, rboID[1]);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_STENCIL_INDEX8, width, height);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboID[1]);
+    char* extString = (char*)glGetString(GL_EXTENSIONS);
+    if (strstr(extString, PACKED_EXTENSION) != 0)
+    {
+        glRenderbufferStorage(GL_RENDERBUFFER, PACKED_EXT, width, height);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
+    }
+    else
+    {
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
+        glBindRenderbuffer(GL_RENDERBUFFER, rboID[1]);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_STENCIL_INDEX8, width, height);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboID[1]);
+    }
 
+    /// print supported extensions into log
+    for (unsigned int i = 0; i < strlen(extString); i++)
+        if (extString[i] == ' ')
+            extString[i] = '\n';
+    logi("Extensions:\n", extString);
 
-    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-        exit(1);
+    /// check FBO status
+    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE)
+        complete = true;
+    else
+    {
+        char error[128];
+        sprintf(error, "%d", glCheckFramebufferStatus(GL_FRAMEBUFFER));
+        logi("glCheckFramebufferStatus", error);
+        complete = false;
+    }
 
-    //clear
+    /// clear
     glViewport (0, 0, width, height);
     glClear(GL_COLOR_BUFFER_BIT);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
 
     /// vertices
     float vertices[] = {
@@ -96,8 +123,8 @@ glfbo::glfbo(int width, int height) {
         1, 1,
     };
 
-    if (rect == 0)
-      rect = new glvbo(6, vertices, 0, coords, 0);
+    /// create vertex buffer
+    rect = new glvbo(6, vertices, 0, coords, 0);
 }
 
 /**
@@ -126,7 +153,6 @@ void glfbo::clear() {
  * @brief destroy removes all data from memory
  */
 void glfbo::destroy() {
-    rtt->pointerDecrease();
     glDeleteRenderbuffers(2, rboID);
     glDeleteFramebuffers(1, fboID);
 }

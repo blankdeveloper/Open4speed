@@ -23,6 +23,10 @@ public class GameLoop extends GLSurfaceView implements Renderer {
     public static boolean init    = false;
     public static boolean paused  = false;
 
+    //fps counter
+    private int currentFPS;
+    private long updateFPS;
+
     /**
      * Constructor which creates support for all incoming events
      * @param context
@@ -98,6 +102,20 @@ public class GameLoop extends GLSurfaceView implements Renderer {
             synchronized (GameActivity.instance.lock) {
                 Native.loop();
             }
+
+            currentFPS++;
+            if (updateFPS + 1000 < System.currentTimeMillis()) {
+                updateFPS = System.currentTimeMillis();
+                final int FPS = currentFPS;
+                GameActivity.instance.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        GameActivity.instance.fpsCounter.setText("FPS:" + FPS);
+                    }
+                });
+                currentFPS = 0;
+            }
+
             long dtime = System.currentTimeMillis() - time;
             if (dtime < 50)
                 try {

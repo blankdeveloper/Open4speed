@@ -45,6 +45,7 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
     extraSound = 0;
     control = i;
     edges = *e;
+    prevEffect = 0;
     rot = 0;
     speed = 0;
     tempRot = 0;

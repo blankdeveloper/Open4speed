@@ -74,7 +74,7 @@ gltexture::gltexture(Texture texture, float alpha) {
 
     //And if you go and use extensions, you can use Anisotropic filtering textures which are of an
     //even better quality, but this will do for now.
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 
     //Here we are setting the parameter to repeat the texture instead of clamping the texture
@@ -86,6 +86,7 @@ gltexture::gltexture(Texture texture, float alpha) {
     } else {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture.width, texture.height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture.data);
     }
+    glGenerateMipmap(GL_TEXTURE_2D);
 
     twidth = texture.width;
     theight = texture.height;

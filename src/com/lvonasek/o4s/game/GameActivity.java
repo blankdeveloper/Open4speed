@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.lvonasek.o4s.R;
 import com.lvonasek.o4s.Sounds;
@@ -32,6 +33,7 @@ public class GameActivity extends FragmentActivity {
     //splash items
     private ImageView loadingImg;
     private ProgressBar progressBar;
+    public TextView fpsCounter;
 
     @Override
     /**
@@ -46,6 +48,7 @@ public class GameActivity extends FragmentActivity {
 
         setContentView(R.layout.race);
         instance = this;
+        fpsCounter = (TextView) findViewById(R.id.fpsCounter);
         gameLoop = (GameLoop) findViewById(R.id.game_screen);
         loadingImg = (ImageView) findViewById(R.id.loading);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);

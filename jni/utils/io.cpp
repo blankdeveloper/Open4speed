@@ -11,9 +11,6 @@
 #include "utils/io.h"
 #include "common.h"
 
-char string[1024];
-char character[2];
-
 #ifdef ZIP_ARCHIVE
 #ifdef ANDROID
 std::string gamePath = "assets/";                           ///< Data path
@@ -29,6 +26,7 @@ std::string gamePath = "./";                                ///< Data path
 */
 char* getsEx(char* line, zip_file* file) {
     line[1023] = '0';
+    char character[2];
     for (int i = 0; i < 1020; i++) {
         int ok = zip_fread(file, character, 1);
         if (ok <= 0) {
@@ -100,6 +98,7 @@ std::string getConfigStr(std::string item, std::vector<std::string> source) {
 * @return extension as char*
 */
 std::string getExtension(std::string filename) {
+   char string[1024];
    for (int i = filename.length() - 1; i > 0; i--) {
        if (filename[i] == '.') {
            for (unsigned int j = i + 1; j < filename.length(); j++) {
@@ -109,8 +108,7 @@ std::string getExtension(std::string filename) {
            return string;
        }
    }
-   string[0] = '\0';
-   return string;
+   return std::string();
 }
 
 /**
@@ -212,6 +210,7 @@ std::vector<std::string> getList(std::string tag, std::string filename) {
  * @param file is input stream
  */
 void gets(char* line, zip_file* file) {
+    char character[2];
     for (int i = 0; i < 1020; i++) {
         zip_fread(file, character, 1);
         line[i] = character[0];
@@ -229,6 +228,7 @@ void gets(char* line, zip_file* file) {
  * @param file is input stream
  */
 void gets(char* line, FILE* file) {
+    char character[2];
     for (int i = 0; i < 1020; i++) {
         fread(character, 1, 1, file);
         line[i] = character[0];
@@ -283,9 +283,10 @@ void logi(std::string value1, std::string value2) {
 * @return prefixed file name
 */
 std::string prefix(std::string filename) {
+   char string[1024];
    strcpy(string, gamePath.c_str());
    strcat(string, filename.c_str());
-   return string;
+   return std::string(string);
 }
 
 /**

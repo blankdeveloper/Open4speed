@@ -19,7 +19,8 @@ class glfbo : public fbo
 public:
     GLuint* rendertexture;        ///< Texture for color buffer
     GLuint* fboID;                ///< Frame buffer object id
-    texture* rtt;                 ///< Texture for color buffer loaded from file
+    GLuint* rboID;                ///< Render buffer object id
+    glvbo* rect;                  ///< VBO for rendering to screen
 
     /**
      * @brief glfbo is an empty constructor

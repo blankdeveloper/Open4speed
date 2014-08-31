@@ -19,6 +19,7 @@ public:
 
     unsigned int width;                ///< Image width
     unsigned int height;               ///< Image height
+    bool complete;                     ///< Information if fbo is complete
 
     /**
      * @brief bindFBO binds FBO

@@ -202,10 +202,12 @@ void displayScene() {
     // update water
     eff[currentFrame].count = 0;
     for (int i = carCount - 1; i >= 0; i--) {
+        float effect = fabs(allCar[i]->speed) * fabs(allCar[i]->speed * (g + allCar[i]->control->getBrake() * 5.0)) * 0.001f;
+        effect = fmax(effect, effect * 0.05 + allCar[i]->prevEffect * 0.95);
+        allCar[i]->prevEffect = effect;
         for (int j = 1; j <= 4; j++) {
             if (active) {
-                float effect = fabs(allCar[i]->speed * (g + allCar[i]->control->getBrake() * 5.0)) * 0.001f;
-                for (int k = 0; k < fmin(fabs(allCar[i]->speed) * effect - 5, 5); k++) {
+                for (int k = 0; k < fmin(effect - 5, 5); k++) {
                     float x = allCar[i]->transform[j].value[12] + (rand() % 50 - 25) * 0.03f + sin(allCar[i]->rot * 3.14 / 180) * k * 0.03f;
                     float y = allCar[i]->transform[j].value[13] - 0.1f;
                     float z = allCar[i]->transform[j].value[14] + (rand() % 50 - 25) * 0.03f + cos(allCar[i]->rot * 3.14 / 180) * k * 0.03f;
@@ -533,10 +535,10 @@ int main(int argc, char** argv) {
 #endif
 
     /// load menu data
-    carList.push_back("cars/orange/params.ini");
+    carList.push_back("cars/01/params");
 
     delete physic;
-    loadScene("tracks/track1.ini");
+    loadScene("tracks/track1");
 
     /// init sound
     crash = getSound("sfx/crash.ogg", false, 1);

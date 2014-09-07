@@ -33,7 +33,7 @@ vec3 one = vec3(1.0, 1.0, 1.0);
 void main()
 {
   vec4 diffuse = texture2D(color_texture, v_Coords);
-  gl_FragColor.rgb = (u_brake > 0.5) && (diffuse.a < 0.75) ? 3.0 * diffuse.rgb : diffuse.rgb;
+  gl_FragColor.rgb = (diffuse.a < 0.75) ? 3.0 * diffuse.rgb * ((u_brake > 0.5) ? 1.0 : 0.2) : diffuse.rgb;
   gl_FragColor.a = 1.0;
   
   vec3 N = normalize(v_Normal - 0.25 + 0.5 * diffuse.rgb);

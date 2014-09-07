@@ -67,7 +67,7 @@ void displayScene() {
     /// set camera
     xrenderer->rtt(true);
     float view = allCar[cameraCar]->getView();
-    xrenderer->perspective(view, aspect, 0.1, VIEW_DISTANCE);
+    xrenderer->perspective(view, aspect, 0.5, VIEW_DISTANCE);
     xrenderer->pushMatrix();
     float cameraX = allCar[cameraCar]->transform->value[12] - sin(direction) * allCar[cameraCar]->control->getDistance() * 2 / (view / 90);
     float cameraY = allCar[cameraCar]->transform->value[13] + fabs(allCar[cameraCar]->control->getDistance() * 1.25f / (view / 90));
@@ -95,7 +95,7 @@ void displayScene() {
     /// render skydome
     xrenderer->pushMatrix();
     xrenderer->translate(cameraX, 0, cameraZ);
-    xrenderer->scale(VIEW_DISTANCE * 0.7);
+    xrenderer->scale(VIEW_DISTANCE * 0.9);
     xrenderer->renderModel(skydome);
     xrenderer->popMatrix();
 

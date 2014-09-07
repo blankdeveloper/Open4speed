@@ -7,6 +7,7 @@ attribute vec2 v_coord;
 varying vec3 v_Vertex;
 varying vec3 v_Normal;
 varying vec2 v_Coords;
+
 void main()
 {
     vec4 view_pos = u_ModelViewMatrix * vec4(v_vertex, 1.0);
@@ -52,7 +53,7 @@ void main()
 
   vec3 N = normalize(v_Normal - 1.0 + 2.0 * diffuse.rgb);
   vec3 R = normalize(-reflect(-v_Vertex, N));
-  gl_FragColor.rgb += 0.5 * clamp(reflect(R, diffuse.rgb).y, -0.75, 0.25);
+  gl_FragColor.rgb += 0.5 * clamp(reflect(R, diffuse.rgb).y, -0.75, 0.25);;
   gl_FragColor.a = 1.0;
 }
 END

@@ -25,6 +25,6 @@ vec4 u_sun_dir = normalize(vec4(0.5, -1.0, 0.0, 0.0));
 void main()
 {
   gl_FragColor = texture2D(color_texture, v_Coords);
-  gl_FragColor.rgb += dot(-v_Vertex, u_sun_dir.xyz) * 0.25;
+  gl_FragColor.rgb += dot(-v_Vertex, u_sun_dir.xyz) * 0.5;
 }
 END

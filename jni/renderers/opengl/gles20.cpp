@@ -279,14 +279,14 @@ void gles20::renderModel(model* m) {
     yp = ym;
     for (float view = direction - M_PI * 0.75f; view <= direction + M_PI * 0.75f; view += M_PI * 0.25f)
     {
-        if (xp < (camX - m->aabb.min.x) / culling + sin(view) * 2)
-            xp = (camX - m->aabb.min.x) / culling + sin(view) * 2;
-        if (xm > (camX - m->aabb.min.x) / culling + sin(view) * 2)
-            xm = (camX - m->aabb.min.x) / culling + sin(view) * 2;
-        if (yp < (camZ - m->aabb.min.z) / culling + cos(view) * 2)
-            yp = (camZ - m->aabb.min.z) / culling + cos(view) * 2;
-        if (ym > (camZ - m->aabb.min.z) / culling + cos(view) * 2)
-            ym = (camZ - m->aabb.min.z) / culling + cos(view) * 2;
+        if (xp < (camX - m->aabb.min.x) / culling + sin(view) * 2.5f)
+            xp = (camX - m->aabb.min.x) / culling + sin(view) * 2.5f;
+        if (xm > (camX - m->aabb.min.x) / culling + sin(view) * 2.5f)
+            xm = (camX - m->aabb.min.x) / culling + sin(view) * 2.5f;
+        if (yp < (camZ - m->aabb.min.z) / culling + cos(view) * 2.5f)
+            yp = (camZ - m->aabb.min.z) / culling + cos(view) * 2.5f;
+        if (ym > (camZ - m->aabb.min.z) / culling + cos(view) * 2.5f)
+            ym = (camZ - m->aabb.min.z) / culling + cos(view) * 2.5f;
     }
     if (xm < 0)
         xm = 0;

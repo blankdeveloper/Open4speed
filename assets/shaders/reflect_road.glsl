@@ -25,6 +25,7 @@ uniform float u_width, u_height;
 varying vec3 v_Vertex;
 varying vec3 v_Normal;
 varying vec2 v_Coords;
+varying vec3 v_Sun;
 
 uniform float u_light_cut;
 uniform vec4 u_light;
@@ -60,10 +61,5 @@ void main()
   //vec3 N = normalize(v_Normal - 1.0 + 2.0 * diffuse.rgb);
   vec3 R = normalize(-reflect(-v_Vertex, N));
   gl_FragColor.rgb += 0.5 * clamp(reflect(R, diffuse.rgb).y, diffuse.a < 0.75 ? -0.75 : 0.0, 0.25);
-
-    
-  //dynamic shadow
-  /*float a = texture2D(EnvMap1, vec2(gl_FragCoord.x * u_width, gl_FragCoord.y * u_height + 0.5 * (1.0 - gl_FragCoord.z))).a;
-  gl_FragColor.rgb *= a == 0.0 ? 0.5 : 1.0;*/
 }
 END

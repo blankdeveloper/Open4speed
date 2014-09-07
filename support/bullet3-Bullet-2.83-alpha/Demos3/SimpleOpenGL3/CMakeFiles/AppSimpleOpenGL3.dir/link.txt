@@ -1,1 +1,0 @@
-/usr/bin/c++   -O3 -DNDEBUG    CMakeFiles/AppSimpleOpenGL3.dir/main.o  -o AppSimpleOpenGL3 -rdynamic ../../btgui/Gwen/libgwen.a ../../btgui/OpenGLWindow/libOpenGLWindow.a ../../src/Bullet3Common/libBullet3Common.a -lGL -lGLU -lGLEW -lX11 -lpthread -ldl -lXext 

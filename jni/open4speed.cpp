@@ -10,6 +10,7 @@
 #ifdef ANDROID
 #include <GLES2/gl2.h>
 #endif
+#include <stdlib.h>
 #include "input/airacer.h"
 #include "input/keyboard.h"
 #include "utils/io.h"
@@ -355,8 +356,9 @@ void display(void) {
     displayScene();
 
 #ifdef ANDROID
-    pthread_t threads[1];
-    pthread_create(&threads[0], NULL, idle, (void *)0);
+    idle(0);
+    //pthread_t threads[1];
+    //pthread_create(&threads[0], NULL, idle, (void *)0);
 #endif
 
     /// update FPS counter

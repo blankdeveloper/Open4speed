@@ -99,9 +99,7 @@ public class GameLoop extends GLSurfaceView implements Renderer {
         //check if game is not paused
         if (!paused) {
             long time = System.currentTimeMillis();
-            synchronized (GameActivity.instance.lock) {
-                Native.loop();
-            }
+            Native.loop();
 
             currentFPS++;
             if (updateFPS + 1000 < System.currentTimeMillis()) {
@@ -116,13 +114,7 @@ public class GameLoop extends GLSurfaceView implements Renderer {
                 currentFPS = 0;
             }
 
-            long dtime = System.currentTimeMillis() - time;
-            if (dtime < 50)
-                try {
-                    Thread.sleep(50 - dtime);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            while (System.currentTimeMillis() - time < 50) {}
         } else
             Native.display();
     }

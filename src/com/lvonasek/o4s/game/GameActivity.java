@@ -26,7 +26,6 @@ import com.lvonasek.o4s.ui.menus.PauseMenu;
 public class GameActivity extends FragmentActivity {
 
     //various instances
-    public Object lock = new Object();
     private GameLoop gameLoop;
     public static GameActivity instance;
 
@@ -109,16 +108,14 @@ public class GameActivity extends FragmentActivity {
     /**
      * Game pause
      */
-    protected void onPause() {
+    protected synchronized void onPause() {
         //pause game
-        synchronized (lock) {
-            if (gameLoop != null)
-                gameLoop.paused = true;
-            if (Sounds.snd != null)
-                Sounds.snd.autoPause();
-            if (Sounds.music != null)
-                Sounds.music.pause();
-        }
+        if (gameLoop != null)
+            gameLoop.paused = true;
+        if (Sounds.snd != null)
+            Sounds.snd.autoPause();
+        if (Sounds.music != null)
+            Sounds.music.pause();
         super.onPause();
     }
 

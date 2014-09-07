@@ -14,7 +14,7 @@ include $(BUILD_STATIC_LIBRARY)
 #
 # ZIP Library
 # 
-LOCAL_PATH := ../support/libzip-0.11.1/lib
+LOCAL_PATH := ../support/libzip-0.11.1
 include $(CLEAR_VARS)
 
 LOCAL_MODULE    := libzip
@@ -25,7 +25,7 @@ include $(BUILD_STATIC_LIBRARY)
 #
 # Bullet Physics Static Library
 # 
-LOCAL_PATH := ../support/bullet3-Bullet-2.83-alpha/src
+LOCAL_PATH := ../support/bullet-2.82-r2704
 include $(CLEAR_VARS)
 
 LOCAL_MODULE    := libbullet
@@ -47,9 +47,9 @@ LOCAL_CFLAGS := -DANDROID_NDK
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
 $(LOCAL_PATH)/../support/libpng-1.6.3 \
-$(LOCAL_PATH)/../support/libzip-0.11.1/lib \
-$(LOCAL_PATH)/../support/bullet3-Bullet-2.83-alpha/src \
-$(LOCAL_PATH)/../support
+$(LOCAL_PATH)/../support/libzip-0.11.1 \
+$(LOCAL_PATH)/../support/bullet-2.82-r2704 \
+$(LOCAL_PATH)/../support/glm-0.9.5.4
 
 LOCAL_SRC_FILES := \
 open4speed.cpp \

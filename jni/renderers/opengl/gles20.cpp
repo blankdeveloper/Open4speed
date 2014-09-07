@@ -7,6 +7,7 @@
 */
 //----------------------------------------------------------------------------------------
 
+#define GLM_FORCE_RADIANS
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <stack>
@@ -111,7 +112,7 @@ void gles20::perspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zF
     if(!matrixBuffer.empty()) {
         matrixBuffer.pop();
     }
-    proj_matrix = glm::perspective(fovy, aspect, zNear,zFar);
+    proj_matrix = glm::perspective((float)(fovy * M_PI / 180.0f), aspect, zNear,zFar);
     glEnable(GL_DEPTH_TEST);
     glDepthMask(true);
 }

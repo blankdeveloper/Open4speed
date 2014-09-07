@@ -44,7 +44,15 @@ public:
     std::stack<glm::mat4x4> matrixBuffer; ///< Matrix stack
     GLushort dynindices[4095];            ///< Indicies for dynamic rendering
     shader* current;                      ///< Current binded shader
+    shader* scene_shader;                 ///< Scene shader
     shader* shadow;                       ///< Special shader for shadow
+    std::vector<fbo*> rtt_fbo;            ///< Screen-space framebuffer
+    bool oddFrame;                        ///< Odd frame info
+
+    /**
+     * @brief gles20 destructor
+     */
+    ~gles20();
 
     /**
      * @brief gles20 constructor
@@ -153,6 +161,8 @@ public:
     void renderSubModel(model* mod, model3d *m);
 
     void shadowMode(bool enable);
+
+    void rtt(bool enable);
 };
 
 #endif // GLES20_H

@@ -20,6 +20,11 @@ public:
     int size;
 
     /**
+     * @brief removes all data from memory
+     */
+    ~glvbo();
+
+    /**
      * @brief glvbo creates VBO from data
      * @param size is amount of vertices
      * @param vertices is vertices array

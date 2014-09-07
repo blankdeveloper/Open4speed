@@ -21,6 +21,8 @@
 #include "interfaces/texture.h"
 #include "interfaces/vbo.h"
 
+void clearMediaStorage();
+
 /**
  * @brief getInput gets input controller
  * @return input controller

@@ -22,10 +22,11 @@ public:
     unsigned int currentMultiFrame; ///< Replying frames state
     unsigned int multiFrame;        ///< Replying frames amount
 
+
     /**
-     * @brief destruct removes texture from memory is there is no more instance
+     * @brief destruct removes texture from memory
      */
-    void pointerDecrease();
+    ~gltexture();
 
     /**
      * @brief gltexture creates animated empty texture instance

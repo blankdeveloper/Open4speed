@@ -36,12 +36,9 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
     /// get car atributes
     std::vector<std::string> atributes = getList("", filename);
 
-    gears = new std::vector<gear>();
-
     /// set default values
     n2o = 150;
     onRoof = 0;
-    edgeSideMove = 0;
     extraSound = 0;
     control = i;
     edges = *e;
@@ -75,8 +72,7 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
     }
 
     /// apply index of car
-    carCount++;
-    index = carCount;
+    index = allCar.size() + 1;
     if (control != 0)
         control->index = index - 1;
 
@@ -96,10 +92,10 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
     currentGear = 1;
     int gearCount = getConfig("gear_count", atributes);
     for (int i = 0; i <= gearCount; i++) {
-        gear g = *(new gear());
+        gear g;
         g.min = getConfig(getTag(i,"gear%d_min"), atributes);
         g.max = getConfig(getTag(i,"gear%d_max"), atributes);
-        gears->push_back(g);
+        gears.push_back(g);
     }
     gearLow = getConfig("gear_low", atributes);
     gearHigh = getConfig("gear_high", atributes);
@@ -115,8 +111,6 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
  * @brief car destructor
  */
 car::~car() {
-    delete skin;
-    delete wheel;
     delete control;
     for (int i = 0; i < 5; i++) {
         delete[] transform[i].temp;
@@ -141,28 +135,25 @@ float car::getView() {
 /**
  * @brief setStart sets start position of car
  * @param e is curve where car starts on
- * @param sidemove is amount of car side movement(use it for rightside riding)
  */
-void car::setStart(edge e, float sidemove) {
+void car::setStart(edge e) {
 
     /// error check
-    if ((e.ax == e.bx) && (e.az == e.bz)) {
+    if ((e.a.x == e.b.x) && (e.a.z == e.b.z)) {
         return;
     }
 
     /// set edges
-    currentEdgeOriginal = e;
+    currentEdge = e;
     currentGoalEdge = e;
-    currentEdge = sidemoveEdge(currentEdgeOriginal,sidemove);
-    edgeSideMove = sidemove;
 
     /// set transformation
     resetAllowed = false;
     reverse = false;
-    rot = (float)angle(currentEdge) * 180 / 3.14 - 180;
-    lx = x = currentEdge.ax;
-    ly = y = currentEdge.ay;
-    lz = z = currentEdge.az;
+    rot = (float)angle(currentEdge.a, currentEdge.b) * 180 / 3.14 - 180;
+    oldPos.x = pos.x = currentEdge.a.x;
+    oldPos.y = pos.y = currentEdge.a.y;
+    oldPos.z = pos.z = currentEdge.a.z;
 
     /// count distance from finish
     int ltg = lapsToGo;
@@ -171,21 +162,20 @@ void car::setStart(edge e, float sidemove) {
         return;
     }
     edge cge = currentGoalEdge;
-    toFinish = dist(cge.ax, cge.ay, cge.az, cge.bx, cge.by, cge.bz);
+    toFinish = glm::length(cge.a - cge.b);
     while (true) {
-        toFinish += dist(cge.ax, cge.ay, cge.az, cge.bx, cge.by, cge.bz);
-        std::vector<int> *nEdges = nextEdge(&edges, cge);
-        if (nEdges->size() > 0) {
-            cge = edges[(*nEdges)[0]];
-            if ((ltg > 0) & ((*nEdges)[0] == finishEdge)) {
+        toFinish += glm::length(cge.a - cge.b);
+        std::vector<int> nEdges = nextEdge(&edges, cge);
+        if (nEdges.size() > 0) {
+            cge = edges[nEdges[0]];
+            if ((ltg > 0) & (nEdges[0] == finishEdge)) {
                 ltg--;
-            } else if ((ltg == 0) & ((*nEdges)[0] == finishEdge)) {
+            } else if ((ltg == 0) & (nEdges[0] == finishEdge)) {
                 break;
             }
         } else {
             break;
         }
-        delete nEdges;
     }
 }
 
@@ -197,38 +187,37 @@ void car::update() {
 
     /// count speed
     lspeed = speed;
-    speed = sqrt(sqr(fabsf(lx - x)) + sqr(fabsf(lz - z))) * SPEED_ASPECT;
+    speed = sqrt(sqr(fabsf(oldPos.x - pos.x)) + sqr(fabsf(oldPos.z - pos.z))) * SPEED_ASPECT;
 
     /// update current edge for counting laps
     edge cge = currentGoalEdge;
-    if (distance(currentGoalEdge, this) < 75) {
-        std::vector<int> *nEdges = nextEdge(&edges, currentGoalEdge);
-        if (nEdges->size() > 0) {
-            if (isSame(edges[(*nEdges)[0]], edges[finishEdge])) {
-                if (distance(currentGoalEdge, this) < 25) {
-                    toFinish -= dist(cge.ax, cge.ay, cge.az, cge.bx, cge.by, cge.bz);
-                    currentEdgeIndex = (*nEdges)[0];
-                    currentGoalEdge = edges[(*nEdges)[0]];
-                    if ((lapsToGo >= 0) & (isSame(edges[(*nEdges)[0]], edges[finishEdge]))) {
+    if (distance(pos, currentGoalEdge.b) < 75) {
+        std::vector<int> nEdges = nextEdge(&edges, currentGoalEdge);
+        if (nEdges.size() > 0) {
+            if (isSame(edges[nEdges[0]], edges[finishEdge])) {
+                if (distance(pos, currentGoalEdge.b) < 25) {
+                    toFinish -= glm::length(cge.a - cge.b);
+                    currentEdgeIndex = nEdges[0];
+                    currentGoalEdge = edges[nEdges[0]];
+                    if ((lapsToGo >= 0) & (isSame(edges[nEdges[0]], edges[finishEdge]))) {
                         lapsToGo--;
                     }
                 }
             } else {
-                toFinish -= dist(cge.ax, cge.ay, cge.az, cge.bx, cge.by, cge.bz);
-                currentEdgeIndex = (*nEdges)[0];
-                currentGoalEdge = edges[(*nEdges)[0]];
-                if ((lapsToGo >= 0) & (isSame(edges[(*nEdges)[0]], edges[finishEdge]))) {
+                toFinish -= glm::length(cge.a - cge.b);
+                currentEdgeIndex = nEdges[0];
+                currentGoalEdge = edges[nEdges[0]];
+                if ((lapsToGo >= 0) & (isSame(edges[nEdges[0]], edges[finishEdge]))) {
                     lapsToGo--;
                 }
             }
         }
-        delete nEdges;
     }
 
     /// store last position
-    lx = x;
-    ly = y;
-    lz = z;
+    oldPos.x = pos.x;
+    oldPos.y = pos.y;
+    oldPos.z = pos.z;
 
     /// reverse gear auto change
     if (reverse & (currentGear == 1))
@@ -238,8 +227,8 @@ void car::update() {
     }
 
     /// count acceleration
-    float speedDiff = (*gears)[currentGear].max - (*gears)[currentGear].min;
-    float speedAspect = (speed - (*gears)[currentGear].min) / speedDiff;
+    float speedDiff = gears[currentGear].max - gears[currentGear].min;
+    float speedAspect = (speed - gears[currentGear].min) / speedDiff;
     if (speedAspect > 1)
         speedAspect = 1;
     if (speedAspect < 0)
@@ -294,18 +283,18 @@ void car::updateSound() {
     }
 
     /// count engine frequency
-    float speedPlus = speed - (*gears)[currentGear].min;
+    float speedPlus = speed - gears[currentGear].min;
     if (speedPlus < 0)
         speedPlus = 0;
-    float speedDiff = (*gears)[currentGear].max - (*gears)[currentGear].min;
+    float speedDiff = gears[currentGear].max - gears[currentGear].min;
     float engineFreq = gearLow + (gearHigh - gearLow) * speedPlus / speedDiff;
 
     /// automatic changing gears
-    int lastGear = currentGear;
+    unsigned int lastGear = currentGear;
     if (currentGear >= 1) {
         if ((currentGear > 1) & (engineFreq < gearDown))
             currentGear--;
-        if (currentGear < gears->size() - 1) {
+        if (currentGear < gears.size() - 1) {
             if (engineFreq > gearUp)
                 currentGear++;
         }
@@ -335,7 +324,7 @@ void car::updateSound() {
     }
 
     /// set sound distance
-    float dist = (1 - distance(allCar[cameraCar],this) / SOUND_MAXIMAL_DISTANCE);
+    float dist = (1 - distance(allCar[cameraCar]->pos, pos) / SOUND_MAXIMAL_DISTANCE);
     if (dist < 0)
         dist = 0;
     dist *= dist;

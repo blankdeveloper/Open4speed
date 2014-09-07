@@ -14,8 +14,6 @@
 #include "utils/switch.h"
 #include "common.h"
 
-char* line = new char[1024];
-
 /**
  * @brief Constructor for loading model from file
  * @param filename is path and name of file to load
@@ -30,6 +28,7 @@ modelo4s::modelo4s(std::string filename, bool gpu) {
 #endif
 
     /// get model dimensions
+    char line[1024];
     gets(line, file);
     cutX = scandec(line);
     gets(line, file);
@@ -113,6 +112,7 @@ modelo4s::modelo4s(std::string filename, bool gpu) {
                 }
                 shadername[strlen(material) - cursor] = '\000';
                 m.material = getShader(shadername);
+                delete[] shadername;
                 break;
             } else {
                 break;
@@ -172,7 +172,8 @@ modelo4s::modelo4s(std::string filename, bool gpu) {
                 m.tnormals = 0;
             }
             m.vboData = getVBO(size, m.vertices, m.normals, m.coords, m.tnormals);
-        }
+        } else
+            m.vboData = 0;
         models.push_back(m);
     }
 
@@ -186,17 +187,17 @@ modelo4s::modelo4s(std::string filename, bool gpu) {
         for (int j = 0; j < edgeCount; j++) {
             edge value;
             gets(line, file);
-            sscanf(line, "%f %f %f %f %f %f", &value.ax, &value.ay, &value.az, &value.bx, &value.by, &value.bz);
+            sscanf(line, "%f %f %f %f %f %f", &value.a.x, &value.a.y, &value.a.z, &value.b.x, &value.b.y, &value.b.z);
             edges[i].push_back(value);
         }
         for (int j = 0; j < edgeCount; j++) {
             edge value;
-            value.ax = edges[i][j].bx;
-            value.ay = edges[i][j].by;
-            value.az = edges[i][j].bz;
-            value.bx = edges[i][j].ax;
-            value.by = edges[i][j].ay;
-            value.bz = edges[i][j].az;
+            value.a.x = edges[i][j].b.x;
+            value.a.y = edges[i][j].b.y;
+            value.a.z = edges[i][j].b.z;
+            value.b.x = edges[i][j].a.x;
+            value.b.y = edges[i][j].a.y;
+            value.b.z = edges[i][j].a.z;
             edges[i].push_back(value);
         }
     }

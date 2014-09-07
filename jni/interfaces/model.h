@@ -20,12 +20,8 @@
  * @brief The edge struct
  */
 struct edge {
-    float ax;    ///< Point coordinate
-    float ay;    ///< Point coordinate
-    float az;    ///< Point coordinate
-    float bx;    ///< Point coordinate
-    float by;    ///< Point coordinate
-    float bz;    ///< Point coordinate
+    glm::vec3 a; ///< Point coordinates
+    glm::vec3 b; ///< Point coordinates
 };
 
 /**
@@ -75,6 +71,7 @@ public:
     std::vector<model3d> models;               ///< All parts of model
     AABB aabb;                                 ///< Extremes of current model
     float width, aplitude, height;             ///< Dimensions of current model
+    char modelname[256];                       ///< Model filename
 };
 
 #endif // MODEL_H

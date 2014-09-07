@@ -59,4 +59,4 @@ HEADERS += \
     interfaces/fbo.h \
     interfaces/vbo.h \
     renderers/opengl/glvbo.h
-INCLUDEPATH += ../support ../support/bullet3-Bullet-2.83-alpha/src
+INCLUDEPATH += /usr/include/bullet

@@ -37,11 +37,6 @@ public:
     virtual void clear() = 0;
 
     /**
-     * @brief destroy removes all data from memory
-     */
-    virtual void destroy() = 0;
-
-    /**
      * @brief drawOnScreen draws FBO on screen
      * @param screen_shader is shader for screen drawing
      */

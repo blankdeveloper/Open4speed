@@ -26,10 +26,15 @@
 #endif
 
 /**
- * @brief glfbo is an empty constructor
+ * @brief removes all data from memory
  */
-glfbo::glfbo() {
-
+glfbo::~glfbo() {
+    glDeleteRenderbuffers(complete ? 2 : 1, rboID);
+    glDeleteFramebuffers(1, fboID);
+    delete rect;
+    delete[] fboID;
+    delete[] rboID;
+    delete[] rendertexture;
 }
 
 /**
@@ -147,14 +152,6 @@ void glfbo::bindTexture() {
  */
 void glfbo::clear() {
     glClear(GL_DEPTH_BUFFER_BIT);
-}
-
-/**
- * @brief destroy removes all data from memory
- */
-void glfbo::destroy() {
-    glDeleteRenderbuffers(2, rboID);
-    glDeleteFramebuffers(1, fboID);
 }
 
 /**

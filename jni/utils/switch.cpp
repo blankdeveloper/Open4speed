@@ -20,10 +20,33 @@
 #include "sound/soundpool.h"
 #include "utils/io.h"
 #include "utils/switch.h"
-#include "common.h"
 
-#define BULLET
-#define GLES20
+/**
+ * @brief The game resources
+ */
+std::vector<model*> models;     ///< Shaders storage
+std::vector<shader*> shaders;   ///< Shaders storage
+std::vector<sound*> sounds;     ///< Sounds storage
+std::vector<texture*> textures; ///< Textures storage
+
+void clearMediaStorage() {
+    while (!models.empty()) {
+        delete models[models.size() - 1];
+        models.pop_back();
+    }
+    while (!shaders.empty()) {
+        delete shaders[shaders.size() - 1];
+        shaders.pop_back();
+    }
+    while (!sounds.empty()) {
+        delete sounds[sounds.size() - 1];
+        sounds.pop_back();
+    }
+    while (!textures.empty()) {
+        delete textures[textures.size() - 1];
+        textures.pop_back();
+    }
+}
 
 /**
  * @brief getInput gets input controller
@@ -40,8 +63,18 @@ input* getInput() {
  */
 model* getModel(std::string filename, bool gpu) {
     logi("Load model:", filename);
+
+    /// find previous instance
+    for (unsigned int i = 0; i < models.size(); i++)
+        if (strcmp(models[i]->modelname, filename.c_str()) == 0)
+            return models[i];
+
+    /// create new instance
     if (strcmp(getExtension(filename).c_str(), "o4s") == 0) {
-        return new modelo4s(filename, gpu);
+        model* instance = new modelo4s(filename, gpu);
+        strcpy(instance->modelname, filename.c_str());
+        models.push_back(instance);
+        return instance;
     }
     loge("File is not supported:", filename);
     return 0;
@@ -54,10 +87,7 @@ model* getModel(std::string filename, bool gpu) {
  */
 physics* getPhysics(model *m) {
     logi("Init physical engine","");
-#ifdef BULLET
     return new bullet(m);
-#endif
-    exit(1);
 }
 
 /**
@@ -66,10 +96,7 @@ physics* getPhysics(model *m) {
  */
 renderer* getRenderer(int w, int h) {
     logi("Init renderer","");
-#ifdef GLES20
     return new gles20(w, h);
-#endif
-    exit(1);
 }
 
 /**
@@ -95,13 +122,10 @@ shader* getShader(std::string name) {
     std::vector<std::string> frag_atributes = getList("FRAG", filename);
 
     /// create shader from code
-#ifdef GLES20
     shader* instance = new glsl(vert_atributes, frag_atributes);
     strcpy(instance->shadername, name.c_str());
     shaders.push_back(instance);
     return instance;
-#endif
-    exit(1);
 }
 
 /**
@@ -113,7 +137,9 @@ shader* getShader(std::string name) {
  */
 sound* getSound(std::string filename, bool loop, int channels) {
     logi("Load sound file:", filename);
-    return new soundpool(filename, loop, channels);
+    sound* instance = new soundpool(filename, loop, channels);
+    sounds.push_back(instance);
+    return instance;
 }
 
 /**
@@ -124,21 +150,14 @@ sound* getSound(std::string filename, bool loop, int channels) {
  */
 texture* getTexture(std::string filename, float alpha) {
     /// find previous instance
-    for (unsigned int i = 0; i < textures.size(); i++) {
-        if (strcmp(textures[i]->texturename, filename.c_str()) == 0) {
-          if (textures[i]->instanceCount > 0) {
-              textures[i]->instanceCount++;
-              return textures[i];
-          }
-        }
-    }
+    for (unsigned int i = 0; i < textures.size(); i++)
+        if (strcmp(textures[i]->texturename, filename.c_str()) == 0)
+            return textures[i];
 
     /// create new instance
     logi("Load texture:", filename);
-#ifdef GLES20
     if (strcmp(getExtension(filename).c_str(), "png") == 0) {
       texture* instance = new gltexture(loadPNG(filename), alpha);
-      instance->instanceCount = 1;
       strcpy(instance->texturename, filename.c_str());
       textures.push_back(instance);
       return instance;
@@ -155,18 +174,17 @@ texture* getTexture(std::string filename, float alpha) {
         for (int i = 0; i <= count; i++) {
             file[strlen(file) - 1] = i % 10 + '0';
             file[strlen(file) - 2] = i / 10 + '0';
-            anim.push_back(new gltexture(loadPNG(file), alpha));
-            anim[anim.size() - 1]->instanceCount = 1;
-            anim[anim.size() - 1]->texturename[0] = '\0';
+            texture* instance = new gltexture(loadPNG(file), alpha);
+            strcpy(instance->texturename, file);
+            anim.push_back(instance);
         }
 
         texture* instance = new gltexture(anim, alpha);
-        instance->instanceCount = 1;
         strcpy(instance->texturename, filename.c_str());
         textures.push_back(instance);
         return instance;
     }
-#endif
+    loge("Unsupported texture", filename);
     exit(1);
 }
 
@@ -179,10 +197,10 @@ texture* getTexture(std::string filename, float alpha) {
  * @return texture instance
  */
 texture* getTexture(float r, float g, float b, float alpha) {
-#ifdef GLES20
-    return new gltexture(*createRGB(1, 1, r, g, b), alpha);
-#endif
-    exit(1);
+    texture* instance = new gltexture(createRGB(1, 1, r, g, b), alpha);
+    sprintf(instance->texturename, "%f %f %f", r, g , b);
+    textures.push_back(instance);
+    return instance;
 }
 
 /**
@@ -194,8 +212,5 @@ texture* getTexture(float r, float g, float b, float alpha) {
  * @param tnormals is triangle normals array
  */
 vbo* getVBO(int size, float* vertices, float* normals, float* coords, float* tnormals) {
-#ifdef GLES20
     return new glvbo(size, vertices, normals, coords, tnormals);
-#endif
-    exit(1);
 }

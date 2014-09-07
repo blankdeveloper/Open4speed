@@ -10,31 +10,13 @@
 #include <cstring>
 #include "renderers/opengl/gles20.h"
 #include "renderers/opengl/gltexture.h"
-#include "common.h"
 
 /**
- * @brief destruct removes texture from memory is there is no more instance
+ * @brief destruct removes texture from memory
  */
-void gltexture::pointerDecrease() {
-    if (animated) {
-        instanceCount--;
-        if (instanceCount == 0) {
-            for (unsigned int i = 0; i < anim.size(); i++) {
-                anim[anim.size() - 1]->pointerDecrease();
-                anim.pop_back();
-            }
-        }
-    } else {
-        instanceCount--;
-        if (instanceCount == 0) {
-          glDeleteTextures(1, &textureID);
-          for (unsigned int i = 0; i < textures.size(); i++) {
-              if (strcmp(texturename, textures[i]->texturename) == 0) {
-                  textures.erase(textures.begin() + i);
-              }
-          }
-        }
-    }
+gltexture::~gltexture() {
+    if (!animated)
+        glDeleteTextures(1, &textureID);
 }
 
 /**

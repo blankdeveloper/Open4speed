@@ -17,11 +17,6 @@ class vbo
 public:
 
     /**
-     * @brief destroy removes all data from memory
-     */
-    virtual void destroy() = 0;
-
-    /**
      * @brief render renders vbo
      * @param sh is shader for rendering
      * @param begin is index of first vector/triangle

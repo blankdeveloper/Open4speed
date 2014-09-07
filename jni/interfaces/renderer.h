@@ -39,11 +39,7 @@ class renderer {
 public:
 
     bool enable[10];            ///< Enabled filter
-    int frame;                  ///< Frame index
-    bool oddFrame;              ///< Odd frame info
-    fbo* rtt[2];                ///< Screen-space framebuffer
-    Light light;                ///< One light information(for lightmap rendering)
-    shader* scene_shader;       ///< Scene shader
+    Light light;                ///< One light information
     glm::vec4 model_position;   ///< Uniform of dynamic model 3D position
     glm::mat4x4 proj_matrix;    ///< Scene projection matrix
     glm::mat4x4 view_matrix;    ///< View matrix
@@ -152,6 +148,8 @@ public:
     virtual void renderSubModel(model* mod, model3d* m) = 0;
 
     virtual void shadowMode(bool enable) = 0;
+
+    virtual void rtt(bool enable) = 0;
 };
 
 #endif // RENDERER_H

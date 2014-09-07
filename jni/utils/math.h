@@ -12,7 +12,6 @@
 
 #include <glm/glm.hpp>
 #include "interfaces/model.h"
-#include "car.h"
 
 /**
  * @brief angle counts angle of line between two points given by coordinates
@@ -25,27 +24,20 @@
 float angle(float fromX, float fromY, float toX, float toY);
 
 /**
- * @brief angle counts angle of edge
- * @param e is instance of edge
- * @return angle in radians
- */
-float angle(edge e);
-
-/**
  * @brief angle counts angle between two cars
- * @param a is instance of first car
- * @param b is instance of second car
+ * @param a is first position
+ * @param b is second position
  * @return angle in radians
  */
-float angle(car* a, car* b);
+float angle(glm::vec3 a, glm::vec3 b);
 
 /**
- * @brief angle counts angle between car and of the end edge
- * @param e is instance of edge
- * @param c is instance of car
- * @return angle in radians
+ * @brief distance counts distance between car and of the end edge
+ * @param a is first position
+ * @param b is second position
+ * @return distance in float
  */
-float angle(edge e, car* c);
+float distance(glm::vec3 a, glm::vec3 b);
 
 /**
  * @brief distance count distance between two points given by coordinates
@@ -58,66 +50,12 @@ float angle(edge e, car* c);
 float distance(float fromX, float fromY, float toX, float toY);
 
 /**
- * @brief distance counts distance between two cars
- * @param a is instance of first car
- * @param b is instance of second car
- * @return distance in float
- */
-float distance(car* a, car* b);
-
-/**
- * @brief distance counts distance between two cars in future
- * @param a is instance of first car
- * @param b is instance of second car
- * @param time is time in future(0=present)
- * @return distance in float
- */
-float distance(car* a, car* b, float time);
-
-/**
- * @brief distance counts distance between car and of the end edge
- * @param e is instance of edge
- * @param c is instance of car
- * @return distance in float
- */
-float distance(edge e, car* c);
-
-/**
- * @brief dist is distance between two points in 3D
- * @param x1 is first point x coordinate
- * @param y1 is first point y coordinate
- * @param z1 is first point z coordinate
- * @param x2 is second point x coordinate
- * @param y2 is second point y coordinate
- * @param z2 is second point z coordinate
- * @return distance in meters
- */
-float dist(float x1, float y1, float z1, float x2, float y2, float z2);
-
-/**
  * @brief gap counts gap between car and of the end edge
  * @param e is instance of edge
  * @param c is instance of car
  * @return gap in radians
  */
-float gap(edge e, car* c);
-
-/**
- * @brief gap counts gap between two cars
- * @param a is instance of first car
- * @param b is instance of second car
- * @return gap in radians
- */
-float gap(car* a, car* b);
-
-/**
- * @brief gap counts gap between two cars in future
- * @param a is instance of first car
- * @param b is instance of second car
- * @param time is time in future(0=present)
- * @return gap in radians
- */
-float gap(car* a, car* b, float time);
+float gap(glm::vec3 e, glm::vec3 c, float crot);
 
 /**
  * @brief getRotation gets rotation of Y axis from transformation matrix
@@ -159,15 +97,7 @@ int min(int a, int b);
  * @param e is current edge
  * @return indicies as vector of int
  */
-std::vector<int>* nextEdge(std::vector<edge> *edges, edge e);
-
-/**
- * @brief sidemoveEdge moves edge into side
- * @param e is edge to move
- * @param amount is amount of movement
- * @return moved edge
- */
-edge sidemoveEdge(edge e, float amount);
+std::vector<int> nextEdge(std::vector<edge> *edges, edge e);
 
 /**
  * @brief sign returns sign of value

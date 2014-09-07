@@ -29,19 +29,6 @@ int lastFPS = 0;                    ///< Viewed FPS
 int fps = 0;                        ///< Actual FPS
 int timestamp = 0;                  ///< Timestamp for updating FPS
 
-struct Dynamic {
-    float* vertices;
-    float* coords;
-    int count;
-    int frame;
-};
-
-int currentFrame = 0;                        ///< Frame index
-const int effLen = 6;                        ///< Length of water effect
-Dynamic eff[effLen];                         ///< 3D water effect object
-model* arrow = 0;                            ///< GPS arrow model
-model* water = 0;                            ///< Water effect model
-
 /**
  * @brief displayScene displaies race scene
  * @param renderer is instance of renderer
@@ -76,18 +63,9 @@ void displayScene() {
     rot = rot % 360000;
     allCar[cameraCar]->rot = rot / 1000.0f;
 
-    xrenderer->rtt[xrenderer->oddFrame]->bindFBO();
-    xrenderer->rtt[xrenderer->oddFrame]->clear();
-
-    xrenderer->oddFrame = !xrenderer->oddFrame;
-    xrenderer->frame++;
-    if (xrenderer->frame > 1000) {
-        xrenderer->frame = 0;
-    }
-
     /// set camera
+    xrenderer->rtt(true);
     float view = allCar[cameraCar]->getView();
-
     xrenderer->perspective(view, aspect, 0.1, VIEW_DISTANCE);
     xrenderer->pushMatrix();
     float cameraX = allCar[cameraCar]->transform->value[12] - sin(direction) * allCar[cameraCar]->control->getDistance() * 2 / (view / 90);
@@ -116,7 +94,7 @@ void displayScene() {
     /// render skydome
     xrenderer->pushMatrix();
     xrenderer->translate(cameraX, 0, cameraZ);
-    xrenderer->scale(VIEW_DISTANCE * 0.75);
+    xrenderer->scale(VIEW_DISTANCE * 0.7);
     xrenderer->renderModel(skydome);
     xrenderer->popMatrix();
 
@@ -126,7 +104,7 @@ void displayScene() {
 
     /// render cars
     xrenderer->enable[2] = false;
-    for (int i = carCount - 1; i >= 0; i--) {
+    for (int i = allCar.size() - 1; i >= 0; i--) {
 
         /// find nearest light
         xrenderer->light.u_nearest1 = glm::vec4(99999,99999,99999,1);
@@ -134,7 +112,7 @@ void displayScene() {
         for (int j = 0/*!lamp[(xrenderer->frame/2) % 100]*/; j < trackdata->edgesCount; j++) {
             for (unsigned int x = 0; x < trackdata->edges[j].size() / 2; x++) {
                 edge e = trackdata->edges[j][x];
-                glm::vec4 pos = glm::vec4(e.bx, e.by, e.bz, 1);
+                glm::vec4 pos = glm::vec4(e.b.x, e.b.y, e.b.z, 1);
                 if (glm::length(xrenderer->model_position - pos) < glm::length(xrenderer->model_position - xrenderer->light.u_nearest1)) {
                     xrenderer->light.u_nearest1 = pos;
                 }
@@ -163,7 +141,7 @@ void displayScene() {
 
     /// render shadows
     xrenderer->shadowMode(true);
-    for (int i = carCount - 1; i >= 0; i--) {
+    for (int i = allCar.size() - 1; i >= 0; i--) {
 
         ///render car skin
         xrenderer->pushMatrix();
@@ -184,14 +162,6 @@ void displayScene() {
     xrenderer->shadowMode(false);
 
     /// render smoke effects
-    if (water == 0) {
-        water = getModel("gfx/water.o4s", true);
-        for (int i = 0; i < effLen; i++) {
-            eff[i].vertices = new float[4095 * 3];
-            eff[i].coords = new float[4095 * 2];
-            eff[i].count = 0;
-        }
-    }
     for (int k = 0; k < effLen; k++) {
         if (active || (k != (currentFrame + effLen - 1) % effLen)) {
             water->models[0].texture2D->setFrame(eff[k].frame);
@@ -201,7 +171,7 @@ void displayScene() {
 
     // update water
     eff[currentFrame].count = 0;
-    for (int i = carCount - 1; i >= 0; i--) {
+    for (int i = allCar.size() - 1; i >= 0; i--) {
         float effect = fabs(allCar[i]->speed) * fabs(allCar[i]->speed * (g + allCar[i]->control->getBrake() * 5.0)) * 0.001f;
         effect = fmax(effect, effect * 0.05 + allCar[i]->prevEffect * 0.95);
         allCar[i]->prevEffect = effect;
@@ -223,22 +193,10 @@ void displayScene() {
             }
         }
     }
+    xrenderer->popMatrix();
 
     // render RTT
-    xrenderer->rtt[xrenderer->oddFrame]->drawOnScreen(xrenderer->scene_shader);
-
-    /// render GPS arrow
-    xrenderer->pushMatrix();
-    float a = angle(allCar[cameraCar]->currentEdge, allCar[cameraCar]);
-    float s = fabs(gap(allCar[cameraCar]->currentEdge, allCar[cameraCar]));
-    s = fmin(s / 45.0f, 0.01f);
-    xrenderer->translate(allCar[cameraCar]->x, allCar[cameraCar]->y + allCar[cameraCar]->control->getDistance() * 1.5, allCar[cameraCar]->z);
-    xrenderer->scale(allCar[cameraCar]->control->getDistance() * s);
-    xrenderer->rotateY(a * 180 / 3.14);
-    xrenderer->renderModel(arrow);
-    xrenderer->popMatrix();
-    xrenderer->popMatrix();
-
+    xrenderer->rtt(false);
 
     for (int k = 0; k < effLen; k++) {
         eff[k].frame++;
@@ -261,18 +219,6 @@ void displayScene() {
  */
 void loadScene(std::string filename) {
 
-    /// clear previous scene
-    if (trackdata != 0) {
-        for (int i = 0; i < carCount; i++)
-            delete allCar[i];
-        delete trackdata;
-        delete skydome;
-    }
-    if (trackdata2 != 0)
-        delete trackdata2;
-    trackdata2 = 0;
-    carCount = 0;
-
     /// load track
     std::vector<std::string> atributes = getList("", filename);
     trackdata = getModel(getConfigStr("track_model1", atributes), true);
@@ -282,30 +228,34 @@ void loadScene(std::string filename) {
 
     /// load sky
     skydome = getModel(getConfigStr("sky_model", atributes), true);
-    if (arrow == 0) {
-        arrow = getModel("gfx/arrow.o4s", true);
-    }
-    //arrow->models[0].texture2D = skydome->models[1].texture2D;
 
     /// load player car
-    allCar[0] = new car(getInput(), &e, carList[playerCar]);
+    allCar.push_back(new car(getInput(), &e, carLst[0]));
 
     /// load race informations
     allCar[0]->lapsToGo = getConfig("laps", atributes) - 1;
     allCar[0]->finishEdge = getConfig("finish", atributes);
     allCar[0]->currentEdgeIndex = getConfig("player_start", atributes);
-    allCar[0]->setStart(allCar[0]->edges[getConfig("player_start", atributes)], 0);
+    allCar[0]->setStart(allCar[0]->edges[getConfig("player_start", atributes)]);
 
     /// load opponents
     opponentCount = getConfig("opponent_count", atributes);
     for (int i = 0; i < opponentCount; i++) {
 
         /// racer ai
-        allCar[i + 1] = new car(new airacer(), &e, carList[getConfig(getTag(i + 1, "opponent%d_car"), atributes)]);
+        allCar.push_back(new car(new airacer(), &e, carLst[getConfig(getTag(i + 1, "opponent%d_car"), atributes)]));
         allCar[i + 1]->finishEdge = allCar[0]->finishEdge;
         allCar[i + 1]->lapsToGo = allCar[0]->lapsToGo;
-        allCar[i + 1]->setStart(allCar[i + 1]->edges[getConfig(getTag(i + 1, "opponent%d_start"), atributes)], 0);
+        allCar[i + 1]->setStart(allCar[i + 1]->edges[getConfig(getTag(i + 1, "opponent%d_start"), atributes)]);
         allCar[i + 1]->currentEdgeIndex = getConfig(getTag(i + 1, "opponent%d_start"), atributes);
+    }
+
+    /// load water
+    water = getModel("gfx/water.o4s", true);
+    for (int i = 0; i < effLen; i++) {
+        eff[i].vertices = new float[4095 * 3];
+        eff[i].coords = new float[4095 * 2];
+        eff[i].count = 0;
     }
 
     /// create instance of physical engine
@@ -327,14 +277,14 @@ void idle(int v) {
 
     if (active) {
         /// update cars
-        for (int i = 0; i < carCount; i++)
+        for (unsigned int i = 0; i < allCar.size(); i++)
             physic->updateCar(allCar[i]);
         /// update scene
         physic->updateWorld();
 
         /// update car transforms
         pthread_mutex_lock(&matrixLock);
-        for (int i = 0; i < carCount; i++)
+        for (unsigned int i = 0; i < allCar.size(); i++)
             physic->updateCarTransform(allCar[i]);
         pthread_mutex_unlock(&matrixLock);
 
@@ -342,7 +292,7 @@ void idle(int v) {
         if (allCar[0]->lapsToGo == -1) {
             int variable = 0;
             /// count player place
-            for (int j = 0; j < carCount; j++) {
+            for (unsigned int j = 0; j < allCar.size(); j++) {
                 if (allCar[cameraCar]->toFinish >= allCar[j]->toFinish) {
                     variable++;
                 }
@@ -352,25 +302,22 @@ void idle(int v) {
         }
         /// another test if race is finished(solve finish line position problem)
         if (allCar[0]->lapsToGo == -1) {
-            if (distance(allCar[cameraCar]->x, allCar[cameraCar]->z,
-                         allCar[cameraCar]->currentGoalEdge.bx, allCar[cameraCar]->currentGoalEdge.bz) < 25) {
+            if (distance(allCar[cameraCar]->pos, allCar[cameraCar]->currentGoalEdge.b) < 25) {
 
                 //TODO what happend if player finish race
             }
         }
 
         /// update cars
-        for (int i = 0; i < carCount; i++) {
+        for (unsigned int i = 0; i < allCar.size(); i++) {
             /// update current edge for navigation
             if (!physic->locked) {
-                if ((distance(allCar[i]->currentEdge, allCar[i]) < allCar[i]->control->getUpdate())
-                        && (fabsf(allCar[i]->currentEdge.by - allCar[i]->y) < 30)) {
-                    std::vector<int> *nEdges = nextEdge(&allCar[i]->edges, allCar[i]->currentEdgeOriginal);
-                    if (nEdges->size() > 0) {
-                        allCar[i]->currentEdgeOriginal = allCar[i]->edges[(*nEdges)[0]];
-                        allCar[i]->currentEdge = sidemoveEdge(allCar[i]->currentEdgeOriginal, allCar[i]->edgeSideMove);
+                if ((distance(allCar[i]->pos, allCar[i]->currentEdge.b) < allCar[i]->control->getUpdate())
+                        && (fabsf(allCar[i]->currentEdge.b.y - allCar[i]->pos.y) < 30)) {
+                    std::vector<int> nEdges = nextEdge(&allCar[i]->edges, allCar[i]->currentEdge);
+                    if (nEdges.size() > 0) {
+                        allCar[i]->currentEdge;
                     }
-                    delete nEdges;
                 }
             }
             allCar[i]->update();
@@ -386,8 +333,6 @@ void idle(int v) {
 
 void *idle(void *threadid)
 {
-    long tid;
-    tid = (long)threadid;
     idle(0);
     pthread_exit(NULL);
 }
@@ -401,7 +346,7 @@ void display(void) {
 
     /// apply latest matrices
     pthread_mutex_lock(&matrixLock);
-    for (int i = carCount - 1; i >= 0; i--) {
+    for (int i = allCar.size() - 1; i >= 0; i--) {
         allCar[i]->updateMatrices();
     }
     pthread_mutex_unlock(&matrixLock);
@@ -469,8 +414,13 @@ void keyboardDown(unsigned char key, int x, int y) {
     if (key == 27) {
         active = false;
         delete physic;
-        loadScene("tracks/track1.ini");
-        active = true;
+        delete xrenderer;
+        clearMediaStorage();
+        while (!allCar.empty()) {
+            delete allCar[allCar.size() - 1];
+            allCar.pop_back();
+        }
+        exit(0);
     }
 #endif
 }
@@ -496,6 +446,8 @@ void keyboardUp(unsigned char key, int x, int y) {
  */
 void reshape (int w, int h) {
    aspect = (float) w/(float) h;
+   if (xrenderer != 0)
+       delete xrenderer;
    xrenderer = getRenderer(w, h);
 }
 
@@ -534,10 +486,8 @@ int main(int argc, char** argv) {
     glutKeyboardUpFunc(keyboardUp);
 #endif
 
-    /// load menu data
-    carList.push_back("cars/01/params");
-
-    delete physic;
+    /// load data
+    carLst.push_back("cars/01/params");
     loadScene("tracks/track1");
 
     /// init sound
@@ -625,7 +575,7 @@ void Java_com_lvonasek_o4s_game_Native_loop( JNIEnv*  env, jobject  thiz ) {
  * @param env is instance of JNI
  */
 jint Java_com_lvonasek_o4s_game_Native_carCount( JNIEnv*  env ) {
-  return carCount;
+  return allCar.size();
 }
 
 /**
@@ -650,13 +600,13 @@ jfloat Java_com_lvonasek_o4s_game_Native_carState( JNIEnv*  env, jobject  thiz, 
     if (type == 7)
         return allCar[index]->control->getNitro();
     if (type == 8)
-        return (*allCar[index]->gears)[allCar[index]->currentGear].min;
+        return allCar[index]->gears[allCar[index]->currentGear].min;
     if (type == 9)
-        return (*allCar[index]->gears)[allCar[index]->currentGear].max;
+        return allCar[index]->gears[allCar[index]->currentGear].max;
     if (type == 10)
         return allCar[index]->n2o;
     if (type == 11)
-        return distance(allCar[cameraCar], allCar[index]);
+        return distance(allCar[cameraCar]->pos, allCar[index]->pos);
     return 0;
 }
 }

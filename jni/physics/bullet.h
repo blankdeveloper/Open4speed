@@ -25,7 +25,7 @@ public:
     /**
      * Bullet physics objects
      */
-    btDynamicsWorld* m_dynamicsWorld;
+    btDiscreteDynamicsWorld* m_dynamicsWorld;
     btDefaultCollisionConfiguration* m_collisionConfiguration;
     btCollisionDispatcher* m_dispatcher;
     btBroadphaseInterface* m_overlappingPairCache;
@@ -44,7 +44,6 @@ public:
     std::vector<btRigidBody*> bodies2;
     std::vector<btCollisionShape*> chassisShapes;
     std::vector<btVehicleRaycaster*> m_vehicleRayCasters;
-    std::vector<btRaycastVehicle*> m_RaycastVehicles;
 
     /**
      * @brief Construct physical model

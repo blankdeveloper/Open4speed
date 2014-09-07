@@ -21,6 +21,16 @@
 #include "common.h"
 
 /**
+ * @brief gles20 destructor
+ */
+gles20::~gles20() {
+    while (!rtt_fbo.empty()) {
+        delete rtt_fbo[rtt_fbo.size() - 1];
+        rtt_fbo.pop_back();
+    }
+}
+
+/**
  * @brief gles20 constructor
  */
 gles20::gles20(int w, int h) {
@@ -38,7 +48,6 @@ gles20::gles20(int w, int h) {
     camX = 0;
     camY = 0;
     camZ = 0;
-    frame = 0;
     oddFrame = true;
 
     /// set open-gl
@@ -57,7 +66,7 @@ gles20::gles20(int w, int h) {
 
     //create render texture
     for (int i = 0; i < 2; i++) {
-        rtt[i] = new glfbo(screen_width, screen_height);
+        rtt_fbo.push_back(new glfbo(screen_width, screen_height));
     }
 
     //set viewport
@@ -324,7 +333,7 @@ void gles20::renderModel(model* m) {
  */
 void gles20::renderShadow(model* m) {
 
-    if (!rtt[oddFrame]->complete)
+    if (!rtt_fbo[oddFrame]->complete)
         return;
 
     /// set culling info positions
@@ -418,7 +427,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
 
     /// previous screen
     glActiveTexture( GL_TEXTURE1 );
-    rtt[oddFrame]->bindTexture();
+    rtt_fbo[oddFrame]->bindTexture();
     current->uniformInt("EnvMap1", 1);
 
     /// set texture
@@ -427,20 +436,11 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     current->uniformInt("color_texture", 0);
 
     /// set uniforms
-    glm::vec4 mpos = (proj_matrix * view_matrix * model_position);
-    float z = mpos.z;
-    mpos /= mpos.w;
-    float y = mpos.y * 0.5 + 0.5 - 2 / z;
-    current->uniformFloat("u_Time", frame / 1000.0f);
-    current->uniformFloat4("u_model_position", glm::clamp(mpos.x * 0.5f + 0.5f, 0.0f, 1.0f), glm::max(0.0f, y), 0, 1);
     current->uniformFloat("u_width", 1 / (float)screen_width);
     current->uniformFloat("u_height", 1 / (float)screen_height);
-    current->uniformFloat4("camera", camX, camY, camZ, 1);
     current->uniformFloat4("u_kA", m->colora[0], m->colora[1], m->colora[2], 1);
     current->uniformFloat4("u_kD", m->colord[0], m->colord[1], m->colord[2], 1);
     current->uniformFloat4("u_kS", m->colors[0], m->colors[1], m->colors[2], 1);
-    current->uniformFloat("u_speed", allCar[cameraCar]->speed / 500.0f + 0.35f);
-    current->uniformFloat("u_gamma", 1.0);
     if (enable[9])
         current->uniformFloat("u_brake", 1);
     else
@@ -483,7 +483,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
 }
 
 void gles20::shadowMode(bool enable) {
-  if (!rtt[oddFrame]->complete)
+  if (!rtt_fbo[oddFrame]->complete)
       return;
 
   if (enable) {
@@ -502,4 +502,15 @@ void gles20::shadowMode(bool enable) {
       glDisable(GL_STENCIL_TEST);
       glStencilMask(false);
   }
+}
+
+void gles20::rtt(bool enable) {
+    if (enable) {
+        rtt_fbo[oddFrame]->bindFBO();
+        rtt_fbo[oddFrame]->clear();
+        oddFrame = !oddFrame;
+    } else {
+        rtt_fbo[oddFrame]->drawOnScreen(scene_shader);
+        glDepthMask(true);
+    }
 }

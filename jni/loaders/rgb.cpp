@@ -18,24 +18,24 @@
  * @param b is blue color value
   * @return texture instance
  */
-Texture* createRGB(int width, int height, float r, float g, float b) {
+Texture createRGB(int width, int height, float r, float g, float b) {
 
     /// create color pixel raster
-    Texture* texture = new Texture();
-    texture->data = new unsigned char[width * height * 4];
+    Texture texture;
+    texture.data = new unsigned char[width * height * 4];
     int index = 0;
     for (int x = 0; x < width; x++)
         for (int y = 0; y < height; y++) {
-            texture->data[0 + index] = (int)(255 * r);
-            texture->data[1 + index] = (int)(255 * g);
-            texture->data[2 + index] = (int)(255 * b);
-            texture->data[3 + index] = (int)(255 * 1);
+            texture.data[0 + index] = (int)(255 * r);
+            texture.data[1 + index] = (int)(255 * g);
+            texture.data[2 + index] = (int)(255 * b);
+            texture.data[3 + index] = (int)(255 * 1);
             index += 4;
         }
 
     /// create texture
-    texture->width = width;
-    texture->height = height;
-    texture->hasAlpha = false;
+    texture.width = width;
+    texture.height = height;
+    texture.hasAlpha = false;
     return texture;
 }

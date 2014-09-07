@@ -23,9 +23,9 @@ public:
     glvbo* rect;                  ///< VBO for rendering to screen
 
     /**
-     * @brief glfbo is an empty constructor
+     * @brief removes all data from memory
      */
-    glfbo();
+    ~glfbo();
 
     /**
      * @brief constructor init framebuffer and renderbuffer
@@ -49,11 +49,6 @@ public:
      * @brief clear clears stencil/depth buffer
      */
     void clear();
-
-    /**
-     * @brief destroy removes all data from memory
-     */
-    void destroy();
 
     /**
      * @brief drawOnScreen draws FBO on screen

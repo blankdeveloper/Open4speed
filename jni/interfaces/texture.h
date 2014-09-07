@@ -26,7 +26,6 @@ class texture {
 public:
     float alpha;            ///< Texture alpha value for blending
     bool transparent;       ///< Texture transparency
-    int instanceCount;      ///< Amount of instances
     int twidth, theight;    ///< Image dimensions
     char texturename[256];  ///< Texture filename
     unsigned int textureID; ///< Texture id
@@ -37,11 +36,6 @@ public:
     unsigned int currentFrame;      ///< Current image
     unsigned int currentMultiFrame; ///< Replying frames state
     unsigned int multiFrame;        ///< Replying frames amount
-
-    /**
-     * @brief destruct removes texture from memory is there is no more instance
-     */
-    virtual void pointerDecrease() = 0;
 
     /**
      * @brief apply applies current texture

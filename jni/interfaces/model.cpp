@@ -14,12 +14,13 @@
  */
 model::~model() {
     for (unsigned int i = 0; i < models.size(); i++) {
-        models[i].vboData->destroy();
+        if (models[i].vboData != 0)
+          delete models[i].vboData;
         delete[] models[i].vertices;
         delete[] models[i].normals;
+        delete[] models[i].tnormals;
         delete[] models[i].coords;
         delete[] models[i].triangleCount;
-        models[i].texture2D->pointerDecrease();
     }
     delete[] edges;
     models.clear();

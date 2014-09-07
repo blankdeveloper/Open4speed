@@ -40,21 +40,19 @@ public:
     float acceleration, brakePower, steering, power, lowAspect, mass;     ///< Physical parameters of car
     float wheelX, wheelY, wheelZ1, wheelZ2;                               ///< Wheel positions
     float gearUp, gearDown, gearLow, gearHigh, gearNitro;                 ///< Gear extremes
-    std::vector<gear> *gears;                                             ///< Transmision gears
+    std::vector<gear> gears;                                              ///< Transmision gears
     unsigned int currentGear;                                             ///< Current gear
     bool reverse;                                                         ///< Car direction
     input* control;                                                       ///< Car control device(or script)
     edge currentEdge;                                                     ///< Current track part
     int currentEdgeIndex;                                                 ///< Current position index
-    edge currentEdgeOriginal;                                             ///< Unmoved current track part
     edge currentGoalEdge;                                                 ///< Current track part for counting laps
     std::vector<edge> edges;                                              ///< Track for current car
-    float edgeSideMove;                                                   ///< Amount of move current car track to side
     int finishEdge;                                                       ///< Index of final edge
     int lapsToGo;                                                         ///< Amount of laps to go
-    int index;                                                            ///< Index of car
-    float x, y, z, rot, speed, tempRot;                                   ///< Car physic state
-    float lx, ly, lz, lspeed;                                             ///< Car last state
+    unsigned int index;                                                   ///< Index of car
+    glm::vec3 pos, oldPos;                                                ///< Car position
+    float rot, speed, tempRot, lspeed;                                    ///< Car state
     float view;                                                           ///< Camera view perspective angle
     model* skin;                                                          ///< 3D models
     model* wheel;                                                         ///< 3D models
@@ -90,9 +88,8 @@ public:
     /**
      * @brief setStart sets start position of car
      * @param e is curve where car starts on
-     * @param sidemove is amount of car side movement(use it for rightside riding)
      */
-    void setStart(edge e, float sidemove);
+    void setStart(edge e);
 
     /**
      * @brief update updates car wheels state(rotation and steering)

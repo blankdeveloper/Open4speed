@@ -13,7 +13,7 @@
 #include "utils/math.h"
 #include "common.h"
 
-//TODO Translate into english
+//TODO Translate comments into english
 
 // pomer brzdeni
 #define BRAKE_ASPECT 1.0
@@ -59,30 +59,10 @@
 #define WORLD_SUBSTEP 4
 
 /**
- * @brief Construct physical model
- * @param m is 3D model for physical model
- */
-bullet::bullet(model *m) {
-
-    /// init engine
-    locked = true;
-    m_collisionConfiguration = new btDefaultCollisionConfiguration();
-    m_dispatcher = new btCollisionDispatcher(m_collisionConfiguration);
-    btVector3 worldMin(-WORLD_LIMIT,-WORLD_LIMIT,-WORLD_LIMIT);
-    btVector3 worldMax(WORLD_LIMIT,WORLD_LIMIT,WORLD_LIMIT);
-    m_overlappingPairCache = new btAxisSweep3(worldMin,worldMax);
-    m_constraintSolver = new btSequentialImpulseConstraintSolver();
-    m_dynamicsWorld = new btDiscreteDynamicsWorld(m_dispatcher,m_overlappingPairCache,m_constraintSolver,m_collisionConfiguration);
-    m_dynamicsWorld->setGravity(btVector3(0,-GRAVITATION,0));
-
-    /// Create scene
-    addModel(m);
-}
-
-/**
  * @brief bullet destructor
  */
 bullet::~bullet() {
+    delete m_dynamicsWorld;
     while(!m_vehicle.empty()) {
         delete m_vehicle[0];
         m_vehicle.erase(m_vehicle.begin());
@@ -119,16 +99,32 @@ bullet::~bullet() {
         delete m_vehicleRayCasters[0];
         m_vehicleRayCasters.erase(m_vehicleRayCasters.begin());
     }
-    while(!m_RaycastVehicles.empty()) {
-        //delete m_RaycastVehicles[0];
-        m_RaycastVehicles.erase(m_RaycastVehicles.begin());
-    }
 
     delete m_collisionConfiguration;
     delete m_dispatcher;
     delete m_overlappingPairCache;
     delete m_constraintSolver;
-    //delete m_dynamicsWorld;
+}
+
+/**
+ * @brief Construct physical model
+ * @param m is 3D model for physical model
+ */
+bullet::bullet(model *m) {
+
+    /// init engine
+    locked = true;
+    m_collisionConfiguration = new btDefaultCollisionConfiguration();
+    m_dispatcher = new btCollisionDispatcher(m_collisionConfiguration);
+    btVector3 worldMin(-WORLD_LIMIT,-WORLD_LIMIT,-WORLD_LIMIT);
+    btVector3 worldMax(WORLD_LIMIT,WORLD_LIMIT,WORLD_LIMIT);
+    m_overlappingPairCache = new btAxisSweep3(worldMin,worldMax);
+    m_constraintSolver = new btSequentialImpulseConstraintSolver();
+    m_dynamicsWorld = new btDiscreteDynamicsWorld(m_dispatcher,m_overlappingPairCache,m_constraintSolver,m_collisionConfiguration);
+    m_dynamicsWorld->setGravity(btVector3(0,-GRAVITATION,0));
+
+    /// Create scene
+    addModel(m);
 }
 
 /**
@@ -158,10 +154,10 @@ void bullet::addCar(car* c) {
     /// Set car default transform
     btVehicleRaycaster* m_vehicleRayCaster = new btDefaultVehicleRaycaster(m_dynamicsWorld);
     m_vehicleRayCasters.push_back(m_vehicleRayCaster);
-    btTransform tr = *(new btTransform());
+    btTransform tr;
     tr.setIdentity();
-    tr.setOrigin(btVector3(c->x, c->y, c->z));
-    btQuaternion qn = *(new btQuaternion());
+    tr.setOrigin(btVector3(c->pos.x, c->pos.y, c->pos.z));
+    btQuaternion qn;
     qn.setW(btScalar(cos(c->rot * 3.14 / 180 / 2.0f)));
     qn.setX(btScalar(0));
     qn.setY(btScalar(sin(c->rot * 3.14 / 180 / 2.0f)));
@@ -170,9 +166,8 @@ void bullet::addCar(car* c) {
 
     /// Create car
     m_carChassis->setCenterOfMassTransform(tr);
-    btRaycastVehicle::btVehicleTuning m_tuning = *(new btRaycastVehicle::btVehicleTuning());
+    btRaycastVehicle::btVehicleTuning m_tuning;
     btRaycastVehicle *m_RaycastVehicle = new btRaycastVehicle(m_tuning,m_carChassis,m_vehicleRayCaster);
-    m_RaycastVehicles.push_back(m_RaycastVehicle);
     m_vehicle.push_back(m_RaycastVehicle);
     m_carChassis->setActivationState(DISABLE_DEACTIVATION);
     m_dynamicsWorld->addVehicle(m_vehicle[c->index - 1]);
@@ -261,7 +256,7 @@ void bullet::addModel(model *m) {
             btCollisionShape* levelShape = new btBvhTriangleMeshShape(mesh,true);
             levelShapes.push_back(levelShape);
             btVector3 localInertia(0,0,0);
-            btTransform localTrans = *(new btTransform());
+            btTransform localTrans;
             localTrans.setIdentity();
             localTrans.setOrigin(btVector3(m->models[i].reg.min.x, m->models[i].reg.min.y, m->models[i].reg.min.z));
             btRigidBody* body = new btRigidBody(0,0,levelShape,localInertia);
@@ -296,10 +291,10 @@ void bullet::getTransform(int index, float* m) {
  */
 void bullet::resetCar(car* c) {
     c->resetRequested = false;
-    c->setStart(c->currentEdge, c->edgeSideMove);
+    c->setStart(c->currentEdge);
     btTransform tr;
     tr.setIdentity();
-    tr.setOrigin(btVector3(c->x,c->y - 0.1f,c->z));
+    tr.setOrigin(btVector3(c->pos.x,c->pos.y - 0.1f,c->pos.z));
     btQuaternion q;
     q.setRotation(btVector3(0,1,0), c->rot * 3.14 / 180.0);
     tr.setRotation(q);
@@ -327,7 +322,7 @@ void bullet::updateCar(car* c) {
 
     /// Set power
     float acc = c->acceleration;
-    float max = (*c->gears)[c->currentGear].max;
+    float max = c->gears[c->currentGear].max;
     if (c->n2o < 150) {
         c->n2o += 0.1f;
     }
@@ -348,7 +343,7 @@ void bullet::updateCar(car* c) {
     }
 
     /// set auto braking
-    if (c->speed < (*c->gears)[c->currentGear].min) {
+    if (c->speed < c->gears[c->currentGear].min) {
         gEngineForce = 0;
         gBreakingForce = UNDERSPEED_BRAKING;
     }
@@ -401,9 +396,9 @@ void bullet::updateCar(car* c) {
 
     // reset car
     if (c->resetAllowed && c->resetRequested) {
-        for (int i = 0; i < carCount; i++) {
+        for (unsigned int i = 0; i < allCar.size(); i++) {
             if (i != c->index - 1) {
-                if (dist(c->currentEdge.ax, c->currentEdge.ay, c->currentEdge.az, allCar[i]->x, allCar[i]->y, allCar[i]->z) < 10) {
+                if (glm::length(c->currentEdge.a - allCar[i]->pos) < 10) {
                     return;
                 }
             }
@@ -430,9 +425,9 @@ void bullet::updateCarTransform(car* c) {
     float y = m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getY();
     float z = m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getZ();
     if (!isnan(x) && !isnan(y) && !isnan(z)) {
-        c->x=x;
-        c->y=y;
-        c->z=z;
+        c->pos.x=x;
+        c->pos.y=y;
+        c->pos.z=z;
     }
 
     /// get matrices

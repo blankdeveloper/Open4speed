@@ -22,6 +22,10 @@ public:
     GLint attribute_v_coord;    ///< VBO coords
     GLint attribute_v_normal;   ///< VBO normals
     GLint attribute_v_tnormal;  ///< VBO triangle normals
+    GLuint shader_vp;           ///< Vertex shader
+    GLuint shader_fp;           ///< Fragment shader
+
+    ~glsl();
 
     /**
      * @brief Constructor
@@ -49,6 +53,14 @@ public:
     void bind();
 
     bool hasAttrib(int i);
+
+    /**
+     * @brief initShader creates shader from code
+     * @param vs is vertex shader code
+     * @param fs is fragment shader code
+     * @return shader program id
+     */
+    unsigned int initShader(const char *vs, const char *fs);
 
     /**
      * @brief it unbinds shader

@@ -60,7 +60,7 @@ float airacer::getGas() {
 
     /// check angle of turn
     if (allCar[index]->speed > SAFE_SPEED)
-        if (fabsf(gap(allCar[index]->currentEdge, allCar[index])) > SAFE_GAP_GAS)
+        if (fabsf(gap(allCar[index]->currentEdge.b, allCar[index]->pos, allCar[index]->rot)) > SAFE_GAP_GAS)
              return 0;
     if ((int)allCar[index]->speed > 5)
         problem = 0;
@@ -86,7 +86,7 @@ float airacer::getSteer() {
          return 0;
 
     /// count track direction
-    float g2 = gap(allCar[index]->currentEdge, allCar[index]);
+    float g2 = gap(allCar[index]->currentEdge.b, allCar[index]->pos, allCar[index]->rot);
 
     /// update direction
     if (g2 > STEERING_GAP_HIGH)

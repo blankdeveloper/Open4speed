@@ -36,32 +36,23 @@ float angle(float fromX, float fromY, float toX, float toY) {
 }
 
 /**
- * @brief angle counts angle of edge
- * @param e is instance of edge
- * @return angle in radians
- */
-float angle(edge e) {
-    return angle(e.ax, e.az, e.bx, e.bz);
-}
-
-/**
  * @brief angle counts angle between two cars
- * @param a is instance of first car
- * @param b is instance of second car
+ * @param a is first position
+ * @param b is second position
  * @return angle in radians
  */
-float angle(car* a, car* b) {
-    return angle(a->x, a->y, b->x, b->y);
+float angle(glm::vec3 a, glm::vec3 b) {
+    return angle(a.x, a.z, b.x, b.z);
 }
 
 /**
- * @brief angle counts angle between car and of the end edge
- * @param e is instance of edge
- * @param c is instance of car
- * @return angle in radians
+ * @brief distance counts distance between car and of the end edge
+ * @param a is first position
+ * @param b is second position
+ * @return distance in float
  */
-float angle(edge e, car* c) {
-    return angle(c->x, c->z, e.bx, e.bz);
+float distance(glm::vec3 a, glm::vec3 b) {
+    return distance(a.x, a.z, b.x, b.z);
 }
 
 /**
@@ -77,64 +68,14 @@ float distance(float fromX, float fromY, float toX, float toY) {
 }
 
 /**
- * @brief dist is distance between two points in 3D
- * @param x1 is first point x coordinate
- * @param y1 is first point y coordinate
- * @param z1 is first point z coordinate
- * @param x2 is second point x coordinate
- * @param y2 is second point y coordinate
- * @param z2 is second point z coordinate
- * @return distance in meters
- */
-float dist(float x1, float y1, float z1, float x2, float y2, float z2) {
-    return sqrt(sqr(x2 - x1) + sqr(y2 - y1) + sqr(z2 - z1));
-}
-
-/**
- * @brief distance counts distance between two cars
- * @param a is instance of first car
- * @param b is instance of second car
- * @return distance in float
- */
-float distance(car* a, car* b) {
-    return distance(a->x, a->y, b->x, b->y);
-}
-
-/**
- * @brief distance counts distance between two cars in future
- * @param a is instance of first car
- * @param b is instance of second car
- * @param time is time in future(0=present)
- * @return distance in float
- */
-float distance(car* a, car* b, float time) {
-    float nax = a->x + sin(a->rot * 3.14 / 180) * time;
-    float nay = a->y + cos(a->rot * 3.14 / 180) * time;
-    float nbx = b->x + sin(b->rot * 3.14 / 180) * time;
-    float nby = b->y + cos(b->rot * 3.14 / 180) * time;
-
-    return distance(nax, nay, nbx, nby);
-}
-
-/**
- * @brief distance counts distance between car and of the end edge
- * @param e is instance of edge
- * @param c is instance of car
- * @return distance in float
- */
-float distance(edge e, car* c) {
-    return distance(c->x, c->z, e.bx, e.bz);
-}
-
-/**
  * @brief gap counts gap between car and of the end edge
  * @param e is instance of edge
  * @param c is instance of car
  * @return gap in radians
  */
-float gap(edge e, car* c) {
-    float direction = angle(e, c) * 180 / 3.14;
-    float gap = c->rot - direction - 180;
+float gap(glm::vec3 e, glm::vec3 c, float crot) {
+    float direction = angle(c, e) * 180 / 3.14;
+    float gap = crot - direction - 180;
     while(true) {
         if (gap < -180)
             gap += 360;
@@ -143,51 +84,6 @@ float gap(edge e, car* c) {
         else
             break;
         }
-    return gap;
-}
-
-/**
- * @brief gap counts gap between two cars
- * @param a is instance of first car
- * @param b is instance of second car
- * @return gap in radians
- */
-float gap(car* a, car* b) {
-    float gap = a->rot - angle(a, b) - 180;
-    while(true) {
-        if (gap < -180)
-            gap += 360;
-        else if (gap > 180)
-            gap -= 360;
-        else
-            break;
-        }
-    return gap;
-}
-
-/**
- * @brief gap counts gap between two cars in future
- * @param a is instance of first car
- * @param b is instance of second car
- * @param time is time in future(0=present)
- * @return gap in radians
- */
-float gap(car* a, car* b, float time) {
-    float nax = a->x - sin(a->rot * 3.14 / 180) * time * a->speed;
-    float nay = a->y - cos(a->rot * 3.14 / 180) * time * a->speed;
-    float nbx = b->x - sin(b->rot * 3.14 / 180) * time * b->speed;
-    float nby = b->y - cos(b->rot * 3.14 / 180) * time * b->speed;
-
-    float an = angle(nax, nay, nbx, nby);
-    float gap = a->rot - an - 180;
-    while(true) {
-        if (gap < -180)
-            gap += 360;
-        else if (gap > 180)
-            gap -= 360;
-        else
-            break;
-    }
     return gap;
 }
 
@@ -214,11 +110,11 @@ float getRotation(float x, float y, float z, float w) {
  * @return true if edges are same
  */
 bool isSame(edge a, edge b) {
-    if ((a.ax == b.bx) & (a.az == b.bz))
-        if ((b.ax == a.bx) & (b.az == a.bz))
+    if ((a.a.x == b.b.x) & (a.a.z == b.b.z))
+        if ((b.a.x == a.b.x) & (b.a.z == a.b.z))
             return true;
-    if ((a.ax == b.ax) & (a.az == b.az))
-        if ((b.bx == a.bx) & (b.bz == a.bz))
+    if ((a.a.x == b.a.x) & (a.a.z == b.a.z))
+        if ((b.b.x == a.b.x) & (b.b.z == a.b.z))
             return true;
     return false;
 }
@@ -255,45 +151,27 @@ int min(int a, int b) {
  * @param e is current edge
  * @return indicies as vector of int
  */
-std::vector<int>* nextEdge(std::vector<edge> *edges, edge e) {
-    std::vector<int> *output = new std::vector<int>();
+std::vector<int> nextEdge(std::vector<edge> *edges, edge e) {
+    std::vector<int> output;
 
     /// skip logical edges
     for (unsigned int i = 0; i < edges->size(); i++) {
-        if (((*edges)[i].ax == e.bx) && ((*edges)[i].az == e.bz)) {
-            if (e.by > (*edges)[i].ay) {
-                e.by = (*edges)[i].ay;
+        if (((*edges)[i].a.x == e.b.x) && ((*edges)[i].a.z == e.b.z)) {
+            if (e.b.y > (*edges)[i].a.y) {
+                e.b.y = (*edges)[i].a.y;
             }
         }
     }
 
     /// add possible edges
     for (unsigned int i = 0; i < edges->size(); i++) {
-        if (((*edges)[i].ax == e.bx) & ((*edges)[i].ay == e.by) & ((*edges)[i].az == e.bz)) {
+        if (((*edges)[i].a.x == e.b.x) & ((*edges)[i].a.y == e.b.y) & ((*edges)[i].a.z == e.b.z)) {
             if (!isSame((*edges)[i],e))
-                if (((*edges)[i].ax != (*edges)[i].bx) | ((*edges)[i].az != (*edges)[i].bz))
-                    output->push_back(i);
+                if (((*edges)[i].a.x != (*edges)[i].b.x) | ((*edges)[i].a.z != (*edges)[i].b.z))
+                    output.push_back(i);
         }
     }
     return output;
-}
-
-/**
- * @brief sidemoveEdge moves edge into side
- * @param e is edge to move
- * @param amount is amount of movement
- * @return moved edge
- */
-edge sidemoveEdge(edge e, float amount) {
-    float a = angle(e) + 1.57;
-    edge o = *(new edge());
-    o.ax = e.ax + sin(a) * amount;
-    o.ay = e.ay;
-    o.az = e.az + cos(a) * amount;
-    o.bx = e.bx + sin(a) * amount;
-    o.by = e.by;
-    o.bz = e.bz + cos(a) * amount;
-    return o;
 }
 
 /**

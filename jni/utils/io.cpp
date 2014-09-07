@@ -262,7 +262,6 @@ void loge(std::string value1, std::string value2) {
 #ifdef ANDROID
  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,"com.lvonasek.o4s:%s %s", value1.c_str(), value2.c_str());
 #endif
- exit(1);
 }
 
 /**

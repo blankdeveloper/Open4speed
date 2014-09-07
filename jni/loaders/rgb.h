@@ -21,6 +21,6 @@
  * @param b is blue color value
   * @return texture instance
  */
-Texture* createRGB(int width, int height, float r, float g, float b);
+Texture createRGB(int width, int height, float r, float g, float b);
 
 #endif // RGB_H

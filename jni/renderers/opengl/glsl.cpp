@@ -12,56 +12,13 @@
 
 std::string header = "#version 100\nprecision highp float;\n";      ///< Shader header
 
-/**
- * @brief initShader creates shader from code
- * @param vs is vertex shader code
- * @param fs is fragment shader code
- * @return shader program id
- */
-unsigned int initShader(const char *vs, const char *fs) {
-
-    /// Load shader
-    GLuint shader_vp = glCreateShader(GL_VERTEX_SHADER);
-    GLuint shader_fp = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(shader_vp, 1, &vs, 0);
-    glShaderSource(shader_fp, 1, &fs, 0);
-
-    /// Alocate buffer for logs
-    const unsigned int BUFFER_SIZE = 512;
-    char buffer[BUFFER_SIZE];
-    memset(buffer, 0, BUFFER_SIZE);
-    GLsizei length = 0;
-
-    /// Compile shaders
-    glCompileShader(shader_vp);
-    glGetShaderInfoLog(shader_vp, BUFFER_SIZE, &length, buffer);
-    if (length > 0) {
-        logi("GLSL compile log:", buffer);
-    }
-    glCompileShader(shader_fp);
-    glGetShaderInfoLog(shader_fp, BUFFER_SIZE, &length, buffer);
-    if (length > 0) {
-        logi("GLSL compile log:", buffer);
-    }
-
-    /// Link program
-    unsigned int shader_id = glCreateProgram();
-    glAttachShader(shader_id, shader_fp);
-    glAttachShader(shader_id, shader_vp);
-    glLinkProgram(shader_id);
-    glGetProgramInfoLog(shader_id, BUFFER_SIZE, &length, buffer);
-    if (length > 0) {
-        logi("GLSL program info log:", buffer);
-    }
-
-    /// Check shader
-    glValidateProgram(shader_id);
-    GLint status;
-    glGetProgramiv(shader_id, GL_LINK_STATUS, &status);
-    if (status == GL_FALSE) {
-        logi("GLSL error linking", "buffer");
-    }
-    return shader_id;
+glsl::~glsl() {
+    glDetachShader(id, shader_vp);
+    glDetachShader(id, shader_fp);
+    glDeleteShader(shader_vp);
+    glDeleteShader(shader_fp);
+    glUseProgram(0);
+    glDeleteProgram(id);
 }
 
 /**
@@ -167,6 +124,58 @@ bool glsl::hasAttrib(int i) {
     if ((i == 3) && (attribute_v_tnormal == -1))
         return false;
     return true;
+}
+
+/**
+ * @brief initShader creates shader from code
+ * @param vs is vertex shader code
+ * @param fs is fragment shader code
+ * @return shader program id
+ */
+unsigned int glsl::initShader(const char *vs, const char *fs) {
+
+    /// Load shader
+    shader_vp = glCreateShader(GL_VERTEX_SHADER);
+    shader_fp = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(shader_vp, 1, &vs, 0);
+    glShaderSource(shader_fp, 1, &fs, 0);
+
+    /// Alocate buffer for logs
+    const unsigned int BUFFER_SIZE = 512;
+    char buffer[BUFFER_SIZE];
+    memset(buffer, 0, BUFFER_SIZE);
+    GLsizei length = 0;
+
+    /// Compile shaders
+    glCompileShader(shader_vp);
+    glGetShaderInfoLog(shader_vp, BUFFER_SIZE, &length, buffer);
+    if (length > 0) {
+        logi("GLSL compile log:", buffer);
+    }
+    glCompileShader(shader_fp);
+    glGetShaderInfoLog(shader_fp, BUFFER_SIZE, &length, buffer);
+    if (length > 0) {
+        logi("GLSL compile log:", buffer);
+    }
+
+    /// Link program
+    unsigned int shader_id = glCreateProgram();
+    glAttachShader(shader_id, shader_fp);
+    glAttachShader(shader_id, shader_vp);
+    glLinkProgram(shader_id);
+    glGetProgramInfoLog(shader_id, BUFFER_SIZE, &length, buffer);
+    if (length > 0) {
+        logi("GLSL program info log:", buffer);
+    }
+
+    /// Check shader
+    glValidateProgram(shader_id);
+    GLint status;
+    glGetProgramiv(shader_id, GL_LINK_STATUS, &status);
+    if (status == GL_FALSE) {
+        logi("GLSL error linking", "buffer");
+    }
+    return shader_id;
 }
 
 /**

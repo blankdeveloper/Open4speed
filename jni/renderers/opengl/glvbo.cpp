@@ -11,6 +11,13 @@
 #include "renderers/opengl/glvbo.h"
 
 /**
+ * @brief removes all data from memory
+ */
+glvbo::~glvbo() {
+    glDeleteBuffers(1, &instance);
+}
+
+/**
  * @brief glvbo creates VBO from data
  * @param size is amount of vertices
  * @param vertices is vertices array
@@ -54,13 +61,6 @@ glvbo::glvbo(int size, float* vertices, float* normals, float* coords, float* tn
     }
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-}
-
-/**
- * @brief destroy removes all data from memory
- */
-void glvbo::destroy() {
-    glDeleteBuffers(1, &instance);
 }
 
 /**

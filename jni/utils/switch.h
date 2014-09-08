@@ -34,7 +34,7 @@ input* getInput();
  * @param filename is path and name of file to load
  * @return instance of model
  */
-model* getModel(std::string filename, bool gpu);
+model* getModel(std::string filename);
 
 /**
  * @brief getPhysics gets physical engine

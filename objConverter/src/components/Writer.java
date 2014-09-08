@@ -31,7 +31,8 @@ public class Writer {
       }
     }
 
-    try (FileOutputStream fos = new FileOutputStream(args[1])) {
+    try {
+      FileOutputStream fos = new FileOutputStream(args[1]);
       fos.write((Common.cellWidth + "\n").getBytes());
       fos.write((Common.cellHeight + "\n").getBytes());
 
@@ -157,8 +158,10 @@ public class Writer {
           }
         }
       }
+      fos.close();
 
       // save edges count
+      fos = new FileOutputStream(args[1] + ".e");
       fos.write((edgesCount + "\n").getBytes());
 
       // save all edges

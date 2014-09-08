@@ -301,7 +301,7 @@ void gles20::renderModel(model* m) {
     for (unsigned int i = 0; i < m->models.size(); i++) {
         current = m->models[i].material;
         current->bind();
-        if (!m->models[i].texture2D->transparent)
+        if (!m->models[i].texture2D->transparent && !m->models[i].touchable)
             if (enable[m->models[i].filter]) {
                 glEnable(GL_CULL_FACE);
                 glCullFace(GL_BACK);
@@ -314,7 +314,7 @@ void gles20::renderModel(model* m) {
     for (unsigned int i = 0; i < m->models.size(); i++) {
         current = m->models[i].material;
         current->bind();
-        if (m->models[i].texture2D->transparent)
+        if (m->models[i].texture2D->transparent && !m->models[i].touchable)
             if (enable[m->models[i].filter]) {
                 /// set alpha channel
                 glEnable(GL_BLEND);
@@ -456,11 +456,6 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     current->uniformFloat4("u_light_att", light.u_light_att.x, light.u_light_att.y, light.u_light_att.z, 1.0);
     current->uniformFloat4("u_light_dir", light.u_light_dir.x, light.u_light_dir.y, light.u_light_dir.z, 1.0);
     current->uniformFloat4("u_nearest1", light.u_nearest1.x, light.u_nearest1.y, light.u_nearest1.z, 1.0);
-
-    if (current->shadername[0] == '0') {
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_ONE, GL_ONE);
-    }
 
     /// standart vertices
     if (mod->cutX * mod->cutY == 1) {

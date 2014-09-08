@@ -46,7 +46,6 @@ extern bool active;                    ///< Information if scene is active
 extern int opponentCount;              ///< Opponent count
 extern model *skydome;                 ///< Skydome model
 extern model *trackdata;               ///< Track first model
-extern model *trackdata2;              ///< Track second model
 extern std::vector<car*> allCar;       ///< All cars in scene instances
 extern unsigned int cameraCar;         ///< Car camera index
 extern sound* crash;                   ///< Crash sound

@@ -107,20 +107,6 @@ void displayScene() {
     xrenderer->enable[2] = false;
     for (int i = allCar.size() - 1; i >= 0; i--) {
 
-        /// find nearest light
-        xrenderer->light.u_nearest1 = glm::vec4(99999,99999,99999,1);
-        xrenderer->model_position = glm::vec4(allCar[i]->transform->value[12], allCar[i]->transform->value[13], allCar[i]->transform->value[14], 1);
-        for (int j = 0/*!lamp[(xrenderer->frame/2) % 100]*/; j < trackdata->edgesCount; j++) {
-            for (unsigned int x = 0; x < trackdata->edges[j].size() / 2; x++) {
-                edge e = trackdata->edges[j][x];
-                glm::vec4 pos = glm::vec4(e.b.x, e.b.y, e.b.z, 1);
-                if (glm::length(xrenderer->model_position - pos) < glm::length(xrenderer->model_position - xrenderer->light.u_nearest1)) {
-                    xrenderer->light.u_nearest1 = pos;
-                }
-            }
-        }
-        xrenderer->light.u_nearest1 = xrenderer->view_matrix * xrenderer->light.u_nearest1;
-
         ///render car skin
         xrenderer->pushMatrix();
         xrenderer->multMatrix(allCar[i]->transform[0].value);
@@ -222,13 +208,49 @@ void loadScene(std::string filename) {
 
     /// load track
     std::vector<std::string> atributes = getList("", filename);
-    trackdata = getModel(getConfigStr("track_model1", atributes), true);
+    trackdata = getModel(getConfigStr("track_model", atributes));
+
+    /// load edges
+#ifdef ZIP_ARCHIVE
+    zip_file* file = zip_fopen(APKArchive, prefix(getConfigStr("track_edges", atributes)).c_str(), 0);
+#else
+    FILE* file = fopen(prefix(getConfigStr("track_edges", atributes)).c_str(), "r");
+#endif
+    char line[1024];
+    gets(line, file);
+    int edgesCount = scandec(line);
     int trackIndex = getConfig("race_track", atributes);
-    trackdata2 = getModel(getConfigStr("track_model2", atributes), false);
-    std::vector<edge> e = trackdata2->edges[trackIndex];
+    std::vector<edge> e;
+    for (int i = 0; i < edgesCount; i++) {
+        gets(line, file);
+        int edgeCount = scandec(line);
+        for (int j = 0; j < edgeCount; j++) {
+            edge value;
+            gets(line, file);
+            sscanf(line, "%f %f %f %f %f %f", &value.a.x, &value.a.y, &value.a.z, &value.b.x, &value.b.y, &value.b.z);
+            if (i == trackIndex)
+                e.push_back(value);
+        }
+        for (int j = 0; j < edgeCount; j++) {
+            edge value;
+            value.a.x = e[j].b.x;
+            value.a.y = e[j].b.y;
+            value.a.z = e[j].b.z;
+            value.b.x = e[j].a.x;
+            value.b.y = e[j].a.y;
+            value.b.z = e[j].a.z;
+            if (i == trackIndex)
+                e.push_back(value);
+        }
+    }
+#ifdef ZIP_ARCHIVE
+    zip_fclose(file);
+#else
+    fclose(file);
+#endif
 
     /// load sky
-    skydome = getModel(getConfigStr("sky_model", atributes), true);
+    skydome = getModel(getConfigStr("sky_model", atributes));
 
     /// load player car
     allCar.push_back(new car(getInput(), &e, carLst[0]));
@@ -252,7 +274,7 @@ void loadScene(std::string filename) {
     }
 
     /// load water
-    water = getModel("gfx/water.o4s", true);
+    water = getModel("gfx/water.o4s");
     for (int i = 0; i < effLen; i++) {
         eff[i].vertices = new float[4095 * 3];
         eff[i].coords = new float[4095 * 2];
@@ -260,11 +282,7 @@ void loadScene(std::string filename) {
     }
 
     /// create instance of physical engine
-    if (trackdata2 != 0) {
-        physic = getPhysics(trackdata2);
-    } else {
-        physic = getPhysics(trackdata);
-    }
+    physic = getPhysics(trackdata);
     for (int i = 0; i <= opponentCount; i++)
         physic->addCar(allCar[i]);
     physic->locked = false;
@@ -315,10 +333,12 @@ void idle(int v) {
             if (!physic->locked) {
                 if ((distance(allCar[i]->pos, allCar[i]->currentEdge.b) < allCar[i]->control->getUpdate())
                         && (fabsf(allCar[i]->currentEdge.b.y - allCar[i]->pos.y) < 30)) {
-                    std::vector<int> nEdges = nextEdge(&allCar[i]->edges, allCar[i]->currentEdge);
+                    std::vector<int> nEdges = nextEdge(allCar[i]->edges, allCar[i]->currentEdge);
                     if (nEdges.size() > 0) {
-                        allCar[i]->currentEdge;
+                        allCar[i]->currentEdge = allCar[i]->edges[nEdges[0]];
+                        printf("Car %d next edge: %d\n", i, nEdges[0]);
                     }
+
                 }
             }
             allCar[i]->update();
@@ -378,7 +398,8 @@ void display(void) {
 
     /// update sounds
     if (active) {
-        allCar[0]->updateSound();
+        for (unsigned int i = 0; i < allCar.size(); i++)
+          allCar[i]->updateSound();
     }
 
     /// stop messuring time
@@ -413,6 +434,16 @@ void keyboardDown(unsigned char key, int x, int y) {
     /// resend key code
     special((int)key + 128, x, y);
 #ifndef ANDROID
+    if (key == 'q') {
+        cameraCar--;
+    }
+    if (key == 'w') {
+        cameraCar++;
+    }
+    if (cameraCar < 0)
+        cameraCar = allCar.size() - 1;
+    else if (cameraCar >= allCar.size())
+        cameraCar = 0;
     if (key == 27) {
         active = false;
         delete physic;

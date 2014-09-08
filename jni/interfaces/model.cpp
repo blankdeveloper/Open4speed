@@ -22,6 +22,5 @@ model::~model() {
         delete[] models[i].coords;
         delete[] models[i].triangleCount;
     }
-    delete[] edges;
     models.clear();
 }

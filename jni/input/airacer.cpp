@@ -11,15 +11,15 @@
 #include "utils/math.h"
 #include "common.h"
 
-#define CAMERA_DISTANCE 1.5
+#define CAMERA_DISTANCE 2.5
 #define REVERSE_DELAY 50
 #define REVERSE_DURATION 30
 #define SAFE_GAP_GAS 15
-#define SAFE_SPEED 35
+#define SAFE_SPEED 20
 #define STEERING_GAP_LOW 5
 #define STEERING_GAP_HIGH 15
-#define TRACK_UPDATE 10
-#define TRACK_UPDATE_SPEED_DEPENDENCY 5
+#define TRACK_UPDATE 20
+#define TRACK_UPDATE_SPEED_DEPENDENCY 20
 
 /**
  * @brief airacer Creates new control instance

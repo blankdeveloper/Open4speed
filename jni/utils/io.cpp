@@ -219,6 +219,9 @@ void gets(char* line, zip_file* file) {
             return;
         }
     }
+    int i = 1020;
+    line[i] = '\n';
+    line[i + 1] = '\000';
 }
 #endif
 
@@ -238,6 +241,9 @@ void gets(char* line, FILE* file) {
             return;
         }
     }
+    int i = 1020;
+    line[i] = '\n';
+    line[i + 1] = '\000';
 }
 
 /**

@@ -97,7 +97,7 @@ int min(int a, int b);
  * @param e is current edge
  * @return indicies as vector of int
  */
-std::vector<int> nextEdge(std::vector<edge> *edges, edge e);
+std::vector<int> nextEdge(std::vector<edge> edges, edge e);
 
 /**
  * @brief sign returns sign of value

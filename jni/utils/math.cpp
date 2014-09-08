@@ -151,23 +151,23 @@ int min(int a, int b) {
  * @param e is current edge
  * @return indicies as vector of int
  */
-std::vector<int> nextEdge(std::vector<edge> *edges, edge e) {
+std::vector<int> nextEdge(std::vector<edge> edges, edge e) {
     std::vector<int> output;
 
     /// skip logical edges
-    for (unsigned int i = 0; i < edges->size(); i++) {
-        if (((*edges)[i].a.x == e.b.x) && ((*edges)[i].a.z == e.b.z)) {
-            if (e.b.y > (*edges)[i].a.y) {
-                e.b.y = (*edges)[i].a.y;
+    /*for (unsigned int i = 0; i < edges.size(); i++) {
+        if ((edges[i].a.x == e.b.x) && (edges[i].a.z == e.b.z)) {
+            if (e.b.y > edges[i].a.y) {
+                e.b.y = edges[i].a.y;
             }
         }
-    }
+    }*/
 
     /// add possible edges
-    for (unsigned int i = 0; i < edges->size(); i++) {
-        if (((*edges)[i].a.x == e.b.x) & ((*edges)[i].a.y == e.b.y) & ((*edges)[i].a.z == e.b.z)) {
-            if (!isSame((*edges)[i],e))
-                if (((*edges)[i].a.x != (*edges)[i].b.x) | ((*edges)[i].a.z != (*edges)[i].b.z))
+    for (unsigned int i = 0; i < edges.size(); i++) {
+        if ((edges[i].a.x == e.b.x) & (edges[i].a.y == e.b.y) & (edges[i].a.z == e.b.z)) {
+            if (!isSame(edges[i],e))
+                if ((edges[i].a.x != edges[i].b.x) | (edges[i].a.z != edges[i].b.z))
                     output.push_back(i);
         }
     }

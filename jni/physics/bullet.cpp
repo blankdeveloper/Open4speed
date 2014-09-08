@@ -28,7 +28,7 @@
 // prevraceni auta pri odstredivej sile
 #define ROLL_INFLUENCE 0.001
 // treni karoserie
-#define SKIN_FRICTION 50
+#define SKIN_FRICTION 5
 // zpomalovani pri neutralu
 #define SPEED_DECREASE 50
 // vyvazi urovne zataceni
@@ -50,7 +50,7 @@
 // casovy krok vozidla
 #define VEHICLE_STEP 100
 // treni vozidla(nizka hodna umozni driftovat->UI nezvladne trat)
-#define WHEEL_FRICTION 1000
+#define WHEEL_FRICTION 500
 // maximalni prunik bounding teles
 #define WORLD_LIMIT 1000
 // casovy krok sceny
@@ -294,7 +294,7 @@ void bullet::resetCar(car* c) {
     c->setStart(c->currentEdge);
     btTransform tr;
     tr.setIdentity();
-    tr.setOrigin(btVector3(c->pos.x,c->pos.y - 0.1f,c->pos.z));
+    tr.setOrigin(btVector3(c->pos.x,c->pos.y + 5.0,c->pos.z));
     btQuaternion q;
     q.setRotation(btVector3(0,1,0), c->rot * 3.14 / 180.0);
     tr.setRotation(q);
@@ -381,7 +381,7 @@ void bullet::updateCar(car* c) {
 
     /// Reset car
     if ((c->speed < 5) && active && !physic->locked) {
-        if (c->onRoof > 30) {
+        if (c->onRoof > 60) {
             c->resetAllowed = true;
             if (c->index - 1 != cameraCar) {
                 c->resetRequested = true;

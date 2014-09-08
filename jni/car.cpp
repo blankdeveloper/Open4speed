@@ -77,8 +77,8 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
         control->index = index - 1;
 
     /// load models
-    skin = getModel(getConfigStr("skin_model", atributes), true);
-    wheel = getModel(getConfigStr("wheel_model", atributes), true);
+    skin = getModel(getConfigStr("skin_model", atributes));
+    wheel = getModel(getConfigStr("wheel_model", atributes));
 
     /// set car wheels position
     wheelX = getConfig("wheel_x", atributes);
@@ -165,7 +165,7 @@ void car::setStart(edge e) {
     toFinish = glm::length(cge.a - cge.b);
     while (true) {
         toFinish += glm::length(cge.a - cge.b);
-        std::vector<int> nEdges = nextEdge(&edges, cge);
+        std::vector<int> nEdges = nextEdge(edges, cge);
         if (nEdges.size() > 0) {
             cge = edges[nEdges[0]];
             if ((ltg > 0) & (nEdges[0] == finishEdge)) {
@@ -192,7 +192,7 @@ void car::update() {
     /// update current edge for counting laps
     edge cge = currentGoalEdge;
     if (distance(pos, currentGoalEdge.b) < 75) {
-        std::vector<int> nEdges = nextEdge(&edges, currentGoalEdge);
+        std::vector<int> nEdges = nextEdge(edges, currentGoalEdge);
         if (nEdges.size() > 0) {
             if (isSame(edges[nEdges[0]], edges[finishEdge])) {
                 if (distance(pos, currentGoalEdge.b) < 25) {

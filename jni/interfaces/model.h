@@ -66,8 +66,7 @@ public:
      */
     virtual ~model() = 0;
 
-    int cutX, cutY, edgesCount;                ///< Size of SS Culling
-    std::vector<edge> *edges;                  ///< All standalone edges of model
+    int cutX, cutY;                            ///< Size of SS Culling
     std::vector<model3d> models;               ///< All parts of model
     AABB aabb;                                 ///< Extremes of current model
     float width, aplitude, height;             ///< Dimensions of current model

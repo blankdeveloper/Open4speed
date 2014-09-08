@@ -18,7 +18,7 @@
  * @brief Constructor for loading model from file
  * @param filename is path and name of file to load
  */
-modelo4s::modelo4s(std::string filename, bool gpu) {
+modelo4s::modelo4s(std::string filename) {
 
     /// open file
 #ifdef ZIP_ARCHIVE
@@ -80,7 +80,7 @@ modelo4s::modelo4s(std::string filename, bool gpu) {
         int cursor = 0;
         m.dynamic = false;
         m.filter = 0;
-        m.touchable = true;
+        m.touchable = false;
         if (m.texture2D->transparent) {
             m.material = getShader("standart_alpha");
         } else {
@@ -90,7 +90,7 @@ modelo4s::modelo4s(std::string filename, bool gpu) {
         /// get material parameters
         while(true) {
             if (material[cursor] == '!') {
-                m.touchable = false;
+                m.touchable = true;
                 cursor++;
             } else if (material[cursor] == '$') {
                 m.dynamic = true;
@@ -157,7 +157,7 @@ modelo4s::modelo4s(std::string filename, bool gpu) {
         }
 
         /// store model in VBO
-        if (gpu) {
+        if (!m.touchable) {
             int size = m.triangleCount[cutX * cutY] * 3;
             if (!m.material->hasAttrib(1)) {
                 delete[] m.normals;
@@ -175,31 +175,6 @@ modelo4s::modelo4s(std::string filename, bool gpu) {
         } else
             m.vboData = 0;
         models.push_back(m);
-    }
-
-    /// load edges
-    gets(line, file);
-    edgesCount = scandec(line);
-    edges = new std::vector<edge>[edgesCount];
-    for (int i = 0; i < edgesCount; i++) {
-        gets(line, file);
-        int edgeCount = scandec(line);
-        for (int j = 0; j < edgeCount; j++) {
-            edge value;
-            gets(line, file);
-            sscanf(line, "%f %f %f %f %f %f", &value.a.x, &value.a.y, &value.a.z, &value.b.x, &value.b.y, &value.b.z);
-            edges[i].push_back(value);
-        }
-        for (int j = 0; j < edgeCount; j++) {
-            edge value;
-            value.a.x = edges[i][j].b.x;
-            value.a.y = edges[i][j].b.y;
-            value.a.z = edges[i][j].b.z;
-            value.b.x = edges[i][j].a.x;
-            value.b.y = edges[i][j].a.y;
-            value.b.z = edges[i][j].a.z;
-            edges[i].push_back(value);
-        }
     }
 
 #ifdef ZIP_ARCHIVE

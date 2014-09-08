@@ -61,7 +61,7 @@ input* getInput() {
  * @param filename is path and name of file to load
  * @return instance of model
  */
-model* getModel(std::string filename, bool gpu) {
+model* getModel(std::string filename) {
     logi("Load model:", filename);
 
     /// find previous instance
@@ -71,7 +71,7 @@ model* getModel(std::string filename, bool gpu) {
 
     /// create new instance
     if (strcmp(getExtension(filename).c_str(), "o4s") == 0) {
-        model* instance = new modelo4s(filename, gpu);
+        model* instance = new modelo4s(filename);
         strcpy(instance->modelname, filename.c_str());
         models.push_back(instance);
         return instance;

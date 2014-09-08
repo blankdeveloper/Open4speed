@@ -23,8 +23,7 @@ pthread_mutex_t matrixLock;     ///< Car matrix locking
 bool active;                    ///< Information if scene is active
 int opponentCount;              ///< Opponent count
 model *skydome;                 ///< Skydome model
-model *trackdata = 0;           ///< Track first model
-model *trackdata2 = 0;          ///< Track second model
+model *trackdata;               ///< Track first model
 std::vector<car*> allCar;       ///< All cars in scene instances
 unsigned int cameraCar = 0;     ///< Car camera index
 sound* crash;                   ///< Crash sound

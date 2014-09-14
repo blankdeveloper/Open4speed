@@ -14,7 +14,6 @@
 #include <string>
 #include "interfaces/input.h"
 #include "interfaces/model.h"
-#include "interfaces/sound.h"
 
 /**
  * @brief The gear struct
@@ -63,6 +62,7 @@ public:
     float n2o;                                                            ///< Amount of N2O
     float extraSound;                                                     ///< Amount of extra engine sound volume
     float prevEffect;                                                     ///< Previous smoke effect intensity
+    float sndCrash, sndDist, sndEngine1, sndEngine2, sndN2O, sndRate;
 
 
     /**
@@ -100,11 +100,6 @@ public:
      * @brief updates car transformation
      */
     void updateMatrices();
-
-    /**
-     * @brief updates car sound
-     */
-    void updateSound();
 };
 
 #endif // CAR_H

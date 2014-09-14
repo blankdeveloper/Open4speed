@@ -22,7 +22,7 @@
 #define SOUND_CRASH_MINIMAL_SPEED 5
 #define SOUND_CRASH_ON_SPEED_CHANGE 0.7
 #define SOUND_ENGINE_FREQ_ASPECT 15
-#define SOUND_MAXIMAL_DISTANCE 25
+#define SOUND_MAXIMAL_DISTANCE 100
 
 /**
  * @brief car is constructor which loads car model
@@ -234,34 +234,6 @@ void car::update() {
     if (speedAspect < 0)
         speedAspect = 0;
     acceleration = lowAspect * power + (1 - lowAspect) * power * speedAspect;
-}
-
-/**
- * @brief updates car transformation
- */
-void car::updateMatrices() {
-    /// update matrices
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 16; j++) {
-            transform[i].value[j] = transform[i].temp[j];
-        }
-    }
-    rot = tempRot;
-
-
-    /// reverse camera
-    if (rot > 360)
-        rot -= 360;
-    if (reverse & (speed > 3))
-        rot -= 180;
-    if (rot < 0)
-        rot += 360;
-}
-
-/**
- * @brief updates car sound
- */
-void car::updateSound() {
 
 
     /// play crash
@@ -271,22 +243,19 @@ void car::updateSound() {
     if (reverse & (control->getGas() < 1))
         brake = true;
     if ((lspeed * SOUND_CRASH_ON_SPEED_CHANGE > speed) & (speed > SOUND_CRASH_MINIMAL_SPEED) & brake) {
-        crash->play(index - 1);
+        sndCrash = true;
     }
 
     /// set nitro sound
-    if ((control->getNitro() > 0) && (n2o > 1)) {
-        noise->play(index - 1);
-        noise->setFrequency(index - 1, speed * 200);
-    } else {
-        noise->stop(index - 1);
-    }
+    if ((control->getNitro() > 0) && (n2o > 1))
+        sndN2O = true;
+    else
+        sndN2O = false;
 
     /// count engine frequency
     float speedPlus = speed - gears[currentGear].min;
     if (speedPlus < 0)
         speedPlus = 0;
-    float speedDiff = gears[currentGear].max - gears[currentGear].min;
     float engineFreq = gearLow + (gearHigh - gearLow) * speedPlus / speedDiff;
 
     /// automatic changing gears
@@ -312,24 +281,40 @@ void car::updateSound() {
     if (extraSound > 0.25)
         extraSound = 0.25;
 
-    /// set engine sound
-    if (engineFreq >= gearLow) {
-        engine->play(index - 1);
-        engine->setFrequency(index - 1, engineFreq * SOUND_ENGINE_FREQ_ASPECT);
-        enginePlus->play(index - 1);
-        enginePlus->setFrequency(index - 1, engineFreq * SOUND_ENGINE_FREQ_ASPECT);
-    } else if (engineFreq < gearLow) {
-        engine->setFrequency(index - 1,  gearLow * SOUND_ENGINE_FREQ_ASPECT);
-        enginePlus->setFrequency(index - 1,  gearLow * SOUND_ENGINE_FREQ_ASPECT);
-    }
+    /// set engine rate
+    if (engineFreq >= gearLow)
+        sndRate = engineFreq * SOUND_ENGINE_FREQ_ASPECT;
+    else if (engineFreq < gearLow)
+        sndRate = gearLow * SOUND_ENGINE_FREQ_ASPECT;
+    sndRate = sndRate / 50000.0f + 0.2f;
 
     /// set sound distance
-    float dist = (1 - distance(allCar[cameraCar]->pos, pos) / SOUND_MAXIMAL_DISTANCE);
-    if (dist < 0)
-        dist = 0;
-    dist *= dist;
-    crash->setVolume(index - 1, dist);
-    engine->setVolume(index - 1, dist * 8.0 * (0.25f - extraSound));
-    enginePlus->setVolume(index - 1, dist * extraSound);
-    noise->setVolume(index - 1, dist);
+    sndDist =  1 / (distance(allCar[cameraCar]->pos, pos) / SOUND_MAXIMAL_DISTANCE + 1);
+    if (sndDist < 0)
+        sndDist = 0;
+    sndDist *= sndDist;
+    sndEngine1 = 8.0 * (0.25f - extraSound);
+    sndEngine2 = extraSound;
+}
+
+/**
+ * @brief updates car transformation
+ */
+void car::updateMatrices() {
+    /// update matrices
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 16; j++) {
+            transform[i].value[j] = transform[i].temp[j];
+        }
+    }
+    rot = tempRot;
+
+
+    /// reverse camera
+    if (rot > 360)
+        rot -= 360;
+    if (reverse & (speed > 3))
+        rot -= 180;
+    if (rot < 0)
+        rot += 360;
 }

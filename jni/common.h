@@ -23,7 +23,6 @@ extern zip* APKArchive;             ///< APK archive instance
 #include "interfaces/physics.h"
 #include "interfaces/renderer.h"
 #include "interfaces/shader.h"
-#include "interfaces/sound.h"
 #include "interfaces/texture.h"
 #include "car.h"
 
@@ -48,10 +47,6 @@ extern model *skydome;                 ///< Skydome model
 extern model *trackdata;               ///< Track first model
 extern std::vector<car*> allCar;       ///< All cars in scene instances
 extern unsigned int cameraCar;         ///< Car camera index
-extern sound* crash;                   ///< Crash sound
-extern sound* engine;                  ///< Engine sound
-extern sound* enginePlus;              ///< Engine extra sound
-extern sound* noise;                   ///< N2O sound
 extern float direction;                ///< Camera direction
 extern physics *physic;                ///< Physical engine instance
 extern renderer *xrenderer;            ///< Renderer instance

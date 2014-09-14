@@ -17,7 +17,6 @@
 #include "interfaces/physics.h"
 #include "interfaces/renderer.h"
 #include "interfaces/shader.h"
-#include "interfaces/sound.h"
 #include "interfaces/texture.h"
 #include "interfaces/vbo.h"
 
@@ -55,15 +54,6 @@ renderer* getRenderer(int w, int h);
  * @return instance of shader
  */
 shader* getShader(std::string name);
-
-/**
- * @brief getSound gets sound
- * @param filename is name of file to load
- * @param loop is true for sound looping
- * @param channels is amount of channels
- * @return sound instance
- */
-sound* getSound(std::string filename, bool loop, int channels);
 
 /**
  * @brief getTexture gets texture

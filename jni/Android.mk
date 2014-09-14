@@ -67,7 +67,6 @@ renderers/opengl/glvbo.cpp \
 loaders/modelo4s.cpp \
 loaders/pngloader.cpp \
 loaders/rgb.cpp \
-sound/soundpool.cpp \
 utils/switch.cpp \
 utils/math.cpp \
 utils/io.cpp

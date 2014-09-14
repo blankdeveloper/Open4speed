@@ -222,7 +222,7 @@ void bullet::addModel(model *m) {
 
             /// Set object physical values
             btVector3 localInertia(0,0,0);
-            float mass = VEHICLE_MASS_ASPECT * w * a * h;
+            float mass = VEHICLE_MASS_ASPECT * w * a * h * 0.01f;
             compound->calculateLocalInertia(mass,localInertia);
             btRigidBody* body = new btRigidBody(mass,0,compound,localInertia);
             bodies.push_back(body);
@@ -235,7 +235,7 @@ void bullet::addModel(model *m) {
 
             /// Create object
             body->setCenterOfMassTransform(tr);
-            body->setFriction(SKIN_FRICTION);
+            body->setDamping(10, 10);
             m->models[i].dynamicID = bodies.size();
 
             /// set default position
@@ -275,7 +275,7 @@ void bullet::addModel(model *m) {
 void bullet::getTransform(int index, float* m) {
 
     /// get matrix
-    bodies[index]->getCenterOfMassTransform().getOpenGLMatrix(m);
+    bodies[index - 1]->getCenterOfMassTransform().getOpenGLMatrix(m);
     for (int i = 0; i < 16; i++) {
         if (isnan(m[i])) {
             for (int j = 0; j < 16; j++)

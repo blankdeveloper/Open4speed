@@ -26,10 +26,6 @@ model *skydome;                 ///< Skydome model
 model *trackdata;               ///< Track first model
 std::vector<car*> allCar;       ///< All cars in scene instances
 unsigned int cameraCar = 0;     ///< Car camera index
-sound* crash;                   ///< Crash sound
-sound* engine;                  ///< Engine sound
-sound* enginePlus;              ///< Engine extra sound
-sound* noise;                   ///< N2O sound
 float direction = 0;            ///< Camera direction
 physics *physic;                ///< Physical engine instance
 renderer *xrenderer = 0;        ///< Renderer instance

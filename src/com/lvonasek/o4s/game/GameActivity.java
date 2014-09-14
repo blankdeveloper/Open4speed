@@ -13,7 +13,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.lvonasek.o4s.R;
-import com.lvonasek.o4s.Sounds;
 import com.lvonasek.o4s.controllers.HWKeys;
 import com.lvonasek.o4s.ui.menus.PauseMenu;
 
@@ -112,10 +111,8 @@ public class GameActivity extends FragmentActivity {
         //pause game
         if (gameLoop != null)
             gameLoop.paused = true;
-        if (Sounds.snd != null)
-            Sounds.snd.autoPause();
-        if (Sounds.music != null)
-            Sounds.music.pause();
+        if (Native.snd != null)
+            Native.snd.autoPause();
         super.onPause();
     }
 
@@ -128,10 +125,8 @@ public class GameActivity extends FragmentActivity {
         super.onResume();
         instance = this;
         GameLoop.paused = false;
-        if (Sounds.snd != null)
-            Sounds.snd.autoResume();
-        if (Sounds.music != null)
-            Sounds.music.start();
+        if (Native.snd != null)
+            Native.snd.autoResume();
     }
 
     @Override
@@ -161,8 +156,8 @@ public class GameActivity extends FragmentActivity {
 
     public void pause() {
         GameLoop.paused = true;
-        if (Sounds.snd != null)
-            Sounds.snd.autoPause();
+        if (Native.snd != null)
+            Native.snd.autoPause();
         FragmentManager fm = getSupportFragmentManager();
         PauseMenu pauseMenu = new PauseMenu();
         pauseMenu.show(fm, "menu_pause");
@@ -170,10 +165,8 @@ public class GameActivity extends FragmentActivity {
 
     public void quit() {
         GameLoop.paused = true;
-        Sounds.music.stop();
-        Sounds.snd.autoPause();
-        Sounds.music = null;
-        Sounds.snd = null;
+        Native.snd.autoPause();
+        Native.snd = null;
         gameLoop = null;
         System.exit(0);
     }

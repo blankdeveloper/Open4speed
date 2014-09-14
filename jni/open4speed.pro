@@ -27,7 +27,6 @@ SOURCES += \
     car.cpp \
     loaders/pngloader.cpp \
     common.cpp \
-    sound/soundpool.cpp \
     interfaces/model.cpp \
     renderers/opengl/gltexture.cpp \
     renderers/opengl/glfbo.cpp \
@@ -43,7 +42,6 @@ HEADERS += \
     loaders/rgb.h \
     interfaces/model.h \
     loaders/modelo4s.h \
-    interfaces/sound.h \
     utils/switch.h \
     utils/math.h \
     utils/io.h \
@@ -53,7 +51,6 @@ HEADERS += \
     loaders/pngloader.h \
     interfaces/shader.h \
     common.h \
-    sound/soundpool.h \
     renderers/opengl/gltexture.h \
     renderers/opengl/glfbo.h \
     interfaces/fbo.h \

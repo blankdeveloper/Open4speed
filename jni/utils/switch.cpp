@@ -17,7 +17,6 @@
 #include "renderers/opengl/glsl.h"
 #include "renderers/opengl/gltexture.h"
 #include "renderers/opengl/glvbo.h"
-#include "sound/soundpool.h"
 #include "utils/io.h"
 #include "utils/switch.h"
 
@@ -26,7 +25,6 @@
  */
 std::vector<model*> models;     ///< Shaders storage
 std::vector<shader*> shaders;   ///< Shaders storage
-std::vector<sound*> sounds;     ///< Sounds storage
 std::vector<texture*> textures; ///< Textures storage
 
 void clearMediaStorage() {
@@ -37,10 +35,6 @@ void clearMediaStorage() {
     while (!shaders.empty()) {
         delete shaders[shaders.size() - 1];
         shaders.pop_back();
-    }
-    while (!sounds.empty()) {
-        delete sounds[sounds.size() - 1];
-        sounds.pop_back();
     }
     while (!textures.empty()) {
         delete textures[textures.size() - 1];
@@ -125,20 +119,6 @@ shader* getShader(std::string name) {
     shader* instance = new glsl(vert_atributes, frag_atributes);
     strcpy(instance->shadername, name.c_str());
     shaders.push_back(instance);
-    return instance;
-}
-
-/**
- * @brief getSound gets sound
- * @param filename is name of file to load
- * @param loop is true for sound looping
- * @param channels is amount of channels
- * @return sound instance
- */
-sound* getSound(std::string filename, bool loop, int channels) {
-    logi("Load sound file:", filename);
-    sound* instance = new soundpool(filename, loop, channels);
-    sounds.push_back(instance);
     return instance;
 }
 

@@ -396,12 +396,6 @@ void display(void) {
 #endif
     }
 
-    /// update sounds
-    if (active) {
-        for (unsigned int i = 0; i < allCar.size(); i++)
-          allCar[i]->updateSound();
-    }
-
     /// stop messuring time
     clock_gettime(CLOCK_REALTIME, &ts_end);
     frameTime += (ts_end.tv_sec - ts_start.tv_sec + (ts_end.tv_nsec - ts_start.tv_nsec) * 0.000000001f) * 1000.0f;
@@ -523,12 +517,6 @@ int main(int argc, char** argv) {
     carLst.push_back("cars/01/params");
     loadScene("tracks/track1");
 
-    /// init sound
-    crash = getSound("sfx/crash.ogg", false, 1);
-    engine = getSound("sfx/engine.ogg", true, 1);
-    enginePlus = getSound("sfx/engineplus.ogg", true, 1);
-    noise = getSound("sfx/n2o.ogg", true, 1);
-
     /// start loop
 #ifndef ANDROID
     glutTimerFunc(0,idle,0);
@@ -640,6 +628,21 @@ jfloat Java_com_lvonasek_o4s_game_Native_carState( JNIEnv*  env, jobject  thiz, 
         return allCar[index]->n2o;
     if (type == 11)
         return distance(allCar[cameraCar]->pos, allCar[index]->pos);
+    if (type == 12) {
+        bool output = allCar[index]->sndCrash;
+        allCar[index]->sndCrash = false;
+        return output;
+    }
+    if (type == 13)
+        return allCar[index]->sndDist;
+    if (type == 14)
+        return allCar[index]->sndEngine1;
+    if (type == 15)
+        return allCar[index]->sndEngine2;
+    if (type == 16)
+        return allCar[index]->sndN2O;
+    if (type == 17)
+        return allCar[index]->sndRate;
     return 0;
 }
 }

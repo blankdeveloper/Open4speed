@@ -13,9 +13,9 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.lvonasek.o4s.R;
-import com.lvonasek.o4s.Sounds;
 import com.lvonasek.o4s.game.GameActivity;
 import com.lvonasek.o4s.game.GameLoop;
+import com.lvonasek.o4s.game.Native;
 
 /**
  * Created by lubos on 31.7.14.
@@ -56,8 +56,8 @@ public class PauseMenu extends DialogFragment {
             @Override
             public void onClick(View view) {
                 GameLoop.paused = false;
-                if (Sounds.snd != null)
-                    Sounds.snd.autoResume();
+                if (Native.snd != null)
+                    Native.snd.autoResume();
                 dismiss();
             }
         });
@@ -86,8 +86,8 @@ public class PauseMenu extends DialogFragment {
             if (ready)
                 if ((keyCode == KeyEvent.KEYCODE_BACK) || (keyCode == KeyEvent.KEYCODE_MENU)) {
                     GameLoop.paused = false;
-                    if (Sounds.snd != null)
-                        Sounds.snd.autoResume();
+                    if (Native.snd != null)
+                        Native.snd.autoResume();
                 }
             return false;
         }

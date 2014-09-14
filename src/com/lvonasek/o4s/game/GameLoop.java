@@ -7,8 +7,6 @@ import android.opengl.GLSurfaceView;
 import android.opengl.GLSurfaceView.Renderer;
 import android.util.AttributeSet;
 
-import com.lvonasek.o4s.Sounds;
-
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -64,12 +62,8 @@ public class GameLoop extends GLSurfaceView implements Renderer {
 
             //send APK file path into C++ code
             apkFilePath = appInfo.sourceDir;
-            Sounds.init();
             Native.init();
             Native.init(apkFilePath);
-            Sounds.soundLoad("sfx/02-danosongs.com-megacosm.mp3");
-            Sounds.soundPlay(Integer.MAX_VALUE, 1);
-            Sounds.soundVolume(Integer.MAX_VALUE, 1);
             GameActivity.instance.finishLoading();
         }
 
@@ -100,6 +94,7 @@ public class GameLoop extends GLSurfaceView implements Renderer {
         if (!paused) {
             long time = System.currentTimeMillis();
             Native.loop();
+            Native.update();
 
             currentFPS++;
             if (updateFPS + 1000 < System.currentTimeMillis()) {

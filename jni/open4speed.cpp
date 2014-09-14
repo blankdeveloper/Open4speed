@@ -336,7 +336,6 @@ void idle(int v) {
                     std::vector<int> nEdges = nextEdge(allCar[i]->edges, allCar[i]->currentEdge);
                     if (nEdges.size() > 0) {
                         allCar[i]->currentEdge = allCar[i]->edges[nEdges[0]];
-                        printf("Car %d next edge: %d\n", i, nEdges[0]);
                     }
 
                 }

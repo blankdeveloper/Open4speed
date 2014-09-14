@@ -80,7 +80,7 @@ public class Sound {
      */
     public void stop() {
         //audio clip
-        if (!GameLoop.paused) {
+        if (!GameLoop.paused && playing) {
             snd.stop(id);
             playing = false;
         }

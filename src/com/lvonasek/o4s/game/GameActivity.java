@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.lvonasek.o4s.R;
 import com.lvonasek.o4s.controllers.HWKeys;
+import com.lvonasek.o4s.media.Sound;
 import com.lvonasek.o4s.ui.menus.PauseMenu;
 
 /**
@@ -111,8 +112,8 @@ public class GameActivity extends FragmentActivity {
         //pause game
         if (gameLoop != null)
             gameLoop.paused = true;
-        if (Native.snd != null)
-            Native.snd.autoPause();
+        if (Sound.snd != null)
+            Sound.snd.autoPause();
         super.onPause();
     }
 
@@ -125,8 +126,8 @@ public class GameActivity extends FragmentActivity {
         super.onResume();
         instance = this;
         GameLoop.paused = false;
-        if (Native.snd != null)
-            Native.snd.autoResume();
+        if (Sound.snd != null)
+            Sound.snd.autoResume();
     }
 
     @Override
@@ -156,8 +157,8 @@ public class GameActivity extends FragmentActivity {
 
     public void pause() {
         GameLoop.paused = true;
-        if (Native.snd != null)
-            Native.snd.autoPause();
+        if (Sound.snd != null)
+            Sound.snd.autoPause();
         FragmentManager fm = getSupportFragmentManager();
         PauseMenu pauseMenu = new PauseMenu();
         pauseMenu.show(fm, "menu_pause");
@@ -165,8 +166,8 @@ public class GameActivity extends FragmentActivity {
 
     public void quit() {
         GameLoop.paused = true;
-        Native.snd.autoPause();
-        Native.snd = null;
+        Sound.snd.autoPause();
+        Sound.snd = null;
         gameLoop = null;
         System.exit(0);
     }

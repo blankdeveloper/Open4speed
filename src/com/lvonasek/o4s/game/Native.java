@@ -53,18 +53,25 @@ public class Native {
             boolean n2o = carState(i, CAR_INFO_SNDN2O) > 0.5f;
             float rate = carState(i, CAR_INFO_SNDRATE);
             float speed = carState(i, CAR_INFO_SPEED);
-            if (crash)
-                list.get(0 + i * 4).play();
-            list.get(1 + i * 4).setFreq(rate);
-            list.get(1 + i * 4).setVolume(dist * engine1);
-            list.get(1 + i * 4).play();
-            list.get(2 + i * 4).setFreq(rate);
-            list.get(2 + i * 4).setVolume(dist * engine2);
-            list.get(2 + i * 4).play();
-            list.get(3 + i * 4).setFreq(speed / 200.0f);
-            list.get(3 + i * 4).setVolume(dist);
-            if (n2o)
-                list.get(3 + i * 4).play();
+            if (dist > 0.1f) {
+                if (crash)
+                    list.get(0 + i * 4).play();
+                list.get(1 + i * 4).setFreq(rate);
+                list.get(1 + i * 4).setVolume(dist * engine1);
+                list.get(1 + i * 4).play();
+                list.get(2 + i * 4).setFreq(rate);
+                list.get(2 + i * 4).setVolume(dist * engine2);
+                list.get(2 + i * 4).play();
+                list.get(3 + i * 4).setFreq(speed / 200.0f);
+                list.get(3 + i * 4).setVolume(dist);
+                if (n2o)
+                    list.get(3 + i * 4).play();
+                else
+                    list.get(3 + i * 4).stop();
+            } else {
+                for (int j = 0 + i * 4; j < 4 + i * 4; j++)
+                    list.get(j).stop();
+            }
         }
     }
 

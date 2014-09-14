@@ -1,6 +1,8 @@
 package com.lvonasek.o4s.game;
 
+import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -17,6 +19,8 @@ import com.lvonasek.o4s.controllers.HWKeys;
 import com.lvonasek.o4s.media.Sound;
 import com.lvonasek.o4s.ui.menus.PauseMenu;
 
+import java.io.IOException;
+
 /**
  * Runnable class - it sets environment and run everything needed. It also manages interruptions of
  * sounds and game loop(e.g.during incoming call)
@@ -28,6 +32,7 @@ public class GameActivity extends FragmentActivity {
     //various instances
     private GameLoop gameLoop;
     public static GameActivity instance;
+    private static MediaPlayer music = new MediaPlayer();
 
     //splash items
     private ImageView loadingImg;
@@ -114,6 +119,8 @@ public class GameActivity extends FragmentActivity {
             gameLoop.paused = true;
         if (Sound.snd != null)
             Sound.snd.autoPause();
+        if (gameLoop.init)
+            music.pause();
         super.onPause();
     }
 
@@ -128,6 +135,8 @@ public class GameActivity extends FragmentActivity {
         GameLoop.paused = false;
         if (Sound.snd != null)
             Sound.snd.autoResume();
+        if (gameLoop.init)
+            music.start();
     }
 
     @Override
@@ -153,6 +162,17 @@ public class GameActivity extends FragmentActivity {
                 progressBar.setVisibility(View.INVISIBLE);
             }
         });
+
+        try {
+            AssetFileDescriptor afd = getAssets().openFd("sfx/02-danosongs.com-megacosm.mp3");
+            music = new MediaPlayer();
+            music.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            music.setLooping(true);
+            music.prepare();
+            music.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void pause() {

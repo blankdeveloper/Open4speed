@@ -3,6 +3,7 @@ package com.lvonasek.o4s.ui.menus;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,11 +13,14 @@ import android.widget.VideoView;
 import com.lvonasek.o4s.R;
 import com.lvonasek.o4s.game.GameActivity;
 
+import java.io.IOException;
+
 /**
  * Created by lubos on 31.7.14.
  */
 public class MainMenu extends Activity {
 
+    private static MediaPlayer music = new MediaPlayer();
     private VideoView view = null;
 
     @Override
@@ -46,7 +50,14 @@ public class MainMenu extends Activity {
     @Override
     protected void onPause() {
         view.pause();
+        music.pause();
         super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        music.start();
     }
 
     @Override
@@ -61,5 +72,16 @@ public class MainMenu extends Activity {
             }
         });
         view.setVideoURI(Uri.parse(path));
+
+        try {
+            AssetFileDescriptor afd = getAssets().openFd("sfx/01-danosongs.com-dublin-forever-instr.mp3");
+            music = new MediaPlayer();
+            music.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            music.setLooping(true);
+            music.prepare();
+            music.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

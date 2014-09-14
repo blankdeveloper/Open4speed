@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Open4speed test</string>
+    <string name="app_name">Open4speed 2.0</string>
 
     <string name="button_back">BACK</string>
     <string name="button_exit">EXIT</string>

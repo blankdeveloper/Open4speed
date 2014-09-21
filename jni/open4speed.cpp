@@ -8,7 +8,7 @@
 //----------------------------------------------------------------------------------------
 
 #ifdef ANDROID
-#include <GLES2/gl2.h>
+#include <GLES3/gl3.h>
 #endif
 #include <stdlib.h>
 #include "input/airacer.h"
@@ -302,10 +302,8 @@ void idle(int v) {
         physic->updateWorld();
 
         /// update car transforms
-        pthread_mutex_lock(&matrixLock);
         for (unsigned int i = 0; i < allCar.size(); i++)
             physic->updateCarTransform(allCar[i]);
-        pthread_mutex_unlock(&matrixLock);
 
         /// if race finished show result
         if (allCar[0]->lapsToGo == -1) {
@@ -351,12 +349,6 @@ void idle(int v) {
 #endif
 }
 
-void *idle(void *threadid)
-{
-    idle(0);
-    pthread_exit(NULL);
-}
-
 /**
  * @brief display updates display
  */
@@ -364,21 +356,8 @@ void display(void) {
     /// start messuring time
     clock_gettime(CLOCK_REALTIME, &ts_start);
 
-    /// apply latest matrices
-    pthread_mutex_lock(&matrixLock);
-    for (int i = allCar.size() - 1; i >= 0; i--) {
-        allCar[i]->updateMatrices();
-    }
-    pthread_mutex_unlock(&matrixLock);
-
     /// display scene
     displayScene();
-
-#ifdef ANDROID
-    idle(0);
-    //pthread_t threads[1];
-    //pthread_create(&threads[0], NULL, idle, (void *)0);
-#endif
 
     /// update FPS counter
     fps++;
@@ -410,6 +389,7 @@ void display(void) {
     glutSwapBuffers();
 #else
     glFinish();
+    idle(0);
 #endif
 
 }
@@ -535,7 +515,6 @@ extern "C" {
  * @param env is instance of JNI
  */
 void Java_com_lvonasek_o4s_game_Native_init( JNIEnv*  env, jclass cls, jstring apkPath ) {
-  instance = env;
   jboolean isCopy;
   APKArchive = zip_open(env->GetStringUTFChars(apkPath, &isCopy), 0, NULL);
   main(0, 0);

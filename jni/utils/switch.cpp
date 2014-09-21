@@ -13,7 +13,7 @@
 #include "loaders/pngloader.h"
 #include "loaders/rgb.h"
 #include "physics/bullet.h"
-#include "renderers/opengl/gles20.h"
+#include "renderers/opengl/gles30.h"
 #include "renderers/opengl/glsl.h"
 #include "renderers/opengl/gltexture.h"
 #include "renderers/opengl/glvbo.h"
@@ -90,7 +90,7 @@ physics* getPhysics(model *m) {
  */
 renderer* getRenderer(int w, int h) {
     logi("Init renderer","");
-    return new gles20(w, h);
+    return new gles30(w, h);
 }
 
 /**

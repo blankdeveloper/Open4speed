@@ -13,11 +13,7 @@
 #ifdef ANDROID
 #define ZIP_ARCHIVE
 #include <jni.h>
-#include <zip.h>
-extern JNIEnv* instance;            ///< JNI instance
-extern zip* APKArchive;             ///< APK archive instance
 #endif
-#include <pthread.h>
 #include <zip.h>
 #include "interfaces/model.h"
 #include "interfaces/physics.h"
@@ -40,7 +36,6 @@ const int effLen = 6;                  ///< Length of water effect
  */
 extern float aspect;                   ///< Screen aspect
 extern std::vector<std::string> carLst;///< List of all cars
-extern pthread_mutex_t matrixLock;     ///< Car matrix locking
 extern bool active;                    ///< Information if scene is active
 extern int opponentCount;              ///< Opponent count
 extern model *skydome;                 ///< Skydome model

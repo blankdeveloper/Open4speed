@@ -19,7 +19,7 @@
 
 #ifdef ANDROID
 #define PACKED_EXTENSION "GL_OES_packed_depth_stencil"
-#define PACKED_EXT GL_DEPTH24_STENCIL8_OES
+#define PACKED_EXT GL_DEPTH24_STENCIL8
 #else
 #define PACKED_EXTENSION "GL_EXT_packed_depth_stencil"
 #define PACKED_EXT GL_DEPTH24_STENCIL8_EXT
@@ -166,6 +166,11 @@ void glfbo::drawOnScreen(shader* screen_shader) {
     glDepthMask(false);
     rect->render(screen_shader, 0, 2);
     screen_shader->unbind();
+
+    // faster unsupported method
+    /*glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, fboID[0]);
+    glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);*/
 }
 
 /**

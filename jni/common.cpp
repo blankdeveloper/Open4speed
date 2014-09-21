@@ -10,16 +10,11 @@
 #include "utils/io.h"
 #include "common.h"
 
-#ifdef ANDROID
-JNIEnv* instance;            ///< JNI instance
-#endif
-
 /**
  * The scene
  */
 float aspect;                   ///< Screen aspect
 std::vector<std::string> carLst;///< List of all cars
-pthread_mutex_t matrixLock;     ///< Car matrix locking
 bool active;                    ///< Information if scene is active
 int opponentCount;              ///< Opponent count
 model *skydome;                 ///< Skydome model

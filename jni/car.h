@@ -27,7 +27,6 @@ struct gear {
  * @brief The matrix struct
  */
 struct matrix {
-    float* temp;    ///< Last value
     float* value;   ///< Used value
 };
 
@@ -51,7 +50,7 @@ public:
     int lapsToGo;                                                         ///< Amount of laps to go
     unsigned int index;                                                   ///< Index of car
     glm::vec3 pos, oldPos;                                                ///< Car position
-    float rot, speed, tempRot, lspeed;                                    ///< Car state
+    float rot, speed, lspeed;                                             ///< Car state
     float view;                                                           ///< Camera view perspective angle
     model* skin;                                                          ///< 3D models
     model* wheel;                                                         ///< 3D models
@@ -95,11 +94,6 @@ public:
      * @brief update updates car wheels state(rotation and steering)
      */
     void update();
-
-    /**
-     * @brief updates car transformation
-     */
-    void updateMatrices();
 };
 
 #endif // CAR_H

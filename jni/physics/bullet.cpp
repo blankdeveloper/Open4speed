@@ -417,7 +417,7 @@ void bullet::updateCarTransform(car* c) {
     btQuaternion qn = m_vehicle[c->index - 1]->getRigidBody()->getOrientation();
     float rot = getRotation(qn.x(),qn.y(),qn.z(),qn.w());
     if (!isnan(rot)) {
-        c->tempRot=rot;
+        c->rot=rot;
     }
 
     /// get position
@@ -433,9 +433,9 @@ void bullet::updateCarTransform(car* c) {
     /// get matrices
     for (int index = 0; index < 5; index++) {
         if (index > 0) {
-          m_vehicle[c->index - 1]->getWheelInfo(index - 1).m_worldTransform.getOpenGLMatrix(c->transform[index].temp);
+          m_vehicle[c->index - 1]->getWheelInfo(index - 1).m_worldTransform.getOpenGLMatrix(c->transform[index].value);
         } else {
-          m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassTransform().getOpenGLMatrix(c->transform[index].temp);
+          m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassTransform().getOpenGLMatrix(c->transform[index].value);
         }
     }
 }

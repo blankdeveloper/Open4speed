@@ -11,7 +11,7 @@
 #ifndef GLFBO_H
 #define GLFBO_H
 
-#include "renderers/opengl/gles20.h"
+#include "renderers/opengl/gles30.h"
 #include "renderers/opengl/glvbo.h"
 
 class glfbo : public fbo

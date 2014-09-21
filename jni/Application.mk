@@ -1,4 +1,4 @@
-APP_PLATFORM 	:= android-14
+APP_PLATFORM 	:= android-18
 APP_STL         := gnustl_static
 APP_OPTIM 	:= release
 APP_ABI 	:= all

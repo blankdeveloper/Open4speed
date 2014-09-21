@@ -45,7 +45,6 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
     prevEffect = 0;
     rot = 0;
     speed = 0;
-    tempRot = 0;
     view = 60;
     reverse = false;
     resetAllowed = false;
@@ -54,21 +53,9 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
     /// create matrices
     transform = new matrix[5];
     for (int i = 0; i < 5; i++) {
-        transform[i].temp = new float[16];
-        for (int j = 0; j < 16; j++)
-            transform[i].temp[j] = 0;
-        transform[i].temp[0] = 1;
-        transform[i].temp[5] = 1;
-        transform[i].temp[10] = 1;
-        transform[i].temp[15] = 1;
-
         transform[i].value = new float[16];
         for (int j = 0; j < 16; j++)
-            transform[i].value[j] = 0;
-        transform[i].value[0] = 1;
-        transform[i].value[5] = 1;
-        transform[i].value[10] = 1;
-        transform[i].value[15] = 1;
+            transform[i].value[j] = j % 5 == 0 ? 1 : 0;
     }
 
     /// apply index of car
@@ -112,10 +99,8 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
  */
 car::~car() {
     delete control;
-    for (int i = 0; i < 5; i++) {
-        delete[] transform[i].temp;
+    for (int i = 0; i < 5; i++)
         delete[] transform[i].value;
-    }
     delete[] transform;
 }
 
@@ -235,6 +220,13 @@ void car::update() {
         speedAspect = 0;
     acceleration = lowAspect * power + (1 - lowAspect) * power * speedAspect;
 
+    /// reverse camera
+    if (rot > 360)
+        rot -= 360;
+    if (reverse & (speed > 3))
+        rot -= 180;
+    if (rot < 0)
+        rot += 360;
 
     /// play crash
     bool brake = false;
@@ -295,26 +287,4 @@ void car::update() {
     sndDist *= sndDist;
     sndEngine1 = 8.0 * (0.25f - extraSound);
     sndEngine2 = extraSound;
-}
-
-/**
- * @brief updates car transformation
- */
-void car::updateMatrices() {
-    /// update matrices
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 16; j++) {
-            transform[i].value[j] = transform[i].temp[j];
-        }
-    }
-    rot = tempRot;
-
-
-    /// reverse camera
-    if (rot > 360)
-        rot -= 360;
-    if (reverse & (speed > 3))
-        rot -= 180;
-    if (rot < 0)
-        rot += 360;
 }

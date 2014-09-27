@@ -41,6 +41,6 @@ void main()
   //reflect
   vec4 r = texture2D(EnvMap1, vec2(0.5 + N.x * 0.5, 1.5 - gl_FragCoord.z * 1.0 + N.z * 0.5)) * clamp(0.0, (v_Vertex2.y - 0.4), 1.0);
   float v = dot(diffuse.rgb, one) * 0.33;
-  gl_FragColor.rgb += 3.0 * (diffuse.r - v) * r.rgb;
+  gl_FragColor.rgb += (0.33 - (diffuse.r - v)) * r.rgb;
 }
 END

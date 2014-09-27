@@ -164,7 +164,7 @@ void bullet::addCar(car* c) {
     m_vehicleRayCasters.push_back(m_vehicleRayCaster);
     btTransform tr;
     tr.setIdentity();
-    tr.setOrigin(btVector3(c->pos.x, c->pos.y, c->pos.z));
+    tr.setOrigin(btVector3(c->pos.x, c->pos.y + 1, c->pos.z));
     btQuaternion qn;
     qn.setW(btScalar(cos(c->rot * 3.14 / 180 / 2.0f)));
     qn.setX(btScalar(0));

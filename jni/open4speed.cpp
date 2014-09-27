@@ -21,23 +21,9 @@
 #define VIEW_DISTANCE 500
 
 /**
- * Counters variables
+ * @brief display updates display
  */
-timespec ts_start, ts_end;          ///< Time messurement of rendering
-float lastFrameTime = 0;            ///< Viewed time per frame
-float frameTime = 0;                ///< Time per frame
-int lastFPS = 0;                    ///< Viewed FPS
-int fps = 0;                        ///< Actual FPS
-int timestamp = 0;                  ///< Timestamp for updating FPS
-
-/**
- * @brief displayScene displaies race scene
- * @param renderer is instance of renderer
- * @param gui is instance of menu
- * @param track is instance of track
- * @param physics is instance of physical engine
- */
-void displayScene() {
+void display(void) {
 
     /// update camera direction
     if (direction * 180 / 3.14 - allCar[cameraCar]->rot > 180)
@@ -194,6 +180,19 @@ void displayScene() {
     if (currentFrame >= effLen) {
         currentFrame = 0;
     }
+
+#ifndef ANDROID
+    /// check if there is an error
+    int i = glGetError();
+    if (i != 0) {
+        printf("GL_ERROR %d\n", i);
+    }
+
+    /// finish rendering
+    glutSwapBuffers();
+#else
+    glFinish();
+#endif
 }
 
 /**
@@ -253,7 +252,7 @@ void loadScene(std::string filename) {
     skydome = getModel(getConfigStr("sky_model", atributes));
 
     /// load player car
-    allCar.push_back(new car(getInput(), &e, carLst[0]));
+    allCar.push_back(new car(getInput(), &e, getConfigStr("player_car", atributes)));
 
     /// load race informations
     allCar[0]->lapsToGo = getConfig("laps", atributes) - 1;
@@ -266,7 +265,7 @@ void loadScene(std::string filename) {
     for (int i = 0; i < opponentCount; i++) {
 
         /// racer ai
-        allCar.push_back(new car(new airacer(), &e, carLst[getConfig(getTag(i + 1, "opponent%d_car"), atributes)]));
+        allCar.push_back(new car(new airacer(), &e, getConfigStr(getTag(i + 1, "opponent%d_car"), atributes)));
         allCar[i + 1]->finishEdge = allCar[0]->finishEdge;
         allCar[i + 1]->lapsToGo = allCar[0]->lapsToGo;
         allCar[i + 1]->setStart(allCar[i + 1]->edges[getConfig(getTag(i + 1, "opponent%d_start"), atributes)]);
@@ -347,51 +346,6 @@ void idle(int v) {
     glutPostRedisplay();
     glutTimerFunc(50,idle,0);
 #endif
-}
-
-/**
- * @brief display updates display
- */
-void display(void) {
-    /// start messuring time
-    clock_gettime(CLOCK_REALTIME, &ts_start);
-
-    /// display scene
-    displayScene();
-
-    /// update FPS counter
-    fps++;
-    if (timestamp != time(0)) {
-        lastFrameTime = frameTime / (float)fps;
-        frameTime = 0;
-        lastFPS = fps;
-        timestamp = time(0);
-        fps = 0;
-
-        /// draw FPS
-#ifndef ANDROID
-        printf("FPS: %d, t: %0.3fms, e: %d\n", lastFPS, lastFrameTime, allCar[cameraCar]->currentEdgeIndex);
-#endif
-    }
-
-    /// stop messuring time
-    clock_gettime(CLOCK_REALTIME, &ts_end);
-    frameTime += (ts_end.tv_sec - ts_start.tv_sec + (ts_end.tv_nsec - ts_start.tv_nsec) * 0.000000001f) * 1000.0f;
-
-#ifndef ANDROID
-    /// check if there is an error
-    int i = glGetError();
-    if (i != 0) {
-        printf("GL_ERROR %d\n", i);
-    }
-
-    /// finish rendering
-    glutSwapBuffers();
-#else
-    glFinish();
-    idle(0);
-#endif
-
 }
 
 /**
@@ -493,7 +447,6 @@ int main(int argc, char** argv) {
 #endif
 
     /// load data
-    carLst.push_back("cars/01/params");
     loadScene("tracks/track1");
 
     /// start loop
@@ -556,8 +509,7 @@ void Java_com_lvonasek_o4s_game_Native_keyUp( JNIEnv*  env, jobject  thiz, jint 
  * @param thiz is asset manager
  */
 void Java_com_lvonasek_o4s_game_Native_display( JNIEnv*  env, jobject  thiz ) {
-  displayScene();
-  glFinish();
+  display();
 }
 
 /**
@@ -566,7 +518,7 @@ void Java_com_lvonasek_o4s_game_Native_display( JNIEnv*  env, jobject  thiz ) {
  * @param thiz is asset manager
  */
 void Java_com_lvonasek_o4s_game_Native_loop( JNIEnv*  env, jobject  thiz ) {
-  display();
+  idle(0);
 }
 
 /**

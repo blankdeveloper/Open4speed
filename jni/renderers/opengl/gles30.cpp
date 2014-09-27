@@ -21,6 +21,8 @@
 #include "utils/switch.h"
 #include "common.h"
 
+GLuint id[2] = {0};
+
 /**
  * @brief gles30 destructor
  */
@@ -457,6 +459,10 @@ void gles30::renderSubModel(model* mod, model3d *m) {
     current->uniformFloat4("u_light_dir", light.u_light_dir.x, light.u_light_dir.y, light.u_light_dir.z, 1.0);
     current->uniformFloat4("u_nearest1", light.u_nearest1.x, light.u_nearest1.y, light.u_nearest1.z, 1.0);
 
+    /// post sun vector as uniform into shader
+    glm::vec3 sun = glm::normalize(glm::vec3(0.5, -1.0, 0.0));
+    current->uniformFloat4("u_sun_dir", sun.x, sun.y, sun.z, 0);
+
     /// standart vertices
     if (mod->cutX * mod->cutY == 1) {
         m->vboData->render(current, 0, m->triangleCount[mod->cutX * mod->cutY]);
@@ -502,11 +508,32 @@ void gles30::shadowMode(bool enable) {
 
 void gles30::rtt(bool enable) {
     if (enable) {
+#ifndef ANDROID
+        /// start timer
+        glGenQueries(1,id);
+        glBeginQuery(GL_TIME_ELAPSED, id[0]);
+#endif
         rtt_fbo[oddFrame]->bindFBO();
         rtt_fbo[oddFrame]->clear();
         oddFrame = !oddFrame;
     } else {
+#ifndef ANDROID
+        glEndQuery(GL_TIME_ELAPSED);
+
+        /// get scene counters
+        GLint gpu_time = 0;
+        glGetQueryObjectiv(id[0], GL_QUERY_RESULT, &gpu_time);
+
+        GLint copy_time = 0;
+        glBeginQuery(GL_TIME_ELAPSED, id[0]);
+#endif
         rtt_fbo[oddFrame]->drawOnScreen(scene_shader);
         glDepthMask(true);
+
+#ifndef ANDROID
+        glEndQuery(GL_TIME_ELAPSED);
+        glGetQueryObjectiv(id[0], GL_QUERY_RESULT, &copy_time);
+        printf("3D time: %dk 2D time: %dk\n", gpu_time / 1000, copy_time / 1000);
+#endif
     }
 }

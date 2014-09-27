@@ -17,10 +17,9 @@ FRAG
 uniform sampler2D color_texture;
 uniform sampler2D EnvMap1;
 uniform float u_res, u_speed;
+uniform vec4 u_sun_dir;
 varying vec2 v_Coords;
 varying vec3 v_Vertex;
-
-vec4 u_sun_dir = normalize(vec4(0.5, -1.0, 0.0, 0.0));
 
 void main()
 {

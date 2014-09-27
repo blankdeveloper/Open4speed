@@ -14,7 +14,6 @@
  * The scene
  */
 float aspect;                   ///< Screen aspect
-std::vector<std::string> carLst;///< List of all cars
 bool active;                    ///< Information if scene is active
 int opponentCount;              ///< Opponent count
 model *skydome;                 ///< Skydome model

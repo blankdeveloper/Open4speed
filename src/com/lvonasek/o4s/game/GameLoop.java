@@ -94,6 +94,7 @@ public class GameLoop extends GLSurfaceView implements Renderer {
         //check if game is not paused
         if (!paused) {
             long time = System.currentTimeMillis();
+            Native.display();
             Native.loop();
             Native.update();
 

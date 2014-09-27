@@ -35,7 +35,6 @@ const int effLen = 6;                  ///< Length of water effect
  * The scene
  */
 extern float aspect;                   ///< Screen aspect
-extern std::vector<std::string> carLst;///< List of all cars
 extern bool active;                    ///< Information if scene is active
 extern int opponentCount;              ///< Opponent count
 extern model *skydome;                 ///< Skydome model

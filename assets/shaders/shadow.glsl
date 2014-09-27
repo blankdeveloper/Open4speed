@@ -3,12 +3,11 @@ uniform mat4 u_Matrix;
 uniform mat4 u_ViewMatrix;
 uniform mat4 u_ModelViewMatrix;
 uniform mat4 u_ProjViewMatrix;
+uniform vec4 u_sun_dir;
 attribute vec3 v_vertex;
 attribute vec3 v_normal;
 attribute vec2 v_coord;
 attribute vec3 v_tnormal;
-
-vec4 u_sun_dir = normalize(vec4(0.5, -1.0, 0.0, 0.0));
 
 void main()
 {

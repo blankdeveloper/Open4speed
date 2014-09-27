@@ -25,6 +25,8 @@
 #define PACKED_EXT GL_DEPTH24_STENCIL8_EXT
 #endif
 
+#define ALIASING 1.0
+
 /**
  * @brief removes all data from memory
  */
@@ -59,11 +61,11 @@ glfbo::glfbo(int width, int height) {
     glBindFramebuffer(GL_FRAMEBUFFER, fboID[0]);
     glGenTextures(1, rendertexture);
     glBindTexture(GL_TEXTURE_2D, rendertexture[0]);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width * ALIASING, height * ALIASING, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rendertexture[0], 0);
 
 
@@ -73,16 +75,16 @@ glfbo::glfbo(int width, int height) {
     char* extString = (char*)glGetString(GL_EXTENSIONS);
     if (strstr(extString, PACKED_EXTENSION) != 0)
     {
-        glRenderbufferStorage(GL_RENDERBUFFER, PACKED_EXT, width, height);
+        glRenderbufferStorage(GL_RENDERBUFFER, PACKED_EXT, width * ALIASING, height * ALIASING);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
     }
     else
     {
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width * ALIASING, height * ALIASING);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
         glBindRenderbuffer(GL_RENDERBUFFER, rboID[1]);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_STENCIL_INDEX8, width, height);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_STENCIL_INDEX8, width * ALIASING, height * ALIASING);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboID[1]);
     }
 
@@ -104,7 +106,7 @@ glfbo::glfbo(int width, int height) {
     }
 
     /// clear
-    glViewport (0, 0, width, height);
+    glViewport (0, 0, width * ALIASING, height * ALIASING);
     glClear(GL_COLOR_BUFFER_BIT);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
@@ -137,7 +139,7 @@ glfbo::glfbo(int width, int height) {
  */
 void glfbo::bindFBO() {
     glBindFramebuffer(GL_FRAMEBUFFER, fboID[0]);
-    glViewport (0, 0, width, height);
+    glViewport (0, 0, width * ALIASING, height * ALIASING);
 }
 
 /**
@@ -160,17 +162,14 @@ void glfbo::clear() {
  */
 void glfbo::drawOnScreen(shader* screen_shader) {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glViewport (0, 0, width, height);
     screen_shader->bind();
     glBindTexture(GL_TEXTURE_2D, rendertexture[0]);
+    glDisable(GL_ALPHA_TEST);
+    glDisable(GL_BLEND);
     glDisable(GL_DEPTH_TEST);
     glDepthMask(false);
     rect->render(screen_shader, 0, 2);
-    screen_shader->unbind();
-
-    // faster unsupported method
-    /*glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glBindFramebuffer(GL_READ_FRAMEBUFFER, fboID[0]);
-    glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);*/
 }
 
 /**

@@ -17,6 +17,14 @@
 
 // pomer brzdeni
 #define BRAKE_ASPECT 1
+// drzeni polohy dynamickych teles
+#define DYNAMIC_DAMPING 10
+// treni dynamickych teles
+#define DYNAMIC_FRICTION 500
+// nasobek gravita pro dynamicka telesa
+#define DYNAMIC_GRAVITATION 10
+// toceni dynamickych teles (mensi cislo je vetsi roztoceni)
+#define DYNAMIC_ROLLING_FRICTION 0
 // maximalni rychlost kterou engine zpracuje(pouziva se k vypoctu promenlive akcelerace)
 #define ENGINE_MAX_SPEED 300
 // pomer akcelerace
@@ -221,10 +229,9 @@ void bullet::addModel(model *m) {
             compound->addChildShape(localTrans,shape);
 
             /// Set object physical values
-            btVector3 localInertia(0,0,0);
-            float mass = VEHICLE_MASS_ASPECT * w * a * h * 0.01f;
-            compound->calculateLocalInertia(mass,localInertia);
-            btRigidBody* body = new btRigidBody(mass,0,compound,localInertia);
+            btVector3 localInertia(0, 0, 0);
+            compound->calculateLocalInertia(w * a * h,localInertia);
+            btRigidBody* body = new btRigidBody(w * a * h + 1, 0, compound,localInertia);
             bodies.push_back(body);
             m_dynamicsWorld->addRigidBody(body);
 
@@ -235,7 +242,10 @@ void bullet::addModel(model *m) {
 
             /// Create object
             body->setCenterOfMassTransform(tr);
-            body->setDamping(10, 10);
+            body->setFriction(DYNAMIC_FRICTION);
+            body->setRollingFriction(DYNAMIC_ROLLING_FRICTION);
+            body->setDamping(DYNAMIC_DAMPING, DYNAMIC_DAMPING);
+            body->setGravity(btVector3(0, -GRAVITATION * DYNAMIC_GRAVITATION, 0));
             m->models[i].dynamicID = bodies.size();
 
             /// set default position

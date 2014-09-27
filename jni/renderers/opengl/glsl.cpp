@@ -10,11 +10,8 @@
 #include "renderers/opengl/glsl.h"
 #include "utils/io.h"
 
-#ifdef ANDROID
-std::string header = "#version 300 es\nprecision mediump float;\n";      ///< Shader header
-#else
-std::string header = "#version 100\nprecision highp float;\n";      ///< Shader header
-#endif
+std::string header = "#version 100\nprecision lowp float;\n";      ///< Shader header
+
 glsl::~glsl() {
     glDetachShader(id, shader_vp);
     glDetachShader(id, shader_fp);

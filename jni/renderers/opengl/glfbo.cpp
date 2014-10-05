@@ -61,8 +61,8 @@ glfbo::glfbo(int width, int height) {
     glBindFramebuffer(GL_FRAMEBUFFER, fboID[0]);
     glGenTextures(1, rendertexture);
     glBindTexture(GL_TEXTURE_2D, rendertexture[0]);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width * ALIASING, height * ALIASING, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
@@ -150,7 +150,7 @@ void glfbo::bindTexture() {
 }
 
 /**
- * @brief clear clears stencil/depth buffer
+ * @brief clear clears depth buffer
  */
 void glfbo::clear() {
     glClear(GL_DEPTH_BUFFER_BIT);

@@ -246,6 +246,7 @@ void bullet::addModel(model *m) {
             body->setRollingFriction(DYNAMIC_ROLLING_FRICTION);
             body->setDamping(DYNAMIC_DAMPING, DYNAMIC_DAMPING);
             body->setGravity(btVector3(0, -GRAVITATION * DYNAMIC_GRAVITATION, 0));
+            body->setActivationState(WANTS_DEACTIVATION);
             m->models[i].dynamicID = bodies.size();
 
             /// set default position
@@ -270,6 +271,7 @@ void bullet::addModel(model *m) {
             localTrans.setIdentity();
             localTrans.setOrigin(btVector3(m->models[i].reg.min.x, m->models[i].reg.min.y, m->models[i].reg.min.z));
             btRigidBody* body = new btRigidBody(0,0,levelShape,localInertia);
+            body->setActivationState(DISABLE_SIMULATION);
             bodies2.push_back(body);
             body->setCenterOfMassTransform(localTrans);
             m_dynamicsWorld->addRigidBody(body);
@@ -304,7 +306,7 @@ void bullet::resetCar(car* c) {
     c->setStart(c->currentEdge, 0);
     btTransform tr;
     tr.setIdentity();
-    tr.setOrigin(btVector3(c->pos.x,c->pos.y + 5.0,c->pos.z));
+    tr.setOrigin(btVector3(c->pos.x,c->pos.y + 1,c->pos.z));
     btQuaternion q;
     q.setRotation(btVector3(0,1,0), c->rot * 3.14 / 180.0);
     tr.setRotation(q);

@@ -34,10 +34,10 @@ airacer::airacer() {
  * @ value between 0 and 1 where 0=not braking and 1=braking
  */
 float airacer::getBrake() {
-    if (getGas() == 1)
+    if (getGas() > 0.8f)
          return 0;
     else
-         return 1;
+         return 0.5f;
 }
 
 /**

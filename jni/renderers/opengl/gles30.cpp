@@ -533,7 +533,7 @@ void gles30::rtt(bool enable) {
 #ifndef ANDROID
         glEndQuery(GL_TIME_ELAPSED);
         glGetQueryObjectiv(id[0], GL_QUERY_RESULT, &copy_time);
-        printf("3D time: %dk 2D time: %dk\n", gpu_time / 1000, copy_time / 1000);
+        printf("3D time: %dk 2D time: %dk, edge:%d\n", gpu_time / 1000, copy_time / 1000, allCar[0]->currentEdgeIndex);
 #endif
     }
 }

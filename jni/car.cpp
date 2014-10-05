@@ -121,7 +121,7 @@ float car::getView() {
  * @brief setStart sets start position of car
  * @param e is curve where car starts on
  */
-void car::setStart(edge e) {
+void car::setStart(edge e, float sidemove) {
 
     /// error check
     if ((e.a.x == e.b.x) && (e.a.z == e.b.z)) {
@@ -135,10 +135,11 @@ void car::setStart(edge e) {
     /// set transformation
     resetAllowed = false;
     reverse = false;
-    rot = (float)angle(currentEdge.a, currentEdge.b) * 180 / 3.14 - 180;
-    oldPos.x = pos.x = currentEdge.a.x;
+    rot = angle(currentEdge.a, currentEdge.b);
+    oldPos.x = pos.x = currentEdge.a.x + sin(rot) * sidemove;
     oldPos.y = pos.y = currentEdge.a.y;
-    oldPos.z = pos.z = currentEdge.a.z;
+    oldPos.z = pos.z = currentEdge.a.z - cos(rot) * sidemove;
+    rot = rot * 180 / 3.14 - 180;
 
     /// count distance from finish
     int ltg = lapsToGo;

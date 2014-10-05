@@ -165,7 +165,6 @@ void glfbo::drawOnScreen(shader* screen_shader) {
     glViewport (0, 0, width, height);
     screen_shader->bind();
     glBindTexture(GL_TEXTURE_2D, rendertexture[0]);
-    glDisable(GL_ALPHA_TEST);
     glDisable(GL_BLEND);
     glDisable(GL_DEPTH_TEST);
     glDepthMask(false);

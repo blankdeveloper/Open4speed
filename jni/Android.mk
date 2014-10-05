@@ -70,7 +70,7 @@ loaders/rgb.cpp \
 utils/switch.cpp \
 utils/math.cpp \
 utils/io.cpp
-LOCAL_LDLIBS := -lGLESv3 -lEGL -ldl -llog -landroid -lz
+LOCAL_LDLIBS := -lGLESv3 -ldl -llog -landroid -lz
 
 LOCAL_STATIC_LIBRARIES := libpng \ libbullet \ libzip
 

@@ -10,7 +10,7 @@
 #include "renderers/opengl/glsl.h"
 #include "utils/io.h"
 
-std::string header = "#version 100\nprecision lowp float;\n";      ///< Shader header
+std::string header = "#version 100\nprecision mediump float;\n";      ///< Shader header
 
 glsl::~glsl() {
     glDetachShader(id, shader_vp);

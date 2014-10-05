@@ -2,12 +2,10 @@ track_model tracks/track.o4s
 sky_model tracks/sky.o4s
 track_edges tracks/track.o4s.e
 race_track 0
-player_car cars/03/params
-player_start 0
+player_car cars/02/params
+race_start 80
 laps 3
-finish 0
+finish 665
 opponent_count 2
 opponent1_car cars/01/params
-opponent1_start 1
-opponent2_car cars/02/params
-opponent2_start 2
+opponent2_car cars/03/params

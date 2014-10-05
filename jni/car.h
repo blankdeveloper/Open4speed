@@ -88,7 +88,7 @@ public:
      * @brief setStart sets start position of car
      * @param e is curve where car starts on
      */
-    void setStart(edge e);
+    void setStart(edge e, float sidemove);
 
     /**
      * @brief update updates car wheels state(rotation and steering)

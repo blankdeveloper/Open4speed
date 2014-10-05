@@ -40,7 +40,7 @@ void main()
   //player car light
   //vec3 lightDir = u_light.xyz - v_Vertex;
   //vec3 E = normalize(-v_Vertex);
-  vec3 N = normalize(v_Normal - 1.0 + 2.0 * diffuse.rgb);
+  vec3 N = normalize(v_Normal - 0.5 + 1.0 * diffuse.rgb);
   /*vec3 L = normalize(lightDir);
   //count effectivity(directionaly)
   float eff = dot(normalize(-u_light_dir.xyz), -L);

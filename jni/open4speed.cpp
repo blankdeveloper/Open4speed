@@ -257,8 +257,8 @@ void loadScene(std::string filename) {
     /// load race informations
     allCar[0]->lapsToGo = getConfig("laps", atributes) - 1;
     allCar[0]->finishEdge = getConfig("finish", atributes);
-    allCar[0]->currentEdgeIndex = getConfig("player_start", atributes);
-    allCar[0]->setStart(allCar[0]->edges[getConfig("player_start", atributes)]);
+    allCar[0]->currentEdgeIndex = getConfig("race_start", atributes);
+    allCar[0]->setStart(allCar[0]->edges[getConfig("race_start", atributes)], 0);
 
     /// load opponents
     opponentCount = getConfig("opponent_count", atributes);
@@ -268,8 +268,9 @@ void loadScene(std::string filename) {
         allCar.push_back(new car(new airacer(), &e, getConfigStr(getTag(i + 1, "opponent%d_car"), atributes)));
         allCar[i + 1]->finishEdge = allCar[0]->finishEdge;
         allCar[i + 1]->lapsToGo = allCar[0]->lapsToGo;
-        allCar[i + 1]->setStart(allCar[i + 1]->edges[getConfig(getTag(i + 1, "opponent%d_start"), atributes)]);
-        allCar[i + 1]->currentEdgeIndex = getConfig(getTag(i + 1, "opponent%d_start"), atributes);
+        int move = (i % 2) * 2 - 1;
+        allCar[i + 1]->setStart(allCar[i + 1]->edges[getConfig("race_start", atributes)], move * 4);
+        allCar[i + 1]->currentEdgeIndex = getConfig("race_start", atributes);
     }
 
     /// load water

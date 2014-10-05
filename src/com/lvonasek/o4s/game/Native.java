@@ -44,7 +44,7 @@ public class Native {
     }
 
     public static void update() {
-        int count = carCount();
+        int count = 1;//carCount();
         for (int i = 0; i < count; i++) {
             boolean crash = carState(i, CAR_INFO_SNDCRASH) > 0.5f;
             float dist = carState(i, CAR_INFO_SNDDIST);

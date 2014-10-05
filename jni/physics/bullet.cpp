@@ -58,7 +58,7 @@
 // casovy krok vozidla
 #define VEHICLE_STEP 100
 // treni vozidla(nizka hodna umozni driftovat->UI nezvladne trat)
-#define WHEEL_FRICTION 500
+#define WHEEL_FRICTION 300
 // maximalni prunik bounding teles
 #define WORLD_LIMIT 1000
 // casovy krok sceny
@@ -164,7 +164,7 @@ void bullet::addCar(car* c) {
     m_vehicleRayCasters.push_back(m_vehicleRayCaster);
     btTransform tr;
     tr.setIdentity();
-    tr.setOrigin(btVector3(c->pos.x, c->pos.y + 1, c->pos.z));
+    tr.setOrigin(btVector3(c->pos.x, c->pos.y + 2, c->pos.z));
     btQuaternion qn;
     qn.setW(btScalar(cos(c->rot * 3.14 / 180 / 2.0f)));
     qn.setX(btScalar(0));
@@ -301,7 +301,7 @@ void bullet::getTransform(int index, float* m) {
  */
 void bullet::resetCar(car* c) {
     c->resetRequested = false;
-    c->setStart(c->currentEdge);
+    c->setStart(c->currentEdge, 0);
     btTransform tr;
     tr.setIdentity();
     tr.setOrigin(btVector3(c->pos.x,c->pos.y + 5.0,c->pos.z));

@@ -13,8 +13,8 @@
 
 
 #ifdef ANDROID
-#include <GLES3/gl3.h>
-#include <GLES3/gl3ext.h>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
 #else
 #define GL_GLEXT_PROTOTYPES
 #include <GL/gl.h>
@@ -32,7 +32,7 @@ const glm::mat4x4 eye = glm::mat4x4(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1);
 /**
  * @brief The gles20 class is implementation of OpenGL ES 2.0
  */
-class gles30 : public renderer {
+class gles20 : public renderer {
 public:
     int xm, xp, ym, yp;                   ///< Current view frustum culling
     float camX;                           ///< Camera position x
@@ -52,12 +52,12 @@ public:
     /**
      * @brief gles20 destructor
      */
-    ~gles30();
+    ~gles20();
 
     /**
      * @brief gles20 constructor
      */
-    gles30(int w, int h);
+    gles20(int w, int h);
 
     /**
      * @brief lookAt implements GLUlookAt

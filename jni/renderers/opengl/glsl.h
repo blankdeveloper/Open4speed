@@ -11,7 +11,7 @@
 #define GLSL_H
 
 #include <string>
-#include "renderers/opengl/gles30.h"
+#include "renderers/opengl/gles20.h"
 #include "interfaces/shader.h"
 
 class glsl : public shader

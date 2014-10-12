@@ -25,11 +25,12 @@ public:
     /**
      * Bullet physics objects
      */
-    btDiscreteDynamicsWorld* m_dynamicsWorld;
-    btDefaultCollisionConfiguration* m_collisionConfiguration;
+    btDynamicsWorld* m_dynamicsWorld;
+    btCollisionConfiguration* m_collisionConfiguration;
     btCollisionDispatcher* m_dispatcher;
     btBroadphaseInterface* m_overlappingPairCache;
     btConstraintSolver* m_constraintSolver;
+    btVehicleRaycaster* m_vehicleRayCaster;
 
 
     /**
@@ -38,12 +39,8 @@ public:
     std::vector<btRaycastVehicle*> m_vehicle;
     std::vector<btRigidBody*> bodies;
     std::vector<btCollisionShape*> shapes;
-    std::vector<btCompoundShape*> compounds;
     std::vector<btTriangleMesh*> meshes;
-    std::vector<btCollisionShape*> levelShapes;
-    std::vector<btRigidBody*> bodies2;
-    std::vector<btCollisionShape*> chassisShapes;
-    std::vector<btVehicleRaycaster*> m_vehicleRayCasters;
+    std::vector<btCollisionObject*> bodies2;
 
     /**
      * @brief Construct physical model
@@ -86,12 +83,6 @@ public:
      * @param c is instance of car
      */
     void updateCar(car* c);
-
-    /**
-     * @brief updateCarTransform updates car OpenGL matrices
-     * @param c is instance of car
-     */
-    void updateCarTransform(car* c);
 
     /**
      * @brief updateWorld updates world state

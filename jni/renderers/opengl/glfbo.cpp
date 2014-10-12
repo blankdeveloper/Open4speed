@@ -19,7 +19,7 @@
 
 #ifdef ANDROID
 #define PACKED_EXTENSION "GL_OES_packed_depth_stencil"
-#define PACKED_EXT GL_DEPTH24_STENCIL8
+#define PACKED_EXT GL_DEPTH24_STENCIL8_OES
 #else
 #define PACKED_EXTENSION "GL_EXT_packed_depth_stencil"
 #define PACKED_EXT GL_DEPTH24_STENCIL8_EXT

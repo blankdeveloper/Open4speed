@@ -27,3 +27,4 @@ zip* APKArchive;                ///< Access to APK archive
 int currentFrame = 0;           ///< Frame index
 Dynamic eff[effLen];            ///< 3D water effect object
 model* water;                   ///< Water effect model
+float viewDistance = 500;

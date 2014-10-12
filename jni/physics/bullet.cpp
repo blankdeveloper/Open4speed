@@ -48,7 +48,7 @@
 // uroven tlumeni
 #define SUSPENSION_DAMPING 0.001
 // delka pruziny
-#define SUSPENSION_REST_LENGTH 0.5
+#define SUSPENSION_REST_LENGTH 0.3
 // tuhost tlumicu
 #define SUSPENSION_STIFFNESS 0.02
 // brzdeni motorem pri nizkych otackach
@@ -60,7 +60,7 @@
 // treni vozidla(nizka hodna umozni driftovat->UI nezvladne trat)
 #define WHEEL_FRICTION 300
 // maximalni prunik bounding teles
-#define WORLD_LIMIT 1000
+#define WORLD_LIMIT 50
 // casovy krok sceny
 #define WORLD_STEP 100
 // maximalni pocet mezikroku sceny
@@ -83,31 +83,16 @@ bullet::~bullet() {
         delete shapes[0];
         shapes.erase(shapes.begin());
     }
-    while(!compounds.empty()) {
-        delete compounds[0];
-        compounds.erase(compounds.begin());
-    }
     while(!meshes.empty()) {
         delete meshes[0];
         meshes.erase(meshes.begin());
-    }
-    while(!levelShapes.empty()) {
-        delete levelShapes[0];
-        levelShapes.erase(levelShapes.begin());
     }
     while(!bodies2.empty()) {
         delete bodies2[0];
         bodies2.erase(bodies2.begin());
     }
-    while(!chassisShapes.empty()) {
-        delete chassisShapes[0];
-        chassisShapes.erase(chassisShapes.begin());
-    }
-    while(!m_vehicleRayCasters.empty()) {
-        delete m_vehicleRayCasters[0];
-        m_vehicleRayCasters.erase(m_vehicleRayCasters.begin());
-    }
 
+    delete m_vehicleRayCaster;
     delete m_collisionConfiguration;
     delete m_dispatcher;
     delete m_overlappingPairCache;
@@ -130,6 +115,7 @@ bullet::bullet(model *m) {
     m_constraintSolver = new btSequentialImpulseConstraintSolver();
     m_dynamicsWorld = new btDiscreteDynamicsWorld(m_dispatcher,m_overlappingPairCache,m_constraintSolver,m_collisionConfiguration);
     m_dynamicsWorld->setGravity(btVector3(0,-GRAVITATION,0));
+    m_vehicleRayCaster = new btDefaultVehicleRaycaster(m_dynamicsWorld);
 
     /// Create scene
     addModel(m);
@@ -143,9 +129,9 @@ void bullet::addCar(car* c) {
 
     /// set chassis
     btCollisionShape* chassisShape = new btBoxShape(btVector3(c->skin->width / 2.0f, c->skin->aplitude / 2.0f,c->skin->height / 2.0f));
-    chassisShapes.push_back(chassisShape);
+    shapes.push_back(chassisShape);
     btCompoundShape* compound = new btCompoundShape();
-    compounds.push_back(compound);
+    shapes.push_back(compound);
     btTransform localTrans;
     localTrans.setIdentity();
     localTrans.setOrigin(btVector3(0, c->wheelY, 0));
@@ -160,8 +146,6 @@ void bullet::addCar(car* c) {
     m_dynamicsWorld->addRigidBody(m_carChassis);
 
     /// Set car default transform
-    btVehicleRaycaster* m_vehicleRayCaster = new btDefaultVehicleRaycaster(m_dynamicsWorld);
-    m_vehicleRayCasters.push_back(m_vehicleRayCaster);
     btTransform tr;
     tr.setIdentity();
     tr.setOrigin(btVector3(c->pos.x, c->pos.y + 2, c->pos.z));
@@ -205,14 +189,14 @@ void bullet::addCar(car* c) {
         wheel.m_wheelsDampingCompression = SUSPENSION_COMPRESSION;
         wheel.m_frictionSlip = WHEEL_FRICTION;
         wheel.m_rollInfluence = ROLL_INFLUENCE;
-    }
-}
+    }}
 
 /**
  * @brief addModel adds model into physical model
  * @param m is 3D model for physical model
  */
 void bullet::addModel(model *m) {
+    btTriangleMesh* mesh = 0;
     for (unsigned int i = 0; i < m->models.size(); i++) {
         if (m->models[i].dynamic) {
 
@@ -220,23 +204,18 @@ void bullet::addModel(model *m) {
             float w = m->models[i].reg.max.x - m->models[i].reg.min.x;
             float a = m->models[i].reg.max.y - m->models[i].reg.min.y;
             float h = m->models[i].reg.max.z - m->models[i].reg.min.z;
-            btCollisionShape* shape = new btBoxShape(btVector3(w / 2, a / 2, h / 2));
+            btBoxShape* shape = new btBoxShape(btVector3(w / 2, a / 2, h / 2));
             shapes.push_back(shape);
-            btCompoundShape* compound = new btCompoundShape();
-            compounds.push_back(compound);
-            btTransform localTrans;
-            localTrans.setIdentity();
-            compound->addChildShape(localTrans,shape);
 
             /// Set object physical values
             btVector3 localInertia(0, 0, 0);
-            compound->calculateLocalInertia(w * a * h,localInertia);
-            btRigidBody* body = new btRigidBody(w * a * h + 1, 0, compound,localInertia);
+            shape->calculateLocalInertia(w * a * h,localInertia);
+            btRigidBody* body = new btRigidBody(w * a * h + 1, 0, shape,localInertia);
             bodies.push_back(body);
             m_dynamicsWorld->addRigidBody(body);
 
             /// Set object default transform
-            btTransform tr = *(new btTransform());
+            btTransform tr;
             tr.setIdentity();
             tr.setOrigin(btVector3(m->models[i].reg.min.x+w/2, m->models[i].reg.min.y+a/2, m->models[i].reg.min.z+h/2));
 
@@ -256,26 +235,25 @@ void bullet::addModel(model *m) {
             m->models[i].y = mat[13];
             m->models[i].z = mat[14];
         } else if (m->models[i].touchable) {
-            btTriangleMesh* mesh = new btTriangleMesh();
-            meshes.push_back(mesh);
+            if (mesh == 0)
+                mesh = new btTriangleMesh();
+            btVector3 o = btVector3(m->models[i].reg.min.x, m->models[i].reg.min.y, m->models[i].reg.min.z);
             for (int j = 0; j < m->models[i].triangleCount[m->cutX * m->cutY]; j++) {
                 btVector3 a = btVector3(m->models[i].vertices[j * 9 + 0], m->models[i].vertices[j * 9 + 1], m->models[i].vertices[j * 9 + 2]);
                 btVector3 b = btVector3(m->models[i].vertices[j * 9 + 3], m->models[i].vertices[j * 9 + 4], m->models[i].vertices[j * 9 + 5]);
                 btVector3 c = btVector3(m->models[i].vertices[j * 9 + 6], m->models[i].vertices[j * 9 + 7], m->models[i].vertices[j * 9 + 8]);
-                mesh->addTriangle(a, b, c);
+                mesh->addTriangle(a + o, b + o, c + o);
             }
-            btCollisionShape* levelShape = new btBvhTriangleMeshShape(mesh,true);
-            levelShapes.push_back(levelShape);
-            btVector3 localInertia(0,0,0);
-            btTransform localTrans;
-            localTrans.setIdentity();
-            localTrans.setOrigin(btVector3(m->models[i].reg.min.x, m->models[i].reg.min.y, m->models[i].reg.min.z));
-            btRigidBody* body = new btRigidBody(0,0,levelShape,localInertia);
-            body->setActivationState(DISABLE_SIMULATION);
-            bodies2.push_back(body);
-            body->setCenterOfMassTransform(localTrans);
-            m_dynamicsWorld->addRigidBody(body);
         }
+    }
+    if (mesh != 0) {
+        meshes.push_back(mesh);
+        btBvhTriangleMeshShape* levelShape = new btBvhTriangleMeshShape(mesh,true);
+        shapes.push_back(levelShape);
+        btRigidBody* body = new btRigidBody(0,0,levelShape);
+        body->setActivationState(DISABLE_SIMULATION);
+        bodies2.push_back(body);
+        m_dynamicsWorld->addCollisionObject(body);
     }
 }
 
@@ -386,9 +364,9 @@ void bullet::updateCar(car* c) {
     m_vehicle[c->index - 1]->setBrake(gBreakingForce + SPEED_DECREASE, 1);
 
     for (int i = 0; i < 4; i++)
-        m_vehicle[c->index - 1]->updateWheelTransform(i,true);
+        m_vehicle[c->index - 1]->updateWheelTransform(i);
 
-    /// Other updates
+    /// Apply updates
     m_vehicle[c->index - 1]->updateVehicle(VEHICLE_STEP);
 
     /// Reset car
@@ -417,13 +395,7 @@ void bullet::updateCar(car* c) {
         }
         resetCar(c);
     }
-}
 
-/**
- * @brief updateCarTransform updates car OpenGL matrices
- * @param c is instance of car
- */
-void bullet::updateCarTransform(car* c) {
 
     /// count angle
     btQuaternion qn = m_vehicle[c->index - 1]->getRigidBody()->getOrientation();

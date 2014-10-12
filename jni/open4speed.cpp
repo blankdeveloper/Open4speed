@@ -8,7 +8,7 @@
 //----------------------------------------------------------------------------------------
 
 #ifdef ANDROID
-#include <GLES3/gl3.h>
+#include <GLES2/gl2.h>
 #endif
 #include <stdlib.h>
 #include "input/airacer.h"
@@ -17,8 +17,6 @@
 #include "utils/math.h"
 #include "utils/switch.h"
 #include "common.h"
-
-#define VIEW_DISTANCE 500
 
 /**
  * @brief display updates display
@@ -53,7 +51,7 @@ void display(void) {
     /// set camera
     xrenderer->rtt(true);
     float view = allCar[cameraCar]->getView();
-    xrenderer->perspective(view, aspect, 0.5, VIEW_DISTANCE);
+    xrenderer->perspective(view, aspect, 0.5, viewDistance);
     xrenderer->pushMatrix();
     float cameraX = allCar[cameraCar]->transform->value[12] - sin(direction) * allCar[cameraCar]->control->getDistance() * 2 / (view / 90);
     float cameraY = allCar[cameraCar]->transform->value[13] + fabs(allCar[cameraCar]->control->getDistance() * 1.25f / (view / 90));
@@ -81,7 +79,7 @@ void display(void) {
     /// render skydome
     xrenderer->pushMatrix();
     xrenderer->translate(cameraX, 0, cameraZ);
-    xrenderer->scale(VIEW_DISTANCE * 0.9);
+    xrenderer->scale(viewDistance * 0.9);
     xrenderer->renderModel(skydome);
     xrenderer->popMatrix();
 
@@ -300,10 +298,6 @@ void idle(int v) {
             physic->updateCar(allCar[i]);
         /// update scene
         physic->updateWorld();
-
-        /// update car transforms
-        for (unsigned int i = 0; i < allCar.size(); i++)
-            physic->updateCarTransform(allCar[i]);
 
         /// if race finished show result
         if (allCar[0]->lapsToGo == -1) {

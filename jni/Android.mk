@@ -59,7 +59,7 @@ physics/bullet.cpp \
 input/keyboard.cpp \
 input/airacer.cpp \
 interfaces/model.cpp \
-renderers/opengl/gles30.cpp \
+renderers/opengl/gles20.cpp \
 renderers/opengl/glsl.cpp \
 renderers/opengl/gltexture.cpp \
 renderers/opengl/glfbo.cpp \
@@ -70,7 +70,7 @@ loaders/rgb.cpp \
 utils/switch.cpp \
 utils/math.cpp \
 utils/io.cpp
-LOCAL_LDLIBS := -lGLESv3 -ldl -llog -landroid -lz
+LOCAL_LDLIBS := -lGLESv2 -ldl -llog -landroid -lz
 
 LOCAL_STATIC_LIBRARIES := libpng \ libbullet \ libzip
 

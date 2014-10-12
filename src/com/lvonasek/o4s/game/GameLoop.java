@@ -35,7 +35,7 @@ public class GameLoop extends GLSurfaceView implements Renderer {
         //enable OpenGL ES 3.0 support
         if (!isInEditMode()) {
             setEGLConfigChooser(8, 8, 8, 0, 16, 1);
-            setEGLContextClientVersion(3);
+            setEGLContextClientVersion(2);
             setRenderer(this);
         }
     }

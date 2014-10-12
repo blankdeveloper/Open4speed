@@ -48,5 +48,5 @@ extern zip* APKArchive;                ///< Access to APK archive
 extern int currentFrame;               ///< Frame index
 extern Dynamic eff[];                  ///< 3D water effect object
 extern model* water;                   ///< Water effect model
-
+extern float viewDistance;
 #endif // COMMON_H

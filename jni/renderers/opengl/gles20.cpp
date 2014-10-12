@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------------------
 /**
- * \file       gles30.cpp
+ * \file       gles20.cpp
  * \author     Vonasek Lubos
  * \date       2014/02/14
  * \brief      GL renderer draws geometry and other things on screen
@@ -13,7 +13,7 @@
 #include <stack>
 #include "loaders/pngloader.h"
 #include "loaders/rgb.h"
-#include "renderers/opengl/gles30.h"
+#include "renderers/opengl/gles20.h"
 #include "renderers/opengl/glfbo.h"
 #include "renderers/opengl/gltexture.h"
 #include "utils/io.h"
@@ -24,9 +24,9 @@
 GLuint id[2] = {0};
 
 /**
- * @brief gles30 destructor
+ * @brief gles20 destructor
  */
-gles30::~gles30() {
+gles20::~gles20() {
     while (!rtt_fbo.empty()) {
         delete rtt_fbo[rtt_fbo.size() - 1];
         rtt_fbo.pop_back();
@@ -34,9 +34,9 @@ gles30::~gles30() {
 }
 
 /**
- * @brief gles30 constructor
+ * @brief gles20 constructor
  */
-gles30::gles30(int w, int h) {
+gles20::gles20(int w, int h) {
 
     screen_width = w;
     screen_height = h;
@@ -90,7 +90,7 @@ gles30::gles30(int w, int h) {
  * @param upy is up vector coordinate
  * @param upz is up vector coordinate
  */
-void gles30::lookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
+void gles20::lookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
                      GLfloat centerx, GLfloat centery, GLfloat centerz,
                      GLfloat upx, GLfloat upy, GLfloat upz) {
 
@@ -110,7 +110,7 @@ void gles30::lookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
  * @param zNear is near cutting plate
  * @param zFar is far cutting plane
  */
-void gles30::perspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zFar) {
+void gles20::perspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zFar) {
     if(!matrixBuffer.empty()) {
         matrixBuffer.pop();
     }
@@ -123,7 +123,7 @@ void gles30::perspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zF
  * @brief multMatrix multiplies with matrix
  * @param matrix is 4x4 matrix in OpenGL format
  */
-void gles30::multMatrix(float* matrix) {
+void gles20::multMatrix(float* matrix) {
   matrix_result *= glm::mat4x4(
       matrix[0], matrix[1], matrix[2], matrix[3],
       matrix[4], matrix[5], matrix[6], matrix[7],
@@ -135,7 +135,7 @@ void gles30::multMatrix(float* matrix) {
 /**
  * @brief popMatrix pops matrix from stack
  */
-void gles30::popMatrix() {
+void gles20::popMatrix() {
   /// popping matrix from stack
   matrix_result = (glm::mat4x4)matrixBuffer.top();
   matrixBuffer.pop();
@@ -144,7 +144,7 @@ void gles30::popMatrix() {
 /**
  * @brief pushMatrix pushs current matrix to stack
  */
-void gles30::pushMatrix() {
+void gles20::pushMatrix() {
   /// push matrix m to stack
   matrixBuffer.push(matrix_result);
 }
@@ -153,7 +153,7 @@ void gles30::pushMatrix() {
  * @brief rotateX rotate around X axis
  * @param value is angle
  */
-void gles30::rotateX(float value) {
+void gles20::rotateX(float value) {
   float radian = value * M_PI / 180;
   /// rotation matrix for 2D transformations (around Z axis)
   glm::mat4x4 rotation(
@@ -170,7 +170,7 @@ void gles30::rotateX(float value) {
  * @brief rotateX rotate around Y axis
  * @param value is angle
  */
-void gles30::rotateY(float value) {
+void gles20::rotateY(float value) {
   float radian = value * M_PI / 180;
   /// rotation matrix for 2D transformations (around Z axis)
   glm::mat4x4 rotation(
@@ -187,7 +187,7 @@ void gles30::rotateY(float value) {
  * @brief rotateX rotate around Z axis
  * @param value is angle
  */
-void gles30::rotateZ(float value) {
+void gles20::rotateZ(float value) {
   float radian = value * M_PI / 180;
   /// rotation matrix for 2D transformations (around Z axis)
   glm::mat4x4 rotation(
@@ -204,7 +204,7 @@ void gles30::rotateZ(float value) {
  * @brief scale scales current matrix
  * @param value is amount of scale(1 to keep current)
  */
-void gles30::scale(float value) {
+void gles20::scale(float value) {
   /// scale matrix
   glm::mat4x4 scale(
       value,0,0,0,
@@ -222,7 +222,7 @@ void gles30::scale(float value) {
  * @param y is translate coordinate
  * @param z is translate coordinate
  */
-void gles30::translate(float x, float y, float z) {
+void gles20::translate(float x, float y, float z) {
   /// transformation matrix
   glm::mat4x4 translation(
       1,0,0,0,
@@ -242,7 +242,7 @@ void gles30::translate(float x, float y, float z) {
  * @param txt is texture to use
  * @param triangleCount is triangle count
  */
-void gles30::renderDynamic(GLfloat *vertices, GLfloat *coords, shader* sh, texture* txt, int triangleCount) {
+void gles20::renderDynamic(GLfloat *vertices, GLfloat *coords, shader* sh, texture* txt, int triangleCount) {
 
     /// set OpenGL state
     glEnable(GL_BLEND);
@@ -272,7 +272,9 @@ void gles30::renderDynamic(GLfloat *vertices, GLfloat *coords, shader* sh, textu
  * @param physic is physical model instance
  * @param gamma is requested render gamma
  */
-void gles30::renderModel(model* m) {
+void gles20::renderModel(model* m) {
+
+    float avd = viewDistance / 200.0f;
 
     /// set culling info positions
     xm = (camX - m->aabb.min.x) / culling;
@@ -281,14 +283,14 @@ void gles30::renderModel(model* m) {
     yp = ym;
     for (float view = direction - M_PI * 0.75f; view <= direction + M_PI * 0.75f; view += M_PI * 0.25f)
     {
-        if (xp < (camX - m->aabb.min.x) / culling + sin(view) * 2.5f)
-            xp = (camX - m->aabb.min.x) / culling + sin(view) * 2.5f;
-        if (xm > (camX - m->aabb.min.x) / culling + sin(view) * 2.5f)
-            xm = (camX - m->aabb.min.x) / culling + sin(view) * 2.5f;
-        if (yp < (camZ - m->aabb.min.z) / culling + cos(view) * 2.5f)
-            yp = (camZ - m->aabb.min.z) / culling + cos(view) * 2.5f;
-        if (ym > (camZ - m->aabb.min.z) / culling + cos(view) * 2.5f)
-            ym = (camZ - m->aabb.min.z) / culling + cos(view) * 2.5f;
+        if (xp < (camX - m->aabb.min.x) / culling + sin(view) * avd)
+            xp = (camX - m->aabb.min.x) / culling + sin(view) * avd;
+        if (xm > (camX - m->aabb.min.x) / culling + sin(view) * avd)
+            xm = (camX - m->aabb.min.x) / culling + sin(view) * avd;
+        if (yp < (camZ - m->aabb.min.z) / culling + cos(view) * avd)
+            yp = (camZ - m->aabb.min.z) / culling + cos(view) * avd;
+        if (ym > (camZ - m->aabb.min.z) / culling + cos(view) * avd)
+            ym = (camZ - m->aabb.min.z) / culling + cos(view) * avd;
     }
     if (xm < 0)
         xm = 0;
@@ -334,7 +336,7 @@ void gles30::renderModel(model* m) {
  * @brief renderShadow renders shadow of model into scene
  * @param m is instance of model to render
  */
-void gles30::renderShadow(model* m) {
+void gles20::renderShadow(model* m) {
 
     if (!rtt_fbo[oddFrame]->complete)
         return;
@@ -380,7 +382,7 @@ void gles30::renderShadow(model* m) {
  * @brief renderSubModel renders model into scene
  * @param m is instance of model to render
  */
-void gles30::renderSubModel(model* mod, model3d *m) {
+void gles20::renderSubModel(model* mod, model3d *m) {
 
     /// set model matrix
     glm::mat4x4 modelView;
@@ -484,7 +486,7 @@ void gles30::renderSubModel(model* mod, model3d *m) {
     current->unbind();
 }
 
-void gles30::shadowMode(bool enable) {
+void gles20::shadowMode(bool enable) {
   if (!rtt_fbo[oddFrame]->complete)
       return;
 
@@ -506,7 +508,7 @@ void gles30::shadowMode(bool enable) {
   }
 }
 
-void gles30::rtt(bool enable) {
+void gles20::rtt(bool enable) {
     if (enable) {
 #ifndef ANDROID
         /// start timer

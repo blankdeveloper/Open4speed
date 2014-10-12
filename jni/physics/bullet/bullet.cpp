@@ -49,7 +49,7 @@
 // uroven tlumeni
 #define SUSPENSION_DAMPING 0.001
 // delka pruziny
-#define SUSPENSION_REST_LENGTH 0.3
+#define SUSPENSION_REST_LENGTH 0.45
 // tuhost tlumicu
 #define SUSPENSION_STIFFNESS 0.02
 // brzdeni motorem pri nizkych otackach
@@ -226,6 +226,7 @@ void bullet::addCar(car* c) {
 }
 
 void bullet::addHeightmap(unsigned char* data, int res, glm::vec3 min, glm::vec3 max) {
+
     btHeightfieldTerrainShape* shape = new btHeightfieldTerrainShape(res, res, data, 1,
                                                            0, 255, 1, PHY_UCHAR, false);
     shape->setLocalScaling(btVector3((max.x - min.x) / (float)res,
@@ -275,7 +276,7 @@ void bullet::addModel(model *m) {
             body->setRollingFriction(DYNAMIC_ROLLING_FRICTION);
             body->setDamping(DYNAMIC_DAMPING, DYNAMIC_DAMPING);
             body->setGravity(btVector3(0, -GRAVITATION * DYNAMIC_GRAVITATION, 0));
-            body->setActivationState(WANTS_DEACTIVATION);
+            body->setActivationState(ISLAND_SLEEPING);
             m->models[i].dynamicID = bodies.size();
 
             /// set default position
@@ -326,6 +327,7 @@ void bullet::getTransform(int index, float* m) {
 }
 
 void bullet::render() {
+#ifndef ANDROID
     btScalar	m[16];
     btMatrix3x3	rot;rot.setIdentity();
     const int	numObjects=m_dynamicsWorld->getNumCollisionObjects();
@@ -343,29 +345,33 @@ void bullet::render() {
             colObj->getWorldTransform().getOpenGLMatrix(m);
             rot=colObj->getWorldTransform().getBasis();
         }
-        btVector3 wireColor(1.f,1.0f,0.5f); //wants deactivation
-        if(i&1) wireColor=btVector3(0.f,0.0f,1.f);
+        btVector3 wireColor(0, 1, 0); //wants deactivation
         ///color differently for active, sleeping, wantsdeactivation states
-        if (colObj->getActivationState() == 1) //active
-        {
-            if (i & 1)
-                wireColor += btVector3 (1.f,0.f,0.f);
-            else
-                wireColor += btVector3 (.5f,0.f,0.f);
-        }
-        if(colObj->getActivationState()==2) //ISLAND_SLEEPING
-        {
-            if(i&1)
-                wireColor += btVector3 (0.f,1.f, 0.f);
-            else
-                wireColor += btVector3 (0.f,0.5f,0.f);
+        switch(colObj->getActivationState()) {
+        case(ACTIVE_TAG):
+            wireColor = btVector3 (1, 0, 0);
+            break;
+        case(ISLAND_SLEEPING):
+            wireColor = btVector3 (0, 0, 1);
+            break;
+        case(WANTS_DEACTIVATION):
+            wireColor = btVector3 (0, 1, 0);
+            break;
+        case(DISABLE_DEACTIVATION):
+            wireColor = btVector3 (1, 1, 0);
+            break;
+        case(DISABLE_SIMULATION):
+            wireColor = btVector3 (0.5f, 0.5f, 0.5f);
+            break;
         }
 
         btVector3 aabbMin(0,0,0),aabbMax(0,0,0);
         aabbMin-=btVector3(BT_LARGE_FLOAT,BT_LARGE_FLOAT,BT_LARGE_FLOAT);
         aabbMax+=btVector3(BT_LARGE_FLOAT,BT_LARGE_FLOAT,BT_LARGE_FLOAT);
         m_shapeDrawer->drawOpenGL(m,colObj->getCollisionShape(),wireColor,0,aabbMin,aabbMax);
+        m_shapeDrawer->drawOpenGL(m,colObj->getCollisionShape(),wireColor,1,aabbMin,aabbMax);
     }
+#endif
 }
 
 /**

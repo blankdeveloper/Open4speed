@@ -168,7 +168,7 @@ void display(void) {
         float effect = fabs(allCar[i]->speed) * fabs(allCar[i]->speed * (g + allCar[i]->control->getBrake() * 5.0)) * 0.001f;
         effect = fmax(effect, effect * 0.05 + allCar[i]->prevEffect * 0.95);
         allCar[i]->prevEffect = effect;
-        for (int j = 1; j <= 4; j++) {
+        for (int j = 1; j <= 2; j++) {
             if (active) {
                 for (int k = 0; k < fmin(effect - 5, 5); k++) {
                     float x = allCar[i]->transform[j].value[12] + (rand() % 50 - 25) * 0.03f + sin(allCar[i]->rot * 3.14 / 180) * k * 0.03f;
@@ -308,9 +308,9 @@ void loadScene(std::string filename) {
         physic->addCar(allCar[i]);
 
     /// heightmap experiment
-    /*glm::vec3 min = glm::vec3(-500,0,-500);
+    glm::vec3 min = glm::vec3(-500,0,-500);
     glm::vec3 max = glm::vec3(500,128,500);
-    Texture t = loadPNG(prefix("tracks/heightmap.png"));
+    /*Texture t = loadPNG(prefix("tracks/heightmap.png"));
     unsigned char data[t.width * t.height];
     int index = 0;
     for (int i = 0; i < t.width * t.height; i++) {

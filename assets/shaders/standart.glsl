@@ -1,6 +1,5 @@
 VERT
 uniform mat4 u_Matrix;
-uniform mat4 u_ModelViewMatrix;
 attribute vec3 v_vertex;
 attribute vec3 v_normal;
 attribute vec2 v_coord;

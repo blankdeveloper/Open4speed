@@ -218,13 +218,11 @@ public:
 		if (m_wireframe)
 		{
 			glBegin(GL_LINES);
-			glColor3f(1, 0, 0);
+            glColor3f(0, 0, 0);
 			glVertex3d(triangle[0].getX(), triangle[0].getY(), triangle[0].getZ());
 			glVertex3d(triangle[1].getX(), triangle[1].getY(), triangle[1].getZ());
-			glColor3f(0, 1, 0);
 			glVertex3d(triangle[2].getX(), triangle[2].getY(), triangle[2].getZ());
 			glVertex3d(triangle[1].getX(), triangle[1].getY(), triangle[1].getZ());
-			glColor3f(0, 0, 1);
 			glVertex3d(triangle[2].getX(), triangle[2].getY(), triangle[2].getZ());
 			glVertex3d(triangle[0].getX(), triangle[0].getY(), triangle[0].getZ());
 			glEnd();
@@ -256,13 +254,11 @@ public:
 
 
 		glBegin(GL_TRIANGLES);//LINES);
-		glColor3f(1, 0, 0);
+        glColor3f(0, 0, 0);
 		glVertex3d(triangle[0].getX(), triangle[0].getY(), triangle[0].getZ());
 		glVertex3d(triangle[1].getX(), triangle[1].getY(), triangle[1].getZ());
-		glColor3f(0, 1, 0);
 		glVertex3d(triangle[2].getX(), triangle[2].getY(), triangle[2].getZ());
 		glVertex3d(triangle[1].getX(), triangle[1].getY(), triangle[1].getZ());
-		glColor3f(0, 0, 1);
 		glVertex3d(triangle[2].getX(), triangle[2].getY(), triangle[2].getZ());
 		glVertex3d(triangle[0].getX(), triangle[0].getY(), triangle[0].getZ());
 		glEnd();

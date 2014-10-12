@@ -1,29 +1,26 @@
 VERT
 uniform mat4 u_Matrix;
+uniform vec4 u_sun_dir;
 attribute vec3 v_vertex;
-attribute vec3 v_normal;
 attribute vec2 v_coord;
 varying vec2 v_Coords;
-varying vec3 v_Vertex;
+varying float v_Intensity;
 void main()
 {
     v_Coords = v_coord;
     gl_Position = u_Matrix * vec4(v_vertex, 1.0);
-    v_Vertex = v_vertex;
+    v_Intensity = dot(-v_vertex, u_sun_dir.xyz) * 0.5;
 }
 END
 
 FRAG
 uniform sampler2D color_texture;
-uniform sampler2D EnvMap1;
-uniform float u_res, u_speed;
-uniform vec4 u_sun_dir;
 varying vec2 v_Coords;
-varying vec3 v_Vertex;
+varying float v_Intensity;
 
 void main()
 {
   gl_FragColor = texture2D(color_texture, v_Coords);
-  gl_FragColor.rgb += dot(-v_Vertex, u_sun_dir.xyz) * 0.5;
+  gl_FragColor.rgb += v_Intensity;
 }
 END

@@ -2,6 +2,7 @@
 # Project created by QtCreator 2011-11-11T16:55:36
 # -------------------------------------------------
 LIBS += -lGL \
+    -lGLU \
     -lglut \
     -lpng \
     -lzip \
@@ -14,7 +15,7 @@ CONFIG -= app_bundle
 TEMPLATE = app
 SOURCES += \
     input/keyboard.cpp \
-    physics/bullet.cpp \
+    physics/bullet/bullet.cpp \
     input/airacer.cpp \
     open4speed.cpp \
     loaders/rgb.cpp \
@@ -30,12 +31,14 @@ SOURCES += \
     interfaces/model.cpp \
     renderers/opengl/gltexture.cpp \
     renderers/opengl/glfbo.cpp \
-    renderers/opengl/glvbo.cpp
+    renderers/opengl/glvbo.cpp \
+    physics/bullet/GL_ShapeDrawer.cpp \
+    physics/bullet/GLDebugFont.cpp
 HEADERS += \
     input/keyboard.h \
     interfaces/input.h \
     interfaces/physics.h \
-    physics/bullet.h \
+    physics/bullet/bullet.h \
     input/airacer.h \
     interfaces/renderer.h \
     interfaces/texture.h \
@@ -55,5 +58,8 @@ HEADERS += \
     renderers/opengl/glfbo.h \
     interfaces/fbo.h \
     interfaces/vbo.h \
-    renderers/opengl/glvbo.h
+    renderers/opengl/glvbo.h \
+    physics/bullet/GL_ShapeDrawer.h \
+    physics/bullet/GLDebugFont.h \
+    physics/bullet/GlutStuff.h
 INCLUDEPATH += /usr/include/bullet

@@ -55,7 +55,7 @@ LOCAL_SRC_FILES := \
 open4speed.cpp \
 car.cpp \
 common.cpp \
-physics/bullet.cpp \
+physics/bullet/bullet.cpp \
 input/keyboard.cpp \
 input/airacer.cpp \
 interfaces/model.cpp \

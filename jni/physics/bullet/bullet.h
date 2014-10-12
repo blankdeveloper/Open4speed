@@ -15,6 +15,7 @@
 #include <btBulletDynamicsCommon.h>
 #include "interfaces/model.h"
 #include "interfaces/physics.h"
+#include "physics/bullet/GL_ShapeDrawer.h"
 
 /**
  * @brief The bullet physics implementation class
@@ -31,7 +32,7 @@ public:
     btBroadphaseInterface* m_overlappingPairCache;
     btConstraintSolver* m_constraintSolver;
     btVehicleRaycaster* m_vehicleRayCaster;
-
+    GL_ShapeDrawer* m_shapeDrawer;
 
     /**
      * Geometry objects
@@ -59,6 +60,8 @@ public:
      */
     void addCar(car* c);
 
+    void addHeightmap(unsigned char* data, int res, glm::vec3 min, glm::vec3 max);
+
     /**
      * @brief addModel adds model into physical model
      * @param m is 3D model for physical model
@@ -71,6 +74,8 @@ public:
      * @return transformation matrix
      */
     void getTransform(int index, float* m);
+
+    void render();
 
     /**
      * @brief resetCar updates car state

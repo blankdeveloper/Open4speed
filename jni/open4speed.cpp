@@ -13,10 +13,15 @@
 #include <stdlib.h>
 #include "input/airacer.h"
 #include "input/keyboard.h"
+#include "loaders/pngloader.h"
 #include "utils/io.h"
 #include "utils/math.h"
 #include "utils/switch.h"
 #include "common.h"
+
+#ifndef ANDROID
+//#define RENDER_PHYSICS
+#endif
 
 /**
  * @brief display updates display
@@ -48,8 +53,25 @@ void display(void) {
     rot = rot % 360000;
     allCar[cameraCar]->rot = rot / 1000.0f;
 
+#ifdef RENDER_PHYSICS
+
     /// set camera
+    float view = allCar[cameraCar]->getView();
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(view, aspect, 0.5, viewDistance);
+    float cameraX = allCar[cameraCar]->transform->value[12] - sin(direction) * allCar[cameraCar]->control->getDistance() * 2 / (view / 90);
+    float cameraY = allCar[cameraCar]->transform->value[13] + fabs(allCar[cameraCar]->control->getDistance() * 1.25f / (view / 90));
+    float cameraZ = allCar[cameraCar]->transform->value[14] - cos(direction) * allCar[cameraCar]->control->getDistance() * 2 / (view / 90);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    gluLookAt(cameraX,cameraY,cameraZ,cameraX + sin(direction),cameraY + sin(-20 * 3.14 / 180), cameraZ + cos(direction),0,1,0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    physic->render();
+#else
     xrenderer->rtt(true);
+
+    /// set camera
     float view = allCar[cameraCar]->getView();
     xrenderer->perspective(view, aspect, 0.5, viewDistance);
     xrenderer->pushMatrix();
@@ -178,6 +200,7 @@ void display(void) {
     if (currentFrame >= effLen) {
         currentFrame = 0;
     }
+#endif
 
 #ifndef ANDROID
     /// check if there is an error
@@ -283,6 +306,20 @@ void loadScene(std::string filename) {
     physic = getPhysics(trackdata);
     for (int i = 0; i <= opponentCount; i++)
         physic->addCar(allCar[i]);
+
+    /// heightmap experiment
+    /*glm::vec3 min = glm::vec3(-500,0,-500);
+    glm::vec3 max = glm::vec3(500,128,500);
+    Texture t = loadPNG(prefix("tracks/heightmap.png"));
+    unsigned char data[t.width * t.height];
+    int index = 0;
+    for (int i = 0; i < t.width * t.height; i++) {
+        data[i] = t.data[index];
+        index += 3;
+    }
+    delete[] t.data;
+    physic->addHeightmap(data, t.width, min, max);*/
+
     physic->locked = false;
 }
 
@@ -403,7 +440,9 @@ void reshape (int w, int h) {
    aspect = (float) w/(float) h;
    if (xrenderer != 0)
        delete xrenderer;
+#ifndef RENDER_PHYSICS
    xrenderer = getRenderer(w, h);
+#endif
 }
 
 /**
@@ -429,7 +468,11 @@ int main(int argc, char** argv) {
 
     /// set screen mode
     glutInitWindowSize(960,640);
+#ifdef RENDER_PHYSICS
+    glutInitContextVersion(2,0);
+#else
     glutInitContextVersion(3,0);
+#endif
     glutInitContextProfile(GLUT_CORE_PROFILE);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
     glutCreateWindow("Open4speed");

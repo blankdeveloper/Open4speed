@@ -8,7 +8,8 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "physics/bullet.h"
+#include <BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h>
+#include "physics/bullet/bullet.h"
 #include "utils/io.h"
 #include "utils/math.h"
 #include "common.h"
@@ -97,6 +98,9 @@ bullet::~bullet() {
     delete m_dispatcher;
     delete m_overlappingPairCache;
     delete m_constraintSolver;
+#ifndef ANDROID
+    delete m_shapeDrawer;
+#endif
 }
 
 /**
@@ -116,6 +120,35 @@ bullet::bullet(model *m) {
     m_dynamicsWorld = new btDiscreteDynamicsWorld(m_dispatcher,m_overlappingPairCache,m_constraintSolver,m_collisionConfiguration);
     m_dynamicsWorld->setGravity(btVector3(0,-GRAVITATION,0));
     m_vehicleRayCaster = new btDefaultVehicleRaycaster(m_dynamicsWorld);
+
+#ifndef ANDROID
+    /// set bullet debugging renderer
+    m_shapeDrawer = new GL_ShapeDrawer();
+    m_shapeDrawer->enableTexture(true);
+
+    GLfloat light_ambient[] = { btScalar(0.2), btScalar(0.2), btScalar(0.2), btScalar(1.0) };
+    GLfloat light_diffuse[] = { btScalar(1.0), btScalar(1.0), btScalar(1.0), btScalar(1.0) };
+    GLfloat light_specular[] = { btScalar(1.0), btScalar(1.0), btScalar(1.0), btScalar(1.0 )};
+    GLfloat light_position0[] = { btScalar(1.0), btScalar(10.0), btScalar(1.0), btScalar(0.0 )};
+    GLfloat light_position1[] = { btScalar(-1.0), btScalar(-10.0), btScalar(-1.0), btScalar(0.0) };
+
+    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position0);
+    glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
+    glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
+    glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
+
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
+    glShadeModel(GL_SMOOTH);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+    glClearColor(btScalar(0.7),btScalar(0.7),btScalar(0.7),btScalar(0));
+#endif
 
     /// Create scene
     addModel(m);
@@ -189,7 +222,24 @@ void bullet::addCar(car* c) {
         wheel.m_wheelsDampingCompression = SUSPENSION_COMPRESSION;
         wheel.m_frictionSlip = WHEEL_FRICTION;
         wheel.m_rollInfluence = ROLL_INFLUENCE;
-    }}
+    }
+}
+
+void bullet::addHeightmap(unsigned char* data, int res, glm::vec3 min, glm::vec3 max) {
+    btHeightfieldTerrainShape* shape = new btHeightfieldTerrainShape(res, res, data, 1,
+                                                           0, 255, 1, PHY_UCHAR, false);
+    shape->setLocalScaling(btVector3((max.x - min.x) / (float)res,
+                                     (max.y - min.y) / 255.0f,
+                                     (max.z - min.z) / (float)res));
+    shapes.push_back(shape);
+    btRigidBody* body = new btRigidBody(0,0,shape);
+    body->translate(btVector3((max.x + min.x) / 2.0f,
+                              (max.y + min.y) / 2.0f,
+                              (max.z + min.z) / 2.0f));
+    body->setActivationState(DISABLE_SIMULATION);
+    bodies2.push_back(body);
+    m_dynamicsWorld->addCollisionObject(body);
+}
 
 /**
  * @brief addModel adds model into physical model
@@ -272,6 +322,49 @@ void bullet::getTransform(int index, float* m) {
                 m[j] = (j % 5 == 0) ? 1 : 0;
             return;
         }
+    }
+}
+
+void bullet::render() {
+    btScalar	m[16];
+    btMatrix3x3	rot;rot.setIdentity();
+    const int	numObjects=m_dynamicsWorld->getNumCollisionObjects();
+    btVector3 wireColor(1,0,0);
+    for(int i=0;i<numObjects;i++) {
+        btCollisionObject*	colObj=m_dynamicsWorld->getCollisionObjectArray()[i];
+        btRigidBody*		body=btRigidBody::upcast(colObj);
+        if(body&&body->getMotionState()) {
+            btDefaultMotionState* myMotionState = (btDefaultMotionState*)body->getMotionState();
+            myMotionState->m_graphicsWorldTrans.getOpenGLMatrix(m);
+            rot=myMotionState->m_graphicsWorldTrans.getBasis();
+        }
+        else
+        {
+            colObj->getWorldTransform().getOpenGLMatrix(m);
+            rot=colObj->getWorldTransform().getBasis();
+        }
+        btVector3 wireColor(1.f,1.0f,0.5f); //wants deactivation
+        if(i&1) wireColor=btVector3(0.f,0.0f,1.f);
+        ///color differently for active, sleeping, wantsdeactivation states
+        if (colObj->getActivationState() == 1) //active
+        {
+            if (i & 1)
+                wireColor += btVector3 (1.f,0.f,0.f);
+            else
+                wireColor += btVector3 (.5f,0.f,0.f);
+        }
+        if(colObj->getActivationState()==2) //ISLAND_SLEEPING
+        {
+            if(i&1)
+                wireColor += btVector3 (0.f,1.f, 0.f);
+            else
+                wireColor += btVector3 (0.f,0.5f,0.f);
+        }
+
+        btVector3 aabbMin(0,0,0),aabbMax(0,0,0);
+        aabbMin-=btVector3(BT_LARGE_FLOAT,BT_LARGE_FLOAT,BT_LARGE_FLOAT);
+        aabbMax+=btVector3(BT_LARGE_FLOAT,BT_LARGE_FLOAT,BT_LARGE_FLOAT);
+        m_shapeDrawer->drawOpenGL(m,colObj->getCollisionShape(),wireColor,0,aabbMin,aabbMax);
     }
 }
 

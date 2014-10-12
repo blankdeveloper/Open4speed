@@ -12,7 +12,7 @@
 #include "loaders/modelo4s.h"
 #include "loaders/pngloader.h"
 #include "loaders/rgb.h"
-#include "physics/bullet.h"
+#include "physics/bullet/bullet.h"
 #include "renderers/opengl/gles20.h"
 #include "renderers/opengl/glsl.h"
 #include "renderers/opengl/gltexture.h"

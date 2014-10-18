@@ -500,6 +500,7 @@ void gles20::shadowMode(bool enable) {
       glEnable(GL_STENCIL_TEST);
       glStencilMask(true);
       glClearStencil(1);
+      glClear(GL_STENCIL_BUFFER_BIT);
   } else {
       glBlendEquation(GL_FUNC_ADD);
       glDisable(GL_STENCIL_TEST);

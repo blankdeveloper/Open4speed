@@ -7,8 +7,10 @@ void main()
 {
     v_Coords = v_coord;
     gl_Position = u_Matrix * vec4(v_vertex, 1.0);
-    gl_Position.xy += 2.0 * (v_Coords.xy * 1.0 - 0.5) * (2.0 - min(gl_Position.z, 2.5));
+    gl_Position.xy += 2.0 * (v_Coords.xy * 1.0 - 0.5) * (2.75 - min(gl_Position.z, 2.5));
     gl_Position.y += 0.25;
+    gl_Position.xy *= (gl_Position.z < 1.0) ? pow(gl_Position.z, 4.0) : 1.0;
+    gl_Position.z -= (gl_Position.z < 0.5) ? 1.0 : 0.0;
 }
 END
 

@@ -32,12 +32,7 @@ public:
      * @param coords is texture coords array
      * @param tnormals is triangle normals array
      */
-    glvbo(int size, float* vertices, float* normals, float* coords, float* tnormals);
-
-    /**
-     * @brief destroy removes all data from memory
-     */
-    void destroy();
+    glvbo(int size, float* vertices, float* normals, float* coords, float* tnormals, bool dynamic);
 
     /**
      * @brief render renders vbo
@@ -46,6 +41,16 @@ public:
      * @param len is length of data to renderer
      */
     void render(shader* sh, int begin, int len);
+
+    /**
+     * @brief update updates VBO data
+     * @param size is amount of vertices
+     * @param vertices is vertices array
+     * @param normals is normals array
+     * @param coords is texture coords array
+     * @param tnormals is triangle normals array
+     */
+    void update(int size, float* vertices, float* normals, float* coords, float* tnormals);
 };
 
 #endif // GLVBO_H

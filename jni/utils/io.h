@@ -11,7 +11,6 @@
 #define IO_H
 
 #include <cstring>
-#include <stdio.h>
 #include <string>
 #include <vector>
 #include "common.h"

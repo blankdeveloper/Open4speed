@@ -11,7 +11,23 @@
 #define MATH_H
 
 #include <glm/glm.hpp>
-#include "interfaces/model.h"
+#include <vector>
+
+/**
+ * @brief The edge struct
+ */
+struct edge {
+    glm::vec3 a; ///< Point coordinates
+    glm::vec3 b; ///< Point coordinates
+};
+
+/**
+ * @brief AABB struct
+ */
+struct AABB {
+    glm::vec3 min; ///< Region extreme
+    glm::vec3 max; ///< Region extreme
+};
 
 /**
  * @brief angle counts angle of line between two points given by coordinates

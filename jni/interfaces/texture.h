@@ -37,6 +37,8 @@ public:
     unsigned int currentMultiFrame; ///< Replying frames state
     unsigned int multiFrame;        ///< Replying frames amount
 
+    virtual ~texture() {}
+
     /**
      * @brief apply applies current texture
      */

@@ -81,6 +81,6 @@ texture* getTexture(float r, float g, float b, float alpha);
  * @param coords is texture coords array
  * @param tnormals is triangle normals array
  */
-vbo* getVBO(int size, float* vertices, float* normals, float* coords, float* tnormals);
+vbo* getVBO(int size, float* vertices, float* normals, float* coords, float* tnormals, bool dynamic);
 
 #endif // SWITCH_H

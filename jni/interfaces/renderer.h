@@ -46,6 +46,8 @@ public:
     int screen_width;           ///< Screen width
     int screen_height;          ///< Screen height
 
+    virtual ~renderer() {}
+
     /**
      * @brief lookAt implements GLUlookAt
      * @param eyex is eye vector coordinate
@@ -121,13 +123,12 @@ public:
 
     /**
      * @brief renderDynamic render dynamic objects
-     * @param vertices is vertices
-     * @param coords is texture coords
+     * @param geom is geometry vbo
      * @param sh is shader to use
      * @param txt is texture to use
      * @param triangleCount is triangle count
      */
-    virtual void renderDynamic(float *vertices, float *coords, shader* sh, texture* txt, int triangleCount) = 0;
+    virtual void renderDynamic(vbo *geom, shader* sh, texture* txt, int triangleCount) = 0;
 
     /**
      * @brief renderModel renders model into scene

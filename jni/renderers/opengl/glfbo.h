@@ -11,15 +11,15 @@
 #ifndef GLFBO_H
 #define GLFBO_H
 
-#include "renderers/opengl/gles20.h"
+#include "interfaces/fbo.h"
 #include "renderers/opengl/glvbo.h"
 
 class glfbo : public fbo
 {
 public:
-    GLuint* rendertexture;        ///< Texture for color buffer
-    GLuint* fboID;                ///< Frame buffer object id
-    GLuint* rboID;                ///< Render buffer object id
+    unsigned int* rendertexture;  ///< Texture for color buffer
+    unsigned int* fboID;          ///< Frame buffer object id
+    unsigned int* rboID;          ///< Render buffer object id
     glvbo* rect;                  ///< VBO for rendering to screen
 
     /**

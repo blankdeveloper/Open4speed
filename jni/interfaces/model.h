@@ -11,26 +11,10 @@
 #define MODEL_H
 
 #include <glm/glm.hpp>
-#include "interfaces/fbo.h"
 #include "interfaces/shader.h"
 #include "interfaces/texture.h"
 #include "interfaces/vbo.h"
-
-/**
- * @brief The edge struct
- */
-struct edge {
-    glm::vec3 a; ///< Point coordinates
-    glm::vec3 b; ///< Point coordinates
-};
-
-/**
- * @brief AABB struct
- */
-struct AABB {
-    glm::vec3 min; ///< Region extreme
-    glm::vec3 max; ///< Region extreme
-};
+#include "utils/math.h"
 
 /**
  * @brief The model3d struct

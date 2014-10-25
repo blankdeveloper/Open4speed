@@ -9,10 +9,8 @@
 //----------------------------------------------------------------------------------------
 
 #include "utils/io.h"
-#include "utils/math.h"
 #include "utils/switch.h"
 #include "car.h"
-#include "common.h"
 
 #define PERSPECTIVE_MIN 90
 #define PERSPECTIVE_MAX 150

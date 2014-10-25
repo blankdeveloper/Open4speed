@@ -17,6 +17,9 @@
 gltexture::~gltexture() {
     if (!animated)
         glDeleteTextures(1, &textureID);
+    else
+        for (int i = anim.size() - 1; i >= 0; i--)
+            delete anim[i];
 }
 
 /**

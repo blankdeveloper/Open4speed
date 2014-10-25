@@ -8,7 +8,7 @@
 //----------------------------------------------------------------------------------------
 
 #include "input/keyboard.h"
-#include "common.h"
+#include "renderers/opengl/gles20.h"
 
 #define CAMERA_DISTANCE_DEFAULT 2.3
 #define CAMERA_STEP 0.3

@@ -7,24 +7,13 @@
 */
 //----------------------------------------------------------------------------------------
 
-#include "utils/io.h"
 #include "common.h"
 
-/**
- * The scene
- */
-float aspect;                   ///< Screen aspect
 bool active;                    ///< Information if scene is active
-int opponentCount;              ///< Opponent count
-model *skydome;                 ///< Skydome model
-model *trackdata;               ///< Track first model
 std::vector<car*> allCar;       ///< All cars in scene instances
-unsigned int cameraCar = 0;     ///< Car camera index
+int cameraCar = 0;              ///< Car camera index
 float direction = 0;            ///< Camera direction
 physics *physic;                ///< Physical engine instance
-renderer *xrenderer = 0;        ///< Renderer instance
 zip* APKArchive;                ///< Access to APK archive
 int currentFrame = 0;           ///< Frame index
-Dynamic eff[effLen];            ///< 3D water effect object
-model* water;                   ///< Water effect model
 float viewDistance = 500;

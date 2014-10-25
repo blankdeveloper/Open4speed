@@ -7,10 +7,11 @@
 */
 //----------------------------------------------------------------------------------------
 
+#include <stdint.h>
 #include "renderers/opengl/glsl.h"
 #include "utils/io.h"
 
-std::string header = "#version 100\nprecision mediump float;\n";      ///< Shader header
+const std::string header = "#version 100\nprecision mediump float;\n";      ///< Shader header
 
 glsl::~glsl() {
     glDetachShader(id, shader_vp);
@@ -65,21 +66,21 @@ glsl::glsl(std::vector<std::string> vert, std::vector<std::string> frag) {
  * @brief it sets pointer to geometry
  * @param size is amount of data
  */
-void glsl::attrib(int size) {
+void glsl::attrib(unsigned int size) {
 
     /// apply attributes
-    glVertexAttribPointer(attribute_v_vertex, 3, GL_FLOAT, GL_FALSE, 0, ( const GLvoid *) 0);
-    int len = 3;
+    glVertexAttribPointer(attribute_v_vertex, 3, GL_FLOAT, GL_FALSE, 0, ( const void *) 0);
+    unsigned int len = 3;
     if (attribute_v_normal != -1) {
-        glVertexAttribPointer(attribute_v_normal, 3, GL_FLOAT, GL_FALSE, 0, ( const GLvoid *) (size * len));
+        glVertexAttribPointer(attribute_v_normal, 3, GL_FLOAT, GL_FALSE, 0, ( const void *) (intptr_t)(size * len));
         len += 3;
     }
     if (attribute_v_coord != -1) {
-        glVertexAttribPointer(attribute_v_coord, 2, GL_FLOAT, GL_FALSE, 0, ( const GLvoid *) (size * len));
+        glVertexAttribPointer(attribute_v_coord, 2, GL_FLOAT, GL_FALSE, 0, ( const void *) (intptr_t)(size * len));
         len += 2;
     }
     if (attribute_v_tnormal != -1) {
-        glVertexAttribPointer(attribute_v_tnormal, 3, GL_FLOAT, GL_TRUE, 0, ( const GLvoid *) (size * len));
+        glVertexAttribPointer(attribute_v_tnormal, 3, GL_FLOAT, GL_TRUE, 0, ( const void *) (intptr_t)(size * len));
         len += 3;
     }
 }

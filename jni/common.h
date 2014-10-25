@@ -15,38 +15,17 @@
 #include <jni.h>
 #endif
 #include <zip.h>
-#include "interfaces/model.h"
 #include "interfaces/physics.h"
-#include "interfaces/renderer.h"
-#include "interfaces/shader.h"
-#include "interfaces/texture.h"
 #include "car.h"
 
-struct Dynamic {
-    float* vertices;
-    float* coords;
-    int count;
-    int frame;
-};
+#define ALIASING 0.5
 
-const int effLen = 6;                  ///< Length of water effect
-
-/**
- * The scene
- */
-extern float aspect;                   ///< Screen aspect
 extern bool active;                    ///< Information if scene is active
-extern int opponentCount;              ///< Opponent count
-extern model *skydome;                 ///< Skydome model
-extern model *trackdata;               ///< Track first model
 extern std::vector<car*> allCar;       ///< All cars in scene instances
-extern unsigned int cameraCar;         ///< Car camera index
+extern int cameraCar;                  ///< Car camera index
 extern float direction;                ///< Camera direction
 extern physics *physic;                ///< Physical engine instance
-extern renderer *xrenderer;            ///< Renderer instance
 extern zip* APKArchive;                ///< Access to APK archive
 extern int currentFrame;               ///< Frame index
-extern Dynamic eff[];                  ///< 3D water effect object
-extern model* water;                   ///< Water effect model
 extern float viewDistance;
 #endif // COMMON_H

@@ -10,12 +10,10 @@
 #ifdef ANDROID
 #include <jni.h>
 #endif
-#include <cstdlib>
 #include <string.h>
+#include "renderers/opengl/gles20.h"
 #include "renderers/opengl/glfbo.h"
 #include "utils/io.h"
-#include "utils/math.h"
-#include "common.h"
 
 #ifdef ANDROID
 #define PACKED_EXTENSION "GL_OES_packed_depth_stencil"
@@ -24,8 +22,6 @@
 #define PACKED_EXTENSION "GL_EXT_packed_depth_stencil"
 #define PACKED_EXT GL_DEPTH24_STENCIL8_EXT
 #endif
-
-#define ALIASING 1.0
 
 /**
  * @brief removes all data from memory
@@ -131,7 +127,7 @@ glfbo::glfbo(int width, int height) {
     };
 
     /// create vertex buffer
-    rect = new glvbo(6, vertices, 0, coords, 0);
+    rect = new glvbo(6, vertices, 0, coords, 0, false);
 }
 
 /**

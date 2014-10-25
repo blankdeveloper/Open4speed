@@ -21,6 +21,8 @@ public:
     unsigned int height;               ///< Image height
     bool complete;                     ///< Information if fbo is complete
 
+    virtual ~fbo() {}
+
     /**
      * @brief bindFBO binds FBO
      */

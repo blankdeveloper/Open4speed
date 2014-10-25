@@ -10,61 +10,33 @@
 
 #include <BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h>
 #include "physics/bullet/bullet.h"
-#include "utils/io.h"
-#include "utils/math.h"
+#include "renderers/opengl/gles20.h"
 #include "common.h"
 
-//TODO Translate comments into english
-
-// pomer brzdeni
 #define BRAKE_ASPECT 1
-// drzeni polohy dynamickych teles
 #define DYNAMIC_DAMPING 10
-// treni dynamickych teles
 #define DYNAMIC_FRICTION 500
-// nasobek gravita pro dynamicka telesa
 #define DYNAMIC_GRAVITATION 10
-// toceni dynamickych teles (mensi cislo je vetsi roztoceni)
 #define DYNAMIC_ROLLING_FRICTION 0
-// maximalni rychlost kterou engine zpracuje(pouziva se k vypoctu promenlive akcelerace)
 #define ENGINE_MAX_SPEED 300
-// pomer akcelerace
 #define GAS_ASPECT 0.00005
-// gravitace
 #define GRAVITATION 10
-// brzdeni pri pretoceni
 #define OVERSPEED_BRAKING 0.2
-// prevraceni auta pri odstredivej sile
 #define ROLL_INFLUENCE 0.001
-// treni karoserie
 #define SKIN_FRICTION 5
-// zpomalovani pri neutralu
 #define SPEED_DECREASE 50
-// vyvazi urovne zataceni
 #define STEERING_ASPECT 45
-// procento zavislosti urovne zataceni na rychlosti(zhruba desetina predchozi hodnoty)
 #define STEERING_SPEED_DEPENDENCY 2.5
-// stlaceni tlumicu
 #define SUSPENSION_COMPRESSION 0.001
-// uroven tlumeni
 #define SUSPENSION_DAMPING 0.001
-// delka pruziny
 #define SUSPENSION_REST_LENGTH 0.45
-// tuhost tlumicu
 #define SUSPENSION_STIFFNESS 0.02
-// brzdeni motorem pri nizkych otackach
 #define UNDERSPEED_BRAKING 400
-// pomer vahy vozidla
 #define VEHICLE_MASS_ASPECT 2
-// casovy krok vozidla
 #define VEHICLE_STEP 100
-// treni vozidla(nizka hodna umozni driftovat->UI nezvladne trat)
 #define WHEEL_FRICTION 300
-// maximalni prunik bounding teles
 #define WORLD_LIMIT 50
-// casovy krok sceny
 #define WORLD_STEP 100
-// maximalni pocet mezikroku sceny
 #define WORLD_SUBSTEP 4
 
 /**
@@ -469,10 +441,10 @@ void bullet::updateCar(car* c) {
     m_vehicle[c->index - 1]->updateVehicle(VEHICLE_STEP);
 
     /// Reset car
-    if ((c->speed < 5) && active && !physic->locked) {
+    if ((c->speed < 5) && active && !locked) {
         if (c->onRoof > 60) {
             c->resetAllowed = true;
-            if (c->index - 1 != cameraCar) {
+            if ((int)c->index - 1 != cameraCar) {
                 c->resetRequested = true;
             }
             c->onRoof = 0;

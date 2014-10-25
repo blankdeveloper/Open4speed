@@ -38,7 +38,7 @@ public:
      * @brief it sets pointer to geometry
      * @param size is amount of data
      */
-    void attrib(int size);
+    void attrib(unsigned int size);
 
     /**
      * @brief it sends geometry into GPU

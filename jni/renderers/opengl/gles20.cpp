@@ -10,14 +10,9 @@
 #define GLM_FORCE_RADIANS
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <stack>
-#include "loaders/pngloader.h"
-#include "loaders/rgb.h"
 #include "renderers/opengl/gles20.h"
 #include "renderers/opengl/glfbo.h"
 #include "renderers/opengl/gltexture.h"
-#include "utils/io.h"
-#include "utils/math.h"
 #include "utils/switch.h"
 #include "common.h"
 
@@ -236,13 +231,12 @@ void gles20::translate(float x, float y, float z) {
 
 /**
  * @brief renderDynamic render dynamic objects
- * @param vertices is vertices
- * @param coords is texture coords
+ * @param geom is geometry vbo
  * @param sh is shader to use
  * @param txt is texture to use
  * @param triangleCount is triangle count
  */
-void gles20::renderDynamic(GLfloat *vertices, GLfloat *coords, shader* sh, texture* txt, int triangleCount) {
+void gles20::renderDynamic(vbo *geom, shader* sh, texture* txt, int triangleCount) {
 
     /// set OpenGL state
     glEnable(GL_BLEND);
@@ -257,8 +251,7 @@ void gles20::renderDynamic(GLfloat *vertices, GLfloat *coords, shader* sh, textu
     sh->uniformMatrix("u_Matrix",glm::value_ptr(matrix));
 
     /// render
-    sh->attrib(vertices, coords);
-    glDrawElements(GL_TRIANGLES, triangleCount * 3, GL_UNSIGNED_SHORT, dynindices);
+    geom->render(sh, 0, triangleCount);
 
     /// set previous OpenGL state
     sh->unbind();
@@ -441,8 +434,8 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     current->uniformInt("color_texture", 0);
 
     /// set uniforms
-    current->uniformFloat("u_width", 1 / (float)screen_width);
-    current->uniformFloat("u_height", 1 / (float)screen_height);
+    current->uniformFloat("u_width", 1 / (float)screen_width / ALIASING);
+    current->uniformFloat("u_height", 1 / (float)screen_height / ALIASING);
     current->uniformFloat4("u_kA", m->colora[0], m->colora[1], m->colora[2], 1);
     current->uniformFloat4("u_kD", m->colord[0], m->colord[1], m->colord[2], 1);
     current->uniformFloat4("u_kS", m->colors[0], m->colors[1], m->colors[2], 1);

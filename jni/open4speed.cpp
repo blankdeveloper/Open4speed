@@ -15,13 +15,29 @@
 #include "input/keyboard.h"
 #include "loaders/pngloader.h"
 #include "utils/io.h"
-#include "utils/math.h"
 #include "utils/switch.h"
 #include "common.h"
 
 #ifndef ANDROID
 //#define RENDER_PHYSICS
 #endif
+
+struct Dynamic {
+    float* vertices;
+    float* coords;
+    int count;
+    int frame;
+};
+
+float aspect;                   ///< Screen aspect
+const int effLen = 3;           ///< Length of water effect
+int opponentCount;              ///< Opponent count
+model *skydome;                 ///< Skydome model
+model *trackdata;               ///< Track first model
+model* water;                   ///< Water effect model
+renderer *xrenderer = 0;        ///< Renderer instance
+Dynamic eff[effLen];            ///< 3D water effect object
+vbo* effectVBO[effLen];
 
 /**
  * @brief display updates display
@@ -158,7 +174,7 @@ void display(void) {
     for (int k = 0; k < effLen; k++) {
         if (active || (k != (currentFrame + effLen - 1) % effLen)) {
             water->models[0].texture2D->setFrame(eff[k].frame);
-            xrenderer->renderDynamic(eff[k].vertices, eff[k].coords, water->models[0].material, water->models[0].texture2D, eff[k].count / 3);
+            xrenderer->renderDynamic(effectVBO[k], water->models[0].material, water->models[0].texture2D, eff[k].count / 3);
         }
     }
 
@@ -186,6 +202,7 @@ void display(void) {
             }
         }
     }
+    effectVBO[currentFrame]->update(4095, eff[currentFrame].vertices, 0, eff[currentFrame].coords, 0);
     xrenderer->popMatrix();
 
     // render RTT
@@ -300,6 +317,7 @@ void loadScene(std::string filename) {
         eff[i].vertices = new float[4095 * 3];
         eff[i].coords = new float[4095 * 2];
         eff[i].count = 0;
+        effectVBO[i] = getVBO(4095, eff[i].vertices, 0, eff[i].coords, 0, true);
     }
 
     /// create instance of physical engine
@@ -308,9 +326,9 @@ void loadScene(std::string filename) {
         physic->addCar(allCar[i]);
 
     /// heightmap experiment
-    glm::vec3 min = glm::vec3(-500,0,-500);
+    /*glm::vec3 min = glm::vec3(-500,0,-500);
     glm::vec3 max = glm::vec3(500,128,500);
-    /*Texture t = loadPNG(prefix("tracks/heightmap.png"));
+    Texture t = loadPNG(prefix("tracks/heightmap.png"));
     unsigned char data[t.width * t.height];
     int index = 0;
     for (int i = 0; i < t.width * t.height; i++) {
@@ -401,20 +419,23 @@ void keyboardDown(unsigned char key, int x, int y) {
     }
     if (cameraCar < 0)
         cameraCar = allCar.size() - 1;
-    else if (cameraCar >= allCar.size())
+    else if (cameraCar >= (int)allCar.size())
         cameraCar = 0;
-    if (key == 27) {
-        active = false;
-        delete physic;
-        delete xrenderer;
-        clearMediaStorage();
-        while (!allCar.empty()) {
-            delete allCar[allCar.size() - 1];
-            allCar.pop_back();
-        }
-        exit(0);
-    }
 #endif
+}
+
+void unload()
+{
+    active = false;
+    for (int i = 0; i < effLen; i++)
+      delete effectVBO[i];
+    delete physic;
+    delete xrenderer;
+    clearMediaStorage();
+    while (!allCar.empty()) {
+        delete allCar[allCar.size() - 1];
+        allCar.pop_back();
+    }
 }
 
 /**
@@ -489,6 +510,7 @@ int main(int argc, char** argv) {
 
     /// start loop
 #ifndef ANDROID
+    atexit(unload);
     glutTimerFunc(0,idle,0);
     glutMainLoop();
     return 0;

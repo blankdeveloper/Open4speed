@@ -10,9 +10,7 @@
 
 #include "loaders/modelo4s.h"
 #include "utils/io.h"
-#include "utils/math.h"
 #include "utils/switch.h"
-#include "common.h"
 
 /**
  * @brief Constructor for loading model from file
@@ -171,7 +169,7 @@ modelo4s::modelo4s(std::string filename) {
                 delete[] m.tnormals;
                 m.tnormals = 0;
             }
-            m.vboData = getVBO(size, m.vertices, m.normals, m.coords, m.tnormals);
+            m.vboData = getVBO(size, m.vertices, m.normals, m.coords, m.tnormals, false);
         } else
             m.vboData = 0;
         models.push_back(m);

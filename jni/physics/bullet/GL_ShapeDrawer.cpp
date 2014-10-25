@@ -554,8 +554,6 @@ void GL_ShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, cons
 
 		glColor3f(color.x(),color.y(), color.z());		
 
-		bool useWireframeFallback = true;
-
 		if (!(debugMode & btIDebugDraw::DBG_DrawWireframe))
 		{
 			///you can comment out any of the specific cases, and use the default
@@ -571,7 +569,6 @@ void GL_ShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, cons
 					const btSphereShape* sphereShape = static_cast<const btSphereShape*>(shape);
 					float radius = sphereShape->getMargin();//radius doesn't include the margin, so draw with margin
 					drawSphere(radius,10,10);
-					useWireframeFallback = false;
 					break;
 				}
 
@@ -603,7 +600,6 @@ void GL_ShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, cons
 						btVector3(-halfExtent[0],halfExtent[1],-halfExtent[2]),	
 						btVector3(halfExtent[0],-halfExtent[1],-halfExtent[2]),	
 						btVector3(-halfExtent[0],-halfExtent[1],-halfExtent[2])};
-#if 1
 					glBegin (GL_TRIANGLES);
 					int si=36;
 					for (int i=0;i<si;i+=3)
@@ -620,44 +616,8 @@ void GL_ShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, cons
 						
 					}
 					glEnd();
-#endif
-
-					useWireframeFallback = false;
 					break;
 				}
-
-
-
-#if 0
-			
-			case CONE_SHAPE_PROXYTYPE:
-				{
-					const btConeShape* coneShape = static_cast<const btConeShape*>(shape);
-					int upIndex = coneShape->getConeUpIndex();
-					float radius = coneShape->getRadius();//+coneShape->getMargin();
-					float height = coneShape->getHeight();//+coneShape->getMargin();
-					switch (upIndex)
-					{
-					case 0:
-						glRotatef(90.0, 0.0, 1.0, 0.0);
-						break;
-					case 1:
-						glRotatef(-90.0, 1.0, 0.0, 0.0);
-						break;
-					case 2:
-						break;
-					default:
-						{
-						}
-					};
-
-					glTranslatef(0.0, 0.0, -0.5*height);
-					glutSolidCone(radius,height,10,10);
-					useWireframeFallback = false;
-					break;
-
-				}
-#endif
 
 			case STATIC_PLANE_PROXYTYPE:
 				{
@@ -683,22 +643,6 @@ void GL_ShapeDrawer::drawOpenGL(btScalar* m, const btCollisionShape* shape, cons
 					break;
 
 				}
-
-/*
-			case CYLINDER_SHAPE_PROXYTYPE:
-				{
-					const btCylinderShape* cylinder = static_cast<const btCylinderShape*>(shape);
-					int upAxis = cylinder->getUpAxis();
-
-
-					float radius = cylinder->getRadius();
-					float halfHeight = cylinder->getHalfExtentsWithMargin()[upAxis];
-
-					drawCylinder(radius,halfHeight,upAxis);
-
-					break;
-				}
-*/
 
 			case MULTI_SPHERE_SHAPE_PROXYTYPE:
 			{

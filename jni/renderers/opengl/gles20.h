@@ -18,13 +18,12 @@
 #else
 #define GL_GLEXT_PROTOTYPES
 #include <GL/gl.h>
-#include <GL/glext.h>
 #endif
 #include <stack>
 #include <vector>
 #include "interfaces/renderer.h"
 #include "interfaces/shader.h"
-
+#include "renderers/opengl/glfbo.h"
 
 const int culling = 150;              ///< View culling distance in meters
 const glm::mat4x4 eye = glm::mat4x4(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1);
@@ -46,7 +45,7 @@ public:
     shader* current;                      ///< Current binded shader
     shader* scene_shader;                 ///< Scene shader
     shader* shadow;                       ///< Special shader for shadow
-    std::vector<fbo*> rtt_fbo;            ///< Screen-space framebuffer
+    std::vector<glfbo*> rtt_fbo;          ///< Screen-space framebuffer
     bool oddFrame;                        ///< Odd frame info
 
     /**
@@ -134,13 +133,12 @@ public:
 
     /**
      * @brief renderDynamic render dynamic objects
-     * @param vertices is vertices
-     * @param coords is texture coords
+     * @param geom is geometry vbo
      * @param sh is shader to use
      * @param txt is texture to use
      * @param triangleCount is triangle count
      */
-    void renderDynamic(GLfloat *vertices, GLfloat *coords, shader* sh, texture* txt, int triangleCount);
+    void renderDynamic(vbo *geom, shader* sh, texture* txt, int triangleCount);
 
     /**
      * @brief renderModel renders model into scene

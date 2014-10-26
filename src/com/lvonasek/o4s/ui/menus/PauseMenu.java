@@ -2,15 +2,16 @@ package com.lvonasek.o4s.ui.menus;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 
 import com.lvonasek.o4s.R;
 import com.lvonasek.o4s.game.GameActivity;
@@ -22,11 +23,16 @@ import com.lvonasek.o4s.media.Sound;
  */
 public class PauseMenu extends DialogFragment {
 
+    public static boolean restart = false;
+
     public PauseMenu() {
         // Empty constructor required for DialogFragment
     }
 
+    public int currentDialog = 0;
     public Dialog dialog = null;
+    public RelativeLayout mainDialog;
+    public RelativeLayout optionsDialog;
     public boolean ready = false;
 
     @Override
@@ -36,10 +42,28 @@ public class PauseMenu extends DialogFragment {
         dialog = getDialog();
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setFlags(fs, fs);
+        dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
-        dialog.setOnKeyListener(listener);
-        Thread thread = new Thread()
-        {
+        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialogInterface, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN)
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        if (currentDialog != 0)
+                            openDialog(0);
+                        else {
+                            if (ready) {
+                                GameLoop.paused--;
+                                if (Sound.snd != null)
+                                    Sound.snd.autoResume();
+                            }
+                            dismiss();
+                        }
+                    }
+                return true;
+            }
+        });
+        new Thread() {
             @Override
             public void run() {
                 try {
@@ -49,13 +73,17 @@ public class PauseMenu extends DialogFragment {
                     e.printStackTrace();
                 }
             }
-        };
-        thread.start();
+        }.start();
         View view = inflater.inflate(R.layout.menu_pause, container);
+        mainDialog = (RelativeLayout) view.findViewById(R.id.pause_main);
+        optionsDialog = (RelativeLayout) view.findViewById(R.id.pause_options);
+        optionsDialog.setVisibility(View.GONE);
+
+        //main pause menu
         view.findViewById(R.id.menu_pause_resume).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GameLoop.paused = false;
+                GameLoop.paused--;
                 if (Sound.snd != null)
                     Sound.snd.autoResume();
                 dismiss();
@@ -64,9 +92,17 @@ public class PauseMenu extends DialogFragment {
         view.findViewById(R.id.menu_pause_options).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = GameActivity.instance.getSupportFragmentManager();
-                PauseOptions pauseOptions = new PauseOptions();
-                pauseOptions.show(fm, "menu_pause_options");
+                openDialog(1);
+            }
+        });
+        view.findViewById(R.id.menu_pause_restart).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                restart = true;
+                GameActivity.instance.overridePendingTransition(0, 0);
+                startActivityForResult(new Intent(GameActivity.instance.getApplicationContext(), GameActivity.class), 1);
+                GameActivity.instance.quit();
+                dismiss();
             }
         });
         view.findViewById(R.id.menu_pause_exit).setOnClickListener(new View.OnClickListener() {
@@ -76,20 +112,34 @@ public class PauseMenu extends DialogFragment {
                 dismiss();
             }
         });
+
+        //options menu
+        view.findViewById(R.id.menu_pause_options_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialog(0);
+            }
+        });
         return view;
     }
 
-    DialogInterface.OnKeyListener listener = new DialogInterface.OnKeyListener() {
-        @Override
-        public boolean onKey(DialogInterface dialogInterface, int i, KeyEvent event) {
-            int keyCode = event.getKeyCode();
-            if (ready)
-                if ((keyCode == KeyEvent.KEYCODE_BACK) || (keyCode == KeyEvent.KEYCODE_MENU)) {
-                    GameLoop.paused = false;
-                    if (Sound.snd != null)
-                        Sound.snd.autoResume();
-                }
-            return false;
+    public void openDialog(int value) {
+        if (value == 0) //main
+        {
+            mainDialog.setVisibility(View.VISIBLE);
+            optionsDialog.setVisibility(View.GONE);
+        } else if (value == 1) //options
+        {
+            mainDialog.setVisibility(View.GONE);
+            optionsDialog.setVisibility(View.VISIBLE);
         }
-    };
+        currentDialog = value;
+    }
+
+    @Override
+    public void onPause() {
+        dismiss();
+        GameLoop.paused--;
+        super.onPause();
+    }
 }

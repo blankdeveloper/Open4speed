@@ -7,6 +7,10 @@ import android.opengl.GLSurfaceView;
 import android.opengl.GLSurfaceView.Renderer;
 import android.util.AttributeSet;
 
+import com.lvonasek.o4s.media.Sound;
+
+import java.util.ArrayList;
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -17,9 +21,30 @@ import javax.microedition.khronos.opengles.GL10;
  */
 public class GameLoop extends GLSurfaceView implements Renderer {
 
+    public static final int CAR_INFO_SPEED = 0;
+    public static final int CAR_INFO_PEDAL_GAS = 1;
+    public static final int CAR_INFO_PEDAL_BRAKE = 2;
+    public static final int CAR_INFO_REVERSE = 3;
+    public static final int CAR_INFO_LASTSPEED = 4;
+    public static final int CAR_INFO_GEARLOW = 5;
+    public static final int CAR_INFO_GEARHIGH = 6;
+    public static final int CAR_INFO_PEDAL_N2O = 7;
+    public static final int CAR_INFO_GEARMIN = 8;
+    public static final int CAR_INFO_GEARMAX = 9;
+    public static final int CAR_INFO_N2OAMOUNT = 10;
+    public static final int CAR_INFO_CAMERADST = 11;
+    public static final int CAR_INFO_SNDCRASH = 12;
+    public static final int CAR_INFO_SNDDIST = 13;
+    public static final int CAR_INFO_SNDENGINE1 = 14;
+    public static final int CAR_INFO_SNDENGINE2 = 15;
+    public static final int CAR_INFO_SNDN2O = 16;
+    public static final int CAR_INFO_SNDRATE = 17;
+
     //Game state
-    public static boolean init    = false;
-    public static boolean paused  = false;
+    public static int     paused  = 0;
+
+    // instance of sounds
+    private static ArrayList<Sound> sounds;
 
     //fps counter
     private int currentFPS;
@@ -32,6 +57,12 @@ public class GameLoop extends GLSurfaceView implements Renderer {
      */
     public GameLoop(Context context, AttributeSet attrs) {
         super(context);
+        sounds = new ArrayList<Sound>();
+        for (int i = 0; i < 1; i++) {
+            sounds.add(new Sound("sfx/crash.ogg", false));
+            sounds.add(new Sound("sfx/engine.ogg", true));
+            sounds.add(new Sound("sfx/engineplus.ogg", true));
+        }
         //enable OpenGL ES 3.0 support
         if (!isInEditMode()) {
             setEGLConfigChooser(8, 8, 8, 0, 16, 1);
@@ -47,7 +78,10 @@ public class GameLoop extends GLSurfaceView implements Renderer {
      */
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         //check if it is ran first time
-        if (!init && !isInEditMode()) {
+        if (!GameActivity.instance.init && !isInEditMode()) {
+            //load C++ part
+            System.loadLibrary("open4speed");
+
             //get package assets object
             String apkFilePath;
             ApplicationInfo appInfo;
@@ -63,12 +97,11 @@ public class GameLoop extends GLSurfaceView implements Renderer {
 
             //send APK file path into C++ code
             apkFilePath = appInfo.sourceDir;
-            Native.init();
-            Native.init(apkFilePath);
+            init(apkFilePath, 1.0f);
             GameActivity.instance.finishLoading();
         }
 
-        init = true;
+        GameActivity.instance.init = true;
     }
 
     /**
@@ -81,7 +114,7 @@ public class GameLoop extends GLSurfaceView implements Renderer {
     public void onSurfaceChanged(GL10 gl, int w, int h) {
         //send new screen dimensions into C++ code
         if (!isInEditMode())
-          Native.resize(w, h);
+          resize(w, h);
     }
 
     /**
@@ -89,14 +122,15 @@ public class GameLoop extends GLSurfaceView implements Renderer {
      * @param gl is java OpenGL instance
      */
     public void onDrawFrame(GL10 gl) {
-        if (isInEditMode() || !init)
+        if (isInEditMode() || !GameActivity.instance.init)
             return;
         //check if game is not paused
-        if (!paused) {
+        if (paused <= 0) {
+            paused = 0;
             long time = System.currentTimeMillis();
-            Native.display();
-            Native.loop();
-            Native.update();
+            display();
+            loop();
+            update();
 
             currentFPS++;
             if (updateFPS + 1000 < System.currentTimeMillis()) {
@@ -113,6 +147,41 @@ public class GameLoop extends GLSurfaceView implements Renderer {
 
             while (System.currentTimeMillis() - time < 50) {}
         } else
-            Native.display();
+            display();
     }
+
+    public void update() {
+        int count = 1;//carCount();
+        for (int i = 0; i < count; i++) {
+            boolean crash = carState(i, CAR_INFO_SNDCRASH) > 0.5f;
+            float dist = carState(i, CAR_INFO_SNDDIST);
+            float engine1 = carState(i, CAR_INFO_SNDENGINE1);
+            float engine2 = carState(i, CAR_INFO_SNDENGINE2);
+            float rate = carState(i, CAR_INFO_SNDRATE);
+            if (dist > 0.1f) {
+                if (crash)
+                    sounds.get(0 + i * 3).play();
+                sounds.get(1 + i * 3).setFreq(rate);
+                sounds.get(1 + i * 3).setVolume(dist * engine1);
+                sounds.get(1 + i * 3).play();
+                sounds.get(2 + i * 3).setFreq(rate);
+                sounds.get(2 + i * 3).setVolume(dist * engine2);
+                sounds.get(2 + i * 3).play();
+            } else {
+                for (int j = 0 + i * 4; j < 4 + i * 4; j++)
+                    sounds.get(j).stop();
+            }
+        }
+    }
+
+    //C++ methods
+    public synchronized native int carCount();
+    public synchronized native float carState(int index, int type);
+    public synchronized native void init(String str, float aliasing);
+    public synchronized native void key(int code);
+    public synchronized native void keyUp(int code);
+    public synchronized native void display();
+    public synchronized native void loop();
+    public synchronized native void resize(int w, int h);
+    public synchronized native void unload();
 }

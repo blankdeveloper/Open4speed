@@ -39,7 +39,7 @@ public class Sound {
     }
 
     public void play() {
-        if (!GameLoop.paused) {
+        if (GameLoop.paused == 0) {
             //play sound
             if (playing)
                 snd.pause(id);
@@ -69,7 +69,7 @@ public class Sound {
      */
     public void setVolume(float volume) {
         //audio clip
-        if (!GameLoop.paused) {
+        if (GameLoop.paused == 0) {
             volume *= 0.25f;
             this.volume = volume;
         }
@@ -80,7 +80,7 @@ public class Sound {
      */
     public void stop() {
         //audio clip
-        if (!GameLoop.paused && playing) {
+        if ((GameLoop.paused == 0) && playing) {
             snd.stop(id);
             playing = false;
         }

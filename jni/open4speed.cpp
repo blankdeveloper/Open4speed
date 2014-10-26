@@ -524,76 +524,86 @@ int main(int argc, char** argv) {
 extern "C" {
 
 /**
- * @brief Java_com_lvonasek_o4s_game_Native_init is init method
+ * @brief Java_com_lvonasek_o4s_game_GameLoop_init is init method
  * @param env is instance of JNI
  */
-void Java_com_lvonasek_o4s_game_Native_init( JNIEnv*  env, jclass cls, jstring apkPath ) {
+void Java_com_lvonasek_o4s_game_GameLoop_init( JNIEnv*  env, jclass cls, jstring apkPath, float alias ) {
   jboolean isCopy;
   APKArchive = zip_open(env->GetStringUTFChars(apkPath, &isCopy), 0, NULL);
+  aliasing = alias;
   main(0, 0);
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_game_Native_resize is resize method
+ * @brief Java_com_lvonasek_o4s_game_GameLoop_resize is resize method
  * @param env is instance of JNI
  * @param w is display width
  * @param h is display height
  */
-void Java_com_lvonasek_o4s_game_Native_resize( JNIEnv*  env, jobject  thiz, jint w, jint h ) {
+void Java_com_lvonasek_o4s_game_GameLoop_resize( JNIEnv*  env, jobject  thiz, jint w, jint h ) {
   reshape(w, h);
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_game_Native_key is key press method
+ * @brief Java_com_lvonasek_o4s_game_GameLoop_key is key press method
  * @param env is instance of JNI
  * @param thiz is asset manager
  * @param code is key code
  */
-void Java_com_lvonasek_o4s_game_Native_key( JNIEnv*  env, jobject  thiz, jint code ) {
+void Java_com_lvonasek_o4s_game_GameLoop_key( JNIEnv*  env, jobject  thiz, jint code ) {
   special(code, 0, 0);
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_game_Native_keyUp is key release method
+ * @brief Java_com_lvonasek_o4s_game_GameLoop_keyUp is key release method
  * @param env is instance of JNI
  * @param thiz is asset manager
  * @param code is key code
  */
-void Java_com_lvonasek_o4s_game_Native_keyUp( JNIEnv*  env, jobject  thiz, jint code ) {
+void Java_com_lvonasek_o4s_game_GameLoop_keyUp( JNIEnv*  env, jobject  thiz, jint code ) {
   specialUp(code, 0, 0);
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_game_Native_display is display method
+ * @brief Java_com_lvonasek_o4s_game_GameLoop_display is display method
  * @param env is instance of JNI
  * @param thiz is asset manager
  */
-void Java_com_lvonasek_o4s_game_Native_display( JNIEnv*  env, jobject  thiz ) {
+void Java_com_lvonasek_o4s_game_GameLoop_display( JNIEnv*  env, jobject  thiz ) {
   display();
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_game_Native_loop is loop method
+ * @brief Java_com_lvonasek_o4s_game_GameLoop_loop is loop method
  * @param env is instance of JNI
  * @param thiz is asset manager
  */
-void Java_com_lvonasek_o4s_game_Native_loop( JNIEnv*  env, jobject  thiz ) {
+void Java_com_lvonasek_o4s_game_GameLoop_loop( JNIEnv*  env, jobject  thiz ) {
   idle(0);
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_game_Native_carCount is amount of cars
+ * @brief Java_com_lvonasek_o4s_game_GameLoop_unload unloads resources
+ * @param env is instance of JNI
+ * @param thiz is asset manager
+ */
+void Java_com_lvonasek_o4s_game_GameLoop_unload( JNIEnv*  env, jobject  thiz ) {
+  unload();
+}
+
+/**
+ * @brief Java_com_lvonasek_o4s_game_GameLoop_carCount is amount of cars
  * @param env is instance of JNI
  */
-jint Java_com_lvonasek_o4s_game_Native_carCount( JNIEnv*  env ) {
+jint Java_com_lvonasek_o4s_game_GameLoop_carCount( JNIEnv*  env ) {
   return allCar.size();
 }
 
 /**
- * @brief Java_com_lvonasek_o4s_game_Native_carState is information about car
+ * @brief Java_com_lvonasek_o4s_game_GameLoop_carState is information about car
  * @param env is instance of JNI
  */
-jfloat Java_com_lvonasek_o4s_game_Native_carState( JNIEnv*  env, jobject  thiz, jint index, jint type ) {
+jfloat Java_com_lvonasek_o4s_game_GameLoop_carState( JNIEnv*  env, jobject  thiz, jint index, jint type ) {
     if (type == 0)
         return allCar[index]->speed;
     if (type == 1)

@@ -8,6 +8,7 @@
     <dimen name="button_text">20dp</dimen>
     <dimen name="button_width">300dp</dimen>
 
-    <dimen name="title_height">32dp</dimen>
+    <dimen name="text_height">21dp</dimen>
+    <dimen name="title_height">28dp</dimen>
     <dimen name="title_margin">20dp</dimen>
 </resources>

@@ -5,8 +5,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.lvonasek.o4s.game.Native;
 import com.lvonasek.o4s.R;
+import com.lvonasek.o4s.game.GameActivity;
 
 /**
  * Manage virtual keys. It is fully multi touched so there are no limits in key pressings. This is
@@ -41,9 +41,9 @@ public class VirtualKey extends View {
                 break;
         }
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            Native.key(code);
+            GameActivity.instance.gameLoop.key(code);
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
-            Native.keyUp(code);
+            GameActivity.instance.gameLoop.keyUp(code);
         }
 
         return true;

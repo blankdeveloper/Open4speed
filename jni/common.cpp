@@ -10,6 +10,7 @@
 #include "common.h"
 
 bool active;                    ///< Information if scene is active
+float aliasing = 1.0;           ///< Screen detail
 std::vector<car*> allCar;       ///< All cars in scene instances
 int cameraCar = 0;              ///< Car camera index
 float direction = 0;            ///< Camera direction

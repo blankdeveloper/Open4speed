@@ -61,7 +61,7 @@ glfbo::glfbo(int width, int height) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width * ALIASING, height * ALIASING, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width * aliasing, height * aliasing, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rendertexture[0], 0);
 
 
@@ -71,16 +71,16 @@ glfbo::glfbo(int width, int height) {
     char* extString = (char*)glGetString(GL_EXTENSIONS);
     if (strstr(extString, PACKED_EXTENSION) != 0)
     {
-        glRenderbufferStorage(GL_RENDERBUFFER, PACKED_EXT, width * ALIASING, height * ALIASING);
+        glRenderbufferStorage(GL_RENDERBUFFER, PACKED_EXT, width * aliasing, height * aliasing);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
     }
     else
     {
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width * ALIASING, height * ALIASING);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width * aliasing, height * aliasing);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
         glBindRenderbuffer(GL_RENDERBUFFER, rboID[1]);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_STENCIL_INDEX8, width * ALIASING, height * ALIASING);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_STENCIL_INDEX8, width * aliasing, height * aliasing);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboID[1]);
     }
 
@@ -102,7 +102,7 @@ glfbo::glfbo(int width, int height) {
     }
 
     /// clear
-    glViewport (0, 0, width * ALIASING, height * ALIASING);
+    glViewport (0, 0, width * aliasing, height * aliasing);
     glClear(GL_COLOR_BUFFER_BIT);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
@@ -135,7 +135,7 @@ glfbo::glfbo(int width, int height) {
  */
 void glfbo::bindFBO() {
     glBindFramebuffer(GL_FRAMEBUFFER, fboID[0]);
-    glViewport (0, 0, width * ALIASING, height * ALIASING);
+    glViewport (0, 0, width * aliasing, height * aliasing);
 }
 
 /**

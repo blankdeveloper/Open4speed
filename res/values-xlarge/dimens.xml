@@ -8,6 +8,7 @@
     <dimen name="button_text">40dp</dimen>
     <dimen name="button_width">600dp</dimen>
 
+    <dimen name="text_height">48dp</dimen>
     <dimen name="title_height">64dp</dimen>
     <dimen name="title_margin">40dp</dimen>
 </resources>

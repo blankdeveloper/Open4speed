@@ -18,19 +18,14 @@ import com.lvonasek.o4s.R;
 public class DarkButton extends Button {
     public DarkButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-    }
-
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-        if (changed && !isInEditMode()) {
-            getPaint().setShader(new LinearGradient(0, 0, 0, getTextSize(),
-                    Color.WHITE, Color.YELLOW, Shader.TileMode.CLAMP));
+        getPaint().setShader(new LinearGradient(0, 0, 0, getTextSize(),
+                Color.WHITE, Color.YELLOW, Shader.TileMode.CLAMP));
+        if (!isInEditMode()) {
             getPaint().setShadowLayer(5, 0, 0, Color.BLACK);
             String font = getResources().getString(R.string.ui_font);
             setTypeface(Typeface.createFromAsset(getContext().getAssets(), font));
-            setBackgroundResource(R.drawable.button_normal);
         }
+        setBackgroundResource(R.drawable.button_normal);
     }
 
     @Override

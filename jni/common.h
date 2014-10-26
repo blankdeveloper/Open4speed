@@ -18,9 +18,8 @@
 #include "interfaces/physics.h"
 #include "car.h"
 
-#define ALIASING 0.5
-
 extern bool active;                    ///< Information if scene is active
+extern float aliasing;                 ///< Screen detail
 extern std::vector<car*> allCar;       ///< All cars in scene instances
 extern int cameraCar;                  ///< Car camera index
 extern float direction;                ///< Camera direction

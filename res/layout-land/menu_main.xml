@@ -1,67 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="fill_parent">
 
     <VideoView
+        android:id="@+id/menu_background"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:id="@+id/menu_background" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/menu_main"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
         <com.lvonasek.o4s.ui.common.BigText
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/app_name"
-            android:layout_gravity="center_horizontal"
-            android:textSize="@dimen/title_height"
-            android:gravity="center_horizontal"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/title_margin"
             android:layout_marginBottom="@dimen/title_margin"
-            android:layout_weight="1" />
+            android:layout_marginTop="@dimen/title_margin"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/menu_title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="@dimen/title_height" />
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <com.lvonasek.o4s.ui.common.DarkButton
                 android:id="@+id/menu_main_start"
-                android:text="@string/button_start_game"
                 android:layout_width="@dimen/button_width"
                 android:layout_height="@dimen/button_height"
-                android:layout_marginTop="@dimen/button_margin"
                 android:layout_marginBottom="@dimen/button_margin"
-                android:textSize="@dimen/button_text"
+                android:layout_marginTop="@dimen/button_margin"
                 android:gravity="center_vertical|center_horizontal"
-                android:textAlignment="gravity" />
+                android:text="@string/button_start_game"
+                android:textAlignment="gravity"
+                android:textSize="@dimen/button_text" />
+
+            <com.lvonasek.o4s.ui.common.DarkButton
+                android:id="@+id/menu_main_options"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginBottom="@dimen/button_margin"
+                android:layout_marginTop="@dimen/button_margin"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/button_options"
+                android:textAlignment="gravity"
+                android:textSize="@dimen/button_text" />
+
+            <com.lvonasek.o4s.ui.common.DarkButton
+                android:id="@+id/menu_main_about"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginBottom="@dimen/button_margin"
+                android:layout_marginTop="@dimen/button_margin"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/button_about"
+                android:textAlignment="gravity"
+                android:textSize="@dimen/button_text" />
 
             <com.lvonasek.o4s.ui.common.DarkButton
                 android:id="@+id/menu_main_exit"
-                android:text="@string/button_exit"
                 android:layout_width="@dimen/button_width"
                 android:layout_height="@dimen/button_height"
-                android:layout_marginTop="@dimen/button_margin"
                 android:layout_marginBottom="@dimen/button_margin"
-                android:textSize="@dimen/button_text"
+                android:layout_marginTop="@dimen/button_margin"
                 android:gravity="center_vertical|center_horizontal"
-                android:textAlignment="gravity" />
+                android:text="@string/button_exit"
+                android:textAlignment="gravity"
+                android:textSize="@dimen/button_text" />
         </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/menu_options"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <com.lvonasek.o4s.ui.common.BigText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/title_margin"
+            android:layout_marginTop="@dimen/title_margin"
+            android:layout_weight="1"
+            android:text="@string/menu_options"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="@dimen/title_height" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.lvonasek.o4s.ui.common.DarkButton
+                android:id="@+id/menu_options_back"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginBottom="@dimen/button_margin"
+                android:layout_marginTop="@dimen/button_margin"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/button_back"
+                android:textAlignment="gravity"
+                android:textSize="@dimen/button_text" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_about"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <com.lvonasek.o4s.ui.common.BigText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/title_margin"
+            android:layout_marginTop="@dimen/title_margin"
+            android:text="@string/button_about"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="@dimen/title_height" />
+
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <com.lvonasek.o4s.ui.common.SimpleText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/title_margin"
+                    android:layout_marginTop="@dimen/title_margin"
+                    android:autoLink="all"
+                    android:text="@string/about_game"
+                    android:textAlignment="center"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textSize="@dimen/text_height" />
+            </ScrollView>
+    </LinearLayout>
 </RelativeLayout>

@@ -30,9 +30,10 @@ import java.io.IOException;
 public class GameActivity extends FragmentActivity {
 
     //various instances
-    private GameLoop gameLoop;
-    public static GameActivity instance;
-    private static MediaPlayer music = new MediaPlayer();
+    public GameLoop gameLoop;
+    public static boolean      init       = false;
+    public static GameActivity instance   = null;
+    private static MediaPlayer music      = new MediaPlayer();
 
     //splash items
     private ImageView loadingImg;
@@ -50,8 +51,8 @@ public class GameActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_PROGRESS);
         setProgressBarVisibility(true);
 
-        setContentView(R.layout.race);
         instance = this;
+        setContentView(R.layout.race);
         fpsCounter = (TextView) findViewById(R.id.fpsCounter);
         gameLoop = (GameLoop) findViewById(R.id.game_screen);
         loadingImg = (ImageView) findViewById(R.id.loading);
@@ -95,13 +96,13 @@ public class GameActivity extends FragmentActivity {
     public boolean dispatchKeyEvent(KeyEvent event) {
         //press
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
-            Native.key(HWKeys.mapKeyCode(event.getKeyCode()));
+            gameLoop.key(HWKeys.mapKeyCode(event.getKeyCode()));
             if (HWKeys.mapKeyCode(event.getKeyCode()) != event.getKeyCode())
                 return true;
         }
         //release
         if (event.getAction() == KeyEvent.ACTION_UP) {
-            Native.keyUp(HWKeys.mapKeyCode(event.getKeyCode()));
+            gameLoop.keyUp(HWKeys.mapKeyCode(event.getKeyCode()));
             if (HWKeys.mapKeyCode(event.getKeyCode()) != event.getKeyCode())
                 return true;
         }
@@ -116,10 +117,10 @@ public class GameActivity extends FragmentActivity {
     protected synchronized void onPause() {
         //pause game
         if (gameLoop != null)
-            gameLoop.paused = true;
+            gameLoop.paused++;
         if (Sound.snd != null)
             Sound.snd.autoPause();
-        if (gameLoop.init)
+        if (init)
             music.pause();
         super.onPause();
     }
@@ -132,11 +133,22 @@ public class GameActivity extends FragmentActivity {
         //resume game
         super.onResume();
         instance = this;
-        GameLoop.paused = false;
+        gameLoop.paused--;
         if (Sound.snd != null)
             Sound.snd.autoResume();
-        if (gameLoop.init)
+        if (init) {
             music.start();
+            if (GameLoop.paused < 0)
+                GameLoop.paused = 0;
+            else
+                pause();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        overridePendingTransition(0, 0);
     }
 
     @Override
@@ -146,7 +158,7 @@ public class GameActivity extends FragmentActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         //change back key function
         if ((keyCode == KeyEvent.KEYCODE_BACK) || (keyCode == KeyEvent.KEYCODE_MENU)) {
-            if (GameLoop.init)
+            if (init)
                 pause();
             return true;
         }
@@ -169,14 +181,15 @@ public class GameActivity extends FragmentActivity {
             music.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
             music.setLooping(true);
             music.prepare();
-            music.start();
+            if (GameLoop.paused <= 0)
+                music.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void pause() {
-        GameLoop.paused = true;
+        GameLoop.paused++;
         if (Sound.snd != null)
             Sound.snd.autoPause();
         FragmentManager fm = getSupportFragmentManager();
@@ -184,11 +197,13 @@ public class GameActivity extends FragmentActivity {
         pauseMenu.show(fm, "menu_pause");
     }
 
+
     public void quit() {
-        GameLoop.paused = true;
         Sound.snd.autoPause();
+        gameLoop.unload();
         Sound.snd = null;
         gameLoop = null;
+        GameLoop.paused = 0;
         System.exit(0);
     }
 }

@@ -434,8 +434,8 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     current->uniformInt("color_texture", 0);
 
     /// set uniforms
-    current->uniformFloat("u_width", 1 / (float)screen_width / ALIASING);
-    current->uniformFloat("u_height", 1 / (float)screen_height / ALIASING);
+    current->uniformFloat("u_width", 1 / (float)screen_width / aliasing);
+    current->uniformFloat("u_height", 1 / (float)screen_height / aliasing);
     current->uniformFloat4("u_kA", m->colora[0], m->colora[1], m->colora[2], 1);
     current->uniformFloat4("u_kD", m->colord[0], m->colord[1], m->colord[2], 1);
     current->uniformFloat4("u_kS", m->colors[0], m->colors[1], m->colors[2], 1);

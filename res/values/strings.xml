@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Open4speed 2.0</string>
+    <string name="about_game">
+        Developed by Luboš Vonásek\n
+        github.com/lvonasek/Open4speed\n
+        \n
+        Powered by Bullet Physics\n
+        bulletphysics.com\n
+        \n
+        Music by Dan-O\n
+        DanoSongs.com\n
+        \n
+        Tracks by VIS-Games\n
+        vis-games.de\n
+        \n
+        Car models by Skoree99beFast\n
+        turbosquid.com/Search/Artists/be-fast\n
+        \n
+        Menu background by Movietools\n
+        movietools.info\n
+        \n
+        Menu font by Typodermic Fonts\n
+        typodermicfonts.com\n
+    </string>
+    <string name="app_name">Open4speed II</string>
 
-    <string name="button_back">BACK</string>
-    <string name="button_exit">EXIT</string>
-    <string name="button_options">OPTIONS</string>
-    <string name="button_restart">RESTART</string>
-    <string name="button_resume">RESUME</string>
-    <string name="button_start_game">START GAME</string>
+    <string name="button_about">About Game</string>
+    <string name="button_back">Back</string>
+    <string name="button_exit">Exit</string>
+    <string name="button_options">Options</string>
+    <string name="button_restart">Restart</string>
+    <string name="button_resume">Resume</string>
+    <string name="button_start_game">Start game</string>
 
-    <string name="menu_pause">PAUSE MENU</string>
-    <string name="menu_options">OPTIONS MENU</string>
+    <string name="menu_title">Open4speed 2 demo</string>
+    <string name="menu_pause">Pause menu</string>
+    <string name="menu_options">Options menu</string>
 
     <string name="ui_font">fonts/zerohour.ttf</string>
 </resources>

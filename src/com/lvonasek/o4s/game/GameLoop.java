@@ -57,14 +57,15 @@ public class GameLoop extends GLSurfaceView implements Renderer {
      */
     public GameLoop(Context context, AttributeSet attrs) {
         super(context);
+        System.loadLibrary("open4speed");
         sounds = new ArrayList<Sound>();
         for (int i = 0; i < 1; i++) {
             sounds.add(new Sound("sfx/crash.ogg", false));
             sounds.add(new Sound("sfx/engine.ogg", true));
             sounds.add(new Sound("sfx/engineplus.ogg", true));
         }
-        //enable OpenGL ES 3.0 support
         if (!isInEditMode()) {
+            //enable OpenGL ES 2.0 support
             setEGLConfigChooser(8, 8, 8, 0, 16, 1);
             setEGLContextClientVersion(2);
             setRenderer(this);
@@ -77,10 +78,8 @@ public class GameLoop extends GLSurfaceView implements Renderer {
      * @param config another OpenGL object(unused because it is for java OpenGL interpretation)
      */
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        //check if it is ran first time
-        if (!GameActivity.instance.init && !isInEditMode()) {
-            //load C++ part
-            System.loadLibrary("open4speed");
+        //check if it is first time run
+        if (!GameActivity.instance.init) {
 
             //get package assets object
             String apkFilePath;
@@ -95,12 +94,11 @@ public class GameLoop extends GLSurfaceView implements Renderer {
                 throw new RuntimeException("Unable to locate assets, aborting...");
             }
 
-            //send APK file path into C++ code
+            //load game
             apkFilePath = appInfo.sourceDir;
             init(apkFilePath, 1.0f);
             GameActivity.instance.finishLoading();
         }
-
         GameActivity.instance.init = true;
     }
 

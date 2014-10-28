@@ -129,22 +129,27 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:visibility="gone" >
+        android:visibility="gone">
 
-        <com.lvonasek.o4s.ui.common.BigText
+        <ScrollView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/title_margin"
-            android:layout_marginTop="@dimen/title_margin"
-            android:text="@string/button_about"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="@dimen/title_height" />
+            android:layout_height="wrap_content">
 
-            <ScrollView
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <com.lvonasek.o4s.ui.common.BigText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/title_margin"
+                    android:layout_marginTop="@dimen/title_margin"
+                    android:text="@string/button_about"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="@dimen/title_height" />
 
                 <com.lvonasek.o4s.ui.common.SimpleText
                     android:layout_width="fill_parent"
@@ -158,6 +163,7 @@
                     android:textAlignment="center"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textSize="@dimen/text_height" />
-            </ScrollView>
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </RelativeLayout>

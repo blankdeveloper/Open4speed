@@ -23,8 +23,6 @@ import com.lvonasek.o4s.media.Sound;
  */
 public class PauseMenu extends DialogFragment {
 
-    public static boolean restart = false;
-
     public PauseMenu() {
         // Empty constructor required for DialogFragment
     }
@@ -83,6 +81,7 @@ public class PauseMenu extends DialogFragment {
         view.findViewById(R.id.menu_pause_resume).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainMenu.playButtonSound();
                 GameLoop.paused--;
                 if (Sound.snd != null)
                     Sound.snd.autoResume();
@@ -92,15 +91,16 @@ public class PauseMenu extends DialogFragment {
         view.findViewById(R.id.menu_pause_options).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainMenu.playButtonSound();
                 openDialog(1);
             }
         });
         view.findViewById(R.id.menu_pause_restart).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                restart = true;
+                MainMenu.playButtonSound();
                 GameActivity.instance.overridePendingTransition(0, 0);
-                startActivityForResult(new Intent(GameActivity.instance.getApplicationContext(), GameActivity.class), 1);
+                startActivity(new Intent(GameActivity.instance.getApplicationContext(), GameActivity.class));
                 GameActivity.instance.quit();
                 dismiss();
             }
@@ -108,6 +108,7 @@ public class PauseMenu extends DialogFragment {
         view.findViewById(R.id.menu_pause_exit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainMenu.playButtonSound();
                 GameActivity.instance.quit();
                 dismiss();
             }
@@ -117,6 +118,7 @@ public class PauseMenu extends DialogFragment {
         view.findViewById(R.id.menu_pause_options_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainMenu.playButtonSound();
                 openDialog(0);
             }
         });

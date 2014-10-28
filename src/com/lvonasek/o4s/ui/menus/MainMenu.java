@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,51 +15,64 @@ import android.widget.VideoView;
 
 import com.lvonasek.o4s.R;
 import com.lvonasek.o4s.game.GameActivity;
+import com.lvonasek.o4s.media.Sound;
+
+import java.io.IOException;
 
 /**
  * Created by lubos on 31.7.14.
  */
 public class MainMenu extends Activity {
 
-    public int                 currentMenu = 0;
-    public LinearLayout        aboutMenu;
-    public LinearLayout        mainMenu;
-    public LinearLayout        optionsMenu;
-    private static MediaPlayer music       = new MediaPlayer();
-    private VideoView          view        = null;
+    public static int buttonClick;
+    public int currentMenu = 0;
+    public LinearLayout aboutMenu;
+    public LinearLayout mainMenu;
+    public LinearLayout optionsMenu;
+    private static MediaPlayer music = new MediaPlayer();
+    private VideoView view = null;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.menu_main);
-        view = (VideoView)findViewById(R.id.menu_background);
+        view = (VideoView) findViewById(R.id.menu_background);
         final Context c = this;
         aboutMenu = (LinearLayout) findViewById(R.id.menu_about);
         mainMenu = (LinearLayout) findViewById(R.id.menu_main);
         optionsMenu = (LinearLayout) findViewById(R.id.menu_options);
+        try {
+            buttonClick = Sound.snd.load(getAssets().openFd("sfx/button.wav"), 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //main menu
         findViewById(R.id.menu_main_start).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(c, GameActivity.class), 1);
+                playButtonSound();
+                startActivity(new Intent(c, GameActivity.class));
             }
         });
         findViewById(R.id.menu_main_options).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                playButtonSound();
                 openMenu(1);
             }
         });
         findViewById(R.id.menu_main_about).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                playButtonSound();
                 openMenu(2);
             }
         });
         findViewById(R.id.menu_main_exit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                playButtonSound();
                 finish();
             }
         });
@@ -67,6 +81,7 @@ public class MainMenu extends Activity {
         findViewById(R.id.menu_options_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                playButtonSound();
                 openMenu(0);
             }
         });
@@ -122,21 +137,30 @@ public class MainMenu extends Activity {
         view.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
+                mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 mp.setLooping(true);
                 mp.start();
             }
         });
         view.setVideoURI(Uri.parse(path));
-
         try {
             AssetFileDescriptor afd = getAssets().openFd("sfx/01-danosongs.com-dublin-forever-instr.mp3");
-            music = new MediaPlayer();
+            music.setAudioStreamType(AudioManager.STREAM_MUSIC);
             music.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-            music.setLooping(true);
             music.prepare();
-            music.start();
+            music.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    mp.setLooping(true);
+                    mp.start();
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void playButtonSound() {
+        Sound.snd.play(buttonClick, 0.5f, 0.5f, 1, 1, 1);
     }
 }

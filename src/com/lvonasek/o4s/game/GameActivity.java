@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.lvonasek.o4s.R;
 import com.lvonasek.o4s.controllers.HWKeys;
 import com.lvonasek.o4s.media.Sound;
+import com.lvonasek.o4s.ui.menus.MainMenu;
 import com.lvonasek.o4s.ui.menus.PauseMenu;
 
 import java.io.IOException;
@@ -30,7 +31,7 @@ import java.io.IOException;
 public class GameActivity extends FragmentActivity {
 
     //various instances
-    public GameLoop gameLoop;
+    public GameLoop            gameLoop   = null;
     public static boolean      init       = false;
     public static GameActivity instance   = null;
     private static MediaPlayer music      = new MediaPlayer();
@@ -68,25 +69,13 @@ public class GameActivity extends FragmentActivity {
         //set the hardware buttons to control the game sound
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
-        //new instance
-        if (gameLoop == null) {
-            //Main screen
-            gameLoop = new GameLoop(this, null);
-            //Ad banner
-            //mAdView = new AdView(this, AdSize.SMART_BANNER, "a152250049be91b");
+        //reload button click sound
+        try {
+            AssetFileDescriptor afd = getAssets().openFd("sfx/button.wav");
+            MainMenu.buttonClick = Sound.snd.load(afd, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        //create screen layout
-        /*RelativeLayout layout = new RelativeLayout(instance);
-        //add main view
-        layout.addView(gameLoop);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams
-                (RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.ALIGN_TOP |
-                RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-
-        //enable renderer
-        setContentView(layout);*/
     }
 
     @Override
@@ -114,14 +103,16 @@ public class GameActivity extends FragmentActivity {
     /**
      * Game pause
      */
-    protected synchronized void onPause() {
+    protected void onPause() {
         //pause game
+        if (init)
+            music.pause();
+        else
+            quit();
         if (gameLoop != null)
             gameLoop.paused++;
         if (Sound.snd != null)
             Sound.snd.autoPause();
-        if (init)
-            music.pause();
         super.onPause();
     }
 
@@ -130,6 +121,12 @@ public class GameActivity extends FragmentActivity {
      * Game resume
      */
     protected void onResume() {
+        //new instance of game
+        if (gameLoop == null) {
+            //Main screen
+            gameLoop = new GameLoop(this, null);
+        }
+
         //resume game
         super.onResume();
         instance = this;
@@ -138,7 +135,7 @@ public class GameActivity extends FragmentActivity {
             Sound.snd.autoResume();
         if (init) {
             music.start();
-            if (GameLoop.paused < 0)
+            if (GameLoop.paused <= 0)
                 GameLoop.paused = 0;
             else
                 pause();
@@ -178,11 +175,18 @@ public class GameActivity extends FragmentActivity {
         try {
             AssetFileDescriptor afd = getAssets().openFd("sfx/02-danosongs.com-megacosm.mp3");
             music = new MediaPlayer();
+            music.setAudioStreamType(AudioManager.STREAM_MUSIC);
             music.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
             music.setLooping(true);
             music.prepare();
-            if (GameLoop.paused <= 0)
-                music.start();
+            if (GameLoop.paused <= 0) {
+                music.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+                        mp.start();
+                    }
+                });
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -200,7 +204,8 @@ public class GameActivity extends FragmentActivity {
 
     public void quit() {
         Sound.snd.autoPause();
-        gameLoop.unload();
+        if (init)
+            gameLoop.unload();
         Sound.snd = null;
         gameLoop = null;
         GameLoop.paused = 0;

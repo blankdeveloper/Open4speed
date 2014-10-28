@@ -1,6 +1,7 @@
 package com.lvonasek.o4s.ui.common;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Rect;
@@ -68,5 +69,15 @@ public class DarkButton extends Button {
                     Color.WHITE, Color.YELLOW, Shader.TileMode.CLAMP));
         }
         return super.onHoverEvent(event);
+    }
+
+
+    @Override
+    protected synchronized void onDraw(Canvas canvas) {
+        Shader sh = getPaint().getShader();
+        getPaint().setShader(null);
+        super.onDraw(canvas);
+        getPaint().setShader(sh);
+        super.onDraw(canvas);
     }
 }

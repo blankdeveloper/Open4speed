@@ -1,6 +1,7 @@
 package com.lvonasek.o4s.ui.common;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
@@ -23,5 +24,15 @@ public class BigText extends TextView {
             setTypeface(Typeface.createFromAsset(getContext().getAssets(), font));
         }
         setGravity(Gravity.CENTER_HORIZONTAL);
+    }
+
+    @Override
+    protected synchronized void onDraw(Canvas canvas) {
+        Shader sh = getPaint().getShader();
+        getPaint().setShader(null);
+        for (int i = 0; i < 3; i++)
+          super.onDraw(canvas);
+        getPaint().setShader(sh);
+        super.onDraw(canvas);
     }
 }

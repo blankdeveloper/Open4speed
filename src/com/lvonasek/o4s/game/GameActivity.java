@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.lvonasek.o4s.R;
 import com.lvonasek.o4s.controllers.HWKeys;
+import com.lvonasek.o4s.media.Settings;
 import com.lvonasek.o4s.media.Sound;
 import com.lvonasek.o4s.ui.menus.MainMenu;
 import com.lvonasek.o4s.ui.menus.PauseMenu;
@@ -34,7 +35,7 @@ public class GameActivity extends FragmentActivity {
     public GameLoop            gameLoop   = null;
     public static boolean      init       = false;
     public static GameActivity instance   = null;
-    private static MediaPlayer music      = new MediaPlayer();
+    public static MediaPlayer music      = new MediaPlayer();
 
     //splash items
     private ImageView loadingImg;
@@ -123,7 +124,6 @@ public class GameActivity extends FragmentActivity {
     protected void onResume() {
         //new instance of game
         if (gameLoop == null) {
-            //Main screen
             gameLoop = new GameLoop(this, null);
         }
 
@@ -173,20 +173,21 @@ public class GameActivity extends FragmentActivity {
         });
 
         try {
-            AssetFileDescriptor afd = getAssets().openFd("sfx/02-danosongs.com-megacosm.mp3");
-            music = new MediaPlayer();
             music.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            AssetFileDescriptor afd = getAssets().openFd("sfx/02-danosongs.com-megacosm.mp3");
             music.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-            music.setLooping(true);
-            music.prepare();
+            final float volume = Settings.getConfig(this, Settings.MUSIC_VOLUME) * 0.01f;
             if (GameLoop.paused <= 0) {
                 music.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
                     public void onPrepared(MediaPlayer mp) {
+                        mp.setVolume(volume, volume);
+                        mp.setLooping(true);
                         mp.start();
                     }
                 });
             }
+            music.prepare();
         } catch (IOException e) {
             e.printStackTrace();
         }

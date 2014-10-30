@@ -15,7 +15,9 @@ import android.widget.VideoView;
 
 import com.lvonasek.o4s.R;
 import com.lvonasek.o4s.game.GameActivity;
+import com.lvonasek.o4s.media.Settings;
 import com.lvonasek.o4s.media.Sound;
+import com.lvonasek.o4s.ui.common.SeekBar;
 
 import java.io.IOException;
 
@@ -24,25 +26,28 @@ import java.io.IOException;
  */
 public class MainMenu extends Activity {
 
-    public static int buttonClick;
-    public int currentMenu = 0;
-    public LinearLayout aboutMenu;
-    public LinearLayout mainMenu;
-    public LinearLayout optionsMenu;
-    private static MediaPlayer music = new MediaPlayer();
-    private VideoView view = null;
+    public static  int          buttonClick = 0;
+    private static MediaPlayer  music       = new MediaPlayer();
+    private        int          currentMenu = 0;
+    private        LinearLayout aboutMenu   = null;
+    private        LinearLayout mainMenu    = null;
+    private        LinearLayout optionsMenu = null;
+    private        VideoView    view        = null;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.menu_main);
         view = (VideoView) findViewById(R.id.menu_background);
+        Settings.init(this);
         final Context c = this;
         aboutMenu = (LinearLayout) findViewById(R.id.menu_about);
         mainMenu = (LinearLayout) findViewById(R.id.menu_main);
         optionsMenu = (LinearLayout) findViewById(R.id.menu_options);
+        Sound.globalVolume = Settings.getConfig(c, Settings.SOUND_VOLUME) * 0.01f;
         try {
             buttonClick = Sound.snd.load(getAssets().openFd("sfx/button.wav"), 1);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -85,6 +90,50 @@ public class MainMenu extends Activity {
                 openMenu(0);
             }
         });
+        ((SeekBar)findViewById(R.id.options_music)).setOnSeekBarChangeListener(new android.widget.SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(android.widget.SeekBar seekBar, int value, boolean b) {
+                if (b) {
+                    Settings.setConfig(c, Settings.MUSIC_VOLUME, value);
+                    float volume = value * 0.01f;
+                    music.setVolume(volume, volume);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(android.widget.SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(android.widget.SeekBar seekBar) {}
+        });
+        ((SeekBar)findViewById(R.id.options_sound)).setOnSeekBarChangeListener(new android.widget.SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(android.widget.SeekBar seekBar, int value, boolean b) {
+                if (b) {
+                    Settings.setConfig(c, Settings.SOUND_VOLUME, value);
+                    Sound.globalVolume = value * 0.01f;
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(android.widget.SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(android.widget.SeekBar seekBar) {}
+        });
+        ((SeekBar)findViewById(R.id.options_visual)).setOnSeekBarChangeListener(new android.widget.SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(android.widget.SeekBar seekBar, int value, boolean b) {
+                if (b)
+                  Settings.setConfig(c, Settings.VISUAL_QUALITY, value);
+            }
+
+            @Override
+            public void onStartTrackingTouch(android.widget.SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(android.widget.SeekBar seekBar) {}
+        });
     }
 
     public void openMenu(int value) {
@@ -95,6 +144,9 @@ public class MainMenu extends Activity {
             aboutMenu.setVisibility(View.GONE);
         } else if (value == 1) //options
         {
+            ((SeekBar)findViewById(R.id.options_music)).setProgress(Settings.getConfig(this, Settings.MUSIC_VOLUME));
+            ((SeekBar)findViewById(R.id.options_sound)).setProgress(Settings.getConfig(this, Settings.SOUND_VOLUME));
+            ((SeekBar)findViewById(R.id.options_visual)).setProgress(Settings.getConfig(this, Settings.VISUAL_QUALITY));
             mainMenu.setVisibility(View.GONE);
             optionsMenu.setVisibility(View.VISIBLE);
             aboutMenu.setVisibility(View.GONE);
@@ -133,6 +185,7 @@ public class MainMenu extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+        final Context c = this;
         String path = "android.resource://" + getPackageName() + "/" + R.raw.menu_background;
         view.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -151,6 +204,8 @@ public class MainMenu extends Activity {
             music.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
+                    float volume = Settings.getConfig(c, Settings.MUSIC_VOLUME) * 0.01f;
+                    mp.setVolume(volume, volume);
                     mp.setLooping(true);
                     mp.start();
                 }
@@ -161,6 +216,7 @@ public class MainMenu extends Activity {
     }
 
     public static void playButtonSound() {
-        Sound.snd.play(buttonClick, 0.5f, 0.5f, 1, 1, 1);
+        float volume = Sound.globalVolume * 0.5f;
+        Sound.snd.play(buttonClick, volume, volume, 1, 0, 1);
     }
 }

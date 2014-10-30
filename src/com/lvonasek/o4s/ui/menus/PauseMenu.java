@@ -1,6 +1,7 @@
 package com.lvonasek.o4s.ui.menus;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +17,9 @@ import android.widget.RelativeLayout;
 import com.lvonasek.o4s.R;
 import com.lvonasek.o4s.game.GameActivity;
 import com.lvonasek.o4s.game.GameLoop;
+import com.lvonasek.o4s.media.Settings;
 import com.lvonasek.o4s.media.Sound;
+import com.lvonasek.o4s.ui.common.SeekBar;
 
 /**
  * Created by lubos on 31.7.14.
@@ -36,6 +39,7 @@ public class PauseMenu extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         int fs = WindowManager.LayoutParams.FLAG_FULLSCREEN;
+        final Context c = getActivity();
         ready = false;
         dialog = getDialog();
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -121,6 +125,39 @@ public class PauseMenu extends DialogFragment {
                 MainMenu.playButtonSound();
                 openDialog(0);
             }
+        });
+        ((SeekBar)view.findViewById(R.id.options_music)).setProgress(Settings.getConfig(c, Settings.MUSIC_VOLUME));
+        ((SeekBar)view.findViewById(R.id.options_music)).setOnSeekBarChangeListener(new android.widget.SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(android.widget.SeekBar seekBar, int value, boolean b) {
+                if (b) {
+                    Settings.setConfig(c, Settings.MUSIC_VOLUME, value);
+                    float volume = value * 0.01f;
+                    GameActivity.music.setVolume(volume, volume);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(android.widget.SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(android.widget.SeekBar seekBar) {}
+        });
+        ((SeekBar)view.findViewById(R.id.options_sound)).setProgress(Settings.getConfig(c, Settings.SOUND_VOLUME));
+        ((SeekBar)view.findViewById(R.id.options_sound)).setOnSeekBarChangeListener(new android.widget.SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(android.widget.SeekBar seekBar, int value, boolean b) {
+                if (b) {
+                    Settings.setConfig(c, Settings.SOUND_VOLUME, value);
+                    Sound.globalVolume = value * 0.01f;
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(android.widget.SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(android.widget.SeekBar seekBar) {}
         });
         return view;
     }

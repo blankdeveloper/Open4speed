@@ -111,16 +111,69 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
+            <com.lvonasek.o4s.ui.common.BigText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/button_margin"
+                android:layout_centerHorizontal="true"
+                android:text="@string/options_music"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="@dimen/text_height" />
+
+            <com.lvonasek.o4s.ui.common.SeekBar
+                android:layout_width="@dimen/seek_width"
+                android:layout_height="@dimen/seek_height"
+                android:gravity="center_vertical|center_horizontal"
+                android:max="100"
+                android:id="@+id/options_music" />
+
+            <com.lvonasek.o4s.ui.common.BigText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/button_margin"
+                android:layout_marginTop="@dimen/button_margin"
+                android:layout_centerHorizontal="true"
+                android:text="@string/options_sound"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="@dimen/text_height" />
+
+            <com.lvonasek.o4s.ui.common.SeekBar
+                android:layout_width="@dimen/seek_width"
+                android:layout_height="@dimen/seek_height"
+                android:layout_marginBottom="@dimen/seek_margin"
+                android:gravity="center_vertical|center_horizontal"
+                android:max="100"
+                android:id="@+id/options_sound" />
+
+            <com.lvonasek.o4s.ui.common.BigText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/button_margin"
+                android:layout_marginTop="@dimen/button_margin"
+                android:layout_centerHorizontal="true"
+                android:text="@string/options_visual"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="@dimen/text_height" />
+
+            <com.lvonasek.o4s.ui.common.SeekBar
+                android:layout_width="@dimen/seek_width"
+                android:layout_height="@dimen/seek_height"
+                android:layout_marginBottom="@dimen/seek_margin"
+                android:gravity="center_vertical|center_horizontal"
+                android:max="100"
+                android:id="@+id/options_visual" />
+
             <com.lvonasek.o4s.ui.common.DarkButton
                 android:id="@+id/menu_options_back"
                 android:layout_width="@dimen/button_width"
                 android:layout_height="@dimen/button_height"
-                android:layout_marginBottom="@dimen/button_margin"
-                android:layout_marginTop="@dimen/button_margin"
+                android:layout_marginTop="@dimen/seek_margin"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="@string/button_back"
                 android:textAlignment="gravity"
                 android:textSize="@dimen/button_text" />
+
         </LinearLayout>
     </LinearLayout>
 

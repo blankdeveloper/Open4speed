@@ -17,6 +17,8 @@ public class Sound {
 
     public static SoundPool snd = new SoundPool(16, AudioManager.STREAM_MUSIC, 0);
 
+    public static float globalVolume = 1;
+
     int id;
     boolean loop;
     boolean playing;
@@ -71,7 +73,7 @@ public class Sound {
         //audio clip
         if (GameLoop.paused == 0) {
             volume *= 0.25f;
-            this.volume = volume;
+            this.volume = volume * globalVolume;
         }
     }
 

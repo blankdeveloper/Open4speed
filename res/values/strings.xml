@@ -36,5 +36,9 @@
     <string name="menu_pause">Pause menu</string>
     <string name="menu_options">Options menu</string>
 
+    <string name="options_music">Music volume</string>
+    <string name="options_sound">Sound FX volume</string>
+    <string name="options_visual">Visual quality</string>
+
     <string name="ui_font">fonts/zerohour.ttf</string>
 </resources>

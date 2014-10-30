@@ -7,6 +7,7 @@ import android.opengl.GLSurfaceView;
 import android.opengl.GLSurfaceView.Renderer;
 import android.util.AttributeSet;
 
+import com.lvonasek.o4s.media.Settings;
 import com.lvonasek.o4s.media.Sound;
 
 import java.util.ArrayList;
@@ -96,7 +97,9 @@ public class GameLoop extends GLSurfaceView implements Renderer {
 
             //load game
             apkFilePath = appInfo.sourceDir;
-            init(apkFilePath, 1.0f);
+            float quality = 0.01f * Settings.getConfig(GameActivity.instance, Settings.VISUAL_QUALITY);
+            quality = 0.33f + 0.67f * quality;
+            init(apkFilePath, quality);
             GameActivity.instance.finishLoading();
         }
         GameActivity.instance.init = true;

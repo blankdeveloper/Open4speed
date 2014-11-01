@@ -36,7 +36,7 @@ public class MainMenu extends Activity {
 
     @Override
     public void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
+        super.onCreate(null);
         setContentView(R.layout.menu_main);
         view = (VideoView) findViewById(R.id.menu_background);
         Settings.init(this);

@@ -58,6 +58,8 @@ public class GameLoop extends GLSurfaceView implements Renderer {
      */
     public GameLoop(Context context, AttributeSet attrs) {
         super(context);
+        if (isInEditMode())
+            return;
         System.loadLibrary("open4speed");
         sounds = new ArrayList<Sound>();
         for (int i = 0; i < 1; i++) {
@@ -65,12 +67,10 @@ public class GameLoop extends GLSurfaceView implements Renderer {
             sounds.add(new Sound("sfx/engine.ogg", true));
             sounds.add(new Sound("sfx/engineplus.ogg", true));
         }
-        if (!isInEditMode()) {
-            //enable OpenGL ES 2.0 support
-            setEGLConfigChooser(8, 8, 8, 0, 16, 1);
-            setEGLContextClientVersion(2);
-            setRenderer(this);
-        }
+        //enable OpenGL ES 2.0 support
+        setEGLConfigChooser(8, 8, 8, 0, 16, 1);
+        setEGLContextClientVersion(2);
+        setRenderer(this);
     }
 
     /**
@@ -185,4 +185,5 @@ public class GameLoop extends GLSurfaceView implements Renderer {
     public synchronized native void loop();
     public synchronized native void resize(int w, int h);
     public synchronized native void unload();
+    public synchronized native void unlock();
 }

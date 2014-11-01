@@ -337,8 +337,6 @@ void loadScene(std::string filename) {
     }
     delete[] t.data;
     physic->addHeightmap(data, t.width, min, max);*/
-
-    physic->locked = false;
 }
 
 /**
@@ -589,6 +587,15 @@ void Java_com_lvonasek_o4s_game_GameLoop_loop( JNIEnv*  env, jobject  thiz ) {
  */
 void Java_com_lvonasek_o4s_game_GameLoop_unload( JNIEnv*  env, jobject  thiz ) {
   unload();
+}
+
+/**
+ * @brief Java_com_lvonasek_o4s_game_GameLoop_unlock unlocks physics
+ * @param env is instance of JNI
+ * @param thiz is asset manager
+ */
+void Java_com_lvonasek_o4s_game_GameLoop_unlock( JNIEnv*  env, jobject  thiz ) {
+    physic->locked = false;
 }
 
 /**

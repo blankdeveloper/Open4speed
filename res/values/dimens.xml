@@ -12,6 +12,10 @@
     <dimen name="seek_margin">10dp</dimen>
     <dimen name="seek_height">20dp</dimen>
 
+    <dimen name="start_width">100dp</dimen>
+    <dimen name="start_height">75dp</dimen>
+    <dimen name="start_pos">75dp</dimen>
+
     <dimen name="text_height">21dp</dimen>
     <dimen name="title_height">28dp</dimen>
     <dimen name="title_margin">20dp</dimen>

@@ -35,7 +35,7 @@ public class GameActivity extends FragmentActivity {
     public GameLoop            gameLoop   = null;
     public static boolean      init       = false;
     public static GameActivity instance   = null;
-    public static MediaPlayer music      = new MediaPlayer();
+    public static MediaPlayer  music      = new MediaPlayer();
 
     //splash items
     private ImageView loadingImg;
@@ -191,6 +191,59 @@ public class GameActivity extends FragmentActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        final ImageView[] start = {(ImageView) findViewById(R.id.start0),
+                                   (ImageView) findViewById(R.id.start1),
+                                   (ImageView) findViewById(R.id.start2),
+                                   (ImageView) findViewById(R.id.start3)};
+        new Thread(new Runnable() {
+
+            private void playSnd(int index) {
+                try {
+                    int id = Sound.snd.load(getAssets().openFd("sfx/start" + index + ".wav"), 1);
+                    Sound.snd.play(id, 1, 1, 1, 0, 1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            private void show(final ImageView[] start, final int index) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (int i = 0; i < start.length; i++) {
+                            if (i == index)
+                                start[i].setVisibility(View.VISIBLE);
+                            else
+                                start[i].setVisibility(View.GONE);
+                        }
+                    }
+                });
+            }
+
+            private void sleep() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void run() {
+                for (int i = 0; i < start.length; i++) {
+                    sleep();
+                    if ((i == 1) || (i == 2))
+                        playSnd(1);
+                    else if (i == 3)
+                        playSnd(2);
+                    show(start, i);
+                }
+                gameLoop.unlock();
+                sleep();
+                show(start, -1);
+            }
+        }).start();
     }
 
     public void pause() {
@@ -201,7 +254,6 @@ public class GameActivity extends FragmentActivity {
         PauseMenu pauseMenu = new PauseMenu();
         pauseMenu.show(fm, "menu_pause");
     }
-
 
     public void quit() {
         Sound.snd.autoPause();

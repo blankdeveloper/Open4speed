@@ -82,4 +82,44 @@
         android:textColor="#ffff0000"
         android:textSize="@dimen/button_text" />
 
+    <ImageView
+        android:layout_width="@dimen/start_width"
+        android:layout_height="@dimen/start_height"
+        android:id="@+id/start0"
+        android:src="@drawable/start0"
+        android:visibility="gone"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/start_pos" />
+
+    <ImageView
+        android:layout_width="@dimen/start_width"
+        android:layout_height="@dimen/start_height"
+        android:id="@+id/start1"
+        android:src="@drawable/start1"
+        android:visibility="gone"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/start_pos" />
+
+    <ImageView
+        android:layout_width="@dimen/start_width"
+        android:layout_height="@dimen/start_height"
+        android:id="@+id/start2"
+        android:src="@drawable/start2"
+        android:visibility="gone"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/start_pos" />
+
+    <ImageView
+        android:layout_width="@dimen/start_width"
+        android:layout_height="@dimen/start_height"
+        android:id="@+id/start3"
+        android:src="@drawable/start3"
+        android:visibility="gone"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/start_pos" />
+
 </RelativeLayout>

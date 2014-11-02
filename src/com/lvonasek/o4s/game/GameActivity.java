@@ -34,20 +34,19 @@ import java.io.IOException;
 public class GameActivity extends FragmentActivity {
 
     //various instances
+    public TextView            fpsCounter = null;
     public GameLoop            gameLoop   = null;
     public static boolean      init       = false;
     public static HudText[]    infopanel  = null;
     public static GameActivity instance   = null;
+    private ImageView          loadingImg = null;
     public static MediaPlayer  music      = new MediaPlayer();
     public static BigText      place      = null;
+    private ProgressBar        progressBar= null;
     public static BigText      restart    = null;
     public static int          restartable= 0;
     public static boolean      started    = false;
-
-    //splash items
-    private ImageView loadingImg;
-    private ProgressBar progressBar;
-    public TextView fpsCounter;
+    private int[]              startSnd   = null;
 
     @Override
     /**
@@ -81,6 +80,15 @@ public class GameActivity extends FragmentActivity {
 
         //set the hardware buttons to control the game sound
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+        //start sounds
+        startSnd = new int[2];
+        for (int i = 1; i <= startSnd.length; i++)
+            try {
+                startSnd[i - 1] = Sound.snd.load(getAssets().openFd("sfx/start" + i + ".wav"), 1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         //reload button click sound
         try {
@@ -220,12 +228,7 @@ public class GameActivity extends FragmentActivity {
         new Thread(new Runnable() {
 
             private void playSnd(int index) {
-                try {
-                    int id = Sound.snd.load(getAssets().openFd("sfx/start" + index + ".wav"), 1);
-                    Sound.snd.play(id, 1, 1, 1, 0, 1);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                Sound.snd.play(startSnd[index], 1, 1, 1, 0, 1);
             }
 
             private void show(final ImageView[] start, final int index) {
@@ -255,9 +258,9 @@ public class GameActivity extends FragmentActivity {
                 for (int i = 0; i < start.length; i++) {
                     sleep();
                     if ((i == 1) || (i == 2))
-                        playSnd(1);
+                        playSnd(0);
                     else if (i == 3)
-                        playSnd(2);
+                        playSnd(1);
                     show(start, i);
                 }
                 gameLoop.unlock();

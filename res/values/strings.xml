@@ -41,6 +41,7 @@
     <string name="hud_km">km</string>
     <string name="hud_kmh">kph</string>
     <string name="hud_place">place</string>
+    <string name="hud_restart">R</string>
 
     <string name="menu_title">Open4speed 2 demo</string>
     <string name="menu_pause">Pause menu</string>

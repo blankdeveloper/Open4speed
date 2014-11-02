@@ -3,10 +3,9 @@ sky_model tracks/sky.o4s
 track_edges tracks/track.o4s.e
 race_track 0
 player_car cars/02/params
-//race_start 80
-race_start 665
-laps 1
+race_start 80
+laps 2
 finish 478
-//opponent_count 2
+opponent_count 2
 opponent1_car cars/01/params
 opponent2_car cars/03/params

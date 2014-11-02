@@ -166,4 +166,16 @@
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/title_height"/>
 
+    <com.lvonasek.o4s.ui.common.BigText
+        android:id="@+id/restart"
+        android:layout_width="@dimen/arrow_size"
+        android:layout_height="@dimen/arrow_size"
+        android:layout_margin="@dimen/arrow_margin"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="@string/hud_restart"
+        android:textSize="@dimen/title_height"
+        android:visibility="gone" />
+
 </RelativeLayout>

@@ -210,8 +210,9 @@ public class GameLoop extends GLSurfaceView implements Renderer {
                         placeText = GameActivity.instance.getString(R.string.hud_6th);
                         break;
                 }
+                int speed = (int)carState(0, CAR_INFO_SPEED);
                 GameActivity.infopanel[0].setText(placeText);
-                GameActivity.infopanel[1].setText((int)carState(0, CAR_INFO_SPEED) + GameActivity.instance.getString(R.string.hud_kmh));
+                GameActivity.infopanel[1].setText(speed + GameActivity.instance.getString(R.string.hud_kmh));
                 GameActivity.infopanel[2].setText((dst / 10) + "." + (dst % 10) + GameActivity.instance.getString(R.string.hud_km));
 
                 if ((currentPlace == 0) && (distance <= 0)) {
@@ -231,6 +232,13 @@ public class GameLoop extends GLSurfaceView implements Renderer {
                         }
                     }).start();
                 }
+                if ((speed <= 5) && (GameActivity.restartable > 50)) {
+                    GameActivity.restart.setVisibility(View.VISIBLE);
+                } else if (GameActivity.started) {
+                    GameActivity.restart.setVisibility(View.GONE);
+                    if (speed > 5)
+                      GameActivity.restartable++;
+                }
             }
         });
     }
@@ -244,6 +252,7 @@ public class GameLoop extends GLSurfaceView implements Renderer {
     public synchronized native void display();
     public synchronized native void loop();
     public synchronized native void resize(int w, int h);
+    public synchronized native void restart();
     public synchronized native void unload();
     public synchronized native void unlock();
 }

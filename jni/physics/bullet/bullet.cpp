@@ -355,7 +355,7 @@ void bullet::resetCar(car* c) {
     c->setStart(c->currentEdge, 0);
     btTransform tr;
     tr.setIdentity();
-    tr.setOrigin(btVector3(c->pos.x,c->pos.y + 1,c->pos.z));
+    tr.setOrigin(btVector3(c->pos.x,c->pos.y + 2,c->pos.z));
     btQuaternion q;
     q.setRotation(btVector3(0,1,0), c->rot * 3.14 / 180.0);
     tr.setRotation(q);

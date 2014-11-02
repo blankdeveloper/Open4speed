@@ -40,6 +40,9 @@ public class GameActivity extends FragmentActivity {
     public static GameActivity instance   = null;
     public static MediaPlayer  music      = new MediaPlayer();
     public static BigText      place      = null;
+    public static BigText      restart    = null;
+    public static int          restartable= 0;
+    public static boolean      started    = false;
 
     //splash items
     private ImageView loadingImg;
@@ -67,6 +70,7 @@ public class GameActivity extends FragmentActivity {
         loadingImg = (ImageView) findViewById(R.id.loading);
         place = (BigText) findViewById(R.id.place);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        restart = (BigText) findViewById(R.id.restart);
 
         //keep screen on
         final Window win = getWindow();
@@ -85,6 +89,15 @@ public class GameActivity extends FragmentActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainMenu.playButtonSound();
+                restartable = 0;
+                gameLoop.restart();
+            }
+        });
     }
 
     @Override
@@ -250,6 +263,7 @@ public class GameActivity extends FragmentActivity {
                 gameLoop.unlock();
                 sleep();
                 show(start, -1);
+                started = true;
             }
         }).start();
     }

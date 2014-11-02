@@ -506,7 +506,7 @@ extern "C" {
  * @brief Java_com_lvonasek_o4s_game_GameLoop_init is init method
  * @param env is instance of JNI
  */
-void Java_com_lvonasek_o4s_game_GameLoop_init( JNIEnv*  env, jclass cls, jstring apkPath, float alias ) {
+void Java_com_lvonasek_o4s_game_GameLoop_init( JNIEnv* env, jclass cls, jstring apkPath, float alias ) {
   jboolean isCopy;
   APKArchive = zip_open(env->GetStringUTFChars(apkPath, &isCopy), 0, NULL);
   aliasing = alias;
@@ -519,63 +519,70 @@ void Java_com_lvonasek_o4s_game_GameLoop_init( JNIEnv*  env, jclass cls, jstring
  * @param w is display width
  * @param h is display height
  */
-void Java_com_lvonasek_o4s_game_GameLoop_resize( JNIEnv*  env, jobject  thiz, jint w, jint h ) {
+void Java_com_lvonasek_o4s_game_GameLoop_resize( JNIEnv* env, jobject object, jint w, jint h ) {
   reshape(w, h);
+}
+/**
+ * @brief Java_com_lvonasek_o4s_game_GameLoop_restart restarts player car
+ * @param env is instance of JNI
+ */
+void Java_com_lvonasek_o4s_game_GameLoop_restart( JNIEnv* env, jobject object) {
+  physic->resetCar(allCar[0]);
 }
 
 /**
  * @brief Java_com_lvonasek_o4s_game_GameLoop_key is key press method
  * @param env is instance of JNI
- * @param thiz is asset manager
+ * @param object is asset manager
  * @param code is key code
  */
-void Java_com_lvonasek_o4s_game_GameLoop_key( JNIEnv*  env, jobject  thiz, jint code ) {
+void Java_com_lvonasek_o4s_game_GameLoop_key( JNIEnv* env, jobject object, jint code ) {
   special(code, 0, 0);
 }
 
 /**
  * @brief Java_com_lvonasek_o4s_game_GameLoop_keyUp is key release method
  * @param env is instance of JNI
- * @param thiz is asset manager
+ * @param object is asset manager
  * @param code is key code
  */
-void Java_com_lvonasek_o4s_game_GameLoop_keyUp( JNIEnv*  env, jobject  thiz, jint code ) {
+void Java_com_lvonasek_o4s_game_GameLoop_keyUp( JNIEnv* env, jobject object, jint code ) {
   specialUp(code, 0, 0);
 }
 
 /**
  * @brief Java_com_lvonasek_o4s_game_GameLoop_display is display method
  * @param env is instance of JNI
- * @param thiz is asset manager
+ * @param object is asset manager
  */
-void Java_com_lvonasek_o4s_game_GameLoop_display( JNIEnv*  env, jobject  thiz ) {
+void Java_com_lvonasek_o4s_game_GameLoop_display( JNIEnv* env, jobject object ) {
   display();
 }
 
 /**
  * @brief Java_com_lvonasek_o4s_game_GameLoop_loop is loop method
  * @param env is instance of JNI
- * @param thiz is asset manager
+ * @param object is asset manager
  */
-void Java_com_lvonasek_o4s_game_GameLoop_loop( JNIEnv*  env, jobject  thiz ) {
+void Java_com_lvonasek_o4s_game_GameLoop_loop( JNIEnv* env, jobject object ) {
   idle(0);
 }
 
 /**
  * @brief Java_com_lvonasek_o4s_game_GameLoop_unload unloads resources
  * @param env is instance of JNI
- * @param thiz is asset manager
+ * @param object is asset manager
  */
-void Java_com_lvonasek_o4s_game_GameLoop_unload( JNIEnv*  env, jobject  thiz ) {
+void Java_com_lvonasek_o4s_game_GameLoop_unload( JNIEnv* env, jobject object ) {
   unload();
 }
 
 /**
  * @brief Java_com_lvonasek_o4s_game_GameLoop_unlock unlocks physics
  * @param env is instance of JNI
- * @param thiz is asset manager
+ * @param object is asset manager
  */
-void Java_com_lvonasek_o4s_game_GameLoop_unlock( JNIEnv*  env, jobject  thiz ) {
+void Java_com_lvonasek_o4s_game_GameLoop_unlock( JNIEnv* env, jobject object ) {
     physic->locked = false;
 }
 
@@ -583,7 +590,7 @@ void Java_com_lvonasek_o4s_game_GameLoop_unlock( JNIEnv*  env, jobject  thiz ) {
  * @brief Java_com_lvonasek_o4s_game_GameLoop_carCount is amount of cars
  * @param env is instance of JNI
  */
-jint Java_com_lvonasek_o4s_game_GameLoop_carCount( JNIEnv*  env ) {
+jint Java_com_lvonasek_o4s_game_GameLoop_carCount( JNIEnv* env ) {
   return allCar.size();
 }
 
@@ -591,7 +598,7 @@ jint Java_com_lvonasek_o4s_game_GameLoop_carCount( JNIEnv*  env ) {
  * @brief Java_com_lvonasek_o4s_game_GameLoop_carState is information about car
  * @param env is instance of JNI
  */
-jfloat Java_com_lvonasek_o4s_game_GameLoop_carState( JNIEnv*  env, jobject  thiz, jint index, jint type ) {
+jfloat Java_com_lvonasek_o4s_game_GameLoop_carState( JNIEnv* env, jobject object, jint index, jint type ) {
     if (type == 0)
         return allCar[index]->speed;
     if (type == 1)

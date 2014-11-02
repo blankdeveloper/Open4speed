@@ -30,6 +30,7 @@ varying vec3 v_Sun;
 void main()
 {
   vec4 diffuse = texture2D(color_texture, v_Coords);
+  diffuse.rgb *= 1.1;
   
   //reflect
   vec3 N = v_Normal - 0.5 + 1.0 * diffuse.rgb;

@@ -6,9 +6,44 @@
     <com.lvonasek.o4s.game.GameLoop
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:id="@+id/game_screen" />
+        android:id="@+id/game_screen"
+        android:layout_below="@+id/infopanel" />
+
+    <LinearLayout
+        android:id="@+id/infopanel"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_height"
+        android:orientation="horizontal"
+        android:background="@drawable/hud_background" >
+
+        <com.lvonasek.o4s.ui.common.HudText
+            android:id="@+id/infopanel1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="@dimen/text_height" />
+
+        <com.lvonasek.o4s.ui.common.HudText
+            android:id="@+id/infopanel2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="@dimen/text_height" />
+
+        <com.lvonasek.o4s.ui.common.HudText
+            android:id="@+id/infopanel3"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="@dimen/text_height" />
+    </LinearLayout>
 
     <com.lvonasek.o4s.controllers.VirtualKey
         android:layout_width="@dimen/arrow_size"
@@ -121,5 +156,14 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/start_pos" />
+
+    <com.lvonasek.o4s.ui.common.BigText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/place"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/title_height"/>
 
 </RelativeLayout>

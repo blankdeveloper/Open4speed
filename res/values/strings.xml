@@ -32,6 +32,16 @@
     <string name="button_resume">Resume</string>
     <string name="button_start_game">Start game</string>
 
+    <string name="hud_1st">1st</string>
+    <string name="hud_2nd">2nd</string>
+    <string name="hud_3rd">3rd</string>
+    <string name="hud_4th">4th</string>
+    <string name="hud_5th">5th</string>
+    <string name="hud_6th">6th</string>
+    <string name="hud_km">km</string>
+    <string name="hud_kmh">kph</string>
+    <string name="hud_place">place</string>
+
     <string name="menu_title">Open4speed 2 demo</string>
     <string name="menu_pause">Pause menu</string>
     <string name="menu_options">Options menu</string>

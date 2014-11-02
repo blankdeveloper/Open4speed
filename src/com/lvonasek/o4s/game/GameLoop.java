@@ -6,7 +6,9 @@ import android.content.pm.PackageManager;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLSurfaceView.Renderer;
 import android.util.AttributeSet;
+import android.view.View;
 
+import com.lvonasek.o4s.R;
 import com.lvonasek.o4s.media.Settings;
 import com.lvonasek.o4s.media.Sound;
 
@@ -40,10 +42,11 @@ public class GameLoop extends GLSurfaceView implements Renderer {
     public static final int CAR_INFO_SNDENGINE2 = 15;
     public static final int CAR_INFO_SNDN2O = 16;
     public static final int CAR_INFO_SNDRATE = 17;
+    public static final int CAR_INFO_TOFINISH = 18;
 
     //Game state
-    public static int     paused  = 0;
-
+    public int            currentPlace = 0;
+    public static int     paused       = 0;
     // instance of sounds
     private static ArrayList<Sound> sounds;
 
@@ -98,7 +101,7 @@ public class GameLoop extends GLSurfaceView implements Renderer {
             //load game
             apkFilePath = appInfo.sourceDir;
             float quality = 0.01f * Settings.getConfig(GameActivity.instance, Settings.VISUAL_QUALITY);
-            quality = 0.33f + 0.67f * quality;
+            quality = 0.25f + 0.75f * quality;
             init(apkFilePath, quality);
             GameActivity.instance.finishLoading();
         }
@@ -173,6 +176,63 @@ public class GameLoop extends GLSurfaceView implements Renderer {
                     sounds.get(j).stop();
             }
         }
+
+        //update HUD
+        GameActivity.instance.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                int count = carCount();
+                int place = 1;
+                float distance = carState(0, CAR_INFO_TOFINISH);
+                for (int i = 1; i < count; i++) {
+                    if (distance > carState(i, CAR_INFO_TOFINISH))
+                        place++;
+                }
+                int dst = Math.max(0, (int)(distance * 0.01));
+                String placeText = "";
+                switch(place) {
+                    case(1):
+                        placeText = GameActivity.instance.getString(R.string.hud_1st);
+                        break;
+                    case(2):
+                        placeText = GameActivity.instance.getString(R.string.hud_2nd);
+                        break;
+                    case(3):
+                        placeText = GameActivity.instance.getString(R.string.hud_3rd);
+                        break;
+                    case(4):
+                        placeText = GameActivity.instance.getString(R.string.hud_4th);
+                        break;
+                    case(5):
+                        placeText = GameActivity.instance.getString(R.string.hud_5th);
+                        break;
+                    case(6):
+                        placeText = GameActivity.instance.getString(R.string.hud_6th);
+                        break;
+                }
+                GameActivity.infopanel[0].setText(placeText);
+                GameActivity.infopanel[1].setText((int)carState(0, CAR_INFO_SPEED) + GameActivity.instance.getString(R.string.hud_kmh));
+                GameActivity.infopanel[2].setText((dst / 10) + "." + (dst % 10) + GameActivity.instance.getString(R.string.hud_km));
+
+                if ((currentPlace == 0) && (distance <= 0)) {
+                    currentPlace = place;
+                    GameActivity.place.setText(placeText + " " + GameActivity.instance.getString(R.string.hud_place));
+                    GameActivity.place.setVisibility(View.VISIBLE);
+                    new Thread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(5000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            GameActivity.instance.quit();
+                        }
+                    }).start();
+                }
+            }
+        });
     }
 
     //C++ methods

@@ -18,6 +18,8 @@ import com.lvonasek.o4s.R;
 import com.lvonasek.o4s.controllers.HWKeys;
 import com.lvonasek.o4s.media.Settings;
 import com.lvonasek.o4s.media.Sound;
+import com.lvonasek.o4s.ui.common.BigText;
+import com.lvonasek.o4s.ui.common.HudText;
 import com.lvonasek.o4s.ui.menus.MainMenu;
 import com.lvonasek.o4s.ui.menus.PauseMenu;
 
@@ -34,8 +36,10 @@ public class GameActivity extends FragmentActivity {
     //various instances
     public GameLoop            gameLoop   = null;
     public static boolean      init       = false;
+    public static HudText[]    infopanel  = null;
     public static GameActivity instance   = null;
     public static MediaPlayer  music      = new MediaPlayer();
+    public static BigText      place      = null;
 
     //splash items
     private ImageView loadingImg;
@@ -49,7 +53,6 @@ public class GameActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //init
         super.onCreate(savedInstanceState);
-
         requestWindowFeature(Window.FEATURE_PROGRESS);
         setProgressBarVisibility(true);
 
@@ -57,7 +60,12 @@ public class GameActivity extends FragmentActivity {
         setContentView(R.layout.race);
         fpsCounter = (TextView) findViewById(R.id.fpsCounter);
         gameLoop = (GameLoop) findViewById(R.id.game_screen);
+        infopanel = new HudText[3];
+        infopanel[0] = (HudText) findViewById(R.id.infopanel1);
+        infopanel[1] = (HudText) findViewById(R.id.infopanel2);
+        infopanel[2] = (HudText) findViewById(R.id.infopanel3);
         loadingImg = (ImageView) findViewById(R.id.loading);
+        place = (BigText) findViewById(R.id.place);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         //keep screen on

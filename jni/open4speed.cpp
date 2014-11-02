@@ -352,26 +352,6 @@ void idle(int v) {
         /// update scene
         physic->updateWorld();
 
-        /// if race finished show result
-        if (allCar[0]->lapsToGo == -1) {
-            int variable = 0;
-            /// count player place
-            for (unsigned int j = 0; j < allCar.size(); j++) {
-                if (allCar[cameraCar]->toFinish >= allCar[j]->toFinish) {
-                    variable++;
-                }
-            }
-
-            //TODO what happend if player finish race
-        }
-        /// another test if race is finished(solve finish line position problem)
-        if (allCar[0]->lapsToGo == -1) {
-            if (distance(allCar[cameraCar]->pos, allCar[cameraCar]->currentGoalEdge.b) < 25) {
-
-                //TODO what happend if player finish race
-            }
-        }
-
         /// update cars
         for (unsigned int i = 0; i < allCar.size(); i++) {
             /// update current edge for navigation
@@ -508,6 +488,7 @@ int main(int argc, char** argv) {
 
     /// start loop
 #ifndef ANDROID
+    physic->locked = false;
     atexit(unload);
     glutTimerFunc(0,idle,0);
     glutMainLoop();
@@ -650,6 +631,8 @@ jfloat Java_com_lvonasek_o4s_game_GameLoop_carState( JNIEnv*  env, jobject  thiz
         return allCar[index]->sndN2O;
     if (type == 17)
         return allCar[index]->sndRate;
+    if (type == 18)
+        return allCar[index]->toFinish;
     return 0;
 }
 }

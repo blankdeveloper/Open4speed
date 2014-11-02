@@ -47,6 +47,7 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
     reverse = false;
     resetAllowed = false;
     resetRequested = false;
+    toFinish = 0;
 
     /// create matrices
     transform = new matrix[5];
@@ -179,7 +180,7 @@ void car::update() {
         std::vector<int> nEdges = nextEdge(edges, currentGoalEdge);
         if (nEdges.size() > 0) {
             if (isSame(edges[nEdges[0]], edges[finishEdge])) {
-                if (distance(pos, currentGoalEdge.b) < 25) {
+                if (distance(pos, currentGoalEdge.b) < 50) {
                     toFinish -= glm::length(cge.a - cge.b);
                     currentEdgeIndex = nEdges[0];
                     currentGoalEdge = edges[nEdges[0]];

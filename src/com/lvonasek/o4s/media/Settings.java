@@ -22,7 +22,7 @@ public class Settings {
         Display display = instance.getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        int level = (int) ((Math.max(size.x, size.y) - 800) / 4.8f);
+        int level = 25 + (int) ((Math.max(size.x, size.y) - 800) / 6.4f);
         level = Math.max(0, Math.min(level, 100));
         DEFAULT_VALUES[VISUAL_QUALITY] = level;
         Log.v("Open4speed", "Default visual quality=" + level);

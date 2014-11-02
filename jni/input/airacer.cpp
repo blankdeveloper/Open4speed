@@ -2,7 +2,7 @@
 /**
  * \file       airacer.cpp
  * \author     Vonasek Lubos
- * \date       2014/01/05
+ * \date       2014/11/01
  * \brief      Car control device(or script) for navigating car on scene
 */
 //----------------------------------------------------------------------------------------

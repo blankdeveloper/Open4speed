@@ -14,7 +14,8 @@ import android.widget.Button;
 import com.lvonasek.o4s.R;
 
 /**
- * Created by lubos on 1.8.14.
+ * GUI component for nice button rendering
+ * @author Lubos Vonasek
  */
 public class DarkButton extends Button {
     public DarkButton(Context context, AttributeSet attrs) {

@@ -7,6 +7,10 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.TextView;
 
+/**
+ * GUI component for fast text rendering
+ * @author Lubos Vonasek
+ */
 public class SimpleText extends TextView {
 
     public SimpleText(Context context, AttributeSet attrs) {

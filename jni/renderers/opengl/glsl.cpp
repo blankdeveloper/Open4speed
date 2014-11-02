@@ -2,7 +2,7 @@
 /**
  * \file       glsl.cpp
  * \author     Vonasek Lubos
- * \date       2014/01/05
+ * \date       2014/11/01
  * \brief      Class for compiling and operating on GLSL shader
 */
 //----------------------------------------------------------------------------------------

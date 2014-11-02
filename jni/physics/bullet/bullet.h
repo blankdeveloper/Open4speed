@@ -2,7 +2,7 @@
 /**
  * \file       bullet.h
  * \author     Vonasek Lubos
- * \date       2014/01/05
+ * \date       2014/11/01
  * \brief      Physical model for scene, it detects collision and also calculate collision
  *             reactions. Also applies car physical and visual state.
 */

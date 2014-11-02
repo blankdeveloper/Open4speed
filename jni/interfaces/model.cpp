@@ -2,7 +2,7 @@
 /**
  * \file       model.h
  * \author     Vonasek Lubos
- * \date       2014/02/11
+ * \date       2014/11/01
  * \brief      Loading and storing models
 */
 //----------------------------------------------------------------------------------------

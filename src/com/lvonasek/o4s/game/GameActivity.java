@@ -28,7 +28,6 @@ import java.io.IOException;
 /**
  * Runnable class - it sets environment and run everything needed. It also manages interruptions of
  * sounds and game loop(e.g.during incoming call)
- *
  * @author Lubos Vonasek
  */
 public class GameActivity extends FragmentActivity {

@@ -2,7 +2,7 @@
 /**
  * \file       renderer.h
  * \author     Vonasek Lubos
- * \date       2014/02/23
+ * \date       2014/11/01
  * \brief      Renderer draws geometry and other things on screen
 */
 //----------------------------------------------------------------------------------------

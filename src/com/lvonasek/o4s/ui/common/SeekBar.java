@@ -13,6 +13,10 @@ import android.widget.TextView;
 
 import com.lvonasek.o4s.R;
 
+/**
+ * GUI component for nice seekbar rendering
+ * @author Lubos Vonasek
+ */
 public class SeekBar extends android.widget.SeekBar {
 
     public SeekBar(Context context, AttributeSet attrs) {

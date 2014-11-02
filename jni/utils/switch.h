@@ -2,7 +2,7 @@
 /**
  * \file       switch.h
  * \author     Vonasek Lubos
- * \date       2014/01/05
+ * \date       2014/11/01
  * \brief      This utility switches between components. Switch depends on configuration
  *             file.
 */

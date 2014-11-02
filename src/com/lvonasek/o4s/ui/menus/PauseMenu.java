@@ -22,7 +22,8 @@ import com.lvonasek.o4s.media.Sound;
 import com.lvonasek.o4s.ui.common.SeekBar;
 
 /**
- * Created by lubos on 31.7.14.
+ * Implementation of pause menu dialog with all actions
+ * @author Lubos Vonasek
  */
 public class PauseMenu extends DialogFragment {
 

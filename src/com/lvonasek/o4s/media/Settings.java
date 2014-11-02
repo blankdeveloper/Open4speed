@@ -8,7 +8,8 @@ import android.util.Log;
 import android.view.Display;
 
 /**
- * Created by lubos on 28.10.14.
+ * Settings manager for holding game config and state
+ * @author Lubos Vonasek
  */
 public class Settings {
 

@@ -2,7 +2,7 @@
 /**
  * \file       glfbo.cpp
  * \author     Vonasek Lubos
- * \date       2014/02/10
+ * \date       2014/11/01
  * \brief      Framebuffer object class for OpenGL
 */
 //----------------------------------------------------------------------------------------

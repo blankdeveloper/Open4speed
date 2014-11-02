@@ -2,7 +2,7 @@
 /**
  * \file       texture.h
  * \author     Vonasek Lubos
- * \date       2014/01/05
+ * \date       2014/11/01
  * \brief      Loading and storing textures
 */
 //----------------------------------------------------------------------------------------

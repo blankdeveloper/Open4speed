@@ -22,7 +22,8 @@ import com.lvonasek.o4s.ui.common.SeekBar;
 import java.io.IOException;
 
 /**
- * Created by lubos on 31.7.14.
+ * Implementation of main menu activity with all actions, background player, etc.
+ * @author Lubos Vonasek
  */
 public class MainMenu extends Activity {
 

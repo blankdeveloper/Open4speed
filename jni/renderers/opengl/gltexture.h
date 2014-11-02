@@ -2,7 +2,7 @@
 /**
  * \file       gltexture.h
  * \author     Vonasek Lubos
- * \date       2014/02/08
+ * \date       2014/11/01
  * \brief      Loading and storing textures in OpenGL
 */
 //----------------------------------------------------------------------------------------

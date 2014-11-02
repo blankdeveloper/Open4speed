@@ -2,7 +2,7 @@
 /**
  * \file       pngloader.cpp
  * \author     Vonasek Lubos
- * \date       2014/02/09
+ * \date       2014/11/01
  * \brief      Loading and storing textures from PNG
 */
 //----------------------------------------------------------------------------------------

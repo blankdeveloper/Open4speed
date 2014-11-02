@@ -2,7 +2,7 @@
 /**
  * \file       math.h
  * \author     Vonasek Lubos
- * \date       2014/02/25
+ * \date       2014/11/01
  * \brief      Common math utils used in program.
 */
 //----------------------------------------------------------------------------------------

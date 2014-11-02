@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import com.lvonasek.o4s.R;
 
+/**
+ * GUI component for nice text rendering
+ * @author Lubos Vonasek
+ */
 public class BigText extends TextView {
 
     public BigText(Context context, AttributeSet attrs) {

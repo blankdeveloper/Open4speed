@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import com.lvonasek.o4s.R;
 
+/**
+ * GUI component for nice and fast text rendering
+ * @author Lubos Vonasek
+ */
 public class HudText extends TextView {
 
     private String lastText;

@@ -2,7 +2,7 @@
 /**
  * \file       car.h
  * \author     Vonasek Lubos
- * \date       2014/01/05
+ * \date       2014/11/01
  * \brief      Class for rendering car and updating navigation on track. It also loads
  *             informations about physical powers of current car.
 */

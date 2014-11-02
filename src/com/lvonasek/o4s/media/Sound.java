@@ -11,7 +11,8 @@ import com.lvonasek.o4s.game.GameLoop;
 import java.io.IOException;
 
 /**
- * Structure for sound
+ * Sound FX player and holder
+ * @author Lubos Vonasek
  */
 public class Sound {
 

@@ -2,7 +2,7 @@
 /**
  * \file       gles20.cpp
  * \author     Vonasek Lubos
- * \date       2014/02/14
+ * \date       2014/11/01
  * \brief      GL renderer draws geometry and other things on screen
 */
 //----------------------------------------------------------------------------------------

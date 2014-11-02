@@ -2,7 +2,7 @@
 /**
  * \file       modelo4s.h
  * \author     Vonasek Lubos
- * \date       2014/01/05
+ * \date       2014/11/01
  * \brief      Class for loading models into OpenGL list, it parse full model file, apply
  *             textures, materials and blending.
 */

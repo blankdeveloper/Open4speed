@@ -115,7 +115,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:textColor="#ffff0000"
-        android:textSize="@dimen/button_text" />
+        android:textSize="@dimen/button_text"
+        android:visibility="gone" />
 
     <ImageView
         android:layout_width="@dimen/start_width"

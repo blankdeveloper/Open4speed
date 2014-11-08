@@ -2,7 +2,7 @@
 /**
  * \file       gles20.cpp
  * \author     Vonasek Lubos
- * \date       2014/11/01
+ * \date       2014/11/08
  * \brief      GL renderer draws geometry and other things on screen
 */
 //----------------------------------------------------------------------------------------
@@ -453,10 +453,6 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     current->uniformFloat4("u_light_att", light.u_light_att.x, light.u_light_att.y, light.u_light_att.z, 1.0);
     current->uniformFloat4("u_light_dir", light.u_light_dir.x, light.u_light_dir.y, light.u_light_dir.z, 1.0);
     current->uniformFloat4("u_nearest1", light.u_nearest1.x, light.u_nearest1.y, light.u_nearest1.z, 1.0);
-
-    /// post sun vector as uniform into shader
-    glm::vec3 sun = glm::normalize(glm::vec3(0.5, -1.0, 0.0));
-    current->uniformFloat4("u_sun_dir", sun.x, sun.y, sun.z, 0);
 
     /// standart vertices
     if (mod->cutX * mod->cutY == 1) {

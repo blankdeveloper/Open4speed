@@ -1,5 +1,6 @@
 track_model tracks/track.o4s
 sky_model tracks/sky.o4s
+shaders shaders/
 track_edges tracks/track.o4s.e
 race_track 0
 player_car cars/02/params

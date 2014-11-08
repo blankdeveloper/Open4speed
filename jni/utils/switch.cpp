@@ -2,7 +2,7 @@
 /**
  * \file       switch.cpp
  * \author     Vonasek Lubos
- * \date       2014/11/01
+ * \date       2014/11/08
  * \brief      This utility switches between components. Switch depends on configuration
  *             file.
 */
@@ -19,6 +19,7 @@
 #include "renderers/opengl/glvbo.h"
 #include "utils/io.h"
 #include "utils/switch.h"
+#include "common.h"
 
 /**
  * @brief The game resources
@@ -107,7 +108,7 @@ shader* getShader(std::string name) {
     }
 
     char filename[256];
-    strcpy(filename, "shaders/");
+    strcpy(filename, shaderPath.c_str());
     strcat(filename, name.c_str());
     strcat(filename, ".glsl");
     logi("Load shader:", filename);

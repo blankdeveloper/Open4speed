@@ -1,10 +1,12 @@
 VERT
 uniform mat4 u_Matrix;
-uniform vec4 u_sun_dir;
 attribute vec3 v_vertex;
 attribute vec2 v_coord;
 varying vec2 v_Coords;
 varying float v_Intensity;
+
+const vec4 u_sun_dir = vec4(0.5, -1.0, 0.0, 0.0);
+
 void main()
 {
     v_Coords = v_coord;

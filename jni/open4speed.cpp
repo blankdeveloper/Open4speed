@@ -2,7 +2,7 @@
 /**
  * \file       open4speed.cpp
  * \author     Vonasek Lubos
- * \date       2014/11/01
+ * \date       2014/11/08
  * \brief      Runable code of project.
 */
 //----------------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ model *trackdata;               ///< Track first model
 model* water;                   ///< Water effect model
 renderer *xrenderer = 0;        ///< Renderer instance
 Dynamic eff[effLen];            ///< 3D water effect object
-vbo* effectVBO[effLen];
+vbo* effectVBO[effLen];         ///< 3D water effect geometry
 
 /**
  * @brief display updates display
@@ -245,6 +245,7 @@ void loadScene(std::string filename) {
 
     /// load track
     std::vector<std::string> atributes = getList("", filename);
+    shaderPath = getConfigStr("shaders", atributes);
     trackdata = getModel(getConfigStr("track_model", atributes));
 
     /// load edges

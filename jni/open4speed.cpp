@@ -98,10 +98,10 @@ void display(void) {
 
     /// set light
     xrenderer->light.u_light_diffuse = glm::vec4(1000.0, 1000.0, 900.0, 0);
-    xrenderer->light.u_light_cut = cos(120.0 * 3.14 / 180.0);
+    xrenderer->light.u_light_cut = cos(60.0 * 3.14 / 180.0);
     xrenderer->light.u_light_spot_eff = 5.0;
     xrenderer->light.u_light_att = glm::vec4(5.0, 25.0, 125.0, 0);
-    xrenderer->light.u_light_dir = glm::vec4(0.0, 0.75, 1.0, 0);
+    xrenderer->light.u_light_dir = glm::vec4(0.0, 0.5, 1.0, 0);
     xrenderer->pushMatrix();
     float* mat = allCar[cameraCar]->transform[0].value;
     glm::mat4x4 bulletMat = glm::mat4x4(mat[0], mat[1], mat[2], mat[3],
@@ -485,7 +485,7 @@ int main(int argc, char** argv) {
 #endif
 
     /// load data
-    loadScene("tracks/track1");
+    loadScene("tracks/track2");
 
     /// start loop
 #ifndef ANDROID

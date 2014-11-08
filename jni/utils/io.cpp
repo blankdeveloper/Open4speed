@@ -150,7 +150,7 @@ std::vector<std::string> getList(std::string tag, std::string filename) {
        else if (value[0] == '#') {
            /// import file
            char name[1024];
-           sscanf(value,"#import %s", name);
+           sscanf(value,"#include %s", name);
            imports.push_back(std::string(name));
        }
 

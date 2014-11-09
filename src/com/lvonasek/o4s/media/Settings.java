@@ -16,8 +16,9 @@ public class Settings {
     public static final int          MUSIC_VOLUME   = 0;
     public static final int          SOUND_VOLUME   = 1;
     public static final int          VISUAL_QUALITY = 2;
+    public static final int          RACE_EVENT     = 3;
 
-    private static int[]             DEFAULT_VALUES = {100, 100, 100};
+    private static int[]             DEFAULT_VALUES = {100, 100, 100, 0};
 
     public static void init(Activity instance) {
         Display display = instance.getWindowManager().getDefaultDisplay();

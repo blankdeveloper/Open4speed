@@ -14,9 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.VideoView;
 
 import com.lvonasek.o4s.R;
-import com.lvonasek.o4s.game.GameActivity;
 import com.lvonasek.o4s.media.Settings;
 import com.lvonasek.o4s.media.Sound;
+import com.lvonasek.o4s.ui.common.RaceButton;
 import com.lvonasek.o4s.ui.common.SeekBar;
 
 import java.io.IOException;
@@ -33,18 +33,25 @@ public class MainMenu extends Activity {
     private        LinearLayout aboutMenu   = null;
     private        LinearLayout mainMenu    = null;
     private        LinearLayout optionsMenu = null;
+    private        LinearLayout startMenu   = null;
     private        VideoView    view        = null;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(null);
-        setContentView(R.layout.menu_main);
+        try {
+            setContentView(R.layout.menu_main);
+        } catch(Exception e) {
+            startActivity(new Intent(this, MainMenu.class));
+            System.exit(0);
+        }
         view = (VideoView) findViewById(R.id.menu_background);
         Settings.init(this);
         final Context c = this;
         aboutMenu = (LinearLayout) findViewById(R.id.menu_about);
         mainMenu = (LinearLayout) findViewById(R.id.menu_main);
         optionsMenu = (LinearLayout) findViewById(R.id.menu_options);
+        startMenu = (LinearLayout) findViewById(R.id.menu_start);
         Sound.globalVolume = Settings.getConfig(c, Settings.SOUND_VOLUME) * 0.01f;
         try {
             buttonClick = Sound.snd.load(getAssets().openFd("sfx/button.wav"), 1);
@@ -58,21 +65,21 @@ public class MainMenu extends Activity {
             @Override
             public void onClick(View view) {
                 playButtonSound();
-                startActivity(new Intent(c, GameActivity.class));
+                openMenu(1);
             }
         });
         findViewById(R.id.menu_main_options).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 playButtonSound();
-                openMenu(1);
+                openMenu(2);
             }
         });
         findViewById(R.id.menu_main_about).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 playButtonSound();
-                openMenu(2);
+                openMenu(3);
             }
         });
         findViewById(R.id.menu_main_exit).setOnClickListener(new View.OnClickListener() {
@@ -83,14 +90,11 @@ public class MainMenu extends Activity {
             }
         });
 
+        //start menu
+        ((RaceButton)findViewById(R.id.menu_start_race1)).setRace(c, 0);
+        ((RaceButton)findViewById(R.id.menu_start_race2)).setRace(c, 1);
+
         //options menu
-        findViewById(R.id.menu_options_back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playButtonSound();
-                openMenu(0);
-            }
-        });
         ((SeekBar)findViewById(R.id.options_music)).setOnSeekBarChangeListener(new android.widget.SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(android.widget.SeekBar seekBar, int value, boolean b) {
@@ -141,19 +145,28 @@ public class MainMenu extends Activity {
         if (value == 0) //main
         {
             mainMenu.setVisibility(View.VISIBLE);
+            startMenu.setVisibility(View.GONE);
             optionsMenu.setVisibility(View.GONE);
             aboutMenu.setVisibility(View.GONE);
-        } else if (value == 1) //options
+        } else if (value == 1) //start
+        {
+            mainMenu.setVisibility(View.GONE);
+            startMenu.setVisibility(View.VISIBLE);
+            optionsMenu.setVisibility(View.GONE);
+            aboutMenu.setVisibility(View.GONE);
+        } else if (value == 2) //options
         {
             ((SeekBar)findViewById(R.id.options_music)).setProgress(Settings.getConfig(this, Settings.MUSIC_VOLUME));
             ((SeekBar)findViewById(R.id.options_sound)).setProgress(Settings.getConfig(this, Settings.SOUND_VOLUME));
             ((SeekBar)findViewById(R.id.options_visual)).setProgress(Settings.getConfig(this, Settings.VISUAL_QUALITY));
             mainMenu.setVisibility(View.GONE);
+            startMenu.setVisibility(View.GONE);
             optionsMenu.setVisibility(View.VISIBLE);
             aboutMenu.setVisibility(View.GONE);
-        } else if (value == 2) //about
+        } else if (value == 3) //about
         {
             mainMenu.setVisibility(View.GONE);
+            startMenu.setVisibility(View.GONE);
             optionsMenu.setVisibility(View.GONE);
             aboutMenu.setVisibility(View.VISIBLE);
         }

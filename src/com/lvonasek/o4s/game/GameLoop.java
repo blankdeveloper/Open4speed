@@ -102,10 +102,11 @@ public class GameLoop extends GLSurfaceView implements Renderer {
             apkFilePath = appInfo.sourceDir;
             float quality = 0.01f * Settings.getConfig(GameActivity.instance, Settings.VISUAL_QUALITY);
             quality = 0.25f + 0.75f * quality;
-            init(apkFilePath, quality);
+            int event = Settings.getConfig(GameActivity.instance, Settings.RACE_EVENT);
+            init(apkFilePath, RaceInfo.EVENT[event].race, quality);
             GameActivity.instance.finishLoading();
         }
-        GameActivity.instance.init = true;
+        GameActivity.init = true;
     }
 
     /**
@@ -246,7 +247,7 @@ public class GameLoop extends GLSurfaceView implements Renderer {
     //C++ methods
     public synchronized native int carCount();
     public synchronized native float carState(int index, int type);
-    public synchronized native void init(String str, float aliasing);
+    public synchronized native void init(String apkFilePath, String track, float aliasing);
     public synchronized native void key(int code);
     public synchronized native void keyUp(int code);
     public synchronized native void display();

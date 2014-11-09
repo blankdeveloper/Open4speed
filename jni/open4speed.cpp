@@ -2,7 +2,7 @@
 /**
  * \file       open4speed.cpp
  * \author     Vonasek Lubos
- * \date       2014/11/08
+ * \date       2014/11/09
  * \brief      Runable code of project.
 */
 //----------------------------------------------------------------------------------------
@@ -294,7 +294,7 @@ void loadScene(std::string filename) {
     allCar.push_back(new car(getInput(), &e, getConfigStr("player_car", atributes)));
 
     /// load race informations
-    allCar[0]->lapsToGo = getConfig("laps", atributes) - 1;
+    allCar[0]->lapsToGo = getConfig("laps", atributes);
     allCar[0]->finishEdge = getConfig("finish", atributes);
     allCar[0]->currentEdgeIndex = getConfig("race_start", atributes);
     allCar[0]->setStart(allCar[0]->edges[getConfig("race_start", atributes)], 0);
@@ -445,58 +445,6 @@ void reshape (int w, int h) {
 #endif
 }
 
-/**
- * @brief main loads data and prepares scene
- * @param argc is amount of arguments
- * @param argv is array of arguments
- * @return exit code
- */
-int main(int argc, char** argv) {
-#ifdef ZIP_ARCHIVE
-#ifndef ANDROID
-    /// open zip file with data
-    APKArchive = zip_open("../out/production/Open4speed/Open4speed.apk", 0, NULL);
-#endif
-#endif
-
-    /// set menu variables
-    active = true;
-
-#ifndef ANDROID
-    /// init glut
-    glutInit(&argc, argv);
-
-    /// set screen mode
-    glutInitWindowSize(960,640);
-#ifdef RENDER_PHYSICS
-    glutInitContextVersion(2,0);
-#else
-    glutInitContextVersion(3,0);
-#endif
-    glutInitContextProfile(GLUT_CORE_PROFILE);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
-    glutCreateWindow("Open4speed");
-
-    /// set handlers
-    glutReshapeFunc(reshape);
-    glutDisplayFunc(display);
-    glutKeyboardFunc(keyboardDown);
-    glutKeyboardUpFunc(keyboardUp);
-#endif
-
-    /// load data
-    loadScene("tracks/track2");
-
-    /// start loop
-#ifndef ANDROID
-    physic->locked = false;
-    atexit(unload);
-    glutTimerFunc(0,idle,0);
-    glutMainLoop();
-    return 0;
-#endif
-}
-
 #ifdef ANDROID
 /**
  * Java native methods
@@ -507,11 +455,12 @@ extern "C" {
  * @brief Java_com_lvonasek_o4s_game_GameLoop_init is init method
  * @param env is instance of JNI
  */
-void Java_com_lvonasek_o4s_game_GameLoop_init( JNIEnv* env, jclass cls, jstring apkPath, float alias ) {
+void Java_com_lvonasek_o4s_game_GameLoop_init( JNIEnv* env, jclass cls, jstring apkPath, jstring track, float alias ) {
   jboolean isCopy;
   APKArchive = zip_open(env->GetStringUTFChars(apkPath, &isCopy), 0, NULL);
   aliasing = alias;
-  main(0, 0);
+  active = true;
+  loadScene(env->GetStringUTFChars(track, &isCopy));
 }
 
 /**
@@ -643,5 +592,48 @@ jfloat Java_com_lvonasek_o4s_game_GameLoop_carState( JNIEnv* env, jobject object
         return allCar[index]->toFinish;
     return 0;
 }
+}
+#else
+
+/**
+ * @brief main loads data and prepares scene
+ * @param argc is amount of arguments
+ * @param argv is array of arguments
+ * @return exit code
+ */
+int main(int argc, char** argv) {
+#ifdef ZIP_ARCHIVE
+    /// open zip file with data
+    APKArchive = zip_open("../out/production/Open4speed/Open4speed.apk", 0, NULL);
+#endif
+
+    /// init glut
+    glutInit(&argc, argv);
+    glutInitWindowSize(960,640);
+#ifdef RENDER_PHYSICS
+    glutInitContextVersion(2,0);
+#else
+    glutInitContextVersion(3,0);
+#endif
+    glutInitContextProfile(GLUT_CORE_PROFILE);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
+    glutCreateWindow("Open4speed");
+
+    /// set handlers
+    glutReshapeFunc(reshape);
+    glutDisplayFunc(display);
+    glutKeyboardFunc(keyboardDown);
+    glutKeyboardUpFunc(keyboardUp);
+
+    /// load data
+    active = true;
+    loadScene("tracks/winter-night");
+
+    /// start loop
+    physic->locked = false;
+    atexit(unload);
+    glutTimerFunc(0,idle,0);
+    glutMainLoop();
+    return 0;
 }
 #endif

@@ -86,6 +86,51 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/menu_start"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <com.lvonasek.o4s.ui.common.BigText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/title_margin"
+            android:layout_marginTop="@dimen/title_margin"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/button_start_game"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="@dimen/title_height" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.lvonasek.o4s.ui.common.RaceButton
+                android:id="@+id/menu_start_race1"
+                android:layout_width="@dimen/event_width"
+                android:layout_height="@dimen/event_height"
+                android:layout_margin="@dimen/button_margin"
+                android:gravity="center_vertical|center_horizontal"
+                android:padding="@dimen/button_margin" />
+
+            <com.lvonasek.o4s.ui.common.RaceButton
+                android:id="@+id/menu_start_race2"
+                android:layout_width="@dimen/event_width"
+                android:layout_height="@dimen/event_height"
+                android:layout_margin="@dimen/button_margin"
+                android:gravity="center_vertical|center_horizontal"
+                android:padding="@dimen/button_margin"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/menu_options"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -162,18 +207,6 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:max="100"
                 android:id="@+id/options_visual" />
-
-            <com.lvonasek.o4s.ui.common.DarkButton
-                android:id="@+id/menu_options_back"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="@dimen/button_height"
-                android:layout_marginTop="@dimen/seek_margin"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@string/button_back"
-                android:textAlignment="gravity"
-                android:textSize="@dimen/button_text" />
-
         </LinearLayout>
     </LinearLayout>
 

@@ -77,6 +77,10 @@ public class GameActivity extends FragmentActivity {
         win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
                 | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
+        //set loading splash
+        int event = Settings.getConfig(this, Settings.RACE_EVENT);
+        loadingImg.setBackground(getResources().getDrawable(RaceInfo.EVENT[event].splash));
+
         //set the hardware buttons to control the game sound
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
@@ -202,7 +206,8 @@ public class GameActivity extends FragmentActivity {
 
         try {
             music.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            AssetFileDescriptor afd = getAssets().openFd("sfx/02-danosongs.com-megacosm.mp3");
+            int event = Settings.getConfig(this, Settings.RACE_EVENT);
+            AssetFileDescriptor afd = getAssets().openFd(RaceInfo.EVENT[event].music);
             music.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
             final float volume = Settings.getConfig(this, Settings.MUSIC_VOLUME) * 0.01f;
             if (GameLoop.paused <= 0) {

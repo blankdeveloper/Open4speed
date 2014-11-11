@@ -200,13 +200,19 @@ public class MainMenu extends Activity {
     protected void onStart() {
         super.onStart();
         final Context c = this;
-        String path = "android.resource://" + getPackageName() + "/" + R.raw.menu_background;
+        final String path = "android.resource://" + getPackageName() + "/" + R.raw.menu_background;
         view.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                mp.setLooping(true);
+                //mp.setLooping(true);
                 mp.start();
+            }
+        });
+        view.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            public void onCompletion(MediaPlayer mp) {
+                mp.reset();
+                view.setVideoURI(Uri.parse(path));
             }
         });
         view.setVideoURI(Uri.parse(path));

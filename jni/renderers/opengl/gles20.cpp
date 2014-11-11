@@ -50,7 +50,6 @@ gles20::gles20(int w, int h) {
 
     /// set open-gl
     glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
-    glDepthFunc(GL_LESS);
 
     //set shaders
     scene_shader = getShader("scene");
@@ -519,7 +518,6 @@ void gles20::rtt(bool enable) {
         glBeginQuery(GL_TIME_ELAPSED, id[0]);
 #endif
         rtt_fbo[oddFrame]->drawOnScreen(scene_shader);
-        glDepthMask(true);
 
 #ifndef ANDROID
         glEndQuery(GL_TIME_ELAPSED);

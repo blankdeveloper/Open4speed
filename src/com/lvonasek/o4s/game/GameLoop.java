@@ -63,16 +63,19 @@ public class GameLoop extends GLSurfaceView implements Renderer {
         super(context);
         if (isInEditMode())
             return;
+
+        //enable OpenGL ES 2.0 support
+        setEGLContextClientVersion(2);
+        //load library
         System.loadLibrary("open4speed");
         sounds = new ArrayList<Sound>();
+        //init sound
         for (int i = 0; i < 1; i++) {
             sounds.add(new Sound("sfx/crash.ogg", false));
             sounds.add(new Sound("sfx/engine.ogg", true));
             sounds.add(new Sound("sfx/engineplus.ogg", true));
         }
-        //enable OpenGL ES 2.0 support
-        setEGLConfigChooser(8, 8, 8, 0, 16, 1);
-        setEGLContextClientVersion(2);
+        //begin
         setRenderer(this);
     }
 

@@ -165,6 +165,7 @@ void glfbo::drawOnScreen(shader* screen_shader) {
     glDisable(GL_DEPTH_TEST);
     glDepthMask(false);
     rect->render(screen_shader, 0, 2);
+    glDepthMask(true);
 }
 
 /**

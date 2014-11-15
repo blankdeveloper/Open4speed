@@ -2,7 +2,7 @@
 /**
  * \file       open4speed.cpp
  * \author     Vonasek Lubos
- * \date       2014/11/09
+ * \date       2014/11/15
  * \brief      Runable code of project.
 */
 //----------------------------------------------------------------------------------------

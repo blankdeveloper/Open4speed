@@ -93,6 +93,7 @@ public class MainMenu extends Activity {
         //start menu
         ((RaceButton)findViewById(R.id.menu_start_race1)).setRace(c, 0);
         ((RaceButton)findViewById(R.id.menu_start_race2)).setRace(c, 1);
+        ((RaceButton)findViewById(R.id.menu_start_race3)).setRace(c, 2);
 
         //options menu
         ((SeekBar)findViewById(R.id.options_music)).setOnSeekBarChangeListener(new android.widget.SeekBar.OnSeekBarChangeListener() {

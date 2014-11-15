@@ -2,8 +2,8 @@
 <!--suppress AndroidDomInspection -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.lvonasek.o4s"
-      android:versionCode="14"
-      android:versionName="2.0.1">
+      android:versionCode="15"
+      android:versionName="2.0.2">
         <supports-screens android:resizeable="true"
                   android:normalScreens="true"
                   android:largeScreens="true"

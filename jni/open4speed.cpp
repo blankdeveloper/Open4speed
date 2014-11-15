@@ -627,7 +627,7 @@ int main(int argc, char** argv) {
 
     /// load data
     active = true;
-    loadScene("tracks/winter-night");
+    loadScene("tracks/winter-fog");
 
     /// start loop
     physic->locked = false;

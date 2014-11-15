@@ -18,16 +18,15 @@ public class RaceInfo {
     private static final String MUSIC_AMBIENT3      = "sfx/07-danosongs.com-cellular-faith.mp3";
 
     private static final String RACE_WINTER_DAY     = "tracks/winter-day";
+    private static final String RACE_WINTER_FOG     = "tracks/winter-fog";
     private static final String RACE_WINTER_NIGHT   = "tracks/winter-night";
-
-    private static final int    SPLASH_WINTER_DAY   = R.drawable.winter_day;
-    private static final int    SPLASH_WINTER_NIGHT = R.drawable.winter_night;
 
     private static final int    TYPE_CLASSIC        = 0;
 
     public static final RaceInfo[] EVENT = {
-            new RaceInfo(MUSIC_ENERGY1, RACE_WINTER_DAY, SPLASH_WINTER_DAY, TYPE_CLASSIC),
-            new RaceInfo(MUSIC_AMBIENT1, RACE_WINTER_NIGHT, SPLASH_WINTER_NIGHT, TYPE_CLASSIC)
+            new RaceInfo(MUSIC_ENERGY1, RACE_WINTER_DAY, R.drawable.winter_day, TYPE_CLASSIC),
+            new RaceInfo(MUSIC_AMBIENT1, RACE_WINTER_NIGHT, R.drawable.winter_night, TYPE_CLASSIC),
+            new RaceInfo(MUSIC_ENERGY2, RACE_WINTER_FOG, R.drawable.winter_fog, TYPE_CLASSIC),
     };
 
     public String music;

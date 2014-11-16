@@ -113,28 +113,25 @@
             android:orientation="horizontal">
 
             <com.lvonasek.o4s.ui.common.RaceButton
+                android:id="@+id/menu_start_race0"
+                android:layout_width="@dimen/event_width"
+                android:layout_height="@dimen/event_height"
+                android:layout_margin="@dimen/button_margin"
+                android:gravity="center_vertical|center_horizontal" />
+
+            <com.lvonasek.o4s.ui.common.RaceButton
                 android:id="@+id/menu_start_race1"
                 android:layout_width="@dimen/event_width"
                 android:layout_height="@dimen/event_height"
                 android:layout_margin="@dimen/button_margin"
-                android:gravity="center_vertical|center_horizontal"
-                android:padding="@dimen/button_margin" />
+                android:gravity="center_vertical|center_horizontal" />
 
             <com.lvonasek.o4s.ui.common.RaceButton
                 android:id="@+id/menu_start_race2"
                 android:layout_width="@dimen/event_width"
                 android:layout_height="@dimen/event_height"
                 android:layout_margin="@dimen/button_margin"
-                android:gravity="center_vertical|center_horizontal"
-                android:padding="@dimen/button_margin"/>
-
-            <com.lvonasek.o4s.ui.common.RaceButton
-                android:id="@+id/menu_start_race3"
-                android:layout_width="@dimen/event_width"
-                android:layout_height="@dimen/event_height"
-                android:layout_margin="@dimen/button_margin"
-                android:gravity="center_vertical|center_horizontal"
-                android:padding="@dimen/button_margin"/>
+                android:gravity="center_vertical|center_horizontal" />
         </LinearLayout>
     </LinearLayout>
 

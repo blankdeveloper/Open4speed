@@ -2,7 +2,7 @@
 /**
  * \file       open4speed.cpp
  * \author     Vonasek Lubos
- * \date       2014/11/15
+ * \date       2014/11/16
  * \brief      Runable code of project.
 */
 //----------------------------------------------------------------------------------------
@@ -627,7 +627,7 @@ int main(int argc, char** argv) {
 
     /// load data
     active = true;
-    loadScene("tracks/winter-fog");
+    loadScene("tracks/winter-day");
 
     /// start loop
     physic->locked = false;

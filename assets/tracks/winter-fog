@@ -7,6 +7,5 @@ player_car cars/03/params
 race_start 80
 laps 2
 finish 478
-opponent_count 2
+opponent_count 1
 opponent1_car cars/01/params
-opponent2_car cars/02/params

@@ -38,6 +38,7 @@ public class GameActivity extends FragmentActivity {
     public static boolean      init       = false;
     public static HudText[]    infopanel  = null;
     public static GameActivity instance   = null;
+    private ImageView          loadingBkg = null;
     private ImageView          loadingImg = null;
     public static MediaPlayer  music      = new MediaPlayer();
     public static BigText      place      = null;
@@ -65,6 +66,7 @@ public class GameActivity extends FragmentActivity {
         infopanel[0] = (HudText) findViewById(R.id.infopanel1);
         infopanel[1] = (HudText) findViewById(R.id.infopanel2);
         infopanel[2] = (HudText) findViewById(R.id.infopanel3);
+        loadingBkg = (ImageView) findViewById(R.id.loadingBkg);
         loadingImg = (ImageView) findViewById(R.id.loading);
         place = (BigText) findViewById(R.id.place);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -199,8 +201,9 @@ public class GameActivity extends FragmentActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                loadingImg.setVisibility(View.INVISIBLE);
-                progressBar.setVisibility(View.INVISIBLE);
+                loadingBkg.setVisibility(View.GONE);
+                loadingImg.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
             }
         });
 

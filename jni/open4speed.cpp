@@ -22,6 +22,8 @@
 //#define RENDER_PHYSICS
 #endif
 
+#define VR
+
 struct Dynamic {
     float* vertices;
     float* coords;
@@ -85,16 +87,33 @@ void display(void) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     physic->render();
 #else
-    xrenderer->rtt(true);
 
+#ifdef VR
+    for (int mode = -1; mode <= 1; mode += 2) {
+        xrenderer->mode3D = mode;
+        float d = direction + (float)mode * 3.14;
+        float view = 60;
+#else
+    {
+        xrenderer->mode3D = 0;
+        float d = direction;
+        float view = allCar[cameraCar]->getView();
+#endif
+    xrenderer->rtt(true);
     /// set camera
-    float view = allCar[cameraCar]->getView();
     xrenderer->perspective(view, aspect, 0.5, viewDistance);
     xrenderer->pushMatrix();
-    float cameraX = allCar[cameraCar]->transform->value[12] - sin(direction) * allCar[cameraCar]->control->getDistance() * 2 / (view / 90);
-    float cameraY = allCar[cameraCar]->transform->value[13] + fabs(allCar[cameraCar]->control->getDistance() * 1.25f / (view / 90));
-    float cameraZ = allCar[cameraCar]->transform->value[14] - cos(direction) * allCar[cameraCar]->control->getDistance() * 2 / (view / 90);
-    xrenderer->lookAt(cameraX,cameraY,cameraZ,cameraX + sin(direction),cameraY + sin(-20 * 3.14 / 180), cameraZ + cos(direction),0,1,0);
+    float cameraX = allCar[cameraCar]->transform->value[12];
+    float cameraY = allCar[cameraCar]->transform->value[13];
+    float cameraZ = allCar[cameraCar]->transform->value[14];
+#ifndef VR
+    cameraX -= sin(d) * allCar[cameraCar]->control->getDistance() * 2.5f / (view / 90);
+    cameraY += fmax(1.0, allCar[cameraCar]->control->getDistance()) / (view / 90);
+    cameraZ -= cos(d) * allCar[cameraCar]->control->getDistance() * 2.5f / (view / 90);
+#endif
+    xrenderer->lookAt(cameraX - sin(d) * 0.1f, cameraY + 0.5f, cameraZ - cos(d) * 0.1f,
+                      cameraX + sin(direction) * 100.0f, cameraY, cameraZ + cos(direction) * 100.0f,
+                      0, 1, 0);
 
     /// set light
     xrenderer->light.u_light_diffuse = glm::vec4(1000.0, 1000.0, 900.0, 0);
@@ -127,7 +146,11 @@ void display(void) {
 
     /// render cars
     xrenderer->enable[2] = false;
-    for (int i = allCar.size() - 1; i >= 0; i--) {
+    int firstCar = 0;
+#ifdef VR
+    firstCar = 1;
+#endif
+    for (int i = allCar.size() - 1; i >= firstCar; i--) {
 
         ///render car skin
         xrenderer->pushMatrix();
@@ -150,7 +173,7 @@ void display(void) {
 
     /// render shadows
     xrenderer->shadowMode(true);
-    for (int i = allCar.size() - 1; i >= 0; i--) {
+    for (int i = allCar.size() - 1; i >= firstCar; i--) {
 
         ///render car skin
         xrenderer->pushMatrix();
@@ -177,6 +200,11 @@ void display(void) {
             xrenderer->renderDynamic(effectVBO[k], water->models[0].material, water->models[0].texture2D, eff[k].count / 3);
         }
     }
+    xrenderer->popMatrix();
+    // render RTT
+    xrenderer->rtt(false);
+    }
+#endif
 
     // update water
     eff[currentFrame].count = 0;
@@ -203,11 +231,6 @@ void display(void) {
         }
     }
     effectVBO[currentFrame]->update(4095, eff[currentFrame].vertices, 0, eff[currentFrame].coords, 0);
-    xrenderer->popMatrix();
-
-    // render RTT
-    xrenderer->rtt(false);
-
     for (int k = 0; k < effLen; k++) {
         eff[k].frame++;
     }
@@ -217,7 +240,6 @@ void display(void) {
     if (currentFrame >= effLen) {
         currentFrame = 0;
     }
-#endif
 
 #ifndef ANDROID
     /// check if there is an error
@@ -291,7 +313,11 @@ void loadScene(std::string filename) {
     skydome = getModel(getConfigStr("sky_model", atributes));
 
     /// load player car
+#ifdef VR
+    allCar.push_back(new car(new airacer(), &e, getConfigStr("player_car", atributes))); //autopilot just for testing
+#else
     allCar.push_back(new car(getInput(), &e, getConfigStr("player_car", atributes)));
+#endif
 
     /// load race informations
     allCar[0]->lapsToGo = getConfig("laps", atributes);

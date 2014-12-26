@@ -46,6 +46,7 @@ gles20::gles20(int w, int h) {
     camX = 0;
     camY = 0;
     camZ = 0;
+    mode3D = 0;
     oddFrame = true;
 
     /// set open-gl
@@ -517,6 +518,14 @@ void gles20::rtt(bool enable) {
         GLint copy_time = 0;
         glBeginQuery(GL_TIME_ELAPSED, id[0]);
 #endif
+        /// rendering
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        if (mode3D == 0)
+          glViewport (0, 0, screen_width, screen_height);
+        else if (mode3D == -1)
+          glViewport (0, 0, screen_width / 2, screen_height);
+        else if (mode3D == 1)
+          glViewport (screen_width / 2, 0, screen_width / 2, screen_height);
         rtt_fbo[oddFrame]->drawOnScreen(scene_shader);
 
 #ifndef ANDROID

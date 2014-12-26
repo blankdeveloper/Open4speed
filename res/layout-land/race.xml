@@ -52,7 +52,8 @@
         android:id="@+id/arrow_left"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/arrow_left" />
+        android:background="@drawable/arrow_left"
+        android:visibility="gone"/>
 
     <com.lvonasek.o4s.controllers.VirtualKey
         android:layout_width="@dimen/arrow_size"
@@ -61,7 +62,8 @@
         android:id="@+id/arrow_right"
         android:background="@drawable/arrow_right"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/arrow_left" />
+        android:layout_toRightOf="@+id/arrow_left"
+        android:visibility="gone"/>
 
     <com.lvonasek.o4s.controllers.VirtualKey
         android:layout_width="@dimen/arrow_size"
@@ -70,7 +72,8 @@
         android:id="@+id/arrow_down"
         android:background="@drawable/arrow_down"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:visibility="gone"/>
 
     <com.lvonasek.o4s.controllers.VirtualKey
         android:layout_width="@dimen/arrow_size"
@@ -79,7 +82,8 @@
         android:id="@+id/arrow_up"
         android:background="@drawable/arrow_up"
         android:layout_above="@+id/arrow_down"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:visibility="gone"/>
 
     <com.lvonasek.o4s.controllers.VirtualKey
         android:layout_width="@dimen/arrow_size"
@@ -88,7 +92,8 @@
         android:id="@+id/arrow_n2o"
         android:background="@drawable/arrow_n2o"
         android:layout_above="@+id/arrow_up"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:visibility="gone"/>
 
     <ImageView
         android:layout_width="fill_parent"

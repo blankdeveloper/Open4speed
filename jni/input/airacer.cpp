@@ -11,7 +11,7 @@
 #include "utils/math.h"
 #include "common.h"
 
-#define CAMERA_DISTANCE 2.5
+#define CAMERA_DISTANCE -2.0
 #define REVERSE_DELAY 50
 #define REVERSE_DURATION 30
 #define SAFE_GAP_GAS 15

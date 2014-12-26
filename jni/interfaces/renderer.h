@@ -45,6 +45,7 @@ public:
     glm::mat4x4 view_matrix;    ///< View matrix
     int screen_width;           ///< Screen width
     int screen_height;          ///< Screen height
+    int mode3D;                 ///< Mode for stereo
 
     virtual ~renderer() {}
 

@@ -17,7 +17,10 @@ varying vec2 v_Coords;
 
 void main()
 {
-  gl_FragColor = texture2D(color_texture, v_Coords);
-  gl_FragColor.rgb *= 0.3;
+  vec4 diffuse = texture2D(color_texture, v_Coords);
+  gl_FragColor.b = 1.5 * (diffuse.g - 0.5);
+  gl_FragColor.g = diffuse.b;
+  gl_FragColor.r = diffuse.b;
+  gl_FragColor.a = diffuse.a * 0.05;
 }
 END

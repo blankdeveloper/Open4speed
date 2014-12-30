@@ -645,7 +645,7 @@ int main(int argc, char** argv) {
     glutKeyboardUpFunc(keyboardUp);
 
     /// load data
-    loadScene("assets/tracks/winter-day");
+    loadScene("assets/tracks/winter-night");
 
     /// start loop
     getPhysics()->locked = false;

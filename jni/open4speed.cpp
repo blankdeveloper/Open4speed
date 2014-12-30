@@ -80,7 +80,7 @@ void display(void) {
     float view = getCar(cameraCar)->getView();
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(view, aspect, 0.5, viewDistance);
+    gluPerspective(view, aspect, 0.5, 500);
     float cameraX = getCar(cameraCar)->transform->value[12] - sin(direction) * getCar(cameraCar)->control->getDistance() * 2 / (view / 90);
     float cameraY = getCar(cameraCar)->transform->value[13] + fabs(getCar(cameraCar)->control->getDistance() * 1.25f / (view / 90));
     float cameraZ = getCar(cameraCar)->transform->value[14] - cos(direction) * getCar(cameraCar)->control->getDistance() * 2 / (view / 90);
@@ -88,7 +88,7 @@ void display(void) {
     glLoadIdentity();
     gluLookAt(cameraX,cameraY,cameraZ,cameraX + sin(direction),cameraY + sin(-20 * 3.14 / 180), cameraZ + cos(direction),0,1,0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    physic->render();
+    getPhysics()->render();
 #else
 
 #ifdef VR

@@ -1,52 +1,13 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
-* \file       io.cpp
-* \author     Vonasek Lubos
-* \date       2014/11/01
-* \brief      Common input/output utils used in program.
-*/
-//----------------------------------------------------------------------------------------
+ * \file       io.cpp
+ * \author     Vonasek Lubos
+ * \date       2014/12/30
+ * \brief      Common input/output utils used in program.
+**/
+///----------------------------------------------------------------------------------------
 
-#include "utils/io.h"
-#include "common.h"
-
-#ifdef ZIP_ARCHIVE
-#ifdef ANDROID
-std::string gamePath = "assets/";                           ///< Data path
-#else
-std::string gamePath = "./";                                ///< Data path
-#endif
-
-/**
-* @brief getsEx gets config value from zip archive
-* @param line is item to read
-* @param zip_file is source storage
-* @return value in char*
-*/
-char* getsEx(char* line, zip_file* file) {
-    line[1023] = '0';
-    char character[2];
-    for (int i = 0; i < 1020; i++) {
-        int ok = zip_fread(file, character, 1);
-        if (ok <= 0) {
-            line[i] = '\n';
-            line[i + 1] = '\000';
-            if (i == 0) {
-                line[1023] = '1';
-            }
-            return line;
-        }
-        line[i] = character[0];
-        if (line[i] == '\n') {
-            line[i + 1] = '\000';
-            return line;
-        }
-    }
-    return line;
-}
-#else
-std::string gamePath = "../assets/";    ///< Data path
-#endif
+#include "engine/io.h"
 
 #ifdef ANDROID
 #include <android/log.h>
@@ -55,6 +16,21 @@ std::string gamePath = "../assets/";    ///< Data path
 #endif
 
 std::vector<std::string> imports;     ///< Config data list
+
+std::string fixPath(std::string filename) {
+  while(true) {
+    int index = 0;
+    for (int i = 1; i < filename.size(); i++) {
+      if ((filename[i] == '/') && (filename[i + 1] != '.'))
+        index = i;
+      else if ((filename[i - 1] == '/') && (filename[i] == '.')) {
+        filename = filename.substr(0, index) + filename.substr(i + 2, filename.size() - i);
+        break;
+      }
+    }
+    return filename;
+  }
+}
 
 /**
 * @brief getConfig gets config value from file
@@ -118,9 +94,9 @@ std::string getExtension(std::string filename) {
 */
 std::vector<std::string> getList(std::string tag, std::string filename) {
 #ifdef ZIP_ARCHIVE
-    zip_file* file = zip_fopen(APKArchive, prefix(filename).c_str(), 0);
+    zip_file* file = zip_fopen(getZip(""), filename.c_str(), 0);
 #else
-    FILE* file = fopen(prefix(filename).c_str(), "r");
+    FILE* file = fopen(filename.c_str(), "r");
 #endif
 
     std::vector<std::string> output;
@@ -181,28 +157,30 @@ std::vector<std::string> getList(std::string tag, std::string filename) {
        if (value[1023] == '1') {
            if (imports.size() > 0) {
                zip_fclose(file);
-               file = zip_fopen(APKArchive, prefix(imports[0]).c_str(), 0);
+               file = zip_fopen(getZip(""), imports[0].c_str(), 0);
+               imports.clear();
+               continue;
+           } else {
+               zip_fclose(file);
+               return output;
+           }
+       }
 #else
        if (feof(file)) {
            if (imports.size() > 0) {
                fclose(file);
-               file = fopen(prefix(imports[0]).c_str(), "r");
-#endif
+               file = fopen(imports[0].c_str(), "r");
                imports.clear();
                continue;
            } else {
-#ifdef ZIP_ARCHIVE
-               zip_fclose(file);
-#else
                fclose(file);
-#endif
                return output;
            }
        }
+#endif
    }
 }
 
-#ifdef ZIP_ARCHIVE
 /**
  * @brief gets custom implementation of syntax fgets
  * @param line is data to read
@@ -222,7 +200,6 @@ void gets(char* line, zip_file* file) {
     line[i] = '\n';
     line[i + 1] = '\000';
 }
-#endif
 
 /**
  * @brief gets custom implementation of syntax fgets
@@ -245,16 +222,33 @@ void gets(char* line, FILE* file) {
     line[i + 1] = '\000';
 }
 
+
 /**
-* @brief getTag gets indexed tag
-* @param index is index of tag
-* @param text is tag text with %d
-* @return indexed tag
+* @brief getsEx gets config value from zip archive
+* @param line is item to read
+* @param zip_file is source storage
+* @return value in char*
 */
-std::string getTag(int index, std::string text) {
-   char output[256];
-   sprintf(output, text.c_str(), index);
-   return std::string(output);
+char* getsEx(char* line, zip_file* file) {
+    line[1023] = '0';
+    char character[2];
+    for (int i = 0; i < 1020; i++) {
+        int ok = zip_fread(file, character, 1);
+        if (ok <= 0) {
+            line[i] = '\n';
+            line[i + 1] = '\000';
+            if (i == 0) {
+                line[1023] = '1';
+            }
+            return line;
+        }
+        line[i] = character[0];
+        if (line[i] == '\n') {
+            line[i + 1] = '\000';
+            return line;
+        }
+    }
+    return line;
 }
 
 /**
@@ -282,15 +276,16 @@ void logi(std::string value1, std::string value2) {
 }
 
 /**
-* @brief prefix prefixes file name
-* @param filename is original file name
-* @return prefixed file name
-*/
-std::string prefix(std::string filename) {
-   char string[1024];
-   strcpy(string, gamePath.c_str());
-   strcat(string, filename.c_str());
-   return std::string(string);
+ * @brief path gets path of filename
+ * @param filename is full filename with path
+ * @return path as string
+ */
+std::string path(std::string filename) {
+  int index = 0;
+  for (unsigned int i = 0; i < filename.length(); i++)
+    if (filename[i] == '/')
+      index = i;
+  return filename.substr(0, index + 1);
 }
 
 /**

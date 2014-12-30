@@ -2,9 +2,9 @@
 /**
  * \file       airacer.h
  * \author     Vonasek Lubos
- * \date       2014/11/01
+ * \date       2014/12/30
  * \brief      Car control device(or script) for navigating car on scene
-*/
+**/
 //----------------------------------------------------------------------------------------
 
 #ifndef AIRACER_H

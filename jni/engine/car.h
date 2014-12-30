@@ -1,19 +1,19 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
  * \file       car.h
  * \author     Vonasek Lubos
- * \date       2014/11/01
+ * \date       2014/12/30
  * \brief      Class for rendering car and updating navigation on track. It also loads
  *             informations about physical powers of current car.
-*/
-//----------------------------------------------------------------------------------------
+**/
+///----------------------------------------------------------------------------------------
 
 #ifndef CAR_H
 #define CAR_H
 
 #include <string>
 #include "interfaces/input.h"
-#include "interfaces/model.h"
+#include "model.h"
 
 /**
  * @brief The gear struct

@@ -199,7 +199,7 @@ public class MTLLoader {
               }
               fis.close();
               sc.close();
-              return textureName + " " + phong;
+              return cut + ".png " + phong;
             }
 
             // end of the material

@@ -1,21 +1,18 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
  * \file       renderer.h
  * \author     Vonasek Lubos
- * \date       2014/11/01
+ * \date       2014/12/30
  * \brief      Renderer draws geometry and other things on screen
-*/
-//----------------------------------------------------------------------------------------
+**/
+///----------------------------------------------------------------------------------------
 
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#ifndef ANDROID
-#include <GL/freeglut.h>
-#endif
 #include <glm/glm.hpp>
+#include "engine/model.h"
 #include "interfaces/fbo.h"
-#include "interfaces/model.h"
 #include "interfaces/texture.h"
 
 /**
@@ -38,6 +35,7 @@ struct Light {
 class renderer {
 public:
 
+    float aliasing;             ///< Screen detail
     bool enable[10];            ///< Enabled filter
     Light light;                ///< One light information
     glm::vec4 model_position;   ///< Uniform of dynamic model 3D position
@@ -49,21 +47,15 @@ public:
 
     virtual ~renderer() {}
 
+    virtual void init(int w, int h) = 0;
+
     /**
      * @brief lookAt implements GLUlookAt
-     * @param eyex is eye vector coordinate
-     * @param eyey is eye vector coordinate
-     * @param eyez is eye vector coordinate
-     * @param centerx is camera center coordinate
-     * @param centery is camera center coordinate
-     * @param centerz is camera center coordinate
-     * @param upx is up vector coordinate
-     * @param upy is up vector coordinate
-     * @param upz is up vector coordinate
+     * @param eye is eye vector
+     * @param center is camera center
+     * @param up is up vector
      */
-    virtual void lookAt(float eyex, float eyey, float eyez,
-                        float centerx, float centery, float centerz,
-                        float upx, float upy, float upz) = 0;
+    virtual void lookAt(glm::vec3 eye, glm::vec3 center, glm::vec3 up) = 0;
 
     /**
      * @brief perspective implements GLUPerspective

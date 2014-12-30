@@ -1,34 +1,42 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
  * \file       switch.cpp
  * \author     Vonasek Lubos
- * \date       2014/11/08
+ * \date       2014/12/30
  * \brief      This utility switches between components. Switch depends on configuration
  *             file.
-*/
-//----------------------------------------------------------------------------------------
+**/
+///----------------------------------------------------------------------------------------
 
+
+#include "engine/io.h"
+#include "engine/model.h"
+#include "engine/switch.h"
+#include "engine/textures.hpp"
 #include "input/keyboard.h"
-#include "loaders/modelo4s.h"
-#include "loaders/pngloader.h"
-#include "loaders/rgb.h"
 #include "physics/bullet/bullet.h"
 #include "renderers/opengl/gles20.h"
 #include "renderers/opengl/glsl.h"
 #include "renderers/opengl/gltexture.h"
 #include "renderers/opengl/glvbo.h"
-#include "utils/io.h"
-#include "utils/switch.h"
-#include "common.h"
 
 /**
  * @brief The game resources
  */
+std::vector<car*> cars;         ///< All cars in scene instances
 std::vector<model*> models;     ///< Shaders storage
 std::vector<shader*> shaders;   ///< Shaders storage
 std::vector<texture*> textures; ///< Textures storage
+physics *physic = 0;            ///< Physical engine instance
+renderer *xrenderer = 0;        ///< Renderer instance
+zip *APKArchive = 0;            ///< Access to APK archive
+std::string shaderPath;         ///< Path to shader files
 
 void clearMediaStorage() {
+    while (!cars.empty()) {
+        delete cars[cars.size() - 1];
+        cars.pop_back();
+    }
     while (!models.empty()) {
         delete models[models.size() - 1];
         models.pop_back();
@@ -41,6 +49,41 @@ void clearMediaStorage() {
         delete textures[textures.size() - 1];
         textures.pop_back();
     }
+    delete physic;
+    delete xrenderer;
+}
+
+/**
+ * @brief addCar adds car into scene
+ * @param c is instance of new car
+ */
+void addCar(car* c) {
+    cars.push_back(c);
+}
+
+/**
+ * @brief getCar gets car from scene
+ * @param index is index of car
+ * @return car instance
+ */
+car* getCar(int index) {
+    return cars[index];
+}
+
+/**
+ * @brief getCarCount gets count of cars in scene
+ * @return count of cars
+ */
+unsigned int getCarCount() {
+    return cars.size();
+}
+
+/**
+ * @brief setShaderPath sets path of shaders
+ * @param path is relative path to runable file
+ */
+void setShaderPath(std::string path) {
+    shaderPath = path;
 }
 
 /**
@@ -66,7 +109,7 @@ model* getModel(std::string filename) {
 
     /// create new instance
     if (strcmp(getExtension(filename).c_str(), "o4s") == 0) {
-        model* instance = new modelo4s(filename);
+        model* instance = new model(filename);
         strcpy(instance->modelname, filename.c_str());
         models.push_back(instance);
         return instance;
@@ -77,21 +120,28 @@ model* getModel(std::string filename) {
 
 /**
  * @brief getPhysics gets physical engine
- * @param m is 3D model of scene
  * @return physical engine
  */
-physics* getPhysics(model *m) {
-    logi("Init physical engine","");
-    return new bullet(m);
+physics* getPhysics() {
+    if (!physic)
+    {
+        logi("Init physical engine","");
+        physic = new bullet();
+    }
+    return physic;
 }
 
 /**
  * @brief getRenderer gets renderer
  * @return renderer instance
  */
-renderer* getRenderer(int w, int h) {
-    logi("Init renderer","");
-    return new gles20(w, h);
+renderer* getRenderer() {
+    if (!xrenderer)
+    {
+        logi("Init renderer","");
+        xrenderer = new gles20();
+    }
+    return xrenderer;
 }
 
 /**
@@ -130,6 +180,9 @@ shader* getShader(std::string name) {
  * @return texture instance
  */
 texture* getTexture(std::string filename, float alpha) {
+
+    filename = fixPath(filename);
+
     /// find previous instance
     for (unsigned int i = 0; i < textures.size(); i++)
         if (strcmp(textures[i]->texturename, filename.c_str()) == 0)
@@ -194,4 +247,15 @@ texture* getTexture(float r, float g, float b, float alpha) {
  */
 vbo* getVBO(int size, float* vertices, float* normals, float* coords, float* tnormals, bool dynamic) {
     return new glvbo(size, vertices, normals, coords, tnormals, dynamic);
+}
+
+/**
+ * @brief getZip gets APK archive object
+ * @param path is "" to get last APK, there is path when APK opening is needed
+ * @return zip instance
+ */
+zip* getZip(std::string path) {
+    if (path.length() != 0)
+      APKArchive = zip_open(path.c_str(), 0, NULL);
+    return APKArchive;
 }

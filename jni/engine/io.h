@@ -1,19 +1,24 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
-* \file       io.h
-* \author     Vonasek Lubos
-* \date       2014/11/01
-* \brief      Common input/output utils used in program.
-*/
-//----------------------------------------------------------------------------------------
+ * \file       io.h
+ * \author     Vonasek Lubos
+ * \date       2014/12/30
+ * \brief      Common input/output utils used in program.
+**/
+///----------------------------------------------------------------------------------------
 
 #ifndef IO_H
 #define IO_H
 
 #include <cstring>
+#include <sstream>
 #include <string>
 #include <vector>
-#include "common.h"
+#include "engine/switch.h"
+
+#define SSTR( x ) dynamic_cast< std::ostringstream & >( ( std::ostringstream() << std::dec << x ) ).str()
+
+std::string fixPath(std::string filename);
 
 /**
  * @brief getConfig gets config value from file
@@ -46,14 +51,12 @@ std::string getExtension(std::string filename);
  */
 std::vector<std::string> getList(std::string tag, std::string filename);
 
-#ifdef ZIP_ARCHIVE
 /**
  * @brief gets custom implementation of syntax fgets
  * @param line is data to read
  * @param file is input stream
  */
 void gets(char* line, zip_file* file);
-#endif
 
 /**
  * @brief gets custom implementation of syntax fgets
@@ -63,12 +66,12 @@ void gets(char* line, zip_file* file);
 void gets(char* line, FILE* file);
 
 /**
- * @brief getTag gets indexed tag
- * @param index is index of tag
- * @param text is tag text with %d
- * @return indexed tag
- */
-std::string getTag(int index, std::string text);
+* @brief getsEx gets config value from zip archive
+* @param line is item to read
+* @param zip_file is source storage
+* @return value in char*
+*/
+char* getsEx(char* line, zip_file* file);
 
 /**
  * @brief loge logs an error
@@ -85,11 +88,11 @@ void loge(std::string value1, std::string value2);
 void logi(std::string value1, std::string value2);
 
 /**
- * @brief prefix prefixes file name
- * @param filename is original file name
- * @return prefixed file name
+ * @brief path gets path of filename
+ * @param filename is full filename with path
+ * @return path as string
  */
-std::string prefix(std::string filename);
+std::string path(std::string filename);
 
 /**
  * @brief scandec read number from chars

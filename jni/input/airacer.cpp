@@ -1,15 +1,15 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
  * \file       airacer.cpp
  * \author     Vonasek Lubos
- * \date       2014/11/01
+ * \date       2014/12/30
  * \brief      Car control device(or script) for navigating car on scene
-*/
-//----------------------------------------------------------------------------------------
+**/
+///----------------------------------------------------------------------------------------
 
+#include "engine/math.h"
+#include "engine/switch.h"
 #include "input/airacer.h"
-#include "utils/math.h"
-#include "common.h"
 
 #define CAMERA_DISTANCE -2.0
 #define REVERSE_DELAY 50
@@ -59,10 +59,10 @@ float airacer::getGas() {
          return 0;
 
     /// check angle of turn
-    if (allCar[index]->speed > SAFE_SPEED)
-        if (fabsf(gap(allCar[index]->currentEdge.b, allCar[index]->pos, allCar[index]->rot)) > SAFE_GAP_GAS)
+    if (getCar(index)->speed > SAFE_SPEED)
+        if (fabsf(gap(getCar(index)->currentEdge.b, getCar(index)->pos, getCar(index)->rot)) > SAFE_GAP_GAS)
              return 0;
-    if ((int)allCar[index]->speed > 5)
+    if ((int)getCar(index)->speed > 5)
         problem = 0;
      return 1;
 }
@@ -86,7 +86,7 @@ float airacer::getSteer() {
          return 0;
 
     /// count track direction
-    float g2 = gap(allCar[index]->currentEdge.b, allCar[index]->pos, allCar[index]->rot);
+    float g2 = gap(getCar(index)->currentEdge.b, getCar(index)->pos, getCar(index)->rot);
 
     /// update direction
     if (g2 > STEERING_GAP_HIGH)
@@ -106,8 +106,7 @@ float airacer::getSteer() {
  * @ constant distance in float
  */
 float airacer::getUpdate() {
-
-    if ((this->getGas() > 0) & ((int)allCar[index]->speed <= 5)) {
+    if ((this->getGas() > 0) & ((int)getCar(index)->speed <= 5)) {
         problem++;
     }
     if (problem >= REVERSE_DELAY) {
@@ -118,5 +117,5 @@ float airacer::getUpdate() {
         reverseMode = false;
         problem = 0;
     }
-    return TRACK_UPDATE + allCar[index]->speed / TRACK_UPDATE_SPEED_DEPENDENCY;
+    return TRACK_UPDATE + getCar(index)->speed / TRACK_UPDATE_SPEED_DEPENDENCY;
 }

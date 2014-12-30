@@ -1,16 +1,16 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
  * \file       car.cpp
  * \author     Vonasek Lubos
- * \date       2014/11/01
+ * \date       2014/12/30
  * \brief      Class for rendering car and updating navigation on track. It also loads
  *             informations about physical powers of current car.
-*/
-//----------------------------------------------------------------------------------------
+**/
+///----------------------------------------------------------------------------------------
 
-#include "utils/io.h"
-#include "utils/switch.h"
-#include "car.h"
+#include "engine/car.h"
+#include "engine/io.h"
+#include "engine/switch.h"
 
 #define PERSPECTIVE_MIN 90
 #define PERSPECTIVE_MAX 150
@@ -58,7 +58,7 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
     }
 
     /// apply index of car
-    index = allCar.size() + 1;
+    index = getCarCount() + 1;
     if (control != 0)
         control->index = index - 1;
 
@@ -79,8 +79,8 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
     int gearCount = getConfig("gear_count", atributes);
     for (int i = 0; i <= gearCount; i++) {
         gear g;
-        g.min = getConfig(getTag(i,"gear%d_min"), atributes);
-        g.max = getConfig(getTag(i,"gear%d_max"), atributes);
+        g.min = getConfig("gear" + SSTR(i) + "_min", atributes);
+        g.max = getConfig("gear" + SSTR(i) + "_max", atributes);
         gears.push_back(g);
     }
     gearLow = getConfig("gear_low", atributes);
@@ -135,9 +135,9 @@ void car::setStart(edge e, float sidemove) {
     resetAllowed = false;
     reverse = false;
     rot = angle(currentEdge.a, currentEdge.b);
-    oldPos.x = pos.x = currentEdge.a.x + sin(rot) * sidemove;
+    oldPos.x = pos.x = currentEdge.a.x + cos(rot) * sidemove;
     oldPos.y = pos.y = currentEdge.a.y;
-    oldPos.z = pos.z = currentEdge.a.z - cos(rot) * sidemove;
+    oldPos.z = pos.z = currentEdge.a.z + sin(rot) * sidemove;
     rot = rot * 180 / 3.14 - 180;
 
     /// count distance from finish
@@ -172,7 +172,9 @@ void car::update() {
 
     /// count speed
     lspeed = speed;
-    speed = sqrt(sqr(fabsf(oldPos.x - pos.x)) + sqr(fabsf(oldPos.z - pos.z))) * SPEED_ASPECT;
+    float dx = oldPos.x - pos.x;
+    float dz = oldPos.z - pos.z;
+    speed = sqrt(dx * dx + dz * dz) * SPEED_ASPECT;
 
     /// update current edge for counting laps
     edge cge = currentGoalEdge;
@@ -281,7 +283,7 @@ void car::update() {
     sndRate = sndRate / 50000.0f + 0.2f;
 
     /// set sound distance
-    sndDist =  1 / (distance(allCar[cameraCar]->pos, pos) / SOUND_MAXIMAL_DISTANCE + 1);
+    sndDist =  1 / (distance(getCar(0)->pos, pos) / SOUND_MAXIMAL_DISTANCE + 1);
     if (sndDist < 0)
         sndDist = 0;
     sndDist *= sndDist;

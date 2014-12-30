@@ -1,11 +1,11 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
  * \file       math.h
  * \author     Vonasek Lubos
- * \date       2014/11/01
+ * \date       2014/12/30
  * \brief      Common math utils used in program.
-*/
-//----------------------------------------------------------------------------------------
+**/
+///----------------------------------------------------------------------------------------
 
 #ifndef MATH_H
 #define MATH_H
@@ -92,41 +92,11 @@ float getRotation(float x, float y, float z, float w);
 bool isSame(edge a, edge b);
 
 /**
- * @brief max get max value of input
- * @param a is first value
- * @param b is second value
- * @return bigger value
- */
-int max(int a, int b);
-
-/**
- * @brief min get min value of input
- * @param a is first value
- * @param b is second value
- * @return smaller value
- */
-int min(int a, int b);
-
-/**
  * @brief nextEdge gets all possible indexes of next edges
  * @param edges is track curve instance
  * @param e is current edge
  * @return indicies as vector of int
  */
 std::vector<int> nextEdge(std::vector<edge> edges, edge e);
-
-/**
- * @brief sign returns sign of value
- * @param v is value
- * @return one with sign of value
- */
-int sign(int v);
-
-/**
- * @brief sqr squares a number
- * @param a is number to square
- * @return squared number
- */
-float sqr(float a);
 
 #endif // MATH_H

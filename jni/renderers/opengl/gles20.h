@@ -1,11 +1,11 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
  * \file       gles20.h
  * \author     Vonasek Lubos
- * \date       2014/11/01
+ * \date       2014/12/30
  * \brief      GL renderer draws geometry and other things on screen
-*/
-//----------------------------------------------------------------------------------------
+**/
+///----------------------------------------------------------------------------------------
 
 
 #ifndef GLES20_H
@@ -26,7 +26,6 @@
 #include "renderers/opengl/glfbo.h"
 
 const int culling = 150;              ///< View culling distance in meters
-const glm::mat4x4 eye = glm::mat4x4(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1);
 
 /**
  * @brief The gles20 class is implementation of OpenGL ES 2.0
@@ -37,6 +36,7 @@ public:
     float camX;                           ///< Camera position x
     float camY;                           ///< Camera position y
     float camZ;                           ///< Camera position z
+    float direction;                      ///< Camera direction
     glm::mat4x4 matrix;                   ///< Matrix for dynamic rendering
     glm::mat4x4 modelMat;                 ///< Model matrix
     glm::mat4x4 matrix_result;            ///< Temp matrix for calculations
@@ -47,6 +47,7 @@ public:
     shader* shadow;                       ///< Special shader for shadow
     std::vector<glfbo*> rtt_fbo;          ///< Screen-space framebuffer
     bool oddFrame;                        ///< Odd frame info
+    float viewDistance;                   ///< Camera far culling
 
     /**
      * @brief gles20 destructor
@@ -56,23 +57,17 @@ public:
     /**
      * @brief gles20 constructor
      */
-    gles20(int w, int h);
+    gles20();
+
+    void init(int w, int h);
 
     /**
      * @brief lookAt implements GLUlookAt
-     * @param eyex is eye vector coordinate
-     * @param eyey is eye vector coordinate
-     * @param eyez is eye vector coordinate
-     * @param centerx is camera center coordinate
-     * @param centery is camera center coordinate
-     * @param centerz is camera center coordinate
-     * @param upx is up vector coordinate
-     * @param upy is up vector coordinate
-     * @param upz is up vector coordinate
+     * @param eye is eye vector
+     * @param center is camera center
+     * @param up is up vector
      */
-    void lookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
-                GLfloat centerx, GLfloat centery, GLfloat centerz,
-                GLfloat upx, GLfloat upy, GLfloat upz);
+    void lookAt(glm::vec3 eye, glm::vec3 center, glm::vec3 up);
 
     /**
      * @brief perspective implements GLUPerspective

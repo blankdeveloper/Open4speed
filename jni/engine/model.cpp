@@ -1,28 +1,43 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
- * \file       modelo4s.cpp
+ * \file       model.h
  * \author     Vonasek Lubos
- * \date       2014/11/01
- * \brief      Class for loading models into OpenGL list, it parse full model file, apply
- *             textures, materials and blending.
-*/
-//----------------------------------------------------------------------------------------
+ * \date       2014/12/30
+ * \brief      Loading and storing models
+**/
+///----------------------------------------------------------------------------------------
 
-#include "loaders/modelo4s.h"
-#include "utils/io.h"
-#include "utils/switch.h"
+#include "engine/io.h"
+#include "engine/model.h"
+#include "engine/switch.h"
+
+/**
+ * @brief model destructor
+ */
+model::~model() {
+    for (unsigned int i = 0; i < models.size(); i++) {
+        if (models[i].vboData != 0)
+          delete models[i].vboData;
+        delete[] models[i].vertices;
+        delete[] models[i].normals;
+        delete[] models[i].tnormals;
+        delete[] models[i].coords;
+        delete[] models[i].triangleCount;
+    }
+    models.clear();
+}
 
 /**
  * @brief Constructor for loading model from file
  * @param filename is path and name of file to load
  */
-modelo4s::modelo4s(std::string filename) {
+model::model(std::string filename) {
 
     /// open file
 #ifdef ZIP_ARCHIVE
-    zip_file* file = zip_fopen(APKArchive, prefix(filename).c_str(), 0);
+    zip_file* file = zip_fopen(getZip(""), filename.c_str(), 0);
 #else
-    FILE* file = fopen(prefix(filename).c_str(), "r");
+    FILE* file = fopen(filename.c_str(), "r");
 #endif
 
     /// get model dimensions
@@ -69,7 +84,7 @@ modelo4s::modelo4s(std::string filename) {
 
         /// if texture is not only single color then load it
         if (texturePath[0] != '*') {
-            m.texture2D = getTexture(texturePath, alpha);
+            m.texture2D = getTexture(path(filename) + texturePath, alpha);
         /// create color texture
         } else {
             m.texture2D = getTexture(m.colord[0], m.colord[1], m.colord[2], alpha);

@@ -1,19 +1,18 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
  * \file       bullet.h
  * \author     Vonasek Lubos
- * \date       2014/11/01
+ * \date       2014/12/30
  * \brief      Physical model for scene, it detects collision and also calculate collision
  *             reactions. Also applies car physical and visual state.
-*/
-//----------------------------------------------------------------------------------------
+**/
+///----------------------------------------------------------------------------------------
 
 #ifndef BULLET_H
 #define BULLET_H
 
 #include <BulletDynamics/Vehicle/btRaycastVehicle.h>
 #include <btBulletDynamicsCommon.h>
-#include "interfaces/model.h"
 #include "interfaces/physics.h"
 #include "physics/bullet/GL_ShapeDrawer.h"
 
@@ -45,9 +44,8 @@ public:
 
     /**
      * @brief Construct physical model
-     * @param m is 3D model for physical model
      */
-    bullet(model *m);
+    bullet();
 
     /**
      * @brief bullet destructor

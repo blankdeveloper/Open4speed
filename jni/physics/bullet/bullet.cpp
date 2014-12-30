@@ -1,17 +1,17 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
  * \file       bullet.cpp
  * \author     Vonasek Lubos
- * \date       2014/11/01
+ * \date       2014/12/30
  * \brief      Physical model for scene, it detects collision and also calculate collision
  *             reactions. Also applies car physical and visual state.
-*/
-//----------------------------------------------------------------------------------------
+**/
+///----------------------------------------------------------------------------------------
 
 #include <BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h>
+#include "engine/switch.h"
 #include "physics/bullet/bullet.h"
 #include "renderers/opengl/gles20.h"
-#include "common.h"
 
 #define BRAKE_ASPECT 1
 #define DYNAMIC_DAMPING 10
@@ -77,11 +77,11 @@ bullet::~bullet() {
 
 /**
  * @brief Construct physical model
- * @param m is 3D model for physical model
  */
-bullet::bullet(model *m) {
+bullet::bullet() {
 
     /// init engine
+    active = true;
     locked = true;
     m_collisionConfiguration = new btDefaultCollisionConfiguration();
     m_dispatcher = new btCollisionDispatcher(m_collisionConfiguration);
@@ -121,9 +121,6 @@ bullet::bullet(model *m) {
     glDepthFunc(GL_LESS);
     glClearColor(btScalar(0.7),btScalar(0.7),btScalar(0.7),btScalar(0));
 #endif
-
-    /// Create scene
-    addModel(m);
 }
 
 /**
@@ -444,7 +441,7 @@ void bullet::updateCar(car* c) {
     if ((c->speed < 5) && active && !locked) {
         if (c->onRoof > 60) {
             c->resetAllowed = true;
-            if ((int)c->index - 1 != cameraCar) {
+            if ((int)c->index - 1 != 0) {
                 c->resetRequested = true;
             }
             c->onRoof = 0;
@@ -457,9 +454,9 @@ void bullet::updateCar(car* c) {
 
     // reset car
     if (c->resetAllowed && c->resetRequested) {
-        for (unsigned int i = 0; i < allCar.size(); i++) {
+        for (unsigned int i = 0; i < getCarCount(); i++) {
             if (i != c->index - 1) {
-                if (glm::length(c->currentEdge.a - allCar[i]->pos) < 10) {
+                if (glm::length(c->currentEdge.a - getCar(i)->pos) < 10) {
                     return;
                 }
             }

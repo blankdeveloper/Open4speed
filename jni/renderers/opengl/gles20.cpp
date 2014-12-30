@@ -1,11 +1,11 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
  * \file       gles20.cpp
  * \author     Vonasek Lubos
- * \date       2014/11/11
+ * \date       2014/12/30
  * \brief      GL renderer draws geometry and other things on screen
-*/
-//----------------------------------------------------------------------------------------
+**/
+///----------------------------------------------------------------------------------------
 
 #define GLM_FORCE_RADIANS
 #include <glm/gtc/matrix_transform.hpp>
@@ -13,8 +13,7 @@
 #include "renderers/opengl/gles20.h"
 #include "renderers/opengl/glfbo.h"
 #include "renderers/opengl/gltexture.h"
-#include "utils/switch.h"
-#include "common.h"
+#include "engine/switch.h"
 
 GLuint id[2] = {0};
 
@@ -31,10 +30,7 @@ gles20::~gles20() {
 /**
  * @brief gles20 constructor
  */
-gles20::gles20(int w, int h) {
-
-    screen_width = w;
-    screen_height = h;
+gles20::gles20() {
 
     /// set default values
     for (int i = 0; i < 10; i++) {
@@ -43,18 +39,19 @@ gles20::gles20(int w, int h) {
     for (int i = 0; i < 4095; i++) {
         dynindices[i] = i;
     }
+    aliasing = 1;
     camX = 0;
     camY = 0;
     camZ = 0;
+    direction = 0;
     mode3D = 0;
     oddFrame = true;
+}
 
-    /// set open-gl
-    glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
+void gles20::init(int w, int h) {
 
-    //set shaders
-    scene_shader = getShader("scene");
-    shadow = getShader("shadow");
+    screen_width = w;
+    screen_height = h;
 
     //find ideal texture resolution
     int resolution = 2;
@@ -71,31 +68,26 @@ gles20::gles20(int w, int h) {
     glViewport (0, 0, (GLsizei) screen_width, (GLsizei) screen_height);
     glClear(GL_COLOR_BUFFER_BIT);
     glActiveTexture( GL_TEXTURE0 );
+
+    //set shaders
+    scene_shader = getShader("scene");
+    shadow = getShader("shadow");
 }
 
 /**
  * @brief lookAt implements GLUlookAt
- * @param eyex is eye vector coordinate
- * @param eyey is eye vector coordinate
- * @param eyez is eye vector coordinate
- * @param centerx is camera center coordinate
- * @param centery is camera center coordinate
- * @param centerz is camera center coordinate
- * @param upx is up vector coordinate
- * @param upy is up vector coordinate
- * @param upz is up vector coordinate
+ * @param eye is eye vector
+ * @param center is camera center
+ * @param up is up vector
  */
-void gles20::lookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
-                     GLfloat centerx, GLfloat centery, GLfloat centerz,
-                     GLfloat upx, GLfloat upy, GLfloat upz) {
+void gles20::lookAt(glm::vec3 eye, glm::vec3 center, glm::vec3 up) {
 
-    camX = eyex;
-    camY = eyey;
-    camZ = eyez;
-    view_matrix = glm::lookAt(glm::vec3(eyex, eyey, eyez),
-                              glm::vec3(centerx, centery, centerz),
-                              glm::vec3(upx, upy, upz));
-    matrix_result = eye;
+    camX = eye.x;
+    camY = eye.y;
+    camZ = eye.z;
+    direction = angle(center, eye);
+    view_matrix = glm::lookAt(eye, center, up);
+    matrix_result = glm::mat4x4(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1);
 }
 
 /**
@@ -106,10 +98,11 @@ void gles20::lookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
  * @param zFar is far cutting plane
  */
 void gles20::perspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zFar) {
-    if(!matrixBuffer.empty()) {
+    while(!matrixBuffer.empty()) {
         matrixBuffer.pop();
     }
     proj_matrix = glm::perspective((float)(fovy * M_PI / 180.0f), aspect, zNear,zFar);
+    viewDistance = zFar;
     glEnable(GL_DEPTH_TEST);
     glDepthMask(true);
 }
@@ -381,7 +374,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     glm::mat4x4 modelView;
     if (m->dynamic) {
         float mat[16];
-        physic->getTransform(m->dynamicID, mat);
+        getPhysics()->getTransform(m->dynamicID, mat);
         m->x = mat[12];
         m->y = mat[13];
         m->z = mat[14];
@@ -532,7 +525,7 @@ void gles20::rtt(bool enable) {
         glEndQuery(GL_TIME_ELAPSED);
         glGetQueryObjectiv(id[0], GL_QUERY_RESULT, &copy_time);
         printf("3D time: %dk 2D time: %dk, edge:%d, dst:%f\n", gpu_time / 1000,
-               copy_time / 1000, allCar[0]->currentEdgeIndex, allCar[0]->toFinish);
+               copy_time / 1000, getCar(0)->currentEdgeIndex, getCar(0)->toFinish);
 #endif
     }
 }

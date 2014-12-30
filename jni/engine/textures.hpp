@@ -1,15 +1,46 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
- * \file       pngloader.cpp
+ * \file       textures.hpp
  * \author     Vonasek Lubos
- * \date       2014/11/01
- * \brief      Loading and storing textures from PNG
-*/
-//----------------------------------------------------------------------------------------
+ * \date       2014/12/30
+ * \brief      Loading textures from PNG and RGB value
+**/
+///----------------------------------------------------------------------------------------
 
 #include <png.h>
+#include "engine/io.h"
 #include "interfaces/texture.h"
-#include "utils/io.h"
+
+/**
+ * @brief rgb creates texture from color
+ * @param width is image width
+ * @param height is image height
+ * @param r is red color value
+ * @param g is green color value
+ * @param b is blue color value
+ * @return texture instance
+ */
+Texture createRGB(int width, int height, float r, float g, float b) {
+
+    /// create color pixel raster
+    Texture texture;
+    texture.data = new unsigned char[width * height * 4];
+    int index = 0;
+    for (int x = 0; x < width; x++)
+        for (int y = 0; y < height; y++) {
+            texture.data[0 + index] = (int)(255 * r);
+            texture.data[1 + index] = (int)(255 * g);
+            texture.data[2 + index] = (int)(255 * b);
+            texture.data[3 + index] = (int)(255 * 1);
+            index += 4;
+        }
+
+    /// create texture
+    texture.width = width;
+    texture.height = height;
+    texture.hasAlpha = false;
+    return texture;
+}
 
 #ifdef ZIP_ARCHIVE
 zip_file* file;
@@ -34,9 +65,9 @@ Texture loadPNG(std::string filename) {
   Texture texture;
   unsigned int sig_read = 0;
 #ifdef ZIP_ARCHIVE
-  file = zip_fopen(APKArchive, prefix(filename).c_str(), 0);
+  file = zip_fopen(getZip(""), filename.c_str(), 0);
 #else
-  fp = fopen(prefix(filename).c_str(), "rb");
+  fp = fopen(filename.c_str(), "rb");
 #endif
 
   /// init PNG library
@@ -77,7 +108,6 @@ Texture loadPNG(std::string filename) {
 #else
   fclose(fp);
 #endif
-
 
   texture.width = width;
   texture.height = height;

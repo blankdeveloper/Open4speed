@@ -1,24 +1,24 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
  * \file       physics.h
  * \author     Vonasek Lubos
- * \date       2014/11/01
+ * \date       2014/12/30
  * \brief      Physical model for scene, it detects collision and also calculate collision
  *             reactions. Also applies car physical and visual state.
-*/
-//----------------------------------------------------------------------------------------
+**/
+///----------------------------------------------------------------------------------------
 
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
-#include "interfaces/model.h"
-#include "car.h"
+#include "engine/car.h"
 
 /**
  * @brief The physics interface
  */
 class physics {
 public:
+    bool active;    ///< Information if scene is active
     bool locked;    ///< Locker for car controling
 
     /**

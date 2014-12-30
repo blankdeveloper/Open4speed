@@ -1,19 +1,20 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
  * \file       glfbo.cpp
  * \author     Vonasek Lubos
- * \date       2014/11/11
+ * \date       2014/12/30
  * \brief      Framebuffer object class for OpenGL
-*/
-//----------------------------------------------------------------------------------------
+**/
+///----------------------------------------------------------------------------------------
 
 #ifdef ANDROID
 #include <jni.h>
 #endif
 #include <string.h>
+#include "engine/io.h"
+#include "engine/switch.h"
 #include "renderers/opengl/gles20.h"
 #include "renderers/opengl/glfbo.h"
-#include "utils/io.h"
 
 #ifdef ANDROID
 #define PACKED_EXTENSION "GL_OES_packed_depth_stencil"
@@ -53,6 +54,7 @@ glfbo::glfbo(int width, int height) {
     rendertexture = new GLuint[1];
 
     //framebuffer texture
+    float aliasing = getRenderer()->aliasing;
     glGenFramebuffers(1, fboID);
     glBindFramebuffer(GL_FRAMEBUFFER, fboID[0]);
     glGenTextures(1, rendertexture);
@@ -134,6 +136,7 @@ glfbo::glfbo(int width, int height) {
  * @brief bind binds FBO
  */
 void glfbo::bindFBO() {
+    float aliasing = getRenderer()->aliasing;
     glBindFramebuffer(GL_FRAMEBUFFER, fboID[0]);
     glViewport (0, 0, width * aliasing, height * aliasing);
 }

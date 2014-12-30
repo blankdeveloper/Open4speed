@@ -1,15 +1,15 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
  * \file       glsl.cpp
  * \author     Vonasek Lubos
- * \date       2014/11/11
+ * \date       2014/12/30
  * \brief      Class for compiling and operating on GLSL shader
 */
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 
 #include <stdint.h>
+#include "engine/io.h"
 #include "renderers/opengl/glsl.h"
-#include "utils/io.h"
 
 const std::string header = "#version 100\nprecision highp float;\n";      ///< Shader header
 

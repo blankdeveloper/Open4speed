@@ -1,13 +1,13 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
  * \file       math.cpp
  * \author     Vonasek Lubos
- * \date       2014/11/01
+ * \date       2014/12/30
  * \brief      Common math utils used in program.
-*/
-//----------------------------------------------------------------------------------------
+**/
+///----------------------------------------------------------------------------------------
 
-#include "utils/math.h"
+#include "engine/math.h"
 
 /**
  * @brief angle counts angle of line between two points given by coordinates
@@ -63,7 +63,9 @@ float distance(glm::vec3 a, glm::vec3 b) {
  * @return distance in float
  */
 float distance(float fromX, float fromY, float toX, float toY) {
-    return sqrt((sqr(fromX - toX) + sqr(fromY - toY)));
+    float dx = fromX - toX;
+    float dy = fromY - toY;
+    return sqrt(dx * dx + dy * dy);
 }
 
 /**
@@ -95,8 +97,8 @@ float gap(glm::vec3 e, glm::vec3 c, float crot) {
  * @return value in degress
  */
 float getRotation(float x, float y, float z, float w) {
-    float rot = asin(-2.0 * (x*z - y*w)) * 180 / 3.14;
-    if (cos(atan2((float)(2.0 * (y*z + x*w)),(-sqr(x) - sqr(y) + sqr(z) + sqr(w)))) < 0) {
+    float rot = asin(-2.0 * (x * z - y * w)) * 180 / 3.14;
+    if (cos(atan2((float)(2.0 * (y * z + x * w)),(- x * x - y * y + z * z + w * w))) < 0) {
         rot = 180 - rot;
     }
     return rot;
@@ -116,32 +118,6 @@ bool isSame(edge a, edge b) {
         if ((b.b.x == a.b.x) & (b.b.z == a.b.z))
             return true;
     return false;
-}
-
-/**
- * @brief max get max value of input
- * @param a is first value
- * @param b is second value
- * @return bigger value
- */
-int max(int a, int b) {
-    if (a > b)
-        return a;
-    else
-        return b;
-}
-
-/**
- * @brief min get min value of input
- * @param a is first value
- * @param b is second value
- * @return smaller value
- */
-int min(int a, int b) {
-    if (a > b)
-        return b;
-    else
-        return a;
 }
 
 /**
@@ -171,25 +147,4 @@ std::vector<int> nextEdge(std::vector<edge> edges, edge e) {
         }
     }
     return output;
-}
-
-/**
- * @brief sign returns sign of value
- * @param v is value
- * @return one with sign of value
- */
-int sign(int v) {
-    if (v > 0)
-        return 1;
-    else
-        return -1;
-}
-
-/**
- * @brief sqr squares a number
- * @param a is number to square
- * @return squared number
- */
-float sqr(float a) {
-    return a * a;
 }

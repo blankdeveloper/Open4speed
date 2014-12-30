@@ -1,20 +1,21 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
  * \file       model.h
  * \author     Vonasek Lubos
- * \date       2014/11/01
+ * \date       2014/12/30
  * \brief      Loading and storing models
-*/
-//----------------------------------------------------------------------------------------
+**/
+///----------------------------------------------------------------------------------------
 
 #ifndef MODEL_H
 #define MODEL_H
 
 #include <glm/glm.hpp>
+#include <string>
+#include "engine/math.h"
 #include "interfaces/shader.h"
 #include "interfaces/texture.h"
 #include "interfaces/vbo.h"
-#include "utils/math.h"
 
 /**
  * @brief The model3d struct
@@ -48,7 +49,13 @@ public:
     /**
      * @brief model destructor
      */
-    virtual ~model() = 0;
+    ~model();
+
+    /**
+     * @brief Constructor for loading model from file
+     * @param filename is path and name of file to load
+     */
+    model(std::string filename);
 
     int cutX, cutY;                            ///< Size of SS Culling
     std::vector<model3d> models;               ///< All parts of model

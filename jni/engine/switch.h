@@ -1,19 +1,24 @@
-//----------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------
 /**
  * \file       switch.h
  * \author     Vonasek Lubos
- * \date       2014/11/01
+ * \date       2014/12/30
  * \brief      This utility switches between components. Switch depends on configuration
  *             file.
-*/
-//----------------------------------------------------------------------------------------
+**/
+///----------------------------------------------------------------------------------------
 
 #ifndef SWITCH_H
 #define SWITCH_H
 
+#ifdef ANDROID
+#define ZIP_ARCHIVE
+#endif
+
 #include <string>
+#include <zip.h>
+#include "engine/model.h"
 #include "interfaces/input.h"
-#include "interfaces/model.h"
 #include "interfaces/physics.h"
 #include "interfaces/renderer.h"
 #include "interfaces/shader.h"
@@ -21,6 +26,31 @@
 #include "interfaces/vbo.h"
 
 void clearMediaStorage();
+
+/**
+ * @brief addCar adds car into scene
+ * @param c is instance of new car
+ */
+void addCar(car* c);
+
+/**
+ * @brief getCar gets car from scene
+ * @param index is index of car
+ * @return car instance
+ */
+car* getCar(int index);
+
+/**
+ * @brief getCarCount gets count of cars in scene
+ * @return count of cars
+ */
+unsigned int getCarCount();
+
+/**
+ * @brief setShaderPath sets path of shaders
+ * @param path is relative path to runable file
+ */
+void setShaderPath(std::string path);
 
 /**
  * @brief getInput gets input controller
@@ -37,16 +67,15 @@ model* getModel(std::string filename);
 
 /**
  * @brief getPhysics gets physical engine
- * @param m is 3D model of scene
  * @return physical engine
  */
-physics* getPhysics(model *m);
+physics* getPhysics();
 
 /**
  * @brief getRenderer gets renderer
  * @return renderer instance
  */
-renderer* getRenderer(int w, int h);
+renderer* getRenderer();
 
 /**
  * @brief getShader compile shader from file
@@ -82,5 +111,13 @@ texture* getTexture(float r, float g, float b, float alpha);
  * @param tnormals is triangle normals array
  */
 vbo* getVBO(int size, float* vertices, float* normals, float* coords, float* tnormals, bool dynamic);
+
+
+/**
+ * @brief getZip gets APK archive object
+ * @param path is "" to get last APK, there is path when APK opening is needed
+ * @return zip instance
+ */
+zip* getZip(std::string path);
 
 #endif // SWITCH_H

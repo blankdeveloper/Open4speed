@@ -2,13 +2,15 @@
 /**
  * \file       textures.hpp
  * \author     Vonasek Lubos
- * \date       2014/12/30
+ * \date       2014/12/31
  * \brief      Loading textures from PNG and RGB value
 **/
 ///----------------------------------------------------------------------------------------
 
 #include <png.h>
 #include "engine/io.h"
+#include "files/extfile.h"
+#include "files/zipfile.h"
 #include "interfaces/texture.h"
 
 /**
@@ -42,19 +44,6 @@ Texture createRGB(int width, int height, float r, float g, float b) {
     return texture;
 }
 
-#ifdef ZIP_ARCHIVE
-zip_file* file;
-
-void png_read(png_structp png_ptr, png_bytep data, png_size_t length) {
-  zip_fread(file, data, length);
-}
-#else
-FILE* fp;
-void png_read(png_structp png_ptr, png_bytep data, png_size_t length) {
-  fread(data, length, 1, fp);
-}
-#endif
-
 /**
  * @brief pngloader loads texture from png file
  * @param filename is name of file
@@ -64,17 +53,17 @@ void png_read(png_structp png_ptr, png_bytep data, png_size_t length) {
 Texture loadPNG(std::string filename) {
   Texture texture;
   unsigned int sig_read = 0;
-#ifdef ZIP_ARCHIVE
-  file = zip_fopen(getZip(""), filename.c_str(), 0);
-#else
-  fp = fopen(filename.c_str(), "rb");
-#endif
+  file* f = getFile(filename);
 
   /// init PNG library
   png_structp png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
   png_infop info_ptr = png_create_info_struct(png_ptr);
   setjmp(png_jmpbuf(png_ptr));
-  png_set_read_fn(png_ptr, NULL, png_read);
+  f->accessStatic();
+  if (f->isArchive())
+    png_set_read_fn(png_ptr, NULL, png_read_zip);
+  else
+    png_set_read_fn(png_ptr, NULL, png_read_ext);
   png_set_sig_bytes(png_ptr, sig_read);
   png_read_png(png_ptr, info_ptr, PNG_TRANSFORM_STRIP_16, NULL);
   int bit_depth, color_type, interlace_type;
@@ -103,11 +92,7 @@ Texture loadPNG(std::string filename) {
   /* Clean up after the read,
    * and free any memory allocated */
   png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
-#ifdef ZIP_ARCHIVE
-  zip_fclose(file);
-#else
-  fclose(fp);
-#endif
+  delete f;
 
   texture.width = width;
   texture.height = height;

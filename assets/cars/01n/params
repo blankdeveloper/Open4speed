@@ -1,5 +1,5 @@
-skin_model assets/cars/01n/skin.o4s
-wheel_model assets/cars/01n/wheel.o4s
+skin_model #assets/cars/01n/skin.o4s
+wheel_model #assets/cars/01n/wheel.o4s
 
 //pozice kol v metrech
 wheel_x 0.95

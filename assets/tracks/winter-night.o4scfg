@@ -1,0 +1,10 @@
+track_model #assets/tracks/winter.o4s
+sky_model #assets/tracks/winter-sky.o4s
+shaders #assets/shaders/night/
+track_edges #assets/tracks/winter.o4s.e
+race_track 0
+player_car #assets/cars/01n/params
+race_start 80
+laps 2
+finish 478
+opponent_count 0

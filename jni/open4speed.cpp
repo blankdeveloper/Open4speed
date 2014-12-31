@@ -2,7 +2,7 @@
 /**
  * \file       open4speed.cpp
  * \author     Vonasek Lubos
- * \date       2014/12/30
+ * \date       2014/12/31
  * \brief      Runable code of project.
 **/
 ///----------------------------------------------------------------------------------------
@@ -37,7 +37,6 @@ int cameraCar = 0;              ///< Car camera index
 int currentFrame = 0;           ///< Frame index
 float direction = 0;            ///< Camera direction
 const int effLen = 3;           ///< Length of water effect
-int opponentCount;              ///< Opponent count
 model *skydome;                 ///< Skydome model
 model *trackdata;               ///< Track first model
 model* water;                   ///< Water effect model
@@ -270,80 +269,76 @@ void display(void) {
 void loadScene(std::string filename) {
 
     /// load track
+    std::string p = getFile(filename)->path();
     std::vector<std::string> atributes = getList("", filename);
-    setShaderPath(getConfigStr("shaders", atributes));
-    trackdata = getModel(getConfigStr("track_model", atributes));
+    setShaderPath(p + getConfigStr("shaders", atributes));
+    trackdata = getModel(p + getConfigStr("track_model", atributes));
 
     /// load edges
-#ifdef ZIP_ARCHIVE
-    zip_file* file = zip_fopen(getZip(""), getConfigStr("track_edges", atributes).c_str(), 0);
-#else
-    FILE* file = fopen(getConfigStr("track_edges", atributes).c_str(), "r");
-#endif
-    char line[1024];
-    gets(line, file);
-    int edgesCount = scandec(line);
-    int trackIndex = getConfig("race_track", atributes);
     std::vector<edge> e;
-    for (int i = 0; i < edgesCount; i++) {
-        gets(line, file);
-        int edgeCount = scandec(line);
-        for (int j = 0; j < edgeCount; j++) {
-            edge value;
-            gets(line, file);
-            sscanf(line, "%f %f %f %f %f %f", &value.a.x, &value.a.y, &value.a.z, &value.b.x, &value.b.y, &value.b.z);
-            if (i == trackIndex)
-                e.push_back(value);
+    if (getConfigStr("track_edges", atributes).length() > 0) {
+        file* f = getFile(p + getConfigStr("track_edges", atributes));
+        char line[1024];
+        int edgesCount = f->scandec();
+        int trackIndex = getConfig("race_track", atributes);
+        for (int i = 0; i < edgesCount; i++) {
+            int edgeCount = f->scandec();
+            for (int j = 0; j < edgeCount; j++) {
+                edge value;
+                f->gets(line);
+                sscanf(line, "%f %f %f %f %f %f", &value.a.x, &value.a.y, &value.a.z, &value.b.x, &value.b.y, &value.b.z);
+                if (i == trackIndex)
+                    e.push_back(value);
+            }
+            for (int j = 0; j < edgeCount; j++) {
+                edge value;
+                value.a.x = e[j].b.x;
+                value.a.y = e[j].b.y;
+                value.a.z = e[j].b.z;
+                value.b.x = e[j].a.x;
+                value.b.y = e[j].a.y;
+                value.b.z = e[j].a.z;
+                if (i == trackIndex)
+                    e.push_back(value);
+            }
         }
-        for (int j = 0; j < edgeCount; j++) {
-            edge value;
-            value.a.x = e[j].b.x;
-            value.a.y = e[j].b.y;
-            value.a.z = e[j].b.z;
-            value.b.x = e[j].a.x;
-            value.b.y = e[j].a.y;
-            value.b.z = e[j].a.z;
-            if (i == trackIndex)
-                e.push_back(value);
-        }
+        delete f;
     }
-#ifdef ZIP_ARCHIVE
-    zip_fclose(file);
-#else
-    fclose(file);
-#endif
 
     /// load sky
-    skydome = getModel(getConfigStr("sky_model", atributes));
+    skydome = getModel(p + getConfigStr("sky_model", atributes));
 
     /// load player car
 #ifdef VR
     addCar(new car(new airacer(), &e, getConfigStr("player_car", atributes))); //autopilot just for testing
 #else
-    addCar(new car(getInput(), &e, getConfigStr("player_car", atributes)));
+    addCar(new car(getInput(), &e, p + getConfigStr("player_car", atributes)));
 #endif
 
     /// load race informations
     getCar(0)->lapsToGo = getConfig("laps", atributes);
     getCar(0)->finishEdge = getConfig("finish", atributes);
     getCar(0)->currentEdgeIndex = getConfig("race_start", atributes);
-    getCar(0)->setStart(getCar(0)->edges[getConfig("race_start", atributes)], 0);
+    if (!getCar(0)->edges.empty())
+    {
+      getCar(0)->setStart(getCar(0)->edges[getConfig("race_start", atributes)], 0);
 
-    /// load opponents
-    opponentCount = getConfig("opponent_count", atributes);
-    for (int i = 0; i < opponentCount; i++) {
+      /// load opponents
+      int opponentCount = getConfig("opponent_count", atributes);
+      for (int i = 0; i < opponentCount; i++) {
 
-        /// racer ai
-        addCar(new car(new airacer(), &e, getConfigStr("opponent" + SSTR(i + 1) + "_car", atributes)));
-        getCar(i + 1)->finishEdge = getCar(0)->finishEdge;
-        getCar(i + 1)->lapsToGo = getCar(0)->lapsToGo;
-        int move = (i % 2) * 2 - 1;
-        getCar(i + 1)->setStart(getCar(i + 1)->edges[getConfig("race_start", atributes)], move * 4);
-        getCar(i + 1)->currentEdgeIndex = getConfig("race_start", atributes);
+          /// racer ai
+          addCar(new car(new airacer(), &e, p + getConfigStr("opponent" + SSTR(i + 1) + "_car", atributes)));
+          getCar(i + 1)->finishEdge = getCar(0)->finishEdge;
+          getCar(i + 1)->lapsToGo = getCar(0)->lapsToGo;
+          int move = (i % 2) * 2 - 1;
+          getCar(i + 1)->setStart(getCar(i + 1)->edges[getConfig("race_start", atributes)], move * 4);
+          getCar(i + 1)->currentEdgeIndex = getConfig("race_start", atributes);
+      }
     }
 
     /// load water
-    water = getModel("assets/cars/fx/water.o4s");
+    water = getModel("#assets/cars/fx/water.o4s");
     for (int i = 0; i < effLen; i++) {
         eff[i].vertices = new float[4095 * 3];
         eff[i].coords = new float[4095 * 2];
@@ -354,13 +349,13 @@ void loadScene(std::string filename) {
     /// create instance of physical engine
     physics* physic = getPhysics();
     physic->addModel(trackdata);
-    for (int i = 0; i <= opponentCount; i++)
+    for (unsigned int i = 0; i < getCarCount(); i++)
         physic->addCar(getCar(i));
 
     /// heightmap experiment
     /*glm::vec3 min = glm::vec3(-500,0,-500);
     glm::vec3 max = glm::vec3(500,128,500);
-    Texture t = loadPNG("tracks/heightmap.png");
+    Texture t = loadPNG("#assets/tracks/heightmap.png");
     unsigned char data[t.width * t.height];
     int index = 0;
     for (int i = 0; i < t.width * t.height; i++) {
@@ -480,7 +475,7 @@ extern "C" {
  */
 void Java_com_lvonasek_o4s_game_GameLoop_init( JNIEnv* env, jclass cls, jstring apkPath, jstring track, float alias ) {
   jboolean isCopy;
-  getZip(env->GetStringUTFChars(apkPath, &isCopy));
+  setZip(env->GetStringUTFChars(apkPath, &isCopy));
   getPhysics()->active = true;
   getRenderer()->aliasing = alias;
   loadScene(env->GetStringUTFChars(track, &isCopy));
@@ -645,7 +640,7 @@ int main(int argc, char** argv) {
     glutKeyboardUpFunc(keyboardUp);
 
     /// load data
-    loadScene("assets/tracks/winter-night");
+    loadScene("#assets/tracks/winter-day.o4scfg");
 
     /// start loop
     getPhysics()->locked = false;

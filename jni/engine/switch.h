@@ -2,7 +2,7 @@
 /**
  * \file       switch.h
  * \author     Vonasek Lubos
- * \date       2014/12/30
+ * \date       2014/12/31
  * \brief      This utility switches between components. Switch depends on configuration
  *             file.
 **/
@@ -11,13 +11,10 @@
 #ifndef SWITCH_H
 #define SWITCH_H
 
-#ifdef ANDROID
-#define ZIP_ARCHIVE
-#endif
-
 #include <string>
 #include <zip.h>
 #include "engine/model.h"
+#include "interfaces/file.h"
 #include "interfaces/input.h"
 #include "interfaces/physics.h"
 #include "interfaces/renderer.h"
@@ -51,6 +48,8 @@ unsigned int getCarCount();
  * @param path is relative path to runable file
  */
 void setShaderPath(std::string path);
+
+file* getFile(std::string filename);
 
 /**
  * @brief getInput gets input controller
@@ -112,12 +111,10 @@ texture* getTexture(float r, float g, float b, float alpha);
  */
 vbo* getVBO(int size, float* vertices, float* normals, float* coords, float* tnormals, bool dynamic);
 
-
 /**
- * @brief getZip gets APK archive object
- * @param path is "" to get last APK, there is path when APK opening is needed
- * @return zip instance
+ * @brief setZip sets APK archive object
+ * @param path is path of APK
  */
-zip* getZip(std::string path);
+void setZip(std::string path);
 
 #endif // SWITCH_H

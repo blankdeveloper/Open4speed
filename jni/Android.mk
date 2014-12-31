@@ -51,21 +51,14 @@ $(LOCAL_PATH)/../support/libzip-0.11.1 \
 $(LOCAL_PATH)/../support/bullet-2.83-alpha \
 $(LOCAL_PATH)/../support/glm-0.9.5.4
 
-LOCAL_SRC_FILES := \
-engine/car.cpp \
-engine/io.cpp \
-engine/math.cpp \
-engine/model.cpp \
-engine/switch.cpp \
-input/keyboard.cpp \
-input/airacer.cpp \
-physics/bullet/bullet.cpp \
-renderers/opengl/gles20.cpp \
-renderers/opengl/glfbo.cpp \
-renderers/opengl/glsl.cpp \
-renderers/opengl/gltexture.cpp \
-renderers/opengl/glvbo.cpp \
-open4speed.cpp
+
+FILE_LIST := $(wildcard $(LOCAL_PATH)/engine/*.cpp)
+FILE_LIST += $(wildcard $(LOCAL_PATH)/files/*.cpp)
+FILE_LIST += $(wildcard $(LOCAL_PATH)/input/*.cpp)
+FILE_LIST += $(wildcard $(LOCAL_PATH)/renderers/opengl/*.cpp)
+FILE_LIST += physics/bullet/bullet.cpp open4speed.cpp
+LOCAL_SRC_FILES := $(FILE_LIST:$(LOCAL_PATH)/%=%)
+
 LOCAL_LDLIBS := -lGLESv2 -ldl -llog -landroid -lz
 
 LOCAL_STATIC_LIBRARIES := libpng \ libbullet \ libzip

@@ -2,7 +2,7 @@
 /**
  * \file       model.h
  * \author     Vonasek Lubos
- * \date       2014/12/30
+ * \date       2014/12/31
  * \brief      Loading and storing models
 **/
 ///----------------------------------------------------------------------------------------
@@ -34,27 +34,20 @@ model::~model() {
 model::model(std::string filename) {
 
     /// open file
-#ifdef ZIP_ARCHIVE
-    zip_file* file = zip_fopen(getZip(""), filename.c_str(), 0);
-#else
-    FILE* file = fopen(filename.c_str(), "r");
-#endif
+    file* f = getFile(filename);
 
     /// get model dimensions
+    cutX = f->scandec();
+    cutY = f->scandec();
     char line[1024];
-    gets(line, file);
-    cutX = scandec(line);
-    gets(line, file);
-    cutY = scandec(line);
-    gets(line, file);
+    f->gets(line);
     sscanf(line, "%f %f %f %f %f %f", &aabb.min.x, &aabb.min.y, &aabb.min.z, &aabb.max.x, &aabb.max.y, &aabb.max.z);
     width = aabb.max.x - aabb.min.x;
     aplitude = aabb.max.y - aabb.min.y;
     height = aabb.max.z - aabb.min.z;
 
     /// get amount of textures in model
-    gets(line, file);
-    int textureCount = scandec(line);
+    int textureCount = f->scandec();
 
     /// parse all textures
     for (int i = 0; i < textureCount; i++) {
@@ -71,7 +64,7 @@ model::model(std::string filename) {
         char texturePath[255];
         char material[255];
         material[0] = '\0';
-        gets(line, file);
+        f->gets(line);
         sscanf(line, "%f %f %f %f %f %f %s %f %f %f %f %f %f %f %f %f %f %s",
                &m.reg.min.x, &m.reg.min.y, &m.reg.min.z, &m.reg.max.x, &m.reg.max.y, &m.reg.max.z,
                &texturePath[0], &m.colora[0], &m.colora[1], &m.colora[2], &m.colord[0], &m.colord[1], &m.colord[2],
@@ -84,7 +77,7 @@ model::model(std::string filename) {
 
         /// if texture is not only single color then load it
         if (texturePath[0] != '*') {
-            m.texture2D = getTexture(path(filename) + texturePath, alpha);
+            m.texture2D = getTexture(f->path() + texturePath, alpha);
         /// create color texture
         } else {
             m.texture2D = getTexture(m.colord[0], m.colord[1], m.colord[2], alpha);
@@ -134,17 +127,15 @@ model::model(std::string filename) {
 
         /// prepare model arrays
         m.triangleCount[0] = 0;
-        for (int j = 1; j <= cutX * cutY; j++) {
-            gets(line, file);
-            m.triangleCount[j] = scandec(line);
-        }
+        for (int j = 1; j <= cutX * cutY; j++)
+            m.triangleCount[j] = f->scandec();
         m.vertices = new float[m.triangleCount[cutX * cutY] * 9];
         m.normals = new float[m.triangleCount[cutX * cutY] * 9];
         m.coords = new float[m.triangleCount[cutX * cutY] * 6];
         m.tnormals = new float[m.triangleCount[cutX * cutY] * 9];
         for (int j = 0; j < m.triangleCount[cutX * cutY]; j++) {
             /// read triangle parameters
-            gets(line, file);
+            f->gets(line);
             sscanf(line, "%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f",
                    &m.coords[j * 6 + 0], &m.coords[j * 6 + 1],
                    &m.normals[j * 9 + 0], &m.normals[j * 9 + 1], &m.normals[j * 9 + 2],
@@ -190,9 +181,5 @@ model::model(std::string filename) {
         models.push_back(m);
     }
 
-#ifdef ZIP_ARCHIVE
-    zip_fclose(file);
-#else
-    fclose(file);
-#endif
+    delete f;
 }

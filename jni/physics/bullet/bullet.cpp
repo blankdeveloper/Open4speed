@@ -2,7 +2,7 @@
 /**
  * \file       bullet.cpp
  * \author     Vonasek Lubos
- * \date       2014/12/30
+ * \date       2014/12/31
  * \brief      Physical model for scene, it detects collision and also calculate collision
  *             reactions. Also applies car physical and visual state.
 **/
@@ -217,6 +217,11 @@ void bullet::addHeightmap(unsigned char* data, int res, glm::vec3 min, glm::vec3
  */
 void bullet::addModel(model *m) {
     btTriangleMesh* mesh = 0;
+    bool touchable = false;
+    for (unsigned int i = 0; i < m->models.size(); i++) {
+      if (m->models[i].touchable)
+          touchable = true;
+    }
     for (unsigned int i = 0; i < m->models.size(); i++) {
         if (m->models[i].dynamic) {
 
@@ -254,7 +259,7 @@ void bullet::addModel(model *m) {
             m->models[i].x = mat[12];
             m->models[i].y = mat[13];
             m->models[i].z = mat[14];
-        } else if (m->models[i].touchable) {
+        } else if (m->models[i].touchable || !touchable) {
             if (mesh == 0)
                 mesh = new btTriangleMesh();
             btVector3 o = btVector3(m->models[i].reg.min.x, m->models[i].reg.min.y, m->models[i].reg.min.z);

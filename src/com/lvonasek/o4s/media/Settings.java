@@ -18,6 +18,8 @@ public class Settings {
     public static final int          VISUAL_QUALITY = 2;
     public static final int          RACE_EVENT     = 3;
 
+    public static final String       RACE_CUSTOM_EVENT = "O4SCFG";
+
     private static int[]             DEFAULT_VALUES = {100, 100, 100, 0};
 
     public static void init(Activity instance) {
@@ -39,6 +41,18 @@ public class Settings {
         SharedPreferences pref = c.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = pref.edit();
         edit.putInt("IntCFG" + index, value);
+        edit.commit();
+    }
+
+    public static String getConfig(Context c, String str) {
+        SharedPreferences pref = c.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        return pref.getString(str, "");
+    }
+
+    public static void setConfig(Context c, String str, String value) {
+        SharedPreferences pref = c.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = pref.edit();
+        edit.putString(str, value);
         edit.commit();
     }
 }

@@ -1,5 +1,6 @@
 package com.lvonasek.o4s.game;
 
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -79,12 +80,23 @@ public class GameActivity extends FragmentActivity {
         win.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
                 | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
-        //set loading splash
-        int event = Settings.getConfig(this, Settings.RACE_EVENT);
-        loadingImg.setBackground(getResources().getDrawable(RaceInfo.EVENT[event].splash));
-
         //set the hardware buttons to control the game sound
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+        //set loading splash
+        int event = Settings.getConfig(this, Settings.RACE_EVENT);
+        if (getIntent().getAction() == Intent.ACTION_VIEW) {
+            String path = getIntent().getDataString();
+            path = path.substring(path.indexOf("file://") + 7);
+            Settings.setConfig(this, Settings.RACE_CUSTOM_EVENT, path);
+            event = -1;
+            Settings.setConfig(this, Settings.RACE_EVENT, event);
+            loadingImg.setVisibility(View.GONE);
+        }
+        if (event >= 0)
+            loadingImg.setBackground(getResources().getDrawable(RaceInfo.EVENT[event].splash));
+        else
+            loadingImg.setVisibility(View.GONE);
 
         //start sounds
         startSnd = new int[2];
@@ -210,20 +222,22 @@ public class GameActivity extends FragmentActivity {
         try {
             music.setAudioStreamType(AudioManager.STREAM_MUSIC);
             int event = Settings.getConfig(this, Settings.RACE_EVENT);
-            AssetFileDescriptor afd = getAssets().openFd(RaceInfo.EVENT[event].music);
-            music.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-            final float volume = Settings.getConfig(this, Settings.MUSIC_VOLUME) * 0.01f;
-            if (GameLoop.paused <= 0) {
-                music.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mp) {
-                        mp.setVolume(volume, volume);
-                        mp.setLooping(true);
-                        mp.start();
-                    }
-                });
+            if (event >= 0) {
+                AssetFileDescriptor afd = getAssets().openFd(RaceInfo.EVENT[event].music);
+                music.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+                final float volume = Settings.getConfig(this, Settings.MUSIC_VOLUME) * 0.01f;
+                if (GameLoop.paused <= 0) {
+                    music.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            mp.setVolume(volume, volume);
+                            mp.setLooping(true);
+                            mp.start();
+                        }
+                    });
+                }
+                music.prepare();
             }
-            music.prepare();
         } catch (IOException e) {
             e.printStackTrace();
         }

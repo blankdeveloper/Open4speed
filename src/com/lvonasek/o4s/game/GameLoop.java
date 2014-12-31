@@ -106,7 +106,12 @@ public class GameLoop extends GLSurfaceView implements Renderer {
             float quality = 0.01f * Settings.getConfig(GameActivity.instance, Settings.VISUAL_QUALITY);
             quality = 0.25f + 0.75f * quality;
             int event = Settings.getConfig(GameActivity.instance, Settings.RACE_EVENT);
-            init(apkFilePath, RaceInfo.EVENT[event].race, quality);
+            if (event >= 0)
+                init(apkFilePath, RaceInfo.EVENT[event].race, quality);
+            else {
+                String path = Settings.getConfig(GameActivity.instance, Settings.RACE_CUSTOM_EVENT);
+                init(apkFilePath, path, quality);
+            }
             GameActivity.instance.finishLoading();
         }
         GameActivity.init = true;
@@ -219,29 +224,33 @@ public class GameLoop extends GLSurfaceView implements Renderer {
                 GameActivity.infopanel[1].setText(speed + GameActivity.instance.getString(R.string.hud_kmh));
                 GameActivity.infopanel[2].setText((dst / 10) + "." + (dst % 10) + GameActivity.instance.getString(R.string.hud_km));
 
-                if ((currentPlace == 0) && (distance <= 0)) {
-                    currentPlace = place;
-                    GameActivity.place.setText(placeText + " " + GameActivity.instance.getString(R.string.hud_place));
-                    GameActivity.place.setVisibility(View.VISIBLE);
-                    new Thread(new Runnable() {
+                int event = Settings.getConfig(GameActivity.instance, Settings.RACE_EVENT);
+                if (event >= 0) {
+                    if ((currentPlace == 0) && (distance <= 0)) {
+                        currentPlace = place;
+                        String str = GameActivity.instance.getString(R.string.hud_place);
+                        GameActivity.place.setText(placeText + " " + str);
+                        GameActivity.place.setVisibility(View.VISIBLE);
+                        new Thread(new Runnable() {
 
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(5000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(5000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                GameActivity.instance.quit();
                             }
-                            GameActivity.instance.quit();
-                        }
-                    }).start();
-                }
-                if ((speed <= 5) && (GameActivity.restartable > 50)) {
-                    GameActivity.restart.setVisibility(View.VISIBLE);
-                } else if (GameActivity.started) {
-                    GameActivity.restart.setVisibility(View.GONE);
-                    if (speed > 5)
-                      GameActivity.restartable++;
+                        }).start();
+                    }
+                    if ((speed <= 5) && (GameActivity.restartable > 50)) {
+                        GameActivity.restart.setVisibility(View.VISIBLE);
+                    } else if (GameActivity.started) {
+                        GameActivity.restart.setVisibility(View.GONE);
+                        if (speed > 5)
+                            GameActivity.restartable++;
+                    }
                 }
             }
         });

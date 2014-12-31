@@ -2,7 +2,7 @@
 /**
  * \file       switch.cpp
  * \author     Vonasek Lubos
- * \date       2014/12/30
+ * \date       2014/12/31
  * \brief      This utility switches between components. Switch depends on configuration
  *             file.
 **/
@@ -13,6 +13,8 @@
 #include "engine/model.h"
 #include "engine/switch.h"
 #include "engine/textures.hpp"
+#include "files/extfile.h"
+#include "files/zipfile.h"
 #include "input/keyboard.h"
 #include "physics/bullet/bullet.h"
 #include "renderers/opengl/gles20.h"
@@ -86,6 +88,22 @@ void setShaderPath(std::string path) {
     shaderPath = path;
 }
 
+file* getFile(std::string filename) {
+    filename = fixName(filename);
+    if (!APKArchive) {
+        if (filename[0] == '#')
+            filename = filename.substr(1, filename.length() - 1);
+        logi("Opening file:", filename);
+        return new extfile(filename);
+    } else {
+        logi("Opening file:", filename);
+        if (filename[0] == '#')
+            return new zipfile(filename.substr(1, filename.length() - 1), APKArchive);
+        else
+            return new extfile(filename);
+    }
+}
+
 /**
  * @brief getInput gets input controller
  * @return input controller
@@ -100,9 +118,9 @@ input* getInput() {
  * @return instance of model
  */
 model* getModel(std::string filename) {
-    logi("Load model:", filename);
 
     /// find previous instance
+    filename = fixName(filename);
     for (unsigned int i = 0; i < models.size(); i++)
         if (strcmp(models[i]->modelname, filename.c_str()) == 0)
             return models[i];
@@ -150,7 +168,9 @@ renderer* getRenderer() {
  * @return instance of shader
  */
 shader* getShader(std::string name) {
+
     /// find previous instance
+    name = fixName(name);
     for (unsigned int i = 0; i < shaders.size(); i++) {
         if (strcmp(shaders[i]->shadername, name.c_str()) == 0) {
             return shaders[i];
@@ -161,7 +181,6 @@ shader* getShader(std::string name) {
     strcpy(filename, shaderPath.c_str());
     strcat(filename, name.c_str());
     strcat(filename, ".glsl");
-    logi("Load shader:", filename);
 
     std::vector<std::string> vert_atributes = getList("VERT", filename);
     std::vector<std::string> frag_atributes = getList("FRAG", filename);
@@ -180,8 +199,7 @@ shader* getShader(std::string name) {
  * @return texture instance
  */
 texture* getTexture(std::string filename, float alpha) {
-
-    filename = fixPath(filename);
+    filename = fixName(filename);
 
     /// find previous instance
     for (unsigned int i = 0; i < textures.size(); i++)
@@ -189,7 +207,6 @@ texture* getTexture(std::string filename, float alpha) {
             return textures[i];
 
     /// create new instance
-    logi("Load texture:", filename);
     if (strcmp(getExtension(filename).c_str(), "png") == 0) {
       texture* instance = new gltexture(loadPNG(filename), alpha);
       strcpy(instance->texturename, filename.c_str());
@@ -250,12 +267,9 @@ vbo* getVBO(int size, float* vertices, float* normals, float* coords, float* tno
 }
 
 /**
- * @brief getZip gets APK archive object
- * @param path is "" to get last APK, there is path when APK opening is needed
- * @return zip instance
+ * @brief setZip sets APK archive object
+ * @param path is path of APK
  */
-zip* getZip(std::string path) {
-    if (path.length() != 0)
-      APKArchive = zip_open(path.c_str(), 0, NULL);
-    return APKArchive;
+void setZip(std::string path) {
+    APKArchive = zip_open(path.c_str(), 0, NULL);
 }

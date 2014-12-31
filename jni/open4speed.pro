@@ -29,7 +29,9 @@ SOURCES += \
     renderers/opengl/glfbo.cpp \
     renderers/opengl/glvbo.cpp \
     physics/bullet/GL_ShapeDrawer.cpp \
-    physics/bullet/GLDebugFont.cpp
+    physics/bullet/GLDebugFont.cpp \
+    files/extfile.cpp \
+    files/zipfile.cpp
 HEADERS += \
     input/keyboard.h \
     interfaces/input.h \
@@ -54,5 +56,8 @@ HEADERS += \
     renderers/opengl/glvbo.h \
     physics/bullet/GL_ShapeDrawer.h \
     physics/bullet/GLDebugFont.h \
-    physics/bullet/GlutStuff.h
+    physics/bullet/GlutStuff.h \
+    files/extfile.h \
+    files/zipfile.h \
+    interfaces/file.h
 INCLUDEPATH += /usr/include/bullet

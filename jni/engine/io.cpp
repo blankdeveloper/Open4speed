@@ -2,7 +2,7 @@
 /**
  * \file       io.cpp
  * \author     Vonasek Lubos
- * \date       2014/12/30
+ * \date       2014/12/31
  * \brief      Common input/output utils used in program.
 **/
 ///----------------------------------------------------------------------------------------
@@ -17,19 +17,25 @@
 
 std::vector<std::string> imports;     ///< Config data list
 
-std::string fixPath(std::string filename) {
-  while(true) {
+
+std::string fixName(std::string filename) {
     int index = 0;
-    for (int i = 1; i < filename.size(); i++) {
-      if ((filename[i] == '/') && (filename[i + 1] != '.'))
-        index = i;
-      else if ((filename[i - 1] == '/') && (filename[i] == '.')) {
-        filename = filename.substr(0, index) + filename.substr(i + 2, filename.size() - i);
-        break;
+    for (unsigned int i = 1; i < filename.size(); i++)
+      if (filename[i] == '#')
+          index = i;
+    filename = filename.substr(index, filename.size() - index);
+    while(true) {
+      index = 0;
+      for (unsigned int i = 1; i < filename.size(); i++) {
+        if ((filename[i] == '/') && (filename[i + 1] != '.'))
+          index = i;
+        else if ((filename[i - 1] == '/') && (filename[i] == '.')) {
+          filename = filename.substr(0, index) + filename.substr(i + 2, filename.size() - i);
+          return filename;
+        }
       }
+      return filename;
     }
-    return filename;
-  }
 }
 
 /**
@@ -93,12 +99,7 @@ std::string getExtension(std::string filename) {
 * @return list as vector of char*
 */
 std::vector<std::string> getList(std::string tag, std::string filename) {
-#ifdef ZIP_ARCHIVE
-    zip_file* file = zip_fopen(getZip(""), filename.c_str(), 0);
-#else
-    FILE* file = fopen(filename.c_str(), "r");
-#endif
-
+    file* f = getFile(filename);
     std::vector<std::string> output;
     bool hasTag = false;
     if (tag.length() == 0)
@@ -106,11 +107,7 @@ std::vector<std::string> getList(std::string tag, std::string filename) {
     while(true) {
        char value[1024];
        strcpy(value, "");
-#ifdef ZIP_ARCHIVE
-       getsEx(value, file);
-#else
-       fgets(value, 1024, file);
-#endif
+       f->getsEx(value);
 
        /// fix end of line
        if (strlen(value) > 0)
@@ -141,11 +138,7 @@ std::vector<std::string> getList(std::string tag, std::string filename) {
                }
            }
            if (hasTag && strcmp(value,"END") == 0){
-#ifdef ZIP_ARCHIVE
-               zip_fclose(file);
-#else
-               fclose(file);
-#endif
+               delete f;
                return output;
            }
            if (hasTag)
@@ -153,102 +146,18 @@ std::vector<std::string> getList(std::string tag, std::string filename) {
        }
 
        /// end of file
-#ifdef ZIP_ARCHIVE
        if (value[1023] == '1') {
            if (imports.size() > 0) {
-               zip_fclose(file);
-               file = zip_fopen(getZip(""), imports[0].c_str(), 0);
+               delete f;
+               f = getFile(imports[0]);
                imports.clear();
                continue;
            } else {
-               zip_fclose(file);
+               delete f;
                return output;
            }
        }
-#else
-       if (feof(file)) {
-           if (imports.size() > 0) {
-               fclose(file);
-               file = fopen(imports[0].c_str(), "r");
-               imports.clear();
-               continue;
-           } else {
-               fclose(file);
-               return output;
-           }
-       }
-#endif
    }
-}
-
-/**
- * @brief gets custom implementation of syntax fgets
- * @param line is data to read
- * @param file is input stream
- */
-void gets(char* line, zip_file* file) {
-    char character[2];
-    for (int i = 0; i < 1020; i++) {
-        zip_fread(file, character, 1);
-        line[i] = character[0];
-        if (line[i] == '\n') {
-            line[i + 1] = '\000';
-            return;
-        }
-    }
-    int i = 1020;
-    line[i] = '\n';
-    line[i + 1] = '\000';
-}
-
-/**
- * @brief gets custom implementation of syntax fgets
- * @param line is data to read
- * @param file is input stream
- */
-void gets(char* line, FILE* file) {
-    char character[2];
-    for (int i = 0; i < 1020; i++) {
-        fread(character, 1, 1, file);
-        line[i] = character[0];
-        if ((line[i] == 10) || (line[i] == 13)) {
-            line[i] = '\n';
-            line[i + 1] = '\000';
-            return;
-        }
-    }
-    int i = 1020;
-    line[i] = '\n';
-    line[i + 1] = '\000';
-}
-
-
-/**
-* @brief getsEx gets config value from zip archive
-* @param line is item to read
-* @param zip_file is source storage
-* @return value in char*
-*/
-char* getsEx(char* line, zip_file* file) {
-    line[1023] = '0';
-    char character[2];
-    for (int i = 0; i < 1020; i++) {
-        int ok = zip_fread(file, character, 1);
-        if (ok <= 0) {
-            line[i] = '\n';
-            line[i + 1] = '\000';
-            if (i == 0) {
-                line[1023] = '1';
-            }
-            return line;
-        }
-        line[i] = character[0];
-        if (line[i] == '\n') {
-            line[i + 1] = '\000';
-            return line;
-        }
-    }
-    return line;
 }
 
 /**
@@ -273,34 +182,4 @@ void logi(std::string value1, std::string value2) {
 #ifdef ANDROID
  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,"com.lvonasek.o4s:%s %s", value1.c_str(), value2.c_str());
 #endif
-}
-
-/**
- * @brief path gets path of filename
- * @param filename is full filename with path
- * @return path as string
- */
-std::string path(std::string filename) {
-  int index = 0;
-  for (unsigned int i = 0; i < filename.length(); i++)
-    if (filename[i] == '/')
-      index = i;
-  return filename.substr(0, index + 1);
-}
-
-/**
- * @brief scandec read number from chars
- * @param line is chars to read
- * @return number as int
- */
-int scandec(char* line) {
-    int number = 0;
-    for (int i = 0; i < 1024; i++) {
-        if (line[i] != 10) {
-            number = number * 10 + line[i] - '0';
-        } else {
-            return number;
-        }
-    }
-    return number;
 }

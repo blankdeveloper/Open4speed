@@ -10,22 +10,34 @@
                   android:xlargeScreens="true"/>
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   <application android:icon="@drawable/icon" android:label="@string/app_name"
                android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
                android:installLocation="auto">
     <activity android:name=".ui.menus.MainMenu"
-                  android:label="@string/app_name"
-                  android:screenOrientation="landscape"
-                  android:configChanges="" >
+              android:label="@string/app_name"
+              android:screenOrientation="landscape"
+              android:configChanges="" >
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
 
-      <activity android:name=".game.GameActivity"
-          android:screenOrientation="landscape"
-          android:configChanges="" />
+    <activity android:name=".game.GameActivity"
+               android:screenOrientation="landscape"
+               android:configChanges="">
+      <intent-filter>
+          <action android:name="android.intent.action.VIEW" />
+          <category android:name="android.intent.category.DEFAULT" />
+          <category android:name="android.intent.category.BROWSABLE" />
+          <data android:scheme="file" />
+          <data android:mimeType="*/*" />
+          <data android:pathPattern=".*\\.o4scfg" />
+          <data android:host="*" />
+      </intent-filter>
+    </activity>
   </application>
   <uses-feature android:glEsVersion="0x00020000"></uses-feature>
   <uses-sdk android:minSdkVersion="16"/>

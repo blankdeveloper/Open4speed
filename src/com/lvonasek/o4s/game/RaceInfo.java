@@ -17,9 +17,9 @@ public class RaceInfo {
     private static final String MUSIC_AMBIENT2      = "sfx/06-danosongs.com-undiscovered-oceans.mp3";
     private static final String MUSIC_AMBIENT3      = "sfx/07-danosongs.com-cellular-faith.mp3";
 
-    private static final String RACE_WINTER_DAY     = "assets/tracks/winter-day";
-    private static final String RACE_WINTER_FOG     = "assets/tracks/winter-fog";
-    private static final String RACE_WINTER_NIGHT   = "assets/tracks/winter-night";
+    private static final String RACE_WINTER_DAY     = "#assets/tracks/winter-day.o4scfg";
+    private static final String RACE_WINTER_FOG     = "#assets/tracks/winter-fog.o4scfg";
+    private static final String RACE_WINTER_NIGHT   = "#assets/tracks/winter-night.o4scfg";
 
     private static final int    TYPE_CLASSIC        = 0;
 

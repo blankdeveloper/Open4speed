@@ -139,7 +139,7 @@ void display(void) {
     /// render skydome
     xrenderer->pushMatrix();
     xrenderer->translate(cameraX, cameraY - 50, cameraZ);
-    xrenderer->scale(450);
+    xrenderer->scale(950);
     xrenderer->renderModel(skydome);
     xrenderer->popMatrix();
 
@@ -640,7 +640,7 @@ int main(int argc, char** argv) {
     glutKeyboardUpFunc(keyboardUp);
 
     /// load data
-    loadScene("#assets/tracks/winter-day.o4scfg");
+    loadScene("#assets/tracks/winter-fog.o4scfg");
 
     /// start loop
     getPhysics()->locked = false;

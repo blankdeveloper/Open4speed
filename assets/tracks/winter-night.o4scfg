@@ -1,5 +1,5 @@
 track_model #assets/tracks/winter.o4s
-sky_model #assets/tracks/winter-sky.o4s
+sky_model #assets/tracks/sky-winter.o4s
 shaders #assets/shaders/night/
 track_edges #assets/tracks/winter.o4s.e
 race_track 0

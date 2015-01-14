@@ -79,8 +79,8 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
     int gearCount = getConfig("gear_count", atributes);
     for (int i = 0; i <= gearCount; i++) {
         gear g;
-        g.min = getConfig("gear" + SSTR(i) + "_min", atributes);
-        g.max = getConfig("gear" + SSTR(i) + "_max", atributes);
+        g.min = getConfig("gear" + str(i) + "_min", atributes);
+        g.max = getConfig("gear" + str(i) + "_max", atributes);
         gears.push_back(g);
     }
     gearLow = getConfig("gear_low", atributes);

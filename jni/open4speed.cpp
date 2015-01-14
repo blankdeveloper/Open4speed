@@ -23,7 +23,7 @@
 //#define RENDER_PHYSICS
 #endif
 
-//#define VR
+#define VR
 
 struct Dynamic {
     float* vertices;
@@ -90,14 +90,15 @@ void display(void) {
     getPhysics()->render();
 #else
 
+    renderer* xrenderer = getRenderer();
+
 #ifdef VR
     for (int mode = -1; mode <= 1; mode += 2) {
         xrenderer->mode3D = mode;
-        float d = direction + (float)mode * 3.14;
+        float d = direction + (float)mode * 3.14 / 3.0f;
         float view = 60;
 #else
     {
-        renderer* xrenderer = getRenderer();
         xrenderer->mode3D = 0;
         float d = direction;
         float view = getCar(cameraCar)->getView();
@@ -269,7 +270,9 @@ void display(void) {
 void loadScene(std::string filename) {
 
     /// load track
-    std::string p = getFile(filename)->path();
+    file* f = getFile(filename);
+    std::string p = f->path();
+    delete f;
     std::vector<std::string> atributes = getList("", filename);
     setShaderPath(p + getConfigStr("shaders", atributes));
     trackdata = getModel(p + getConfigStr("track_model", atributes));
@@ -277,7 +280,7 @@ void loadScene(std::string filename) {
     /// load edges
     std::vector<edge> e;
     if (getConfigStr("track_edges", atributes).length() > 0) {
-        file* f = getFile(p + getConfigStr("track_edges", atributes));
+        f = getFile(p + getConfigStr("track_edges", atributes));
         char line[1024];
         int edgesCount = f->scandec();
         int trackIndex = getConfig("race_track", atributes);
@@ -328,7 +331,7 @@ void loadScene(std::string filename) {
       for (int i = 0; i < opponentCount; i++) {
 
           /// racer ai
-          addCar(new car(new airacer(), &e, p + getConfigStr("opponent" + SSTR(i + 1) + "_car", atributes)));
+          addCar(new car(new airacer(), &e, p + getConfigStr("opponent" + str(i + 1) + "_car", atributes)));
           getCar(i + 1)->finishEdge = getCar(0)->finishEdge;
           getCar(i + 1)->lapsToGo = getCar(0)->lapsToGo;
           int move = (i % 2) * 2 - 1;
@@ -478,7 +481,16 @@ void Java_com_lvonasek_o4s_game_GameLoop_init( JNIEnv* env, jclass cls, jstring 
   setZip(env->GetStringUTFChars(apkPath, &isCopy));
   getPhysics()->active = true;
   getRenderer()->aliasing = alias;
-  loadScene(env->GetStringUTFChars(track, &isCopy));
+
+  //prevent start without FBO
+  std::string filename = env->GetStringUTFChars(track, &isCopy);
+  file* f = getFile(filename);
+  std::string p = f->path();
+  delete f;
+  setShaderPath(p + getConfigStr("shaders", getList("", filename)));
+  reshape(64, 64);
+
+  loadScene(filename);
 }
 
 /**

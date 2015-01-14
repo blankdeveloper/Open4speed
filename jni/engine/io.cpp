@@ -183,3 +183,28 @@ void logi(std::string value1, std::string value2) {
  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,"com.lvonasek.o4s:%s %s", value1.c_str(), value2.c_str());
 #endif
 }
+
+/**
+ * @brief str converts int into string
+ * @param i is int number
+ * @return number as string
+ */
+std::string str(int i) {
+  if (i == 0)
+    return "0";
+  std::string output;
+  if (i > 0) {
+    while(i > 0) {
+      output = (char)(i % 10 + '0') + output;
+      i /= 10;
+    }
+    return output;
+  } else {
+      i *= -1;
+      while(i > 0) {
+        output = (char)(i % 10 + '0') + output;
+        i /= 10;
+      }
+      return '-' + output;
+  }
+}

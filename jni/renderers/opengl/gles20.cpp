@@ -60,6 +60,10 @@ void gles20::init(int w, int h) {
     }
 
     //create render texture
+    while (!rtt_fbo.empty()) {
+        delete rtt_fbo[rtt_fbo.size() - 1];
+        rtt_fbo.pop_back();
+    }
     for (int i = 0; i < 2; i++) {
         rtt_fbo.push_back(new glfbo(screen_width, screen_height));
     }

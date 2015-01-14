@@ -10,13 +10,9 @@
 #ifndef IO_H
 #define IO_H
 
-#include <cstring>
-#include <sstream>
 #include <string>
 #include <vector>
 #include "engine/switch.h"
-
-#define SSTR( x ) dynamic_cast< std::ostringstream & >( ( std::ostringstream() << std::dec << x ) ).str()
 
 std::string fixName(std::string filename);
 
@@ -64,5 +60,12 @@ void loge(std::string value1, std::string value2);
  * @param value2 is a second value
  */
 void logi(std::string value1, std::string value2);
+
+/**
+ * @brief str converts int into string
+ * @param i is int number
+ * @return number as string
+ */
+std::string str(int i);
 
 #endif // IO_H

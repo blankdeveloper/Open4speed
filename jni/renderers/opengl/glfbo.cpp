@@ -86,12 +86,6 @@ glfbo::glfbo(int width, int height) {
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboID[1]);
     }
 
-    /// print supported extensions into log
-    for (unsigned int i = 0; i < strlen(extString); i++)
-        if (extString[i] == ' ')
-            extString[i] = '\n';
-    logi("Extensions:\n", extString);
-
     /// check FBO status
     if(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE)
         complete = true;

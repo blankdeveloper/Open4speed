@@ -35,7 +35,7 @@ void main()
   //reflect
   vec3 N = v_Normal - 0.5 + 1.0 * diffuse.rgb;
   float y = 1.0 - gl_FragCoord.y * u_height + gl_FragCoord.z * 0.1 + gl_FragCoord.z * (0.9 - N.y);
-  gl_FragColor.rgb =  v_Normal.y * (1.0 - diffuse.a) *  diffuse.rgb + diffuse.a * 0.5 * texture2D(EnvMap1, vec2(gl_FragCoord.x * u_width, y)).rgb * gl_FragCoord.y * u_height;
+  gl_FragColor.rgb =  v_Normal.y * (1.0 - diffuse.a) *  diffuse.rgb + diffuse.a * 1.0 * texture2D(EnvMap1, vec2(gl_FragCoord.x * u_width, y)).rgb * gl_FragCoord.y * u_height;
   gl_FragColor.a = 1.0;
 }
 END

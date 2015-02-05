@@ -237,7 +237,7 @@ void gles20::renderDynamic(vbo *geom, shader* sh, texture* txt, int triangleCoun
 
     /// set OpenGL state
     glEnable(GL_BLEND);
-    glDepthMask(false);
+    glDisable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA,GL_ONE);
     glDisable(GL_CULL_FACE);
     txt->apply();
@@ -253,7 +253,7 @@ void gles20::renderDynamic(vbo *geom, shader* sh, texture* txt, int triangleCoun
     /// set previous OpenGL state
     sh->unbind();
     glDisable(GL_BLEND);
-    glDepthMask(true);
+    glEnable(GL_DEPTH_TEST);
 }
 
 /**

@@ -11,7 +11,7 @@ void main()
 {
     v_Coords = v_coord;
     gl_Position = u_Matrix * vec4(v_vertex, 1.0);
-    v_Intensity = dot(-v_vertex, u_sun_dir.xyz) * 0.5;
+    v_Intensity = dot(-v_vertex, u_sun_dir.xyz) * 0.1;
 }
 END
 

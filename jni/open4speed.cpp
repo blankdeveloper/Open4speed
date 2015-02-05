@@ -23,7 +23,7 @@
 //#define RENDER_PHYSICS
 #endif
 
-#define VR
+//#define VR
 
 struct Dynamic {
     float* vertices;
@@ -36,7 +36,7 @@ float aspect;                   ///< Screen aspect
 int cameraCar = 0;              ///< Car camera index
 int currentFrame = 0;           ///< Frame index
 float direction = 0;            ///< Camera direction
-const int effLen = 3;           ///< Length of water effect
+const int effLen = 5;           ///< Length of water effect
 model *skydome;                 ///< Skydome model
 model *trackdata;               ///< Track first model
 model* water;                   ///< Water effect model
@@ -652,7 +652,7 @@ int main(int argc, char** argv) {
     glutKeyboardUpFunc(keyboardUp);
 
     /// load data
-    loadScene("#assets/tracks/winter-fog.o4scfg");
+    loadScene("#assets/tracks/winter-day.o4scfg");
 
     /// start loop
     getPhysics()->locked = false;

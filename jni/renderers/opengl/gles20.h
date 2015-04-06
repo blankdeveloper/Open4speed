@@ -22,7 +22,6 @@
 #include <stack>
 #include <vector>
 #include "interfaces/renderer.h"
-#include "interfaces/shader.h"
 #include "renderers/opengl/glfbo.h"
 
 const int culling = 150;              ///< View culling distance in meters
@@ -43,7 +42,6 @@ public:
     std::stack<glm::mat4x4> matrixBuffer; ///< Matrix stack
     GLushort dynindices[4095];            ///< Indicies for dynamic rendering
     shader* current;                      ///< Current binded shader
-    shader* scene_shader;                 ///< Scene shader
     shader* shadow;                       ///< Special shader for shadow
     std::vector<glfbo*> rtt_fbo;          ///< Screen-space framebuffer
     bool oddFrame;                        ///< Odd frame info

@@ -13,6 +13,7 @@
 #include <glm/glm.hpp>
 #include "engine/model.h"
 #include "interfaces/fbo.h"
+#include "interfaces/shader.h"
 #include "interfaces/texture.h"
 
 /**
@@ -41,6 +42,7 @@ public:
     glm::vec4 model_position;   ///< Uniform of dynamic model 3D position
     glm::mat4x4 proj_matrix;    ///< Scene projection matrix
     glm::mat4x4 view_matrix;    ///< View matrix
+    shader* scene_shader;       ///< Scene shader
     int screen_width;           ///< Screen width
     int screen_height;          ///< Screen height
     int mode3D;                 ///< Mode for stereo

@@ -8,8 +8,8 @@
     <dimen name="button_text">30dp</dimen>
     <dimen name="button_width">450dp</dimen>
 
-    <dimen name="event_width">240dp</dimen>
-    <dimen name="event_height">144dp</dimen>
+    <dimen name="event_width">480dp</dimen>
+    <dimen name="event_height">288dp</dimen>
 
     <dimen name="seek_width">600dp</dimen>
     <dimen name="seek_margin">15dp</dimen>

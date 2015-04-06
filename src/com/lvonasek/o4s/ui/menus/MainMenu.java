@@ -86,7 +86,7 @@ public class MainMenu extends Activity {
             @Override
             public void onClick(View view) {
                 playButtonSound();
-                finish();
+                System.exit(0);
             }
         });
 
@@ -94,6 +94,7 @@ public class MainMenu extends Activity {
         ((RaceButton)findViewById(R.id.menu_start_race0)).setRace(c, 0);
         ((RaceButton)findViewById(R.id.menu_start_race1)).setRace(c, 1);
         ((RaceButton)findViewById(R.id.menu_start_race2)).setRace(c, 2);
+        ((RaceButton)findViewById(R.id.menu_start_race3)).setRace(c, 3);
 
         //options menu
         ((SeekBar)findViewById(R.id.options_music)).setOnSeekBarChangeListener(new android.widget.SeekBar.OnSeekBarChangeListener() {
@@ -176,11 +177,14 @@ public class MainMenu extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK)
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (currentMenu != 0) {
                 openMenu(0);
                 return true;
             }
+            else
+                System.exit(0);
+        }
         return super.onKeyDown(keyCode, event);
     }
 

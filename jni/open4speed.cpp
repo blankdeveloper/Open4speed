@@ -36,6 +36,7 @@ float aspect;                   ///< Screen aspect
 int cameraCar = 0;              ///< Car camera index
 int currentFrame = 0;           ///< Frame index
 float direction = 0;            ///< Camera direction
+int viewDistance = 500;         ///< Camera view distance
 const int effLen = 5;           ///< Length of water effect
 model *skydome;                 ///< Skydome model
 model *trackdata;               ///< Track first model
@@ -79,7 +80,7 @@ void display(void) {
     float view = getCar(cameraCar)->getView();
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(view, aspect, 0.5, 500);
+    gluPerspective(view, aspect, 0.5, viewDistance);
     float cameraX = getCar(cameraCar)->transform->value[12] - sin(direction) * getCar(cameraCar)->control->getDistance() * 2 / (view / 90);
     float cameraY = getCar(cameraCar)->transform->value[13] + fabs(getCar(cameraCar)->control->getDistance() * 1.25f / (view / 90));
     float cameraZ = getCar(cameraCar)->transform->value[14] - cos(direction) * getCar(cameraCar)->control->getDistance() * 2 / (view / 90);
@@ -105,7 +106,7 @@ void display(void) {
 #endif
     xrenderer->rtt(true);
     /// set camera
-    xrenderer->perspective(view, aspect, 0.5, 500);
+    xrenderer->perspective(view, aspect, 0.5, viewDistance);
     xrenderer->pushMatrix();
     float cameraX = getCar(cameraCar)->transform->value[12];
     float cameraY = getCar(cameraCar)->transform->value[13];
@@ -140,7 +141,7 @@ void display(void) {
     /// render skydome
     xrenderer->pushMatrix();
     xrenderer->translate(cameraX, cameraY - 50, cameraZ);
-    xrenderer->scale(950);
+    xrenderer->scale(viewDistance * 2 - 50);
     xrenderer->renderModel(skydome);
     xrenderer->popMatrix();
 
@@ -206,6 +207,8 @@ void display(void) {
     }
     xrenderer->popMatrix();
     // render RTT
+    xrenderer->scene_shader->bind();
+    xrenderer->scene_shader->uniformFloat("u_speed", getCar(0)->speed / 50.0f);
     xrenderer->rtt(false);
     }
 #endif
@@ -276,6 +279,9 @@ void loadScene(std::string filename) {
     std::vector<std::string> atributes = getList("", filename);
     setShaderPath(p + getConfigStr("shaders", atributes));
     trackdata = getModel(p + getConfigStr("track_model", atributes));
+    viewDistance = getConfig("view_distance", atributes);
+    if (viewDistance == 0)
+        viewDistance = 500;
 
     /// load edges
     std::vector<edge> e;
@@ -619,7 +625,7 @@ jfloat Java_com_lvonasek_o4s_game_GameLoop_carState( JNIEnv* env, jobject object
     if (type == 17)
         return getCar(index)->sndRate;
     if (type == 18)
-        return getCar(index)->toFinish;
+        return getCar(index)->edges.empty() ? 9999 : getCar(index)->toFinish;
     return 0;
 }
 }
@@ -652,7 +658,7 @@ int main(int argc, char** argv) {
     glutKeyboardUpFunc(keyboardUp);
 
     /// load data
-    loadScene("#assets/tracks/winter-day.o4scfg");
+    loadScene("#assets/tracks/room/room.o4scfg");
 
     /// start loop
     getPhysics()->locked = false;

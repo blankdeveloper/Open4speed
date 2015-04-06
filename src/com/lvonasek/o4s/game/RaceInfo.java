@@ -20,6 +20,7 @@ public class RaceInfo {
     private static final String RACE_WINTER_DAY     = "#assets/tracks/winter-day.o4scfg";
     private static final String RACE_WINTER_FOG     = "#assets/tracks/winter-fog.o4scfg";
     private static final String RACE_WINTER_NIGHT   = "#assets/tracks/winter-night.o4scfg";
+    private static final String RACE_TESTROOM       = "#assets/tracks/room/room.o4scfg";
 
     private static final int    TYPE_CLASSIC        = 0;
 
@@ -27,6 +28,7 @@ public class RaceInfo {
             new RaceInfo(MUSIC_ENERGY1, RACE_WINTER_DAY, R.drawable.winter_day, TYPE_CLASSIC),
             new RaceInfo(MUSIC_AMBIENT1, RACE_WINTER_NIGHT, R.drawable.winter_night, TYPE_CLASSIC),
             new RaceInfo(MUSIC_ENERGY2, RACE_WINTER_FOG, R.drawable.winter_fog, TYPE_CLASSIC),
+            new RaceInfo(MUSIC_AMBIENT3, RACE_TESTROOM, R.drawable.test_room, TYPE_CLASSIC),
     };
 
     public String music;

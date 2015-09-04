@@ -356,9 +356,10 @@ void gles20::renderShadow(model* m) {
     if (yp >= m->cutY)
         yp = m->cutY - 1;
 
-    //render shadow
-    glStencilFunc(GL_EQUAL, 1, 0x1);
-    glStencilOp(GL_KEEP,GL_KEEP,GL_ZERO);
+    /// prepare depth buffer shape and make stencil buffer shape
+    glColorMask(false, false, false, false);
+    glStencilFunc(GL_ALWAYS, 1, 255);
+    glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
     for (unsigned int i = 0; i < m->models.size(); i++) {
         current = shadow;
         current->bind();
@@ -366,6 +367,24 @@ void gles20::renderShadow(model* m) {
             if (enable[m->models[i].filter])
                 renderSubModel(m, &m->models[i]);
     }
+
+    /// render shadow
+    glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
+    glColorMask(true, true, true, true);
+    glCullFace(GL_FRONT);
+    glDepthFunc(GL_GEQUAL);;
+    glEnable(GL_CULL_FACE);
+    glStencilFunc(GL_EQUAL, 1, 255);
+    glStencilOp(GL_KEEP,GL_KEEP,GL_INCR);
+    for (unsigned int i = 0; i < m->models.size(); i++) {
+        current = shadow;
+        current->bind();
+        if (!m->models[i].texture2D->transparent)
+            if (enable[m->models[i].filter])
+                renderSubModel(m, &m->models[i]);
+    }
+    glDepthFunc(GL_LEQUAL);
+    glDisable(GL_CULL_FACE);
 }
 
 /**
@@ -480,12 +499,9 @@ void gles20::shadowMode(bool enable) {
       glDepthMask(false);
       glEnable(GL_BLEND);
       glBlendFunc(GL_ONE, GL_ONE);
-      glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
-      glEnable(GL_CULL_FACE);
-      glCullFace(GL_BACK);
       glEnable(GL_STENCIL_TEST);
       glStencilMask(true);
-      glClearStencil(1);
+      glClearStencil(0);
       glClear(GL_STENCIL_BUFFER_BIT);
   } else {
       glBlendEquation(GL_FUNC_ADD);

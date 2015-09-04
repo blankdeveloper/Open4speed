@@ -149,15 +149,16 @@ model::model(std::string filename) {
                    &m.normals[j * 9 + 6], &m.normals[j * 9 + 7], &m.normals[j * 9 + 8],
                    &m.vertices[j * 9 + 6], &m.vertices[j * 9 + 7], &m.vertices[j * 9 + 8]);
 
-            m.tnormals[j * 9 + 0] = glm::normalize(m.normals[j * 9 + 0] + m.normals[j * 9 + 3] + m.normals[j * 9 + 6]);
-            m.tnormals[j * 9 + 1] = glm::normalize(m.normals[j * 9 + 1] + m.normals[j * 9 + 4] + m.normals[j * 9 + 7]);
-            m.tnormals[j * 9 + 2] = glm::normalize(m.normals[j * 9 + 2] + m.normals[j * 9 + 5] + m.normals[j * 9 + 8]);
-            m.tnormals[j * 9 + 3] = m.tnormals[j * 9 + 0];
-            m.tnormals[j * 9 + 4] = m.tnormals[j * 9 + 1];
-            m.tnormals[j * 9 + 5] = m.tnormals[j * 9 + 2];
-            m.tnormals[j * 9 + 6] = m.tnormals[j * 9 + 0];
-            m.tnormals[j * 9 + 7] = m.tnormals[j * 9 + 1];
-            m.tnormals[j * 9 + 8] = m.tnormals[j * 9 + 2];
+            /// count triangle normal
+            glm::vec3 a = glm::vec3(m.vertices[j * 9 + 0], m.vertices[j * 9 + 1], m.vertices[j * 9 + 2]);
+            glm::vec3 b = glm::vec3(m.vertices[j * 9 + 3], m.vertices[j * 9 + 4], m.vertices[j * 9 + 5]);
+            glm::vec3 c = glm::vec3(m.vertices[j * 9 + 6], m.vertices[j * 9 + 7], m.vertices[j * 9 + 8]);
+            glm::vec3 tnormal = glm::normalize(glm::cross(b - a, c - a));
+            for (int k = 0; k < 9; k+=3) {
+                m.tnormals[j * 9 + k] = tnormal.x;
+                m.tnormals[j * 9 + k] = tnormal.y;
+                m.tnormals[j * 9 + k] = tnormal.z;
+            }
         }
 
         /// store model in VBO

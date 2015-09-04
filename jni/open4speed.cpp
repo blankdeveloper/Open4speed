@@ -187,14 +187,14 @@ void display(void) {
         xrenderer->popMatrix();
 
         /// render wheels
-        for (int j = 1; j <= 4; j++) {
+        /*for (int j = 1; j <= 4; j++) {
             xrenderer->pushMatrix();
             xrenderer->multMatrix(getCar(i)->transform[j].value);
             if (j % 2 == 1)
               xrenderer->rotateY(180);
             xrenderer->renderShadow(getCar(i)->wheel);
             xrenderer->popMatrix();
-        }
+        }*/
     }
     xrenderer->shadowMode(false);
 
@@ -658,7 +658,7 @@ int main(int argc, char** argv) {
     glutKeyboardUpFunc(keyboardUp);
 
     /// load data
-    loadScene("#assets/tracks/room/room.o4scfg");
+    loadScene("#assets/tracks/winter-day.o4scfg");
 
     /// start loop
     getPhysics()->locked = false;

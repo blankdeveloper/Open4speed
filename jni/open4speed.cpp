@@ -179,23 +179,26 @@ void display(void) {
     /// render shadows
     xrenderer->shadowMode(true);
     for (int pass = 1; pass <= 2; pass++)
-    for (int i = getCarCount() - 1; i >= firstCar; i--) {
+    {
+        xrenderer->renderShadow(trackdata, pass);
+        for (int i = getCarCount() - 1; i >= firstCar; i--) {
 
-        ///render car skin
-        xrenderer->pushMatrix();
-        xrenderer->multMatrix(getCar(i)->transform[0].value);
-        xrenderer->renderShadow(getCar(i)->skin, pass);
-        xrenderer->popMatrix();
-
-        /// render wheels
-        /*for (int j = 1; j <= 4; j++) {
+            ///render car skin
             xrenderer->pushMatrix();
-            xrenderer->multMatrix(getCar(i)->transform[j].value);
-            if (j % 2 == 1)
-              xrenderer->rotateY(180);
-            xrenderer->renderShadow(getCar(i)->wheel, pass);
+            xrenderer->multMatrix(getCar(i)->transform[0].value);
+            xrenderer->renderShadow(getCar(i)->skin, pass);
             xrenderer->popMatrix();
-        }*/
+
+            /// render wheels
+            for (int j = 1; j <= 4; j++) {
+                xrenderer->pushMatrix();
+                xrenderer->multMatrix(getCar(i)->transform[j].value);
+                if (j % 2 == 1)
+                  xrenderer->rotateY(180);
+                xrenderer->renderShadow(getCar(i)->wheel, pass);
+                xrenderer->popMatrix();
+            }
+        }
     }
     xrenderer->shadowMode(false);
 
@@ -238,7 +241,7 @@ void display(void) {
             }
         }
     }
-    effectVBO[currentFrame]->update(4095, eff[currentFrame].vertices, 0, eff[currentFrame].coords, 0);
+    effectVBO[currentFrame]->update(4095, eff[currentFrame].vertices, 0, eff[currentFrame].coords);
     for (int k = 0; k < effLen; k++) {
         eff[k].frame++;
     }
@@ -353,7 +356,7 @@ void loadScene(std::string filename) {
         eff[i].vertices = new float[4095 * 3];
         eff[i].coords = new float[4095 * 2];
         eff[i].count = 0;
-        effectVBO[i] = getVBO(4095, eff[i].vertices, 0, eff[i].coords, 0, true);
+        effectVBO[i] = getVBO(4095, eff[i].vertices, 0, eff[i].coords);
     }
 
     /// create instance of physical engine

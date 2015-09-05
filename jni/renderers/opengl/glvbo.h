@@ -30,9 +30,8 @@ public:
      * @param vertices is vertices array
      * @param normals is normals array
      * @param coords is texture coords array
-     * @param tnormals is triangle normals array
      */
-    glvbo(int size, float* vertices, float* normals, float* coords, float* tnormals, bool dynamic);
+    glvbo(int size, float* vertices, float* normals, float* coords);
 
     /**
      * @brief render renders vbo
@@ -48,9 +47,8 @@ public:
      * @param vertices is vertices array
      * @param normals is normals array
      * @param coords is texture coords array
-     * @param tnormals is triangle normals array
      */
-    void update(int size, float* vertices, float* normals, float* coords, float* tnormals);
+    void update(int size, float* vertices, float* normals, float* coords);
 };
 
 #endif // GLVBO_H

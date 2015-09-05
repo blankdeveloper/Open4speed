@@ -32,8 +32,7 @@ public:
      * @param vertices is vertices array
      * @param normals is normals array
      * @param coords is texture coords array
-     * @param tnormals is triangle normals array
      */
-    virtual void update(int size, float* vertices, float* normals, float* coords, float* tnormals) = 0;
+    virtual void update(int size, float* vertices, float* normals, float* coords) = 0;
 };
 #endif // VBO_H

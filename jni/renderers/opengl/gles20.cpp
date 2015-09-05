@@ -264,9 +264,8 @@ void gles20::renderDynamic(vbo *geom, shader* sh, texture* txt, int triangleCoun
  */
 void gles20::renderModel(model* m) {
 
-    float avd = viewDistance / 200.0f;
-
     /// set culling info positions
+    float avd = viewDistance / 200.0f;
     xm = (camX - m->aabb.min.x) / culling;
     xp = xm;
     ym = (camZ - m->aabb.min.z) / culling;
@@ -304,6 +303,7 @@ void gles20::renderModel(model* m) {
                 current->uniformFloat("u_Alpha", 1);
                 renderSubModel(m, &m->models[i]);
             }
+        current->unbind();
     }
     for (unsigned int i = 0; i < m->models.size(); i++) {
         current = m->models[i].material;
@@ -318,6 +318,7 @@ void gles20::renderModel(model* m) {
                 current->uniformFloat("u_Alpha", m->models[i].texture2D->alpha);
                 renderSubModel(m, &m->models[i]);
             }
+        current->unbind();
     }
 }
 
@@ -332,20 +333,21 @@ void gles20::renderShadow(model* m, int pass) {
         return;
 
     /// set culling info positions
+    float avd = viewDistance / 200.0f;
     xm = (camX - m->aabb.min.x) / culling;
     xp = xm;
     ym = (camZ - m->aabb.min.z) / culling;
     yp = ym;
     for (float view = direction - M_PI * 0.75f; view <= direction + M_PI * 0.75f; view += M_PI * 0.25f)
     {
-        if (xp < (camX - m->aabb.min.x) / culling + sin(view) * 2)
-            xp = (camX - m->aabb.min.x) / culling + sin(view) * 2;
-        if (xm > (camX - m->aabb.min.x) / culling + sin(view) * 2)
-            xm = (camX - m->aabb.min.x) / culling + sin(view) * 2;
-        if (yp < (camZ - m->aabb.min.z) / culling + cos(view) * 2)
-            yp = (camZ - m->aabb.min.z) / culling + cos(view) * 2;
-        if (ym > (camZ - m->aabb.min.z) / culling + cos(view) * 2)
-            ym = (camZ - m->aabb.min.z) / culling + cos(view) * 2;
+        if (xp < (camX - m->aabb.min.x) / culling + sin(view) * avd)
+            xp = (camX - m->aabb.min.x) / culling + sin(view) * avd;
+        if (xm > (camX - m->aabb.min.x) / culling + sin(view) * avd)
+            xm = (camX - m->aabb.min.x) / culling + sin(view) * avd;
+        if (yp < (camZ - m->aabb.min.z) / culling + cos(view) * avd)
+            yp = (camZ - m->aabb.min.z) / culling + cos(view) * avd;
+        if (ym > (camZ - m->aabb.min.z) / culling + cos(view) * avd)
+            ym = (camZ - m->aabb.min.z) / culling + cos(view) * avd;
     }
     if (xm < 0)
         xm = 0;
@@ -359,35 +361,33 @@ void gles20::renderShadow(model* m, int pass) {
     /// prepare depth buffer shape and make stencil buffer shape
     if (pass = 1)
     {
+        current = shadow;
+        current->bind();
+        current->uniformFloat("u_offset", 0);
         glColorMask(false, false, false, false);
         glStencilFunc(GL_ALWAYS, 1, 255);
         glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
-        for (unsigned int i = 0; i < m->models.size(); i++) {
-            current = shadow;
-            current->bind();
-            current->uniformFloat("u_offset", 0);
-            if (!m->models[i].texture2D->transparent)
-                if (enable[m->models[i].filter])
-                    renderSubModel(m, &m->models[i]);
-        }
+        for (unsigned int i = 0; i < m->models.size(); i++)
+            if (!m->models[i].texture2D->transparent && m->models[i].hasShadow && enable[m->models[i].filter])
+                renderSubModel(m, &m->models[i]);
+        current->unbind();
     }
 
     /// render shadow
     if (pass = 2)
     {
+        current = shadow;
+        current->bind();
+        current->uniformFloat("u_offset", 0.05f);
         glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
         glColorMask(true, true, true, true);
         glDepthFunc(GL_GEQUAL);;
         glStencilFunc(GL_EQUAL, 1, 255);
         glStencilOp(GL_KEEP,GL_KEEP,GL_INCR);
-        for (unsigned int i = 0; i < m->models.size(); i++) {
-            current = shadow;
-            current->bind();
-            current->uniformFloat("u_offset", 0.05f);
-            if (!m->models[i].texture2D->transparent)
-                if (enable[m->models[i].filter])
-                    renderSubModel(m, &m->models[i]);
-        }
+        for (unsigned int i = 0; i < m->models.size(); i++)
+            if (!m->models[i].texture2D->transparent && m->models[i].hasShadow && enable[m->models[i].filter])
+                renderSubModel(m, &m->models[i]);
+        current->unbind();
         glDepthFunc(GL_LEQUAL);
         glDisable(GL_CULL_FACE);
     }
@@ -492,9 +492,6 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         int r = m->triangleCount[mod->cutX * mod->cutY];
         m->vboData->render(current, l, r - l);
     }
-
-    //unbind shader
-    current->unbind();
 }
 
 void gles20::shadowMode(bool enable) {

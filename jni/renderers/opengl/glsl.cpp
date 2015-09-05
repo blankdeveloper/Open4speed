@@ -59,7 +59,6 @@ glsl::glsl(std::vector<std::string> vert, std::vector<std::string> frag) {
     attribute_v_vertex = glGetAttribLocation(id, "v_vertex");
     attribute_v_coord = glGetAttribLocation(id, "v_coord");
     attribute_v_normal = glGetAttribLocation(id, "v_normal");
-    attribute_v_tnormal = glGetAttribLocation(id, "v_tnormal");
 }
 
 /**
@@ -78,10 +77,6 @@ void glsl::attrib(unsigned int size) {
     if (attribute_v_coord != -1) {
         glVertexAttribPointer(attribute_v_coord, 2, GL_FLOAT, GL_FALSE, 0, ( const void *) (intptr_t)(size * len));
         len += 2;
-    }
-    if (attribute_v_tnormal != -1) {
-        glVertexAttribPointer(attribute_v_tnormal, 3, GL_FLOAT, GL_TRUE, 0, ( const void *) (intptr_t)(size * len));
-        len += 3;
     }
 }
 
@@ -111,8 +106,6 @@ void glsl::bind() {
         glEnableVertexAttribArray(attribute_v_normal);
     if (attribute_v_coord != -1)
         glEnableVertexAttribArray(attribute_v_coord);
-    if (attribute_v_tnormal != -1)
-        glEnableVertexAttribArray(attribute_v_tnormal);
 }
 
 bool glsl::hasAttrib(int i) {
@@ -121,8 +114,6 @@ bool glsl::hasAttrib(int i) {
     if ((i == 1) && (attribute_v_normal == -1))
         return false;
     if ((i == 2) && (attribute_v_coord == -1))
-        return false;
-    if ((i == 3) && (attribute_v_tnormal == -1))
         return false;
     return true;
 }

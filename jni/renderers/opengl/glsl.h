@@ -21,7 +21,6 @@ public:
     GLint attribute_v_vertex;   ///< VBO vertices
     GLint attribute_v_coord;    ///< VBO coords
     GLint attribute_v_normal;   ///< VBO normals
-    GLint attribute_v_tnormal;  ///< VBO triangle normals
     GLuint shader_vp;           ///< Vertex shader
     GLuint shader_fp;           ///< Fragment shader
 

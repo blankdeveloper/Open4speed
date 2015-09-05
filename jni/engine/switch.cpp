@@ -260,10 +260,9 @@ texture* getTexture(float r, float g, float b, float alpha) {
  * @param vertices is vertices array
  * @param normals is normals array
  * @param coords is texture coords array
- * @param tnormals is triangle normals array
  */
-vbo* getVBO(int size, float* vertices, float* normals, float* coords, float* tnormals, bool dynamic) {
-    return new glvbo(size, vertices, normals, coords, tnormals, dynamic);
+vbo* getVBO(int size, float* vertices, float* normals, float* coords) {
+    return new glvbo(size, vertices, normals, coords);
 }
 
 /**

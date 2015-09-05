@@ -23,9 +23,8 @@ glvbo::~glvbo() {
  * @param vertices is vertices array
  * @param normals is normals array
  * @param coords is texture coords array
- * @param tnormals is triangle normals array
  */
-glvbo::glvbo(int size, float* vertices, float* normals, float* coords, float* tnormals, bool dynamic) {
+glvbo::glvbo(int size, float* vertices, float* normals, float* coords) {
     /// count buffer size
     size *= sizeof(float);
     this->size = size;
@@ -36,15 +35,10 @@ glvbo::glvbo(int size, float* vertices, float* normals, float* coords, float* tn
         len += size * 3;
     if (coords != 0)
         len += size * 2;
-    if (tnormals != 0)
-        len += size * 3;
 
     glGenBuffers(1, &instance);
     glBindBuffer(GL_ARRAY_BUFFER, instance);
-    if (dynamic)
-      glBufferData(GL_ARRAY_BUFFER, len, NULL, GL_DYNAMIC_DRAW);
-    else
-      glBufferData(GL_ARRAY_BUFFER, len, NULL, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, len, NULL, GL_DYNAMIC_DRAW);
     len = 0;
     if (vertices != 0) {
         glBufferSubData(GL_ARRAY_BUFFER, len, size * 3, vertices);
@@ -58,11 +52,6 @@ glvbo::glvbo(int size, float* vertices, float* normals, float* coords, float* tn
         glBufferSubData(GL_ARRAY_BUFFER, len, size * 2, coords);
         len += size * 2;
     }
-    if (tnormals != 0) {
-        glBufferSubData(GL_ARRAY_BUFFER, len, size * 3, tnormals);
-        len += size * 3;
-    }
-
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
@@ -86,9 +75,8 @@ void glvbo::render(shader* sh, int begin, int len) {
  * @param vertices is vertices array
  * @param normals is normals array
  * @param coords is texture coords array
- * @param tnormals is triangle normals array
  */
-void glvbo::update(int size, float* vertices, float* normals, float* coords, float* tnormals) {
+void glvbo::update(int size, float* vertices, float* normals, float* coords) {
     /// count buffer size
     size *= sizeof(float);
     int len = 0;
@@ -98,8 +86,6 @@ void glvbo::update(int size, float* vertices, float* normals, float* coords, flo
         len += size * 3;
     if (coords != 0)
         len += size * 2;
-    if (tnormals != 0)
-        len += size * 3;
 
     glBindBuffer(GL_ARRAY_BUFFER, instance);
     len = 0;
@@ -114,10 +100,6 @@ void glvbo::update(int size, float* vertices, float* normals, float* coords, flo
     if (coords != 0) {
         glBufferSubData(GL_ARRAY_BUFFER, len, size * 2, coords);
         len += size * 2;
-    }
-    if (tnormals != 0) {
-        glBufferSubData(GL_ARRAY_BUFFER, len, size * 3, tnormals);
-        len += size * 3;
     }
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

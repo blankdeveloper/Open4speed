@@ -20,7 +20,6 @@ model::~model() {
           delete models[i].vboData;
         delete[] models[i].vertices;
         delete[] models[i].normals;
-        delete[] models[i].tnormals;
         delete[] models[i].coords;
         delete[] models[i].triangleCount;
     }
@@ -86,6 +85,7 @@ model::model(std::string filename) {
         int cursor = 0;
         m.dynamic = false;
         m.filter = 0;
+        m.hasShadow = false;
         m.touchable = false;
         if (m.texture2D->transparent) {
             m.material = getShader("standart_alpha");
@@ -97,6 +97,9 @@ model::model(std::string filename) {
         while(true) {
             if (material[cursor] == '!') {
                 m.touchable = true;
+                cursor++;
+            } else if (material[cursor] == '@') {
+                m.hasShadow = true;
                 cursor++;
             } else if (material[cursor] == '$') {
                 m.dynamic = true;
@@ -132,7 +135,6 @@ model::model(std::string filename) {
         m.vertices = new float[m.triangleCount[cutX * cutY] * 9];
         m.normals = new float[m.triangleCount[cutX * cutY] * 9];
         m.coords = new float[m.triangleCount[cutX * cutY] * 6];
-        m.tnormals = new float[m.triangleCount[cutX * cutY] * 9];
         for (int j = 0; j < m.triangleCount[cutX * cutY]; j++) {
             /// read triangle parameters
             f->gets(line);
@@ -148,17 +150,6 @@ model::model(std::string filename) {
                    &m.coords[j * 6 + 4], &m.coords[j * 6 + 5],
                    &m.normals[j * 9 + 6], &m.normals[j * 9 + 7], &m.normals[j * 9 + 8],
                    &m.vertices[j * 9 + 6], &m.vertices[j * 9 + 7], &m.vertices[j * 9 + 8]);
-
-            /// count triangle normal
-            glm::vec3 a = glm::vec3(m.vertices[j * 9 + 0], m.vertices[j * 9 + 1], m.vertices[j * 9 + 2]);
-            glm::vec3 b = glm::vec3(m.vertices[j * 9 + 3], m.vertices[j * 9 + 4], m.vertices[j * 9 + 5]);
-            glm::vec3 c = glm::vec3(m.vertices[j * 9 + 6], m.vertices[j * 9 + 7], m.vertices[j * 9 + 8]);
-            glm::vec3 tnormal = glm::normalize(glm::cross(b - a, c - a));
-            for (int k = 0; k < 9; k+=3) {
-                m.tnormals[j * 9 + k] = tnormal.x;
-                m.tnormals[j * 9 + k] = tnormal.y;
-                m.tnormals[j * 9 + k] = tnormal.z;
-            }
         }
 
         /// store model in VBO
@@ -172,11 +163,7 @@ model::model(std::string filename) {
                 delete[] m.coords;
                 m.coords = 0;
             }
-            if (!m.material->hasAttrib(3)) {
-                delete[] m.tnormals;
-                m.tnormals = 0;
-            }
-            m.vboData = getVBO(size, m.vertices, m.normals, m.coords, m.tnormals, false);
+            m.vboData = getVBO(size, m.vertices, m.normals, m.coords);
         } else
             m.vboData = 0;
         models.push_back(m);

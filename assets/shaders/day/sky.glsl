@@ -5,7 +5,7 @@ attribute vec2 v_coord;
 varying vec2 v_Coords;
 varying float v_Intensity;
 
-const vec4 u_sun_dir = vec4(0.5, -1.0, 0.0, 0.0);
+const vec4 u_sun_dir = vec4(-0.5, -1.0, 0.0, 0.0);
 
 void main()
 {

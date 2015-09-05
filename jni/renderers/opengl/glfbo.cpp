@@ -132,7 +132,7 @@ glfbo::glfbo(int width, int height) {
     };
 
     /// create vertex buffer
-    rect = new glvbo(6, vertices, 0, coords, 0, false);
+    rect = new glvbo(6, vertices, 0, coords);
 }
 
 /**

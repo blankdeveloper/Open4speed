@@ -24,15 +24,21 @@
 #define PACKED_EXT GL_DEPTH24_STENCIL8_EXT
 #endif
 
+unsigned int* rboID = 0;          ///< Render buffer object id
+
 /**
  * @brief removes all data from memory
  */
 glfbo::~glfbo() {
-    glDeleteRenderbuffers(complete ? 2 : 1, rboID);
+    if (rboID != 0)
+    {
+        glDeleteRenderbuffers(2, rboID);
+        delete[] rboID;
+        rboID = 0;
+    }
     glDeleteFramebuffers(1, fboID);
     delete rect;
     delete[] fboID;
-    delete[] rboID;
     delete[] rendertexture;
 }
 
@@ -50,7 +56,6 @@ glfbo::glfbo(int width, int height) {
 
     //create frame buffer
     fboID = new GLuint[1];
-    rboID = new GLuint[2];
     rendertexture = new GLuint[1];
 
     //framebuffer texture
@@ -68,7 +73,11 @@ glfbo::glfbo(int width, int height) {
 
 
     /// create render buffers for depth buffer and stencil buffer
-    glGenRenderbuffers(2, rboID);
+    if (rboID == 0)
+    {
+        rboID = new GLuint[2];
+        glGenRenderbuffers(2, rboID);
+    }
     glBindRenderbuffer(GL_RENDERBUFFER, rboID[0]);
     char* extString = (char*)glGetString(GL_EXTENSIONS);
     if (strstr(extString, PACKED_EXTENSION) != 0)
@@ -146,7 +155,8 @@ void glfbo::bindTexture() {
  * @brief clear clears depth buffer
  */
 void glfbo::clear() {
-    glClear(GL_DEPTH_BUFFER_BIT);
+    glClearStencil(0);
+    glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
 /**

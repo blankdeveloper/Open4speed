@@ -2,7 +2,7 @@
 <!--suppress AndroidDomInspection -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.lvonasek.o4s"
-      android:versionCode="17"
+      android:versionCode="18"
       android:versionName="2.0.5">
         <supports-screens android:resizeable="true"
                   android:normalScreens="true"

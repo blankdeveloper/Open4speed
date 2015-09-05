@@ -135,7 +135,7 @@ public:
      * @brief renderShadow renders shadow of model into scene
      * @param m is instance of model to render
      */
-    virtual void renderShadow(model* m) = 0;
+    virtual void renderShadow(model* m, int pass) = 0;
 
     /**
      * @brief renderSubModel renders model into scene

@@ -178,12 +178,13 @@ void display(void) {
 
     /// render shadows
     xrenderer->shadowMode(true);
+    for (int pass = 1; pass <= 2; pass++)
     for (int i = getCarCount() - 1; i >= firstCar; i--) {
 
         ///render car skin
         xrenderer->pushMatrix();
         xrenderer->multMatrix(getCar(i)->transform[0].value);
-        xrenderer->renderShadow(getCar(i)->skin);
+        xrenderer->renderShadow(getCar(i)->skin, pass);
         xrenderer->popMatrix();
 
         /// render wheels
@@ -192,7 +193,7 @@ void display(void) {
             xrenderer->multMatrix(getCar(i)->transform[j].value);
             if (j % 2 == 1)
               xrenderer->rotateY(180);
-            xrenderer->renderShadow(getCar(i)->wheel);
+            xrenderer->renderShadow(getCar(i)->wheel, pass);
             xrenderer->popMatrix();
         }*/
     }

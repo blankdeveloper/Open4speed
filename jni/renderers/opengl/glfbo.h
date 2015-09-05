@@ -19,7 +19,6 @@ class glfbo : public fbo
 public:
     unsigned int* rendertexture;  ///< Texture for color buffer
     unsigned int* fboID;          ///< Frame buffer object id
-    unsigned int* rboID;          ///< Render buffer object id
     glvbo* rect;                  ///< VBO for rendering to screen
 
     /**

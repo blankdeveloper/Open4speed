@@ -34,7 +34,7 @@ glvbo::glvbo(int size, float* vertices, float* normals, float* coords) {
     if (normals != 0)
         len += size * 3;
     if (coords != 0)
-        len += size * 2;
+        len += size * 3;
 
     glGenBuffers(1, &instance);
     glBindBuffer(GL_ARRAY_BUFFER, instance);
@@ -49,8 +49,8 @@ glvbo::glvbo(int size, float* vertices, float* normals, float* coords) {
         len += size * 3;
     }
     if (coords != 0) {
-        glBufferSubData(GL_ARRAY_BUFFER, len, size * 2, coords);
-        len += size * 2;
+        glBufferSubData(GL_ARRAY_BUFFER, len, size * 3, coords);
+        len += size * 3;
     }
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
@@ -85,7 +85,7 @@ void glvbo::update(int size, float* vertices, float* normals, float* coords) {
     if (normals != 0)
         len += size * 3;
     if (coords != 0)
-        len += size * 2;
+        len += size * 3;
 
     glBindBuffer(GL_ARRAY_BUFFER, instance);
     len = 0;
@@ -98,8 +98,8 @@ void glvbo::update(int size, float* vertices, float* normals, float* coords) {
         len += size * 3;
     }
     if (coords != 0) {
-        glBufferSubData(GL_ARRAY_BUFFER, len, size * 2, coords);
-        len += size * 2;
+        glBufferSubData(GL_ARRAY_BUFFER, len, size * 3, coords);
+        len += size * 3;
     }
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

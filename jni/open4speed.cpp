@@ -233,8 +233,9 @@ void display(void) {
                         eff[currentFrame].vertices[eff[currentFrame].count * 3 + 0] = x;
                         eff[currentFrame].vertices[eff[currentFrame].count * 3 + 1] = y;
                         eff[currentFrame].vertices[eff[currentFrame].count * 3 + 2] = z;
-                        eff[currentFrame].coords[eff[currentFrame].count * 2 + 0] = water->models[0].coords[l * 2 + 0];
-                        eff[currentFrame].coords[eff[currentFrame].count * 2 + 1] = water->models[0].coords[l * 2 + 1];
+                        eff[currentFrame].coords[eff[currentFrame].count * 3 + 0] = water->models[0].coords[l * 3 + 0];
+                        eff[currentFrame].coords[eff[currentFrame].count * 3 + 1] = water->models[0].coords[l * 3 + 1];
+                        eff[currentFrame].coords[eff[currentFrame].count * 3 + 2] = water->models[0].coords[l * 3 + 2];
                         eff[currentFrame].count++;
                     }
                 }
@@ -354,7 +355,7 @@ void loadScene(std::string filename) {
     water = getModel("#assets/cars/fx/water.o4s");
     for (int i = 0; i < effLen; i++) {
         eff[i].vertices = new float[4095 * 3];
-        eff[i].coords = new float[4095 * 2];
+        eff[i].coords = new float[4095 * 3];
         eff[i].count = 0;
         effectVBO[i] = getVBO(4095, eff[i].vertices, 0, eff[i].coords);
     }

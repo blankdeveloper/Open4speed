@@ -358,19 +358,24 @@ void gles20::renderShadow(model* m, int pass) {
     if (yp >= m->cutY)
         yp = m->cutY - 1;
 
-    /// prepare depth buffer shape and make stencil buffer shape
+    /// set visibility shape
     if (pass = 1)
     {
         current = shadow;
         current->bind();
-        current->uniformFloat("u_offset", 0);
         glColorMask(false, false, false, false);
+        glDepthMask(false);
+        glDepthRange(-1000, 1);
         glStencilFunc(GL_ALWAYS, 1, 255);
         glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
-        for (unsigned int i = 0; i < m->models.size(); i++)
-            if (!m->models[i].texture2D->transparent && m->models[i].hasShadow && enable[m->models[i].filter])
-                renderSubModel(m, &m->models[i]);
+        for (unsigned int i = 0; i < m->shadows.size(); i++)
+            for (float j = 1; j <= 2; j++) {
+                current->uniformFloat("u_offset", j);
+                renderSubModel(m, &m->shadows[i]);
+            }
         current->unbind();
+        glDepthMask(true);
+        glDepthRange(0, 1);
     }
 
     /// render shadow
@@ -382,13 +387,19 @@ void gles20::renderShadow(model* m, int pass) {
         glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
         glColorMask(true, true, true, true);
         glDepthFunc(GL_GEQUAL);;
+        glDepthMask(false);
+        glDepthRange(-1000, 1);
         glStencilFunc(GL_EQUAL, 1, 255);
         glStencilOp(GL_KEEP,GL_KEEP,GL_INCR);
-        for (unsigned int i = 0; i < m->models.size(); i++)
-            if (!m->models[i].texture2D->transparent && m->models[i].hasShadow && enable[m->models[i].filter])
-                renderSubModel(m, &m->models[i]);
+        for (unsigned int i = 0; i < m->shadows.size(); i++)
+            for (float j = 1; j <= 2; j++) {
+                current->uniformFloat("u_offset", j);
+                renderSubModel(m, &m->shadows[i]);
+            }
         current->unbind();
         glDepthFunc(GL_LEQUAL);
+        glDepthMask(true);
+        glDepthRange(0, 1);
         glDisable(GL_CULL_FACE);
     }
 }

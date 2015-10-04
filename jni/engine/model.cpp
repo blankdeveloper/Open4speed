@@ -23,7 +23,11 @@ model::~model() {
         delete[] models[i].coords;
         delete[] models[i].triangleCount;
     }
-    models.clear();
+    for (unsigned int i = 0; i < shadows.size(); i++) {
+        if (shadows[i].vboData != 0)
+          delete shadows[i].vboData;
+        delete[] shadows[i].normals;
+    }
 }
 
 /**
@@ -134,26 +138,57 @@ model::model(std::string filename) {
             m.triangleCount[j] = f->scandec();
         m.vertices = new float[m.triangleCount[cutX * cutY] * 9];
         m.normals = new float[m.triangleCount[cutX * cutY] * 9];
-        m.coords = new float[m.triangleCount[cutX * cutY] * 9];
+        m.coords = new float[m.triangleCount[cutX * cutY] * 6];
         for (int j = 0; j < m.triangleCount[cutX * cutY]; j++) {
             /// read triangle parameters
             f->gets(line);
             sscanf(line, "%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f",
-                   &m.coords[j * 9 + 0], &m.coords[j * 9 + 1],
+                   &m.coords[j * 6 + 0], &m.coords[j * 6 + 1],
                    &m.normals[j * 9 + 0], &m.normals[j * 9 + 1], &m.normals[j * 9 + 2],
                    &m.vertices[j * 9 + 0], &m.vertices[j * 9 + 1], &m.vertices[j * 9 + 2],
 
-                   &m.coords[j * 9 + 3], &m.coords[j * 9 + 4],
+                   &m.coords[j * 6 + 2], &m.coords[j * 6 + 3],
                    &m.normals[j * 9 + 3], &m.normals[j * 9 + 4], &m.normals[j * 9 + 5],
                    &m.vertices[j * 9 + 3], &m.vertices[j * 9 + 4], &m.vertices[j * 9 + 5],
 
-                   &m.coords[j * 9 + 6], &m.coords[j * 9 + 7],
+                   &m.coords[j * 6 + 4], &m.coords[j * 6 + 5],
                    &m.normals[j * 9 + 6], &m.normals[j * 9 + 7], &m.normals[j * 9 + 8],
                    &m.vertices[j * 9 + 6], &m.vertices[j * 9 + 7], &m.vertices[j * 9 + 8]);
+        }
 
-            m.coords[j * 9 + 2] = 0;
-            m.coords[j * 9 + 5] = 0;
-            m.coords[j * 9 + 8] = 0;
+        /// generate shadow
+        if (m.hasShadow)
+        {
+            /// set default value
+            model3d s;
+            s.triangleCount = m.triangleCount;
+            for (int j = 0; j < 4; j++)
+            {
+                s.colora[j] = m.colora[j];
+                s.colord[j] = m.colord[j];
+                s.colors[j] = m.colors[j];
+            }
+            s.reg = m.reg;
+            s.x = m.reg.min.x;
+            s.y = m.reg.min.y;
+            s.z = m.reg.min.z;
+            s.texture2D = m.texture2D;
+
+            s.dynamic = m.dynamic;
+            s.filter = m.filter;
+            s.hasShadow = m.hasShadow;
+            s.material = getShader("shadow");
+            s.touchable = m.touchable;
+            s.vertices = m.vertices;
+            /// set custom arrays
+            s.normals = new float[s.triangleCount[cutX * cutY] * 9];
+            for (int j = 0; j < s.triangleCount[cutX * cutY]; j++) {
+                for (int k = 0; k < 9; k++)
+                    s.normals[j * 9 + k] = (k + 1) / 3;
+            }
+            int size = s.triangleCount[cutX * cutY] * 3;
+            s.vboData = getVBO(size, s.vertices, s.normals, 0);
+            shadows.push_back(s);
         }
 
         /// store model in VBO

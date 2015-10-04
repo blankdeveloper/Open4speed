@@ -123,12 +123,12 @@ glfbo::glfbo(int width, int height) {
 
     /// coords
     float coords[] = {
-        0, 1, 0,
-        0, 0, 0,
-        1, 0, 0,
-        0, 1, 0,
-        1, 0, 0,
-        1, 1, 0,
+        0, 1,
+        0, 0,
+        1, 0,
+        0, 1,
+        1, 0,
+        1, 1,
     };
 
     /// create vertex buffer

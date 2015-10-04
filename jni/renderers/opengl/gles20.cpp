@@ -365,7 +365,6 @@ void gles20::renderShadow(model* m, int pass) {
         current->bind();
         glColorMask(false, false, false, false);
         glDepthMask(false);
-        glDepthRange(-1000, 1);
         glStencilFunc(GL_ALWAYS, 1, 255);
         glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
         for (unsigned int i = 0; i < m->shadows.size(); i++)
@@ -375,7 +374,6 @@ void gles20::renderShadow(model* m, int pass) {
             }
         current->unbind();
         glDepthMask(true);
-        glDepthRange(0, 1);
     }
 
     /// render shadow
@@ -388,7 +386,6 @@ void gles20::renderShadow(model* m, int pass) {
         glColorMask(true, true, true, true);
         glDepthFunc(GL_GEQUAL);;
         glDepthMask(false);
-        glDepthRange(-1000, 1);
         glStencilFunc(GL_EQUAL, 1, 255);
         glStencilOp(GL_KEEP,GL_KEEP,GL_INCR);
         for (unsigned int i = 0; i < m->shadows.size(); i++)
@@ -399,7 +396,6 @@ void gles20::renderShadow(model* m, int pass) {
         current->unbind();
         glDepthFunc(GL_LEQUAL);
         glDepthMask(true);
-        glDepthRange(0, 1);
         glDisable(GL_CULL_FACE);
     }
 }

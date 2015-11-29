@@ -59,7 +59,6 @@ public:
 
     int cutX, cutY;                            ///< Size of SS Culling
     std::vector<model3d> models;               ///< Standard parts of model
-    std::vector<model3d> shadows;              ///< Shadow parts of model
     AABB aabb;                                 ///< Extremes of current model
     float width, aplitude, height;             ///< Dimensions of current model
     char modelname[256];                       ///< Model filename

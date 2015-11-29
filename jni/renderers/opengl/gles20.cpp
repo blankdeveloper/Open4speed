@@ -327,7 +327,7 @@ void gles20::renderModel(model* m) {
  * @brief renderShadow renders shadow of model into scene
  * @param m is instance of model to render
  */
-void gles20::renderShadow(model* m, int pass) {
+void gles20::renderShadow(model* m) {
 
     if (!rtt_fbo[oddFrame]->complete)
         return;
@@ -359,45 +359,39 @@ void gles20::renderShadow(model* m, int pass) {
         yp = m->cutY - 1;
 
     /// set visibility shape
-    if (pass = 1)
-    {
-        current = shadow;
-        current->bind();
-        glColorMask(false, false, false, false);
-        glDepthMask(false);
-        glStencilFunc(GL_ALWAYS, 1, 255);
-        glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
-        for (unsigned int i = 0; i < m->shadows.size(); i++)
-            for (float j = 1; j <= 2; j++) {
-                current->uniformFloat("u_offset", j);
-                renderSubModel(m, &m->shadows[i]);
-            }
-        current->unbind();
-        glDepthMask(true);
-    }
+    current = shadow;
+    current->bind();
+    current->uniformFloat("u_offset", 0.0f);
+    glColorMask(false, false, false, false);
+    glDepthMask(false);
+    glEnable(GL_STENCIL_TEST);
+    glStencilMask(true);
+    glStencilFunc(GL_ALWAYS, 1, 255);
+    glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
+    for (unsigned int i = 0; i < m->models.size(); i++)
+        renderSubModel(m, &m->models[i]);
 
     /// render shadow
-    if (pass = 2)
-    {
-        current = shadow;
-        current->bind();
-        current->uniformFloat("u_offset", 0.05f);
-        glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
-        glColorMask(true, true, true, true);
-        glDepthFunc(GL_GEQUAL);;
-        glDepthMask(false);
-        glStencilFunc(GL_EQUAL, 1, 255);
-        glStencilOp(GL_KEEP,GL_KEEP,GL_INCR);
-        for (unsigned int i = 0; i < m->shadows.size(); i++)
-            for (float j = 1; j <= 2; j++) {
-                current->uniformFloat("u_offset", j);
-                renderSubModel(m, &m->shadows[i]);
-            }
-        current->unbind();
-        glDepthFunc(GL_LEQUAL);
-        glDepthMask(true);
-        glDisable(GL_CULL_FACE);
-    }
+    current->uniformFloat("u_offset", 0.1f);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_ONE);
+    glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
+    glColorMask(true, true, true, true);
+    glDepthFunc(GL_GEQUAL);;
+    glDepthMask(false);
+    glStencilFunc(GL_EQUAL, 1, 255);
+    glStencilOp(GL_KEEP,GL_KEEP,GL_ZERO);
+    for (unsigned int i = 0; i < m->models.size(); i++)
+        renderSubModel(m, &m->models[i]);
+
+    /// set up previous state
+    current->unbind();
+    glBlendEquation(GL_FUNC_ADD);
+    glDepthFunc(GL_LEQUAL);
+    glDepthMask(true);
+    glDisable(GL_CULL_FACE);
+    glDisable(GL_STENCIL_TEST);
+    glStencilMask(false);
 }
 
 /**
@@ -501,23 +495,10 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     }
 }
 
-void gles20::shadowMode(bool enable) {
-  if (!rtt_fbo[oddFrame]->complete)
-      return;
-
-  if (enable) {
-      glDepthMask(false);
-      glEnable(GL_BLEND);
-      glBlendFunc(GL_ONE, GL_ONE);
-      glEnable(GL_STENCIL_TEST);
-      glStencilMask(true);
-  } else {
-      glBlendEquation(GL_FUNC_ADD);
-      glDisable(GL_STENCIL_TEST);
-      glStencilMask(false);
-  }
-}
-
+/**
+ * @brief rtt enables rendering into FBO which makes posible to do reflections
+ * @param enable is true to start drawing, false to render on screen
+ */
 void gles20::rtt(bool enable) {
     if (enable) {
 #ifndef ANDROID

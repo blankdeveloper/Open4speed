@@ -7,7 +7,7 @@ attribute vec3 v_vertex;
 attribute vec2 v_coord;
 attribute vec3 v_tnormal;
 
-const vec4 u_sun_dir = vec4(0.5, -1.0, 0.0, 0.0);
+const vec4 u_sun_dir = vec4(0.3, -1.0, 0.0, 0.0);
 
 void main()
 {
@@ -19,6 +19,6 @@ END
 FRAG
 void main()
 {
-  gl_FragColor = vec4(0.25, 0.25, 0.25, 0.5);
+  gl_FragColor = vec4(0.05, 0.05, 0.05, 0.25);
 }
 END

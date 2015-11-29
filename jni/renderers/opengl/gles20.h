@@ -143,7 +143,7 @@ public:
      * @brief renderShadow renders shadow of model into scene
      * @param m is instance of model to render
      */
-    void renderShadow(model* m, int pass);
+    void renderShadow(model* m);
 
     /**
      * @brief renderSubModel renders model into scene
@@ -151,8 +151,10 @@ public:
      */
     void renderSubModel(model* mod, model3d *m);
 
-    void shadowMode(bool enable);
-
+    /**
+     * @brief rtt enables rendering into FBO which makes posible to do reflections
+     * @param enable is true to start drawing, false to render on screen
+     */
     void rtt(bool enable);
 };
 

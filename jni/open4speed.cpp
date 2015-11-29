@@ -177,30 +177,14 @@ void display(void) {
     }
 
     /// render shadows
-    xrenderer->shadowMode(true);
-    for (int pass = 1; pass <= 2; pass++)
-    {
-        //xrenderer->renderShadow(trackdata, pass);
-        for (int i = getCarCount() - 1; i >= firstCar; i--) {
+    for (int i = getCarCount() - 1; i >= firstCar; i--) {
 
-            ///render car skin
-            xrenderer->pushMatrix();
-            xrenderer->multMatrix(getCar(i)->transform[0].value);
-            xrenderer->renderShadow(getCar(i)->skin, pass);
-            xrenderer->popMatrix();
-
-            /// render wheels
-            for (int j = 1; j <= 4; j++) {
-                xrenderer->pushMatrix();
-                xrenderer->multMatrix(getCar(i)->transform[j].value);
-                if (j % 2 == 1)
-                  xrenderer->rotateY(180);
-                xrenderer->renderShadow(getCar(i)->wheel, pass);
-                xrenderer->popMatrix();
-            }
-        }
+        ///render car skin
+        xrenderer->pushMatrix();
+        xrenderer->multMatrix(getCar(i)->transform[0].value);
+        xrenderer->renderShadow(getCar(i)->skin);
+        xrenderer->popMatrix();
     }
-    xrenderer->shadowMode(false);
 
     /// render smoke effects
     for (int k = 0; k < effLen; k++) {

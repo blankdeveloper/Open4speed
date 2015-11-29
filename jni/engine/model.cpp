@@ -23,11 +23,6 @@ model::~model() {
         delete[] models[i].coords;
         delete[] models[i].triangleCount;
     }
-    for (unsigned int i = 0; i < shadows.size(); i++) {
-        if (shadows[i].vboData != 0)
-          delete shadows[i].vboData;
-        delete[] shadows[i].normals;
-    }
 }
 
 /**
@@ -154,41 +149,6 @@ model::model(std::string filename) {
                    &m.coords[j * 6 + 4], &m.coords[j * 6 + 5],
                    &m.normals[j * 9 + 6], &m.normals[j * 9 + 7], &m.normals[j * 9 + 8],
                    &m.vertices[j * 9 + 6], &m.vertices[j * 9 + 7], &m.vertices[j * 9 + 8]);
-        }
-
-        /// generate shadow
-        if (m.hasShadow)
-        {
-            /// set default value
-            model3d s;
-            s.triangleCount = m.triangleCount;
-            for (int j = 0; j < 4; j++)
-            {
-                s.colora[j] = m.colora[j];
-                s.colord[j] = m.colord[j];
-                s.colors[j] = m.colors[j];
-            }
-            s.reg = m.reg;
-            s.x = m.reg.min.x;
-            s.y = m.reg.min.y;
-            s.z = m.reg.min.z;
-            s.texture2D = m.texture2D;
-
-            s.dynamic = m.dynamic;
-            s.filter = m.filter;
-            s.hasShadow = m.hasShadow;
-            s.material = getShader("shadow");
-            s.touchable = m.touchable;
-            s.vertices = m.vertices;
-            /// set custom arrays
-            s.normals = new float[s.triangleCount[cutX * cutY] * 9];
-            for (int j = 0; j < s.triangleCount[cutX * cutY]; j++) {
-                for (int k = 0; k < 9; k++)
-                    s.normals[j * 9 + k] = (k + 1) / 3;
-            }
-            int size = s.triangleCount[cutX * cutY] * 3;
-            s.vboData = getVBO(size, s.vertices, s.normals, 0);
-            shadows.push_back(s);
         }
 
         /// store model in VBO

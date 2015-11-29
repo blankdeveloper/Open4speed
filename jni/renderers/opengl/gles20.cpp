@@ -479,7 +479,13 @@ void gles20::renderSubModel(model* mod, model3d *m) {
 
     /// standart vertices
     if (mod->cutX * mod->cutY == 1) {
+#ifdef USE_VBO
         m->vboData->render(current, 0, m->triangleCount[mod->cutX * mod->cutY]);
+#else
+        current->attrib(m->vertices, m->normals, m->coords);
+        glDrawArrays(GL_TRIANGLES, 0, m->triangleCount[mod->cutX * mod->cutY] * 3);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+#endif
     }
 
     /// culled vertices
@@ -487,11 +493,23 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         for (int i = ym; i <= yp; i++) {
             int l = m->triangleCount[i * mod->cutX + xm];
             int r = m->triangleCount[i * mod->cutX + xp + 1];
+#ifdef USE_VBO
             m->vboData->render(current, l, r - l);
+#else
+            current->attrib(m->vertices, m->normals, m->coords);
+            glDrawArrays(GL_TRIANGLES, l * 3, (r - l) * 3);
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
+#endif
         }
         int l = m->triangleCount[(mod->cutX - 1) * mod->cutY];
         int r = m->triangleCount[mod->cutX * mod->cutY];
+#ifdef USE_VBO
         m->vboData->render(current, l, r - l);
+#else
+        current->attrib(m->vertices, m->normals, m->coords);
+        glDrawArrays(GL_TRIANGLES, l * 3, (r - l) * 3);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+#endif
     }
 }
 

@@ -129,6 +129,7 @@ model::model(std::string filename) {
 
         /// prepare model arrays
         m.triangleCount[0] = 0;
+        m.vboData = 0;
         for (int j = 1; j <= cutX * cutY; j++)
             m.triangleCount[j] = f->scandec();
         m.vertices = new float[m.triangleCount[cutX * cutY] * 9];
@@ -151,6 +152,7 @@ model::model(std::string filename) {
                    &m.vertices[j * 9 + 6], &m.vertices[j * 9 + 7], &m.vertices[j * 9 + 8]);
         }
 
+#ifdef USE_VBO
         /// store model in VBO
         if (!m.touchable) {
             int size = m.triangleCount[cutX * cutY] * 3;
@@ -163,8 +165,8 @@ model::model(std::string filename) {
                 m.coords = 0;
             }
             m.vboData = getVBO(size, m.vertices, m.normals, m.coords);
-        } else
-            m.vboData = 0;
+        }
+#endif
         models.push_back(m);
     }
 

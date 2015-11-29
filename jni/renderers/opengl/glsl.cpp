@@ -83,14 +83,16 @@ void glsl::attrib(unsigned int size) {
 /**
  * @brief it sends geometry into GPU
  * @param vertices is vertices
+ * @param normals is normals
  * @param coords is texture coords
  */
-void glsl::attrib(float* vertices, float* coords) {
+void glsl::attrib(float* vertices, float* normals, float* coords) {
     /// send attributes to GPU
     glVertexAttribPointer(attribute_v_vertex, 3, GL_FLOAT, GL_FALSE, 0, vertices);
-    if (attribute_v_normal != -1)
-        glVertexAttribPointer(attribute_v_normal, 3, GL_FLOAT, GL_FALSE, 0, vertices);
-    glVertexAttribPointer(attribute_v_coord, 2, GL_FLOAT, GL_FALSE, 0, coords);
+    if ((attribute_v_normal != -1) && (normals != 0))
+      glVertexAttribPointer(attribute_v_normal, 3, GL_FLOAT, GL_FALSE, 0, normals);
+    if ((attribute_v_coord != -1) && (coords != 0))
+      glVertexAttribPointer(attribute_v_coord, 2, GL_FLOAT, GL_FALSE, 0, coords);
 }
 
 /**

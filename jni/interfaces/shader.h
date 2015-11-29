@@ -29,9 +29,10 @@ public:
     /**
      * @brief it sends geometry into GPU
      * @param vertices is vertices
+     * @param normals is normals
      * @param coords is texture coords
      */
-    virtual void attrib(float* vertices, float* coords) = 0;
+    virtual void attrib(float* vertices, float* normals, float* coords) = 0;
 
     /**
      * @brief it binds shader

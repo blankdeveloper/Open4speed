@@ -18,6 +18,7 @@
 #include "engine/switch.h"
 #include "input/airacer.h"
 #include "input/keyboard.h"
+#include "renderers/simple/simple.h"
 
 #ifndef ANDROID
 //#define RENDER_PHYSICS
@@ -195,8 +196,6 @@ void display(void) {
     }
     xrenderer->popMatrix();
     // render RTT
-    xrenderer->scene_shader->bind();
-    xrenderer->scene_shader->uniformFloat("u_speed", getCar(0)->speed / 50.0f);
     xrenderer->rtt(false);
     }
 #endif

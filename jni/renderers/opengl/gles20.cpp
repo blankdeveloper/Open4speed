@@ -101,7 +101,7 @@ void gles20::lookAt(glm::vec3 eye, glm::vec3 center, glm::vec3 up) {
  * @param zNear is near cutting plate
  * @param zFar is far cutting plane
  */
-void gles20::perspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zFar) {
+void gles20::perspective(float fovy, float aspect, float zNear, float zFar) {
     while(!matrixBuffer.empty()) {
         matrixBuffer.pop();
     }

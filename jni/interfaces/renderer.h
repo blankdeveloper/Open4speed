@@ -30,6 +30,8 @@ struct Light {
     glm::vec4 u_nearest1;       ///< Nearest light position
 };
 
+const int culling = 150;              ///< View culling distance in meters
+
 /**
  * @brief The renderer interface
  */
@@ -39,7 +41,6 @@ public:
     float aliasing;             ///< Screen detail
     bool enable[10];            ///< Enabled filter
     Light light;                ///< One light information
-    glm::vec4 model_position;   ///< Uniform of dynamic model 3D position
     glm::mat4x4 proj_matrix;    ///< Scene projection matrix
     glm::mat4x4 view_matrix;    ///< View matrix
     shader* scene_shader;       ///< Scene shader

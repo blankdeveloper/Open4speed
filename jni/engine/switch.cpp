@@ -21,6 +21,7 @@
 #include "renderers/opengl/glsl.h"
 #include "renderers/opengl/gltexture.h"
 #include "renderers/opengl/glvbo.h"
+#include "renderers/simple/simple.h"
 
 /**
  * @brief The game resources
@@ -157,7 +158,8 @@ renderer* getRenderer() {
     if (!xrenderer)
     {
         logi("Init renderer","");
-        xrenderer = new gles20();
+        //xrenderer = new gles20();
+        xrenderer = new simple();
     }
     return xrenderer;
 }

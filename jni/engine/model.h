@@ -17,7 +17,7 @@
 #include "interfaces/texture.h"
 #include "interfaces/vbo.h"
 
-#define USE_VBO
+//#define USE_VBO
 
 /**
  * @brief The model3d struct

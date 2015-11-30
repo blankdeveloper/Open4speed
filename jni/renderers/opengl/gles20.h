@@ -24,8 +24,6 @@
 #include "interfaces/renderer.h"
 #include "renderers/opengl/glfbo.h"
 
-const int culling = 150;              ///< View culling distance in meters
-
 /**
  * @brief The gles20 class is implementation of OpenGL ES 2.0
  */
@@ -74,7 +72,7 @@ public:
      * @param zNear is near cutting plate
      * @param zFar is far cutting plane
      */
-    void perspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zFar);
+    void perspective(float fovy, float aspect, float zNear, float zFar);
 
     /**
      * @brief multMatrix multiplies with matrix

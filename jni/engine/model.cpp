@@ -108,6 +108,7 @@ model::model(std::string filename) {
                 cursor++;
                 m.filter = material[cursor] - '0';
                 cursor++;
+#ifndef SOFTWARE_RENDERER
             } else if (material[cursor] == '%') {
                 cursor++;
                 m.texture2D->transparent = false;
@@ -123,6 +124,7 @@ model::model(std::string filename) {
                 m.material = getShader(shadername);
                 delete[] shadername;
                 break;
+#endif
             } else {
                 break;
             }

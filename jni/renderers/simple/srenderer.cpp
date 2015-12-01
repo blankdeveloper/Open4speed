@@ -14,7 +14,7 @@
 #include <sys/time.h>
 #include "engine/switch.h"
 #include "renderers/opengl/gles20.h"//just for RTT method
-#include "renderers/simple/simple.h"
+#include "renderers/simple/srenderer.h"
 
 Color black = {0,0,0};
 Color white = {255,255,255};
@@ -22,7 +22,7 @@ Color white = {255,255,255};
 /**
  * @brief simple constructor
  */
-simple::simple() {
+srenderer::srenderer() {
     /// set default values
     for (int i = 0; i < 10; i++) {
         enable[i] = true;
@@ -39,6 +39,7 @@ simple::simple() {
     pixelBuffer = 0;
     fillCache1 = 0;
     fillCache2 = 0;
+    texture = 0;
 }
 
 /**
@@ -46,7 +47,7 @@ simple::simple() {
  * @param width is width of viewport
  * @param height is height of viewport
  */
-void simple::init(int width, int height) {
+void srenderer::init(int width, int height) {
     //create viewport
     viewport_x = 0;
     viewport_y = 0;
@@ -72,7 +73,7 @@ void simple::init(int width, int height) {
 /**
  * @brief renderer destructor
  */
-simple::~simple() {
+srenderer::~srenderer() {
   if(depthBuffer)
       delete[] depthBuffer;
   if(pixelBuffer)
@@ -90,7 +91,7 @@ simple::~simple() {
 /**
  * @brief clear clears depth and pixel buffers
  */
-void simple::clear() {
+void srenderer::clear() {
     //clear arrays
     for (int i = 0; i < viewport_width * viewport_height + 1; i++) {
         depthBuffer[i] = viewDistance;
@@ -104,7 +105,7 @@ void simple::clear() {
  * @param physic is physical model instance
  * @param gamma is requested render gamma
  */
-void simple::renderModel(model* m) {
+void srenderer::renderModel(model* m) {
 
     /// set culling info positions
     float avd = viewDistance / 200.0f;
@@ -148,7 +149,7 @@ void simple::renderModel(model* m) {
  * @brief renderSubModel renders model into scene
  * @param m is instance of model to render
  */
-void simple::renderSubModel(model* mod, model3d *m) {
+void srenderer::renderSubModel(model* mod, model3d *m) {
 
     /// set model matrix
     glm::mat4x4 modelView;
@@ -192,9 +193,13 @@ void simple::renderSubModel(model* mod, model3d *m) {
     return;
 #endif
 
+    // apply texture
+    m->texture2D->apply();
+    texture = (stexture*)(m->texture2D);
+
     /// standart vertices
     if (mod->cutX * mod->cutY == 1) {
-        triangles(m->vertices, 0, m->triangleCount[mod->cutX * mod->cutY]);
+        triangles(m->vertices, m->coords, 0, m->triangleCount[mod->cutX * mod->cutY]);
     }
 
     /// culled vertices
@@ -202,19 +207,20 @@ void simple::renderSubModel(model* mod, model3d *m) {
         for (int i = ym; i <= yp; i++) {
             int l = m->triangleCount[i * mod->cutX + xm];
             int r = m->triangleCount[i * mod->cutX + xp + 1];
-            triangles(m->vertices, l, r);
+            triangles(m->vertices, m->coords, l, r);
         }
         int l = m->triangleCount[(mod->cutX - 1) * mod->cutY];
         int r = m->triangleCount[mod->cutX * mod->cutY];
-        triangles(m->vertices, l, r);
+        triangles(m->vertices, m->coords, l, r);
     }
+    texture = 0;
 }
 
 /**
  * @brief rtt enables rendering into FBO which makes posible to do reflections
  * @param enable is true to start drawing, false to render on screen
  */
-void simple::rtt(bool enable) {
+void srenderer::rtt(bool enable) {
     struct timeval tv;
     gettimeofday(&tv, 0);
     if(enable) {
@@ -240,7 +246,7 @@ void simple::rtt(bool enable) {
   * @param dm is draw mode to be used
   * @return true if line was drawed
   */
-bool simple::line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z2, DrawMode dm) {
+bool srenderer::line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z2, DrawMode dm) {
 
     int a0, a1, b0, b1, c0, c1, d0, d1, h, p, w, mem;
     double t1, t2, dx, dy;
@@ -354,9 +360,10 @@ bool simple::line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z2, 
             if ((dm != Normal))
                 fillCache[y1] = {x1, z1};
             else if ((0 < z1.z) && (depthBuffer[mem] > z1.z)) {
-                int v = glm::clamp(z1.z, 0.0, 255.0);
-                setColor(v, v, v);
-                pixelBuffer[mem] = currentColor;
+                if (texture)
+                    texture->setPixel(pixelBuffer, mem, z1.x, z1.y);
+                else
+                    pixelBuffer[mem] = currentColor;
                 depthBuffer[mem] = z1.z;
             }
         }
@@ -371,7 +378,7 @@ bool simple::line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z2, 
  * @param g is green color
  * @param b is blue color
  */
-void simple::setColor(unsigned char r, unsigned char g, unsigned char b) {
+void srenderer::setColor(unsigned char r, unsigned char g, unsigned char b) {
     currentColor.r = r;
     currentColor.g = g;
     currentColor.b = b;
@@ -380,7 +387,7 @@ void simple::setColor(unsigned char r, unsigned char g, unsigned char b) {
 /**
  * @brief test is Liang & Barsky clipping
  */
-bool simple::test(double p, double q, double &t1, double &t2) {
+bool srenderer::test(double p, double q, double &t1, double &t2) {
     //negative cutting
     if (p < 0) {
         double t = q/p;
@@ -409,7 +416,7 @@ bool simple::test(double p, double q, double &t1, double &t2) {
     return true;
 }
 
-void simple::triangle(int x1, int y1, int x2, int y2, int x3, int y3, glm::dvec3 z1, glm::dvec3 z2, glm::dvec3 z3) {
+void srenderer::triangle(int x1, int y1, int x2, int y2, int x3, int y3, glm::dvec3 z1, glm::dvec3 z2, glm::dvec3 z3) {
     //create markers for filling
     int a12 = glm::abs(y1 - y2);
     int a13 = glm::abs(y1 - y3);
@@ -436,30 +443,37 @@ void simple::triangle(int x1, int y1, int x2, int y2, int x3, int y3, glm::dvec3
     }
 
     //fill triangle
-    //setColor(0, 0, 128);
     for (int y = glm::max(0, min); y < glm::min(viewport_height - 1, max); y++) {
         line(fillCache1[y].first, y, fillCache2[y].first, y, fillCache1[y].second, fillCache2[y].second, Normal);
     }
 
     //draw frames
-    /*setColor(255, 0, 0);
     line(x1, y1, x2, y2, z1, z2, Normal);
     line(x1, y1, x3, y3, z1, z3, Normal);
-    line(x2, y2, x3, y3, z2, z3, Normal);*/
+    line(x2, y2, x3, y3, z2, z3, Normal);
 }
 
-void simple::triangles(float* vertices, int offset, int size) {
-    for (int i = offset; i < size; i++) {
-        glm::vec4 a = matrix * glm::vec4(vertices[i * 9 + 0], vertices[i * 9 + 1], vertices[i * 9 + 2], 1.0f);
-        glm::vec4 b = matrix * glm::vec4(vertices[i * 9 + 3], vertices[i * 9 + 4], vertices[i * 9 + 5], 1.0f);
-        glm::vec4 c = matrix * glm::vec4(vertices[i * 9 + 6], vertices[i * 9 + 7], vertices[i * 9 + 8], 1.0f);
+void srenderer::triangles(float* vertices, float* coords, int offset, int size) {
+    int v = offset * 9;
+    int t = offset * 6;
+    for (int i = offset; i < size; i++, v += 9, t += 6) {
+        //transfer into screen coordinates from -1 to 1
+        glm::vec4 a = matrix * glm::vec4(vertices[v + 0], vertices[v + 1], vertices[v + 2], 1.0f);
+        glm::vec4 b = matrix * glm::vec4(vertices[v + 3], vertices[v + 4], vertices[v + 5], 1.0f);
+        glm::vec4 c = matrix * glm::vec4(vertices[v + 6], vertices[v + 7], vertices[v + 8], 1.0f);
+        //scale into screen dimensions
         a.x = (a.x / fabs(a.w) + 1.0f) * 0.5f * viewport_width;
         a.y = (a.y / fabs(a.w) + 1.0f) * 0.5f * viewport_height;
         b.x = (b.x / fabs(b.w) + 1.0f) * 0.5f * viewport_width;
         b.y = (b.y / fabs(b.w) + 1.0f) * 0.5f * viewport_height;
         c.x = (c.x / fabs(c.w) + 1.0f) * 0.5f * viewport_width;
         c.y = (c.y / fabs(c.w) + 1.0f) * 0.5f * viewport_height;
-        triangle(a.x, a.y, b.x, b.y, c.x, c.y, glm::dvec3(0.0, 0.0, a.z), glm::dvec3(0.0, 0.0, b.z), glm::dvec3(0.0, 0.0, c.z));
+        //get texture coordinates and depth for interpolation
+        glm::dvec3 az = glm::dvec3(coords[t + 0], coords[t + 1], a.z);
+        glm::dvec3 bz = glm::dvec3(coords[t + 2], coords[t + 3], b.z);
+        glm::dvec3 cz = glm::dvec3(coords[t + 4], coords[t + 5], c.z);
+        //render triangle
+        triangle(a.x, a.y, b.x, b.y, c.x, c.y, az, bz, cz);
     }
 }
 
@@ -473,7 +487,7 @@ void simple::triangles(float* vertices, int offset, int size) {
  * @param center is camera center
  * @param up is up vector
  */
-void simple::lookAt(glm::vec3 eye, glm::vec3 center, glm::vec3 up) {
+void srenderer::lookAt(glm::vec3 eye, glm::vec3 center, glm::vec3 up) {
 
     camX = eye.x;
     camY = eye.y;
@@ -490,7 +504,7 @@ void simple::lookAt(glm::vec3 eye, glm::vec3 center, glm::vec3 up) {
  * @param zNear is near cutting plate
  * @param zFar is far cutting plane
  */
-void simple::perspective(float fovy, float aspect, float zNear, float zFar) {
+void srenderer::perspective(float fovy, float aspect, float zNear, float zFar) {
     while(!matrixBuffer.empty()) {
         matrixBuffer.pop();
     }
@@ -502,7 +516,7 @@ void simple::perspective(float fovy, float aspect, float zNear, float zFar) {
  * @brief multMatrix multiplies with matrix
  * @param matrix is 4x4 matrix in OpenGL format
  */
-void simple::multMatrix(float* matrix) {
+void srenderer::multMatrix(float* matrix) {
   matrix_result *= glm::mat4x4(
       matrix[0], matrix[1], matrix[2], matrix[3],
       matrix[4], matrix[5], matrix[6], matrix[7],
@@ -514,7 +528,7 @@ void simple::multMatrix(float* matrix) {
 /**
  * @brief popMatrix pops matrix from stack
  */
-void simple::popMatrix() {
+void srenderer::popMatrix() {
   /// popping matrix from stack
   matrix_result = (glm::mat4x4)matrixBuffer.top();
   matrixBuffer.pop();
@@ -523,7 +537,7 @@ void simple::popMatrix() {
 /**
  * @brief pushMatrix pushs current matrix to stack
  */
-void simple::pushMatrix() {
+void srenderer::pushMatrix() {
   /// push matrix m to stack
   matrixBuffer.push(matrix_result);
 }
@@ -532,7 +546,7 @@ void simple::pushMatrix() {
  * @brief rotateX rotate around X axis
  * @param value is angle
  */
-void simple::rotateX(float value) {
+void srenderer::rotateX(float value) {
   float radian = value * M_PI / 180;
   /// rotation matrix for 2D transformations (around Z axis)
   glm::mat4x4 rotation(
@@ -549,7 +563,7 @@ void simple::rotateX(float value) {
  * @brief rotateX rotate around Y axis
  * @param value is angle
  */
-void simple::rotateY(float value) {
+void srenderer::rotateY(float value) {
   float radian = value * M_PI / 180;
   /// rotation matrix for 2D transformations (around Z axis)
   glm::mat4x4 rotation(
@@ -566,7 +580,7 @@ void simple::rotateY(float value) {
  * @brief rotateX rotate around Z axis
  * @param value is angle
  */
-void simple::rotateZ(float value) {
+void srenderer::rotateZ(float value) {
   float radian = value * M_PI / 180;
   /// rotation matrix for 2D transformations (around Z axis)
   glm::mat4x4 rotation(
@@ -583,7 +597,7 @@ void simple::rotateZ(float value) {
  * @brief scale scales current matrix
  * @param value is amount of scale(1 to keep current)
  */
-void simple::scale(float value) {
+void srenderer::scale(float value) {
   /// scale matrix
   glm::mat4x4 scale(
       value,0,0,0,
@@ -601,7 +615,7 @@ void simple::scale(float value) {
  * @param y is translate coordinate
  * @param z is translate coordinate
  */
-void simple::translate(float x, float y, float z) {
+void srenderer::translate(float x, float y, float z) {
   /// transformation matrix
   glm::mat4x4 translation(
       1,0,0,0,

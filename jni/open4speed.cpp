@@ -18,7 +18,6 @@
 #include "engine/switch.h"
 #include "input/airacer.h"
 #include "input/keyboard.h"
-#include "renderers/simple/simple.h"
 
 #ifndef ANDROID
 //#define RENDER_PHYSICS

@@ -21,7 +21,14 @@
 #include "renderers/opengl/glsl.h"
 #include "renderers/opengl/gltexture.h"
 #include "renderers/opengl/glvbo.h"
-#include "renderers/simple/simple.h"
+#include "renderers/simple/srenderer.h"
+#include "renderers/simple/stexture.h"
+
+#ifdef SOFTWARE_RENDERER
+#define XTEXTURE stexture
+#else
+#define XTEXTURE gltexture
+#endif
 
 /**
  * @brief The game resources
@@ -158,8 +165,11 @@ renderer* getRenderer() {
     if (!xrenderer)
     {
         logi("Init renderer","");
-        //xrenderer = new gles20();
-        xrenderer = new simple();
+#ifdef SOFTWARE_RENDERER
+        xrenderer = new srenderer();
+#else
+        xrenderer = new gles20();
+#endif
     }
     return xrenderer;
 }
@@ -210,7 +220,7 @@ texture* getTexture(std::string filename, float alpha) {
 
     /// create new instance
     if (strcmp(getExtension(filename).c_str(), "png") == 0) {
-      texture* instance = new gltexture(loadPNG(filename), alpha);
+      texture* instance = new XTEXTURE(loadPNG(filename), alpha);
       strcpy(instance->texturename, filename.c_str());
       textures.push_back(instance);
       return instance;
@@ -227,12 +237,12 @@ texture* getTexture(std::string filename, float alpha) {
         for (int i = 0; i <= count; i++) {
             file[strlen(file) - 1] = i % 10 + '0';
             file[strlen(file) - 2] = i / 10 + '0';
-            texture* instance = new gltexture(loadPNG(file), alpha);
+            texture* instance = new XTEXTURE(loadPNG(file), alpha);
             strcpy(instance->texturename, file);
             anim.push_back(instance);
         }
 
-        texture* instance = new gltexture(anim, alpha);
+        texture* instance = new XTEXTURE(anim, alpha);
         strcpy(instance->texturename, filename.c_str());
         textures.push_back(instance);
         return instance;
@@ -250,7 +260,7 @@ texture* getTexture(std::string filename, float alpha) {
  * @return texture instance
  */
 texture* getTexture(float r, float g, float b, float alpha) {
-    texture* instance = new gltexture(createRGB(1, 1, r, g, b), alpha);
+    texture* instance = new XTEXTURE(createRGB(1, 1, r, g, b), alpha);
     sprintf(instance->texturename, "%f %f %f", r, g , b);
     textures.push_back(instance);
     return instance;

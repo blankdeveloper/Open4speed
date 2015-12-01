@@ -12,11 +12,7 @@
 
 #include <stack>
 #include "interfaces/renderer.h"
-
-// Struct for color of pixel r,g,b red, green, blue values
-struct Color {
-    unsigned char r,g,b;
-};
+#include "renderers/simple/stexture.h"
 
 enum DrawMode {
     Normal, Marker1, Marker2
@@ -25,13 +21,13 @@ enum DrawMode {
 /**
  * @brief The simple 2D renderer
  */
-class simple : public renderer {
+class srenderer : public renderer {
 public:
 
     /**
      * @brief simple constructor
      */
-    simple();
+    srenderer();
 
     /**
      * @brief simple is constructor
@@ -43,7 +39,7 @@ public:
     /**
      * @brief renderer destructor
      */
-    ~simple();
+    ~srenderer();
 
     /**
      * @brief clear clears depth and pixel buffers
@@ -181,7 +177,7 @@ private:
      */
     bool test(double p, double q, double &t1, double &t2);
 
-    void triangles(float* vertices, int offset, int size);
+    void triangles(float* vertices, float* coords, int offset, int size);
 
     // rendering
     int viewport_x, viewport_y, viewport_width, viewport_height;
@@ -191,6 +187,7 @@ private:
     Color currentColor;
     std::pair<int, glm::dvec3>* fillCache1;
     std::pair<int, glm::dvec3>* fillCache2;
+    stexture* texture;
     unsigned int timestamp;
 
     int xm, xp, ym, yp;                   ///< Current view frustum culling

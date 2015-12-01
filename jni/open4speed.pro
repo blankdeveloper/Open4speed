@@ -32,7 +32,8 @@ SOURCES += \
     renderers/opengl/glsl.cpp \
     renderers/opengl/gltexture.cpp \
     renderers/opengl/glvbo.cpp \
-    renderers/simple/simple.cpp \
+    renderers/simple/srenderer.cpp \
+    renderers/simple/stexture.cpp \
     open4speed.cpp
 HEADERS += \
     engine/car.h \
@@ -62,5 +63,6 @@ HEADERS += \
     renderers/opengl/glsl.h \
     renderers/opengl/gltexture.h \
     renderers/opengl/glvbo.h \
-    renderers/simple/simple.h
+    renderers/simple/srenderer.h \
+    renderers/simple/stexture.h
 INCLUDEPATH += /usr/include/bullet

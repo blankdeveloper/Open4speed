@@ -315,7 +315,6 @@ void gles20::renderModel(model* m) {
                 glDepthMask(false);
                 glDisable(GL_CULL_FACE);
                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-                current->uniformFloat("u_Alpha", m->models[i].texture2D->alpha);
                 renderSubModel(m, &m->models[i]);
             }
         current->unbind();

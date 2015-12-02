@@ -31,16 +31,14 @@ public:
     /**
      * @brief gltexture creates animated empty texture instance
      * @param anim is an image sequence
-     * @param alpha is amount of blending
      */
-    gltexture(std::vector<texture*> anim, float alpha);
+    gltexture(std::vector<texture*> anim);
 
     /**
      * @brief gltexture creates texture from raster data
      * @param texture is texture raster instance
-     * @param alpha is amount of blending
      */
-    gltexture(Texture texture, float alpha);
+    gltexture(Texture texture);
 
     /**
      * @brief apply applies current texture

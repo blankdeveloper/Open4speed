@@ -24,10 +24,8 @@ stexture::~stexture() {
 /**
  * @brief stexture creates animated empty texture instance
  * @param anim is an image sequence
- * @param alpha is amount of blending
  */
-stexture::stexture(std::vector<texture*> anim, float alpha) {
-    this->alpha = alpha;
+stexture::stexture(std::vector<texture*> anim) {
     this->anim = anim;
     transparent = true;
     animated = true;
@@ -46,9 +44,8 @@ stexture::stexture(std::vector<texture*> anim, float alpha) {
 /**
  * @brief stexture creates texture from raster data
  * @param texture is texture raster instance
- * @param alpha is amount of blending
  */
-stexture::stexture(Texture texture, float alpha) {
+stexture::stexture(Texture texture) {
     twidth = texture.width;
     theight = texture.height;
     transparent = texture.hasAlpha;

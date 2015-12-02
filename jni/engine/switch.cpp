@@ -207,10 +207,9 @@ shader* getShader(std::string name) {
 /**
  * @brief getTexture gets texture
  * @param filename is filename of texture
- * @param alpha is amount of blending
  * @return texture instance
  */
-texture* getTexture(std::string filename, float alpha) {
+texture* getTexture(std::string filename) {
     filename = fixName(filename);
 
     /// find previous instance
@@ -220,7 +219,7 @@ texture* getTexture(std::string filename, float alpha) {
 
     /// create new instance
     if (strcmp(getExtension(filename).c_str(), "png") == 0) {
-      texture* instance = new XTEXTURE(loadPNG(filename), alpha);
+      texture* instance = new XTEXTURE(loadPNG(filename));
       strcpy(instance->texturename, filename.c_str());
       textures.push_back(instance);
       return instance;
@@ -237,12 +236,12 @@ texture* getTexture(std::string filename, float alpha) {
         for (int i = 0; i <= count; i++) {
             file[strlen(file) - 1] = i % 10 + '0';
             file[strlen(file) - 2] = i / 10 + '0';
-            texture* instance = new XTEXTURE(loadPNG(file), alpha);
+            texture* instance = new XTEXTURE(loadPNG(file));
             strcpy(instance->texturename, file);
             anim.push_back(instance);
         }
 
-        texture* instance = new XTEXTURE(anim, alpha);
+        texture* instance = new XTEXTURE(anim);
         strcpy(instance->texturename, filename.c_str());
         textures.push_back(instance);
         return instance;
@@ -256,11 +255,10 @@ texture* getTexture(std::string filename, float alpha) {
  * @param r is amount of red from 0 to 1
  * @param g is amount of green from 0 to 1
  * @param b is amount of blue from 0 to 1
- * @param alpha is amount of blending
  * @return texture instance
  */
-texture* getTexture(float r, float g, float b, float alpha) {
-    texture* instance = new XTEXTURE(createRGB(1, 1, r, g, b), alpha);
+texture* getTexture(float r, float g, float b) {
+    texture* instance = new XTEXTURE(createRGB(1, 1, r, g, b));
     sprintf(instance->texturename, "%f %f %f", r, g , b);
     textures.push_back(instance);
     return instance;

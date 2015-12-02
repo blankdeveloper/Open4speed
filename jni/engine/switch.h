@@ -88,20 +88,18 @@ shader* getShader(std::string name);
 /**
  * @brief getTexture gets texture
  * @param filename is filename of texture
- * @param alpha is amount of blending
  * @return texture instance
  */
-texture* getTexture(std::string filename, float alpha);
+texture* getTexture(std::string filename);
 
 /**
  * @brief getTexture gets texture
  * @param r is amount of red from 0 to 1
  * @param g is amount of green from 0 to 1
  * @param b is amount of blue from 0 to 1
- * @param alpha is amount of blending
  * @return texture instance
  */
-texture* getTexture(float r, float g, float b, float alpha);
+texture* getTexture(float r, float g, float b);
 
 /**
  * @brief glvbo creates VBO from data

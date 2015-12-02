@@ -47,7 +47,6 @@ Texture createRGB(int width, int height, float r, float g, float b) {
 /**
  * @brief pngloader loads texture from png file
  * @param filename is name of file
- * @param alpha is amount of blending
  * @return texture instance
  */
 Texture loadPNG(std::string filename) {

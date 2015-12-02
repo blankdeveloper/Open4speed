@@ -25,10 +25,8 @@ gltexture::~gltexture() {
 /**
  * @brief gltexture creates animated empty texture instance
  * @param anim is an image sequence
- * @param alpha is amount of blending
  */
-gltexture::gltexture(std::vector<texture*> anim, float alpha) {
-    this->alpha = alpha;
+gltexture::gltexture(std::vector<texture*> anim) {
     this->anim = anim;
     transparent = true;
     animated = true;
@@ -49,10 +47,9 @@ gltexture::gltexture(std::vector<texture*> anim, float alpha) {
  * @param texture is texture raster instance
  * @param alpha is amount of blending
  */
-gltexture::gltexture(Texture texture, float alpha) {
+gltexture::gltexture(Texture texture) {
 
     /// create texture
-    this->alpha = alpha;
     glGenTextures(1, &this->textureID);
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, this->textureID);

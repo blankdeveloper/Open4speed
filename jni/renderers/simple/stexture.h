@@ -37,16 +37,14 @@ public:
     /**
      * @brief stexture creates animated empty texture instance
      * @param anim is an image sequence
-     * @param alpha is amount of blending
      */
-    stexture(std::vector<texture*> anim, float alpha);
+    stexture(std::vector<texture*> anim);
 
     /**
      * @brief stexture creates texture from raster data
      * @param texture is texture raster instance
-     * @param alpha is amount of blending
      */
-    stexture(Texture texture, float alpha);
+    stexture(Texture texture);
 
     /**
      * @brief apply applies current texture

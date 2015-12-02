@@ -24,7 +24,6 @@ struct Texture {
  */
 class texture {
 public:
-    float alpha;            ///< Texture alpha value for blending
     bool transparent;       ///< Texture transparency
     int twidth, theight;    ///< Image dimensions
     char texturename[256];  ///< Texture filename

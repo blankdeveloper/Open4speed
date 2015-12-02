@@ -59,7 +59,7 @@ model::model(std::string filename) {
         m.colors[3] = 1;
 
         /// get material attributes
-        float alpha = 1;
+        float alpha = 1; //unused, remove from format
         char texturePath[255];
         char material[255];
         material[0] = '\0';
@@ -75,12 +75,11 @@ model::model(std::string filename) {
         m.z = m.reg.min.z;
 
         /// if texture is not only single color then load it
-        if (texturePath[0] != '*') {
-            m.texture2D = getTexture(f->path() + texturePath, alpha);
+        if (texturePath[0] != '*')
+            m.texture2D = getTexture(f->path() + texturePath);
         /// create color texture
-        } else {
-            m.texture2D = getTexture(m.colord[0], m.colord[1], m.colord[2], alpha);
-        }
+        else
+            m.texture2D = getTexture(m.colord[0], m.colord[1], m.colord[2]);
 
         int cursor = 0;
         m.dynamic = false;

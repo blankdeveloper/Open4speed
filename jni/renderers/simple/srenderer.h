@@ -14,10 +14,6 @@
 #include "interfaces/renderer.h"
 #include "renderers/simple/stexture.h"
 
-enum DrawMode {
-    Normal, Marker1, Marker2
-};
-
 /**
  * @brief The simple 2D renderer
  */
@@ -53,23 +49,15 @@ public:
     unsigned char* getBuffer() { return (unsigned char*)pixelBuffer; }
 
     /**
-      * @brief line draws line into pixel buffer
+      * @brief line makes markers for filling triangle
       * @param x1 is line start position x
       * @param y1 is line start position y
       * @param x2 is line end position x
       * @param y2 is line end position y
-      * @param dm is draw mode to be used
-      * @return true if line was drawed
+      * @param fillCache is cache to be used
+      * @return true if line was processed
       */
-    bool line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z2, DrawMode dm);
-
-    /**
-     * @brief setColor sets RGB current color
-     * @param r is red color
-     * @param g is green color
-     * @param b is blue color
-     */
-    void setColor(unsigned char r, unsigned char g, unsigned char b);
+    bool line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z2, std::pair<int, glm::dvec3>* fillCache);
 
     void triangle(int x1, int y1, int x2, int y2, int x3, int y3, glm::dvec3 z1, glm::dvec3 z2, glm::dvec3 z3);
 
@@ -180,11 +168,9 @@ private:
     void triangles(float* vertices, float* coords, int offset, int size);
 
     // rendering
-    int viewport_x, viewport_y, viewport_width, viewport_height;
+    int viewport_width, viewport_height;
     double* depthBuffer;
     Color* pixelBuffer;
-    Color clearColor;
-    Color currentColor;
     std::pair<int, glm::dvec3>* fillCache1;
     std::pair<int, glm::dvec3>* fillCache2;
     stexture* texture;

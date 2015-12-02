@@ -17,7 +17,6 @@
 #include "renderers/simple/srenderer.h"
 
 Color black = {0,0,0};
-Color white = {255,255,255};
 
 /**
  * @brief simple constructor
@@ -39,7 +38,6 @@ srenderer::srenderer() {
     pixelBuffer = 0;
     fillCache1 = 0;
     fillCache2 = 0;
-    texture = 0;
 }
 
 /**
@@ -49,8 +47,6 @@ srenderer::srenderer() {
  */
 void srenderer::init(int width, int height) {
     //create viewport
-    viewport_x = 0;
-    viewport_y = 0;
     viewport_width = width;
     viewport_height = height;
 
@@ -213,7 +209,6 @@ void srenderer::renderSubModel(model* mod, model3d *m) {
         int r = m->triangleCount[mod->cutX * mod->cutY];
         triangles(m->vertices, m->coords, l, r);
     }
-    texture = 0;
 }
 
 /**
@@ -238,150 +233,108 @@ void srenderer::rtt(bool enable) {
  */
 
 /**
-  * @brief line draws line into pixel buffer
+  * @brief line makes markers for filling triangle
   * @param x1 is line start position x
   * @param y1 is line start position y
   * @param x2 is line end position x
   * @param y2 is line end position y
-  * @param dm is draw mode to be used
-  * @return true if line was drawed
+  * @param fillCache is cache to be used
+  * @return true if line was processed
   */
-bool srenderer::line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z2, DrawMode dm) {
+bool srenderer::line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z2, std::pair<int, glm::dvec3>* fillCache) {
 
-    int a0, a1, b0, b1, c0, c1, d0, d1, h, p, w, mem;
-    double t1, t2, dx, dy;
-    bool wp, hp;
-    glm::dvec3 dz, z;
-    std::pair<int, glm::dvec3>* fillCache = dm == Marker1 ? fillCache1 : fillCache2;
+    //Liang & Barsky clipping (only top-bottom)
+    int h = y2 - y1;
+    double t1 = 0, t2 = 1;
+    if (test(-h, y1, t1, t2) && test(h, viewport_height - 1 - y1, t1, t2) ) {
+        glm::dvec3 z;
+        int c0, c1, xp0, xp1, yp0, yp1, y, p, w;
+        bool wp, hp;
 
-    //Liang & Barsky clipping
-    t1 = 0;
-    t2 = 1;
-    dx = x2 - x1;
-    dy = y2 - y1;
-    dz = z2 - z1;
-    if ((dm != Normal || (test(-dx, x1, t1, t2) && test(dx, viewport_width - 1 - x1, t1, t2)))  &&
-        test(-dy, y1, t1, t2) && test(dy, viewport_height - 1 - y1, t1, t2) ) {
+        //clip line
         if (t1 > 0) {
-            x1 += t1 * dx;
-            y1 += t1 * dy;
-            z1 += t1 * dz;
+            w = x2 - x1;
+            z = z2 - z1;
+            x1 += t1 * w;
+            y1 += t1 * h;
+            z1 += t1 * z;
         } else
             t1 = 0;
         if (t2 < 1) {
-            x2 = x1 + (t2 - t1) * dx;
-            y2 = y1 + (t2 - t1) * dy;
-            z2 = z1 + (t2 - t1) * dz;
-        } else
-            t2 = 1;
-
-        //count line dimensions
-        w = (int)(x2 - x1);
-        h = (int)(y2 - y1);
-        z = z2 - z1;
-
-        //check if dimension is positive
-        if (w >= 0) {
-            wp = true;
-        } else {
-            wp = false;
-            w = -w;
+            w = x2 - x1;
+            z = z2 - z1;
+            t2 -= t1;
+            x2 = x1 + t2 * w;
+            y2 = y1 + t2 * h;
+            z2 = z1 + t2 * z;
         }
 
-        if (h >= 0) {
-            hp = true;
-        } else {
-            hp = false;
-            h = -h;
-        }
+        //count new line dimensions
+        wp = (x2 >= x1) ? true : false;
+        w = wp ? x2 - x1 : x1 - x2;
+        hp = (y2 >= y1) ? true : false;
+        h = hp ? y2 - y1 : y1 - y2;
 
         //line in x axis nearby
         if (w > h) {
-            //count Bresenham's alg. variables
-            c0 = 2 * h;
-            p = c0 - w;
-            c1 = p - w;
-
             //direction from left to right
-            a0 = wp ? 1 : -1;
-            b0 = 0;
-            d0 = a0;
+            xp0 = wp ? 1 : -1;
+            yp0 = 0;
 
             //direction from top to bottom
-            a1 = hp ? a0 + viewport_width : a0 - viewport_width;
-            b1 = hp ? 1 : -1;
-            d1 = a0;
+            xp1 = wp ? 1 : -1;
+            yp1 = hp ? 1 : -1;
 
         //line in y axis nearby
         } else {
-            //count Bresenham's alg. variables
-            c0 = 2 * w;
-            p = c0 - h;
-            c1 = p - h;
-
             //direction from top to bottom
-            a0 = hp ? viewport_width : -viewport_width;
-            b0 = hp ? 1 : -1;
-            d0 = 0;
+            xp0 = 0;
+            yp0 = hp ? 1 : -1;
 
             //direction from left to right
-            a1 = wp ? a0 + 1 : a0 - 1;
-            b1 = b0;
-            d1 = a1 - a0;
+            xp1 = wp ? 1 : -1;
+            yp1 = hp ? 1 : -1;
 
             //apply line length
+            y = w;
             w = h;
+            h = y;
         }
 
         //count z coordinate step
-        z /= (double)w;
+        z = (z2 - z1) / (double)w;
 
         //Bresenham's algorithm
-        mem = x1 + y1 * viewport_width;
-        if ((dm != Normal))
-            fillCache[y1] = {x1, z1};
+        c0 = h + h;
+        p = c0 - w;
+        c1 = p - w;
+        y = y1;
+        fillCache[y].first = x1;
+        fillCache[y].second = z1;
         for (w--; w >= 0; w--) {
-            if (p < 0) {
-                mem += a0;
-                y1 += b0;
-                p += c0;
-                x1 += d0;
-            } else {
-                mem += a1;
-                y1 += b1;
-                p += c1;
-                x1 += d1;
-            }
 
-            //interpolate z coordinate
+            //interpolate
+            if (p < 0) {
+                p += c0;
+                x1 += xp0;
+                y1 += yp0;
+            } else {
+                p += c1;
+                x1 += xp1;
+                y1 += yp1;
+            }
             z1 += z;
 
-            //write pixel into memory and depth test
-            if ((dm != Normal))
-                fillCache[y1] = {x1, z1};
-            else if ((0 < z1.z) && (depthBuffer[mem] > z1.z)) {
-                if (texture)
-                    texture->setPixel(pixelBuffer, mem, z1.x, z1.y);
-                else
-                    pixelBuffer[mem] = currentColor;
-                depthBuffer[mem] = z1.z;
+            //write cache info
+            if (wp || (y != y1)) {
+                y = y1;
+                fillCache[y].first = x1;
+                fillCache[y].second = z1;
             }
         }
         return true;
     }
     return false;
-}
-
-/**
- * @brief setColor sets RGB current color
- * @param r is red color
- * @param g is green color
- * @param b is blue color
- */
-void srenderer::setColor(unsigned char r, unsigned char g, unsigned char b) {
-    currentColor.r = r;
-    currentColor.g = g;
-    currentColor.b = b;
 }
 
 /**
@@ -423,34 +376,75 @@ void srenderer::triangle(int x1, int y1, int x2, int y2, int x3, int y3, glm::dv
     int a23 = glm::abs(y2 - y3);
     int min, max;
     if ((a12 >= a13) && (a12 >= a23)) {
-        line(x1, y1, x2, y2, z1, z2, Marker1);
-        line(x1, y1, x3, y3, z1, z3, Marker2);
-        line(x2, y2, x3, y3, z2, z3, Marker2);
-        min = glm::min(y1, y2);
-        max = glm::max(y1, y2);
+        line(x1, y1, x2, y2, z1, z2, fillCache1);
+        line(x1, y1, x3, y3, z1, z3, fillCache2);
+        line(x2, y2, x3, y3, z2, z3, fillCache2);
+        min = glm::max(0, glm::min(y1, y2));
+        max = glm::min(glm::max(y1, y2), viewport_height - 1);
     } else if ((a13 >= a12) && (a13 >= a23)) {
-        line(x1, y1, x3, y3, z1, z3, Marker1);
-        line(x1, y1, x2, y2, z1, z2, Marker2);
-        line(x2, y2, x3, y3, z2, z3, Marker2);
-        min = glm::min(y1, y3);
-        max = glm::max(y1, y3);
+        line(x1, y1, x3, y3, z1, z3, fillCache1);
+        line(x1, y1, x2, y2, z1, z2, fillCache2);
+        line(x2, y2, x3, y3, z2, z3, fillCache2);
+        min = glm::max(0, glm::min(y1, y3));
+        max = glm::min(glm::max(y1, y3), viewport_height - 1);
     } else if ((a23 >= a12) && (a23 >= a13)) {
-        line(x2, y2, x3, y3, z2, z3, Marker1);
-        line(x1, y1, x2, y2, z1, z2, Marker2);
-        line(x1, y1, x3, y3, z1, z3, Marker2);
-        min = glm::min(y2, y3);
-        max = glm::max(y2, y3);
+        line(x2, y2, x3, y3, z2, z3, fillCache1);
+        line(x1, y1, x2, y2, z1, z2, fillCache2);
+        line(x1, y1, x3, y3, z1, z3, fillCache2);
+        min = glm::max(0, glm::min(y2, y3));
+        max = glm::min(glm::max(y2, y3), viewport_height - 1);
     }
 
     //fill triangle
-    for (int y = glm::max(0, min); y < glm::min(viewport_height - 1, max); y++) {
-        line(fillCache1[y].first, y, fillCache2[y].first, y, fillCache1[y].second, fillCache2[y].second, Normal);
-    }
+    int a, x, y, mem, ymem;
+    double t1, t2;
+    glm::dvec3 z;
+    ymem = min * viewport_width;
+    for (y = min; y <= max; y++) {
+        x1 = fillCache1[y].first;
+        x2 = fillCache2[y].first;
+        z1 = fillCache1[y].second;
+        z2 = fillCache2[y].second;
 
-    //draw frames
-    line(x1, y1, x2, y2, z1, z2, Normal);
-    line(x1, y1, x3, y3, z1, z3, Normal);
-    line(x2, y2, x3, y3, z2, z3, Normal);
+        //Liang & Barsky clipping
+        t1 = 0;
+        t2 = 1;
+        x = x2 - x1;
+        if (test(-x, x1, t1, t2) && test(x, viewport_width - 1 - x1, t1, t2)) {
+
+            //clip line
+            z = z2 - z1;
+            if (t1 > 0) {
+                x1 += t1 * x;
+                z1 += t1 * z;
+            } else
+                t1 = 0;
+            if (t2 < 1) {
+                t2 -= t1;
+                x2 = x1 + t2 * x;
+                z2 = z1 + t2 * z;
+            }
+
+            //filling algorithm initialize
+            x = glm::abs(x2 - x1);
+            a = (x2 >= x1) ? 1 : -1;
+            z = (z2 - z1) / (double)x;
+            mem = x1 + ymem;
+            for (; x >= 0; x--) {
+
+                //write pixel into memory and depth test
+                if ((0 < z1.z) && (depthBuffer[mem] > z1.z)) {
+                    texture->setPixel(pixelBuffer, mem, z1.x, z1.y);
+                    depthBuffer[mem] = z1.z;
+                }
+
+                //interpolate
+                mem += a;
+                z1 += z;
+            }
+        }
+        ymem += viewport_width;
+    }
 }
 
 void srenderer::triangles(float* vertices, float* coords, int offset, int size) {

@@ -49,12 +49,22 @@ stexture::stexture(std::vector<texture*> anim, float alpha) {
  * @param alpha is amount of blending
  */
 stexture::stexture(Texture texture, float alpha) {
-
-    data = texture.data;
     twidth = texture.width;
     theight = texture.height;
     transparent = texture.hasAlpha;
     animated = false;
+
+    int index = 0;
+    int size = twidth * theight;
+    data = new Color[size];
+    for (int i = 0 ; i < size; i++) {
+        data[i].r = texture.data[index++];
+        data[i].g = texture.data[index++];
+        data[i].b = texture.data[index++];
+        if (transparent)
+            index++;
+    }
+    delete[] texture.data;
 }
 
 /**
@@ -96,21 +106,13 @@ void stexture::setPixel(Color* buffer, int mem, double s, double t) {
         s++;
     if (t < 0)
         t++;
-    int i, w, h;
-    unsigned char* d;
     if (currentFrame == -1) {
-        d = data;
-        i = transparent ? 4 : 3;
-        w = twidth;
-        h = theight;
+        s *= twidth - 1;
+        t *= theight - 1;
+        buffer[mem] = data[(int)s + (int)t * twidth];
     } else {
-        d = ((stexture*)anim[currentFrame])->data;
-        i = anim[currentFrame]->transparent ? 4 : 3;
-        w = anim[currentFrame]->twidth;
-        h = anim[currentFrame]->theight;
+        s *= anim[currentFrame]->twidth - 1;
+        t *= anim[currentFrame]->theight - 1;
+        buffer[mem] = ((stexture*)anim[currentFrame])->data[(int)s + (int)t * anim[currentFrame]->twidth];
     }
-    s *= w;
-    t *= h;
-    i *= ((int)s + (int)t * w);
-    buffer[mem] = {d[i + 0], d[i + 1], d[i + 2]};
 }

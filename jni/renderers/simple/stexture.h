@@ -26,7 +26,7 @@ public:
     unsigned int currentFrame;      ///< Current image
     unsigned int currentMultiFrame; ///< Replying frames state
     unsigned int multiFrame;        ///< Replying frames amount
-    unsigned char* data;            ///< Texture data
+    Color* data;                    ///< Texture data
 
 
     /**

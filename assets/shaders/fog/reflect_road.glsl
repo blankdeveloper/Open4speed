@@ -27,15 +27,19 @@ varying vec3 v_Normal;
 varying vec2 v_Coords;
 varying vec3 v_Sun;
 
+vec3 one = vec3(1.0, 1.0, 1.0);
+
 void main()
 {
   vec4 diffuse = texture2D(color_texture, v_Coords);
-  diffuse.rgb *= 1.1;
   
   //reflect
   vec3 N = v_Normal - 0.5 + 1.0 * diffuse.rgb;
   float y = 1.0 - gl_FragCoord.y * u_height + gl_FragCoord.z * 0.1 + gl_FragCoord.z * (0.9 - N.y);
-  gl_FragColor.rgb =  v_Normal.y *  diffuse.rgb + diffuse.a * 0.5 * texture2D(EnvMap1, vec2(gl_FragCoord.x * u_width, y)).rgb * gl_FragCoord.y * u_height;
+  gl_FragColor.rgb =  (1.2 - diffuse.a) * v_Normal.y *  diffuse.rgb + diffuse.a * texture2D(EnvMap1, vec2(gl_FragCoord.x * u_width, y)).rgb * gl_FragCoord.y * u_height;
   gl_FragColor.a = 1.0;
+  //fog
+  float d = clamp(-0.005 * v_Vertex.z, 0.0, 1.0);
+  gl_FragColor.rgb = 0.75 * one * d + (1.0 - d) * gl_FragColor.rgb;
 }
 END

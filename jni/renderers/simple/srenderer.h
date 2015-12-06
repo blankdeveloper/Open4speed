@@ -59,8 +59,6 @@ public:
       */
     bool line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z2, std::pair<int, glm::dvec3>* fillCache);
 
-    void triangle(int x1, int y1, int x2, int y2, int x3, int y3, glm::dvec3 z1, glm::dvec3 z2, glm::dvec3 z3);
-
     /**
      * @brief lookAt implements GLUlookAt
      * @param eye is eye vector

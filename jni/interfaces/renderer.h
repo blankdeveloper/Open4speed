@@ -16,20 +16,6 @@
 #include "interfaces/shader.h"
 #include "interfaces/texture.h"
 
-/**
- * @brief The Light struct
- */
-struct Light {
-    glm::vec4 u_light_diffuse;  ///< Diffuse light
-    float u_light_cut;          ///< Light cutoff
-    float u_light_spot_eff;     ///< Light spot effect
-    float u_near;               ///< Near clipping
-    glm::vec4 u_light;          ///< Light position
-    glm::vec4 u_light_att;      ///< Light attenuation
-    glm::vec4 u_light_dir;      ///< Light direction
-    glm::vec4 u_nearest1;       ///< Nearest light position
-};
-
 const int culling = 150;              ///< View culling distance in meters
 
 /**
@@ -40,7 +26,6 @@ public:
 
     float aliasing;             ///< Screen detail
     bool enable[10];            ///< Enabled filter
-    Light light;                ///< One light information
     glm::mat4x4 proj_matrix;    ///< Scene projection matrix
     glm::mat4x4 view_matrix;    ///< View matrix
     shader* scene_shader;       ///< Scene shader

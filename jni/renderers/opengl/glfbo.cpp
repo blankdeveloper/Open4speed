@@ -19,9 +19,6 @@
 #ifdef ANDROID
 #define PACKED_EXTENSION "GL_OES_packed_depth_stencil"
 #define PACKED_EXT GL_DEPTH24_STENCIL8_OES
-#else
-#define PACKED_EXTENSION "GL_EXT_packed_depth_stencil"
-#define PACKED_EXT GL_DEPTH24_STENCIL8_EXT
 #endif
 
 unsigned int* rboID = 0;          ///< Render buffer object id
@@ -79,6 +76,7 @@ glfbo::glfbo(int width, int height) {
         glGenRenderbuffers(2, rboID);
     }
     glBindRenderbuffer(GL_RENDERBUFFER, rboID[0]);
+#ifdef ANDROID
     char* extString = (char*)glGetString(GL_EXTENSIONS);
     if (strstr(extString, PACKED_EXTENSION) != 0)
     {
@@ -87,6 +85,7 @@ glfbo::glfbo(int width, int height) {
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
     }
     else
+#endif
     {
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width * aliasing, height * aliasing);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);

@@ -357,31 +357,37 @@ void gles20::renderShadow(model* m) {
     if (yp >= m->cutY)
         yp = m->cutY - 1;
 
-    /// set visibility shape
-    current = shadow;
-    current->bind();
-    current->uniformFloat("u_offset", 0.0f);
-    glColorMask(false, false, false, false);
     glDepthMask(false);
-    glEnable(GL_STENCIL_TEST);
-    glStencilMask(true);
-    glStencilFunc(GL_ALWAYS, 1, 255);
-    glStencilOp(GL_KEEP,GL_KEEP,GL_REPLACE);
-    for (unsigned int i = 0; i < m->models.size(); i++)
-        renderSubModel(m, &m->models[i]);
-
-    /// render shadow
-    current->uniformFloat("u_offset", 0.1f);
     glEnable(GL_BLEND);
+    glEnable(GL_STENCIL_TEST);
     glBlendFunc(GL_ONE, GL_ONE);
     glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
-    glColorMask(true, true, true, true);
-    glDepthFunc(GL_GEQUAL);;
-    glDepthMask(false);
-    glStencilFunc(GL_EQUAL, 1, 255);
-    glStencilOp(GL_KEEP,GL_KEEP,GL_ZERO);
-    for (unsigned int i = 0; i < m->models.size(); i++)
-        renderSubModel(m, &m->models[i]);
+    glStencilMask(true);
+    current = shadow;
+    current->bind();
+    current->uniformFloat4("u_sun_dir", -1.5f, -3.0f, 0.0f, 0.0f);
+    for (int pass = 1; pass <= 1; pass++) {
+        /// set visibility shape
+        current->uniformFloat("u_pass", pass * 0.05f);
+        current->uniformFloat("u_offset", 0.0f);
+        glColorMask(false, false, false, false);
+        glDepthFunc(GL_LEQUAL);
+        glStencilFunc(GL_ALWAYS, 0, 1);
+        glStencilOp(GL_KEEP,GL_KEEP,GL_ZERO);
+        for (unsigned int i = 0; i < m->models.size(); i++)
+            if (!m->models[i].filter)
+                renderSubModel(m, &m->models[i]);
+
+        /// render shadow
+        current->uniformFloat("u_offset", 0.5f);
+        glColorMask(true, true, true, true);
+        glDepthFunc(GL_GEQUAL);
+        glStencilFunc(GL_EQUAL, 0, 1);
+        glStencilOp(GL_KEEP,GL_KEEP, GL_INCR);
+        for (unsigned int i = 0; i < m->models.size(); i++)
+            if (!m->models[i].filter)
+                renderSubModel(m, &m->models[i]);
+    }
 
     /// set up previous state
     current->unbind();
@@ -465,16 +471,6 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         current->uniformFloat("u_brake", 1);
     else
         current->uniformFloat("u_brake", 0);
-
-    /// post light as uniform into shader
-    current->uniformFloat4("u_light_diffuse", light.u_light_diffuse.x, light.u_light_diffuse.y, light.u_light_diffuse.z, 1.0);
-    current->uniformFloat("u_light_cut", light.u_light_cut);
-    current->uniformFloat("u_light_near", light.u_near);
-    current->uniformFloat("u_light_spot_eff", light.u_light_spot_eff);
-    current->uniformFloat4("u_light", light.u_light.x, light.u_light.y, light.u_light.z, 1.0);
-    current->uniformFloat4("u_light_att", light.u_light_att.x, light.u_light_att.y, light.u_light_att.z, 1.0);
-    current->uniformFloat4("u_light_dir", light.u_light_dir.x, light.u_light_dir.y, light.u_light_dir.z, 1.0);
-    current->uniformFloat4("u_nearest1", light.u_nearest1.x, light.u_nearest1.y, light.u_nearest1.z, 1.0);
 
     /// standart vertices
     if (mod->cutX * mod->cutY == 1) {

@@ -1,5 +1,0 @@
-track_model #assets/tracks/room/room.o4s
-sky_model #assets/tracks/sky-winter.o4s
-shaders #assets/shaders/cartoon/
-player_car #assets/cars/02/params
-view_distance 5000

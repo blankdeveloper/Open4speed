@@ -120,24 +120,6 @@ void display(void) {
                       glm::vec3(cameraX + sin(direction) * 100.0f, cameraY, cameraZ + cos(direction) * 100.0f),
                       glm::vec3(0, 1, 0));
 
-    /// set light
-    xrenderer->light.u_light_diffuse = glm::vec4(1000.0, 1000.0, 900.0, 0);
-    xrenderer->light.u_light_cut = cos(60.0 * 3.14 / 180.0);
-    xrenderer->light.u_light_spot_eff = 5.0;
-    xrenderer->light.u_light_att = glm::vec4(5.0, 25.0, 125.0, 0);
-    xrenderer->light.u_light_dir = glm::vec4(0.0, 0.5, 1.0, 0);
-    xrenderer->pushMatrix();
-    float* mat = getCar(cameraCar)->transform[0].value;
-    glm::mat4x4 bulletMat = glm::mat4x4(mat[0], mat[1], mat[2], mat[3],
-                                        mat[4], mat[5], mat[6], mat[7],
-                                        mat[8], mat[9], mat[10], mat[11],
-                                        mat[12], mat[13], mat[14], mat[15]);
-    xrenderer->light.u_light = xrenderer->view_matrix * bulletMat * glm::vec4(0, getCar(cameraCar)->skin->aplitude * 0.5f,
-                                                                              getCar(cameraCar)->skin->height * 0.6f, 1);
-    xrenderer->light.u_light_dir = xrenderer->view_matrix * bulletMat * glm::vec4(0, getCar(cameraCar)->skin->aplitude * 3.0f,
-                                                                                  -getCar(cameraCar)->skin->height, 0);
-    xrenderer->popMatrix();
-
     /// render skydome
     xrenderer->pushMatrix();
     xrenderer->translate(cameraX, cameraY - 50, cameraZ);
@@ -644,7 +626,7 @@ int main(int argc, char** argv) {
     glutKeyboardUpFunc(keyboardUp);
 
     /// load data
-    loadScene("#assets/tracks/winter-day.o4scfg");
+    loadScene("#assets/tracks/winter-fog.o4scfg");
 
     /// start loop
     getPhysics()->locked = false;

@@ -369,92 +369,23 @@ bool srenderer::test(double p, double q, double &t1, double &t2) {
     return true;
 }
 
-void srenderer::triangle(int x1, int y1, int x2, int y2, int x3, int y3, glm::dvec3 z1, glm::dvec3 z2, glm::dvec3 z3) {
-    //create markers for filling
-    int a12 = glm::abs(y1 - y2);
-    int a13 = glm::abs(y1 - y3);
-    int a23 = glm::abs(y2 - y3);
-    int min, max;
-    if ((a12 >= a13) && (a12 >= a23)) {
-        line(x1, y1, x2, y2, z1, z2, fillCache1);
-        line(x1, y1, x3, y3, z1, z3, fillCache2);
-        line(x2, y2, x3, y3, z2, z3, fillCache2);
-        min = glm::max(0, glm::min(y1, y2));
-        max = glm::min(glm::max(y1, y2), viewport_height - 1);
-    } else if ((a13 >= a12) && (a13 >= a23)) {
-        line(x1, y1, x3, y3, z1, z3, fillCache1);
-        line(x1, y1, x2, y2, z1, z2, fillCache2);
-        line(x2, y2, x3, y3, z2, z3, fillCache2);
-        min = glm::max(0, glm::min(y1, y3));
-        max = glm::min(glm::max(y1, y3), viewport_height - 1);
-    } else if ((a23 >= a12) && (a23 >= a13)) {
-        line(x2, y2, x3, y3, z2, z3, fillCache1);
-        line(x1, y1, x2, y2, z1, z2, fillCache2);
-        line(x1, y1, x3, y3, z1, z3, fillCache2);
-        min = glm::max(0, glm::min(y2, y3));
-        max = glm::min(glm::max(y2, y3), viewport_height - 1);
-    }
-
-    //fill triangle
-    int a, x, y, mem, ymem;
-    double t1, t2;
-    glm::dvec3 z;
-    ymem = min * viewport_width;
-    for (y = min; y <= max; y++) {
-        x1 = fillCache1[y].first;
-        x2 = fillCache2[y].first;
-        z1 = fillCache1[y].second;
-        z2 = fillCache2[y].second;
-
-        //Liang & Barsky clipping
-        t1 = 0;
-        t2 = 1;
-        x = x2 - x1;
-        if (test(-x, x1, t1, t2) && test(x, viewport_width - 1 - x1, t1, t2)) {
-
-            //clip line
-            z = z2 - z1;
-            if (t1 > 0) {
-                x1 += t1 * x;
-                z1 += t1 * z;
-            } else
-                t1 = 0;
-            if (t2 < 1) {
-                t2 -= t1;
-                x2 = x1 + t2 * x;
-                z2 = z1 + t2 * z;
-            }
-
-            //filling algorithm initialize
-            x = glm::abs(x2 - x1);
-            a = (x2 >= x1) ? 1 : -1;
-            z = (z2 - z1) / (double)x;
-            mem = x1 + ymem;
-            for (; x >= 0; x--) {
-
-                //write pixel into memory and depth test
-                if ((0 < z1.z) && (depthBuffer[mem] > z1.z)) {
-                    texture->setPixel(pixelBuffer, mem, z1.x, z1.y);
-                    depthBuffer[mem] = z1.z;
-                }
-
-                //interpolate
-                mem += a;
-                z1 += z;
-            }
-        }
-        ymem += viewport_width;
-    }
-}
-
 void srenderer::triangles(float* vertices, float* coords, int offset, int size) {
     int v = offset * 9;
     int t = offset * 6;
+    int ab, ac, bc, step, x, x1, x2, y, min, mem, memy, max;
+    double t1, t2;
+    glm::vec4 a, b, c;
+    glm::dvec3 az, bz, cz, z, z1, z2;
+
     for (int i = offset; i < size; i++, v += 9, t += 6) {
+        //get vertices
+        a = glm::vec4(vertices[v + 0], vertices[v + 1], vertices[v + 2], 1.0f);
+        b = glm::vec4(vertices[v + 3], vertices[v + 4], vertices[v + 5], 1.0f);
+        c = glm::vec4(vertices[v + 6], vertices[v + 7], vertices[v + 8], 1.0f);
         //transfer into screen coordinates from -1 to 1
-        glm::vec4 a = matrix * glm::vec4(vertices[v + 0], vertices[v + 1], vertices[v + 2], 1.0f);
-        glm::vec4 b = matrix * glm::vec4(vertices[v + 3], vertices[v + 4], vertices[v + 5], 1.0f);
-        glm::vec4 c = matrix * glm::vec4(vertices[v + 6], vertices[v + 7], vertices[v + 8], 1.0f);
+        a = matrix * a;
+        b = matrix * b;
+        c = matrix * c;
         //scale into screen dimensions
         a.x = (a.x / fabs(a.w) + 1.0f) * 0.5f * viewport_width;
         a.y = (a.y / fabs(a.w) + 1.0f) * 0.5f * viewport_height;
@@ -463,11 +394,81 @@ void srenderer::triangles(float* vertices, float* coords, int offset, int size) 
         c.x = (c.x / fabs(c.w) + 1.0f) * 0.5f * viewport_width;
         c.y = (c.y / fabs(c.w) + 1.0f) * 0.5f * viewport_height;
         //get texture coordinates and depth for interpolation
-        glm::dvec3 az = glm::dvec3(coords[t + 0], coords[t + 1], a.z);
-        glm::dvec3 bz = glm::dvec3(coords[t + 2], coords[t + 3], b.z);
-        glm::dvec3 cz = glm::dvec3(coords[t + 4], coords[t + 5], c.z);
-        //render triangle
-        triangle(a.x, a.y, b.x, b.y, c.x, c.y, az, bz, cz);
+        az = glm::dvec3(coords[t + 0], coords[t + 1], a.z);
+        bz = glm::dvec3(coords[t + 2], coords[t + 3], b.z);
+        cz = glm::dvec3(coords[t + 4], coords[t + 5], c.z);
+
+        //create markers for filling
+        ab = glm::abs(a.y - b.y);
+        ac = glm::abs(a.y - c.y);
+        bc = glm::abs(b.y - c.y);
+        if ((ab >= ac) && (ab >= bc)) {
+            line(a.x, a.y, b.x, b.y, az, bz, fillCache1);
+            line(a.x, a.y, c.x, c.y, az, cz, fillCache2);
+            line(b.x, b.y, c.x, c.y, bz, cz, fillCache2);
+            min = glm::max(0.0f, glm::min(a.y, b.y));
+            max = glm::min(glm::max(a.y, b.y), viewport_height - 1.0f);
+        } else if ((ac >= ab) && (ac >= bc)) {
+            line(a.x, a.y, c.x, c.y, az, cz, fillCache1);
+            line(a.x, a.y, b.x, b.y, az, bz, fillCache2);
+            line(b.x, b.y, c.x, c.y, bz, cz, fillCache2);
+            min = glm::max(0.0f, glm::min(a.y, c.y));
+            max = glm::min(glm::max(a.y, c.y), viewport_height - 1.0f);
+        } else if ((bc >= ab) && (bc >= ac)) {
+            line(b.x, b.y, c.x, c.y, bz, cz, fillCache1);
+            line(a.x, a.y, b.x, b.y, az, bz, fillCache2);
+            line(a.x, a.y, c.x, c.y, az, cz, fillCache2);
+            min = glm::max(0.0f, glm::min(b.y, c.y));
+            max = glm::min(glm::max(b.y, c.y), viewport_height - 1.0f);
+        }
+
+        //fill triangle
+        memy = min * viewport_width;
+        for (y = min; y <= max; y++) {
+            x1 = fillCache1[y].first;
+            x2 = fillCache2[y].first;
+            z1 = fillCache1[y].second;
+            z2 = fillCache2[y].second;
+
+            //Liang & Barsky clipping
+            t1 = 0;
+            t2 = 1;
+            x = x2 - x1;
+            if (test(-x, x1, t1, t2) && test(x, viewport_width - 1 - x1, t1, t2)) {
+
+                //clip line
+                z = z2 - z1;
+                if (t1 > 0) {
+                    x1 += t1 * x;
+                    z1 += t1 * z;
+                } else
+                    t1 = 0;
+                if (t2 < 1) {
+                    t2 -= t1;
+                    x2 = x1 + t2 * x;
+                    z2 = z1 + t2 * z;
+                }
+
+                //filling algorithm initialize
+                x = glm::abs(x2 - x1);
+                step = (x2 >= x1) ? 1 : -1;
+                z = (z2 - z1) / (double)x;
+                mem = x1 + memy;
+                for (; x >= 0; x--) {
+
+                    //write pixel into memory and depth test
+                    if ((0 < z1.z) && (depthBuffer[mem] > z1.z)) {
+                        texture->setPixel(pixelBuffer, mem, z1.x, z1.y);
+                        depthBuffer[mem] = z1.z;
+                    }
+
+                    //interpolate
+                    mem += step;
+                    z1 += z;
+                }
+            }
+            memy += viewport_width;
+        }
     }
 }
 

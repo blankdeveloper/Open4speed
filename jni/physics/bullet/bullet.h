@@ -63,8 +63,9 @@ public:
     /**
      * @brief addModel adds model into physical model
      * @param m is 3D model for physical model
+     * @param center is model translation
      */
-    void addModel(model *m);
+    void addModel(model *m, glm::vec3 center);
 
     /**
      * @brief getTransform counts OpenGL matrix of transformation

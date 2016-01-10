@@ -44,6 +44,8 @@ model* water;                   ///< Water effect model
 Dynamic eff[effLen];            ///< 3D water effect object
 vbo* effectVBO[effLen];         ///< 3D water effect geometry
 
+std::vector<std::pair<model*, glm::vec3> > addedModels;
+
 /**
  * @brief display updates display
  */
@@ -124,12 +126,16 @@ void display(void) {
     xrenderer->pushMatrix();
     xrenderer->translate(cameraX, cameraY - 50, cameraZ);
     xrenderer->scale(viewDistance * 2 - 50);
-    xrenderer->renderModel(skydome);
+    xrenderer->renderModel(skydome, glm::vec3(0, 0, 0));
     xrenderer->popMatrix();
 
     /// render track
     xrenderer->enable[1] = false;
-    xrenderer->renderModel(trackdata);
+    xrenderer->renderModel(trackdata, glm::vec3(0, 0, 0));
+
+    for (int i = 0; i < addedModels.size(); i++) {
+        xrenderer->renderModel(addedModels[i].first, addedModels[i].second);
+    }
 
     /// render cars
     xrenderer->enable[2] = false;
@@ -144,7 +150,7 @@ void display(void) {
         xrenderer->multMatrix(getCar(i)->transform[0].value);
         xrenderer->enable[1] = getCar(i)->control->getNitro() && (getCar(i)->n2o > 1);
         xrenderer->enable[9] = getCar(i)->control->getBrake() != 0;
-        xrenderer->renderModel(getCar(i)->skin);
+        xrenderer->renderModel(getCar(i)->skin, glm::vec3(0, 0, 0));
         xrenderer->popMatrix();
 
         /// render wheels
@@ -153,7 +159,7 @@ void display(void) {
             xrenderer->multMatrix(getCar(i)->transform[j].value);
             if (j % 2 == 1)
               xrenderer->rotateY(180);
-            xrenderer->renderModel(getCar(i)->wheel);
+            xrenderer->renderModel(getCar(i)->wheel, glm::vec3(0, 0, 0));
             xrenderer->popMatrix();
         }
     }
@@ -164,7 +170,7 @@ void display(void) {
         ///render car skin
         xrenderer->pushMatrix();
         xrenderer->multMatrix(getCar(i)->transform[0].value);
-        xrenderer->renderShadow(getCar(i)->skin);
+        xrenderer->renderShadow(getCar(i)->skin, glm::vec3(0, 0, 0));
         xrenderer->popMatrix();
     }
 
@@ -282,6 +288,25 @@ void loadScene(std::string filename) {
         delete f;
     }
 
+    /// load special models
+    addedModels.clear();
+    int index = 0;
+    while(true) {
+        index++;
+        char key[128];
+        sprintf(key, "add%d_model", index);
+        std::string m = getConfigStr(key, atributes);
+        if(m.size() == 0)
+          break;
+        model* mod = getModel(m);
+        sprintf(key, "add%d_x", index);
+        float x = getConfig(key, atributes);
+        sprintf(key, "add%d_z", index);
+        float z = getConfig(key, atributes);
+        addedModels.push_back(std::pair<model*, glm::vec3>(mod, glm::vec3(x, 0, z)));
+        getPhysics()->addModel(mod, glm::vec3(x, 0, z));
+    }
+
     /// load sky
     skydome = getModel(p + getConfigStr("sky_model", atributes));
 
@@ -325,7 +350,7 @@ void loadScene(std::string filename) {
 
     /// create instance of physical engine
     physics* physic = getPhysics();
-    physic->addModel(trackdata);
+    physic->addModel(trackdata, glm::vec3(0, 0, 0));
     for (unsigned int i = 0; i < getCarCount(); i++)
         physic->addCar(getCar(i));
 
@@ -626,7 +651,7 @@ int main(int argc, char** argv) {
     glutKeyboardUpFunc(keyboardUp);
 
     /// load data
-    loadScene("#assets/tracks/winter-fog.o4scfg");
+    loadScene("#assets/tracks/hydro-day.o4scfg");
 
     /// start loop
     getPhysics()->locked = false;

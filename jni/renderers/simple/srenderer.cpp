@@ -98,10 +98,9 @@ void srenderer::clear() {
 /**
  * @brief renderModel renders model into scene
  * @param m is instance of model to render
- * @param physic is physical model instance
- * @param gamma is requested render gamma
+ * @param center is model translation
  */
-void srenderer::renderModel(model* m) {
+void srenderer::renderModel(model* m, glm::vec3 center) {
 
     /// set culling info positions
     float avd = viewDistance / 200.0f;
@@ -132,20 +131,21 @@ void srenderer::renderModel(model* m) {
     for (unsigned int i = 0; i < m->models.size(); i++) {
         if (!m->models[i].texture2D->transparent && !m->models[i].touchable)
             if (enable[m->models[i].filter])
-                renderSubModel(m, &m->models[i]);
+                renderSubModel(m, &m->models[i], center);
     }
     for (unsigned int i = 0; i < m->models.size(); i++) {
         if (m->models[i].texture2D->transparent && !m->models[i].touchable)
             if (enable[m->models[i].filter])
-                renderSubModel(m, &m->models[i]);
+                renderSubModel(m, &m->models[i], center);
     }
 }
 
 /**
  * @brief renderSubModel renders model into scene
  * @param m is instance of model to render
+ * @param center is model translation
  */
-void srenderer::renderSubModel(model* mod, model3d *m) {
+void srenderer::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
 
     /// set model matrix
     glm::mat4x4 modelView;
@@ -162,7 +162,7 @@ void srenderer::renderSubModel(model* mod, model3d *m) {
             1,0,0,0,
             0,1,0,0,
             0,0,1,0,
-            -w/2, -a/2, -h/2, 1
+            -w/2 + center.x, -a/2 + center.y, -h/2 + center.z, 1
         );
         glm::mat4x4 dynamic(
             mat[0],mat[1],mat[2],mat[3],
@@ -177,7 +177,7 @@ void srenderer::renderSubModel(model* mod, model3d *m) {
             1,0,0,0,
             0,1,0,0,
             0,0,1,0,
-            m->reg.min.x, m->reg.min.y, m->reg.min.z,1
+            m->reg.min.x + center.x, m->reg.min.y + center.y, m->reg.min.z + center.z, 1
         );
         modelMat = matrix_result * translation;
         modelView = view_matrix * modelMat;

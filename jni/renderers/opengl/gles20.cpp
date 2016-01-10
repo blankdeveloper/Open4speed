@@ -259,10 +259,9 @@ void gles20::renderDynamic(vbo *geom, shader* sh, texture* txt, int triangleCoun
 /**
  * @brief renderModel renders model into scene
  * @param m is instance of model to render
- * @param physic is physical model instance
- * @param gamma is requested render gamma
+ * @param center is model translation
  */
-void gles20::renderModel(model* m) {
+void gles20::renderModel(model* m, glm::vec3 center) {
 
     /// set culling info positions
     float avd = viewDistance / 200.0f;
@@ -292,32 +291,15 @@ void gles20::renderModel(model* m) {
 
     /// set opengl for rendering models
     for (unsigned int i = 0; i < m->models.size(); i++) {
-        current = m->models[i].material;
-        current->bind();
-        if (!m->models[i].texture2D->transparent && !m->models[i].touchable)
-            if (enable[m->models[i].filter]) {
-                glEnable(GL_CULL_FACE);
-                glCullFace(GL_BACK);
-                glDisable(GL_BLEND);
-                glDepthMask(true);
-                current->uniformFloat("u_Alpha", 1);
-                renderSubModel(m, &m->models[i]);
-            }
-        current->unbind();
-    }
-    for (unsigned int i = 0; i < m->models.size(); i++) {
-        current = m->models[i].material;
-        current->bind();
-        if (m->models[i].texture2D->transparent && !m->models[i].touchable)
-            if (enable[m->models[i].filter]) {
-                /// set alpha channel
-                glEnable(GL_BLEND);
-                glDepthMask(false);
+        if (enable[m->models[i].filter] && !m->models[i].touchable) {
+            current = m->models[i].material;
+            current->bind();
+            if (m->models[i].texture2D->transparent)
                 glDisable(GL_CULL_FACE);
-                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-                renderSubModel(m, &m->models[i]);
-            }
-        current->unbind();
+            renderSubModel(m, &m->models[i], center);
+            current->unbind();
+        }
+        glEnable(GL_CULL_FACE);
     }
 }
 
@@ -325,8 +307,9 @@ void gles20::renderModel(model* m) {
 /**
  * @brief renderShadow renders shadow of model into scene
  * @param m is instance of model to render
+ * @param center is model translation
  */
-void gles20::renderShadow(model* m) {
+void gles20::renderShadow(model* m, glm::vec3 center) {
 
     if (!rtt_fbo[oddFrame]->complete)
         return;
@@ -376,7 +359,7 @@ void gles20::renderShadow(model* m) {
         glStencilOp(GL_KEEP,GL_KEEP,GL_ZERO);
         for (unsigned int i = 0; i < m->models.size(); i++)
             if (!m->models[i].filter)
-                renderSubModel(m, &m->models[i]);
+                renderSubModel(m, &m->models[i], center);
 
         /// render shadow
         current->uniformFloat("u_offset", 0.5f);
@@ -386,7 +369,7 @@ void gles20::renderShadow(model* m) {
         glStencilOp(GL_KEEP,GL_KEEP, GL_INCR);
         for (unsigned int i = 0; i < m->models.size(); i++)
             if (!m->models[i].filter)
-                renderSubModel(m, &m->models[i]);
+                renderSubModel(m, &m->models[i], center);
     }
 
     /// set up previous state
@@ -402,8 +385,9 @@ void gles20::renderShadow(model* m) {
 /**
  * @brief renderSubModel renders model into scene
  * @param m is instance of model to render
+ * @param center is model translation
  */
-void gles20::renderSubModel(model* mod, model3d *m) {
+void gles20::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
 
     /// set model matrix
     glm::mat4x4 modelView;
@@ -420,7 +404,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
             1,0,0,0,
             0,1,0,0,
             0,0,1,0,
-            -w/2, -a/2, -h/2, 1
+            -w/2 + center.x, -a/2 + center.y, -h/2 + center.z, 1
         );
         glm::mat4x4 dynamic(
             mat[0],mat[1],mat[2],mat[3],
@@ -435,7 +419,7 @@ void gles20::renderSubModel(model* mod, model3d *m) {
             1,0,0,0,
             0,1,0,0,
             0,0,1,0,
-            m->reg.min.x, m->reg.min.y, m->reg.min.z,1
+            m->reg.min.x + center.x, m->reg.min.y + center.y, m->reg.min.z + center.z, 1
         );
         modelMat = matrix_result * translation;
         modelView = view_matrix * modelMat;

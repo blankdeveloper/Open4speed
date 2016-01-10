@@ -214,8 +214,9 @@ void bullet::addHeightmap(unsigned char* data, int res, glm::vec3 min, glm::vec3
 /**
  * @brief addModel adds model into physical model
  * @param m is 3D model for physical model
+ * @param center is model translation
  */
-void bullet::addModel(model *m) {
+void bullet::addModel(model *m, glm::vec3 center) {
     btTriangleMesh* mesh = 0;
     bool touchable = false;
     for (unsigned int i = 0; i < m->models.size(); i++) {
@@ -242,7 +243,9 @@ void bullet::addModel(model *m) {
             /// Set object default transform
             btTransform tr;
             tr.setIdentity();
-            tr.setOrigin(btVector3(m->models[i].reg.min.x+w/2, m->models[i].reg.min.y+a/2, m->models[i].reg.min.z+h/2));
+            tr.setOrigin(btVector3(m->models[i].reg.min.x + w / 2 + center.x,
+                                   m->models[i].reg.min.y + a / 2 + center.y,
+                                   m->models[i].reg.min.z + h / 2 + center.z));
 
             /// Create object
             body->setCenterOfMassTransform(tr);
@@ -262,7 +265,7 @@ void bullet::addModel(model *m) {
         } else if (m->models[i].touchable || !touchable) {
             if (mesh == 0)
                 mesh = new btTriangleMesh();
-            btVector3 o = btVector3(m->models[i].reg.min.x, m->models[i].reg.min.y, m->models[i].reg.min.z);
+            btVector3 o = btVector3(m->models[i].reg.min.x + center.x, m->models[i].reg.min.y + center.y, m->models[i].reg.min.z + center.z);
             for (int j = 0; j < m->models[i].triangleCount[m->cutX * m->cutY]; j++) {
                 btVector3 a = btVector3(m->models[i].vertices[j * 9 + 0], m->models[i].vertices[j * 9 + 1], m->models[i].vertices[j * 9 + 2]);
                 btVector3 b = btVector3(m->models[i].vertices[j * 9 + 3], m->models[i].vertices[j * 9 + 4], m->models[i].vertices[j * 9 + 5]);

@@ -263,32 +263,6 @@ void gles20::renderDynamic(vbo *geom, shader* sh, texture* txt, int triangleCoun
  */
 void gles20::renderModel(model* m, glm::vec3 center) {
 
-    /// set culling info positions
-    float avd = viewDistance / 200.0f;
-    xm = (camX - m->aabb.min.x) / culling;
-    xp = xm;
-    ym = (camZ - m->aabb.min.z) / culling;
-    yp = ym;
-    for (float view = direction - M_PI * 0.75f; view <= direction + M_PI * 0.75f; view += M_PI * 0.25f)
-    {
-        if (xp < (camX - m->aabb.min.x) / culling + sin(view) * avd)
-            xp = (camX - m->aabb.min.x) / culling + sin(view) * avd;
-        if (xm > (camX - m->aabb.min.x) / culling + sin(view) * avd)
-            xm = (camX - m->aabb.min.x) / culling + sin(view) * avd;
-        if (yp < (camZ - m->aabb.min.z) / culling + cos(view) * avd)
-            yp = (camZ - m->aabb.min.z) / culling + cos(view) * avd;
-        if (ym > (camZ - m->aabb.min.z) / culling + cos(view) * avd)
-            ym = (camZ - m->aabb.min.z) / culling + cos(view) * avd;
-    }
-    if (xm < 0)
-        xm = 0;
-    if (ym < 0)
-        ym = 0;
-    if (xp >= m->cutX)
-        xp = m->cutX - 1;
-    if (yp >= m->cutY)
-        yp = m->cutY - 1;
-
     /// set opengl for rendering models
     for (unsigned int i = 0; i < m->models.size(); i++) {
         if (enable[m->models[i].filter] && !m->models[i].touchable) {
@@ -313,32 +287,6 @@ void gles20::renderShadow(model* m, glm::vec3 center) {
 
     if (!rtt_fbo[oddFrame]->complete)
         return;
-
-    /// set culling info positions
-    float avd = viewDistance / 200.0f;
-    xm = (camX - m->aabb.min.x) / culling;
-    xp = xm;
-    ym = (camZ - m->aabb.min.z) / culling;
-    yp = ym;
-    for (float view = direction - M_PI * 0.75f; view <= direction + M_PI * 0.75f; view += M_PI * 0.25f)
-    {
-        if (xp < (camX - m->aabb.min.x) / culling + sin(view) * avd)
-            xp = (camX - m->aabb.min.x) / culling + sin(view) * avd;
-        if (xm > (camX - m->aabb.min.x) / culling + sin(view) * avd)
-            xm = (camX - m->aabb.min.x) / culling + sin(view) * avd;
-        if (yp < (camZ - m->aabb.min.z) / culling + cos(view) * avd)
-            yp = (camZ - m->aabb.min.z) / culling + cos(view) * avd;
-        if (ym > (camZ - m->aabb.min.z) / culling + cos(view) * avd)
-            ym = (camZ - m->aabb.min.z) / culling + cos(view) * avd;
-    }
-    if (xm < 0)
-        xm = 0;
-    if (ym < 0)
-        ym = 0;
-    if (xp >= m->cutX)
-        xp = m->cutX - 1;
-    if (yp >= m->cutY)
-        yp = m->cutY - 1;
 
     glDepthMask(false);
     glEnable(GL_BLEND);
@@ -456,40 +404,13 @@ void gles20::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
     else
         current->uniformFloat("u_brake", 0);
 
-    /// standart vertices
-    if (mod->cutX * mod->cutY == 1) {
 #ifdef USE_VBO
-        m->vboData->render(current, 0, m->triangleCount[mod->cutX * mod->cutY]);
+        m->vboData->render(current, 0, m->triangleCount);
 #else
         current->attrib(m->vertices, m->normals, m->coords);
-        glDrawArrays(GL_TRIANGLES, 0, m->triangleCount[mod->cutX * mod->cutY] * 3);
+        glDrawArrays(GL_TRIANGLES, 0, m->triangleCount * 3);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 #endif
-    }
-
-    /// culled vertices
-    else {
-        for (int i = ym; i <= yp; i++) {
-            int l = m->triangleCount[i * mod->cutX + xm];
-            int r = m->triangleCount[i * mod->cutX + xp + 1];
-#ifdef USE_VBO
-            m->vboData->render(current, l, r - l);
-#else
-            current->attrib(m->vertices, m->normals, m->coords);
-            glDrawArrays(GL_TRIANGLES, l * 3, (r - l) * 3);
-            glBindBuffer(GL_ARRAY_BUFFER, 0);
-#endif
-        }
-        int l = m->triangleCount[(mod->cutX - 1) * mod->cutY];
-        int r = m->triangleCount[mod->cutX * mod->cutY];
-#ifdef USE_VBO
-        m->vboData->render(current, l, r - l);
-#else
-        current->attrib(m->vertices, m->normals, m->coords);
-        glDrawArrays(GL_TRIANGLES, l * 3, (r - l) * 3);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-#endif
-    }
 }
 
 /**

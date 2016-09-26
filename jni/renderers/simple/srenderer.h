@@ -177,7 +177,6 @@ private:
     stexture* texture;
     unsigned int timestamp;
 
-    int xm, xp, ym, yp;                   ///< Current view frustum culling
     float camX;                           ///< Camera position x
     float camY;                           ///< Camera position y
     float camZ;                           ///< Camera position z

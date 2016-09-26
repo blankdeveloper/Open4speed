@@ -14,12 +14,6 @@ public class Vertex {
 		this.v = v;
 	}
 
-	public int getCell() {
-		int x = (int) ((v.x - Common.minx) / Common.cellSize);
-		int z = (int) ((v.z - Common.minz) / Common.cellSize);
-		return z * Common.cellWidth + x;
-	}
-	
 	// compressed values of point
 	String value() {
 		String output = "";

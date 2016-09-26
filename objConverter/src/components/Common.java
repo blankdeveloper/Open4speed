@@ -12,9 +12,6 @@ import geometry.Point3D;
 
 public class Common {
 
-	public static final int cellSize = 150;
-	public static int cellWidth;
-	public static int cellHeight;
 	public static int missingCoord = 0;
 	public static int missingNormal = 0;
 	public static String path;
@@ -59,7 +56,7 @@ public class Common {
 		String[] text = {
 				" ___________________________________________________________",
 				"|                                                           |",
-				"|            Open4speed by L.Vonásek OBJ converter          |",
+				"|            Open4speed by L.Vonasek OBJ converter          |",
 				"|___________________________________________________________|",
 				"usage:   java -jar ObjConverter.jar <input.obj> <xxx/yyy.o4s>",
 				"" };

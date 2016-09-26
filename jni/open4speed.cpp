@@ -199,7 +199,7 @@ void display(void) {
                     float x = getCar(i)->transform[j].value[12] + (rand() % 50 - 25) * 0.03f + sin(getCar(i)->rot * 3.14 / 180) * k * 0.03f;
                     float y = getCar(i)->transform[j].value[13] - 0.1f;
                     float z = getCar(i)->transform[j].value[14] + (rand() % 50 - 25) * 0.03f + cos(getCar(i)->rot * 3.14 / 180) * k * 0.03f;
-                    for (int l = 0; l < water->models[0].triangleCount[1] * 3; l++) {
+                    for (int l = 0; l < water->models[0].triangleCount * 3; l++) {
                         eff[currentFrame].vertices[eff[currentFrame].count * 3 + 0] = x;
                         eff[currentFrame].vertices[eff[currentFrame].count * 3 + 1] = y;
                         eff[currentFrame].vertices[eff[currentFrame].count * 3 + 2] = z;
@@ -651,7 +651,7 @@ int main(int argc, char** argv) {
     glutKeyboardUpFunc(keyboardUp);
 
     /// load data
-    loadScene("#assets/tracks/hydro-day.o4scfg");
+    loadScene("#assets/tracks/winter-day.o4scfg");
 
     /// start loop
     getPhysics()->locked = false;

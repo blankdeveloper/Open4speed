@@ -33,7 +33,7 @@ struct model3d {
     int dynamicID;      ///< ID of the last dynamic update
     bool hasShadow;     ///< Information that model casts shadow
     AABB reg;           ///< AABB of the object
-    int* triangleCount; ///< Amount of triangles
+    int triangleCount;  ///< Amount of triangles
     texture* texture2D; ///< Object texture
     float* vertices;    ///< Object vertices
     float* normals;     ///< Object normals
@@ -59,7 +59,6 @@ public:
      */
     model(std::string filename);
 
-    int cutX, cutY;                            ///< Size of SS Culling
     std::vector<model3d> models;               ///< Standard parts of model
     AABB aabb;                                 ///< Extremes of current model
     float width, aplitude, height;             ///< Dimensions of current model

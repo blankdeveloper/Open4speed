@@ -29,7 +29,6 @@
  */
 class gles20 : public renderer {
 public:
-    int xm, xp, ym, yp;                   ///< Current view frustum culling
     float camX;                           ///< Camera position x
     float camY;                           ///< Camera position y
     float camZ;                           ///< Camera position z

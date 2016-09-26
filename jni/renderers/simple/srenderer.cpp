@@ -102,32 +102,6 @@ void srenderer::clear() {
  */
 void srenderer::renderModel(model* m, glm::vec3 center) {
 
-    /// set culling info positions
-    float avd = viewDistance / 200.0f;
-    xm = (camX - m->aabb.min.x) / culling;
-    xp = xm;
-    ym = (camZ - m->aabb.min.z) / culling;
-    yp = ym;
-    for (float view = direction - M_PI * 0.75f; view <= direction + M_PI * 0.75f; view += M_PI * 0.25f)
-    {
-        if (xp < (camX - m->aabb.min.x) / culling + sin(view) * avd)
-            xp = (camX - m->aabb.min.x) / culling + sin(view) * avd;
-        if (xm > (camX - m->aabb.min.x) / culling + sin(view) * avd)
-            xm = (camX - m->aabb.min.x) / culling + sin(view) * avd;
-        if (yp < (camZ - m->aabb.min.z) / culling + cos(view) * avd)
-            yp = (camZ - m->aabb.min.z) / culling + cos(view) * avd;
-        if (ym > (camZ - m->aabb.min.z) / culling + cos(view) * avd)
-            ym = (camZ - m->aabb.min.z) / culling + cos(view) * avd;
-    }
-    if (xm < 0)
-        xm = 0;
-    if (ym < 0)
-        ym = 0;
-    if (xp >= m->cutX)
-        xp = m->cutX - 1;
-    if (yp >= m->cutY)
-        yp = m->cutY - 1;
-
     for (unsigned int i = 0; i < m->models.size(); i++) {
         if (!m->models[i].texture2D->transparent && !m->models[i].touchable)
             if (enable[m->models[i].filter])
@@ -194,21 +168,7 @@ void srenderer::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
     texture = (stexture*)(m->texture2D);
 
     /// standart vertices
-    if (mod->cutX * mod->cutY == 1) {
-        triangles(m->vertices, m->coords, 0, m->triangleCount[mod->cutX * mod->cutY]);
-    }
-
-    /// culled vertices
-    else {
-        for (int i = ym; i <= yp; i++) {
-            int l = m->triangleCount[i * mod->cutX + xm];
-            int r = m->triangleCount[i * mod->cutX + xp + 1];
-            triangles(m->vertices, m->coords, l, r);
-        }
-        int l = m->triangleCount[(mod->cutX - 1) * mod->cutY];
-        int r = m->triangleCount[mod->cutX * mod->cutY];
-        triangles(m->vertices, m->coords, l, r);
-    }
+    triangles(m->vertices, m->coords, 0, m->triangleCount);
 }
 
 /**

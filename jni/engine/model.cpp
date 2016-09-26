@@ -22,7 +22,6 @@ model::~model() {
         if (models[i].normals)
              delete[] models[i].normals;
         delete[] models[i].coords;
-        delete[] models[i].triangleCount;
     }
 }
 
@@ -36,8 +35,6 @@ model::model(std::string filename) {
     file* f = getFile(filename);
 
     /// get model dimensions
-    cutX = f->scandec();
-    cutY = f->scandec();
     char line[1024];
     f->gets(line);
     sscanf(line, "%f %f %f %f %f %f", &aabb.min.x, &aabb.min.y, &aabb.min.z, &aabb.max.x, &aabb.max.y, &aabb.max.z);
@@ -53,7 +50,6 @@ model::model(std::string filename) {
 
         /// set default value
         model3d m;
-        m.triangleCount = new int[cutX * cutY + 1];
         m.colora[3] = 1;
         m.colord[3] = 1;
         m.colors[3] = 1;
@@ -75,7 +71,7 @@ model::model(std::string filename) {
         m.z = m.reg.min.z;
 
         /// if texture is not only single color then load it
-        if (texturePath[0] != '*')
+        if((texturePath[0] != '*') && (texturePath[0] != '('))
             m.texture2D = getTexture(f->path() + texturePath);
         /// create color texture
         else
@@ -130,14 +126,12 @@ model::model(std::string filename) {
         }
 
         /// prepare model arrays
-        m.triangleCount[0] = 0;
+        m.triangleCount = f->scandec();
         m.vboData = 0;
-        for (int j = 1; j <= cutX * cutY; j++)
-            m.triangleCount[j] = f->scandec();
-        m.vertices = new float[m.triangleCount[cutX * cutY] * 9];
-        m.normals = new float[m.triangleCount[cutX * cutY] * 9];
-        m.coords = new float[m.triangleCount[cutX * cutY] * 6];
-        for (int j = 0; j < m.triangleCount[cutX * cutY]; j++) {
+        m.vertices = new float[m.triangleCount * 9];
+        m.normals = new float[m.triangleCount * 9];
+        m.coords = new float[m.triangleCount * 6];
+        for (int j = 0; j < m.triangleCount; j++) {
             /// read triangle parameters
             f->gets(line);
             sscanf(line, "%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f",
@@ -157,7 +151,7 @@ model::model(std::string filename) {
 #ifdef USE_VBO
         /// store model in VBO
         if (!m.touchable) {
-            int size = m.triangleCount[cutX * cutY] * 3;
+            int size = m.triangleCount * 3;
             if (!m.material->hasAttrib(1)) {
                 delete[] m.normals;
                 m.normals = 0;

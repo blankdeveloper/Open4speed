@@ -33,8 +33,6 @@ public class Writer {
 
     try {
       FileOutputStream fos = new FileOutputStream(args[1]);
-      fos.write((Common.cellWidth + "\n").getBytes());
-      fos.write((Common.cellHeight + "\n").getBytes());
 
       // save extreme values
       String extremes = Common.minx + " " + Common.miny + " "

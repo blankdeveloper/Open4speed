@@ -45,6 +45,8 @@ public:
      */
     void apply();
 
+    Color getPixel(double s, double t);
+
     /**
      * @brief setFrame set frame of animation
      * @param frame is index of frame

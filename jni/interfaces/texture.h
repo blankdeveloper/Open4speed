@@ -12,6 +12,11 @@
 
 #include <vector>
 
+// Struct for color of pixel r,g,b red, green, blue values
+struct Color {
+    unsigned char r,g,b,a;
+};
+
 struct Texture {
     int width;
     int height;
@@ -28,6 +33,7 @@ public:
     int twidth, theight;    ///< Image dimensions
     char texturename[256];  ///< Texture filename
     unsigned int textureID; ///< Texture id
+    Texture data;           ///< Texture data
 
 
     bool animated;                  ///< True if it is texture sequence
@@ -42,6 +48,8 @@ public:
      * @brief apply applies current texture
      */
     virtual void apply() = 0;
+
+    virtual Color getPixel(double s, double t) = 0;
 
     /**
      * @brief setFrame set frame of animation

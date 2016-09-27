@@ -13,11 +13,6 @@
 
 #include "interfaces/texture.h"
 
-// Struct for color of pixel r,g,b red, green, blue values
-struct Color {
-    unsigned char r,g,b,a;
-};
-
 class stexture : public texture {
 public:
 
@@ -50,6 +45,8 @@ public:
      * @brief apply applies current texture
      */
     void apply();
+
+    Color getPixel(double s, double t) { return Color(); }
 
     /**
      * @brief setFrame set frame of animation

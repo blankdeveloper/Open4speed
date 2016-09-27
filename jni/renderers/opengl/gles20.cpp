@@ -385,29 +385,36 @@ void gles20::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
     matrix = proj_matrix * modelView;
     current->uniformMatrix("u_Matrix",glm::value_ptr(matrix));
 
-    /// previous screen
-    glActiveTexture( GL_TEXTURE1 );
-    rtt_fbo[oddFrame]->bindTexture();
-    current->uniformInt("EnvMap1", 1);
+    if(mod->voxelised) {
+        current->attrib(m->vertices, m->normals, m->coords);
+        glPointSize(4);
+        glDrawArrays(GL_POINTS, 0, m->count);
+    } else {
 
-    /// set texture
-    glActiveTexture( GL_TEXTURE0 );
-    m->texture2D->apply();
-    current->uniformInt("color_texture", 0);
+        /// previous screen
+        glActiveTexture( GL_TEXTURE1 );
+        rtt_fbo[oddFrame]->bindTexture();
+        current->uniformInt("EnvMap1", 1);
 
-    /// set uniforms
-    current->uniformFloat("u_width", 1 / (float)screen_width / aliasing);
-    current->uniformFloat("u_height", 1 / (float)screen_height / aliasing);
-    current->uniformFloat4("u_kA", m->colora[0], m->colora[1], m->colora[2], 1);
-    current->uniformFloat4("u_kD", m->colord[0], m->colord[1], m->colord[2], 1);
-    current->uniformFloat4("u_kS", m->colors[0], m->colors[1], m->colors[2], 1);
-    if (enable[9])
-        current->uniformFloat("u_brake", 1);
-    else
-        current->uniformFloat("u_brake", 0);
+        /// set texture
+        glActiveTexture( GL_TEXTURE0 );
+        m->texture2D->apply();
+        current->uniformInt("color_texture", 0);
 
-    current->attrib(m->vertices, m->normals, m->coords);
-    glDrawArrays(GL_TRIANGLES, 0, m->triangleCount * 3);
+        /// set uniforms
+        current->uniformFloat("u_width", 1 / (float)screen_width / aliasing);
+        current->uniformFloat("u_height", 1 / (float)screen_height / aliasing);
+        current->uniformFloat4("u_kA", m->colora[0], m->colora[1], m->colora[2], 1);
+        current->uniformFloat4("u_kD", m->colord[0], m->colord[1], m->colord[2], 1);
+        current->uniformFloat4("u_kS", m->colors[0], m->colors[1], m->colors[2], 1);
+        if (enable[9])
+            current->uniformFloat("u_brake", 1);
+        else
+            current->uniformFloat("u_brake", 0);
+
+        current->attrib(m->vertices, m->normals, m->coords);
+        glDrawArrays(GL_TRIANGLES, 0, m->count * 3);
+    }
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 

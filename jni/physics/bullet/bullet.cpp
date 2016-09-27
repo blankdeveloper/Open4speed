@@ -256,7 +256,7 @@ void bullet::addModel(model *m, glm::vec3 center) {
             if (mesh == 0)
                 mesh = new btTriangleMesh();
             btVector3 o = btVector3(m->models[i].reg.min.x + center.x, m->models[i].reg.min.y + center.y, m->models[i].reg.min.z + center.z);
-            for (int j = 0; j < m->models[i].triangleCount; j++) {
+            for (int j = 0; j < m->models[i].count; j++) {
                 btVector3 a = btVector3(m->models[i].vertices[j * 9 + 0], m->models[i].vertices[j * 9 + 1], m->models[i].vertices[j * 9 + 2]);
                 btVector3 b = btVector3(m->models[i].vertices[j * 9 + 3], m->models[i].vertices[j * 9 + 4], m->models[i].vertices[j * 9 + 5]);
                 btVector3 c = btVector3(m->models[i].vertices[j * 9 + 6], m->models[i].vertices[j * 9 + 7], m->models[i].vertices[j * 9 + 8]);

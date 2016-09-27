@@ -15,9 +15,10 @@
  * @brief destruct removes texture from memory
  */
 gltexture::~gltexture() {
-    if (!animated)
+    if (!animated) {
+        delete[] data.data;
         glDeleteTextures(1, &textureID);
-    else
+    } else
         for (int i = anim.size() - 1; i >= 0; i--)
             delete anim[i];
 }
@@ -50,6 +51,7 @@ gltexture::gltexture(std::vector<texture*> anim) {
 gltexture::gltexture(Texture texture) {
 
     /// create texture
+    data = texture;
     glGenTextures(1, &this->textureID);
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, this->textureID);
@@ -74,8 +76,6 @@ gltexture::gltexture(Texture texture) {
     theight = texture.height;
     transparent = texture.hasAlpha;
     animated = false;
-
-    delete[] texture.data;
 }
 
 /**
@@ -97,6 +97,22 @@ void gltexture::apply() {
     } else {
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, textureID);
+    }
+}
+
+Color gltexture::getPixel(double s, double t) {
+    if (animated)
+      return anim[currentFrame]->getPixel(s, t);
+    else {
+        s -= (int)s;
+        t -= (int)t;
+        if (s < 0)
+            s++;
+        if (t < 0)
+            t++;
+        s *= twidth - 1;
+        t *= theight - 1;
+        return ((Color*)data.data)[(int)s + (int)t * twidth];
     }
 }
 

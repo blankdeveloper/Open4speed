@@ -34,8 +34,6 @@ srenderer::srenderer() {
     mode3D = 0;
     depthBuffer = 0;
     pixelBuffer = 0;
-    fillCache1 = 0;
-    fillCache2 = 0;
 }
 
 /**
@@ -53,14 +51,8 @@ void srenderer::init(int width, int height) {
         delete[] depthBuffer;
     if(pixelBuffer)
         delete[] pixelBuffer;
-    if(fillCache1)
-        delete[] fillCache1;
-    if(fillCache2)
-        delete[] fillCache2;
     depthBuffer = new double[width * height + 1];
     pixelBuffer = new Color[width * height + 1];
-    fillCache1 = new std::pair<int, glm::dvec3>[height + 1];
-    fillCache2 = new std::pair<int, glm::dvec3>[height + 1];
     clear();
 }
 
@@ -72,14 +64,8 @@ srenderer::~srenderer() {
       delete[] depthBuffer;
   if(pixelBuffer)
       delete[] pixelBuffer;
-  if(fillCache1)
-      delete[] fillCache1;
-  if(fillCache2)
-      delete[] fillCache2;
   depthBuffer = 0;
   pixelBuffer = 0;
-  fillCache1 = 0;
-  fillCache2 = 0;
 }
 
 /**
@@ -166,7 +152,7 @@ void srenderer::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
     texture = (stexture*)(m->texture2D);
 
     /// standart vertices
-    triangles(m->vertices, m->coords, 0, m->triangleCount);
+    triangles(m->vertices, m->coords, 0, m->count);
 }
 
 /**
@@ -207,6 +193,7 @@ bool srenderer::line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z
     double t1 = 0, t2 = 1;
     if (test(-h, y1, t1, t2) && test(h, viewport_height - 1 - y1, t1, t2) ) {
         glm::dvec3 z;
+        std::pair<int, glm::dvec3> v;
         int c0, c1, xp0, xp1, yp0, yp1, y, p, w;
         bool wp, hp;
 
@@ -268,8 +255,9 @@ bool srenderer::line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z
         p = c0 - w;
         c1 = p - w;
         y = y1;
-        fillCache[y].first = x1;
-        fillCache[y].second = z1;
+        v.first = x1;
+        v.second = z1;
+        fillCache[y] = v;
         for (w--; w >= 0; w--) {
 
             //interpolate
@@ -287,8 +275,9 @@ bool srenderer::line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z
             //write cache info
             if (wp || (y != y1)) {
                 y = y1;
-                fillCache[y].first = x1;
-                fillCache[y].second = z1;
+                v.first = x1;
+                v.second = z1;
+                fillCache[y] = v;
             }
         }
         return true;
@@ -335,6 +324,9 @@ void srenderer::triangles(float* vertices, float* coords, int offset, int size) 
     double t1, t2;
     glm::vec4 a, b, c;
     glm::dvec3 az, bz, cz, z, z1, z2;
+
+    std::pair<int, glm::dvec3> fillCache1[viewport_height + 1];
+    std::pair<int, glm::dvec3> fillCache2[viewport_height + 1];
 
     for (int i = offset; i < size; i++, v += 9, t += 6) {
         //get vertices

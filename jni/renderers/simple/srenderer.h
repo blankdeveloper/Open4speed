@@ -43,17 +43,6 @@ public:
     void clear();
 
     /**
-      * @brief line makes markers for filling triangle
-      * @param x1 is line start position x
-      * @param y1 is line start position y
-      * @param x2 is line end position x
-      * @param y2 is line end position y
-      * @param fillCache is cache to be used
-      * @return true if line was processed
-      */
-    bool line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z2, std::pair<int, glm::dvec3>* fillCache);
-
-    /**
      * @brief lookAt implements GLUlookAt
      * @param eye is eye vector
      * @param center is camera center
@@ -156,6 +145,17 @@ public:
 private:
 
     /**
+      * @brief line makes markers for filling triangle
+      * @param x1 is line start position x
+      * @param y1 is line start position y
+      * @param x2 is line end position x
+      * @param y2 is line end position y
+      * @param fillCache is cache to be used
+      * @return true if line was processed
+      */
+    bool line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z2, std::pair<int, glm::dvec3>* fillCache);
+
+    /**
      * @brief test is Liang & Barsky clipping
      */
     bool test(double p, double q, double &t1, double &t2);
@@ -166,8 +166,6 @@ private:
     int viewport_width, viewport_height;
     double* depthBuffer;
     Color* pixelBuffer;
-    std::pair<int, glm::dvec3>* fillCache1;
-    std::pair<int, glm::dvec3>* fillCache2;
     stexture* texture;
     unsigned int timestamp;
 

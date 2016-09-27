@@ -29,6 +29,8 @@ stexture::stexture(std::vector<texture*> anim) {
     this->anim = anim;
     transparent = true;
     animated = true;
+    twidth = 0;
+    theight = 0;
 
     /// set animation speed
     multiFrame = anim.size() / 50;
@@ -58,8 +60,9 @@ stexture::stexture(Texture texture) {
         data[i].r = texture.data[index++];
         data[i].g = texture.data[index++];
         data[i].b = texture.data[index++];
+        data[i].a = 255;
         if (transparent)
-            index++;
+            data[i].a = texture.data[index++];
     }
     delete[] texture.data;
 }
@@ -96,7 +99,7 @@ void stexture::setFrame(int frame) {
  * @param s is position x in texture
  * @param t is position y in texture
  */
-void stexture::setPixel(Color* buffer, int mem, double s, double t) {
+bool stexture::setPixel(Color* buffer, int mem, double s, double t) {
     s -= (int)s;
     t -= (int)t;
     if (s < 0)
@@ -106,10 +109,11 @@ void stexture::setPixel(Color* buffer, int mem, double s, double t) {
     if (currentFrame == -1) {
         s *= twidth - 1;
         t *= theight - 1;
-        buffer[mem] = data[(int)s + (int)t * twidth];
-    } else {
-        s *= anim[currentFrame]->twidth - 1;
-        t *= anim[currentFrame]->theight - 1;
-        buffer[mem] = ((stexture*)anim[currentFrame])->data[(int)s + (int)t * anim[currentFrame]->twidth];
+        Color c = data[(int)s + (int)t * twidth];
+        if((int)c.a > 0) {
+          buffer[mem] = c;
+          return true;
+        }
     }
+    return false;
 }

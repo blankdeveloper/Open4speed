@@ -32,8 +32,6 @@ srenderer::srenderer() {
     camZ = 0;
     direction = 0;
     mode3D = 0;
-    viewDistance = 1000;
-
     depthBuffer = 0;
     pixelBuffer = 0;
     fillCache1 = 0;
@@ -90,7 +88,7 @@ srenderer::~srenderer() {
 void srenderer::clear() {
     //clear arrays
     for (int i = 0; i < viewport_width * viewport_height + 1; i++) {
-        depthBuffer[i] = viewDistance;
+        depthBuffer[i] = 9999999999999999;
         //pixelBuffer[i] = black;
     }
 }
@@ -157,6 +155,11 @@ void srenderer::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
         modelView = view_matrix * modelMat;
     }
     matrix = proj_matrix * modelView;
+    //ortho mode
+    float w = 38.4f;
+    float h = 25.6f;
+    glm::mat4 ortho = glm::ortho(-w, w, -h, h);
+    matrix = ortho * modelView;
 
     // apply texture
     m->texture2D->apply();
@@ -179,7 +182,8 @@ void srenderer::rtt(bool enable) {
         return;
     }
     glDisable(GL_DEPTH_TEST);
-    glDrawPixels( viewport_width, viewport_height, GL_RGB, GL_UNSIGNED_BYTE, getBuffer() );
+    if(pixelBuffer)
+      glDrawPixels( viewport_width, viewport_height, GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char*)pixelBuffer );
     printf("Software rendering: %dms\n", (unsigned int)(tv.tv_sec * 1000 + tv.tv_usec / 1000) - timestamp);
 }
 
@@ -412,10 +416,9 @@ void srenderer::triangles(float* vertices, float* coords, int offset, int size) 
                 for (; x >= 0; x--) {
 
                     //write pixel into memory and depth test
-                    if ((0 < z1.z) && (depthBuffer[mem] > z1.z)) {
-                        texture->setPixel(pixelBuffer, mem, z1.x, z1.y);
-                        depthBuffer[mem] = z1.z;
-                    }
+                    if ((0 < z1.z) && (depthBuffer[mem] > z1.z))
+                        if(texture->setPixel(pixelBuffer, mem, z1.x, z1.y))
+                            depthBuffer[mem] = z1.z;
 
                     //interpolate
                     mem += step;
@@ -459,7 +462,6 @@ void srenderer::perspective(float fovy, float aspect, float zNear, float zFar) {
         matrixBuffer.pop();
     }
     proj_matrix = glm::perspective((float)(fovy * M_PI / 180.0f), aspect, zNear,zFar);
-    viewDistance = zFar;
 }
 
 /**

@@ -15,7 +15,7 @@
 
 // Struct for color of pixel r,g,b red, green, blue values
 struct Color {
-    unsigned char r,g,b;
+    unsigned char r,g,b,a;
 };
 
 class stexture : public texture {
@@ -64,7 +64,7 @@ public:
      * @param s is position x in texture
      * @param t is position y in texture
      */
-    void setPixel(Color* buffer, int mem, double s, double t);
+    bool setPixel(Color* buffer, int mem, double s, double t);
 };
 
 #endif // stexture_H

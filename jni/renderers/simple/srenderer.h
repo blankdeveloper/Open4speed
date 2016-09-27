@@ -43,12 +43,6 @@ public:
     void clear();
 
     /**
-     * @brief getBuffer gets pixel buffer
-     * @return pointer to pixel buffer
-     */
-    unsigned char* getBuffer() { return (unsigned char*)pixelBuffer; }
-
-    /**
       * @brief line makes markers for filling triangle
       * @param x1 is line start position x
       * @param y1 is line start position y
@@ -185,8 +179,6 @@ private:
     glm::mat4x4 modelMat;                 ///< Model matrix
     glm::mat4x4 matrix_result;            ///< Temp matrix for calculations
     std::stack<glm::mat4x4> matrixBuffer; ///< Matrix stack
-    float viewDistance;                   ///< Camera far culling
-
 };
 
 #endif // SIMPLE_H

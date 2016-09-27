@@ -41,8 +41,6 @@ model *trackdata;               ///< Track first model
 model* water;                   ///< Water effect model
 Dynamic eff[effLen];            ///< 3D water effect object
 
-std::vector<std::pair<model*, glm::vec3> > addedModels;
-
 /**
  * @brief display updates display
  */
@@ -101,12 +99,17 @@ void display(void) {
     float cameraX = getCar(cameraCar)->transform->value[12];
     float cameraY = getCar(cameraCar)->transform->value[13];
     float cameraZ = getCar(cameraCar)->transform->value[14];
+    //need for speed style
     cameraX -= sin(d) * getCar(cameraCar)->control->getDistance() * 2.5f / (view / 90);
     cameraY += fmax(1.0, getCar(cameraCar)->control->getDistance()) / (view / 90);
     cameraZ -= cos(d) * getCar(cameraCar)->control->getDistance() * 2.5f / (view / 90);
     xrenderer->lookAt(glm::vec3(cameraX - sin(d) * 0.1f, cameraY + 0.5f, cameraZ - cos(d) * 0.1f),
                       glm::vec3(cameraX + sin(direction) * 100.0f, cameraY, cameraZ + cos(direction) * 100.0f),
                       glm::vec3(0, 1, 0));
+    //gta style
+    /*xrenderer->lookAt(glm::vec3(cameraX, cameraY + 10.0f, cameraZ),
+                      glm::vec3(cameraX, cameraY, cameraZ),
+                      glm::vec3(0, 0, 1));*/
 
     /// render skydome
     xrenderer->pushMatrix();
@@ -118,10 +121,6 @@ void display(void) {
     /// render track
     xrenderer->enable[1] = false;
     xrenderer->renderModel(trackdata, glm::vec3(0, 0, 0));
-
-    for (int i = 0; i < addedModels.size(); i++) {
-        xrenderer->renderModel(addedModels[i].first, addedModels[i].second);
-    }
 
     /// render cars
     xrenderer->enable[2] = false;
@@ -268,34 +267,11 @@ void loadScene(std::string filename) {
         delete f;
     }
 
-    /// load special models
-    addedModels.clear();
-    int index = 0;
-    while(true) {
-        index++;
-        char key[128];
-        sprintf(key, "add%d_model", index);
-        std::string m = getConfigStr(key, atributes);
-        if(m.size() == 0)
-          break;
-        model* mod = getModel(m);
-        sprintf(key, "add%d_x", index);
-        float x = getConfig(key, atributes);
-        sprintf(key, "add%d_z", index);
-        float z = getConfig(key, atributes);
-        addedModels.push_back(std::pair<model*, glm::vec3>(mod, glm::vec3(x, 0, z)));
-        getPhysics()->addModel(mod, glm::vec3(x, 0, z));
-    }
-
     /// load sky
     skydome = getModel(p + getConfigStr("sky_model", atributes));
 
     /// load player car
-#ifdef VR
-    addCar(new car(new airacer(), &e, getConfigStr("player_car", atributes))); //autopilot just for testing
-#else
     addCar(new car(getInput(), &e, p + getConfigStr("player_car", atributes)));
-#endif
 
     /// load race informations
     getCar(0)->lapsToGo = getConfig("laps", atributes);

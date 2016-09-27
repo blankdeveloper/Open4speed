@@ -165,7 +165,7 @@ private:
     // rendering
     int viewport_width, viewport_height;
     double* depthBuffer;
-    Color* pixelBuffer;
+    ColorRGBA* pixelBuffer;
     stexture* texture;
     unsigned int timestamp;
 

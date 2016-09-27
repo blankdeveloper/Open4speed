@@ -16,7 +16,7 @@
 #include "renderers/opengl/gles20.h"//just for RTT method
 #include "renderers/simple/srenderer.h"
 
-Color black = {0,0,0};
+ColorRGBA black = {0,0,0};
 
 /**
  * @brief simple constructor
@@ -52,7 +52,7 @@ void srenderer::init(int width, int height) {
     if(pixelBuffer)
         delete[] pixelBuffer;
     depthBuffer = new double[width * height + 1];
-    pixelBuffer = new Color[width * height + 1];
+    pixelBuffer = new ColorRGBA[width * height + 1];
     clear();
 }
 

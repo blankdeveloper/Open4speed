@@ -21,6 +21,8 @@ public:
     unsigned int currentFrame;      ///< Current image
     unsigned int currentMultiFrame; ///< Replying frames state
     unsigned int multiFrame;        ///< Replying frames amount
+    ColorRGB* dataRGB;              ///< Texture data
+    ColorRGBA* dataRGBA;            ///< Texture data
 
 
     /**
@@ -45,7 +47,7 @@ public:
      */
     void apply();
 
-    Color getPixel(double s, double t);
+    ColorRGBA getPixel(double s, double t);
 
     /**
      * @brief setFrame set frame of animation

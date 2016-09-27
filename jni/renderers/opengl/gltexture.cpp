@@ -16,7 +16,10 @@
  */
 gltexture::~gltexture() {
     if (!animated) {
-        delete[] data.data;
+        if (transparent)
+            delete[] dataRGBA;
+        else
+            delete[] dataRGB;
         glDeleteTextures(1, &textureID);
     } else
         for (int i = anim.size() - 1; i >= 0; i--)
@@ -51,7 +54,6 @@ gltexture::gltexture(std::vector<texture*> anim) {
 gltexture::gltexture(Texture texture) {
 
     /// create texture
-    data = texture;
     glGenTextures(1, &this->textureID);
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, this->textureID);
@@ -67,8 +69,10 @@ gltexture::gltexture(Texture texture) {
     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
     if (texture.hasAlpha) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture.width, texture.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture.data);
+        dataRGBA = (ColorRGBA*)texture.data;
     } else {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture.width, texture.height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture.data);
+        dataRGB = (ColorRGB*)texture.data;
     }
     glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -100,7 +104,7 @@ void gltexture::apply() {
     }
 }
 
-Color gltexture::getPixel(double s, double t) {
+ColorRGBA gltexture::getPixel(double s, double t) {
     if (animated)
       return anim[currentFrame]->getPixel(s, t);
     else {
@@ -112,7 +116,13 @@ Color gltexture::getPixel(double s, double t) {
             t++;
         s *= twidth - 1;
         t *= theight - 1;
-        return ((Color*)data.data)[(int)s + (int)t * twidth];
+        if (transparent)
+          return dataRGBA[(int)s + (int)t * twidth];
+        else {
+          ColorRGB c = dataRGB[(int)s + (int)t * twidth];
+          ColorRGBA rgba = {c.r, c.g, c.b, 255};
+          return rgba;
+        }
     }
 }
 

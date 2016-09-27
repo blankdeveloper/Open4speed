@@ -21,7 +21,7 @@ public:
     unsigned int currentFrame;      ///< Current image
     unsigned int currentMultiFrame; ///< Replying frames state
     unsigned int multiFrame;        ///< Replying frames amount
-    Color* data;                    ///< Texture data
+    ColorRGBA* data;                    ///< Texture data
 
 
     /**
@@ -46,7 +46,7 @@ public:
      */
     void apply();
 
-    Color getPixel(double s, double t) { return Color(); }
+    ColorRGBA getPixel(double s, double t) { return ColorRGBA(); }
 
     /**
      * @brief setFrame set frame of animation
@@ -61,7 +61,7 @@ public:
      * @param s is position x in texture
      * @param t is position y in texture
      */
-    bool setPixel(Color* buffer, int mem, double s, double t);
+    bool setPixel(ColorRGBA* buffer, int mem, double s, double t);
 };
 
 #endif // stexture_H

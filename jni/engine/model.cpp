@@ -18,8 +18,9 @@ model::~model() {
     for (unsigned int i = 0; i < models.size(); i++) {
         delete[] models[i].vertices;
         if (models[i].normals)
-             delete[] models[i].normals;
-        delete[] models[i].coords;
+            delete[] models[i].normals;
+        if (models[i].coords)
+            delete[] models[i].coords;
     }
 }
 
@@ -161,6 +162,7 @@ model::model(std::string filename) {
   */
 void model::line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z2, std::pair<int, glm::dvec3>* fillCache) {
 
+    int o = aabb.min.z + 1;
     glm::dvec3 z;
     std::pair<int, glm::dvec3> v;
     int c0, c1, xp0, xp1, yp0, yp1, y, p, w, h;
@@ -208,7 +210,7 @@ void model::line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z2, s
     y = y1;
     v.first = x1;
     v.second = z1;
-    fillCache[y] = v;
+    fillCache[y - o] = v;
     for (w--; w >= 0; w--) {
 
         //interpolate
@@ -228,7 +230,7 @@ void model::line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z2, s
             y = y1;
             v.first = x1;
             v.second = z1;
-            fillCache[y] = v;
+            fillCache[y - o] = v;
         }
     }
 }
@@ -236,13 +238,15 @@ void model::line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z2, s
 void model::triangles(model3d* m) {
     int v = 0;
     int t = 0;
-    int ab, ac, bc, step, x, x1, x2, y, min, mem, memy, max;
+    int o = aabb.min.z + 1;
+    int ab, ac, bc, step, x, x1, x2, y, min, mem, max;
     glm::vec4 a, b, c;
     glm::dvec3 az, bz, cz, z, z1, z2;
 
-    //TODO:model dimension
     std::pair<int, glm::dvec3> fillCache1[(int)height + 1];
     std::pair<int, glm::dvec3> fillCache2[(int)height + 1];
+    std::vector<float> vertices;
+    std::vector<float> colors;
 
     for (int i = 0; i < m->count; i++, v += 9, t += 6) {
         //get vertices
@@ -279,36 +283,62 @@ void model::triangles(model3d* m) {
         }
 
         //fill triangle
-        memy = min;
         for (y = min; y <= max; y++) {
-            x1 = fillCache1[y].first;
-            x2 = fillCache2[y].first;
-            z1 = fillCache1[y].second;
-            z2 = fillCache2[y].second;
+            x1 = fillCache1[y - o].first;
+            x2 = fillCache2[y - o].first;
+            z1 = fillCache1[y - o].second;
+            z2 = fillCache2[y - o].second;
 
             //filling algorithm initialize
-            x = glm::abs(x2 - x1);
+            x = x1;
             step = (x2 >= x1) ? 1 : -1;
-            z = (z2 - z1) / (double)x;
-            mem = x1 + memy;
-            for (; x >= 0; x--) {
+            z = (z2 - z1) / (double)glm::abs(x2 - x1);
+            mem = glm::abs(x2 - x1);
+            for (; mem >= 0; mem--) {
 
                 //write pixel into memory
-                Color c = m->texture2D->getPixel(z1.x, z1.y);
-                //TODO:output
+                //Color c = {128, 128, 128, 255};
+                ColorRGBA c = m->texture2D->getPixel(z1.x, z1.y);
+                if(c.a > 128) {
+                    for(min = (int)z1.z; min < (int)(z1.z + z.z); min++) {
+                        vertices.push_back(x);
+                        vertices.push_back(y);
+                        vertices.push_back(min);
+                        colors.push_back(c.r / 255.0f);
+                        colors.push_back(c.g / 255.0f);
+                        colors.push_back(c.b / 255.0f);
+                    }
+                }
 
                 //interpolate
-                mem += step;
+                x += step;
                 z1 += z;
             }
-            memy++;
         }
     }
+
+    //import into model
+    delete[] m->vertices;
+    if (m->normals)
+        delete[] m->normals;
+    if(m->coords)
+      delete[] m->coords;
+    m->coords = 0;
+    m->material = getShader("voxel");
+    m->vertices = new float[vertices.size()];
+    m->normals = new float[vertices.size()];
+    m->count = vertices.size() / 3;
+    for(unsigned int i = 0; i < vertices.size(); i++) {
+      m->vertices[i] = vertices[i];
+      m->normals[i] = colors[i];
+    }
+    printf("Converted %d voxels\n", vertices.size() / 3);
+    //m->count *= 3;
+    //m->material = getShader("voxel");
 }
 
 void model::voxelise() {
-    //TODO:process
     for (unsigned int i = 0; i < models.size(); i++)
-      models[i].count *= 3;
+        triangles(&models[i]);
     voxelised = true;
 }

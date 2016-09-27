@@ -55,7 +55,7 @@ stexture::stexture(Texture texture) {
 
     int index = 0;
     int size = twidth * theight;
-    data = new Color[size];
+    data = new ColorRGBA[size];
     for (int i = 0 ; i < size; i++) {
         data[i].r = texture.data[index++];
         data[i].g = texture.data[index++];
@@ -99,7 +99,7 @@ void stexture::setFrame(int frame) {
  * @param s is position x in texture
  * @param t is position y in texture
  */
-bool stexture::setPixel(Color* buffer, int mem, double s, double t) {
+bool stexture::setPixel(ColorRGBA* buffer, int mem, double s, double t) {
     s -= (int)s;
     t -= (int)t;
     if (s < 0)
@@ -109,7 +109,7 @@ bool stexture::setPixel(Color* buffer, int mem, double s, double t) {
     if (currentFrame == -1) {
         s *= twidth - 1;
         t *= theight - 1;
-        Color c = data[(int)s + (int)t * twidth];
+        ColorRGBA c = data[(int)s + (int)t * twidth];
         if((int)c.a > 0) {
           buffer[mem] = c;
           return true;

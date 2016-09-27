@@ -22,7 +22,6 @@
 #include "interfaces/renderer.h"
 #include "interfaces/shader.h"
 #include "interfaces/texture.h"
-#include "interfaces/vbo.h"
 
 void clearMediaStorage();
 
@@ -100,15 +99,6 @@ texture* getTexture(std::string filename);
  * @return texture instance
  */
 texture* getTexture(float r, float g, float b);
-
-/**
- * @brief glvbo creates VBO from data
- * @param size is amount of vertices
- * @param vertices is vertices array
- * @param normals is normals array
- * @param coords is texture coords array
- */
-vbo* getVBO(int size, float* vertices, float* normals, float* coords);
 
 /**
  * @brief setZip sets APK archive object

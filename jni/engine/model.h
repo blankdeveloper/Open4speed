@@ -15,7 +15,6 @@
 #include "engine/math.h"
 #include "interfaces/shader.h"
 #include "interfaces/texture.h"
-#include "interfaces/vbo.h"
 
 //#define USE_VBO
 
@@ -39,7 +38,6 @@ struct model3d {
     float* normals;     ///< Object normals
     float* coords;      ///< Object texture coordinates
     float x,y,z;        ///< Object translation
-    vbo* vboData;       ///< VBO of model
 };
 
 /**

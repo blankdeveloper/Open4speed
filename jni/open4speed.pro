@@ -31,7 +31,6 @@ SOURCES += \
     renderers/opengl/glfbo.cpp \
     renderers/opengl/glsl.cpp \
     renderers/opengl/gltexture.cpp \
-    renderers/opengl/glvbo.cpp \
     renderers/simple/srenderer.cpp \
     renderers/simple/stexture.cpp \
     open4speed.cpp
@@ -53,7 +52,6 @@ HEADERS += \
     interfaces/renderer.h \
     interfaces/shader.h \
     interfaces/texture.h \
-    interfaces/vbo.h \
     physics/bullet/bullet.h \
     physics/bullet/GL_ShapeDrawer.h \
     physics/bullet/GLDebugFont.h \
@@ -62,7 +60,6 @@ HEADERS += \
     renderers/opengl/glfbo.h \
     renderers/opengl/glsl.h \
     renderers/opengl/gltexture.h \
-    renderers/opengl/glvbo.h \
     renderers/simple/srenderer.h \
     renderers/simple/stexture.h
 INCLUDEPATH += /usr/include/bullet

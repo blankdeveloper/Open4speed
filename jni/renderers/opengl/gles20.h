@@ -128,7 +128,7 @@ public:
      * @param txt is texture to use
      * @param triangleCount is triangle count
      */
-    void renderDynamic(vbo *geom, shader* sh, texture* txt, int triangleCount);
+    void renderDynamic(float* vertices, float* normals, float* coords, shader* sh, texture* txt, int triangleCount);
 
     /**
      * @brief renderModel renders model into scene

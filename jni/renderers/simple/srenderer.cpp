@@ -158,11 +158,6 @@ void srenderer::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
     }
     matrix = proj_matrix * modelView;
 
-#ifdef USE_VBO
-    printf("unsupported rendering models from GPU in software renderer\n");
-    return;
-#endif
-
     // apply texture
     m->texture2D->apply();
     texture = (stexture*)(m->texture2D);

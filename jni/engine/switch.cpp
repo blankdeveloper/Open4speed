@@ -20,7 +20,6 @@
 #include "renderers/opengl/gles20.h"
 #include "renderers/opengl/glsl.h"
 #include "renderers/opengl/gltexture.h"
-#include "renderers/opengl/glvbo.h"
 #include "renderers/simple/srenderer.h"
 #include "renderers/simple/stexture.h"
 
@@ -262,17 +261,6 @@ texture* getTexture(float r, float g, float b) {
     sprintf(instance->texturename, "%f %f %f", r, g , b);
     textures.push_back(instance);
     return instance;
-}
-
-/**
- * @brief glvbo creates VBO from data
- * @param size is amount of vertices
- * @param vertices is vertices array
- * @param normals is normals array
- * @param coords is texture coords array
- */
-vbo* getVBO(int size, float* vertices, float* normals, float* coords) {
-    return new glvbo(size, vertices, normals, coords);
 }
 
 /**

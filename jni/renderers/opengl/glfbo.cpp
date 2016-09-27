@@ -34,7 +34,6 @@ glfbo::~glfbo() {
         rboID = 0;
     }
     glDeleteFramebuffers(1, fboID);
-    delete rect;
     delete[] fboID;
     delete[] rendertexture;
 }
@@ -109,29 +108,6 @@ glfbo::glfbo(int width, int height) {
     glViewport (0, 0, width * aliasing, height * aliasing);
     glClear(GL_COLOR_BUFFER_BIT);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-    /// vertices
-    float vertices[] = {
-        -1, +1, 0,
-        -1, -1, 0,
-        +1, -1, 0,
-        -1, +1, 0,
-        +1, -1, 0,
-        +1, +1, 0,
-    };
-
-    /// coords
-    float coords[] = {
-        0, 1,
-        0, 0,
-        1, 0,
-        0, 1,
-        1, 0,
-        1, 1,
-    };
-
-    /// create vertex buffer
-    rect = new glvbo(6, vertices, 0, coords);
 }
 
 /**
@@ -163,12 +139,36 @@ void glfbo::clear() {
  * @param screen_shader is shader for screen drawing
  */
 void glfbo::drawOnScreen(shader* screen_shader) {
+
+    /// vertices
+    float vertices[] = {
+        -1, +1, 0,
+        -1, -1, 0,
+        +1, -1, 0,
+        -1, +1, 0,
+        +1, -1, 0,
+        +1, +1, 0,
+    };
+
+    /// coords
+    float coords[] = {
+        0, 1,
+        0, 0,
+        1, 0,
+        0, 1,
+        1, 0,
+        1, 1,
+    };
+
     screen_shader->bind();
     bindTexture();
     glDisable(GL_BLEND);
     glDisable(GL_DEPTH_TEST);
     glDepthMask(false);
-    rect->render(screen_shader, 0, 2);
+    /// render
+    screen_shader->attrib(vertices, 0, coords);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
     glDepthMask(true);
 }
 

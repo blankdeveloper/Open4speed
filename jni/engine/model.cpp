@@ -16,8 +16,6 @@
  */
 model::~model() {
     for (unsigned int i = 0; i < models.size(); i++) {
-        if (models[i].vboData)
-             delete models[i].vboData;
         delete[] models[i].vertices;
         if (models[i].normals)
              delete[] models[i].normals;
@@ -127,7 +125,6 @@ model::model(std::string filename) {
 
         /// prepare model arrays
         m.triangleCount = f->scandec();
-        m.vboData = 0;
         m.vertices = new float[m.triangleCount * 9];
         m.normals = new float[m.triangleCount * 9];
         m.coords = new float[m.triangleCount * 6];
@@ -147,22 +144,6 @@ model::model(std::string filename) {
                    &m.normals[j * 9 + 6], &m.normals[j * 9 + 7], &m.normals[j * 9 + 8],
                    &m.vertices[j * 9 + 6], &m.vertices[j * 9 + 7], &m.vertices[j * 9 + 8]);
         }
-
-#ifdef USE_VBO
-        /// store model in VBO
-        if (!m.touchable) {
-            int size = m.triangleCount * 3;
-            if (!m.material->hasAttrib(1)) {
-                delete[] m.normals;
-                m.normals = 0;
-            }
-            if (!m.material->hasAttrib(2)) {
-                delete[] m.coords;
-                m.coords = 0;
-            }
-            m.vboData = getVBO(size, m.vertices, m.normals, m.coords);
-        }
-#endif
         models.push_back(m);
     }
 

@@ -233,7 +233,7 @@ void gles20::translate(float x, float y, float z) {
  * @param txt is texture to use
  * @param triangleCount is triangle count
  */
-void gles20::renderDynamic(vbo *geom, shader* sh, texture* txt, int triangleCount) {
+void gles20::renderDynamic(float* vertices, float* normals, float* coords, shader* sh, texture* txt, int triangleCount) {
 
     /// set OpenGL state
     glEnable(GL_BLEND);
@@ -248,7 +248,9 @@ void gles20::renderDynamic(vbo *geom, shader* sh, texture* txt, int triangleCoun
     sh->uniformMatrix("u_Matrix",glm::value_ptr(matrix));
 
     /// render
-    geom->render(sh, 0, triangleCount);
+    sh->attrib(vertices, normals, coords);
+    glDrawArrays(GL_TRIANGLES, 0, triangleCount * 3);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     /// set previous OpenGL state
     sh->unbind();
@@ -404,13 +406,9 @@ void gles20::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
     else
         current->uniformFloat("u_brake", 0);
 
-#ifdef USE_VBO
-        m->vboData->render(current, 0, m->triangleCount);
-#else
-        current->attrib(m->vertices, m->normals, m->coords);
-        glDrawArrays(GL_TRIANGLES, 0, m->triangleCount * 3);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-#endif
+    current->attrib(m->vertices, m->normals, m->coords);
+    glDrawArrays(GL_TRIANGLES, 0, m->triangleCount * 3);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 /**

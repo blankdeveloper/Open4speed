@@ -23,8 +23,6 @@
 //#define RENDER_PHYSICS
 #endif
 
-//#define VR
-
 struct Dynamic {
     float* vertices;
     float* coords;
@@ -42,7 +40,6 @@ model *skydome;                 ///< Skydome model
 model *trackdata;               ///< Track first model
 model* water;                   ///< Water effect model
 Dynamic eff[effLen];            ///< 3D water effect object
-vbo* effectVBO[effLen];         ///< 3D water effect geometry
 
 std::vector<std::pair<model*, glm::vec3> > addedModels;
 
@@ -94,18 +91,9 @@ void display(void) {
 #else
 
     renderer* xrenderer = getRenderer();
-
-#ifdef VR
-    for (int mode = -1; mode <= 1; mode += 2) {
-        xrenderer->mode3D = mode;
-        float d = direction + (float)mode * 3.14 / 3.0f;
-        float view = 60;
-#else
-    {
-        xrenderer->mode3D = 0;
-        float d = direction;
-        float view = getCar(cameraCar)->getView();
-#endif
+    xrenderer->mode3D = 0;
+    float d = direction;
+    float view = getCar(cameraCar)->getView();
     xrenderer->rtt(true);
     /// set camera
     xrenderer->perspective(view, aspect, 0.5, viewDistance);
@@ -113,11 +101,9 @@ void display(void) {
     float cameraX = getCar(cameraCar)->transform->value[12];
     float cameraY = getCar(cameraCar)->transform->value[13];
     float cameraZ = getCar(cameraCar)->transform->value[14];
-#ifndef VR
     cameraX -= sin(d) * getCar(cameraCar)->control->getDistance() * 2.5f / (view / 90);
     cameraY += fmax(1.0, getCar(cameraCar)->control->getDistance()) / (view / 90);
     cameraZ -= cos(d) * getCar(cameraCar)->control->getDistance() * 2.5f / (view / 90);
-#endif
     xrenderer->lookAt(glm::vec3(cameraX - sin(d) * 0.1f, cameraY + 0.5f, cameraZ - cos(d) * 0.1f),
                       glm::vec3(cameraX + sin(direction) * 100.0f, cameraY, cameraZ + cos(direction) * 100.0f),
                       glm::vec3(0, 1, 0));
@@ -139,11 +125,7 @@ void display(void) {
 
     /// render cars
     xrenderer->enable[2] = false;
-    int firstCar = 0;
-#ifdef VR
-    firstCar = 1;
-#endif
-    for (int i = getCarCount() - 1; i >= firstCar; i--) {
+    for (int i = getCarCount() - 1; i >= 0; i--) {
 
         ///render car skin
         xrenderer->pushMatrix();
@@ -165,7 +147,7 @@ void display(void) {
     }
 
     /// render shadows
-    for (int i = getCarCount() - 1; i >= firstCar; i--) {
+    for (int i = getCarCount() - 1; i >= 0; i--) {
 
         ///render car skin
         xrenderer->pushMatrix();
@@ -178,13 +160,12 @@ void display(void) {
     for (int k = 0; k < effLen; k++) {
         if (getPhysics()->active || (k != (currentFrame + effLen - 1) % effLen)) {
             water->models[0].texture2D->setFrame(eff[k].frame);
-            xrenderer->renderDynamic(effectVBO[k], water->models[0].material, water->models[0].texture2D, eff[k].count / 3);
+            xrenderer->renderDynamic(eff[k].vertices, 0, eff[k].coords, water->models[0].material, water->models[0].texture2D, eff[k].count / 3);
         }
     }
     xrenderer->popMatrix();
     // render RTT
     xrenderer->rtt(false);
-    }
 #endif
 
     // update water
@@ -211,7 +192,6 @@ void display(void) {
             }
         }
     }
-    effectVBO[currentFrame]->update(4095, eff[currentFrame].vertices, 0, eff[currentFrame].coords);
     for (int k = 0; k < effLen; k++) {
         eff[k].frame++;
     }
@@ -345,7 +325,6 @@ void loadScene(std::string filename) {
         eff[i].vertices = new float[4095 * 3];
         eff[i].coords = new float[4095 * 2];
         eff[i].count = 0;
-        effectVBO[i] = getVBO(4095, eff[i].vertices, 0, eff[i].coords);
     }
 
     /// create instance of physical engine
@@ -434,8 +413,6 @@ void keyboardDown(unsigned char key, int x, int y) {
 void unload()
 {
     getPhysics()->active = false;
-    for (int i = 0; i < effLen; i++)
-      delete effectVBO[i];
     clearMediaStorage();
 }
 

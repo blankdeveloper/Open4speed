@@ -386,9 +386,16 @@ void gles20::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
     current->uniformMatrix("u_Matrix",glm::value_ptr(matrix));
 
     if(mod->voxelised) {
-        current->attrib(m->vertices, m->normals, m->coords);
-        glPointSize(4);
-        glDrawArrays(GL_POINTS, 0, m->count);
+        if (m->voxelCount > 0) {
+            current->attrib(&m->voxelCoord[0], &m->voxelColor[0], 0);
+            glPointSize(4);
+            glDrawArrays(GL_POINTS, 0, m->voxelCount);
+            //wireframe
+            /*glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+            current->attrib(m->vertices, m->normals, m->coords);
+            glDrawArrays(GL_TRIANGLES, 0, m->count * 3);
+            glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );*/
+        }
     } else {
 
         /// previous screen

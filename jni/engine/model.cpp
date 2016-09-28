@@ -11,6 +11,8 @@
 #include "engine/model.h"
 #include "engine/switch.h"
 
+#define VOXEL_DENSITY 1
+
 /**
  * @brief model destructor
  */
@@ -151,190 +153,171 @@ model::model(std::string filename) {
     delete f;
 }
 
-/**
-  * @brief line makes markers for filling triangle
-  * @param x1 is line start position x
-  * @param y1 is line start position y
-  * @param x2 is line end position x
-  * @param y2 is line end position y
-  * @param fillCache is cache to be used
-  * @return true if line was processed
-  */
-void model::line(int x1, int y1, int x2, int y2, glm::dvec3 z1, glm::dvec3 z2, std::pair<int, glm::dvec3>* fillCache) {
+//https://gist.github.com/yamamushi/5823518
+void model::bresenham3D(model3d* model, long x1, long y1, long z1, const long x2, const long y2, const long z2, std::vector<long> *output) {
 
-    int o = aabb.min.z + 1;
-    glm::dvec3 z;
-    std::pair<int, glm::dvec3> v;
-    int c0, c1, xp0, xp1, yp0, yp1, y, p, w, h;
-    bool wp, hp;
+    long i, dx, dy, dz, l, m, n, x_inc, y_inc, z_inc, err_1, err_2, dx2, dy2, dz2;
+    long point[3];
 
-    //count new line dimensions
-    wp = (x2 >= x1) ? true : false;
-    w = wp ? x2 - x1 : x1 - x2;
-    hp = (y2 >= y1) ? true : false;
-    h = hp ? y2 - y1 : y1 - y2;
+    point[0] = x1;
+    point[1] = y1;
+    point[2] = z1;
+    dx = x2 - x1;
+    dy = y2 - y1;
+    dz = z2 - z1;
+    x_inc = (dx < 0) ? -1 : 1;
+    l = abs(dx);
+    y_inc = (dy < 0) ? -1 : 1;
+    m = abs(dy);
+    z_inc = (dz < 0) ? -1 : 1;
+    n = abs(dz);
+    dx2 = l << 1;
+    dy2 = m << 1;
+    dz2 = n << 1;
 
-    //line in x axis nearby
-    if (w > h) {
-        //direction from left to right
-        xp0 = wp ? 1 : -1;
-        yp0 = 0;
-
-        //direction from top to bottom
-        xp1 = wp ? 1 : -1;
-        yp1 = hp ? 1 : -1;
-
-    //line in y axis nearby
-    } else {
-        //direction from top to bottom
-        xp0 = 0;
-        yp0 = hp ? 1 : -1;
-
-        //direction from left to right
-        xp1 = wp ? 1 : -1;
-        yp1 = hp ? 1 : -1;
-
-        //apply line length
-        y = w;
-        w = h;
-        h = y;
-    }
-
-    //count z coordinate step
-    z = (z2 - z1) / (double)w;
-
-    //Bresenham's algorithm
-    c0 = h + h;
-    p = c0 - w;
-    c1 = p - w;
-    y = y1;
-    v.first = x1;
-    v.second = z1;
-    fillCache[y - o] = v;
-    for (w--; w >= 0; w--) {
-
-        //interpolate
-        if (p < 0) {
-            p += c0;
-            x1 += xp0;
-            y1 += yp0;
-        } else {
-            p += c1;
-            x1 += xp1;
-            y1 += yp1;
+    if ((l >= m) && (l >= n)) {
+        err_1 = dy2 - l;
+        err_2 = dz2 - l;
+        for (i = 0; i <= l; i++) {
+            if(output) {
+                output->push_back(point[0]);
+                output->push_back(point[1]);
+                output->push_back(point[2]);
+            } else {
+                model->voxelCoord.push_back(point[0] / (float)VOXEL_DENSITY);
+                model->voxelCoord.push_back(point[1] / (float)VOXEL_DENSITY);
+                model->voxelCoord.push_back(point[2] / (float)VOXEL_DENSITY);
+                model->voxelColor.push_back(128);
+                model->voxelColor.push_back(128);
+                model->voxelColor.push_back(128);
+            }
+            if (err_1 > 0) {
+                point[1] += y_inc;
+                err_1 -= dx2;
+            }
+            if (err_2 > 0) {
+                point[2] += z_inc;
+                err_2 -= dx2;
+            }
+            err_1 += dy2;
+            err_2 += dz2;
+            point[0] += x_inc;
         }
-        z1 += z;
-
-        //write cache info
-        if (wp || (y != y1)) {
-            y = y1;
-            v.first = x1;
-            v.second = z1;
-            fillCache[y - o] = v;
+    } else if ((m >= l) && (m >= n)) {
+        err_1 = dx2 - m;
+        err_2 = dz2 - m;
+        for (i = 0; i <= m; i++) {
+            if(output) {
+                output->push_back(point[0]);
+                output->push_back(point[1]);
+                output->push_back(point[2]);
+            } else {
+                model->voxelCoord.push_back(point[0] / (float)VOXEL_DENSITY);
+                model->voxelCoord.push_back(point[1] / (float)VOXEL_DENSITY);
+                model->voxelCoord.push_back(point[2] / (float)VOXEL_DENSITY);
+                model->voxelColor.push_back(128);
+                model->voxelColor.push_back(128);
+                model->voxelColor.push_back(128);
+            }
+            if (err_1 > 0) {
+                point[0] += x_inc;
+                err_1 -= dy2;
+            }
+            if (err_2 > 0) {
+                point[2] += z_inc;
+                err_2 -= dy2;
+            }
+            err_1 += dx2;
+            err_2 += dz2;
+            point[1] += y_inc;
+        }
+    } else {
+        err_1 = dy2 - n;
+        err_2 = dx2 - n;
+        for (i = 0; i <= n; i++) {
+            if(output) {
+                output->push_back(point[0]);
+                output->push_back(point[1]);
+                output->push_back(point[2]);
+            } else {
+                model->voxelCoord.push_back(point[0] / (float)VOXEL_DENSITY);
+                model->voxelCoord.push_back(point[1] / (float)VOXEL_DENSITY);
+                model->voxelCoord.push_back(point[2] / (float)VOXEL_DENSITY);
+                model->voxelColor.push_back(128);
+                model->voxelColor.push_back(128);
+                model->voxelColor.push_back(128);
+            }
+            if (err_1 > 0) {
+                point[1] += y_inc;
+                err_1 -= dz2;
+            }
+            if (err_2 > 0) {
+                point[0] += x_inc;
+                err_2 -= dz2;
+            }
+            err_1 += dy2;
+            err_2 += dx2;
+            point[2] += z_inc;
         }
     }
 }
 
 void model::triangles(model3d* m) {
-    int v = 0;
-    int t = 0;
-    int o = aabb.min.z + 1;
-    int ab, ac, bc, step, x, x1, x2, y, min, mem, max;
-    glm::vec4 a, b, c;
-    glm::dvec3 az, bz, cz, z, z1, z2;
-
-    std::pair<int, glm::dvec3> fillCache1[(int)height + 1];
-    std::pair<int, glm::dvec3> fillCache2[(int)height + 1];
-    std::vector<float> vertices;
-    std::vector<float> colors;
-
+    long v = 0;
+    long t = 0;
+    long ab, ac, bc;
+    glm::vec3 a, b, c;
+    glm::dvec3 az, bz, cz;
     for (int i = 0; i < m->count; i++, v += 9, t += 6) {
         //get vertices
-        a = glm::vec4(m->vertices[v + 0], m->vertices[v + 1], m->vertices[v + 2], 1.0f);
-        b = glm::vec4(m->vertices[v + 3], m->vertices[v + 4], m->vertices[v + 5], 1.0f);
-        c = glm::vec4(m->vertices[v + 6], m->vertices[v + 7], m->vertices[v + 8], 1.0f);
+        a = glm::vec3(m->vertices[v + 0], m->vertices[v + 1], m->vertices[v + 2]);
+        b = glm::vec3(m->vertices[v + 3], m->vertices[v + 4], m->vertices[v + 5]);
+        c = glm::vec3(m->vertices[v + 6], m->vertices[v + 7], m->vertices[v + 8]);
+        //set density
+        a *= VOXEL_DENSITY;
+        b *= VOXEL_DENSITY;
+        c *= VOXEL_DENSITY;
+        a += 0.5f;
+        b += 0.5f;
+        c += 0.5f;
         //get texture coordinates and depth for interpolation
         az = glm::dvec3(m->coords[t + 0], m->coords[t + 1], a.z);
         bz = glm::dvec3(m->coords[t + 2], m->coords[t + 3], b.z);
         cz = glm::dvec3(m->coords[t + 4], m->coords[t + 5], c.z);
 
-        //create markers for filling
-        ab = glm::abs(a.y - b.y);
-        ac = glm::abs(a.y - c.y);
-        bc = glm::abs(b.y - c.y);
+        //find edges
+        ab = glm::length(a - b);
+        ac = glm::length(a - c);
+        bc = glm::length(b - c);
+        std::vector<long> output1;
+        std::vector<long> output2;
         if ((ab >= ac) && (ab >= bc)) {
-            line(a.x, a.y, b.x, b.y, az, bz, fillCache1);
-            line(a.x, a.y, c.x, c.y, az, cz, fillCache2);
-            line(b.x, b.y, c.x, c.y, bz, cz, fillCache2);
-            min = glm::max(0.0f, glm::min(a.y, b.y));
-            max = glm::min(glm::max(a.y, b.y), (int)height - 1.0f);
+            bresenham3D(m, a.x, a.y, a.z, c.x, c.y, c.z, &output1);
+            bresenham3D(m, b.x, b.y, b.z, c.x, c.y, c.z, &output2);
         } else if ((ac >= ab) && (ac >= bc)) {
-            line(a.x, a.y, c.x, c.y, az, cz, fillCache1);
-            line(a.x, a.y, b.x, b.y, az, bz, fillCache2);
-            line(b.x, b.y, c.x, c.y, bz, cz, fillCache2);
-            min = glm::max(0.0f, glm::min(a.y, c.y));
-            max = glm::min(glm::max(a.y, c.y), (int)height - 1.0f);
+            bresenham3D(m, a.x, a.y, a.z, b.x, b.y, b.z, &output1);
+            bresenham3D(m, c.x, c.y, c.z, b.x, b.y, b.z, &output2);
         } else if ((bc >= ab) && (bc >= ac)) {
-            line(b.x, b.y, c.x, c.y, bz, cz, fillCache1);
-            line(a.x, a.y, b.x, b.y, az, bz, fillCache2);
-            line(a.x, a.y, c.x, c.y, az, cz, fillCache2);
-            min = glm::max(0.0f, glm::min(b.y, c.y));
-            max = glm::min(glm::max(b.y, c.y), (int)height - 1.0f);
+            bresenham3D(m, a.x, a.y, a.z, b.x, b.y, b.z, &output1);
+            bresenham3D(m, a.x, a.y, a.z, c.x, c.y, c.z, &output2);
         }
 
-        //fill triangle
-        for (y = min; y <= max; y++) {
-            x1 = fillCache1[y - o].first;
-            x2 = fillCache2[y - o].first;
-            z1 = fillCache1[y - o].second;
-            z2 = fillCache2[y - o].second;
-
-            //filling algorithm initialize
-            x = x1;
-            step = (x2 >= x1) ? 1 : -1;
-            z = (z2 - z1) / (double)glm::abs(x2 - x1);
-            mem = glm::abs(x2 - x1);
-            for (; mem >= 0; mem--) {
-
-                //write pixel into memory
-                //Color c = {128, 128, 128, 255};
-                ColorRGBA c = m->texture2D->getPixel(z1.x, z1.y);
-                if(c.a > 128) {
-                    for(min = (int)z1.z; min < (int)(z1.z + z.z); min++) {
-                        vertices.push_back(x);
-                        vertices.push_back(y);
-                        vertices.push_back(min);
-                        colors.push_back(c.r / 255.0f);
-                        colors.push_back(c.g / 255.0f);
-                        colors.push_back(c.b / 255.0f);
-                    }
-                }
-
-                //interpolate
-                x += step;
-                z1 += z;
-            }
+        //fill
+        unsigned int min = glm::min(output1.size(), output2.size()) / 3 - 1;
+        unsigned int max = glm::max(output1.size(), output2.size()) / 3 - 1;
+        for (unsigned int j = 0; j <= min; j++) {
+            bresenham3D(m, output1[j * 3 + 0], output1[j * 3 + 1], output1[j * 3 + 2], output2[j * 3 + 0], output2[j * 3 + 1], output2[j * 3 + 2], 0);
+        }
+        for (unsigned int j = min + 1; j <= max; j++) {
+            if (output1.size() > output2.size())
+                bresenham3D(m, output1[j * 3 + 0], output1[j * 3 + 1], output1[j * 3 + 2], output2[min * 3 + 0], output2[min * 3 + 1], output2[min * 3 + 2], 0);
+            else
+                bresenham3D(m, output1[min * 3 + 0], output1[min * 3 + 1], output1[min * 3 + 2], output2[j * 3 + 0], output2[j * 3 + 1], output2[j * 3 + 2], 0);
         }
     }
-
-    //import into model
-    delete[] m->vertices;
-    if (m->normals)
-        delete[] m->normals;
-    if(m->coords)
-      delete[] m->coords;
-    m->coords = 0;
     m->material = getShader("voxel");
-    m->vertices = new float[vertices.size()];
-    m->normals = new float[vertices.size()];
-    m->count = vertices.size() / 3;
-    for(unsigned int i = 0; i < vertices.size(); i++) {
-      m->vertices[i] = vertices[i];
-      m->normals[i] = colors[i];
-    }
-    printf("Converted %d voxels\n", vertices.size() / 3);
-    //m->count *= 3;
-    //m->material = getShader("voxel");
+    m->voxelCount = m->voxelCoord.size() / 3;
+    printf("Converted %d voxels\n", m->voxelCount);
 }
 
 void model::voxelise() {

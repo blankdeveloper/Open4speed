@@ -107,7 +107,7 @@ void display(void) {
                       glm::vec3(cameraX + sin(direction) * 100.0f, cameraY, cameraZ + cos(direction) * 100.0f),
                       glm::vec3(0, 1, 0));
     //gta style
-    /*xrenderer->lookAt(glm::vec3(cameraX, cameraY + 10.0f, cameraZ),
+    /*xrenderer->lookAt(glm::vec3(cameraX, cameraY + getCar(cameraCar)->control->getDistance() * 10.0f, cameraZ),
                       glm::vec3(cameraX, cameraY, cameraZ),
                       glm::vec3(0, 0, 1));*/
 

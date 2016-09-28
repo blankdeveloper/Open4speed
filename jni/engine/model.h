@@ -58,7 +58,7 @@ public:
      */
     model(std::string filename);
 
-    void bresenham3D(model3d* m, long x1, long y1, long z1, const long x2, const long y2, const long z2, std::vector<long> *output);
+    void bresenham3D(model3d* m, long x1, long y1, long z1, float s1, float t1, long x2, long y2, long z2, float s2, float t2, std::vector<double> *output);
 
     void triangles(model3d* m);
 

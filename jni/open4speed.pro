@@ -19,6 +19,7 @@ SOURCES += \
     engine/io.cpp \
     engine/math.cpp \
     engine/model.cpp \
+    engine/octreeNode.cpp \
     engine/switch.cpp \
     files/extfile.cpp \
     files/zipfile.cpp \
@@ -39,6 +40,7 @@ HEADERS += \
     engine/io.h \
     engine/math.h \
     engine/model.h \
+    engine/octreeNode.h \
     engine/switch.h \
     engine/textures.hpp \
     files/extfile.h \

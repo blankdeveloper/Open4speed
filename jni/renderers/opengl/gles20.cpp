@@ -287,7 +287,7 @@ void gles20::renderModel(model* m, glm::vec3 center) {
  */
 void gles20::renderShadow(model* m, glm::vec3 center) {
 
-    if (!rtt_fbo[oddFrame]->complete)
+    if (!rtt_fbo[oddFrame]->complete || m->voxelised)
         return;
 
     glDepthMask(false);
@@ -388,7 +388,7 @@ void gles20::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
     if(mod->voxelised) {
         if (m->voxelCount > 0) {
             current->attrib(&m->voxelCoord[0], &m->voxelColor[0], 0);
-            glPointSize(4);
+            glPointSize(5);
             glDrawArrays(GL_POINTS, 0, m->voxelCount);
             //wireframe
             /*glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );

@@ -307,10 +307,13 @@ void loadScene(std::string filename) {
     physics* physic = getPhysics();
     physic->addModel(trackdata, glm::vec3(0, 0, 0));
     for (unsigned int i = 0; i < getCarCount(); i++)
+    {
         physic->addCar(getCar(i));
 #ifndef SOFTWARE_RENDERER
-    //trackdata->voxelise();
+        /*getCar(i)->skin->voxelise();
+        getCar(i)->wheel->voxelise();*/
 #endif
+    }
 }
 
 /**

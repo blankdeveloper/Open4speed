@@ -11,7 +11,7 @@
 #include "engine/model.h"
 #include "engine/switch.h"
 
-#define VOXEL_DENSITY 1
+#define VOXEL_DENSITY 32
 
 /**
  * @brief model destructor
@@ -184,7 +184,7 @@ void model::bresenham3D(model3d* model, long x1, long y1, long z1, float s1, flo
         err_1 = dy2 - l;
         err_2 = dz2 - l;
         s_inc = ds / (double)l;
-        t_inc = ds / (double)l;
+        t_inc = dt / (double)l;
         for (i = 0; i <= l; i++) {
             if(output) {
                 output->push_back(point[0]);
@@ -221,7 +221,7 @@ void model::bresenham3D(model3d* model, long x1, long y1, long z1, float s1, flo
         err_1 = dx2 - m;
         err_2 = dz2 - m;
         s_inc = ds / (double)m;
-        t_inc = ds / (double)m;
+        t_inc = dt / (double)m;
         for (i = 0; i <= m; i++) {
             if(output) {
                 output->push_back(point[0]);
@@ -258,7 +258,7 @@ void model::bresenham3D(model3d* model, long x1, long y1, long z1, float s1, flo
         err_1 = dy2 - n;
         err_2 = dx2 - n;
         s_inc = ds / (double)n;
-        t_inc = ds / (double)n;
+        t_inc = dt / (double)n;
         for (i = 0; i <= n; i++) {
             if(output) {
                 output->push_back(point[0]);

@@ -31,14 +31,11 @@ struct model3d {
     bool hasShadow;     ///< Information that model casts shadow
     AABB reg;           ///< AABB of the object
     int count;          ///< Amount of triangles
-    int voxelCount;     ///< Amount of voxels
     texture* texture2D; ///< Object texture
     float* vertices;    ///< Object vertices
     float* normals;     ///< Object normals
     float* coords;      ///< Object texture coordinates
     float x,y,z;        ///< Object translation
-    std::vector<float> voxelCoord;
-    std::vector<float> voxelColor;
 };
 
 /**
@@ -69,6 +66,8 @@ public:
     float width, aplitude, height;             ///< Dimensions of current model
     char modelname[256];                       ///< Model filename
     bool voxelised;
+    std::vector<float> voxelCoord;
+    std::vector<float> voxelColor;
 };
 
 #endif // MODEL_H

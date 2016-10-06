@@ -195,12 +195,12 @@ void model::bresenham3D(model3d* model, long x1, long y1, long z1, float s1, flo
             } else {
                 ColorRGBA c = model->texture2D->getPixel(point[3], point[4]);
                 if (c.a > 128) {
-                    model->voxelCoord.push_back(point[0] / (float)VOXEL_DENSITY);
-                    model->voxelCoord.push_back(point[1] / (float)VOXEL_DENSITY);
-                    model->voxelCoord.push_back(point[2] / (float)VOXEL_DENSITY);
-                    model->voxelColor.push_back(c.r / 255.0f);
-                    model->voxelColor.push_back(c.g / 255.0f);
-                    model->voxelColor.push_back(c.b / 255.0f);
+                    voxelCoord.push_back(point[0] / (float)VOXEL_DENSITY + model->reg.min.x);
+                    voxelCoord.push_back(point[1] / (float)VOXEL_DENSITY + model->reg.min.y);
+                    voxelCoord.push_back(point[2] / (float)VOXEL_DENSITY + model->reg.min.z);
+                    voxelColor.push_back(c.r / 255.0f);
+                    voxelColor.push_back(c.g / 255.0f);
+                    voxelColor.push_back(c.b / 255.0f);
                 }
             }
             if (err_1 > 0) {
@@ -232,12 +232,12 @@ void model::bresenham3D(model3d* model, long x1, long y1, long z1, float s1, flo
             } else {
                 ColorRGBA c = model->texture2D->getPixel(point[3], point[4]);
                 if (c.a > 128) {
-                    model->voxelCoord.push_back(point[0] / (float)VOXEL_DENSITY);
-                    model->voxelCoord.push_back(point[1] / (float)VOXEL_DENSITY);
-                    model->voxelCoord.push_back(point[2] / (float)VOXEL_DENSITY);
-                    model->voxelColor.push_back(c.r / 255.0f);
-                    model->voxelColor.push_back(c.g / 255.0f);
-                    model->voxelColor.push_back(c.b / 255.0f);
+                    voxelCoord.push_back(point[0] / (float)VOXEL_DENSITY + model->reg.min.x);
+                    voxelCoord.push_back(point[1] / (float)VOXEL_DENSITY + model->reg.min.y);
+                    voxelCoord.push_back(point[2] / (float)VOXEL_DENSITY + model->reg.min.z);
+                    voxelColor.push_back(c.r / 255.0f);
+                    voxelColor.push_back(c.g / 255.0f);
+                    voxelColor.push_back(c.b / 255.0f);
                 }
             }
             if (err_1 > 0) {
@@ -269,12 +269,12 @@ void model::bresenham3D(model3d* model, long x1, long y1, long z1, float s1, flo
             } else {
                 ColorRGBA c = model->texture2D->getPixel(point[3], point[4]);
                 if (c.a > 128) {
-                    model->voxelCoord.push_back(point[0] / (float)VOXEL_DENSITY);
-                    model->voxelCoord.push_back(point[1] / (float)VOXEL_DENSITY);
-                    model->voxelCoord.push_back(point[2] / (float)VOXEL_DENSITY);
-                    model->voxelColor.push_back(c.r / 255.0f);
-                    model->voxelColor.push_back(c.g / 255.0f);
-                    model->voxelColor.push_back(c.b / 255.0f);
+                    voxelCoord.push_back(point[0] / (float)VOXEL_DENSITY + model->reg.min.x);
+                    voxelCoord.push_back(point[1] / (float)VOXEL_DENSITY + model->reg.min.y);
+                    voxelCoord.push_back(point[2] / (float)VOXEL_DENSITY + model->reg.min.z);
+                    voxelColor.push_back(c.r / 255.0f);
+                    voxelColor.push_back(c.g / 255.0f);
+                    voxelColor.push_back(c.b / 255.0f);
                 }
             }
             if (err_1 > 0) {
@@ -350,13 +350,11 @@ void model::triangles(model3d* m) {
                                output2[j * 5 + 0], output2[j * 5 + 1], output2[j * 5 + 2], output2[j * 5 + 3], output2[j * 5 + 4], 0);
         }
     }
-    m->material = getShader("voxel");
-    m->voxelCount = m->voxelCoord.size() / 3;
-    printf("Converted %d voxels\n", m->voxelCount);
 }
 
 void model::voxelise() {
     for (unsigned int i = 0; i < models.size(); i++)
-        triangles(&models[i]);
+        if(models[i].filter == 0)
+            triangles(&models[i]);
     voxelised = true;
 }

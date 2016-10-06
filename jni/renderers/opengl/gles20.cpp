@@ -76,6 +76,7 @@ void gles20::init(int w, int h) {
     //set shaders
     scene_shader = getShader("scene");
     shadow = getShader("shadow");
+    voxel = getShader("voxel");
 }
 
 /**
@@ -265,6 +266,15 @@ void gles20::renderDynamic(float* vertices, float* normals, float* coords, shade
  */
 void gles20::renderModel(model* m, glm::vec3 center) {
 
+    if (m->voxelised)
+    {
+        current = voxel;
+        current->bind();
+        renderSubModel(m, &m->models[0], center);
+        current->unbind();
+        return;
+    }
+
     /// set opengl for rendering models
     for (unsigned int i = 0; i < m->models.size(); i++) {
         if (enable[m->models[i].filter] && !m->models[i].touchable) {
@@ -365,13 +375,26 @@ void gles20::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
         modelMat = dynamic * translation;
         modelView = view_matrix * modelMat;
     } else {
-        glm::mat4x4 translation(
-            1,0,0,0,
-            0,1,0,0,
-            0,0,1,0,
-            m->reg.min.x + center.x, m->reg.min.y + center.y, m->reg.min.z + center.z, 1
-        );
-        modelMat = matrix_result * translation;
+        if(mod->voxelised)
+        {
+            glm::mat4x4 translation(
+                1,0,0,0,
+                0,1,0,0,
+                0,0,1,0,
+                center.x, center.y, center.z, 1
+            );
+            modelMat = matrix_result * translation;
+        }
+        else
+        {
+            glm::mat4x4 translation(
+                1,0,0,0,
+                0,1,0,0,
+                0,0,1,0,
+                m->reg.min.x + center.x, m->reg.min.y + center.y, m->reg.min.z + center.z, 1
+            );
+            modelMat = matrix_result * translation;
+        }
         modelView = view_matrix * modelMat;
     }
     glm::mat4x4 projView = proj_matrix * view_matrix;
@@ -386,15 +409,10 @@ void gles20::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
     current->uniformMatrix("u_Matrix",glm::value_ptr(matrix));
 
     if(mod->voxelised) {
-        if (m->voxelCount > 0) {
-            current->attrib(&m->voxelCoord[0], &m->voxelColor[0], 0);
+        if (mod->voxelCoord.size() > 0) {
+            current->attrib(&mod->voxelCoord[0], &mod->voxelColor[0], 0);
             glPointSize(5);
-            glDrawArrays(GL_POINTS, 0, m->voxelCount);
-            //wireframe
-            /*glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-            current->attrib(m->vertices, m->normals, m->coords);
-            glDrawArrays(GL_TRIANGLES, 0, m->count * 3);
-            glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );*/
+            glDrawArrays(GL_POINTS, 0, mod->voxelCoord.size() / 3);
         }
     } else {
 

@@ -40,6 +40,7 @@ public:
     GLushort dynindices[4095];            ///< Indicies for dynamic rendering
     shader* current;                      ///< Current binded shader
     shader* shadow;                       ///< Special shader for shadow
+    shader* voxel;                        ///< Special shader for voxels
     std::vector<glfbo*> rtt_fbo;          ///< Screen-space framebuffer
     bool oddFrame;                        ///< Odd frame info
     float viewDistance;                   ///< Camera far culling

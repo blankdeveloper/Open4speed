@@ -1,5 +1,4 @@
 VERT
-uniform mat4 u_Matrix;
 attribute vec3 v_vertex;
 attribute vec3 v_normal;
 varying vec3 v_Color;
@@ -7,7 +6,7 @@ varying vec3 v_Color;
 void main()
 {
     v_Color = v_normal;
-    gl_Position = u_Matrix * vec4(v_vertex, 1.0);
+    gl_Position = vec4(v_vertex, 1.0);
 }
 END
 

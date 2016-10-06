@@ -12,7 +12,7 @@
 
 #include <glm/glm.hpp>
 #include <string>
-#include "engine/math.h"
+#include "engine/octreeNode.h"
 #include "interfaces/shader.h"
 #include "interfaces/texture.h"
 
@@ -65,9 +65,7 @@ public:
     AABB aabb;                                 ///< Extremes of current model
     float width, aplitude, height;             ///< Dimensions of current model
     char modelname[256];                       ///< Model filename
-    bool voxelised;
-    std::vector<float> voxelCoord;
-    std::vector<float> voxelColor;
+    octreeNode* voxels;
 };
 
 #endif // MODEL_H

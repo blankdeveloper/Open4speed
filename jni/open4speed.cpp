@@ -310,8 +310,8 @@ void loadScene(std::string filename) {
     {
         physic->addCar(getCar(i));
 #ifndef SOFTWARE_RENDERER
-        /*getCar(i)->skin->voxelise();
-        getCar(i)->wheel->voxelise();*/
+        getCar(i)->skin->voxelise();
+        getCar(i)->wheel->voxelise();
 #endif
     }
 }

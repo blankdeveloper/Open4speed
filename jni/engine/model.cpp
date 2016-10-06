@@ -11,7 +11,7 @@
 #include "engine/model.h"
 #include "engine/switch.h"
 
-#define VOXEL_DENSITY 32
+#define VOXEL_DENSITY 10
 
 /**
  * @brief model destructor
@@ -24,6 +24,8 @@ model::~model() {
         if (models[i].coords)
             delete[] models[i].coords;
     }
+    if (voxels)
+        delete voxels;
 }
 
 /**
@@ -42,6 +44,7 @@ model::model(std::string filename) {
     width = aabb.max.x - aabb.min.x;
     aplitude = aabb.max.y - aabb.min.y;
     height = aabb.max.z - aabb.min.z;
+    voxels = 0;
 
     /// get amount of textures in model
     int textureCount = f->scandec();
@@ -149,7 +152,6 @@ model::model(std::string filename) {
         }
         models.push_back(m);
     }
-    voxelised = false;
     delete f;
 }
 
@@ -193,15 +195,10 @@ void model::bresenham3D(model3d* model, long x1, long y1, long z1, float s1, flo
                 output->push_back(point[3]);
                 output->push_back(point[4]);
             } else {
-                ColorRGBA c = model->texture2D->getPixel(point[3], point[4]);
-                if (c.a > 128) {
-                    voxelCoord.push_back(point[0] / (float)VOXEL_DENSITY + model->reg.min.x);
-                    voxelCoord.push_back(point[1] / (float)VOXEL_DENSITY + model->reg.min.y);
-                    voxelCoord.push_back(point[2] / (float)VOXEL_DENSITY + model->reg.min.z);
-                    voxelColor.push_back(c.r / 255.0f);
-                    voxelColor.push_back(c.g / 255.0f);
-                    voxelColor.push_back(c.b / 255.0f);
-                }
+                voxels->addVoxel(point[0] / (float)VOXEL_DENSITY + model->reg.min.x,
+                                 point[1] / (float)VOXEL_DENSITY + model->reg.min.y,
+                                 point[2] / (float)VOXEL_DENSITY + model->reg.min.z,
+                                 model->texture2D->getPixel(point[3], point[4]));
             }
             if (err_1 > 0) {
                 point[1] += y_inc;
@@ -230,15 +227,10 @@ void model::bresenham3D(model3d* model, long x1, long y1, long z1, float s1, flo
                 output->push_back(point[3]);
                 output->push_back(point[4]);
             } else {
-                ColorRGBA c = model->texture2D->getPixel(point[3], point[4]);
-                if (c.a > 128) {
-                    voxelCoord.push_back(point[0] / (float)VOXEL_DENSITY + model->reg.min.x);
-                    voxelCoord.push_back(point[1] / (float)VOXEL_DENSITY + model->reg.min.y);
-                    voxelCoord.push_back(point[2] / (float)VOXEL_DENSITY + model->reg.min.z);
-                    voxelColor.push_back(c.r / 255.0f);
-                    voxelColor.push_back(c.g / 255.0f);
-                    voxelColor.push_back(c.b / 255.0f);
-                }
+                voxels->addVoxel(point[0] / (float)VOXEL_DENSITY + model->reg.min.x,
+                                 point[1] / (float)VOXEL_DENSITY + model->reg.min.y,
+                                 point[2] / (float)VOXEL_DENSITY + model->reg.min.z,
+                                 model->texture2D->getPixel(point[3], point[4]));
             }
             if (err_1 > 0) {
                 point[0] += x_inc;
@@ -267,15 +259,10 @@ void model::bresenham3D(model3d* model, long x1, long y1, long z1, float s1, flo
                 output->push_back(point[3]);
                 output->push_back(point[4]);
             } else {
-                ColorRGBA c = model->texture2D->getPixel(point[3], point[4]);
-                if (c.a > 128) {
-                    voxelCoord.push_back(point[0] / (float)VOXEL_DENSITY + model->reg.min.x);
-                    voxelCoord.push_back(point[1] / (float)VOXEL_DENSITY + model->reg.min.y);
-                    voxelCoord.push_back(point[2] / (float)VOXEL_DENSITY + model->reg.min.z);
-                    voxelColor.push_back(c.r / 255.0f);
-                    voxelColor.push_back(c.g / 255.0f);
-                    voxelColor.push_back(c.b / 255.0f);
-                }
+                voxels->addVoxel(point[0] / (float)VOXEL_DENSITY + model->reg.min.x,
+                                 point[1] / (float)VOXEL_DENSITY + model->reg.min.y,
+                                 point[2] / (float)VOXEL_DENSITY + model->reg.min.z,
+                                 model->texture2D->getPixel(point[3], point[4]));
             }
             if (err_1 > 0) {
                 point[1] += y_inc;
@@ -353,8 +340,8 @@ void model::triangles(model3d* m) {
 }
 
 void model::voxelise() {
+    voxels = new octreeNode();
     for (unsigned int i = 0; i < models.size(); i++)
         if(models[i].filter == 0)
             triangles(&models[i]);
-    voxelised = true;
 }

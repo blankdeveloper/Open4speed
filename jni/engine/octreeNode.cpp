@@ -13,8 +13,28 @@ float dst;       ///< far from glperspective
 glm::mat4x4 mvp; ///< model view matrix(camera)
 glm::vec3 min;   ///< AABB corner of current node
 glm::vec3 max;   ///< AABB corner of current node
+std::pair<std::vector<float>, std::vector<float> > output;
 
-//TODO:octree building
+/**
+ * @brief addVoxel adds voxel into tree
+ * @param x is position x coordinate
+ * @param y is position y coordinate
+ * @param z is position z coordinate
+ * @param c is voxel color
+ */
+void octreeNode::addVoxel(float x, float y, float z, ColorRGBA c)
+{
+    //TODO:replace with octree implementation
+    if (c.a > 128)
+    {
+        voxelCoord.push_back(x);
+        voxelCoord.push_back(y);
+        voxelCoord.push_back(z);
+        voxelColor.push_back(c.r / 255.0f);
+        voxelColor.push_back(c.g / 255.0f);
+        voxelColor.push_back(c.b / 255.0f);
+    }
+}
 
 /**
  * @brief getTransform gets position of AABB vertex in frustum space
@@ -102,4 +122,28 @@ void octreeNode::processAll() {
     }
 }
 
-//TODO:getting culled data from octree
+std::pair<std::vector<float>, std::vector<float> > octreeNode::getCulledVoxels(glm::mat4x4 matrix, float far, AABB aabb)
+{
+  //TODO:getting culled and projected voxels from octree
+  dst = far;
+  mvp = matrix;
+  min = aabb.min;
+  max = aabb.max;
+  output.first.clear();
+  output.second.clear();
+  for (unsigned int i = 0; i < voxelCoord.size() / 3; i++)
+  {
+    glm::vec4 position = mvp * glm::vec4(voxelCoord[i * 3 + 0], voxelCoord[i * 3 + 1], voxelCoord[i * 3 + 2], 1);
+    position /= position.w;
+    if ((fabs(position.x) < 1.0f) && (fabs(position.y) < 1.0f) && (position.z > 0.0f) && (position.z < 1.0f))
+    {
+        output.first.push_back(position.x);
+        output.first.push_back(position.y);
+        output.first.push_back(position.z);
+        output.second.push_back(voxelColor[i * 3 + 0]);
+        output.second.push_back(voxelColor[i * 3 + 1]);
+        output.second.push_back(voxelColor[i * 3 + 2]);
+    }
+  }
+  return output;
+}

@@ -266,7 +266,7 @@ void gles20::renderDynamic(float* vertices, float* normals, float* coords, shade
  */
 void gles20::renderModel(model* m, glm::vec3 center) {
 
-    if (m->voxelised)
+    if (m->voxels)
     {
         current = voxel;
         current->bind();
@@ -297,7 +297,7 @@ void gles20::renderModel(model* m, glm::vec3 center) {
  */
 void gles20::renderShadow(model* m, glm::vec3 center) {
 
-    if (!rtt_fbo[oddFrame]->complete || m->voxelised)
+    if (!rtt_fbo[oddFrame]->complete || m->voxels)
         return;
 
     glDepthMask(false);
@@ -375,7 +375,7 @@ void gles20::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
         modelMat = dynamic * translation;
         modelView = view_matrix * modelMat;
     } else {
-        if(mod->voxelised)
+        if(mod->voxels)
         {
             glm::mat4x4 translation(
                 1,0,0,0,
@@ -408,12 +408,11 @@ void gles20::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
     matrix = proj_matrix * modelView;
     current->uniformMatrix("u_Matrix",glm::value_ptr(matrix));
 
-    if(mod->voxelised) {
-        if (mod->voxelCoord.size() > 0) {
-            current->attrib(&mod->voxelCoord[0], &mod->voxelColor[0], 0);
-            glPointSize(5);
-            glDrawArrays(GL_POINTS, 0, mod->voxelCoord.size() / 3);
-        }
+    if(mod->voxels) {
+        std::pair<std::vector<float>, std::vector<float> > v = mod->voxels->getCulledVoxels(matrix, viewDistance, mod->aabb);
+        current->attrib(&v.first[0], &v.second[0], 0);
+        glPointSize(8);
+        glDrawArrays(GL_POINTS, 0, v.first.size() / 3);
     } else {
 
         /// previous screen

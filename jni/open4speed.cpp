@@ -266,6 +266,13 @@ void loadScene(std::string filename) {
         }
         delete f;
     }
+    else
+    {
+        edge edg;
+        edg.a = glm::vec3( 100, 50, 0 );
+        edg.b = glm::vec3( 10, 50, 0 );
+        e.push_back( edg );
+    }
 
     /// load sky
     skydome = getModel(p + getConfigStr("sky_model", atributes));
@@ -307,13 +314,15 @@ void loadScene(std::string filename) {
     physics* physic = getPhysics();
     physic->addModel(trackdata, glm::vec3(0, 0, 0));
     for (unsigned int i = 0; i < getCarCount(); i++)
-    {
         physic->addCar(getCar(i));
 #ifndef SOFTWARE_RENDERER
-        getCar(i)->skin->voxelise();
-        getCar(i)->wheel->voxelise();
+    /*trackdata->detexturise();
+    for (unsigned int i = 0; i < getCarCount(); i++)
+    {
+        getCar(i)->skin->detexturise();
+        getCar(i)->wheel->detexturise();
+    }*/
 #endif
-    }
 }
 
 /**

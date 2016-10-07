@@ -76,7 +76,7 @@ void gles20::init(int w, int h) {
     //set shaders
     scene_shader = getShader("scene");
     shadow = getShader("shadow");
-    voxel = getShader("voxel");
+    detextured = getShader("simple");
 }
 
 /**
@@ -266,12 +266,25 @@ void gles20::renderDynamic(float* vertices, float* normals, float* coords, shade
  */
 void gles20::renderModel(model* m, glm::vec3 center) {
 
-    if (m->voxels)
+    if (!m->vertices.empty())
     {
-        current = voxel;
+        current = detextured;
         current->bind();
         renderSubModel(m, &m->models[0], center);
         current->unbind();
+
+        /// dynamic objects
+        for (unsigned int i = 0; i < m->models.size(); i++) {
+            if (enable[m->models[i].filter] && m->models[i].dynamic) {
+                current = m->models[i].material;
+                current->bind();
+                if (m->models[i].texture2D->transparent)
+                    glDisable(GL_CULL_FACE);
+                renderSubModel(m, &m->models[i], center);
+                current->unbind();
+            }
+            glEnable(GL_CULL_FACE);
+        }
         return;
     }
 
@@ -297,7 +310,7 @@ void gles20::renderModel(model* m, glm::vec3 center) {
  */
 void gles20::renderShadow(model* m, glm::vec3 center) {
 
-    if (!rtt_fbo[oddFrame]->complete || m->voxels)
+    if (!rtt_fbo[oddFrame]->complete || !m->vertices.empty())
         return;
 
     glDepthMask(false);
@@ -375,7 +388,7 @@ void gles20::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
         modelMat = dynamic * translation;
         modelView = view_matrix * modelMat;
     } else {
-        if(mod->voxels)
+        if(!mod->vertices.empty())
         {
             glm::mat4x4 translation(
                 1,0,0,0,
@@ -408,11 +421,9 @@ void gles20::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
     matrix = proj_matrix * modelView;
     current->uniformMatrix("u_Matrix",glm::value_ptr(matrix));
 
-    if(mod->voxels) {
-        std::pair<std::vector<float>, std::vector<float> > v = mod->voxels->getCulledVoxels(matrix, viewDistance, mod->aabb);
-        current->attrib(&v.first[0], &v.second[0], 0);
-        glPointSize(8);
-        glDrawArrays(GL_POINTS, 0, v.first.size() / 3);
+    if (!mod->vertices.empty() && !m->dynamic) {
+        current->attrib(&mod->vertices[0], &mod->colors[0], 0);
+        glDrawArrays(GL_TRIANGLES, 0, mod->vertices.size() / 3);
     } else {
 
         /// previous screen

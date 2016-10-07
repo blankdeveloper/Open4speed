@@ -12,7 +12,7 @@
 
 #include <glm/glm.hpp>
 #include <string>
-#include "engine/octreeNode.h"
+#include "engine/math.h"
 #include "interfaces/shader.h"
 #include "interfaces/texture.h"
 
@@ -55,17 +55,16 @@ public:
      */
     model(std::string filename);
 
-    void bresenham3D(model3d* m, long x1, long y1, long z1, float s1, float t1, long x2, long y2, long z2, float s2, float t2, std::vector<double> *output);
-
     void triangles(model3d* m);
 
-    void voxelise();
+    void detexturise();
 
     std::vector<model3d> models;               ///< Standard parts of model
     AABB aabb;                                 ///< Extremes of current model
     float width, aplitude, height;             ///< Dimensions of current model
     char modelname[256];                       ///< Model filename
-    octreeNode* voxels;
+    std::vector<float> vertices;
+    std::vector<float> colors;
 };
 
 #endif // MODEL_H

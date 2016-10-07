@@ -11,6 +11,14 @@
 #include "engine/model.h"
 #include "engine/switch.h"
 
+
+//http://stackoverflow.com/questions/23880160/stdmap-key-no-match-for-operator
+bool operator<(const id3d& lhs, const id3d& rhs)
+{
+    return lhs.x < rhs.x ||
+           lhs.x == rhs.x && (lhs.y < rhs.y || lhs.y == rhs.y && lhs.z < rhs.z);
+}
+
 /**
  * @brief model destructor
  */
@@ -150,39 +158,63 @@ model::model(std::string filename) {
     delete f;
 }
 
-void model::triangles(model3d* m) {
+void model::triangles(model3d* m, bool culling) {
     long v = 0;
     long t = 0;
-    ColorRGBA a, b, c;
+    id3d id;
+    id.x = 0;
+    id.y = 0;
+    id.z = 0;
+    glm::vec3 a, b, c, center;
+    ColorRGBA ca, cb, cc;
     for (int i = 0; i < m->count; i++, v += 9, t += 6) {
+        //get vertices
+        a = glm::vec3(m->vertices[v + 0] + m->reg.min.x,
+                      m->vertices[v + 1] + m->reg.min.y,
+                      m->vertices[v + 2] + m->reg.min.z);
+        b = glm::vec3(m->vertices[v + 3] + m->reg.min.x,
+                      m->vertices[v + 4] + m->reg.min.y,
+                      m->vertices[v + 5] + m->reg.min.z);
+        c = glm::vec3(m->vertices[v + 6] + m->reg.min.x,
+                      m->vertices[v + 7] + m->reg.min.y,
+                      m->vertices[v + 8] + m->reg.min.z);
         //get colors
-        a = m->texture2D->getPixel(m->coords[t + 0], m->coords[t + 1]);
-        b = m->texture2D->getPixel(m->coords[t + 2], m->coords[t + 3]);
-        c = m->texture2D->getPixel(m->coords[t + 4], m->coords[t + 5]);
-        //put vertices
-        vertices.push_back(m->vertices[v + 0] + m->reg.min.x);
-        vertices.push_back(m->vertices[v + 1] + m->reg.min.y);
-        vertices.push_back(m->vertices[v + 2] + m->reg.min.z);
-        vertices.push_back(m->vertices[v + 3] + m->reg.min.x);
-        vertices.push_back(m->vertices[v + 4] + m->reg.min.y);
-        vertices.push_back(m->vertices[v + 5] + m->reg.min.z);
-        vertices.push_back(m->vertices[v + 6] + m->reg.min.x);
-        vertices.push_back(m->vertices[v + 7] + m->reg.min.y);
-        vertices.push_back(m->vertices[v + 8] + m->reg.min.z);
-        colors.push_back(a.r / 255.0f);
-        colors.push_back(a.g / 255.0f);
-        colors.push_back(a.b / 255.0f);
-        colors.push_back(b.r / 255.0f);
-        colors.push_back(b.g / 255.0f);
-        colors.push_back(b.b / 255.0f);
-        colors.push_back(c.r / 255.0f);
-        colors.push_back(c.g / 255.0f);
-        colors.push_back(c.b / 255.0f);
+        ca = m->texture2D->getPixel(m->coords[t + 0], m->coords[t + 1]);
+        cb = m->texture2D->getPixel(m->coords[t + 2], m->coords[t + 3]);
+        cc = m->texture2D->getPixel(m->coords[t + 4], m->coords[t + 5]);
+        //get id
+        center = (a + b + c) / 3.0f;
+        center += 100.0f;
+        if(culling)
+        {
+            id.x = center.x / 200;
+            id.y = center.y / 200;
+            id.z = center.z / 200;
+        }
+        //put triangle into data
+        vertices[id].push_back(a.x);
+        vertices[id].push_back(a.y);
+        vertices[id].push_back(a.z);
+        vertices[id].push_back(b.x);
+        vertices[id].push_back(b.y);
+        vertices[id].push_back(b.z);
+        vertices[id].push_back(c.x);
+        vertices[id].push_back(c.y);
+        vertices[id].push_back(c.z);
+        colors[id].push_back(ca.r / 255.0f);
+        colors[id].push_back(ca.g / 255.0f);
+        colors[id].push_back(ca.b / 255.0f);
+        colors[id].push_back(cb.r / 255.0f);
+        colors[id].push_back(cb.g / 255.0f);
+        colors[id].push_back(cb.b / 255.0f);
+        colors[id].push_back(cc.r / 255.0f);
+        colors[id].push_back(cc.g / 255.0f);
+        colors[id].push_back(cc.b / 255.0f);
     }
 }
 
-void model::detexturise() {
+void model::detexturise(bool culling) {
     for (unsigned int i = 0; i < models.size(); i++)
         if((models[i].filter == 0) && !models[i].dynamic && !models[i].touchable)
-            triangles(&models[i]);
+            triangles(&models[i], culling);
 }

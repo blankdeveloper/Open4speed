@@ -6,15 +6,24 @@ LIBS += -lglut \
     -lGLU \
     -lX11 \
     -lpng \
-    -lzip \
-    -lBulletDynamics \
-    -lBulletCollision \
-    -lLinearMath
+    -lzip
 TARGET = open4speed
 CONFIG += console
 CONFIG -= app_bundle
 TEMPLATE = app
 SOURCES += \
+    ../support/bullet3-2.83.7/BulletCollision/BroadphaseCollision/*.cpp \
+    ../support/bullet3-2.83.7/BulletCollision/CollisionDispatch/*.cpp \
+    ../support/bullet3-2.83.7/BulletCollision/CollisionShapes/*.cpp \
+    ../support/bullet3-2.83.7/BulletCollision/Gimpact/*.cpp \
+    ../support/bullet3-2.83.7/BulletCollision/NarrowPhaseCollision/*.cpp \
+    ../support/bullet3-2.83.7/BulletDynamics/ConstraintSolver/*.cpp \
+    ../support/bullet3-2.83.7/BulletDynamics/Dynamics/*.cpp \
+    ../support/bullet3-2.83.7/BulletDynamics/Featherstone/*.cpp \
+    ../support/bullet3-2.83.7/BulletDynamics/Character/*.cpp \
+    ../support/bullet3-2.83.7/BulletDynamics/MLCPSolvers/*.cpp \
+    ../support/bullet3-2.83.7/BulletDynamics/Vehicle/*.cpp \
+    ../support/bullet3-2.83.7/LinearMath/*.cpp \
     engine/car.cpp \
     engine/io.cpp \
     engine/math.cpp \
@@ -62,4 +71,4 @@ HEADERS += \
     renderers/opengl/gltexture.h \
     renderers/simple/srenderer.h \
     renderers/simple/stexture.h
-INCLUDEPATH += /usr/include/bullet
+INCLUDEPATH += ../support/bullet3-2.83.7

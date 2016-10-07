@@ -410,8 +410,24 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     current->uniformMatrix("u_Matrix",glm::value_ptr(matrix));
 
     if (!mod->vertices.empty() && !m->dynamic) {
-        current->attrib(&mod->vertices[0], &mod->colors[0], 0);
-        glDrawArrays(GL_TRIANGLES, 0, mod->vertices.size() / 3);
+        id3d id;
+        if(mod->vertices.size() == 1)
+        {
+            id.x = 0;
+            id.y = 0;
+            id.z = 0;
+            current->attrib(&mod->vertices[id][0], &mod->colors[id][0], 0);
+            glDrawArrays(GL_TRIANGLES, 0, mod->vertices[id].size() / 3);
+        } else {
+            for (id.x = (camX + 100.0f) / 200 - 1; id.x <= (camX + 100.0f) / 200 + 1; id.x++)
+                for (id.y = (camY + 100.0f) / 200 - 1; id.y <= (camY + 100.0f) / 200 + 1; id.y++)
+                    for (id.z = (camZ + 100.0f) / 200 - 1; id.z <= (camZ + 100.0f) / 200 + 1; id.z++)
+                        if (mod->vertices.find(id) != mod->vertices.end())
+                        {
+                            current->attrib(&mod->vertices[id][0], &mod->colors[id][0], 0);
+                            glDrawArrays(GL_TRIANGLES, 0, mod->vertices[id].size() / 3);
+                        }
+        }
     } else {
 
         /// previous screen

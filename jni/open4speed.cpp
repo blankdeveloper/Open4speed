@@ -269,7 +269,7 @@ void loadScene(std::string filename) {
     else
     {
         edge edg;
-        edg.a = glm::vec3( 100, 50, 0 );
+        edg.a = glm::vec3( 1000, 50, 0 );
         edg.b = glm::vec3( 10, 50, 0 );
         e.push_back( edg );
     }
@@ -316,11 +316,11 @@ void loadScene(std::string filename) {
     for (unsigned int i = 0; i < getCarCount(); i++)
         physic->addCar(getCar(i));
 #ifndef SOFTWARE_RENDERER
-    /*trackdata->detexturise();
+    /*trackdata->detexturise(true);
     for (unsigned int i = 0; i < getCarCount(); i++)
     {
-        getCar(i)->skin->detexturise();
-        getCar(i)->wheel->detexturise();
+        getCar(i)->skin->detexturise(false);
+        getCar(i)->wheel->detexturise(false);
     }*/
 #endif
 }

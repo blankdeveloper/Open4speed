@@ -44,16 +44,31 @@
  */
 bullet::~bullet() {
     delete m_dynamicsWorld;
-    if(!m_vehicle.empty())
-        delete[] &m_vehicle[0];
-    if(!bodies.empty())
-        delete[] &bodies[0];
-    if(!shapes.empty())
-        delete[] &shapes[0];
-    if(!meshes.empty())
-        delete[] &meshes[0];
-    if(!bodies2.empty())
-        delete[] &bodies2[0];
+    while(!m_vehicle.empty())
+    {
+        delete m_vehicle[m_vehicle.size() - 1];
+        m_vehicle.pop_back();
+    }
+    while(!bodies.empty())
+    {
+        delete bodies[bodies.size() - 1];
+        bodies.pop_back();
+    }
+    while(!shapes.empty())
+    {
+        delete shapes[shapes.size() - 1];
+        shapes.pop_back();
+    }
+    while(!meshes.empty())
+    {
+        delete meshes[meshes.size() - 1];
+        meshes.pop_back();
+    }
+    while(!bodies2.empty())
+    {
+        delete bodies2[bodies2.size() - 1];
+        bodies2.pop_back();
+    }
 
     delete m_vehicleRayCaster;
     delete m_collisionConfiguration;

@@ -8,6 +8,7 @@
 ///----------------------------------------------------------------------------------------
 
 #include <cstring>
+#include <stdio.h>
 #include "renderers/opengl/gles20.h"
 #include "renderers/opengl/gltexture.h"
 
@@ -108,8 +109,8 @@ ColorRGBA gltexture::getPixel(double s, double t) {
     if (animated)
       return anim[currentFrame]->getPixel(s, t);
     else {
-        s -= (int)s;
-        t -= (int)t;
+        s = glm::mod(s, 1.0);
+        t = glm::mod(t, 1.0);
         if (s < 0)
             s++;
         if (t < 0)

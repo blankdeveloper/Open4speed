@@ -268,6 +268,7 @@ void gles20::renderModel(model* m, glm::vec3 center) {
 
     if (!m->vertices.empty())
     {
+        glDisable(GL_CULL_FACE);
         current = detextured;
         current->bind();
         renderSubModel(m, &m->models[0], center);
@@ -278,13 +279,11 @@ void gles20::renderModel(model* m, glm::vec3 center) {
             if (enable[m->models[i].filter] && m->models[i].dynamic) {
                 current = m->models[i].material;
                 current->bind();
-                if (m->models[i].texture2D->transparent)
-                    glDisable(GL_CULL_FACE);
                 renderSubModel(m, &m->models[i], center);
                 current->unbind();
             }
-            glEnable(GL_CULL_FACE);
         }
+        glEnable(GL_CULL_FACE);
         return;
     }
 

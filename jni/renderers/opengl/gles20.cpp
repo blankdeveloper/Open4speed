@@ -262,16 +262,15 @@ void gles20::renderDynamic(float* vertices, float* normals, float* coords, shade
 /**
  * @brief renderModel renders model into scene
  * @param m is instance of model to render
- * @param center is model translation
  */
-void gles20::renderModel(model* m, glm::vec3 center) {
+void gles20::renderModel(model* m) {
 
     if (!m->vertices.empty())
     {
         glDisable(GL_CULL_FACE);
         current = detextured;
         current->bind();
-        renderSubModel(m, &m->models[0], center);
+        renderSubModel(m, &m->models[0]);
         current->unbind();
 
         /// dynamic objects
@@ -279,7 +278,7 @@ void gles20::renderModel(model* m, glm::vec3 center) {
             if (enable[m->models[i].filter] && m->models[i].dynamic) {
                 current = m->models[i].material;
                 current->bind();
-                renderSubModel(m, &m->models[i], center);
+                renderSubModel(m, &m->models[i]);
                 current->unbind();
             }
         }
@@ -294,7 +293,7 @@ void gles20::renderModel(model* m, glm::vec3 center) {
             current->bind();
             if (m->models[i].texture2D->transparent)
                 glDisable(GL_CULL_FACE);
-            renderSubModel(m, &m->models[i], center);
+            renderSubModel(m, &m->models[i]);
             current->unbind();
         }
         glEnable(GL_CULL_FACE);
@@ -305,9 +304,8 @@ void gles20::renderModel(model* m, glm::vec3 center) {
 /**
  * @brief renderShadow renders shadow of model into scene
  * @param m is instance of model to render
- * @param center is model translation
  */
-void gles20::renderShadow(model* m, glm::vec3 center) {
+void gles20::renderShadow(model* m) {
 
     if (!rtt_fbo[oddFrame]->complete || !m->vertices.empty())
         return;
@@ -331,7 +329,7 @@ void gles20::renderShadow(model* m, glm::vec3 center) {
         glStencilOp(GL_KEEP,GL_KEEP,GL_ZERO);
         for (unsigned int i = 0; i < m->models.size(); i++)
             if (!m->models[i].filter)
-                renderSubModel(m, &m->models[i], center);
+                renderSubModel(m, &m->models[i]);
 
         /// render shadow
         current->uniformFloat("u_offset", 0.5f);
@@ -341,7 +339,7 @@ void gles20::renderShadow(model* m, glm::vec3 center) {
         glStencilOp(GL_KEEP,GL_KEEP, GL_INCR);
         for (unsigned int i = 0; i < m->models.size(); i++)
             if (!m->models[i].filter)
-                renderSubModel(m, &m->models[i], center);
+                renderSubModel(m, &m->models[i]);
     }
 
     /// set up previous state
@@ -357,9 +355,8 @@ void gles20::renderShadow(model* m, glm::vec3 center) {
 /**
  * @brief renderSubModel renders model into scene
  * @param m is instance of model to render
- * @param center is model translation
  */
-void gles20::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
+void gles20::renderSubModel(model* mod, model3d *m) {
 
     /// set model matrix
     glm::mat4x4 modelView;
@@ -376,7 +373,7 @@ void gles20::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
             1,0,0,0,
             0,1,0,0,
             0,0,1,0,
-            -w/2 + center.x, -a/2 + center.y, -h/2 + center.z, 1
+            -w/2, -a/2, -h/2, 1
         );
         glm::mat4x4 dynamic(
             mat[0],mat[1],mat[2],mat[3],
@@ -388,22 +385,14 @@ void gles20::renderSubModel(model* mod, model3d *m, glm::vec3 center) {
         modelView = view_matrix * modelMat;
     } else {
         if(!mod->vertices.empty())
-        {
-            glm::mat4x4 translation(
-                1,0,0,0,
-                0,1,0,0,
-                0,0,1,0,
-                center.x, center.y, center.z, 1
-            );
-            modelMat = matrix_result * translation;
-        }
+            modelMat = matrix_result;
         else
         {
             glm::mat4x4 translation(
                 1,0,0,0,
                 0,1,0,0,
                 0,0,1,0,
-                m->reg.min.x + center.x, m->reg.min.y + center.y, m->reg.min.z + center.z, 1
+                m->reg.min.x, m->reg.min.y, m->reg.min.z, 1
             );
             modelMat = matrix_result * translation;
         }

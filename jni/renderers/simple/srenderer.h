@@ -119,23 +119,20 @@ public:
     /**
      * @brief renderModel renders model into scene
      * @param m is instance of model to render
-     * @param center is model translation
      */
-    void renderModel(model* m, glm::vec3 center);
+    void renderModel(model* m);
 
     /**
      * @brief renderShadow renders shadow of model into scene
      * @param m is instance of model to render
-     * @param center is model translation
      */
-    void renderShadow(model* m, glm::vec3 center) { /*unsupported*/ }
+    void renderShadow(model* m) { /*unsupported*/ }
 
     /**
      * @brief renderSubModel renders model into scene
      * @param m is instance of model to render
-     * @param center is model translation
      */
-    void renderSubModel(model* mod, model3d *m, glm::vec3 center);
+    void renderSubModel(model* mod, model3d *m);
 
     /**
      * @brief rtt enables rendering into FBO which makes posible to do reflections

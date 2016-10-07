@@ -115,12 +115,12 @@ void display(void) {
     xrenderer->pushMatrix();
     xrenderer->translate(cameraX, cameraY - 50, cameraZ);
     xrenderer->scale(viewDistance * 2 - 50);
-    xrenderer->renderModel(skydome, glm::vec3(0, 0, 0));
+    xrenderer->renderModel(skydome);
     xrenderer->popMatrix();
 
     /// render track
     xrenderer->enable[1] = false;
-    xrenderer->renderModel(trackdata, glm::vec3(0, 0, 0));
+    xrenderer->renderModel(trackdata);
 
     /// render cars
     xrenderer->enable[2] = false;
@@ -131,7 +131,7 @@ void display(void) {
         xrenderer->multMatrix(getCar(i)->transform[0].value);
         xrenderer->enable[1] = getCar(i)->control->getNitro() && (getCar(i)->n2o > 1);
         xrenderer->enable[9] = getCar(i)->control->getBrake() != 0;
-        xrenderer->renderModel(getCar(i)->skin, glm::vec3(0, 0, 0));
+        xrenderer->renderModel(getCar(i)->skin);
         xrenderer->popMatrix();
 
         /// render wheels
@@ -140,7 +140,7 @@ void display(void) {
             xrenderer->multMatrix(getCar(i)->transform[j].value);
             if (j % 2 == 1)
               xrenderer->rotateY(180);
-            xrenderer->renderModel(getCar(i)->wheel, glm::vec3(0, 0, 0));
+            xrenderer->renderModel(getCar(i)->wheel);
             xrenderer->popMatrix();
         }
     }
@@ -151,7 +151,7 @@ void display(void) {
         ///render car skin
         xrenderer->pushMatrix();
         xrenderer->multMatrix(getCar(i)->transform[0].value);
-        xrenderer->renderShadow(getCar(i)->skin, glm::vec3(0, 0, 0));
+        xrenderer->renderShadow(getCar(i)->skin);
         xrenderer->popMatrix();
     }
 

@@ -71,8 +71,8 @@ public:
     char modelname[256];                       ///< Model filename
 
     std::map<id3d, std::vector<float> > vertices;
-    std::map<id3d, std::vector<float> > colors;
-    bool culled;
+    std::map<id3d, std::vector<float> > normals;
+    std::map<id3d, std::vector<float> > coords;
 };
 
 #endif // MODEL_H

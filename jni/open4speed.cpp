@@ -315,13 +315,6 @@ void loadScene(std::string filename) {
     physic->addModel(trackdata);
     for (unsigned int i = 0; i < getCarCount(); i++)
         physic->addCar(getCar(i));
-
-    /*trackdata->detexturise(true);
-    for (unsigned int i = 0; i < getCarCount(); i++)
-    {
-        getCar(i)->skin->detexturise(false);
-        getCar(i)->wheel->detexturise(false);
-    }*/
 }
 
 /**

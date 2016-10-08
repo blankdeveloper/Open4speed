@@ -190,15 +190,17 @@ void model::detexturise(bool culling) {
                 vertices[id].push_back(c.x);
                 vertices[id].push_back(c.y);
                 vertices[id].push_back(c.z);
-                colors[id].push_back(ca.r / 255.0f);
-                colors[id].push_back(ca.g / 255.0f);
-                colors[id].push_back(ca.b / 255.0f);
-                colors[id].push_back(cb.r / 255.0f);
-                colors[id].push_back(cb.g / 255.0f);
-                colors[id].push_back(cb.b / 255.0f);
-                colors[id].push_back(cc.r / 255.0f);
-                colors[id].push_back(cc.g / 255.0f);
-                colors[id].push_back(cc.b / 255.0f);
+                normals[id].push_back(ca.r / 255.0f);
+                normals[id].push_back(ca.g / 255.0f);
+                normals[id].push_back(ca.b / 255.0f);
+                normals[id].push_back(cb.r / 255.0f);
+                normals[id].push_back(cb.g / 255.0f);
+                normals[id].push_back(cb.b / 255.0f);
+                normals[id].push_back(cc.r / 255.0f);
+                normals[id].push_back(cc.g / 255.0f);
+                normals[id].push_back(cc.b / 255.0f);
+                for(int j = 0; j < 6; j++)
+                  coords[id].push_back(m->coords[t + j]);
             }
         }
 }

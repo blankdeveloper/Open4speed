@@ -268,31 +268,57 @@ void gles20::renderModel(model* m) {
         glDisable(GL_CULL_FACE);
         current = detextured;
         current->bind();
-        renderSubModel(m, &m->models[0]);
-        current->unbind();
+        /// set matrices
+        modelMat = matrix_result;
+        glm::mat4x4 modelView = view_matrix * modelMat;
+        glm::mat4x4 projView = proj_matrix * view_matrix;
+        matrix = proj_matrix * modelView;
+        current->uniformMatrix("u_ModelMatrix",glm::value_ptr(modelMat));
+        current->uniformMatrix("u_ViewMatrix",glm::value_ptr(view_matrix));
+        current->uniformMatrix("u_ModelViewMatrix",glm::value_ptr(modelView));
+        current->uniformMatrix("u_ProjViewMatrix",glm::value_ptr(projView));
+        current->uniformMatrix("u_ProjectionMatrix",glm::value_ptr(proj_matrix));
+        current->uniformMatrix("u_Matrix",glm::value_ptr(matrix));
 
-        /// dynamic objects
-        for (unsigned int i = 0; i < m->models.size(); i++) {
-            if (enable[m->models[i].filter] && m->models[i].dynamic) {
-                current = m->models[i].material;
-                current->bind();
-                renderSubModel(m, &m->models[i]);
-                current->unbind();
-            }
+        id3d id;
+        if(m->vertices.size() == 1)
+        {
+            id.x = 0;
+            id.y = 0;
+            id.z = 0;
+            current->attrib(&m->vertices[id][0], &m->normals[id][0], &m->coords[id][0]);
+            glDrawArrays(GL_TRIANGLES, 0, m->vertices[id].size() / 3);
+        } else {
+            int s = 2;
+            int cx = camX / 150;
+            int cy = camY / 150;
+            int cz = camZ / 150;
+            for (id.x = cx - s; id.x <= cx + s; id.x++)
+                for (id.y = cy - s; id.y <= cy + s; id.y++)
+                    for (id.z = cz - s; id.z <= cz + s; id.z++)
+                        if (m->vertices.find(id) != m->vertices.end())
+                        {
+                            current->attrib(&m->vertices[id][0], &m->normals[id][0], &m->coords[id][0]);
+                            glDrawArrays(GL_TRIANGLES, 0, m->vertices[id].size() / 3);
+                        }
         }
-        glEnable(GL_CULL_FACE);
-        return;
+        current->unbind();
     }
 
     /// set opengl for rendering models
-    for (unsigned int i = 0; i < m->models.size(); i++) {
-        if (enable[m->models[i].filter] && !m->models[i].touchable) {
-            current = m->models[i].material;
-            current->bind();
-            if (m->models[i].texture2D->transparent)
-                glDisable(GL_CULL_FACE);
-            renderSubModel(m, &m->models[i]);
-            current->unbind();
+    for (unsigned int i = 0; i < m->models.size(); i++)
+    {
+        if (enable[m->models[i].filter] && !m->models[i].touchable)
+        {
+            if(m->models[i].dynamic || m->vertices.empty())
+            {
+                current = m->models[i].material;
+                current->bind();
+                if (m->models[i].texture2D->transparent)
+                    glDisable(GL_CULL_FACE);
+                renderSubModel(m, &m->models[i]);
+                current->unbind();
+            }
         }
         glEnable(GL_CULL_FACE);
     }
@@ -379,18 +405,13 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         modelMat = dynamic * translation;
         modelView = view_matrix * modelMat;
     } else {
-        if(!mod->vertices.empty())
-            modelMat = matrix_result;
-        else
-        {
-            glm::mat4x4 translation(
-                1,0,0,0,
-                0,1,0,0,
-                0,0,1,0,
-                m->reg.min.x, m->reg.min.y, m->reg.min.z, 1
-            );
-            modelMat = matrix_result * translation;
-        }
+        glm::mat4x4 translation(
+            1,0,0,0,
+            0,1,0,0,
+            0,0,1,0,
+            m->reg.min.x, m->reg.min.y, m->reg.min.z, 1
+        );
+        modelMat = matrix_result * translation;
         modelView = view_matrix * modelMat;
     }
     glm::mat4x4 projView = proj_matrix * view_matrix;
@@ -404,55 +425,29 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     matrix = proj_matrix * modelView;
     current->uniformMatrix("u_Matrix",glm::value_ptr(matrix));
 
-    if (!mod->vertices.empty() && !m->dynamic) {
-        id3d id;
-        if(mod->vertices.size() == 1)
-        {
-            id.x = 0;
-            id.y = 0;
-            id.z = 0;
-            current->attrib(&mod->vertices[id][0], &mod->colors[id][0], 0);
-            glDrawArrays(GL_TRIANGLES, 0, mod->vertices[id].size() / 3);
-        } else {
-            int s = 2;
-            int cx = camX / 150;
-            int cy = camY / 150;
-            int cz = camZ / 150;
-            for (id.x = cx - s; id.x <= cx + s; id.x++)
-                for (id.y = cy - s; id.y <= cy + s; id.y++)
-                    for (id.z = cz - s; id.z <= cz + s; id.z++)
-                        if (mod->vertices.find(id) != mod->vertices.end())
-                        {
-                            current->attrib(&mod->vertices[id][0], &mod->colors[id][0], 0);
-                            glDrawArrays(GL_TRIANGLES, 0, mod->vertices[id].size() / 3);
-                        }
-        }
-    } else {
+    /// previous screen
+    glActiveTexture( GL_TEXTURE1 );
+    rtt_fbo[oddFrame]->bindTexture();
+    current->uniformInt("EnvMap1", 1);
 
-        /// previous screen
-        glActiveTexture( GL_TEXTURE1 );
-        rtt_fbo[oddFrame]->bindTexture();
-        current->uniformInt("EnvMap1", 1);
+    /// set texture
+    glActiveTexture( GL_TEXTURE0 );
+    m->texture2D->apply();
+    current->uniformInt("color_texture", 0);
 
-        /// set texture
-        glActiveTexture( GL_TEXTURE0 );
-        m->texture2D->apply();
-        current->uniformInt("color_texture", 0);
+    /// set uniforms
+    current->uniformFloat("u_width", 1 / (float)screen_width / aliasing);
+    current->uniformFloat("u_height", 1 / (float)screen_height / aliasing);
+    current->uniformFloat4("u_kA", m->colora[0], m->colora[1], m->colora[2], 1);
+    current->uniformFloat4("u_kD", m->colord[0], m->colord[1], m->colord[2], 1);
+    current->uniformFloat4("u_kS", m->colors[0], m->colors[1], m->colors[2], 1);
+    if (enable[9])
+        current->uniformFloat("u_brake", 1);
+    else
+        current->uniformFloat("u_brake", 0);
 
-        /// set uniforms
-        current->uniformFloat("u_width", 1 / (float)screen_width / aliasing);
-        current->uniformFloat("u_height", 1 / (float)screen_height / aliasing);
-        current->uniformFloat4("u_kA", m->colora[0], m->colora[1], m->colora[2], 1);
-        current->uniformFloat4("u_kD", m->colord[0], m->colord[1], m->colord[2], 1);
-        current->uniformFloat4("u_kS", m->colors[0], m->colors[1], m->colors[2], 1);
-        if (enable[9])
-            current->uniformFloat("u_brake", 1);
-        else
-            current->uniformFloat("u_brake", 0);
-
-        current->attrib(&m->vertices[0], &m->normals[0], &m->coords[0]);
-        glDrawArrays(GL_TRIANGLES, 0, m->vertices.size() / 3);
-    }
+    current->attrib(&m->vertices[0], &m->normals[0], &m->coords[0]);
+    glDrawArrays(GL_TRIANGLES, 0, m->vertices.size() / 3);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 

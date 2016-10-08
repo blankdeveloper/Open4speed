@@ -23,13 +23,6 @@ bool operator<(const id3d& lhs, const id3d& rhs)
  * @brief model destructor
  */
 model::~model() {
-    for (unsigned int i = 0; i < models.size(); i++) {
-        delete[] models[i].vertices;
-        if (models[i].normals)
-            delete[] models[i].normals;
-        if (models[i].coords)
-            delete[] models[i].coords;
-    }
 }
 
 /**
@@ -72,11 +65,6 @@ model::model(std::string filename) {
                &texturePath[0], &m.colora[0], &m.colora[1], &m.colora[2], &m.colord[0], &m.colord[1], &m.colord[2],
                &m.colors[0], &m.colors[1], &m.colors[2], &alpha, &material[0]);
 
-        /// get model size
-        m.x = m.reg.min.x;
-        m.y = m.reg.min.y;
-        m.z = m.reg.min.z;
-
         /// if texture is not only single color then load it
         if((texturePath[0] != '*') && (texturePath[0] != '('))
             m.texture2D = getTexture(f->path() + texturePath);
@@ -110,7 +98,6 @@ model::model(std::string filename) {
                 cursor++;
                 m.filter = material[cursor] - '0';
                 cursor++;
-#ifndef SOFTWARE_RENDERER
             } else if (material[cursor] == '%') {
                 cursor++;
                 m.texture2D->transparent = false;
@@ -126,95 +113,92 @@ model::model(std::string filename) {
                 m.material = getShader(shadername);
                 delete[] shadername;
                 break;
-#endif
             } else {
                 break;
             }
         }
 
         /// prepare model arrays
-        m.count = f->scandec();
-        m.vertices = new float[m.count * 9];
-        m.normals = new float[m.count * 9];
-        m.coords = new float[m.count * 6];
-        for (int j = 0; j < m.count; j++) {
+        int count = f->scandec();
+        float v[9];
+        float n[9];
+        float t[6];
+        for (int j = 0; j < count; j++) {
             /// read triangle parameters
             f->gets(line);
             sscanf(line, "%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f",
-                   &m.coords[j * 6 + 0], &m.coords[j * 6 + 1],
-                   &m.normals[j * 9 + 0], &m.normals[j * 9 + 1], &m.normals[j * 9 + 2],
-                   &m.vertices[j * 9 + 0], &m.vertices[j * 9 + 1], &m.vertices[j * 9 + 2],
+                   &t[0], &t[1], &n[0], &n[1], &n[2], &v[0], &v[1], &v[2],
+                   &t[2], &t[3], &n[3], &n[4], &n[5], &v[3], &v[4], &v[5],
+                   &t[4], &t[5], &n[6], &n[7], &n[8], &v[6], &v[7], &v[8]);
 
-                   &m.coords[j * 6 + 2], &m.coords[j * 6 + 3],
-                   &m.normals[j * 9 + 3], &m.normals[j * 9 + 4], &m.normals[j * 9 + 5],
-                   &m.vertices[j * 9 + 3], &m.vertices[j * 9 + 4], &m.vertices[j * 9 + 5],
-
-                   &m.coords[j * 6 + 4], &m.coords[j * 6 + 5],
-                   &m.normals[j * 9 + 6], &m.normals[j * 9 + 7], &m.normals[j * 9 + 8],
-                   &m.vertices[j * 9 + 6], &m.vertices[j * 9 + 7], &m.vertices[j * 9 + 8]);
+            /// copy data
+            for(int i = 0; i < 9; i++)
+                m.vertices.push_back(v[i]);
+            for(int i = 0; i < 9; i++)
+                m.normals.push_back(n[i]);
+            for(int i = 0; i < 6; i++)
+                m.coords.push_back(t[i]);
         }
         models.push_back(m);
     }
     delete f;
 }
 
-void model::triangles(model3d* m, bool culling) {
-    long v = 0;
-    long t = 0;
-    id3d id;
-    id.x = 0;
-    id.y = 0;
-    id.z = 0;
-    glm::vec3 a, b, c, center;
-    ColorRGBA ca, cb, cc;
-    for (int i = 0; i < m->count; i++, v += 9, t += 6) {
-        //get vertices
-        a = glm::vec3(m->vertices[v + 0] + m->reg.min.x,
-                      m->vertices[v + 1] + m->reg.min.y,
-                      m->vertices[v + 2] + m->reg.min.z);
-        b = glm::vec3(m->vertices[v + 3] + m->reg.min.x,
-                      m->vertices[v + 4] + m->reg.min.y,
-                      m->vertices[v + 5] + m->reg.min.z);
-        c = glm::vec3(m->vertices[v + 6] + m->reg.min.x,
-                      m->vertices[v + 7] + m->reg.min.y,
-                      m->vertices[v + 8] + m->reg.min.z);
-        //get colors
-        ca = m->texture2D->getPixel(m->coords[t + 0], m->coords[t + 1]);
-        cb = m->texture2D->getPixel(m->coords[t + 2], m->coords[t + 3]);
-        cc = m->texture2D->getPixel(m->coords[t + 4], m->coords[t + 5]);
-        //get id
-        center = (a + b + c) / 3.0f;
-        center += 100.0f;
-        if(culling)
-        {
-            id.x = center.x / 200;
-            id.y = center.y / 200;
-            id.z = center.z / 200;
-        }
-        //put triangle into data
-        vertices[id].push_back(a.x);
-        vertices[id].push_back(a.y);
-        vertices[id].push_back(a.z);
-        vertices[id].push_back(b.x);
-        vertices[id].push_back(b.y);
-        vertices[id].push_back(b.z);
-        vertices[id].push_back(c.x);
-        vertices[id].push_back(c.y);
-        vertices[id].push_back(c.z);
-        colors[id].push_back(ca.r / 255.0f);
-        colors[id].push_back(ca.g / 255.0f);
-        colors[id].push_back(ca.b / 255.0f);
-        colors[id].push_back(cb.r / 255.0f);
-        colors[id].push_back(cb.g / 255.0f);
-        colors[id].push_back(cb.b / 255.0f);
-        colors[id].push_back(cc.r / 255.0f);
-        colors[id].push_back(cc.g / 255.0f);
-        colors[id].push_back(cc.b / 255.0f);
-    }
-}
-
 void model::detexturise(bool culling) {
     for (unsigned int i = 0; i < models.size(); i++)
         if((models[i].filter == 0) && !models[i].dynamic && !models[i].touchable)
-            triangles(&models[i], culling);
+        {
+            model3d* m = &models[i];
+            long v = 0;
+            long t = 0;
+            id3d id;
+            id.x = 0;
+            id.y = 0;
+            id.z = 0;
+            glm::vec3 a, b, c, center;
+            ColorRGBA ca, cb, cc;
+            for (unsigned int i = 0; i < m->vertices.size() / 9; i++, v += 9, t += 6) {
+                //get vertices
+                a = glm::vec3(m->vertices[v + 0] + m->reg.min.x,
+                              m->vertices[v + 1] + m->reg.min.y,
+                              m->vertices[v + 2] + m->reg.min.z);
+                b = glm::vec3(m->vertices[v + 3] + m->reg.min.x,
+                              m->vertices[v + 4] + m->reg.min.y,
+                              m->vertices[v + 5] + m->reg.min.z);
+                c = glm::vec3(m->vertices[v + 6] + m->reg.min.x,
+                              m->vertices[v + 7] + m->reg.min.y,
+                              m->vertices[v + 8] + m->reg.min.z);
+                //get colors
+                ca = m->texture2D->getPixel(m->coords[t + 0], m->coords[t + 1]);
+                cb = m->texture2D->getPixel(m->coords[t + 2], m->coords[t + 3]);
+                cc = m->texture2D->getPixel(m->coords[t + 4], m->coords[t + 5]);
+                //get id
+                center = (a + b + c) / 3.0f;
+                if(culling)
+                {
+                    id.x = center.x / 150;
+                    id.y = center.y / 150;
+                    id.z = center.z / 150;
+                }
+                //put triangle into data
+                vertices[id].push_back(a.x);
+                vertices[id].push_back(a.y);
+                vertices[id].push_back(a.z);
+                vertices[id].push_back(b.x);
+                vertices[id].push_back(b.y);
+                vertices[id].push_back(b.z);
+                vertices[id].push_back(c.x);
+                vertices[id].push_back(c.y);
+                vertices[id].push_back(c.z);
+                colors[id].push_back(ca.r / 255.0f);
+                colors[id].push_back(ca.g / 255.0f);
+                colors[id].push_back(ca.b / 255.0f);
+                colors[id].push_back(cb.r / 255.0f);
+                colors[id].push_back(cb.g / 255.0f);
+                colors[id].push_back(cb.b / 255.0f);
+                colors[id].push_back(cc.r / 255.0f);
+                colors[id].push_back(cc.g / 255.0f);
+                colors[id].push_back(cc.b / 255.0f);
+            }
+        }
 }

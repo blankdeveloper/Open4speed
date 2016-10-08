@@ -179,7 +179,7 @@ void display(void) {
                     float x = getCar(i)->transform[j].value[12] + (rand() % 50 - 25) * 0.03f + sin(getCar(i)->rot * 3.14 / 180) * k * 0.03f;
                     float y = getCar(i)->transform[j].value[13] - 0.1f;
                     float z = getCar(i)->transform[j].value[14] + (rand() % 50 - 25) * 0.03f + cos(getCar(i)->rot * 3.14 / 180) * k * 0.03f;
-                    for (int l = 0; l < water->models[0].count * 3; l++) {
+                    for (int l = 0; l < water->models[0].vertices.size() / 3; l++) {
                         eff[currentFrame].vertices[eff[currentFrame].count * 3 + 0] = x;
                         eff[currentFrame].vertices[eff[currentFrame].count * 3 + 1] = y;
                         eff[currentFrame].vertices[eff[currentFrame].count * 3 + 2] = z;
@@ -269,7 +269,7 @@ void loadScene(std::string filename) {
     else
     {
         edge edg;
-        edg.a = glm::vec3( 1000, 50, 0 );
+        edg.a = glm::vec3( 100, 50, 0 );
         edg.b = glm::vec3( 10, 50, 0 );
         e.push_back( edg );
     }
@@ -312,17 +312,16 @@ void loadScene(std::string filename) {
 
     /// create instance of physical engine
     physics* physic = getPhysics();
-    physic->addModel(trackdata, glm::vec3(0, 0, 0));
+    physic->addModel(trackdata);
     for (unsigned int i = 0; i < getCarCount(); i++)
         physic->addCar(getCar(i));
-#ifndef SOFTWARE_RENDERER
+
     /*trackdata->detexturise(true);
     for (unsigned int i = 0; i < getCarCount(); i++)
     {
         getCar(i)->skin->detexturise(false);
         getCar(i)->wheel->detexturise(false);
     }*/
-#endif
 }
 
 /**

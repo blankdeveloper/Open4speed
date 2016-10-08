@@ -30,22 +30,20 @@ bool operator<(const id3d& lhs, const id3d& rhs);
  * @brief The model3d struct
  */
 struct model3d {
-    bool touchable;     ///< info if it is used in physics
-    int filter;         ///< filter index
-    shader* material;   ///< shader to use
-    float colora[4];    ///< Ambient color
-    float colord[4];    ///< Diffuse color
-    float colors[4];    ///< Specular color
-    bool dynamic;       ///< True if object is dynamic
-    int dynamicID;      ///< ID of the last dynamic update
-    bool hasShadow;     ///< Information that model casts shadow
-    AABB reg;           ///< AABB of the object
-    int count;          ///< Amount of triangles
-    texture* texture2D; ///< Object texture
-    float* vertices;    ///< Object vertices
-    float* normals;     ///< Object normals
-    float* coords;      ///< Object texture coordinates
-    float x,y,z;        ///< Object translation
+    bool touchable;              ///< info if it is used in physics
+    int filter;                  ///< filter index
+    shader* material;            ///< shader to use
+    float colora[4];             ///< Ambient color
+    float colord[4];             ///< Diffuse color
+    float colors[4];             ///< Specular color
+    bool dynamic;                ///< True if object is dynamic
+    int dynamicID;               ///< ID of the last dynamic update
+    bool hasShadow;              ///< Information that model casts shadow
+    AABB reg;                    ///< AABB of the object
+    texture* texture2D;          ///< Object texture
+    std::vector<float> vertices; ///< Object vertices
+    std::vector<float> normals;  ///< Object normals
+    std::vector<float> coords;   ///< Object texture coordinates
 };
 
 /**
@@ -64,8 +62,6 @@ public:
      * @param filename is path and name of file to load
      */
     model(std::string filename);
-
-    void triangles(model3d* m, bool culling);
 
     void detexturise(bool culling);
 

@@ -221,9 +221,10 @@ void bullet::addHeightmap(unsigned char* data, int res, glm::vec3 min, glm::vec3
  * @param m is 3D model for physical model
  * @param center is model translation
  */
-void bullet::addModel(model *m, glm::vec3 center) {
-    btTriangleMesh* mesh = 0;
+void bullet::addModel(model *m) {
+    btTriangleMesh* mesh = new btTriangleMesh();
     bool touchable = false;
+    int count = 0;
     for (unsigned int i = 0; i < m->models.size(); i++) {
       if (m->models[i].touchable)
           touchable = true;
@@ -248,9 +249,9 @@ void bullet::addModel(model *m, glm::vec3 center) {
             /// Set object default transform
             btTransform tr;
             tr.setIdentity();
-            tr.setOrigin(btVector3(m->models[i].reg.min.x + w / 2 + center.x,
-                                   m->models[i].reg.min.y + a / 2 + center.y,
-                                   m->models[i].reg.min.z + h / 2 + center.z));
+            tr.setOrigin(btVector3(m->models[i].reg.min.x + w / 2,
+                                   m->models[i].reg.min.y + a / 2,
+                                   m->models[i].reg.min.z + h / 2));
 
             /// Create object
             body->setCenterOfMassTransform(tr);
@@ -260,26 +261,30 @@ void bullet::addModel(model *m, glm::vec3 center) {
             body->setGravity(btVector3(0, -GRAVITATION * DYNAMIC_GRAVITATION, 0));
             body->setActivationState(ISLAND_SLEEPING);
             m->models[i].dynamicID = bodies.size();
-
-            /// set default position
-            float mat[16];
-            getTransform(m->models[i].dynamicID, mat);
-            m->models[i].x = mat[12];
-            m->models[i].y = mat[13];
-            m->models[i].z = mat[14];
         } else if (m->models[i].touchable || !touchable) {
-            if (mesh == 0)
-                mesh = new btTriangleMesh();
-            btVector3 o = btVector3(m->models[i].reg.min.x + center.x, m->models[i].reg.min.y + center.y, m->models[i].reg.min.z + center.z);
-            for (int j = 0; j < m->models[i].count; j++) {
+            btVector3 o = btVector3(m->models[i].reg.min.x, m->models[i].reg.min.y, m->models[i].reg.min.z);
+            for (int j = 0; j < m->models[i].vertices.size() / 9; j++) {
                 btVector3 a = btVector3(m->models[i].vertices[j * 9 + 0], m->models[i].vertices[j * 9 + 1], m->models[i].vertices[j * 9 + 2]);
                 btVector3 b = btVector3(m->models[i].vertices[j * 9 + 3], m->models[i].vertices[j * 9 + 4], m->models[i].vertices[j * 9 + 5]);
                 btVector3 c = btVector3(m->models[i].vertices[j * 9 + 6], m->models[i].vertices[j * 9 + 7], m->models[i].vertices[j * 9 + 8]);
                 mesh->addTriangle(a + o, b + o, c + o);
+                count++;
+                if (count >= 65535)
+                {
+                    count = 0;
+                    meshes.push_back(mesh);
+                    btBvhTriangleMeshShape* levelShape = new btBvhTriangleMeshShape(mesh,true);
+                    shapes.push_back(levelShape);
+                    btRigidBody* body = new btRigidBody(0,0,levelShape);
+                    body->setActivationState(DISABLE_SIMULATION);
+                    bodies2.push_back(body);
+                    m_dynamicsWorld->addCollisionObject(body);
+                    mesh = new btTriangleMesh();
+                }
             }
         }
     }
-    if (mesh != 0) {
+    if (count > 0) {
         meshes.push_back(mesh);
         btBvhTriangleMeshShape* levelShape = new btBvhTriangleMeshShape(mesh,true);
         shapes.push_back(levelShape);
@@ -287,7 +292,8 @@ void bullet::addModel(model *m, glm::vec3 center) {
         body->setActivationState(DISABLE_SIMULATION);
         bodies2.push_back(body);
         m_dynamicsWorld->addCollisionObject(body);
-    }
+    } else
+        delete mesh;
 }
 
 /**

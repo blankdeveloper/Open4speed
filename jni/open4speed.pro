@@ -40,8 +40,6 @@ SOURCES += \
     renderers/opengl/glfbo.cpp \
     renderers/opengl/glsl.cpp \
     renderers/opengl/gltexture.cpp \
-    renderers/simple/srenderer.cpp \
-    renderers/simple/stexture.cpp \
     open4speed.cpp
 HEADERS += \
     engine/car.h \
@@ -68,7 +66,5 @@ HEADERS += \
     renderers/opengl/gles20.h \
     renderers/opengl/glfbo.h \
     renderers/opengl/glsl.h \
-    renderers/opengl/gltexture.h \
-    renderers/simple/srenderer.h \
-    renderers/simple/stexture.h
+    renderers/opengl/gltexture.h
 INCLUDEPATH += ../support/bullet3-2.83.7

@@ -43,7 +43,6 @@ gles20::gles20() {
     camX = 0;
     camY = 0;
     camZ = 0;
-    direction = 0;
     mode3D = 0;
     oddFrame = true;
 }
@@ -90,7 +89,6 @@ void gles20::lookAt(glm::vec3 eye, glm::vec3 center, glm::vec3 up) {
     camX = eye.x;
     camY = eye.y;
     camZ = eye.z;
-    direction = angle(center, eye);
     view_matrix = glm::lookAt(eye, center, up);
     matrix_result = glm::mat4x4(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1);
 }
@@ -363,9 +361,6 @@ void gles20::renderSubModel(model* mod, model3d *m) {
     if (m->dynamic) {
         float mat[16];
         getPhysics()->getTransform(m->dynamicID, mat);
-        m->x = mat[12];
-        m->y = mat[13];
-        m->z = mat[14];
         float w = m->reg.max.x - m->reg.min.x;
         float a = m->reg.max.y - m->reg.min.y;
         float h = m->reg.max.z - m->reg.min.z;
@@ -419,9 +414,13 @@ void gles20::renderSubModel(model* mod, model3d *m) {
             current->attrib(&mod->vertices[id][0], &mod->colors[id][0], 0);
             glDrawArrays(GL_TRIANGLES, 0, mod->vertices[id].size() / 3);
         } else {
-            for (id.x = (camX + 100.0f) / 200 - 1; id.x <= (camX + 100.0f) / 200 + 1; id.x++)
-                for (id.y = (camY + 100.0f) / 200 - 1; id.y <= (camY + 100.0f) / 200 + 1; id.y++)
-                    for (id.z = (camZ + 100.0f) / 200 - 1; id.z <= (camZ + 100.0f) / 200 + 1; id.z++)
+            int s = 2;
+            int cx = camX / 150;
+            int cy = camY / 150;
+            int cz = camZ / 150;
+            for (id.x = cx - s; id.x <= cx + s; id.x++)
+                for (id.y = cy - s; id.y <= cy + s; id.y++)
+                    for (id.z = cz - s; id.z <= cz + s; id.z++)
                         if (mod->vertices.find(id) != mod->vertices.end())
                         {
                             current->attrib(&mod->vertices[id][0], &mod->colors[id][0], 0);
@@ -451,8 +450,8 @@ void gles20::renderSubModel(model* mod, model3d *m) {
         else
             current->uniformFloat("u_brake", 0);
 
-        current->attrib(m->vertices, m->normals, m->coords);
-        glDrawArrays(GL_TRIANGLES, 0, m->count * 3);
+        current->attrib(&m->vertices[0], &m->normals[0], &m->coords[0]);
+        glDrawArrays(GL_TRIANGLES, 0, m->vertices.size() / 3);
     }
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

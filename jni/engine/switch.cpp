@@ -20,14 +20,6 @@
 #include "renderers/opengl/gles20.h"
 #include "renderers/opengl/glsl.h"
 #include "renderers/opengl/gltexture.h"
-#include "renderers/simple/srenderer.h"
-#include "renderers/simple/stexture.h"
-
-#ifdef SOFTWARE_RENDERER
-#define XTEXTURE stexture
-#else
-#define XTEXTURE gltexture
-#endif
 
 /**
  * @brief The game resources
@@ -164,11 +156,7 @@ renderer* getRenderer() {
     if (!xrenderer)
     {
         logi("Init renderer","");
-#ifdef SOFTWARE_RENDERER
-        xrenderer = new srenderer();
-#else
         xrenderer = new gles20();
-#endif
     }
     return xrenderer;
 }
@@ -218,7 +206,7 @@ texture* getTexture(std::string filename) {
 
     /// create new instance
     if (strcmp(getExtension(filename).c_str(), "png") == 0) {
-      texture* instance = new XTEXTURE(loadPNG(filename));
+      texture* instance = new gltexture(loadPNG(filename));
       strcpy(instance->texturename, filename.c_str());
       textures.push_back(instance);
       return instance;
@@ -235,12 +223,12 @@ texture* getTexture(std::string filename) {
         for (int i = 0; i <= count; i++) {
             file[strlen(file) - 1] = i % 10 + '0';
             file[strlen(file) - 2] = i / 10 + '0';
-            texture* instance = new XTEXTURE(loadPNG(file));
+            texture* instance = new gltexture(loadPNG(file));
             strcpy(instance->texturename, file);
             anim.push_back(instance);
         }
 
-        texture* instance = new XTEXTURE(anim);
+        texture* instance = new gltexture(anim);
         strcpy(instance->texturename, filename.c_str());
         textures.push_back(instance);
         return instance;
@@ -257,7 +245,7 @@ texture* getTexture(std::string filename) {
  * @return texture instance
  */
 texture* getTexture(float r, float g, float b) {
-    texture* instance = new XTEXTURE(createRGB(1, 1, r, g, b));
+    texture* instance = new gltexture(createRGB(1, 1, r, g, b));
     sprintf(instance->texturename, "%f %f %f", r, g , b);
     textures.push_back(instance);
     return instance;

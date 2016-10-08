@@ -32,7 +32,6 @@ public:
     float camX;                           ///< Camera position x
     float camY;                           ///< Camera position y
     float camZ;                           ///< Camera position z
-    float direction;                      ///< Camera direction
     glm::mat4x4 matrix;                   ///< Matrix for dynamic rendering
     glm::mat4x4 modelMat;                 ///< Model matrix
     glm::mat4x4 matrix_result;            ///< Temp matrix for calculations

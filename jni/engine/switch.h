@@ -11,8 +11,6 @@
 #ifndef SWITCH_H
 #define SWITCH_H
 
-//#define SOFTWARE_RENDERER
-
 #include <string>
 #include <zip.h>
 #include "engine/model.h"

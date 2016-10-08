@@ -71,9 +71,11 @@ gltexture::gltexture(Texture texture) {
     if (texture.hasAlpha) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture.width, texture.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture.data);
         dataRGBA = (ColorRGBA*)texture.data;
+        dataRGB = 0;
     } else {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture.width, texture.height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture.data);
         dataRGB = (ColorRGB*)texture.data;
+        dataRGBA = 0;
     }
     glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -117,7 +119,7 @@ ColorRGBA gltexture::getPixel(double s, double t) {
             t++;
         s *= twidth - 1;
         t *= theight - 1;
-        if (transparent)
+        if (dataRGBA)
           return dataRGBA[(int)s + (int)t * twidth];
         else {
           ColorRGB c = dataRGB[(int)s + (int)t * twidth];

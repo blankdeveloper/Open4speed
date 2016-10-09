@@ -31,7 +31,6 @@ public:
     shader* scene_shader;       ///< Scene shader
     int screen_width;           ///< Screen width
     int screen_height;          ///< Screen height
-    int mode3D;                 ///< Mode for stereo
 
     virtual ~renderer() {}
 

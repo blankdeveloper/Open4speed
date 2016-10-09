@@ -17,7 +17,7 @@
 #include "interfaces/shader.h"
 #include "interfaces/texture.h"
 
-#define CULLING_DST 150
+#define CULLING_DST 50
 
 struct id3d
 {
@@ -69,7 +69,6 @@ public:
     std::vector<model3d> models;               ///< Standard parts of model
     std::map<id3d, std::vector<model3d> > v3d; ///< Models with culling
     AABB aabb;                                 ///< Extremes of current model
-    float width, aplitude, height;             ///< Dimensions of current model
     char modelname[256];                       ///< Model filename
 };
 

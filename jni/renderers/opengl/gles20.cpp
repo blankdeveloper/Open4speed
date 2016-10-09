@@ -38,10 +38,6 @@ gles20::gles20() {
         dynindices[i] = i;
     }
     aliasing = 1;
-    camX = 0;
-    camY = 0;
-    camZ = 0;
-    mode3D = 0;
     oddFrame = true;
 }
 
@@ -83,9 +79,8 @@ void gles20::init(int w, int h) {
  */
 void gles20::lookAt(glm::vec3 eye, glm::vec3 center, glm::vec3 up) {
 
-    camX = eye.x;
-    camY = eye.y;
-    camZ = eye.z;
+    camera = eye;
+    direction = glm::normalize(center - eye);
     view_matrix = glm::lookAt(eye, center, up);
     matrix_result = glm::mat4x4(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1);
 }
@@ -102,7 +97,6 @@ void gles20::perspective(float fovy, float aspect, float zNear, float zFar) {
         matrixBuffer.pop();
     }
     proj_matrix = glm::perspective((float)(fovy * M_PI / 180.0f), aspect, zNear,zFar);
-    viewDistance = zFar;
     glEnable(GL_DEPTH_TEST);
     glDepthMask(true);
 }
@@ -258,21 +252,25 @@ void gles20::renderDynamic(float* vertices, float* normals, float* coords, shade
  * @brief renderModel renders model into scene
  * @param m is instance of model to render
  */
-void gles20::renderModel(model* m) {
-
+void gles20::renderModel(model* m)
+{
+    // culled model
     if (!m->v3d.empty())
     {
         id3d id;
-        int step = 1;
-        int cx = camX / CULLING_DST;
-        int cy = camY / CULLING_DST;
-        int cz = camZ / CULLING_DST;
-        for (id.x = cx - step; id.x <= cx + step; id.x++)
-            for (id.y = cy - step; id.y <= cy + step; id.y++)
-                for (id.z = cz - step; id.z <= cz + step; id.z++)
-                    if (m->v3d.find(id) != m->v3d.end())
-                        for (unsigned int i = 0; i < m->v3d[id].size(); i++)
-                            if (!m->v3d[id][i].vertices.empty())
+        int steps = 4;
+        int cx = camera.x / CULLING_DST;
+        int cy = camera.y / CULLING_DST;
+        int cz = camera.z / CULLING_DST;
+        for (id.x = cx - steps; id.x <= cx + steps; id.x++)
+            for (id.y = cy - steps; id.y <= cy + steps; id.y++)
+                for (id.z = cz - steps; id.z <= cz + steps; id.z++)
+                {
+                    glm::vec3 part = glm::vec3(id.x - cx, id.y - cy, id.z - cz);
+                    if ((glm::dot(part, direction) > -0.005f) ||
+                        (fabs(part.x) < 1.5f) || (fabs(part.x) < 1.5f) || (fabs(part.x) < 1.5f))
+                        if (m->v3d.find(id) != m->v3d.end())
+                            for (unsigned int i = 0; i < m->v3d[id].size(); i++)
                             {
                                 current = m->v3d[id][i].material;
                                 current->bind();
@@ -282,8 +280,8 @@ void gles20::renderModel(model* m) {
                                     glEnable(GL_CULL_FACE);
                                 renderSubModel(&m->v3d[id][i]);
                                 current->unbind();
-
                             }
+                }
     }
 
     /// set opengl for rendering models
@@ -435,14 +433,11 @@ void gles20::renderSubModel(model3d *m) {
  * @param enable is true to start drawing, false to render on screen
  */
 void gles20::rtt(bool enable) {
-#ifndef ANDROID
-    GLuint id[1];
-#endif
     if (enable) {
 #ifndef ANDROID
         /// start timer
-        glGenQueries(1,id);
-        glBeginQuery(GL_TIME_ELAPSED, id[0]);
+        glGenQueries(1,gpuMeasuring);
+        glBeginQuery(GL_TIME_ELAPSED, gpuMeasuring[0]);
 #endif
         rtt_fbo[oddFrame]->bindFBO();
         rtt_fbo[oddFrame]->clear();
@@ -453,24 +448,19 @@ void gles20::rtt(bool enable) {
 
         /// get scene counters
         GLint gpu_time = 0;
-        glGetQueryObjectiv(id[0], GL_QUERY_RESULT, &gpu_time);
+        glGetQueryObjectiv(gpuMeasuring[0], GL_QUERY_RESULT, &gpu_time);
 
         GLint copy_time = 0;
-        glBeginQuery(GL_TIME_ELAPSED, id[0]);
+        glBeginQuery(GL_TIME_ELAPSED, gpuMeasuring[0]);
 #endif
         /// rendering
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        if (mode3D == 0)
-          glViewport (0, 0, screen_width, screen_height);
-        else if (mode3D == -1)
-          glViewport (0, 0, screen_width / 2, screen_height);
-        else if (mode3D == 1)
-          glViewport (screen_width / 2, 0, screen_width / 2, screen_height);
+        glViewport (0, 0, screen_width, screen_height);
         rtt_fbo[oddFrame]->drawOnScreen(scene_shader);
 
 #ifndef ANDROID
         glEndQuery(GL_TIME_ELAPSED);
-        glGetQueryObjectiv(id[0], GL_QUERY_RESULT, &copy_time);
+        glGetQueryObjectiv(gpuMeasuring[0], GL_QUERY_RESULT, &copy_time);
         printf("3D time: %dk 2D time: %dk, edge:%d, dst:%f\n", gpu_time / 1000,
                copy_time / 1000, getCar(0)->currentEdgeIndex, getCar(0)->toFinish);
 #endif

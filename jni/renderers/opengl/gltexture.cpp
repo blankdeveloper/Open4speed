@@ -17,10 +17,6 @@
  */
 gltexture::~gltexture() {
     if (!animated) {
-        if (transparent)
-            delete[] dataRGBA;
-        else
-            delete[] dataRGB;
         glDeleteTextures(1, &textureID);
     } else
         for (int i = anim.size() - 1; i >= 0; i--)
@@ -68,21 +64,17 @@ gltexture::gltexture(Texture texture) {
     //to the edge of our shape.
     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-    if (texture.hasAlpha) {
+    if (texture.hasAlpha)
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture.width, texture.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture.data);
-        dataRGBA = (ColorRGBA*)texture.data;
-        dataRGB = 0;
-    } else {
+    else
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture.width, texture.height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture.data);
-        dataRGB = (ColorRGB*)texture.data;
-        dataRGBA = 0;
-    }
     glGenerateMipmap(GL_TEXTURE_2D);
 
     twidth = texture.width;
     theight = texture.height;
     transparent = texture.hasAlpha;
     animated = false;
+    delete[] texture.data;
 }
 
 /**
@@ -104,28 +96,6 @@ void gltexture::apply() {
     } else {
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, textureID);
-    }
-}
-
-ColorRGBA gltexture::getPixel(glm::vec2 uv) {
-    if (animated)
-      return anim[currentFrame]->getPixel(uv);
-    else {
-        uv.s = glm::mod(uv.s, 1.0f);
-        uv.t = glm::mod(uv.t, 1.0f);
-        if (uv.s < 0)
-            uv.s++;
-        if (uv.t < 0)
-            uv.t++;
-        uv.s *= twidth - 1;
-        uv.t *= theight - 1;
-        if (dataRGBA)
-          return dataRGBA[(int)uv.s + (int)uv.t * twidth];
-        else {
-          ColorRGB c = dataRGB[(int)uv.s + (int)uv.t * twidth];
-          ColorRGBA rgba = {c.r, c.g, c.b, 255};
-          return rgba;
-        }
     }
 }
 

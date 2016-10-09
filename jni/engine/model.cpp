@@ -38,9 +38,6 @@ model::model(std::string filename) {
     char line[1024];
     f->gets(line);
     sscanf(line, "%f %f %f %f %f %f", &aabb.min.x, &aabb.min.y, &aabb.min.z, &aabb.max.x, &aabb.max.y, &aabb.max.z);
-    width = aabb.max.x - aabb.min.x;
-    aplitude = aabb.max.y - aabb.min.y;
-    height = aabb.max.z - aabb.min.z;
 
     /// get amount of textures in model
     int textureCount = f->scandec();
@@ -143,6 +140,8 @@ model::model(std::string filename) {
 void model::culling()
 {
     for (unsigned int j = 0; j < models.size(); j++)
+    {
+        std::map<id3d, bool> used;
         if((models[j].filter == 0) && !models[j].dynamic && !models[j].touchable)
         {
             model3d* m = &models[j];
@@ -175,18 +174,16 @@ void model::culling()
                 id.x = center.x / CULLING_DST;
                 id.y = center.y / CULLING_DST;
                 id.z = center.z / CULLING_DST;
-                //put triangle into data
-                if(v3d[id].empty())
+                if (used.find(id) == used.end())
                 {
-                    for (unsigned int k = 0; k < models.size(); k++)
-                    {
-                        model3d mod;
-                        mod.material = models[k].material;
-                        mod.texture2D = models[k].texture2D;
-                        v3d[id].push_back(mod);
-                    }
+                    model3d mod;
+                    mod.material = models[j].material;
+                    mod.texture2D = models[j].texture2D;
+                    v3d[id].push_back(mod);
+                    used[id] = true;
                 }
-                model3d* mod = &v3d[id][j];
+                //put triangle into structure
+                model3d* mod = &v3d[id][v3d[id].size() - 1];
                 mod->vertices.push_back(va.x);
                 mod->vertices.push_back(va.y);
                 mod->vertices.push_back(va.z);
@@ -213,4 +210,5 @@ void model::culling()
                 mod->coords.push_back(tc.t);
             }
         }
+    }
 }

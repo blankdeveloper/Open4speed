@@ -12,18 +12,7 @@
 
 #include "files/extfile.h"
 #include "files/zipfile.h"
-#include <glm/glm.hpp>
 #include <vector>
-
-// Struct for color of pixel r,g,b,a red, green, blue, alpha values
-struct ColorRGBA {
-    unsigned char r,g,b,a;
-};
-
-// Struct for color of pixel r,g,b red, green, blue values
-struct ColorRGB {
-    unsigned char r,g,b;
-};
 
 struct Texture {
     int width;
@@ -54,8 +43,6 @@ public:
      * @brief apply applies current texture
      */
     virtual void apply() = 0;
-
-    virtual ColorRGBA getPixel(glm::vec2 uv) = 0;
 
     /**
      * @brief setFrame set frame of animation

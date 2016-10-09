@@ -135,7 +135,10 @@ bullet::bullet() {
 void bullet::addCar(car* c) {
 
     /// set chassis
-    btCollisionShape* chassisShape = new btBoxShape(btVector3(c->skin->width / 2.0f, c->skin->aplitude / 2.0f,c->skin->height / 2.0f));
+    float width = c->skin->aabb.max.x - c->skin->aabb.min.x;
+    float altitude = c->skin->aabb.max.y - c->skin->aabb.min.y;
+    float height = c->skin->aabb.max.z - c->skin->aabb.min.z;
+    btCollisionShape* chassisShape = new btBoxShape(btVector3(width / 2.0f, altitude / 2.0f, height / 2.0f));
     shapes.push_back(chassisShape);
     btCompoundShape* compound = new btCompoundShape();
     shapes.push_back(compound);
@@ -173,20 +176,17 @@ void bullet::addCar(car* c) {
     m_vehicle[c->index - 1]->setCoordinateSystem(0,1,2);
 
     /// Set wheels connections
-    btVector3 wheelDirectionCS0(0,-1,0);
-    btVector3 wheelAxleCS(-1,0,0);
-    btVector3 connectionPointCS0(-c->wheelX, 0, -c->wheelZ1);
-    m_vehicle[c->index - 1]->addWheel(connectionPointCS0, wheelDirectionCS0, wheelAxleCS, SUSPENSION_REST_LENGTH,
-                                      c->wheel->aplitude / 2.0f, m_tuning, true);
-    connectionPointCS0 = btVector3(c->wheelX, 0, -c->wheelZ1);
-    m_vehicle[c->index - 1]->addWheel(connectionPointCS0, wheelDirectionCS0, wheelAxleCS, SUSPENSION_REST_LENGTH,
-                                      c->wheel->aplitude / 2.0f, m_tuning, true);
-    connectionPointCS0 = btVector3(-c->wheelX, 0, c->wheelZ2);
-    m_vehicle[c->index - 1]->addWheel(connectionPointCS0, wheelDirectionCS0, wheelAxleCS, SUSPENSION_REST_LENGTH,
-                                      c->wheel->aplitude / 2.0f, m_tuning, false);
-    connectionPointCS0 = btVector3(c->wheelX, 0, c->wheelZ2);
-    m_vehicle[c->index - 1]->addWheel(connectionPointCS0, wheelDirectionCS0, wheelAxleCS, SUSPENSION_REST_LENGTH,
-                                      c->wheel->aplitude / 2.0f, m_tuning, false);
+    altitude = (c->wheel->aabb.max.y - c->wheel->aabb.min.y) / 2.0f;
+    btVector3 direction(0,-1,0);
+    btVector3 axle(-1,0,0);
+    btVector3 point(-c->wheelX, 0, -c->wheelZ1);
+    m_vehicle[c->index - 1]->addWheel(point, direction, axle, SUSPENSION_REST_LENGTH, altitude, m_tuning, true);
+    point = btVector3(c->wheelX, 0, -c->wheelZ1);
+    m_vehicle[c->index - 1]->addWheel(point, direction, axle, SUSPENSION_REST_LENGTH, altitude, m_tuning, true);
+    point = btVector3(-c->wheelX, 0, c->wheelZ2);
+    m_vehicle[c->index - 1]->addWheel(point, direction, axle, SUSPENSION_REST_LENGTH, altitude, m_tuning, false);
+    point = btVector3(c->wheelX, 0, c->wheelZ2);
+    m_vehicle[c->index - 1]->addWheel(point, direction, axle, SUSPENSION_REST_LENGTH, altitude, m_tuning, false);
 
     /// Set wheels parameters
     for (int i = 0; i < m_vehicle[c->index - 1]->getNumWheels(); i++) {

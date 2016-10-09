@@ -89,8 +89,6 @@ void display(void) {
 #else
 
     renderer* xrenderer = getRenderer();
-    xrenderer->mode3D = 0;
-    float d = direction;
     float view = getCar(cameraCar)->getView();
     xrenderer->rtt(true);
     /// set camera
@@ -100,10 +98,10 @@ void display(void) {
     float cameraY = getCar(cameraCar)->transform->value[13];
     float cameraZ = getCar(cameraCar)->transform->value[14];
     //need for speed style
-    cameraX -= sin(d) * getCar(cameraCar)->control->getDistance() * 2.5f / (view / 90);
+    cameraX -= sin(direction) * getCar(cameraCar)->control->getDistance() * 2.5f / (view / 90);
     cameraY += fmax(1.0, getCar(cameraCar)->control->getDistance()) / (view / 90);
-    cameraZ -= cos(d) * getCar(cameraCar)->control->getDistance() * 2.5f / (view / 90);
-    xrenderer->lookAt(glm::vec3(cameraX - sin(d) * 0.1f, cameraY + 0.5f, cameraZ - cos(d) * 0.1f),
+    cameraZ -= cos(direction) * getCar(cameraCar)->control->getDistance() * 2.5f / (view / 90);
+    xrenderer->lookAt(glm::vec3(cameraX - sin(direction) * 0.1f, cameraY + 0.5f, cameraZ - cos(direction) * 0.1f),
                       glm::vec3(cameraX + sin(direction) * 100.0f, cameraY, cameraZ + cos(direction) * 100.0f),
                       glm::vec3(0, 1, 0));
     //gta style
@@ -405,7 +403,7 @@ void keyboardUp(unsigned char key, int x, int y) {
  * @param w is new window width
  * @param h is new window hegiht
  */
-void reshape (int w, int h) {
+void reshape(int w, int h) {
    aspect = (float) w/(float) h;
 #ifndef RENDER_PHYSICS
    getRenderer()->init(w, h);

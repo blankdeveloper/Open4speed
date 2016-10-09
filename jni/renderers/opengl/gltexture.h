@@ -21,8 +21,6 @@ public:
     unsigned int currentFrame;      ///< Current image
     unsigned int currentMultiFrame; ///< Replying frames state
     unsigned int multiFrame;        ///< Replying frames amount
-    ColorRGB* dataRGB;              ///< Texture data
-    ColorRGBA* dataRGBA;            ///< Texture data
 
 
     /**
@@ -46,8 +44,6 @@ public:
      * @brief apply applies current texture
      */
     void apply();
-
-    ColorRGBA getPixel(glm::vec2 uv);
 
     /**
      * @brief setFrame set frame of animation

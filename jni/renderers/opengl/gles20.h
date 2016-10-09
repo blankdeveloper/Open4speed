@@ -29,9 +29,9 @@
  */
 class gles20 : public renderer {
 public:
-    float camX;                           ///< Camera position x
-    float camY;                           ///< Camera position y
-    float camZ;                           ///< Camera position z
+    GLuint gpuMeasuring[1];               ///< Profiling
+    glm::vec3 camera;                     ///< Camera position
+    glm::vec3 direction;                  ///< Camera direction
     glm::mat4x4 matrix;                   ///< Matrix for dynamic rendering
     glm::mat4x4 modelMat;                 ///< Model matrix
     glm::mat4x4 matrix_result;            ///< Temp matrix for calculations
@@ -41,7 +41,6 @@ public:
     shader* shadow;                       ///< Special shader for shadow
     std::vector<glfbo*> rtt_fbo;          ///< Screen-space framebuffer
     bool oddFrame;                        ///< Odd frame info
-    float viewDistance;                   ///< Camera far culling
 
     /**
      * @brief gles20 destructor

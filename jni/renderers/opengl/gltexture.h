@@ -47,7 +47,7 @@ public:
      */
     void apply();
 
-    ColorRGBA getPixel(double s, double t);
+    ColorRGBA getPixel(glm::vec2 uv);
 
     /**
      * @brief setFrame set frame of animation

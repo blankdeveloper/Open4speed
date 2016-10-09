@@ -39,7 +39,6 @@ public:
     GLushort dynindices[4095];            ///< Indicies for dynamic rendering
     shader* current;                      ///< Current binded shader
     shader* shadow;                       ///< Special shader for shadow
-    shader* detextured;                   ///< Special shader for rendering without textures
     std::vector<glfbo*> rtt_fbo;          ///< Screen-space framebuffer
     bool oddFrame;                        ///< Odd frame info
     float viewDistance;                   ///< Camera far culling
@@ -146,7 +145,7 @@ public:
      * @brief renderSubModel renders model into scene
      * @param m is instance of model to render
      */
-    void renderSubModel(model* mod, model3d *m);
+    void renderSubModel(model3d *m);
 
     /**
      * @brief rtt enables rendering into FBO which makes posible to do reflections

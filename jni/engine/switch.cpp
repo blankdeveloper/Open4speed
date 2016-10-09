@@ -12,7 +12,6 @@
 #include "engine/io.h"
 #include "engine/model.h"
 #include "engine/switch.h"
-#include "engine/textures.hpp"
 #include "files/extfile.h"
 #include "files/zipfile.h"
 #include "input/keyboard.h"
@@ -206,7 +205,7 @@ texture* getTexture(std::string filename) {
 
     /// create new instance
     if (strcmp(getExtension(filename).c_str(), "png") == 0) {
-      texture* instance = new gltexture(loadPNG(filename));
+      texture* instance = new gltexture(texture::loadPNG(getFile(filename)));
       strcpy(instance->texturename, filename.c_str());
       textures.push_back(instance);
       return instance;
@@ -223,7 +222,7 @@ texture* getTexture(std::string filename) {
         for (int i = 0; i <= count; i++) {
             file[strlen(file) - 1] = i % 10 + '0';
             file[strlen(file) - 2] = i / 10 + '0';
-            texture* instance = new gltexture(loadPNG(file));
+            texture* instance = new gltexture(texture::loadPNG(getFile(file)));
             strcpy(instance->texturename, file);
             anim.push_back(instance);
         }
@@ -245,7 +244,7 @@ texture* getTexture(std::string filename) {
  * @return texture instance
  */
 texture* getTexture(float r, float g, float b) {
-    texture* instance = new gltexture(createRGB(1, 1, r, g, b));
+    texture* instance = new gltexture(texture::createRGB(1, 1, r, g, b));
     sprintf(instance->texturename, "%f %f %f", r, g , b);
     textures.push_back(instance);
     return instance;

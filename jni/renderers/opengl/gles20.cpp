@@ -15,8 +15,6 @@
 #include "renderers/opengl/gltexture.h"
 #include "engine/switch.h"
 
-GLuint id[2] = {0};
-
 /**
  * @brief gles20 destructor
  */
@@ -75,7 +73,6 @@ void gles20::init(int w, int h) {
     //set shaders
     scene_shader = getShader("scene");
     shadow = getShader("shadow");
-    detextured = getShader("simple");
 }
 
 /**
@@ -263,65 +260,47 @@ void gles20::renderDynamic(float* vertices, float* normals, float* coords, shade
  */
 void gles20::renderModel(model* m) {
 
-    if (!m->vertices.empty())
+    if (!m->v3d.empty())
     {
-        glDisable(GL_CULL_FACE);
-        current = detextured;
-        current->bind();
-        /// set matrices
-        modelMat = matrix_result;
-        glm::mat4x4 modelView = view_matrix * modelMat;
-        glm::mat4x4 projView = proj_matrix * view_matrix;
-        matrix = proj_matrix * modelView;
-        current->uniformMatrix("u_ModelMatrix",glm::value_ptr(modelMat));
-        current->uniformMatrix("u_ViewMatrix",glm::value_ptr(view_matrix));
-        current->uniformMatrix("u_ModelViewMatrix",glm::value_ptr(modelView));
-        current->uniformMatrix("u_ProjViewMatrix",glm::value_ptr(projView));
-        current->uniformMatrix("u_ProjectionMatrix",glm::value_ptr(proj_matrix));
-        current->uniformMatrix("u_Matrix",glm::value_ptr(matrix));
-
         id3d id;
-        if(m->vertices.size() == 1)
-        {
-            id.x = 0;
-            id.y = 0;
-            id.z = 0;
-            current->attrib(&m->vertices[id][0], &m->normals[id][0], &m->coords[id][0]);
-            glDrawArrays(GL_TRIANGLES, 0, m->vertices[id].size() / 3);
-        } else {
-            int s = 2;
-            int cx = camX / 150;
-            int cy = camY / 150;
-            int cz = camZ / 150;
-            for (id.x = cx - s; id.x <= cx + s; id.x++)
-                for (id.y = cy - s; id.y <= cy + s; id.y++)
-                    for (id.z = cz - s; id.z <= cz + s; id.z++)
-                        if (m->vertices.find(id) != m->vertices.end())
-                        {
-                            current->attrib(&m->vertices[id][0], &m->normals[id][0], &m->coords[id][0]);
-                            glDrawArrays(GL_TRIANGLES, 0, m->vertices[id].size() / 3);
-                        }
-        }
-        current->unbind();
+        int step = 1;
+        int cx = camX / CULLING_DST;
+        int cy = camY / CULLING_DST;
+        int cz = camZ / CULLING_DST;
+        for (id.x = cx - step; id.x <= cx + step; id.x++)
+            for (id.y = cy - step; id.y <= cy + step; id.y++)
+                for (id.z = cz - step; id.z <= cz + step; id.z++)
+                    if (m->v3d.find(id) != m->v3d.end())
+                        for (unsigned int i = 0; i < m->v3d[id].size(); i++)
+                            if (!m->v3d[id][i].vertices.empty())
+                            {
+                                current = m->v3d[id][i].material;
+                                current->bind();
+                                if (m->v3d[id][i].texture2D->transparent)
+                                    glDisable(GL_CULL_FACE);
+                                else
+                                    glEnable(GL_CULL_FACE);
+                                renderSubModel(&m->v3d[id][i]);
+                                current->unbind();
+
+                            }
     }
 
     /// set opengl for rendering models
     for (unsigned int i = 0; i < m->models.size(); i++)
-    {
         if (enable[m->models[i].filter] && !m->models[i].touchable)
-        {
-            if(m->models[i].dynamic || m->vertices.empty())
+            if(m->models[i].dynamic || m->v3d.empty())
             {
                 current = m->models[i].material;
                 current->bind();
                 if (m->models[i].texture2D->transparent)
                     glDisable(GL_CULL_FACE);
-                renderSubModel(m, &m->models[i]);
+                else
+                    glEnable(GL_CULL_FACE);
+                renderSubModel(&m->models[i]);
                 current->unbind();
             }
-        }
-        glEnable(GL_CULL_FACE);
-    }
+    glEnable(GL_CULL_FACE);
 }
 
 
@@ -331,7 +310,7 @@ void gles20::renderModel(model* m) {
  */
 void gles20::renderShadow(model* m) {
 
-    if (!rtt_fbo[oddFrame]->complete || !m->vertices.empty())
+    if (!rtt_fbo[oddFrame]->complete || !m->v3d.empty())
         return;
 
     glDepthMask(false);
@@ -353,7 +332,7 @@ void gles20::renderShadow(model* m) {
         glStencilOp(GL_KEEP,GL_KEEP,GL_ZERO);
         for (unsigned int i = 0; i < m->models.size(); i++)
             if (!m->models[i].filter)
-                renderSubModel(m, &m->models[i]);
+                renderSubModel(&m->models[i]);
 
         /// render shadow
         current->uniformFloat("u_offset", 0.5f);
@@ -363,7 +342,7 @@ void gles20::renderShadow(model* m) {
         glStencilOp(GL_KEEP,GL_KEEP, GL_INCR);
         for (unsigned int i = 0; i < m->models.size(); i++)
             if (!m->models[i].filter)
-                renderSubModel(m, &m->models[i]);
+                renderSubModel(&m->models[i]);
     }
 
     /// set up previous state
@@ -380,7 +359,7 @@ void gles20::renderShadow(model* m) {
  * @brief renderSubModel renders model into scene
  * @param m is instance of model to render
  */
-void gles20::renderSubModel(model* mod, model3d *m) {
+void gles20::renderSubModel(model3d *m) {
 
     /// set model matrix
     glm::mat4x4 modelView;
@@ -456,6 +435,9 @@ void gles20::renderSubModel(model* mod, model3d *m) {
  * @param enable is true to start drawing, false to render on screen
  */
 void gles20::rtt(bool enable) {
+#ifndef ANDROID
+    GLuint id[1];
+#endif
     if (enable) {
 #ifndef ANDROID
         /// start timer

@@ -47,7 +47,6 @@ HEADERS += \
     engine/math.h \
     engine/model.h \
     engine/switch.h \
-    engine/textures.hpp \
     files/extfile.h \
     files/zipfile.h \
     input/airacer.h \

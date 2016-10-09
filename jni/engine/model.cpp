@@ -75,7 +75,6 @@ model::model(std::string filename) {
         int cursor = 0;
         m.dynamic = false;
         m.filter = 0;
-        m.hasShadow = false;
         m.touchable = false;
         if (m.texture2D->transparent) {
             m.material = getShader("standart_alpha");
@@ -87,9 +86,6 @@ model::model(std::string filename) {
         while(true) {
             if (material[cursor] == '!') {
                 m.touchable = true;
-                cursor++;
-            } else if (material[cursor] == '@') {
-                m.hasShadow = true;
                 cursor++;
             } else if (material[cursor] == '$') {
                 m.dynamic = true;
@@ -144,63 +140,77 @@ model::model(std::string filename) {
     delete f;
 }
 
-void model::detexturise(bool culling) {
-    for (unsigned int i = 0; i < models.size(); i++)
-        if((models[i].filter == 0) && !models[i].dynamic && !models[i].touchable)
+void model::culling()
+{
+    for (unsigned int j = 0; j < models.size(); j++)
+        if((models[j].filter == 0) && !models[j].dynamic && !models[j].touchable)
         {
-            model3d* m = &models[i];
+            model3d* m = &models[j];
             long v = 0;
             long t = 0;
             id3d id;
-            id.x = 0;
-            id.y = 0;
-            id.z = 0;
-            glm::vec3 a, b, c, center;
-            ColorRGBA ca, cb, cc;
+            glm::vec3 center;
+            glm::vec3 va, vb, vc;
+            glm::vec3 na, nb, nc;
+            glm::vec2 ta, tb, tc;
             for (unsigned int i = 0; i < m->vertices.size() / 9; i++, v += 9, t += 6) {
-                //get vertices
-                a = glm::vec3(m->vertices[v + 0] + m->reg.min.x,
-                              m->vertices[v + 1] + m->reg.min.y,
-                              m->vertices[v + 2] + m->reg.min.z);
-                b = glm::vec3(m->vertices[v + 3] + m->reg.min.x,
-                              m->vertices[v + 4] + m->reg.min.y,
-                              m->vertices[v + 5] + m->reg.min.z);
-                c = glm::vec3(m->vertices[v + 6] + m->reg.min.x,
-                              m->vertices[v + 7] + m->reg.min.y,
-                              m->vertices[v + 8] + m->reg.min.z);
-                //get colors
-                ca = m->texture2D->getPixel(m->coords[t + 0], m->coords[t + 1]);
-                cb = m->texture2D->getPixel(m->coords[t + 2], m->coords[t + 3]);
-                cc = m->texture2D->getPixel(m->coords[t + 4], m->coords[t + 5]);
+                //get geometry
+                va = glm::vec3(m->vertices[v + 0] + m->reg.min.x,
+                               m->vertices[v + 1] + m->reg.min.y,
+                               m->vertices[v + 2] + m->reg.min.z);
+                vb = glm::vec3(m->vertices[v + 3] + m->reg.min.x,
+                               m->vertices[v + 4] + m->reg.min.y,
+                               m->vertices[v + 5] + m->reg.min.z);
+                vc = glm::vec3(m->vertices[v + 6] + m->reg.min.x,
+                               m->vertices[v + 7] + m->reg.min.y,
+                               m->vertices[v + 8] + m->reg.min.z);
+                na = glm::vec3(m->normals[v + 0], m->normals[v + 1], m->normals[v + 2]);
+                nb = glm::vec3(m->normals[v + 3], m->normals[v + 4], m->normals[v + 5]);
+                nc = glm::vec3(m->normals[v + 6], m->normals[v + 7], m->normals[v + 8]);
+                ta = glm::vec2(m->coords[t + 0], m->coords[t + 1]);
+                tb = glm::vec2(m->coords[t + 2], m->coords[t + 3]);
+                tc = glm::vec2(m->coords[t + 4], m->coords[t + 5]);
                 //get id
-                center = (a + b + c) / 3.0f;
-                if(culling)
-                {
-                    id.x = center.x / 150;
-                    id.y = center.y / 150;
-                    id.z = center.z / 150;
-                }
+                center = (va + vb + vc) / 3.0f;
+                id.x = center.x / CULLING_DST;
+                id.y = center.y / CULLING_DST;
+                id.z = center.z / CULLING_DST;
                 //put triangle into data
-                vertices[id].push_back(a.x);
-                vertices[id].push_back(a.y);
-                vertices[id].push_back(a.z);
-                vertices[id].push_back(b.x);
-                vertices[id].push_back(b.y);
-                vertices[id].push_back(b.z);
-                vertices[id].push_back(c.x);
-                vertices[id].push_back(c.y);
-                vertices[id].push_back(c.z);
-                normals[id].push_back(ca.r / 255.0f);
-                normals[id].push_back(ca.g / 255.0f);
-                normals[id].push_back(ca.b / 255.0f);
-                normals[id].push_back(cb.r / 255.0f);
-                normals[id].push_back(cb.g / 255.0f);
-                normals[id].push_back(cb.b / 255.0f);
-                normals[id].push_back(cc.r / 255.0f);
-                normals[id].push_back(cc.g / 255.0f);
-                normals[id].push_back(cc.b / 255.0f);
-                for(int j = 0; j < 6; j++)
-                  coords[id].push_back(m->coords[t + j]);
+                if(v3d[id].empty())
+                {
+                    for (unsigned int k = 0; k < models.size(); k++)
+                    {
+                        model3d mod;
+                        mod.material = models[k].material;
+                        mod.texture2D = models[k].texture2D;
+                        v3d[id].push_back(mod);
+                    }
+                }
+                model3d* mod = &v3d[id][j];
+                mod->vertices.push_back(va.x);
+                mod->vertices.push_back(va.y);
+                mod->vertices.push_back(va.z);
+                mod->vertices.push_back(vb.x);
+                mod->vertices.push_back(vb.y);
+                mod->vertices.push_back(vb.z);
+                mod->vertices.push_back(vc.x);
+                mod->vertices.push_back(vc.y);
+                mod->vertices.push_back(vc.z);
+                mod->normals.push_back(na.x);
+                mod->normals.push_back(na.y);
+                mod->normals.push_back(na.z);
+                mod->normals.push_back(nb.x);
+                mod->normals.push_back(nb.y);
+                mod->normals.push_back(nb.z);
+                mod->normals.push_back(nc.x);
+                mod->normals.push_back(nc.y);
+                mod->normals.push_back(nc.z);
+                mod->coords.push_back(ta.s);
+                mod->coords.push_back(ta.t);
+                mod->coords.push_back(tb.s);
+                mod->coords.push_back(tb.t);
+                mod->coords.push_back(tc.s);
+                mod->coords.push_back(tc.t);
             }
         }
 }

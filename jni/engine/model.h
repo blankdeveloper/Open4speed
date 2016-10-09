@@ -17,6 +17,8 @@
 #include "interfaces/shader.h"
 #include "interfaces/texture.h"
 
+#define CULLING_DST 150
+
 struct id3d
 {
     int x;
@@ -38,7 +40,6 @@ struct model3d {
     float colors[4];             ///< Specular color
     bool dynamic;                ///< True if object is dynamic
     int dynamicID;               ///< ID of the last dynamic update
-    bool hasShadow;              ///< Information that model casts shadow
     AABB reg;                    ///< AABB of the object
     texture* texture2D;          ///< Object texture
     std::vector<float> vertices; ///< Object vertices
@@ -63,16 +64,13 @@ public:
      */
     model(std::string filename);
 
-    void detexturise(bool culling);
+    void culling();
 
     std::vector<model3d> models;               ///< Standard parts of model
+    std::map<id3d, std::vector<model3d> > v3d; ///< Models with culling
     AABB aabb;                                 ///< Extremes of current model
     float width, aplitude, height;             ///< Dimensions of current model
     char modelname[256];                       ///< Model filename
-
-    std::map<id3d, std::vector<float> > vertices;
-    std::map<id3d, std::vector<float> > normals;
-    std::map<id3d, std::vector<float> > coords;
 };
 
 #endif // MODEL_H

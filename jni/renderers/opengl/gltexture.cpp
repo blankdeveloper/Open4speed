@@ -107,22 +107,22 @@ void gltexture::apply() {
     }
 }
 
-ColorRGBA gltexture::getPixel(double s, double t) {
+ColorRGBA gltexture::getPixel(glm::vec2 uv) {
     if (animated)
-      return anim[currentFrame]->getPixel(s, t);
+      return anim[currentFrame]->getPixel(uv);
     else {
-        s = glm::mod(s, 1.0);
-        t = glm::mod(t, 1.0);
-        if (s < 0)
-            s++;
-        if (t < 0)
-            t++;
-        s *= twidth - 1;
-        t *= theight - 1;
+        uv.s = glm::mod(uv.s, 1.0f);
+        uv.t = glm::mod(uv.t, 1.0f);
+        if (uv.s < 0)
+            uv.s++;
+        if (uv.t < 0)
+            uv.t++;
+        uv.s *= twidth - 1;
+        uv.t *= theight - 1;
         if (dataRGBA)
-          return dataRGBA[(int)s + (int)t * twidth];
+          return dataRGBA[(int)uv.s + (int)uv.t * twidth];
         else {
-          ColorRGB c = dataRGB[(int)s + (int)t * twidth];
+          ColorRGB c = dataRGB[(int)uv.s + (int)uv.t * twidth];
           ColorRGBA rgba = {c.r, c.g, c.b, 255};
           return rgba;
         }

@@ -127,7 +127,7 @@ public:
      * @brief renderSubModel renders model into scene
      * @param m is instance of model to render
      */
-    virtual void renderSubModel(model* mod, model3d *m) = 0;
+    virtual void renderSubModel(model3d *m) = 0;
 
     /**
      * @brief rtt enables rendering into FBO which makes posible to do reflections

@@ -258,7 +258,7 @@ void gles20::renderModel(model* m)
     if (!m->v3d.empty())
     {
         id3d id;
-        int steps = 4;
+        int steps = 2;
         int cx = camera.x / CULLING_DST;
         int cy = camera.y / CULLING_DST;
         int cz = camera.z / CULLING_DST;

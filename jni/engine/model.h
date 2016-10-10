@@ -17,7 +17,7 @@
 #include "interfaces/shader.h"
 #include "interfaces/texture.h"
 
-#define CULLING_DST 50
+#define CULLING_DST 100
 
 struct id3d
 {

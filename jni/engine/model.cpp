@@ -139,10 +139,10 @@ model::model(std::string filename) {
 
 void model::culling()
 {
-    for (unsigned int j = 0; j < models.size(); j++)
+    for (int j = models.size() - 1; j >= 0; j--)
     {
         std::map<id3d, bool> used;
-        if((models[j].filter == 0) && !models[j].dynamic && !models[j].touchable)
+        if ((models[j].filter == 0) && !models[j].dynamic && !models[j].touchable)
         {
             model3d* m = &models[j];
             long v = 0;
@@ -152,7 +152,8 @@ void model::culling()
             glm::vec3 va, vb, vc;
             glm::vec3 na, nb, nc;
             glm::vec2 ta, tb, tc;
-            for (unsigned int i = 0; i < m->vertices.size() / 9; i++, v += 9, t += 6) {
+            for (unsigned int i = 0; i < m->vertices.size() / 9; i++, v += 9, t += 6)
+            {
                 //get geometry
                 va = glm::vec3(m->vertices[v + 0] + m->reg.min.x,
                                m->vertices[v + 1] + m->reg.min.y,
@@ -209,6 +210,7 @@ void model::culling()
                 mod->coords.push_back(tc.s);
                 mod->coords.push_back(tc.t);
             }
+            models.erase(models.begin() + j);
         }
     }
 }

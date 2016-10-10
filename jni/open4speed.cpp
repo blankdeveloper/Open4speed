@@ -313,6 +313,9 @@ void loadScene(std::string filename) {
     physic->addModel(trackdata);
     for (unsigned int i = 0; i < getCarCount(); i++)
         physic->addCar(getCar(i));
+
+    /// optimise level
+    trackdata->culling();
 }
 
 /**

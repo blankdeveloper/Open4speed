@@ -2,7 +2,6 @@ import geometry.Vertex;
 
 import java.io.File;
 
-import components.ObjLoader;
 
 /**
  * Tool for converting OBJ models into O4S

@@ -368,12 +368,13 @@ void keyboardDown(unsigned char key, int x, int y) {
     /// resend key code
     special((int)key + 128, x, y);
 #ifndef ANDROID
-    if (key == 'q') {
+    if (key == 'q')
         cameraCar--;
-    }
-    if (key == 'w') {
+    else if (key == 'w')
         cameraCar++;
-    }
+    else if (key == 'r')
+        getPhysics()->resetCar(getCar(0));
+
     if (cameraCar < 0)
         cameraCar = getCarCount() - 1;
     else if (cameraCar >= (int)getCarCount())

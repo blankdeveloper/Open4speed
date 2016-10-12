@@ -10,6 +10,7 @@
 #ifndef ANDROID
 #include <GL/freeglut.h>
 #endif
+#include "engine/switch.h"
 #include "input/keyboard.h"
 #include "renderers/opengl/gles20.h"
 

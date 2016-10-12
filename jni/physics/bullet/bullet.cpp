@@ -368,7 +368,9 @@ void bullet::render() {
  */
 void bullet::resetCar(car* c) {
     c->resetRequested = false;
+#ifdef ANDROID
     c->setStart(c->currentEdge, 0);
+#endif
     btTransform tr;
     tr.setIdentity();
     tr.setOrigin(btVector3(c->pos.x,c->pos.y + 2,c->pos.z));

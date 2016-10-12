@@ -28,7 +28,6 @@ class texture {
 public:
     bool transparent;       ///< Texture transparency
     int twidth, theight;    ///< Image dimensions
-    char texturename[256];  ///< Texture filename
     unsigned int textureID; ///< Texture id
 
     bool animated;                  ///< True if it is texture sequence

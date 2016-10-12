@@ -13,8 +13,6 @@
 class shader
 {
 public:
-    char shadername[256];  ///< Shader filename
-
     /**
      * @brief ~shader is destructor
      */

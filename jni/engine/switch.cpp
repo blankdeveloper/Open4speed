@@ -23,34 +23,36 @@
 /**
  * @brief The game resources
  */
-std::vector<car*> cars;         ///< All cars in scene instances
-std::vector<model*> models;     ///< Shaders storage
-std::vector<shader*> shaders;   ///< Shaders storage
-std::vector<texture*> textures; ///< Textures storage
-physics *physic = 0;            ///< Physical engine instance
-renderer *xrenderer = 0;        ///< Renderer instance
-zip *APKArchive = 0;            ///< Access to APK archive
-std::string shaderPath;         ///< Path to shader files
+std::vector<car*> cars;                   ///< All cars in scene instances
+std::map<std::string, model*> models;     ///< Models storage
+std::map<std::string, shader*> shaders;   ///< Shaders storage
+std::map<std::string, texture*> textures; ///< Textures storage
+physics *physic = 0;                      ///< Physical engine instance
+renderer *xrenderer = 0;                  ///< Renderer instance
+zip *APKArchive = 0;                      ///< Access to APK archive
+std::string shaderPath;                   ///< Path to shader files
 
 void clearMediaStorage() {
     while (!cars.empty()) {
         delete cars[cars.size() - 1];
         cars.pop_back();
     }
-    while (!models.empty()) {
-        delete models[models.size() - 1];
-        models.pop_back();
-    }
-    while (!shaders.empty()) {
-        delete shaders[shaders.size() - 1];
-        shaders.pop_back();
-    }
-    while (!textures.empty()) {
-        delete textures[textures.size() - 1];
-        textures.pop_back();
-    }
-    delete physic;
-    delete xrenderer;
+    for (std::map<std::string, model*>::const_iterator it = models.begin(); it != models.end(); ++it)
+        delete it->second;
+    models.clear();
+    for (std::map<std::string, shader*>::const_iterator it = shaders.begin(); it != shaders.end(); ++it)
+        delete it->second;
+    shaders.clear();
+    for (std::map<std::string, texture*>::const_iterator it = textures.begin(); it != textures.end(); ++it)
+        delete it->second;
+    textures.clear();
+
+    if (physic)
+        delete physic;
+    physic = 0;
+    if (xrenderer)
+        delete xrenderer;
+    xrenderer = 0;
 }
 
 /**
@@ -119,15 +121,13 @@ model* getModel(std::string filename) {
 
     /// find previous instance
     filename = fixName(filename);
-    for (unsigned int i = 0; i < models.size(); i++)
-        if (strcmp(models[i]->modelname, filename.c_str()) == 0)
-            return models[i];
+    if (models.find(filename) != models.end())
+        return models[filename];
 
     /// create new instance
     if (strcmp(getExtension(filename).c_str(), "o4s") == 0) {
         model* instance = new model(filename);
-        strcpy(instance->modelname, filename.c_str());
-        models.push_back(instance);
+        models[filename] == instance;
         return instance;
     }
     loge("File is not supported:", filename);
@@ -169,13 +169,10 @@ shader* getShader(std::string name) {
 
     /// find previous instance
     name = fixName(name);
-    for (unsigned int i = 0; i < shaders.size(); i++) {
-        if (strcmp(shaders[i]->shadername, name.c_str()) == 0) {
-            return shaders[i];
-        }
-    }
+    if (shaders.find(name) != shaders.end())
+        return shaders[name];
 
-    char filename[256];
+    char filename[1024];
     strcpy(filename, shaderPath.c_str());
     strcat(filename, name.c_str());
     strcat(filename, ".glsl");
@@ -185,8 +182,7 @@ shader* getShader(std::string name) {
 
     /// create shader from code
     shader* instance = new glsl(vert_atributes, frag_atributes);
-    strcpy(instance->shadername, name.c_str());
-    shaders.push_back(instance);
+    shaders[name] = instance;
     return instance;
 }
 
@@ -199,15 +195,13 @@ texture* getTexture(std::string filename) {
     filename = fixName(filename);
 
     /// find previous instance
-    for (unsigned int i = 0; i < textures.size(); i++)
-        if (strcmp(textures[i]->texturename, filename.c_str()) == 0)
-            return textures[i];
+    if (textures.find(filename) != textures.end())
+        return textures[filename];
 
     /// create new instance
     if (strcmp(getExtension(filename).c_str(), "png") == 0) {
       texture* instance = new gltexture(texture::loadPNG(getFile(filename)));
-      strcpy(instance->texturename, filename.c_str());
-      textures.push_back(instance);
+      textures[filename] = instance;
       return instance;
     } else if (getExtension(filename)[0] == 'p') {
 
@@ -223,13 +217,11 @@ texture* getTexture(std::string filename) {
             file[strlen(file) - 1] = i % 10 + '0';
             file[strlen(file) - 2] = i / 10 + '0';
             texture* instance = new gltexture(texture::loadPNG(getFile(file)));
-            strcpy(instance->texturename, file);
             anim.push_back(instance);
         }
 
         texture* instance = new gltexture(anim);
-        strcpy(instance->texturename, filename.c_str());
-        textures.push_back(instance);
+        textures[filename] = instance;
         return instance;
     }
     loge("Unsupported texture", filename);
@@ -244,9 +236,15 @@ texture* getTexture(std::string filename) {
  * @return texture instance
  */
 texture* getTexture(float r, float g, float b) {
+    char filename[256];
+    sprintf(filename, "%d %d %d", (int)(r * 255.0f), (int)(g * 255.0f), (int)(b * 255.0f));
+
+    /// find previous instance
+    if (textures.find(filename) != textures.end())
+        return textures[filename];
+
     texture* instance = new gltexture(texture::createRGB(1, 1, r, g, b));
-    sprintf(instance->texturename, "%f %f %f", r, g , b);
-    textures.push_back(instance);
+    textures[filename] = instance;
     return instance;
 }
 

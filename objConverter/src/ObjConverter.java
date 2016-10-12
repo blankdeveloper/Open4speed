@@ -72,10 +72,15 @@ public class ObjConverter
     // process
     long timestamp = System.currentTimeMillis();
     Vertex.resetStatistics();
+    // load data
     ObjLoader obj = new ObjLoader(path);
     obj.loadObj(args[0]);
     obj.parseObj(args[0]);
-    obj.writeO4S(args[1]);
+    // write data
+    O4SWriter o4s = new O4SWriter(args[1]);
+    o4s.write(obj.getModels(), obj.getExtremes());
+    o4s.writeEdges(obj.getGraphs());
+
     int time = (int) ((System.currentTimeMillis() - timestamp) / 1000);
     System.out.println("Done in " + time + " seconds.");
   }

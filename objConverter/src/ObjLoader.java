@@ -1,5 +1,3 @@
-
-
 import geometry.Edge;
 import geometry.Graph;
 import geometry.Model;
@@ -14,7 +12,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -43,7 +40,6 @@ public class ObjLoader
   private ArrayList<Point2D>   texCoords          = new ArrayList<>();
   private ArrayList<Model>     models             = new ArrayList<>();
   private ArrayList<Graph>     graph              = new ArrayList<>();
-  private FileOutputStream     fos                = null;
 
   public ObjLoader(String path)
   {
@@ -51,7 +47,7 @@ public class ObjLoader
   }
 
   // get material parameters from library
-  public String getMaterial(String lib, String mtl, String path) throws IOException
+  private String getMaterial(String lib, String mtl, String path) throws IOException
   {
     top = false;
     // open material library file
@@ -93,9 +89,9 @@ public class ObjLoader
             {
               StringTokenizer lsc = new StringTokenizer(data);
               lsc.nextToken();
-              ar = ObjLoader.stringToFloat(lsc.nextToken());
-              ag = ObjLoader.stringToFloat(lsc.nextToken());
-              ab = ObjLoader.stringToFloat(lsc.nextToken());
+              ar = stringToFloat(lsc.nextToken());
+              ag = stringToFloat(lsc.nextToken());
+              ab = stringToFloat(lsc.nextToken());
             }
 
             // set diffuse parameter
@@ -103,9 +99,9 @@ public class ObjLoader
             {
               StringTokenizer lsc = new StringTokenizer(data);
               lsc.nextToken();
-              dr = ObjLoader.stringToFloat(lsc.nextToken());
-              dg = ObjLoader.stringToFloat(lsc.nextToken());
-              db = ObjLoader.stringToFloat(lsc.nextToken());
+              dr = stringToFloat(lsc.nextToken());
+              dg = stringToFloat(lsc.nextToken());
+              db = stringToFloat(lsc.nextToken());
             }
 
             // set specular parameter
@@ -113,9 +109,9 @@ public class ObjLoader
             {
               StringTokenizer lsc = new StringTokenizer(data);
               lsc.nextToken();
-              sr = ObjLoader.stringToFloat(lsc.nextToken());
-              sg = ObjLoader.stringToFloat(lsc.nextToken());
-              sb = ObjLoader.stringToFloat(lsc.nextToken());
+              sr = stringToFloat(lsc.nextToken());
+              sg = stringToFloat(lsc.nextToken());
+              sb = stringToFloat(lsc.nextToken());
             }
 
             // set alpha parameter
@@ -123,7 +119,7 @@ public class ObjLoader
             {
               StringTokenizer lsc = new StringTokenizer(data);
               lsc.nextToken();
-              alpha = ObjLoader.stringToFloat(lsc.nextToken());
+              alpha = stringToFloat(lsc.nextToken());
             }
 
             // compress parameters
@@ -160,17 +156,17 @@ public class ObjLoader
               textureName = path + "/" + cut + ".png";
 
               // check if texture is not already processed
-              if (!ObjLoader.exists(textureName))
+              if (!exists(textureName))
               {
                 // get image of texture
                 BufferedImage img = null;
                 BufferedImage resizedImage;
                 try
                 {
-                  if (ObjLoader.exists(data.substring(7)))
+                  if (exists(data.substring(7)))
                   {
                     img = ImageIO.read(new File(data.substring(7)));
-                  } else if (ObjLoader.exists(fileName))
+                  } else if (exists(fileName))
                   {
                     img = ImageIO.read(new File(fileName));
                   }
@@ -209,7 +205,7 @@ public class ObjLoader
                 try
                 {
                   ImageIO.write(resizedImage, "png", new File(textureName));
-                  if (!ObjLoader.exists(textureName))
+                  if (!exists(textureName))
                   {
                     System.err.println("Unsupported texture format " + fileName);
                     fis.close();
@@ -575,223 +571,25 @@ public class ObjLoader
     System.out.println("OK");
   }
 
-  public void writeO4S(String outputFile)
+  public String getExtremes()
   {
+    String extremes = minx + " " + miny + " " + minz + " ";
+    extremes += maxx + " " + maxy + " " + maxz + "\n";
+    return extremes;
+  }
 
-    System.out.print("Writing output file...");
-    ArrayList<Triangle> faces;
+  public ArrayList<Graph> getGraphs()
+  {
+    return graph;
+  }
 
-    // count faces
-    int facesCount = 0;
-    for (int j = 1; j < models.size(); j++)
-    {
-      // check if current material has faces
-      if (models.get(j).faces.size() > 0)
-      {
-        facesCount++;
-      }
-    }
-    // count edges
-    int edgesCount = 0;
-    for (int j = 0; j < graph.size(); j++)
-    {
-      // check if current graph has edges
-      if (graph.get(j).edges.size() > 0)
-      {
-        edgesCount++;
-      }
-    }
-
-    try
-    {
-      fos = new FileOutputStream(outputFile);
-
-      // save extreme values
-      String extremes = minx + " " + miny + " " + minz + " ";
-      extremes += maxx + " " + maxy + " " + maxz + "\n";
-      fos.write((extremes).getBytes());
-
-      // save faces count
-      fos.write((facesCount + "\n").getBytes());
-
-      // save all faces
-      for (int j = 1; j < models.size(); j++)
-      {
-        // get faces pointer for current material
-        faces = models.get(j).faces;
-        // find local center
-        minx = 99999;
-        miny = 99999;
-        minz = 99999;
-        maxx = -99999;
-        maxy = -99999;
-        maxz = -99999;
-        for (int i = 0; i < faces.size(); i++)
-        {
-          if (minx > faces.get(i).a.v.x)
-          {
-            minx = faces.get(i).a.v.x;
-          }
-          if (miny > faces.get(i).a.v.y)
-          {
-            miny = faces.get(i).a.v.y;
-          }
-          if (minz > faces.get(i).a.v.z)
-          {
-            minz = faces.get(i).a.v.z;
-          }
-
-          if (maxx < faces.get(i).a.v.x)
-          {
-            maxx = faces.get(i).a.v.x;
-          }
-          if (maxy < faces.get(i).a.v.y)
-          {
-            maxy = faces.get(i).a.v.y;
-          }
-          if (maxz < faces.get(i).a.v.z)
-          {
-            maxz = faces.get(i).a.v.z;
-          }
-
-          if (minx > faces.get(i).b.v.x)
-          {
-            minx = faces.get(i).b.v.x;
-          }
-          if (miny > faces.get(i).b.v.y)
-          {
-            miny = faces.get(i).b.v.y;
-          }
-          if (minz > faces.get(i).b.v.z)
-          {
-            minz = faces.get(i).b.v.z;
-          }
-
-          if (maxx < faces.get(i).b.v.x)
-          {
-            maxx = faces.get(i).b.v.x;
-          }
-          if (maxy < faces.get(i).b.v.y)
-          {
-            maxy = faces.get(i).b.v.y;
-          }
-          if (maxz < faces.get(i).b.v.z)
-          {
-            maxz = faces.get(i).b.v.z;
-          }
-
-          if (minx > faces.get(i).c.v.x)
-          {
-            minx = faces.get(i).c.v.x;
-          }
-          if (miny > faces.get(i).c.v.y)
-          {
-            miny = faces.get(i).c.v.y;
-          }
-          if (minz > faces.get(i).c.v.z)
-          {
-            minz = faces.get(i).c.v.z;
-          }
-
-          if (maxx < faces.get(i).c.v.x)
-          {
-            maxx = faces.get(i).c.v.x;
-          }
-          if (maxy < faces.get(i).c.v.y)
-          {
-            maxy = faces.get(i).c.v.y;
-          }
-          if (maxz < faces.get(i).c.v.z)
-          {
-            maxz = faces.get(i).c.v.z;
-          }
-        }
-
-        // check if current material has faces
-        if (faces.size() > 0)
-        {
-          // save material parameters
-          fos.write((minx + " " + miny + " " + minz + " " + maxx + " " + maxy + " " + maxz + " "
-              + models.get(j).material + "\n").getBytes());
-          // save faces count
-          fos.write((faces.size() + "\n").getBytes());
-          // save face parameters
-          for (int i = 0; i < faces.size(); i++)
-          {
-            faces.get(i).a.v.x -= minx;
-            faces.get(i).a.v.y -= miny;
-            faces.get(i).a.v.z -= minz;
-            faces.get(i).b.v.x -= minx;
-            faces.get(i).b.v.y -= miny;
-            faces.get(i).b.v.z -= minz;
-            faces.get(i).c.v.x -= minx;
-            faces.get(i).c.v.y -= miny;
-            faces.get(i).c.v.z -= minz;
-            fos.write(faces.get(i).value());
-            faces.get(i).a.v.x += minx;
-            faces.get(i).a.v.y += miny;
-            faces.get(i).a.v.z += minz;
-            faces.get(i).b.v.x += minx;
-            faces.get(i).b.v.y += miny;
-            faces.get(i).b.v.z += minz;
-            faces.get(i).c.v.x += minx;
-            faces.get(i).c.v.y += miny;
-            faces.get(i).c.v.z += minz;
-          }
-        }
-      }
-      fos.close();
-
-      // save edges count
-      fos = new FileOutputStream(outputFile + ".e");
-      fos.write((edgesCount + "\n").getBytes());
-
-      // save all edges
-      for (int j = 0; j < graph.size(); j++)
-      {
-        // get edges pointer for current material
-        ArrayList<Edge> edges = graph.get(j).edges;
-        // check if current material has edges
-        if (edges.size() > 0)
-        {
-          // save edges count
-          fos.write((edges.size() + "\n").getBytes());
-          // save face parameters
-          for (int i = 0; i < edges.size(); i++)
-          {
-            fos.write(edges.get(i).value());
-          }
-        }
-      }
-    } catch (IOException e)
-    {
-      System.err.println("Unable to save file");
-      return;
-    }
-    System.out.println("OK");
-
-    // show information
-    if (models.get(0).faces.size() > 0)
-    {
-      System.out.println(models.get(0).faces.size() + " polygons weren't parsed.");
-    }
-    Vertex.printStatistics();
-
-    if (facesCount > 0)
-    {
-      System.out.println("Converted " + facesCount + " triangle objects");
-      if (edgesCount > 0)
-      {
-        System.out.println("Converted " + edgesCount + " edge tracks");
-      }
-    } else
-    {
-      System.out.println("Nothing converted");
-    }
+  public ArrayList<Model> getModels()
+  {
+    return models;
   }
 
   // convert string to float
-  public static float stringToFloat(String value)
+  private float stringToFloat(String value)
   {
     try
     {

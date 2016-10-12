@@ -45,29 +45,29 @@ model::model(std::string filename) {
     /// parse all textures
     for (int i = 0; i < textureCount; i++) {
 
-        /// set default value
-        model3d m;
-        m.colora[3] = 1;
-        m.colord[3] = 1;
-        m.colors[3] = 1;
+        //TODO:unused, remove from format
+        float alpha = 1;
+        float colora[4];
+        float colord[4];
+        float colors[4];
 
         /// get material attributes
-        float alpha = 1; //unused, remove from format
+        model3d m;
         char texturePath[255];
         char material[255];
         material[0] = '\0';
         f->gets(line);
         sscanf(line, "%f %f %f %f %f %f %s %f %f %f %f %f %f %f %f %f %f %s",
                &m.reg.min.x, &m.reg.min.y, &m.reg.min.z, &m.reg.max.x, &m.reg.max.y, &m.reg.max.z,
-               &texturePath[0], &m.colora[0], &m.colora[1], &m.colora[2], &m.colord[0], &m.colord[1], &m.colord[2],
-               &m.colors[0], &m.colors[1], &m.colors[2], &alpha, &material[0]);
+               &texturePath[0], &colora[0], &colora[1], &colora[2], &colord[0], &colord[1], &colord[2],
+               &colors[0], &colors[1], &colors[2], &alpha, &material[0]);
 
         /// if texture is not only single color then load it
         if((texturePath[0] != '*') && (texturePath[0] != '('))
             m.texture2D = getTexture(f->path() + texturePath);
         /// create color texture
         else
-            m.texture2D = getTexture(m.colord[0], m.colord[1], m.colord[2]);
+            m.texture2D = getTexture(colord[0], colord[1], colord[2]);
 
         int cursor = 0;
         m.dynamic = false;

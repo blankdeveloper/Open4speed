@@ -167,15 +167,15 @@ renderer* getRenderer() {
  */
 shader* getShader(std::string name) {
 
-    /// find previous instance
-    name = fixName(name);
-    if (shaders.find(name) != shaders.end())
-        return shaders[name];
-
     char filename[1024];
     strcpy(filename, shaderPath.c_str());
     strcat(filename, name.c_str());
     strcat(filename, ".glsl");
+
+    /// find previous instance
+    name = fixName(name);
+    if (shaders.find(name) != shaders.end())
+        return shaders[name];
 
     std::vector<std::string> vert_atributes = getList("VERT", filename);
     std::vector<std::string> frag_atributes = getList("FRAG", filename);

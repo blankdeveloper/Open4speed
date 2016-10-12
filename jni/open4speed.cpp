@@ -128,7 +128,7 @@ void display(void) {
         xrenderer->pushMatrix();
         xrenderer->multMatrix(getCar(i)->transform[0].value);
         xrenderer->enable[1] = getCar(i)->control->getNitro() && (getCar(i)->n2o > 1);
-        xrenderer->enable[9] = getCar(i)->control->getBrake() != 0;
+        xrenderer->enable[9] = getCar(i)->control->getBrake() > 0.005f;
         xrenderer->renderModel(getCar(i)->skin);
         xrenderer->popMatrix();
 

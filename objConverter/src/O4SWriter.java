@@ -1,6 +1,8 @@
+import geometry.AABB;
 import geometry.Edge;
 import geometry.Graph;
 import geometry.Model;
+import geometry.Point3D;
 import geometry.Triangle;
 import geometry.Vertex;
 
@@ -8,16 +10,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class O4SWriter
 {
   private String outputFile;
-  
+
   public O4SWriter(String outputFile)
   {
     this.outputFile = outputFile;
   }
-  
+
   public void write(ArrayList<Model> models, String extremes)
   {
     System.out.print("Writing output file...");
@@ -48,124 +49,40 @@ public class O4SWriter
       {
         // get faces pointer for current material
         ArrayList<Triangle> faces = models.get(j).faces;
-        // find local center
-        float minx = 99999;
-        float miny = 99999;
-        float minz = 99999;
-        float maxx = -99999;
-        float maxy = -99999;
-        float maxz = -99999;
-        for (int i = 0; i < faces.size(); i++)
-        {
-          if (minx > faces.get(i).a.v.x)
-          {
-            minx = faces.get(i).a.v.x;
-          }
-          if (miny > faces.get(i).a.v.y)
-          {
-            miny = faces.get(i).a.v.y;
-          }
-          if (minz > faces.get(i).a.v.z)
-          {
-            minz = faces.get(i).a.v.z;
-          }
-
-          if (maxx < faces.get(i).a.v.x)
-          {
-            maxx = faces.get(i).a.v.x;
-          }
-          if (maxy < faces.get(i).a.v.y)
-          {
-            maxy = faces.get(i).a.v.y;
-          }
-          if (maxz < faces.get(i).a.v.z)
-          {
-            maxz = faces.get(i).a.v.z;
-          }
-
-          if (minx > faces.get(i).b.v.x)
-          {
-            minx = faces.get(i).b.v.x;
-          }
-          if (miny > faces.get(i).b.v.y)
-          {
-            miny = faces.get(i).b.v.y;
-          }
-          if (minz > faces.get(i).b.v.z)
-          {
-            minz = faces.get(i).b.v.z;
-          }
-
-          if (maxx < faces.get(i).b.v.x)
-          {
-            maxx = faces.get(i).b.v.x;
-          }
-          if (maxy < faces.get(i).b.v.y)
-          {
-            maxy = faces.get(i).b.v.y;
-          }
-          if (maxz < faces.get(i).b.v.z)
-          {
-            maxz = faces.get(i).b.v.z;
-          }
-
-          if (minx > faces.get(i).c.v.x)
-          {
-            minx = faces.get(i).c.v.x;
-          }
-          if (miny > faces.get(i).c.v.y)
-          {
-            miny = faces.get(i).c.v.y;
-          }
-          if (minz > faces.get(i).c.v.z)
-          {
-            minz = faces.get(i).c.v.z;
-          }
-
-          if (maxx < faces.get(i).c.v.x)
-          {
-            maxx = faces.get(i).c.v.x;
-          }
-          if (maxy < faces.get(i).c.v.y)
-          {
-            maxy = faces.get(i).c.v.y;
-          }
-          if (maxz < faces.get(i).c.v.z)
-          {
-            maxz = faces.get(i).c.v.z;
-          }
-        }
+        AABB aabb = models.get(j).getAABB();
+        Point3D min = aabb.getMin();
+        Point3D max = aabb.getMax();
 
         // check if current material has faces
         if (faces.size() > 0)
         {
           // save material parameters
-          fos.write((minx + " " + miny + " " + minz + " " + maxx + " " + maxy + " " + maxz + " "
+          fos.write((min.x + " " + min.y + " " + min.z + " " + max.x + " " + max.y + " " + max.z + " "
               + models.get(j).material + "\n").getBytes());
           // save faces count
           fos.write((faces.size() + "\n").getBytes());
           // save face parameters
           for (int i = 0; i < faces.size(); i++)
           {
-            faces.get(i).a.v.x -= minx;
-            faces.get(i).a.v.y -= miny;
-            faces.get(i).a.v.z -= minz;
-            faces.get(i).b.v.x -= minx;
-            faces.get(i).b.v.y -= miny;
-            faces.get(i).b.v.z -= minz;
-            faces.get(i).c.v.x -= minx;
-            faces.get(i).c.v.y -= miny;
-            faces.get(i).c.v.z -= minz;
+            faces.get(i).a.v.x -= min.x;
+            faces.get(i).a.v.y -= min.y;
+            faces.get(i).a.v.z -= min.z;
+            faces.get(i).b.v.x -= min.x;
+            faces.get(i).b.v.y -= min.y;
+            faces.get(i).b.v.z -= min.z;
+            faces.get(i).c.v.x -= min.x;
+            faces.get(i).c.v.y -= min.y;
+            faces.get(i).c.v.z -= min.z;
             fos.write(faces.get(i).value());
-            faces.get(i).a.v.x += minx;
-            faces.get(i).a.v.y += miny;
-            faces.get(i).a.v.z += minz;
-            faces.get(i).b.v.x += minx;
-            faces.get(i).b.v.y += miny;
-            faces.get(i).b.v.z += minz;
-            faces.get(i).c.v.x += minx;
-            faces.get(i).c.v.y += miny;
-            faces.get(i).c.v.z += minz;
+            faces.get(i).a.v.x += min.x;
+            faces.get(i).a.v.y += min.y;
+            faces.get(i).a.v.z += min.z;
+            faces.get(i).b.v.x += min.x;
+            faces.get(i).b.v.y += min.y;
+            faces.get(i).b.v.z += min.z;
+            faces.get(i).c.v.x += min.x;
+            faces.get(i).c.v.y += min.y;
+            faces.get(i).c.v.z += min.z;
           }
         }
       }
@@ -235,7 +152,7 @@ public class O4SWriter
       System.err.println("Unable to save file");
       return;
     }
-    
+
     if (edgesCount > 0)
     {
       System.out.println("Converted " + edgesCount + " edge tracks");

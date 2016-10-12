@@ -27,6 +27,7 @@ SOURCES += \
     engine/car.cpp \
     engine/io.cpp \
     engine/math.cpp \
+    engine/matrices.cpp \
     engine/model.cpp \
     engine/switch.cpp \
     files/extfile.cpp \
@@ -45,6 +46,7 @@ HEADERS += \
     engine/car.h \
     engine/io.h \
     engine/math.h \
+    engine/matrices.h \
     engine/model.h \
     engine/switch.h \
     files/extfile.h \

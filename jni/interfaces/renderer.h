@@ -11,6 +11,7 @@
 #define RENDERER_H
 
 #include <glm/glm.hpp>
+#include "engine/matrices.h"
 #include "engine/model.h"
 #include "interfaces/fbo.h"
 #include "interfaces/shader.h"
@@ -21,13 +22,12 @@ const int culling = 150;              ///< View culling distance in meters
 /**
  * @brief The renderer interface
  */
-class renderer {
+class renderer : public matrices
+{
 public:
 
     float aliasing;             ///< Screen detail
     bool enable[10];            ///< Enabled filter
-    glm::mat4x4 proj_matrix;    ///< Scene projection matrix
-    glm::mat4x4 view_matrix;    ///< View matrix
     shader* scene_shader;       ///< Scene shader
     int screen_width;           ///< Screen width
     int screen_height;          ///< Screen height
@@ -35,71 +35,6 @@ public:
     virtual ~renderer() {}
 
     virtual void init(int w, int h) = 0;
-
-    /**
-     * @brief lookAt implements GLUlookAt
-     * @param eye is eye vector
-     * @param center is camera center
-     * @param up is up vector
-     */
-    virtual void lookAt(glm::vec3 eye, glm::vec3 center, glm::vec3 up) = 0;
-
-    /**
-     * @brief perspective implements GLUPerspective
-     * @param fovy is fov angle
-     * @param aspect is screen aspect ration
-     * @param zNear is near cutting plate
-     * @param zFar is far cutting plane
-     */
-    virtual void perspective(float fovy, float aspect, float zNear, float zFar) = 0;
-
-    /**
-     * @brief multMatrix multiplies with matrix
-     * @param matrix is 4x4 matrix in OpenGL format
-     */
-    virtual void multMatrix(float* matrix) = 0;
-
-    /**
-     * @brief popMatrix pops matrix from stack
-     */
-    virtual void popMatrix() = 0;
-
-    /**
-     * @brief pushMatrix pushs current matrix to stack
-     */
-    virtual void pushMatrix() = 0;
-
-    /**
-     * @brief rotateX rotate around X axis
-     * @param value is angle
-     */
-    virtual void rotateX(float value) = 0;
-
-    /**
-     * @brief rotateX rotate around Y axis
-     * @param value is angle
-     */
-    virtual void rotateY(float value) = 0;
-
-    /**
-     * @brief rotateX rotate around Z axis
-     * @param value is angle
-     */
-    virtual void rotateZ(float value) = 0;
-
-    /**
-     * @brief scale scales current matrix
-     * @param value is amount of scale(1 to keep current)
-     */
-    virtual void scale(float value) = 0;
-
-    /**
-     * @brief translate translates object
-     * @param x is translate coordinate
-     * @param y is translate coordinate
-     * @param z is translate coordinate
-     */
-    virtual void translate(float x, float y, float z) = 0;
 
     /**
      * @brief renderDynamic render dynamic objects

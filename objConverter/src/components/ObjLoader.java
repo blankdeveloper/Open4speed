@@ -515,10 +515,6 @@ public class ObjLoader
           fos.write((minx + " " + miny + " " + minz + " " + maxx + " " + maxy + " " + maxz + " "
               + materials.get(j).parameters + "\n").getBytes());
           // save faces count
-          for (int l = 0; l < materials.get(j).pointers.size(); l++)
-          {
-            fos.write((materials.get(j).pointers.get(l) + "\n").getBytes());
-          }
           fos.write((faces.size() + "\n").getBytes());
           // save face parameters
           for (int i = 0; i < faces.size(); i++)

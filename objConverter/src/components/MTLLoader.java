@@ -20,47 +20,18 @@ public class MTLLoader
 {
 
   public ArrayList<Triangle> faces;
-  public ArrayList<Integer>  pointers;
   public String              parameters;
   public static boolean      top;
-
-  private MTLLoader()
-  {
-  }
 
   public MTLLoader(String t)
   {
     faces = new ArrayList<Triangle>();
-    pointers = new ArrayList<Integer>();
     parameters = t;
-  }
-
-  public MTLLoader clone(boolean half)
-  {
-    MTLLoader mtl = new MTLLoader();
-    mtl.faces = new ArrayList<Triangle>();
-    mtl.pointers = new ArrayList<Integer>();
-    if (half)
-    {
-      for (int i = 0; i < this.faces.size() / 2; i++)
-      {
-        mtl.faces.add(this.faces.get(i));
-      }
-    } else
-    {
-      for (int i = this.faces.size() / 2; i < this.faces.size(); i++)
-      {
-        mtl.faces.add(this.faces.get(i));
-      }
-    }
-    mtl.parameters = "" + this.parameters;
-    return mtl;
   }
 
   // get material parameters from library
   public static String getMaterial(String lib, String mtl, String path) throws IOException
   {
-
     top = false;
     // open material library file
     FileInputStream fis;

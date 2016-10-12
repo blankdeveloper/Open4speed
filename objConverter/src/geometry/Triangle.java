@@ -14,11 +14,6 @@ public class Triangle
     this.c = c;
   }
 
-  public double area()
-  {
-    return c.v.minus(a.v).cross(c.v.minus(b.v)).size();
-  }
-
   // compressed values of triangle
   public byte[] value()
   {

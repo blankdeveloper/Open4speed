@@ -54,7 +54,7 @@ public:
      * @brief resetCar updates car state
      * @param c is instance of car
      */
-    virtual void resetCar(car* c) = 0;
+    virtual void resetCar(car* c, bool total = true) = 0;
 
     /**
      * @brief updateCar updates car state

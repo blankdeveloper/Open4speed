@@ -366,11 +366,11 @@ void bullet::render() {
  * @brief resetCar updates car state
  * @param c is instance of car
  */
-void bullet::resetCar(car* c) {
+void bullet::resetCar(car* c, bool total)
+{
     c->resetRequested = false;
-#ifdef ANDROID
-    c->setStart(c->currentEdge, 0);
-#endif
+    if (total)
+      c->setStart(c->currentEdge, 0);
     btTransform tr;
     tr.setIdentity();
     tr.setOrigin(btVector3(c->pos.x,c->pos.y + 2,c->pos.z));
@@ -378,6 +378,15 @@ void bullet::resetCar(car* c) {
     q.setRotation(btVector3(0,1,0), c->rot * 3.14 / 180.0);
     tr.setRotation(q);
     m_vehicle[c->index - 1]->getRigidBody()->setCenterOfMassTransform(tr);
+
+    /// get matrices
+    for (int index = 0; index < 5; index++) {
+        if (index > 0) {
+          m_vehicle[c->index - 1]->getWheelInfo(index - 1).m_worldTransform.getOpenGLMatrix(c->transform[index].value);
+        } else {
+          m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassTransform().getOpenGLMatrix(c->transform[index].value);
+        }
+    }
 }
 
 /**

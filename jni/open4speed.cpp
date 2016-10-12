@@ -104,10 +104,6 @@ void display(void) {
     xrenderer->lookAt(glm::vec3(cameraX - sin(direction) * 0.1f, cameraY + 0.5f, cameraZ - cos(direction) * 0.1f),
                       glm::vec3(cameraX + sin(direction) * 100.0f, cameraY, cameraZ + cos(direction) * 100.0f),
                       glm::vec3(0, 1, 0));
-    //gta style
-    /*xrenderer->lookAt(glm::vec3(cameraX, cameraY + getCar(cameraCar)->control->getDistance() * 10.0f, cameraZ),
-                      glm::vec3(cameraX, cameraY, cameraZ),
-                      glm::vec3(0, 0, 1));*/
 
     /// render skydome
     xrenderer->pushMatrix();
@@ -324,28 +320,39 @@ void loadScene(std::string filename) {
  */
 void idle(int v) {
     physics* physic = getPhysics();
-    if (physic->active) {
+    if (physic->active)
+    {
         /// update cars
         for (unsigned int i = 0; i < getCarCount(); i++)
-            physic->updateCar(getCar(i));
-        /// update scene
-        physic->updateWorld();
-
-        /// update cars
-        for (unsigned int i = 0; i < getCarCount(); i++) {
+        {
             /// update current edge for navigation
-            if (!physic->locked) {
+            if (!physic->locked)
+            {
                 if ((distance(getCar(i)->pos, getCar(i)->currentEdge.b) < getCar(i)->control->getUpdate())
                         && (fabsf(getCar(i)->currentEdge.b.y - getCar(i)->pos.y) < 30)) {
                     std::vector<int> nEdges = nextEdge(getCar(i)->edges, getCar(i)->currentEdge);
-                    if (nEdges.size() > 0) {
+                    if (nEdges.size() > 0)
                         getCar(i)->currentEdge = getCar(i)->edges[nEdges[0]];
-                    }
 
                 }
+                if (i != 0)
+                {
+                  if (distance(getCar(i)->pos, getCar(0)->pos) > 300)
+                  {
+                    int rnd = (int)(i * 500) % 10;
+                    getCar(i)->pos += glm::normalize(getCar(i)->currentEdge.b - getCar(i)->pos) * (2 + rnd * 0.1f);
+                    getCar(i)->rot = angle(getCar(i)->currentEdge.b, getCar(i)->currentEdge.a) * 180.0f / 3.14f;
+                    physic->resetCar(getCar(i), false);
+                    continue;
+                  }
+                }
             }
+            physic->updateCar(getCar(i));
             getCar(i)->update();
         }
+
+        /// update scene
+        physic->updateWorld();
     }
 
     /// call update
@@ -373,7 +380,7 @@ void keyboardDown(unsigned char key, int x, int y) {
     else if (key == 'w')
         cameraCar++;
     else if (key == 'r')
-        getPhysics()->resetCar(getCar(0));
+        getPhysics()->resetCar(getCar(0), false);
 
     if (cameraCar < 0)
         cameraCar = getCarCount() - 1;

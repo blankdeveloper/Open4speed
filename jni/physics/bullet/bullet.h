@@ -80,7 +80,7 @@ public:
      * @brief resetCar updates car state
      * @param c is instance of car
      */
-    void resetCar(car* c);
+    void resetCar(car* c, bool total = true);
 
     /**
      * @brief updateCar updates car state

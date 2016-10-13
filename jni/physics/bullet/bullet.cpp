@@ -8,10 +8,7 @@
 **/
 ///----------------------------------------------------------------------------------------
 
-#include <BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h>
-#include "engine/switch.h"
 #include "physics/bullet/bullet.h"
-#include "renderers/opengl/gles20.h"
 
 #define BRAKE_ASPECT 1
 #define DYNAMIC_DAMPING 10
@@ -42,7 +39,8 @@
 /**
  * @brief bullet destructor
  */
-bullet::~bullet() {
+bullet::~bullet()
+{
     delete m_dynamicsWorld;
     while(!vehicles.empty())
     {
@@ -74,16 +72,13 @@ bullet::~bullet() {
     delete m_dispatcher;
     delete m_overlappingPairCache;
     delete m_constraintSolver;
-#ifndef ANDROID
-    delete m_shapeDrawer;
-#endif
 }
 
 /**
  * @brief Construct physical model
  */
-bullet::bullet() {
-
+bullet::bullet()
+{
     /// init engine
     active = true;
     locked = true;
@@ -96,43 +91,14 @@ bullet::bullet() {
     m_dynamicsWorld = new btDiscreteDynamicsWorld(m_dispatcher,m_overlappingPairCache,m_constraintSolver,m_collisionConfiguration);
     m_dynamicsWorld->setGravity(btVector3(0,-GRAVITATION,0));
     m_vehicleRayCaster = new btDefaultVehicleRaycaster(m_dynamicsWorld);
-
-#ifndef ANDROID
-    /// set bullet debugging renderer
-    m_shapeDrawer = new GL_ShapeDrawer();
-    m_shapeDrawer->enableTexture(true);
-
-    GLfloat light_ambient[] = { btScalar(0.2), btScalar(0.2), btScalar(0.2), btScalar(1.0) };
-    GLfloat light_diffuse[] = { btScalar(1.0), btScalar(1.0), btScalar(1.0), btScalar(1.0) };
-    GLfloat light_specular[] = { btScalar(1.0), btScalar(1.0), btScalar(1.0), btScalar(1.0 )};
-    GLfloat light_position0[] = { btScalar(1.0), btScalar(10.0), btScalar(1.0), btScalar(0.0 )};
-    GLfloat light_position1[] = { btScalar(-1.0), btScalar(-10.0), btScalar(-1.0), btScalar(0.0) };
-
-    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
-    glLightfv(GL_LIGHT0, GL_POSITION, light_position0);
-    glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
-    glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
-    glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
-    glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
-
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glEnable(GL_LIGHT1);
-    glShadeModel(GL_SMOOTH);
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
-    glClearColor(btScalar(0.7),btScalar(0.7),btScalar(0.7),btScalar(0));
-#endif
 }
 
 /**
  * @brief addCar adds car into physical model
  * @param c is car instance
  */
-void bullet::addCar(car* c) {
-
+void bullet::addCar(car* c)
+{
     /// set chassis
     float width = c->skin->aabb.max.x - c->skin->aabb.min.x;
     float altitude = c->skin->aabb.max.y - c->skin->aabb.min.y;
@@ -167,7 +133,7 @@ void bullet::addCar(car* c) {
     vehicles[c->index - 1]->setCoordinateSystem(0,1,2);
 
     /// Set wheels connections
-    altitude = (c->wheel->aabb.max.y - c->wheel->aabb.min.y) / 2.0f;
+    altitude = (c->wheel->aabb.max.y - c->wheel->aabb.min.y);
     btVector3 direction(0,-1,0);
     btVector3 axle(-1,0,0);
     btVector3 point(-c->wheelX, 0, -c->wheelZ1);
@@ -180,7 +146,8 @@ void bullet::addCar(car* c) {
     vehicles[c->index - 1]->addWheel(point, direction, axle, SUSPENSION_REST_LENGTH, altitude, m_tuning, false);
 
     /// Set wheels parameters
-    for (int i = 0; i < vehicles[c->index - 1]->getNumWheels(); i++) {
+    for (int i = 0; i < vehicles[c->index - 1]->getNumWheels(); i++)
+    {
         btWheelInfo& wheel = vehicles[c->index - 1]->getWheelInfo(i);
         wheel.m_suspensionStiffness = SUSPENSION_STIFFNESS;
         wheel.m_wheelsDampingRelaxation = SUSPENSION_DAMPING;
@@ -195,17 +162,20 @@ void bullet::addCar(car* c) {
  * @param m is 3D model for physical model
  * @param center is model translation
  */
-void bullet::addModel(model *m) {
+void bullet::addModel(model *m)
+{
     btTriangleMesh* mesh = new btTriangleMesh();
     bool touchable = false;
     int count = 0;
-    for (unsigned int i = 0; i < m->models.size(); i++) {
+    for (unsigned int i = 0; i < m->models.size(); i++)
+    {
       if (m->models[i].touchable)
           touchable = true;
     }
-    for (unsigned int i = 0; i < m->models.size(); i++) {
-        if (m->models[i].dynamic) {
-
+    for (unsigned int i = 0; i < m->models.size(); i++)
+    {
+        if (m->models[i].dynamic)
+        {
             /// Create object
             float w = m->models[i].reg.max.x - m->models[i].reg.min.x;
             float a = m->models[i].reg.max.y - m->models[i].reg.min.y;
@@ -255,7 +225,8 @@ void bullet::addModel(model *m) {
             }
         }
     }
-    if (count > 0) {
+    if (count > 0)
+    {
         staticMeshes.push_back(mesh);
         btRigidBody* body = new btRigidBody(0,0,new btBvhTriangleMeshShape(mesh,true));
         body->setActivationState(DISABLE_SIMULATION);
@@ -270,65 +241,19 @@ void bullet::addModel(model *m) {
  * @param index is index of object
  * @return transformation matrix
  */
-void bullet::getTransform(int index, float* m) {
-
+void bullet::getTransform(int index, float* m)
+{
     /// get matrix
     dynamicObjects[index - 1]->getCenterOfMassTransform().getOpenGLMatrix(m);
-    for (int i = 0; i < 16; i++) {
-        if (isnan(m[i])) {
+    for (int i = 0; i < 16; i++)
+    {
+        if (isnan(m[i]))
+        {
             for (int j = 0; j < 16; j++)
                 m[j] = (j % 5 == 0) ? 1 : 0;
             return;
         }
     }
-}
-
-void bullet::render() {
-#ifndef ANDROID
-    btScalar	m[16];
-    btMatrix3x3	rot;rot.setIdentity();
-    const int	numObjects=m_dynamicsWorld->getNumCollisionObjects();
-    btVector3 wireColor(1,0,0);
-    for(int i=0;i<numObjects;i++) {
-        btCollisionObject*	colObj=m_dynamicsWorld->getCollisionObjectArray()[i];
-        btRigidBody*		body=btRigidBody::upcast(colObj);
-        if(body&&body->getMotionState()) {
-            btDefaultMotionState* myMotionState = (btDefaultMotionState*)body->getMotionState();
-            myMotionState->m_graphicsWorldTrans.getOpenGLMatrix(m);
-            rot=myMotionState->m_graphicsWorldTrans.getBasis();
-        }
-        else
-        {
-            colObj->getWorldTransform().getOpenGLMatrix(m);
-            rot=colObj->getWorldTransform().getBasis();
-        }
-        btVector3 wireColor(0, 1, 0); //wants deactivation
-        ///color differently for active, sleeping, wantsdeactivation states
-        switch(colObj->getActivationState()) {
-        case(ACTIVE_TAG):
-            wireColor = btVector3 (1, 0, 0);
-            break;
-        case(ISLAND_SLEEPING):
-            wireColor = btVector3 (0, 0, 1);
-            break;
-        case(WANTS_DEACTIVATION):
-            wireColor = btVector3 (0, 1, 0);
-            break;
-        case(DISABLE_DEACTIVATION):
-            wireColor = btVector3 (1, 1, 0);
-            break;
-        case(DISABLE_SIMULATION):
-            wireColor = btVector3 (0.5f, 0.5f, 0.5f);
-            break;
-        }
-
-        btVector3 aabbMin(0,0,0),aabbMax(0,0,0);
-        aabbMin-=btVector3(BT_LARGE_FLOAT,BT_LARGE_FLOAT,BT_LARGE_FLOAT);
-        aabbMax+=btVector3(BT_LARGE_FLOAT,BT_LARGE_FLOAT,BT_LARGE_FLOAT);
-        m_shapeDrawer->drawOpenGL(m,colObj->getCollisionShape(),wireColor,0,aabbMin,aabbMax);
-        m_shapeDrawer->drawOpenGL(m,colObj->getCollisionShape(),wireColor,1,aabbMin,aabbMax);
-    }
-#endif
 }
 
 /**
@@ -351,12 +276,12 @@ void bullet::resetCar(car* c, bool total)
     /// get matrices
     for (int i = 0; i < 4; i++)
         vehicles[c->index - 1]->updateWheelTransform(i);
-    for (int index = 0; index < 5; index++) {
-        if (index > 0) {
+    for (int index = 0; index < 5; index++)
+    {
+        if (index > 0)
           vehicles[c->index - 1]->getWheelInfo(index - 1).m_worldTransform.getOpenGLMatrix(c->transform[index].value);
-        } else {
+        else
           vehicles[c->index - 1]->getRigidBody()->getCenterOfMassTransform().getOpenGLMatrix(c->transform[index].value);
-        }
     }
 }
 
@@ -366,14 +291,14 @@ void bullet::resetCar(car* c, bool total)
  */
 void bullet::updateCar(car* c)
 {
-
     /// get direction
     if ((int)vehicles[c->index - 1]->getCurrentSpeedKmHour() < 0)
         c->reverse = true;
     if ((int)vehicles[c->index - 1]->getCurrentSpeedKmHour() > 0)
         c->reverse = false;
 
-    if (fabsf(vehicles[c->index - 1]->getCurrentSpeedKmHour()) < 5) {
+    if (fabsf(vehicles[c->index - 1]->getCurrentSpeedKmHour()) < 5)
+    {
         if (c->control->getGas() > 0)
             c->reverse = false;
         if (c->control->getBrake() > 0)
@@ -383,11 +308,12 @@ void bullet::updateCar(car* c)
     /// Set power
     float acc = c->acceleration;
     float max = c->gears[c->currentGear].max;
-    if (c->n2o < 150) {
+    if (c->n2o < 150)
         c->n2o += 0.1f;
-    }
-    if (c->control->getNitro()) {
-        if (c->n2o >= 1) {
+    if (c->control->getNitro())
+    {
+        if (c->n2o >= 1)
+        {
             acc *= 2;
             max *= 1.5f;
             c->n2o--;
@@ -397,35 +323,41 @@ void bullet::updateCar(car* c)
     /// set forces
     float gEngineForce = c->control->getGas() * (ENGINE_MAX_SPEED - c->speed) * acc * GAS_ASPECT;
     float gBreakingForce = c->control->getBrake() * c->brakePower * BRAKE_ASPECT;
-    if (c->reverse) {
+    if (c->reverse)
+    {
         gEngineForce = c->control->getBrake() * (ENGINE_MAX_SPEED - c->speed) * acc * GAS_ASPECT;
         gBreakingForce = c->control->getGas() * c->brakePower * BRAKE_ASPECT / 2.0;
     }
 
     /// set auto braking
-    if (c->speed < c->gears[c->currentGear].min) {
+    if (c->speed < c->gears[c->currentGear].min)
+    {
         gEngineForce = 0;
         gBreakingForce = UNDERSPEED_BRAKING;
     }
 
     /// Limit power
-    if (max < c->speed) {
+    if (max < c->speed)
+    {
         gEngineForce = 0;
         gBreakingForce = OVERSPEED_BRAKING;
     }
 
     /// Apply power
-    if (!locked) {
+    if (!locked)
+    {
         float gVehicleSteering = c->control->getSteer() * c->steering;
             gVehicleSteering /= (STEERING_ASPECT + c->speed * STEERING_SPEED_DEPENDENCY);
 
         vehicles[c->index - 1]->setSteeringValue(gVehicleSteering,2);
         vehicles[c->index - 1]->setSteeringValue(gVehicleSteering,3);
 
-        if (c->reverse) {
+        if (c->reverse)
+        {
             vehicles[c->index - 1]->applyEngineForce(-gEngineForce,0);
             vehicles[c->index - 1]->applyEngineForce(-gEngineForce,1);
-        } else {
+        } else
+        {
             vehicles[c->index - 1]->applyEngineForce(gEngineForce,0);
             vehicles[c->index - 1]->applyEngineForce(gEngineForce,1);
         }
@@ -440,63 +372,50 @@ void bullet::updateCar(car* c)
     vehicles[c->index - 1]->updateVehicle(VEHICLE_STEP);
 
     /// Reset car
-    if ((c->speed < 5) && active && !locked) {
-        if (c->onRoof > 60) {
+    if ((c->speed < 5) && active && !locked)
+    {
+        if (c->onRoof > 60)
+        {
             c->resetAllowed = true;
-            if ((int)c->index - 1 != 0) {
+            if ((int)c->index - 1 != 0)
                 c->resetRequested = true;
-            }
             c->onRoof = 0;
-        } else if (c->speed < 5) {
+        } else if (c->speed < 5)
             c->onRoof++;
-        }
-    } else {
+    } else
         c->resetAllowed = false;
-    }
-
-    // reset car
-    if (c->resetAllowed && c->resetRequested) {
-        for (unsigned int i = 0; i < getCarCount(); i++) {
-            if (i != c->index - 1) {
-                if (glm::length(c->currentEdge.a - getCar(i)->pos) < 10) {
-                    return;
-                }
-            }
-        }
-        resetCar(c);
-    }
-
 
     /// count angle
     btQuaternion qn = vehicles[c->index - 1]->getRigidBody()->getOrientation();
     float rot = getRotation(qn.x(),qn.y(),qn.z(),qn.w());
-    if (!isnan(rot)) {
+    if (!isnan(rot))
         c->rot=rot;
-    }
 
     /// get position
     float x = vehicles[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getX();
     float y = vehicles[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getY();
     float z = vehicles[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getZ();
-    if (!isnan(x) && !isnan(y) && !isnan(z)) {
+    if (!isnan(x) && !isnan(y) && !isnan(z))
+    {
         c->pos.x=x;
         c->pos.y=y;
         c->pos.z=z;
     }
 
     /// get matrices
-    for (int index = 0; index < 5; index++) {
-        if (index > 0) {
+    for (int index = 0; index < 5; index++)
+    {
+        if (index > 0)
           vehicles[c->index - 1]->getWheelInfo(index - 1).m_worldTransform.getOpenGLMatrix(c->transform[index].value);
-        } else {
+        else
           vehicles[c->index - 1]->getRigidBody()->getCenterOfMassTransform().getOpenGLMatrix(c->transform[index].value);
-        }
     }
 }
 
 /**
  * @brief updateWorld updates world state
  */
-void bullet::updateWorld() {
+void bullet::updateWorld()
+{
      m_dynamicsWorld->stepSimulation(WORLD_STEP, WORLD_SUBSTEP);
 }

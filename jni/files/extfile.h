@@ -17,7 +17,6 @@
 class extfile : public file
 {
 public:
-    FILE* f;
     extfile(std::string filename);
 
     ~extfile();
@@ -49,6 +48,8 @@ public:
      * @return number as int
      */
     int scandec();
+private:
+    FILE* f;
 };
 
 void png_read_ext(png_structp png_ptr, png_bytep data, png_size_t length);

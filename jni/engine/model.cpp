@@ -22,15 +22,16 @@ bool operator<(const id3d& lhs, const id3d& rhs)
 /**
  * @brief model destructor
  */
-model::~model() {
+model::~model()
+{
 }
 
 /**
  * @brief Constructor for loading model from file
  * @param filename is path and name of file to load
  */
-model::model(std::string filename) {
-
+model::model(std::string filename)
+{
     /// open file
     file* f = getFile(filename);
 
@@ -43,8 +44,8 @@ model::model(std::string filename) {
     int textureCount = f->scandec();
 
     /// parse all textures
-    for (int i = 0; i < textureCount; i++) {
-
+    for (int i = 0; i < textureCount; i++)
+    {
         //TODO:unused, remove from format
         float alpha = 1;
         float colora[4];
@@ -73,31 +74,37 @@ model::model(std::string filename) {
         m.dynamic = false;
         m.filter = 0;
         m.touchable = false;
-        if (m.texture2D->transparent) {
+        if (m.texture2D->transparent)
             m.material = getShader("standart_alpha");
-        } else {
+        else
             m.material = getShader("standart");
-        }
 
         /// get material parameters
-        while(true) {
-            if (material[cursor] == '!') {
+        while(true)
+        {
+            if (material[cursor] == '!')
+            {
                 m.touchable = true;
                 cursor++;
-            } else if (material[cursor] == '$') {
+            } else if (material[cursor] == '$')
+            {
                 m.dynamic = true;
                 cursor++;
-            } else if (material[cursor] == '#') {
+            } else if (material[cursor] == '#')
+            {
                 cursor++;
                 m.filter = material[cursor] - '0';
                 cursor++;
-            } else if (material[cursor] == '%') {
+            } else if (material[cursor] == '%')
+            {
                 cursor++;
                 m.texture2D->transparent = false;
                 char* shadername = new char[strlen(material) - cursor + 1];
-                for (unsigned int j = cursor; j < strlen(material); j++) {
+                for (unsigned int j = cursor; j < strlen(material); j++)
+                {
                     shadername[j - cursor] = material[j];
-                    if (material[j] == '/') {
+                    if (material[j] == '/')
+                    {
                         shadername[j - cursor] = '\000';
                         break;
                     }
@@ -106,9 +113,8 @@ model::model(std::string filename) {
                 m.material = getShader(shadername);
                 delete[] shadername;
                 break;
-            } else {
+            } else
                 break;
-            }
         }
 
         /// prepare model arrays
@@ -116,7 +122,8 @@ model::model(std::string filename) {
         float v[9];
         float n[9];
         float t[6];
-        for (int j = 0; j < count; j++) {
+        for (int j = 0; j < count; j++)
+        {
             /// read triangle parameters
             f->gets(line);
             sscanf(line, "%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f",

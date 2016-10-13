@@ -13,11 +13,9 @@
 /**
  * @brief The input interface
  */
-class input {
+class input
+{
 public:
-
-    int index;          ///< Index of controlled car
-
     /**
      * @brief input destructor
      */

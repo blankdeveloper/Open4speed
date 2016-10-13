@@ -32,8 +32,10 @@ renderer *xrenderer = 0;                  ///< Renderer instance
 zip *APKArchive = 0;                      ///< Access to APK archive
 std::string shaderPath;                   ///< Path to shader files
 
-void clearMediaStorage() {
-    while (!cars.empty()) {
+void clearMediaStorage()
+{
+    while (!cars.empty())
+    {
         delete cars[cars.size() - 1];
         cars.pop_back();
     }
@@ -59,7 +61,8 @@ void clearMediaStorage() {
  * @brief addCar adds car into scene
  * @param c is instance of new car
  */
-void addCar(car* c) {
+void addCar(car* c)
+{
     cars.push_back(c);
 }
 
@@ -68,7 +71,8 @@ void addCar(car* c) {
  * @param index is index of car
  * @return car instance
  */
-car* getCar(int index) {
+car* getCar(int index)
+{
     return cars[index];
 }
 
@@ -76,7 +80,8 @@ car* getCar(int index) {
  * @brief getCarCount gets count of cars in scene
  * @return count of cars
  */
-unsigned int getCarCount() {
+unsigned int getCarCount()
+{
     return cars.size();
 }
 
@@ -84,18 +89,22 @@ unsigned int getCarCount() {
  * @brief setShaderPath sets path of shaders
  * @param path is relative path to runable file
  */
-void setShaderPath(std::string path) {
+void setShaderPath(std::string path)
+{
     shaderPath = path;
 }
 
-file* getFile(std::string filename) {
+file* getFile(std::string filename)
+{
     filename = fixName(filename);
-    if (!APKArchive) {
+    if (!APKArchive)
+    {
         if (filename[0] == '#')
             filename = filename.substr(1, filename.length() - 1);
         logi("Opening file:", filename);
         return new extfile(filename);
-    } else {
+    } else
+    {
         logi("Opening file:", filename);
         if (filename[0] == '#')
             return new zipfile(filename.substr(1, filename.length() - 1), APKArchive);
@@ -108,7 +117,8 @@ file* getFile(std::string filename) {
  * @brief getInput gets input controller
  * @return input controller
  */
-input* getInput() {
+input* getInput()
+{
     return new keyboard();
 }
 
@@ -117,15 +127,16 @@ input* getInput() {
  * @param filename is path and name of file to load
  * @return instance of model
  */
-model* getModel(std::string filename) {
-
+model* getModel(std::string filename)
+{
     /// find previous instance
     filename = fixName(filename);
     if (models.find(filename) != models.end())
         return models[filename];
 
     /// create new instance
-    if (strcmp(getExtension(filename).c_str(), "o4s") == 0) {
+    if (strcmp(getExtension(filename).c_str(), "o4s") == 0)
+    {
         model* instance = new model(filename);
         models[filename] = instance;
         return instance;
@@ -138,7 +149,8 @@ model* getModel(std::string filename) {
  * @brief getPhysics gets physical engine
  * @return physical engine
  */
-physics* getPhysics() {
+physics* getPhysics()
+{
     if (!physic)
     {
         logi("Init physical engine","");
@@ -151,7 +163,8 @@ physics* getPhysics() {
  * @brief getRenderer gets renderer
  * @return renderer instance
  */
-renderer* getRenderer() {
+renderer* getRenderer()
+{
     if (!xrenderer)
     {
         logi("Init renderer","");
@@ -165,8 +178,8 @@ renderer* getRenderer() {
  * @param name is shader filename
  * @return instance of shader
  */
-shader* getShader(std::string name) {
-
+shader* getShader(std::string name)
+{
     char filename[1024];
     strcpy(filename, shaderPath.c_str());
     strcat(filename, name.c_str());
@@ -191,7 +204,8 @@ shader* getShader(std::string name) {
  * @param filename is filename of texture
  * @return texture instance
  */
-texture* getTexture(std::string filename) {
+texture* getTexture(std::string filename)
+{
     filename = fixName(filename);
 
     /// find previous instance
@@ -199,12 +213,13 @@ texture* getTexture(std::string filename) {
         return textures[filename];
 
     /// create new instance
-    if (strcmp(getExtension(filename).c_str(), "png") == 0) {
+    if (strcmp(getExtension(filename).c_str(), "png") == 0)
+    {
       texture* instance = new gltexture(texture::loadPNG(getFile(filename)));
       textures[filename] = instance;
       return instance;
-    } else if (getExtension(filename)[0] == 'p') {
-
+    } else if (getExtension(filename)[0] == 'p')
+    {
         /// get animation frame count
         std::string ext = getExtension(filename);
         int count = (ext[1] - '0') * 10 + ext[2] - '0';
@@ -213,7 +228,8 @@ texture* getTexture(std::string filename) {
 
         /// load all sequence images
         std::vector<texture*> anim;
-        for (int i = 0; i <= count; i++) {
+        for (int i = 0; i <= count; i++)
+        {
             file[strlen(file) - 1] = i % 10 + '0';
             file[strlen(file) - 2] = i / 10 + '0';
             texture* instance = new gltexture(texture::loadPNG(getFile(file)));
@@ -235,7 +251,8 @@ texture* getTexture(std::string filename) {
  * @param b is amount of blue from 0 to 1
  * @return texture instance
  */
-texture* getTexture(float r, float g, float b) {
+texture* getTexture(float r, float g, float b)
+{
     char filename[256];
     sprintf(filename, "%d %d %d", (int)(r * 255.0f), (int)(g * 255.0f), (int)(b * 255.0f));
 
@@ -252,6 +269,7 @@ texture* getTexture(float r, float g, float b) {
  * @brief setZip sets APK archive object
  * @param path is path of APK
  */
-void setZip(std::string path) {
+void setZip(std::string path)
+{
     APKArchive = zip_open(path.c_str(), 0, NULL);
 }

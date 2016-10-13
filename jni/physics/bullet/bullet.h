@@ -14,12 +14,12 @@
 #include <BulletDynamics/Vehicle/btRaycastVehicle.h>
 #include <btBulletDynamicsCommon.h>
 #include "interfaces/physics.h"
-#include "physics/bullet/GL_ShapeDrawer.h"
 
 /**
  * @brief The bullet physics implementation class
  */
-class bullet:public physics {
+class bullet:public physics
+{
 public:
 
     /**
@@ -31,7 +31,6 @@ public:
     btBroadphaseInterface* m_overlappingPairCache;
     btConstraintSolver* m_constraintSolver;
     btVehicleRaycaster* m_vehicleRayCaster;
-    GL_ShapeDrawer* m_shapeDrawer;
 
     /**
      * Geometry objects
@@ -70,8 +69,6 @@ public:
      * @return transformation matrix
      */
     void getTransform(int index, float* m);
-
-    void render();
 
     /**
      * @brief resetCar updates car state

@@ -29,8 +29,8 @@
  * @param filename is path to file to load
  * @param automatic is true for automatic transmision
  */
-car::car(input *i, std::vector<edge> *e, std::string filename) {
-
+car::car(input *i, std::vector<edge> *e, std::string filename)
+{
     /// get car atributes
     std::vector<std::string> atributes = getList("", filename);
 
@@ -51,7 +51,8 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
 
     /// create matrices
     transform = new matrix[5];
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 5; i++)
+    {
         transform[i].value = new float[16];
         for (int j = 0; j < 16; j++)
             transform[i].value[j] = j % 5 == 0 ? 1 : 0;
@@ -59,8 +60,6 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
 
     /// apply index of car
     index = getCarCount() + 1;
-    if (control != 0)
-        control->index = index - 1;
 
     /// load models
     skin = getModel(getConfigStr("skin_model", atributes));
@@ -77,7 +76,8 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
     /// set gears
     currentGear = 1;
     int gearCount = getConfig("gear_count", atributes);
-    for (int i = 0; i <= gearCount; i++) {
+    for (int i = 0; i <= gearCount; i++)
+    {
         gear g;
         g.min = getConfig("gear" + str(i) + "_min", atributes);
         g.max = getConfig("gear" + str(i) + "_max", atributes);
@@ -96,7 +96,8 @@ car::car(input *i, std::vector<edge> *e, std::string filename) {
 /**
  * @brief car destructor
  */
-car::~car() {
+car::~car()
+{
     delete control;
     for (int i = 0; i < 5; i++)
         delete[] transform[i].value;
@@ -107,7 +108,8 @@ car::~car() {
  * @brief getView gets perspective view of car
  * @return view perspective by car speed
  */
-float car::getView() {
+float car::getView()
+{
     view = (view + (PERSPECTIVE_MIN + speed * PERSPECTIVE_SPEED_DEPENDENCY)) / PERSPECTIVE_SPEED_FOLLOW;
     if (view < PERSPECTIVE_MIN)
         view = PERSPECTIVE_MIN;
@@ -120,12 +122,11 @@ float car::getView() {
  * @brief setStart sets start position of car
  * @param e is curve where car starts on
  */
-void car::setStart(edge e, float sidemove) {
-
+void car::setStart(edge e, float sidemove)
+{
     /// error check
-    if ((e.a.x == e.b.x) && (e.a.z == e.b.z)) {
+    if ((e.a.x == e.b.x) && (e.a.z == e.b.z))
         return;
-    }
 
     /// set edges
     currentEdge = e;
@@ -142,7 +143,8 @@ void car::setStart(edge e, float sidemove) {
 
     /// count distance from finish
     int ltg = lapsToGo;
-    if (ltg < 0) {
+    if (ltg < 0)
+    {
         toFinish = 0;
         return;
     }
@@ -151,16 +153,15 @@ void car::setStart(edge e, float sidemove) {
     while (true) {
         toFinish += glm::length(cge.a - cge.b);
         std::vector<int> nEdges = nextEdge(edges, cge);
-        if (nEdges.size() > 0) {
+        if (nEdges.size() > 0)
+        {
             cge = edges[nEdges[0]];
-            if ((ltg > 0) & (nEdges[0] == finishEdge)) {
+            if ((ltg > 0) & (nEdges[0] == finishEdge))
                 ltg--;
-            } else if ((ltg == 0) & (nEdges[0] == finishEdge)) {
+            else if ((ltg == 0) & (nEdges[0] == finishEdge))
                 break;
-            }
-        } else {
+        } else
             break;
-        }
     }
 }
 
@@ -168,8 +169,8 @@ void car::setStart(edge e, float sidemove) {
 /**
  * @brief update updates car wheels state(rotation and steering)
  */
-void car::update() {
-
+void car::update()
+{
     /// count speed
     lspeed = speed;
     float dx = oldPos.x - pos.x;
@@ -178,25 +179,28 @@ void car::update() {
 
     /// update current edge for counting laps
     edge cge = currentGoalEdge;
-    if (distance(pos, currentGoalEdge.b) < 75) {
+    if (distance(pos, currentGoalEdge.b) < 75)
+    {
         std::vector<int> nEdges = nextEdge(edges, currentGoalEdge);
-        if (nEdges.size() > 0) {
-            if (isSame(edges[nEdges[0]], edges[finishEdge])) {
-                if (distance(pos, currentGoalEdge.b) < 50) {
+        if (nEdges.size() > 0)
+        {
+            if (isSame(edges[nEdges[0]], edges[finishEdge]))
+            {
+                if (distance(pos, currentGoalEdge.b) < 50)
+                {
                     toFinish -= glm::length(cge.a - cge.b);
                     currentEdgeIndex = nEdges[0];
                     currentGoalEdge = edges[nEdges[0]];
-                    if ((lapsToGo >= 0) & (isSame(edges[nEdges[0]], edges[finishEdge]))) {
+                    if ((lapsToGo >= 0) & (isSame(edges[nEdges[0]], edges[finishEdge])))
                         lapsToGo--;
-                    }
                 }
-            } else {
+            } else
+            {
                 toFinish -= glm::length(cge.a - cge.b);
                 currentEdgeIndex = nEdges[0];
                 currentGoalEdge = edges[nEdges[0]];
-                if ((lapsToGo >= 0) & (isSame(edges[nEdges[0]], edges[finishEdge]))) {
+                if ((lapsToGo >= 0) & (isSame(edges[nEdges[0]], edges[finishEdge])))
                     lapsToGo--;
-                }
             }
         }
     }
@@ -209,9 +213,8 @@ void car::update() {
     /// reverse gear auto change
     if (reverse & (currentGear == 1))
         currentGear = 0;
-    else if (!reverse & (currentGear == 0)) {
+    else if (!reverse & (currentGear == 0))
         currentGear = 1;
-    }
 
     /// count acceleration
     float speedDiff = gears[currentGear].max - gears[currentGear].min;
@@ -236,9 +239,8 @@ void car::update() {
         brake = true;
     if (reverse & (control->getGas() < 1))
         brake = true;
-    if ((lspeed * SOUND_CRASH_ON_SPEED_CHANGE > speed) & (speed > SOUND_CRASH_MINIMAL_SPEED) & brake) {
+    if ((lspeed * SOUND_CRASH_ON_SPEED_CHANGE > speed) & (speed > SOUND_CRASH_MINIMAL_SPEED) & brake)
         sndCrash = true;
-    }
 
     /// set nitro sound
     if ((control->getNitro() > 0) && (n2o > 1))
@@ -254,13 +256,13 @@ void car::update() {
 
     /// automatic changing gears
     unsigned int lastGear = currentGear;
-    if (currentGear >= 1) {
+    if (currentGear >= 1)
+    {
         if ((currentGear > 1) & (engineFreq < gearDown))
             currentGear--;
-        if (currentGear < gears.size() - 1) {
+        if (currentGear < gears.size() - 1)
             if (engineFreq > gearUp)
                 currentGear++;
-        }
     }
 
     /// update extra sound volume

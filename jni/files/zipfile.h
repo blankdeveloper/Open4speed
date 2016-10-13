@@ -17,7 +17,6 @@
 class zipfile : public file
 {
 public:
-    zip_file* f;
     zipfile(std::string filename, zip* archive);
 
     ~zipfile();
@@ -49,6 +48,8 @@ public:
      * @return number as int
      */
     int scandec();
+private:
+    zip_file* f;
 };
 
 void png_read_zip(png_structp png_ptr, png_bytep data, png_size_t length);

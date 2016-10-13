@@ -14,7 +14,8 @@
 #include "files/zipfile.h"
 #include <vector>
 
-struct Texture {
+struct Texture
+{
     int width;
     int height;
     unsigned char* data;
@@ -24,7 +25,8 @@ struct Texture {
 /**
  * @brief The texture interface
  */
-class texture {
+class texture
+{
 public:
     bool transparent;       ///< Texture transparency
     int twidth, theight;    ///< Image dimensions

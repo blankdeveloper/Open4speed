@@ -12,29 +12,11 @@
 
 #include "interfaces/input.h"
 
-/// Key pressed
-/**
- * @brief special Method is automatically called on key down
- * @param key is key code
- * @param x is mouse cursor position
- * @param y is mouse cursor position
- */
-extern void special(int key, int x, int y);
-
-
-/// Key released
-/**
- * @brief specialUp Method is automatically called on key up
- * @param key is key code
- * @param x is mouse cursor position
- * @param y is mouse cursor position
- */
-extern void specialUp(int key, int x, int y);
-
 /**
  * @brief The keyboard class
  */
-class keyboard : public input {
+class keyboard : public input
+{
 public:
 
     /**
@@ -84,6 +66,29 @@ public:
      * @return constant distance in float
      */
     float getUpdate();
+
+
+    /// Key pressed
+    /**
+     * @brief special Method is automatically called on key down
+     * @param key is key code
+     * @param x is mouse cursor position
+     * @param y is mouse cursor position
+     */
+    static void special(int key, int x, int y);
+
+    /// Key released
+    /**
+     * @brief specialUp Method is automatically called on key up
+     * @param key is key code
+     * @param x is mouse cursor position
+     * @param y is mouse cursor position
+     */
+    static void specialUp(int key, int x, int y);
+
+private:
+    static float cameraDistance;    ///< Distance of camera
+    static bool keys[5];            ///< State of keyboard
 };
 
 #endif // KEYBOARD_H

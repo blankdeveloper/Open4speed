@@ -16,7 +16,8 @@
 /**
  * @brief The input interface
  */
-class matrices {
+class matrices
+{
 public:
     /**
      * @brief lookAt implements GLUlookAt

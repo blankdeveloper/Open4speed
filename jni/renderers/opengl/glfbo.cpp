@@ -21,18 +21,14 @@
 #define PACKED_EXT GL_DEPTH24_STENCIL8_OES
 #endif
 
-unsigned int* rboID = 0;          ///< Render buffer object id
-
 /**
  * @brief removes all data from memory
  */
-glfbo::~glfbo() {
-    if (rboID != 0)
-    {
-        glDeleteRenderbuffers(2, rboID);
-        delete[] rboID;
-        rboID = 0;
-    }
+glfbo::~glfbo()
+{
+    glDeleteRenderbuffers(2, rboID);
+    delete[] rboID;
+    rboID = 0;
     glDeleteFramebuffers(1, fboID);
     delete[] fboID;
     delete[] rendertexture;
@@ -44,14 +40,15 @@ glfbo::~glfbo() {
  * @param height is height of framebuffer
  * @param depthbuffer is true to use depthbuffer texture
  */
-glfbo::glfbo(int width, int height) {
-
+glfbo::glfbo(int width, int height)
+{
     //find ideal texture resolution
     this->width = width;
     this->height = height;
 
     //create frame buffer
     fboID = new GLuint[1];
+    rboID = new GLuint[2];
     rendertexture = new GLuint[1];
 
     //framebuffer texture
@@ -69,11 +66,7 @@ glfbo::glfbo(int width, int height) {
 
 
     /// create render buffers for depth buffer and stencil buffer
-    if (rboID == 0)
-    {
-        rboID = new GLuint[2];
-        glGenRenderbuffers(2, rboID);
-    }
+    glGenRenderbuffers(2, rboID);
     glBindRenderbuffer(GL_RENDERBUFFER, rboID[0]);
 #ifdef ANDROID
     char* extString = (char*)glGetString(GL_EXTENSIONS);
@@ -113,7 +106,8 @@ glfbo::glfbo(int width, int height) {
 /**
  * @brief bind binds FBO
  */
-void glfbo::bindFBO() {
+void glfbo::bindFBO()
+{
     float aliasing = getRenderer()->aliasing;
     glBindFramebuffer(GL_FRAMEBUFFER, fboID[0]);
     glViewport (0, 0, width * aliasing, height * aliasing);
@@ -122,14 +116,16 @@ void glfbo::bindFBO() {
 /**
  * @brief bind binds texture
  */
-void glfbo::bindTexture() {
+void glfbo::bindTexture()
+{
     glBindTexture(GL_TEXTURE_2D, rendertexture[0]);
 }
 
 /**
  * @brief clear clears depth buffer
  */
-void glfbo::clear() {
+void glfbo::clear()
+{
     glClearStencil(0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
@@ -140,10 +136,11 @@ void glfbo::clear() {
  * @brief drawOnScreen draws FBO on screen
  * @param screen_shader is shader for screen drawing
  */
-void glfbo::drawOnScreen(shader* screen_shader) {
-
+void glfbo::drawOnScreen(shader* screen_shader)
+{
     /// vertices
-    float vertices[] = {
+    float vertices[] =
+    {
         -1, +1, 0,
         -1, -1, 0,
         +1, -1, 0,
@@ -153,7 +150,8 @@ void glfbo::drawOnScreen(shader* screen_shader) {
     };
 
     /// coords
-    float coords[] = {
+    float coords[] =
+    {
         0, 1,
         0, 0,
         1, 0,
@@ -177,6 +175,7 @@ void glfbo::drawOnScreen(shader* screen_shader) {
 /**
  * @brief unbindFBO unbinds FBO
  */
-void glfbo::unbindFBO() {
+void glfbo::unbindFBO()
+{
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

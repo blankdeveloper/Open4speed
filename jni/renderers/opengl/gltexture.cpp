@@ -15,19 +15,23 @@
 /**
  * @brief destruct removes texture from memory
  */
-gltexture::~gltexture() {
-    if (!animated) {
+gltexture::~gltexture()
+{
+    if (!animated)
         glDeleteTextures(1, &textureID);
-    } else
+    else
+    {
         for (int i = anim.size() - 1; i >= 0; i--)
             delete anim[i];
+    }
 }
 
 /**
  * @brief gltexture creates animated empty texture instance
  * @param anim is an image sequence
  */
-gltexture::gltexture(std::vector<texture*> anim) {
+gltexture::gltexture(std::vector<texture*> anim)
+{
     this->anim = anim;
     transparent = true;
     animated = true;
@@ -48,8 +52,8 @@ gltexture::gltexture(std::vector<texture*> anim) {
  * @param texture is texture raster instance
  * @param alpha is amount of blending
  */
-gltexture::gltexture(Texture texture) {
-
+gltexture::gltexture(Texture texture)
+{
     /// create texture
     glGenTextures(1, &this->textureID);
     glEnable(GL_TEXTURE_2D);
@@ -80,20 +84,23 @@ gltexture::gltexture(Texture texture) {
 /**
  * @brief apply applies current texture
  */
-void gltexture::apply() {
-    if (animated) {
+void gltexture::apply()
+{
+    if (animated)
+    {
         anim[currentFrame]->apply();
 
         /// update animation
         currentMultiFrame++;
-        if (currentMultiFrame == multiFrame) {
+        if (currentMultiFrame == multiFrame)
+        {
             currentMultiFrame = 0;
             currentFrame++;
         }
-        if (currentFrame == anim.size()) {
+        if (currentFrame == anim.size())
             currentFrame = 0;
-        }
-    } else {
+    } else
+    {
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, textureID);
     }
@@ -103,6 +110,7 @@ void gltexture::apply() {
  * @brief setFrame set frame of animation
  * @param frame is index of frame
  */
-void gltexture::setFrame(int frame) {
+void gltexture::setFrame(int frame)
+{
     currentFrame = frame;
 }

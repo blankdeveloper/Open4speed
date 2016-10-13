@@ -10,14 +10,16 @@
 #ifndef AIRACER_H
 #define AIRACER_H
 
+#include "engine/car.h"
 #include "interfaces/input.h"
 
 /**
  * @brief The AI for racer class
  */
-class airacer : public input {
+class airacer : public input
+{
 public:
-
+    car* vehicle;       ///< Instance of car
     int problem;        ///< Indicates bad situation state
     bool reverseMode;   ///< Indicates reverse mode
 
@@ -25,6 +27,12 @@ public:
      * @brief airacer Creates new control instance
      */
     airacer();
+
+    /**
+     * @brief init makes instance ready for use
+     * @param c is instance of car
+     */
+    void init(car* c);
 
     /**
      * @brief getBrake Get brakes state

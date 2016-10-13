@@ -17,8 +17,10 @@
 /**
  * @brief gles20 destructor
  */
-gles20::~gles20() {
-    while (!rtt_fbo.empty()) {
+gles20::~gles20()
+{
+    while (!rtt_fbo.empty())
+    {
         delete rtt_fbo[rtt_fbo.size() - 1];
         rtt_fbo.pop_back();
     }
@@ -27,35 +29,34 @@ gles20::~gles20() {
 /**
  * @brief gles20 constructor
  */
-gles20::gles20() {
+gles20::gles20()
+{
 
     /// set default values
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++)
         enable[i] = true;
-    }
     aliasing = 1;
     oddFrame = true;
 }
 
-void gles20::init(int w, int h) {
-
+void gles20::init(int w, int h)
+{
     screen_width = w;
     screen_height = h;
 
     //find ideal texture resolution
     int resolution = 2;
-    while (resolution < screen_width) {
+    while (resolution < screen_width)
         resolution *= 2;
-    }
 
     //create render texture
-    while (!rtt_fbo.empty()) {
+    while (!rtt_fbo.empty())
+    {
         delete rtt_fbo[rtt_fbo.size() - 1];
         rtt_fbo.pop_back();
     }
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 2; i++)
         rtt_fbo.push_back(new glfbo(screen_width, screen_height));
-    }
 
     //set viewport
     glViewport (0, 0, (GLsizei) screen_width, (GLsizei) screen_height);
@@ -63,7 +64,7 @@ void gles20::init(int w, int h) {
     glActiveTexture( GL_TEXTURE0 );
 
     //set shaders
-    scene_shader = getShader("scene");
+    scene = getShader("scene");
     shadow = getShader("shadow");
 }
 
@@ -74,8 +75,8 @@ void gles20::init(int w, int h) {
  * @param txt is texture to use
  * @param triangleCount is triangle count
  */
-void gles20::renderDynamic(float* vertices, float* normals, float* coords, shader* sh, texture* txt, int triangleCount) {
-
+void gles20::renderDynamic(float* vertices, float* normals, float* coords, shader* sh, texture* txt, int triangleCount)
+{
     /// set OpenGL state
     glEnable(GL_BLEND);
     glDisable(GL_DEPTH_TEST);
@@ -157,8 +158,8 @@ void gles20::renderModel(model* m)
  * @brief renderShadow renders shadow of model into scene
  * @param m is instance of model to render
  */
-void gles20::renderShadow(model* m) {
-
+void gles20::renderShadow(model* m)
+{
     if (!rtt_fbo[oddFrame]->complete || !m->v3d.empty())
         return;
 
@@ -171,7 +172,8 @@ void gles20::renderShadow(model* m) {
     current = shadow;
     current->bind();
     current->uniformFloat4("u_sun_dir", -1.5f, -3.0f, 0.0f, 0.0f);
-    for (int pass = 1; pass <= 1; pass++) {
+    for (int pass = 1; pass <= 1; pass++)
+    {
         /// set visibility shape
         current->uniformFloat("u_pass", pass * 0.05f);
         current->uniformFloat("u_offset", 0.0f);
@@ -208,11 +210,12 @@ void gles20::renderShadow(model* m) {
  * @brief renderSubModel renders model into scene
  * @param m is instance of model to render
  */
-void gles20::renderSubModel(model3d *m) {
-
+void gles20::renderSubModel(model3d *m)
+{
     /// set model matrix
     glm::mat4x4 modelView;
-    if (m->dynamic) {
+    if (m->dynamic)
+    {
         float mat[16];
         getPhysics()->getTransform(m->dynamicID, mat);
         float w = m->reg.max.x - m->reg.min.x;
@@ -232,7 +235,8 @@ void gles20::renderSubModel(model3d *m) {
         );
         modelMat = dynamic * translation;
         modelView = view_matrix * modelMat;
-    } else {
+    } else
+    {
         glm::mat4x4 translation(
             1,0,0,0,
             0,1,0,0,
@@ -279,8 +283,10 @@ void gles20::renderSubModel(model3d *m) {
  * @brief rtt enables rendering into FBO which makes posible to do reflections
  * @param enable is true to start drawing, false to render on screen
  */
-void gles20::rtt(bool enable) {
-    if (enable) {
+void gles20::rtt(bool enable)
+{
+    if (enable)
+    {
 #ifndef ANDROID
         /// start timer
         glGenQueries(1,gpuMeasuring);
@@ -289,7 +295,8 @@ void gles20::rtt(bool enable) {
         rtt_fbo[oddFrame]->bindFBO();
         rtt_fbo[oddFrame]->clear();
         oddFrame = !oddFrame;
-    } else {
+    } else
+    {
 #ifndef ANDROID
         glEndQuery(GL_TIME_ELAPSED);
 
@@ -303,13 +310,12 @@ void gles20::rtt(bool enable) {
         /// rendering
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         glViewport (0, 0, screen_width, screen_height);
-        rtt_fbo[oddFrame]->drawOnScreen(scene_shader);
+        rtt_fbo[oddFrame]->drawOnScreen(scene);
 
 #ifndef ANDROID
         glEndQuery(GL_TIME_ELAPSED);
         glGetQueryObjectiv(gpuMeasuring[0], GL_QUERY_RESULT, &copy_time);
-        printf("3D time: %dk 2D time: %dk, edge:%d, dst:%f\n", gpu_time / 1000,
-               copy_time / 1000, getCar(0)->currentEdgeIndex, getCar(0)->toFinish);
+        printf("3D time: %dk 2D time: %dk\n", gpu_time / 1000, copy_time / 1000);
 #endif
     }
 }

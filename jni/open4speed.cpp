@@ -19,11 +19,8 @@
 #include "input/airacer.h"
 #include "input/keyboard.h"
 
-#ifndef ANDROID
-//#define RENDER_PHYSICS
-#endif
-
-struct Dynamic {
+struct Dynamic
+{
     float* vertices;
     float* coords;
     int count;
@@ -38,31 +35,31 @@ int viewDistance = 500;         ///< Camera view distance
 const int effLen = 5;           ///< Length of water effect
 model *skydome;                 ///< Skydome model
 model *trackdata;               ///< Track first model
-model* water;                   ///< Water effect model
+model *water;                   ///< Water effect model
 Dynamic eff[effLen];            ///< 3D water effect object
 
 /**
  * @brief display updates display
  */
-void display(void) {
-
+void display(void)
+{
     /// update camera direction
     if (direction * 180 / 3.14 - getCar(cameraCar)->rot > 180)
         direction -= 6.28;
     else if (direction * 180 / 3.14 - getCar(cameraCar)->rot < -180)
         direction += 6.28;
     float g = getCar(cameraCar)->rot * 3.14 / 180.0 - direction;
-    if (getPhysics()->active) {
-        if (getCar(cameraCar)->control->getDistance() < 0) {
+    if (getPhysics()->active)
+    {
+        if (getCar(cameraCar)->control->getDistance() < 0)
             direction += g / 2.0;
-        } else {
+        else
             direction += g / 15.0;
-        }
-    } else {
+    } else
+    {
         direction += 0.01;
-        if (direction > 6.28) {
+        if (direction > 6.28)
             direction -= 6.28;
-        }
     }
 
     /// fix camera direction
@@ -70,23 +67,6 @@ void display(void) {
     rot += 720 * 1000;
     rot = rot % 360000;
     getCar(cameraCar)->rot = rot / 1000.0f;
-
-#ifdef RENDER_PHYSICS
-
-    /// set camera
-    float view = getCar(cameraCar)->getView();
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(view, aspect, 0.5, viewDistance);
-    float cameraX = getCar(cameraCar)->transform->value[12] - sin(direction) * getCar(cameraCar)->control->getDistance() * 2 / (view / 90);
-    float cameraY = getCar(cameraCar)->transform->value[13] + fabs(getCar(cameraCar)->control->getDistance() * 1.25f / (view / 90));
-    float cameraZ = getCar(cameraCar)->transform->value[14] - cos(direction) * getCar(cameraCar)->control->getDistance() * 2 / (view / 90);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    gluLookAt(cameraX,cameraY,cameraZ,cameraX + sin(direction),cameraY + sin(-20 * 3.14 / 180), cameraZ + cos(direction),0,1,0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    getPhysics()->render();
-#else
 
     renderer* xrenderer = getRenderer();
     float view = getCar(cameraCar)->getView();
@@ -118,8 +98,8 @@ void display(void) {
 
     /// render cars
     xrenderer->enable[2] = false;
-    for (int i = getCarCount() - 1; i >= 0; i--) {
-
+    for (int i = getCarCount() - 1; i >= 0; i--)
+    {
         ///render car skin
         xrenderer->pushMatrix();
         xrenderer->multMatrix(getCar(i)->transform[0].value);
@@ -129,7 +109,8 @@ void display(void) {
         xrenderer->popMatrix();
 
         /// render wheels
-        for (int j = 1; j <= 4; j++) {
+        for (int j = 1; j <= 4; j++)
+        {
             xrenderer->pushMatrix();
             xrenderer->multMatrix(getCar(i)->transform[j].value);
             if (j % 2 == 1)
@@ -140,8 +121,8 @@ void display(void) {
     }
 
     /// render shadows
-    for (int i = getCarCount() - 1; i >= 0; i--) {
-
+    for (int i = getCarCount() - 1; i >= 0; i--)
+    {
         ///render car skin
         xrenderer->pushMatrix();
         xrenderer->multMatrix(getCar(i)->transform[0].value);
@@ -150,8 +131,10 @@ void display(void) {
     }
 
     /// render smoke effects
-    for (int k = 0; k < effLen; k++) {
-        if (getPhysics()->active || (k != (currentFrame + effLen - 1) % effLen)) {
+    for (int k = 0; k < effLen; k++)
+    {
+        if (getPhysics()->active || (k != (currentFrame + effLen - 1) % effLen))
+        {
             water->models[0].texture2D->setFrame(eff[k].frame);
             xrenderer->renderDynamic(eff[k].vertices, 0, eff[k].coords, water->models[0].material, water->models[0].texture2D, eff[k].count / 3);
         }
@@ -159,21 +142,25 @@ void display(void) {
     xrenderer->popMatrix();
     // render RTT
     xrenderer->rtt(false);
-#endif
 
     // update water
     eff[currentFrame].count = 0;
-    for (int i = getCarCount() - 1; i >= 0; i--) {
+    for (int i = getCarCount() - 1; i >= 0; i--)
+    {
         float effect = fabs(getCar(i)->speed) * fabs(getCar(i)->speed * (g + getCar(i)->control->getBrake() * 5.0)) * 0.001f;
         effect = fmax(effect, effect * 0.05 + getCar(i)->prevEffect * 0.95);
         getCar(i)->prevEffect = effect;
-        for (int j = 1; j <= 2; j++) {
-            if (getPhysics()->active) {
-                for (int k = 0; k < fmin(effect - 5, 5); k++) {
+        for (int j = 1; j <= 2; j++)
+        {
+            if (getPhysics()->active)
+            {
+                for (int k = 0; k < fmin(effect - 5, 5); k++)
+                {
                     float x = getCar(i)->transform[j].value[12] + (rand() % 50 - 25) * 0.03f + sin(getCar(i)->rot * 3.14 / 180) * k * 0.03f;
                     float y = getCar(i)->transform[j].value[13] - 0.1f;
                     float z = getCar(i)->transform[j].value[14] + (rand() % 50 - 25) * 0.03f + cos(getCar(i)->rot * 3.14 / 180) * k * 0.03f;
-                    for (int l = 0; l < water->models[0].vertices.size() / 3; l++) {
+                    for (int l = 0; l < water->models[0].vertices.size() / 3; l++)
+                    {
                         eff[currentFrame].vertices[eff[currentFrame].count * 3 + 0] = x;
                         eff[currentFrame].vertices[eff[currentFrame].count * 3 + 1] = y;
                         eff[currentFrame].vertices[eff[currentFrame].count * 3 + 2] = z;
@@ -185,22 +172,18 @@ void display(void) {
             }
         }
     }
-    for (int k = 0; k < effLen; k++) {
+    for (int k = 0; k < effLen; k++)
         eff[k].frame++;
-    }
     eff[currentFrame].frame = 0;
     currentFrame++;
-
-    if (currentFrame >= effLen) {
+    if (currentFrame >= effLen)
         currentFrame = 0;
-    }
 
 #ifndef ANDROID
     /// check if there is an error
     int i = glGetError();
-    if (i != 0) {
+    if (i != 0)
         printf("GL_ERROR %d\n", i);
-    }
 
     /// finish rendering
     glutSwapBuffers();
@@ -217,8 +200,8 @@ void display(void) {
  * @param playerCar  is index of choosen car
  * @return loaded scene
  */
-void loadScene(std::string filename) {
-
+void loadScene(std::string filename)
+{
     /// load track
     file* f = getFile(filename);
     std::string p = f->path();
@@ -239,14 +222,16 @@ void loadScene(std::string filename) {
         int trackIndex = getConfig("race_track", atributes);
         for (int i = 0; i < edgesCount; i++) {
             int edgeCount = f->scandec();
-            for (int j = 0; j < edgeCount; j++) {
+            for (int j = 0; j < edgeCount; j++)
+            {
                 edge value;
-                f->gets(line);
+                f->getsEx(line);
                 sscanf(line, "%f %f %f %f %f %f", &value.a.x, &value.a.y, &value.a.z, &value.b.x, &value.b.y, &value.b.z);
                 if (i == trackIndex)
                     e.push_back(value);
             }
-            for (int j = 0; j < edgeCount; j++) {
+            for (int j = 0; j < edgeCount; j++)
+            {
                 edge value;
                 value.a.x = e[j].b.x;
                 value.a.y = e[j].b.y;
@@ -284,10 +269,12 @@ void loadScene(std::string filename) {
 
       /// load opponents
       int opponentCount = getConfig("opponent_count", atributes);
-      for (int i = 0; i < opponentCount; i++) {
-
+      for (int i = 0; i < opponentCount; i++)
+      {
           /// racer ai
-          addCar(new car(new airacer(), &e, p + getConfigStr("opponent" + str(i + 1) + "_car", atributes)));
+          airacer* ai = new airacer();
+          addCar(new car(ai, &e, p + getConfigStr("opponent" + str(i + 1) + "_car", atributes)));
+          ai->init(getCar(i + 1));
           getCar(i + 1)->finishEdge = getCar(0)->finishEdge;
           getCar(i + 1)->lapsToGo = getCar(0)->lapsToGo;
           int move = (i % 2) * 2 - 1;
@@ -298,7 +285,8 @@ void loadScene(std::string filename) {
 
     /// load water
     water = getModel("#assets/cars/fx/water.o4s");
-    for (int i = 0; i < effLen; i++) {
+    for (int i = 0; i < effLen; i++)
+    {
         eff[i].vertices = new float[4095 * 3];
         eff[i].coords = new float[4095 * 2];
         eff[i].count = 0;
@@ -318,7 +306,8 @@ void loadScene(std::string filename) {
  * @brief idle is non-graphical thread and it is called automatically by GLUT
  * @param v is time information
  */
-void idle(int v) {
+void idle(int v)
+{
     physics* physic = getPhysics();
     if (physic->active)
     {
@@ -326,32 +315,46 @@ void idle(int v) {
         for (unsigned int i = 0; i < getCarCount(); i++)
         {
             /// update current edge for navigation
+            car* c = getCar(i);
             if (!physic->locked)
             {
-                bool out = distance(getCar(i)->pos, getCar(0)->pos) > 300;
-                float update = out ? 5 : getCar(i)->control->getUpdate();
-                if ((distance(getCar(i)->pos, getCar(i)->currentEdge.b) < update)
-                        && (fabsf(getCar(i)->currentEdge.b.y - getCar(i)->pos.y) < 30)) {
-                    std::vector<int> nEdges = nextEdge(getCar(i)->edges, getCar(i)->currentEdge);
+                bool out = distance(c->pos, getCar(0)->pos) > 300;
+                float update = out ? 5 : c->control->getUpdate();
+                if ((distance(c->pos, c->currentEdge.b) < update)
+                        && (fabsf(c->currentEdge.b.y - c->pos.y) < 30))
+                {
+                    std::vector<int> nEdges = nextEdge(c->edges, c->currentEdge);
                     if (nEdges.size() > 0)
-                        getCar(i)->currentEdge = getCar(i)->edges[nEdges[0]];
+                        c->currentEdge = c->edges[nEdges[0]];
 
                 }
                 if (i != 0)
                 {
-                  if (out)
-                  {
-                    int rnd = (int)(i * 17) % 10;
-                    float speed = (1.5f + rnd * 0.1f) * (1 - getCar(i)->control->getBrake());
-                    getCar(i)->pos += glm::normalize(getCar(i)->currentEdge.b - getCar(i)->pos) * speed;
-                    getCar(i)->rot = angle(getCar(i)->currentEdge.b, getCar(i)->currentEdge.a) * 180.0f / 3.14f;
-                    physic->resetCar(getCar(i), false);
-                    continue;
-                  }
+                    if (out)
+                    {
+                      int rnd = (int)(i * 17) % 10;
+                      float speed = (1.5f + rnd * 0.1f) * (1 - c->control->getBrake());
+                      c->pos += glm::normalize(c->currentEdge.b - c->pos) * speed;
+                      c->rot = angle(c->currentEdge.b, c->currentEdge.a) * 180.0f / 3.14f;
+                      physic->resetCar(c, false);
+                      continue;
+                    }
                 }
             }
-            physic->updateCar(getCar(i));
-            getCar(i)->update();
+            physic->updateCar(c);
+            c->update();
+
+            // reset car if needed
+            if (c->resetAllowed && c->resetRequested)
+            {
+                for (unsigned int i = 0; i < getCarCount(); i++)
+                {
+                    if (i != c->index - 1)
+                        if (glm::length(c->currentEdge.a - getCar(i)->pos) < 10)
+                            return;
+                }
+                physic->resetCar(c);
+            }
         }
 
         /// update scene
@@ -371,12 +374,13 @@ void idle(int v) {
  * @param x is cursor position x
  * @param y is cursor position y
  */
-void keyboardDown(unsigned char key, int x, int y) {
+void keyboardDown(unsigned char key, int x, int y)
+{
     /// disable upper case
     if ((key >= 'A') & (key <= 'Z'))
         key = key - 'A' + 'a';
     /// resend key code
-    special((int)key + 128, x, y);
+    keyboard::special((int)key + 128, x, y);
 #ifndef ANDROID
     if (key == 'q')
         cameraCar--;
@@ -404,12 +408,13 @@ void unload()
  * @param x is cursor position x
  * @param y is cursor position y
  */
-void keyboardUp(unsigned char key, int x, int y) {
+void keyboardUp(unsigned char key, int x, int y)
+{
     /// disable upper case
     if ((key >= 'A') & (key <= 'Z'))
         key = key - 'A' + 'a';
     /// resend key code
-    specialUp((int)key + 128, x, y);
+    keyboard::specialUp((int)key + 128, x, y);
 }
 
 /**
@@ -417,24 +422,25 @@ void keyboardUp(unsigned char key, int x, int y) {
  * @param w is new window width
  * @param h is new window hegiht
  */
-void reshape(int w, int h) {
+void reshape(int w, int h)
+{
    aspect = (float) w/(float) h;
-#ifndef RENDER_PHYSICS
    getRenderer()->init(w, h);
-#endif
 }
 
 #ifdef ANDROID
 /**
  * Java native methods
  */
-extern "C" {
+extern "C"
+{
 
 /**
  * @brief Java_com_lvonasek_o4s_game_GameLoop_init is init method
  * @param env is instance of JNI
  */
-void Java_com_lvonasek_o4s_game_GameLoop_init( JNIEnv* env, jclass cls, jstring apkPath, jstring track, float alias ) {
+void Java_com_lvonasek_o4s_game_GameLoop_init( JNIEnv* env, jclass cls, jstring apkPath, jstring track, float alias )
+{
   jboolean isCopy;
   setZip(env->GetStringUTFChars(apkPath, &isCopy));
   getPhysics()->active = true;
@@ -457,14 +463,16 @@ void Java_com_lvonasek_o4s_game_GameLoop_init( JNIEnv* env, jclass cls, jstring 
  * @param w is display width
  * @param h is display height
  */
-void Java_com_lvonasek_o4s_game_GameLoop_resize( JNIEnv* env, jobject object, jint w, jint h ) {
+void Java_com_lvonasek_o4s_game_GameLoop_resize( JNIEnv* env, jobject object, jint w, jint h )
+{
   reshape(w, h);
 }
 /**
  * @brief Java_com_lvonasek_o4s_game_GameLoop_restart restarts player car
  * @param env is instance of JNI
  */
-void Java_com_lvonasek_o4s_game_GameLoop_restart( JNIEnv* env, jobject object) {
+void Java_com_lvonasek_o4s_game_GameLoop_restart( JNIEnv* env, jobject object)
+{
   getPhysics()->resetCar(getCar(0));
 }
 
@@ -474,7 +482,8 @@ void Java_com_lvonasek_o4s_game_GameLoop_restart( JNIEnv* env, jobject object) {
  * @param object is asset manager
  * @param code is key code
  */
-void Java_com_lvonasek_o4s_game_GameLoop_key( JNIEnv* env, jobject object, jint code ) {
+void Java_com_lvonasek_o4s_game_GameLoop_key( JNIEnv* env, jobject object, jint code )
+{
   special(code, 0, 0);
 }
 
@@ -484,7 +493,8 @@ void Java_com_lvonasek_o4s_game_GameLoop_key( JNIEnv* env, jobject object, jint 
  * @param object is asset manager
  * @param code is key code
  */
-void Java_com_lvonasek_o4s_game_GameLoop_keyUp( JNIEnv* env, jobject object, jint code ) {
+void Java_com_lvonasek_o4s_game_GameLoop_keyUp( JNIEnv* env, jobject object, jint code )
+{
   specialUp(code, 0, 0);
 }
 
@@ -493,7 +503,8 @@ void Java_com_lvonasek_o4s_game_GameLoop_keyUp( JNIEnv* env, jobject object, jin
  * @param env is instance of JNI
  * @param object is asset manager
  */
-void Java_com_lvonasek_o4s_game_GameLoop_display( JNIEnv* env, jobject object ) {
+void Java_com_lvonasek_o4s_game_GameLoop_display( JNIEnv* env, jobject object )
+{
   display();
 }
 
@@ -502,7 +513,8 @@ void Java_com_lvonasek_o4s_game_GameLoop_display( JNIEnv* env, jobject object ) 
  * @param env is instance of JNI
  * @param object is asset manager
  */
-void Java_com_lvonasek_o4s_game_GameLoop_loop( JNIEnv* env, jobject object ) {
+void Java_com_lvonasek_o4s_game_GameLoop_loop( JNIEnv* env, jobject object )
+{
   idle(0);
 }
 
@@ -511,7 +523,8 @@ void Java_com_lvonasek_o4s_game_GameLoop_loop( JNIEnv* env, jobject object ) {
  * @param env is instance of JNI
  * @param object is asset manager
  */
-void Java_com_lvonasek_o4s_game_GameLoop_unload( JNIEnv* env, jobject object ) {
+void Java_com_lvonasek_o4s_game_GameLoop_unload( JNIEnv* env, jobject object )
+{
   unload();
 }
 
@@ -520,7 +533,8 @@ void Java_com_lvonasek_o4s_game_GameLoop_unload( JNIEnv* env, jobject object ) {
  * @param env is instance of JNI
  * @param object is asset manager
  */
-void Java_com_lvonasek_o4s_game_GameLoop_unlock( JNIEnv* env, jobject object ) {
+void Java_com_lvonasek_o4s_game_GameLoop_unlock( JNIEnv* env, jobject object )
+{
     getPhysics()->locked = false;
 }
 
@@ -528,7 +542,8 @@ void Java_com_lvonasek_o4s_game_GameLoop_unlock( JNIEnv* env, jobject object ) {
  * @brief Java_com_lvonasek_o4s_game_GameLoop_carCount is amount of cars
  * @param env is instance of JNI
  */
-jint Java_com_lvonasek_o4s_game_GameLoop_carCount( JNIEnv* env ) {
+jint Java_com_lvonasek_o4s_game_GameLoop_carCount( JNIEnv* env )
+{
   return getCarCount();
 }
 
@@ -536,7 +551,8 @@ jint Java_com_lvonasek_o4s_game_GameLoop_carCount( JNIEnv* env ) {
  * @brief Java_com_lvonasek_o4s_game_GameLoop_carState is information about car
  * @param env is instance of JNI
  */
-jfloat Java_com_lvonasek_o4s_game_GameLoop_carState( JNIEnv* env, jobject object, jint index, jint type ) {
+jfloat Java_com_lvonasek_o4s_game_GameLoop_carState( JNIEnv* env, jobject object, jint index, jint type )
+{
     if (type == 0)
         return getCar(index)->speed;
     if (type == 1)
@@ -589,16 +605,12 @@ jfloat Java_com_lvonasek_o4s_game_GameLoop_carState( JNIEnv* env, jobject object
  * @param argv is array of arguments
  * @return exit code
  */
-int main(int argc, char** argv) {
-
+int main(int argc, char** argv)
+{
     /// init glut
     glutInit(&argc, argv);
     glutInitWindowSize(960,640);
-#ifdef RENDER_PHYSICS
-    glutInitContextVersion(2,0);
-#else
     glutInitContextVersion(3,0);
-#endif
     glutInitContextProfile(GLUT_CORE_PROFILE);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
     glutCreateWindow("Open4speed");

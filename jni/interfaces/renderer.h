@@ -17,8 +17,6 @@
 #include "interfaces/shader.h"
 #include "interfaces/texture.h"
 
-const int culling = 150;              ///< View culling distance in meters
-
 /**
  * @brief The renderer interface
  */
@@ -28,7 +26,6 @@ public:
 
     float aliasing;             ///< Screen detail
     bool enable[10];            ///< Enabled filter
-    shader* scene_shader;       ///< Scene shader
     int screen_width;           ///< Screen width
     int screen_height;          ///< Screen height
 

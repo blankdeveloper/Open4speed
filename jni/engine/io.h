@@ -12,7 +12,6 @@
 
 #include <string>
 #include <vector>
-#include "engine/switch.h"
 
 std::string fixName(std::string filename);
 

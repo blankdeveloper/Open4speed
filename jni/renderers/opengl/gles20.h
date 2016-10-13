@@ -31,6 +31,7 @@ class gles20 : public renderer
 public:
     GLuint gpuMeasuring[1];               ///< Profiling
     shader* current;                      ///< Current binded shader
+    shader* scene;                        ///< Scene shader
     shader* shadow;                       ///< Special shader for shadow
     std::vector<glfbo*> rtt_fbo;          ///< Screen-space framebuffer
     bool oddFrame;                        ///< Odd frame info

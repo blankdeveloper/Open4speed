@@ -35,8 +35,6 @@ SOURCES += \
     input/airacer.cpp \
     input/keyboard.cpp \
     physics/bullet/bullet.cpp \
-    physics/bullet/GL_ShapeDrawer.cpp \
-    physics/bullet/GLDebugFont.cpp \
     renderers/opengl/gles20.cpp \
     renderers/opengl/glfbo.cpp \
     renderers/opengl/glsl.cpp \
@@ -61,9 +59,6 @@ HEADERS += \
     interfaces/shader.h \
     interfaces/texture.h \
     physics/bullet/bullet.h \
-    physics/bullet/GL_ShapeDrawer.h \
-    physics/bullet/GLDebugFont.h \
-    physics/bullet/GlutStuff.h \
     renderers/opengl/gles20.h \
     renderers/opengl/glfbo.h \
     renderers/opengl/glsl.h \

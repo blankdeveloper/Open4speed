@@ -18,7 +18,8 @@
 /**
  * @brief The gear struct
  */
-struct gear {
+struct gear
+{
     float min;  ///< Minimal value
     float max;  ///< Maximal value
 };
@@ -26,7 +27,8 @@ struct gear {
 /**
  * @brief The matrix struct
  */
-struct matrix {
+struct matrix
+{
     float* value;   ///< Used value
 };
 

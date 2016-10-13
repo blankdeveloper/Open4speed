@@ -8,7 +8,6 @@
 ///----------------------------------------------------------------------------------------
 
 #include "engine/math.h"
-#include "engine/switch.h"
 #include "input/airacer.h"
 
 #define CAMERA_DISTANCE 2.0
@@ -24,16 +23,27 @@
 /**
  * @brief airacer Creates new control instance
  */
-airacer::airacer() {
+airacer::airacer()
+{
     problem = 0;
     reverseMode = false;
+}
+
+/**
+ * @brief init makes instance ready for use
+ * @param c is instance of car
+ */
+void airacer::init(car * c)
+{
+    vehicle = c;
 }
 
 /**
  * @brief getBrake Get brakes state
  * @ value between 0 and 1 where 0=not braking and 1=braking
  */
-float airacer::getBrake() {
+float airacer::getBrake()
+{
     if (getGas() > 0.8f)
          return 0;
     else
@@ -44,7 +54,8 @@ float airacer::getBrake() {
  * @brief getDistance Get distance of camera from car for camera transformation
  * @ distance in float
  */
-float airacer::getDistance() {
+float airacer::getDistance()
+{
      return CAMERA_DISTANCE;
 }
 
@@ -52,17 +63,17 @@ float airacer::getDistance() {
  * @brief getGas Get gas pedal state
  * @ value between 0 and 1 where 0=unpressed and 1=full pressed
  */
-float airacer::getGas() {
-
+float airacer::getGas()
+{
     /// no gas on reverse mode
     if (reverseMode)
          return 0;
 
     /// check angle of turn
-    if (getCar(index)->speed > SAFE_SPEED)
-        if (fabsf(gap(getCar(index)->currentEdge.b, getCar(index)->pos, getCar(index)->rot)) > SAFE_GAP_GAS)
+    if (vehicle->speed > SAFE_SPEED)
+        if (fabsf(gap(vehicle->currentEdge.b, vehicle->pos, vehicle->rot)) > SAFE_GAP_GAS)
              return 0;
-    if ((int)getCar(index)->speed > 5)
+    if ((int)vehicle->speed > 5)
         problem = 0;
      return 1;
 }
@@ -71,7 +82,8 @@ float airacer::getGas() {
  * @brief getNitro get nitro power
  * @return 0 if nitro is disable and 1 if it is enabled
  */
-bool airacer::getNitro() {
+bool airacer::getNitro()
+{
      return false;
 }
 
@@ -79,14 +91,14 @@ bool airacer::getNitro() {
  * @brief getSteer Get current volant state
  * @ value between -1 and 1 where -1=left, 0=center and 1=right
  */
-float airacer::getSteer() {
-
+float airacer::getSteer()
+{
     /// no turning on reverse mode
     if (reverseMode)
          return 0;
 
     /// count track direction
-    float g2 = gap(getCar(index)->currentEdge.b, getCar(index)->pos, getCar(index)->rot);
+    float g2 = gap(vehicle->currentEdge.b, vehicle->pos, vehicle->rot);
 
     /// update direction
     if (g2 > STEERING_GAP_HIGH)
@@ -105,17 +117,19 @@ float airacer::getSteer() {
   for faster cars
  * @ constant distance in float
  */
-float airacer::getUpdate() {
-    if ((this->getGas() > 0) & ((int)getCar(index)->speed <= 5)) {
+float airacer::getUpdate()
+{
+    if ((this->getGas() > 0) & ((int)vehicle->speed <= 5))
         problem++;
-    }
-    if (problem >= REVERSE_DELAY) {
+    if (problem >= REVERSE_DELAY)
+    {
         reverseMode = true;
         problem++;
     }
-    if (problem >= REVERSE_DELAY + REVERSE_DURATION) {
+    if (problem >= REVERSE_DELAY + REVERSE_DURATION)
+    {
         reverseMode = false;
         problem = 0;
     }
-    return TRACK_UPDATE + getCar(index)->speed / TRACK_UPDATE_SPEED_DEPENDENCY;
+    return TRACK_UPDATE + vehicle->speed / TRACK_UPDATE_SPEED_DEPENDENCY;
 }

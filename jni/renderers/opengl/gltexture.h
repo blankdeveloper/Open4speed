@@ -13,9 +13,9 @@
 
 #include "interfaces/texture.h"
 
-class gltexture : public texture {
+class gltexture : public texture
+{
 public:
-
     bool animated;                  ///< True if it is texture sequence
     std::vector<texture*> anim;     ///< Animation images
     unsigned int currentFrame;      ///< Current image

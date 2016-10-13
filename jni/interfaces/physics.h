@@ -16,7 +16,8 @@
 /**
  * @brief The physics interface
  */
-class physics {
+class physics
+{
 public:
     bool active;    ///< Information if scene is active
     bool locked;    ///< Locker for car controling
@@ -45,8 +46,6 @@ public:
      * @return transformation matrix
      */
     virtual void getTransform(int index, float* m) = 0;
-
-    virtual void render() = 0;
 
     /**
      * @brief resetCar updates car state

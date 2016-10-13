@@ -16,7 +16,8 @@
 /**
  * @brief The edge struct
  */
-struct edge {
+struct edge
+{
     glm::vec3 a; ///< Point coordinates
     glm::vec3 b; ///< Point coordinates
 };
@@ -24,7 +25,8 @@ struct edge {
 /**
  * @brief AABB struct
  */
-struct AABB {
+struct AABB
+{
     glm::vec3 min; ///< Region extreme
     glm::vec3 max; ///< Region extreme
 };

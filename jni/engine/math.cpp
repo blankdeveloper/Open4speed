@@ -17,14 +17,15 @@
  * @param toY is second point coordinate y
  * @return angle in radians
  */
-float angle(float fromX, float fromY, float toX, float toY) {
+float angle(float fromX, float fromY, float toX, float toY)
+{
     /// solve special cases
-    if (fromY == toY) {
-        if (toX > fromX) {
+    if (fromY == toY)
+    {
+        if (toX > fromX)
             return 1.57 + 3.14;
-        } else {
+        else
             return 1.57;
-        }
     }
 
     /// solve standart cases
@@ -40,7 +41,8 @@ float angle(float fromX, float fromY, float toX, float toY) {
  * @param b is second position
  * @return angle in radians
  */
-float angle(glm::vec3 a, glm::vec3 b) {
+float angle(glm::vec3 a, glm::vec3 b)
+{
     return angle(a.x, a.z, b.x, b.z);
 }
 
@@ -50,7 +52,8 @@ float angle(glm::vec3 a, glm::vec3 b) {
  * @param b is second position
  * @return distance in float
  */
-float distance(glm::vec3 a, glm::vec3 b) {
+float distance(glm::vec3 a, glm::vec3 b)
+{
     return distance(a.x, a.z, b.x, b.z);
 }
 
@@ -62,7 +65,8 @@ float distance(glm::vec3 a, glm::vec3 b) {
  * @param toY is second point coordinate y
  * @return distance in float
  */
-float distance(float fromX, float fromY, float toX, float toY) {
+float distance(float fromX, float fromY, float toX, float toY)
+{
     float dx = fromX - toX;
     float dy = fromY - toY;
     return sqrt(dx * dx + dy * dy);
@@ -74,17 +78,19 @@ float distance(float fromX, float fromY, float toX, float toY) {
  * @param c is instance of car
  * @return gap in radians
  */
-float gap(glm::vec3 e, glm::vec3 c, float crot) {
+float gap(glm::vec3 e, glm::vec3 c, float crot)
+{
     float direction = angle(c, e) * 180 / 3.14;
     float gap = crot - direction - 180;
-    while(true) {
+    while(true)
+    {
         if (gap < -180)
             gap += 360;
         else if (gap > 180)
             gap -= 360;
         else
             break;
-        }
+    }
     return gap;
 }
 
@@ -96,11 +102,11 @@ float gap(glm::vec3 e, glm::vec3 c, float crot) {
  * @param w is weight coordinate
  * @return value in degress
  */
-float getRotation(float x, float y, float z, float w) {
+float getRotation(float x, float y, float z, float w)
+{
     float rot = asin(-2.0 * (x * z - y * w)) * 180 / 3.14;
-    if (cos(atan2((float)(2.0 * (y * z + x * w)),(- x * x - y * y + z * z + w * w))) < 0) {
+    if (cos(atan2((float)(2.0 * (y * z + x * w)),(- x * x - y * y + z * z + w * w))) < 0)
         rot = 180 - rot;
-    }
     return rot;
 }
 
@@ -110,7 +116,8 @@ float getRotation(float x, float y, float z, float w) {
  * @param b is the second edge
  * @return true if edges are same
  */
-bool isSame(edge a, edge b) {
+bool isSame(edge a, edge b)
+{
     if ((a.a.x == b.b.x) & (a.a.z == b.b.z))
         if ((b.a.x == a.b.x) & (b.a.z == a.b.z))
             return true;
@@ -126,7 +133,8 @@ bool isSame(edge a, edge b) {
  * @param e is current edge
  * @return indicies as vector of int
  */
-std::vector<int> nextEdge(std::vector<edge> edges, edge e) {
+std::vector<int> nextEdge(std::vector<edge> edges, edge e)
+{
     std::vector<int> output;
 
     /// skip logical edges
@@ -139,12 +147,12 @@ std::vector<int> nextEdge(std::vector<edge> edges, edge e) {
     }*/
 
     /// add possible edges
-    for (unsigned int i = 0; i < edges.size(); i++) {
-        if ((edges[i].a.x == e.b.x) & (edges[i].a.y == e.b.y) & (edges[i].a.z == e.b.z)) {
+    for (unsigned int i = 0; i < edges.size(); i++)
+    {
+        if ((edges[i].a.x == e.b.x) & (edges[i].a.y == e.b.y) & (edges[i].a.z == e.b.z))
             if (!isSame(edges[i],e))
                 if ((edges[i].a.x != edges[i].b.x) | (edges[i].a.z != edges[i].b.z))
                     output.push_back(i);
-        }
     }
     return output;
 }

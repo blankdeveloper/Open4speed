@@ -31,7 +31,8 @@ bool operator<(const id3d& lhs, const id3d& rhs);
 /**
  * @brief The model3d struct
  */
-struct model3d {
+struct model3d
+{
     bool touchable;              ///< info if it is used in physics
     int filter;                  ///< filter index
     shader* material;            ///< shader to use
@@ -47,7 +48,8 @@ struct model3d {
 /**
  * @brief The model interface
  */
-class model {
+class model
+{
 public:
 
     /**

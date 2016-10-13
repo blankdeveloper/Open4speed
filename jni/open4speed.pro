@@ -36,7 +36,6 @@ SOURCES += \
     input/keyboard.cpp \
     physics/bullet/bullet.cpp \
     renderers/opengl/gles20.cpp \
-    renderers/opengl/glfbo.cpp \
     renderers/opengl/glsl.cpp \
     renderers/opengl/gltexture.cpp \
     open4speed.cpp
@@ -51,7 +50,6 @@ HEADERS += \
     files/zipfile.h \
     input/airacer.h \
     input/keyboard.h \
-    interfaces/fbo.h \
     interfaces/file.h \
     interfaces/input.h \
     interfaces/physics.h \
@@ -60,7 +58,6 @@ HEADERS += \
     interfaces/texture.h \
     physics/bullet/bullet.h \
     renderers/opengl/gles20.h \
-    renderers/opengl/glfbo.h \
     renderers/opengl/glsl.h \
     renderers/opengl/gltexture.h
 INCLUDEPATH += ../support/bullet3-2.83.7

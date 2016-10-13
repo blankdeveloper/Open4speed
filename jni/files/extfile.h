@@ -10,6 +10,7 @@
 #ifndef EXTFILE_H
 #define EXTFILE_H
 
+#include <png.h>
 #include <stdio.h>
 #include <string>
 #include "interfaces/file.h"

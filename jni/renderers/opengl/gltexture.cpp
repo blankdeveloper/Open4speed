@@ -7,7 +7,6 @@
 **/
 ///----------------------------------------------------------------------------------------
 
-#include <cstring>
 #include <stdio.h>
 #include "renderers/opengl/gles20.h"
 #include "renderers/opengl/gltexture.h"

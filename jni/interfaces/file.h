@@ -10,7 +10,6 @@
 #ifndef FILE_H
 #define FILE_H
 
-#include <png.h>
 #include <string>
 
 class file

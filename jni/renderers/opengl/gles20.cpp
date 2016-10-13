@@ -9,9 +9,8 @@
 
 #define GLM_FORCE_RADIANS
 #include <glm/gtc/type_ptr.hpp>
+#include "engine/io.h"
 #include "renderers/opengl/gles20.h"
-#include "renderers/opengl/glfbo.h"
-#include "renderers/opengl/gltexture.h"
 #include "engine/switch.h"
 
 /**
@@ -19,10 +18,23 @@
  */
 gles20::~gles20()
 {
-    while (!rtt_fbo.empty())
+    if (rboID)
     {
-        delete rtt_fbo[rtt_fbo.size() - 1];
-        rtt_fbo.pop_back();
+        glDeleteRenderbuffers(2, rboID);
+        delete[] rboID;
+        rboID = 0;
+    }
+    if (fboID)
+    {
+        glDeleteFramebuffers(2, fboID);
+        delete[] fboID;
+        fboID = 0;
+    }
+    if (rendertexture)
+    {
+        glDeleteTextures(2, rendertexture);
+        delete[] rendertexture;
+        rendertexture = 0;
     }
 }
 
@@ -41,25 +53,73 @@ gles20::gles20()
 
 void gles20::init(int w, int h)
 {
-    screen_width = w;
-    screen_height = h;
+    width = w;
+    height = h;
 
     //find ideal texture resolution
     int resolution = 2;
-    while (resolution < screen_width)
+    while (resolution < width)
         resolution *= 2;
 
-    //create render texture
-    while (!rtt_fbo.empty())
-    {
-        delete rtt_fbo[rtt_fbo.size() - 1];
-        rtt_fbo.pop_back();
-    }
+    //create frame buffer
+    fboID = new GLuint[2];
+    rboID = new GLuint[2];
+    rendertexture = new GLuint[2];
+
+    //framebuffer textures
+    glGenTextures(2, rendertexture);
     for (int i = 0; i < 2; i++)
-        rtt_fbo.push_back(new glfbo(screen_width, screen_height));
+    {
+        glBindTexture(GL_TEXTURE_2D, rendertexture[i]);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+    }
+
+    /// create render buffers for depth buffer and stencil buffer
+    int stencilIndex = 1;
+    glGenRenderbuffers(2, rboID);
+    glBindRenderbuffer(GL_RENDERBUFFER, rboID[0]);
+#ifdef ANDROID
+    char* extString = (char*)glGetString(GL_EXTENSIONS);
+    if (strstr(extString, PACKED_EXTENSION) != 0)
+    {
+        glRenderbufferStorage(GL_RENDERBUFFER, PACKED_EXT, width, height);
+        stencilIndex = 0;
+    }
+    else
+#endif
+    {
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
+        glBindRenderbuffer(GL_RENDERBUFFER, rboID[1]);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_STENCIL_INDEX8, width, height);
+    }
+
+    //framebuffers
+    glGenFramebuffers(2, fboID);
+    for (int i = 0; i < 2; i++)
+    {
+        glBindFramebuffer(GL_FRAMEBUFFER, fboID[i]);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rendertexture[i], 0);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboID[0]);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboID[stencilIndex]);
+    }
+
+    /// check FBO status
+    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE)
+        rttComplete = true;
+    else
+    {
+        char error[128];
+        sprintf(error, "%d", glCheckFramebufferStatus(GL_FRAMEBUFFER));
+        logi("glCheckFramebufferStatus", error);
+        rttComplete = false;
+    }
 
     //set viewport
-    glViewport (0, 0, (GLsizei) screen_width, (GLsizei) screen_height);
+    glViewport (0, 0, (GLsizei) width, (GLsizei) height);
     glClear(GL_COLOR_BUFFER_BIT);
     glActiveTexture( GL_TEXTURE0 );
 
@@ -160,7 +220,7 @@ void gles20::renderModel(model* m)
  */
 void gles20::renderShadow(model* m)
 {
-    if (!rtt_fbo[oddFrame]->complete || !m->v3d.empty())
+    if (!rttComplete || !m->v3d.empty())
         return;
 
     glDepthMask(false);
@@ -259,7 +319,7 @@ void gles20::renderSubModel(model3d *m)
 
     /// previous screen
     glActiveTexture( GL_TEXTURE1 );
-    rtt_fbo[oddFrame]->bindTexture();
+    glBindTexture(GL_TEXTURE_2D, rendertexture[oddFrame]);
     current->uniformInt("EnvMap1", 1);
 
     /// set texture
@@ -268,8 +328,8 @@ void gles20::renderSubModel(model3d *m)
     current->uniformInt("color_texture", 0);
 
     /// set uniforms
-    current->uniformFloat("u_width", 1 / (float)screen_width / aliasing);
-    current->uniformFloat("u_height", 1 / (float)screen_height / aliasing);
+    current->uniformFloat("u_width", 1 / (float)width / aliasing);
+    current->uniformFloat("u_height", 1 / (float)height / aliasing);
     if (enable[9])
         current->uniformFloat("u_brake", 1.0f);
     else
@@ -292,8 +352,12 @@ void gles20::rtt(bool enable)
         glGenQueries(1,gpuMeasuring);
         glBeginQuery(GL_TIME_ELAPSED, gpuMeasuring[0]);
 #endif
-        rtt_fbo[oddFrame]->bindFBO();
-        rtt_fbo[oddFrame]->clear();
+        glBindFramebuffer(GL_FRAMEBUFFER, fboID[oddFrame]);
+        glViewport (0, 0, width * aliasing, height * aliasing);
+        glClearStencil(0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        glEnable(GL_DEPTH_TEST);
+        glDepthMask(true);
         oddFrame = !oddFrame;
     } else
     {
@@ -307,10 +371,42 @@ void gles20::rtt(bool enable)
         GLint copy_time = 0;
         glBeginQuery(GL_TIME_ELAPSED, gpuMeasuring[0]);
 #endif
-        /// rendering
+        /// prepare rendering
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glViewport (0, 0, screen_width, screen_height);
-        rtt_fbo[oddFrame]->drawOnScreen(scene);
+        glViewport (0, 0, width, height);
+
+        /// vertices
+        float vertices[] =
+        {
+            -1, +1, 0,
+            -1, -1, 0,
+            +1, -1, 0,
+            -1, +1, 0,
+            +1, -1, 0,
+            +1, +1, 0,
+        };
+
+        /// coords
+        float coords[] =
+        {
+            0, 1,
+            0, 0,
+            1, 0,
+            0, 1,
+            1, 0,
+            1, 1,
+        };
+
+        scene->bind();
+        glBindTexture(GL_TEXTURE_2D, rendertexture[oddFrame]);
+        glDisable(GL_BLEND);
+        glDisable(GL_DEPTH_TEST);
+        glDepthMask(false);
+        /// render
+        scene->attrib(vertices, 0, coords);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glDepthMask(true);
 
 #ifndef ANDROID
         glEndQuery(GL_TIME_ELAPSED);

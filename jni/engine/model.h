@@ -10,7 +10,6 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include <glm/glm.hpp>
 #include <map>
 #include <string>
 #include "engine/math.h"

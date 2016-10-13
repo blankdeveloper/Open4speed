@@ -10,6 +10,7 @@
 #ifndef ZIPFILE_H
 #define ZIPFILE_H
 
+#include <png.h>
 #include <string>
 #include <zip.h>
 #include "interfaces/file.h"

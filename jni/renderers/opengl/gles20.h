@@ -21,7 +21,6 @@
 #endif
 #include <vector>
 #include "interfaces/renderer.h"
-#include "renderers/opengl/glfbo.h"
 
 /**
  * @brief The gles20 class is implementation of OpenGL ES 2.0
@@ -33,8 +32,11 @@ public:
     shader* current;                      ///< Current binded shader
     shader* scene;                        ///< Scene shader
     shader* shadow;                       ///< Special shader for shadow
-    std::vector<glfbo*> rtt_fbo;          ///< Screen-space framebuffer
     bool oddFrame;                        ///< Odd frame info
+    bool rttComplete;                     ///< Information if fbo is complete
+    unsigned int* rendertexture;          ///< Texture for color buffer
+    unsigned int* fboID;                  ///< Frame buffer object id
+    unsigned int* rboID;                  ///< Render buffer object id
 
     /**
      * @brief gles20 destructor

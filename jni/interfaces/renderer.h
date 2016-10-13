@@ -10,10 +10,8 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include <glm/glm.hpp>
 #include "engine/matrices.h"
 #include "engine/model.h"
-#include "interfaces/fbo.h"
 #include "interfaces/shader.h"
 #include "interfaces/texture.h"
 
@@ -24,10 +22,10 @@ class renderer : public matrices
 {
 public:
 
-    float aliasing;             ///< Screen detail
-    bool enable[10];            ///< Enabled filter
-    int screen_width;           ///< Screen width
-    int screen_height;          ///< Screen height
+    float aliasing;      ///< Screen detail
+    bool enable[10];     ///< Enabled filter
+    int width;           ///< Screen width
+    int height;          ///< Screen height
 
     virtual ~renderer() {}
 

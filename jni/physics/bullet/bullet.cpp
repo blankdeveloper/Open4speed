@@ -44,30 +44,29 @@
  */
 bullet::~bullet() {
     delete m_dynamicsWorld;
-    while(!m_vehicle.empty())
+    while(!vehicles.empty())
     {
-        delete m_vehicle[m_vehicle.size() - 1];
-        m_vehicle.pop_back();
+        delete vehicles[vehicles.size() - 1]->getRigidBody()->getCollisionShape();
+        delete vehicles[vehicles.size() - 1]->getRigidBody();
+        delete vehicles[vehicles.size() - 1];
+        vehicles.pop_back();
     }
-    while(!bodies.empty())
+    while(!dynamicObjects.empty())
     {
-        delete bodies[bodies.size() - 1];
-        bodies.pop_back();
+        delete dynamicObjects[dynamicObjects.size() - 1]->getCollisionShape();
+        delete dynamicObjects[dynamicObjects.size() - 1];
+        dynamicObjects.pop_back();
     }
-    while(!shapes.empty())
+    while(!staticMeshes.empty())
     {
-        delete shapes[shapes.size() - 1];
-        shapes.pop_back();
+        delete staticMeshes[staticMeshes.size() - 1];
+        staticMeshes.pop_back();
     }
-    while(!meshes.empty())
+    while(!staticObjects.empty())
     {
-        delete meshes[meshes.size() - 1];
-        meshes.pop_back();
-    }
-    while(!bodies2.empty())
-    {
-        delete bodies2[bodies2.size() - 1];
-        bodies2.pop_back();
+        delete staticObjects[staticObjects.size() - 1]->getCollisionShape();
+        delete staticObjects[staticObjects.size() - 1];
+        staticObjects.pop_back();
     }
 
     delete m_vehicleRayCaster;
@@ -139,20 +138,12 @@ void bullet::addCar(car* c) {
     float altitude = c->skin->aabb.max.y - c->skin->aabb.min.y;
     float height = c->skin->aabb.max.z - c->skin->aabb.min.z;
     btCollisionShape* chassisShape = new btBoxShape(btVector3(width / 2.0f, altitude / 2.0f, height / 2.0f));
-    shapes.push_back(chassisShape);
-    btCompoundShape* compound = new btCompoundShape();
-    shapes.push_back(compound);
-    btTransform localTrans;
-    localTrans.setIdentity();
-    localTrans.setOrigin(btVector3(0, c->wheelY, 0));
-    compound->addChildShape(localTrans,chassisShape);
 
     /// Set car physical values
     btVector3 localInertia(0,0,0);
     float mass = VEHICLE_MASS_ASPECT * c->mass;
-    compound->calculateLocalInertia(mass,localInertia);
-    btRigidBody* m_carChassis = new btRigidBody(mass,0,compound,localInertia);
-    bodies2.push_back(m_carChassis);
+    chassisShape->calculateLocalInertia(mass,localInertia);
+    btRigidBody* m_carChassis = new btRigidBody(mass,0,chassisShape,localInertia);
     m_dynamicsWorld->addRigidBody(m_carChassis);
 
     /// Set car default transform
@@ -170,50 +161,33 @@ void bullet::addCar(car* c) {
     m_carChassis->setCenterOfMassTransform(tr);
     btRaycastVehicle::btVehicleTuning m_tuning;
     btRaycastVehicle *m_RaycastVehicle = new btRaycastVehicle(m_tuning,m_carChassis,m_vehicleRayCaster);
-    m_vehicle.push_back(m_RaycastVehicle);
+    vehicles.push_back(m_RaycastVehicle);
     m_carChassis->setActivationState(DISABLE_DEACTIVATION);
-    m_dynamicsWorld->addVehicle(m_vehicle[c->index - 1]);
-    m_vehicle[c->index - 1]->setCoordinateSystem(0,1,2);
+    m_dynamicsWorld->addVehicle(vehicles[c->index - 1]);
+    vehicles[c->index - 1]->setCoordinateSystem(0,1,2);
 
     /// Set wheels connections
     altitude = (c->wheel->aabb.max.y - c->wheel->aabb.min.y) / 2.0f;
     btVector3 direction(0,-1,0);
     btVector3 axle(-1,0,0);
     btVector3 point(-c->wheelX, 0, -c->wheelZ1);
-    m_vehicle[c->index - 1]->addWheel(point, direction, axle, SUSPENSION_REST_LENGTH, altitude, m_tuning, true);
+    vehicles[c->index - 1]->addWheel(point, direction, axle, SUSPENSION_REST_LENGTH, altitude, m_tuning, true);
     point = btVector3(c->wheelX, 0, -c->wheelZ1);
-    m_vehicle[c->index - 1]->addWheel(point, direction, axle, SUSPENSION_REST_LENGTH, altitude, m_tuning, true);
+    vehicles[c->index - 1]->addWheel(point, direction, axle, SUSPENSION_REST_LENGTH, altitude, m_tuning, true);
     point = btVector3(-c->wheelX, 0, c->wheelZ2);
-    m_vehicle[c->index - 1]->addWheel(point, direction, axle, SUSPENSION_REST_LENGTH, altitude, m_tuning, false);
+    vehicles[c->index - 1]->addWheel(point, direction, axle, SUSPENSION_REST_LENGTH, altitude, m_tuning, false);
     point = btVector3(c->wheelX, 0, c->wheelZ2);
-    m_vehicle[c->index - 1]->addWheel(point, direction, axle, SUSPENSION_REST_LENGTH, altitude, m_tuning, false);
+    vehicles[c->index - 1]->addWheel(point, direction, axle, SUSPENSION_REST_LENGTH, altitude, m_tuning, false);
 
     /// Set wheels parameters
-    for (int i = 0; i < m_vehicle[c->index - 1]->getNumWheels(); i++) {
-        btWheelInfo& wheel = m_vehicle[c->index - 1]->getWheelInfo(i);
+    for (int i = 0; i < vehicles[c->index - 1]->getNumWheels(); i++) {
+        btWheelInfo& wheel = vehicles[c->index - 1]->getWheelInfo(i);
         wheel.m_suspensionStiffness = SUSPENSION_STIFFNESS;
         wheel.m_wheelsDampingRelaxation = SUSPENSION_DAMPING;
         wheel.m_wheelsDampingCompression = SUSPENSION_COMPRESSION;
         wheel.m_frictionSlip = WHEEL_FRICTION;
         wheel.m_rollInfluence = ROLL_INFLUENCE;
     }
-}
-
-void bullet::addHeightmap(unsigned char* data, int res, glm::vec3 min, glm::vec3 max) {
-
-    btHeightfieldTerrainShape* shape = new btHeightfieldTerrainShape(res, res, data, 1,
-                                                           0, 255, 1, PHY_UCHAR, false);
-    shape->setLocalScaling(btVector3((max.x - min.x) / (float)res,
-                                     (max.y - min.y) / 255.0f,
-                                     (max.z - min.z) / (float)res));
-    shapes.push_back(shape);
-    btRigidBody* body = new btRigidBody(0,0,shape);
-    body->translate(btVector3((max.x + min.x) / 2.0f,
-                              (max.y + min.y) / 2.0f,
-                              (max.z + min.z) / 2.0f));
-    body->setActivationState(DISABLE_SIMULATION);
-    bodies2.push_back(body);
-    m_dynamicsWorld->addCollisionObject(body);
 }
 
 /**
@@ -237,13 +211,12 @@ void bullet::addModel(model *m) {
             float a = m->models[i].reg.max.y - m->models[i].reg.min.y;
             float h = m->models[i].reg.max.z - m->models[i].reg.min.z;
             btBoxShape* shape = new btBoxShape(btVector3(w / 2, a / 2, h / 2));
-            shapes.push_back(shape);
 
             /// Set object physical values
             btVector3 localInertia(0, 0, 0);
             shape->calculateLocalInertia(w * a * h,localInertia);
             btRigidBody* body = new btRigidBody(w * a * h + 1, 0, shape,localInertia);
-            bodies.push_back(body);
+            dynamicObjects.push_back(body);
             m_dynamicsWorld->addRigidBody(body);
 
             /// Set object default transform
@@ -260,7 +233,7 @@ void bullet::addModel(model *m) {
             body->setDamping(DYNAMIC_DAMPING, DYNAMIC_DAMPING);
             body->setGravity(btVector3(0, -GRAVITATION * DYNAMIC_GRAVITATION, 0));
             body->setActivationState(ISLAND_SLEEPING);
-            m->models[i].dynamicID = bodies.size();
+            m->models[i].dynamicID = dynamicObjects.size();
         } else if (m->models[i].touchable || !touchable) {
             btVector3 o = btVector3(m->models[i].reg.min.x, m->models[i].reg.min.y, m->models[i].reg.min.z);
             for (int j = 0; j < m->models[i].vertices.size() / 9; j++) {
@@ -272,12 +245,10 @@ void bullet::addModel(model *m) {
                 if (count >= 65535)
                 {
                     count = 0;
-                    meshes.push_back(mesh);
-                    btBvhTriangleMeshShape* levelShape = new btBvhTriangleMeshShape(mesh,true);
-                    shapes.push_back(levelShape);
-                    btRigidBody* body = new btRigidBody(0,0,levelShape);
+                    staticMeshes.push_back(mesh);
+                    btRigidBody* body = new btRigidBody(0,0,new btBvhTriangleMeshShape(mesh,true));
                     body->setActivationState(DISABLE_SIMULATION);
-                    bodies2.push_back(body);
+                    staticObjects.push_back(body);
                     m_dynamicsWorld->addCollisionObject(body);
                     mesh = new btTriangleMesh();
                 }
@@ -285,12 +256,10 @@ void bullet::addModel(model *m) {
         }
     }
     if (count > 0) {
-        meshes.push_back(mesh);
-        btBvhTriangleMeshShape* levelShape = new btBvhTriangleMeshShape(mesh,true);
-        shapes.push_back(levelShape);
-        btRigidBody* body = new btRigidBody(0,0,levelShape);
+        staticMeshes.push_back(mesh);
+        btRigidBody* body = new btRigidBody(0,0,new btBvhTriangleMeshShape(mesh,true));
         body->setActivationState(DISABLE_SIMULATION);
-        bodies2.push_back(body);
+        staticObjects.push_back(body);
         m_dynamicsWorld->addCollisionObject(body);
     } else
         delete mesh;
@@ -304,7 +273,7 @@ void bullet::addModel(model *m) {
 void bullet::getTransform(int index, float* m) {
 
     /// get matrix
-    bodies[index - 1]->getCenterOfMassTransform().getOpenGLMatrix(m);
+    dynamicObjects[index - 1]->getCenterOfMassTransform().getOpenGLMatrix(m);
     for (int i = 0; i < 16; i++) {
         if (isnan(m[i])) {
             for (int j = 0; j < 16; j++)
@@ -377,14 +346,14 @@ void bullet::resetCar(car* c, bool total)
     btQuaternion q;
     q.setRotation(btVector3(0,1,0), c->rot * 3.14 / 180.0);
     tr.setRotation(q);
-    m_vehicle[c->index - 1]->getRigidBody()->setCenterOfMassTransform(tr);
+    vehicles[c->index - 1]->getRigidBody()->setCenterOfMassTransform(tr);
 
     /// get matrices
     for (int index = 0; index < 5; index++) {
         if (index > 0) {
-          m_vehicle[c->index - 1]->getWheelInfo(index - 1).m_worldTransform.getOpenGLMatrix(c->transform[index].value);
+          vehicles[c->index - 1]->getWheelInfo(index - 1).m_worldTransform.getOpenGLMatrix(c->transform[index].value);
         } else {
-          m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassTransform().getOpenGLMatrix(c->transform[index].value);
+          vehicles[c->index - 1]->getRigidBody()->getCenterOfMassTransform().getOpenGLMatrix(c->transform[index].value);
         }
     }
 }
@@ -396,12 +365,12 @@ void bullet::resetCar(car* c, bool total)
 void bullet::updateCar(car* c) {
 
     /// get direction
-    if ((int)m_vehicle[c->index - 1]->getCurrentSpeedKmHour() < 0)
+    if ((int)vehicles[c->index - 1]->getCurrentSpeedKmHour() < 0)
         c->reverse = true;
-    if ((int)m_vehicle[c->index - 1]->getCurrentSpeedKmHour() > 0)
+    if ((int)vehicles[c->index - 1]->getCurrentSpeedKmHour() > 0)
         c->reverse = false;
 
-    if (fabsf(m_vehicle[c->index - 1]->getCurrentSpeedKmHour()) < 5) {
+    if (fabsf(vehicles[c->index - 1]->getCurrentSpeedKmHour()) < 5) {
         if (c->control->getGas() > 0)
             c->reverse = false;
         if (c->control->getBrake() > 0)
@@ -447,25 +416,25 @@ void bullet::updateCar(car* c) {
         float gVehicleSteering = c->control->getSteer() * c->steering;
             gVehicleSteering /= (STEERING_ASPECT + c->speed * STEERING_SPEED_DEPENDENCY);
 
-        m_vehicle[c->index - 1]->setSteeringValue(gVehicleSteering,2);
-        m_vehicle[c->index - 1]->setSteeringValue(gVehicleSteering,3);
+        vehicles[c->index - 1]->setSteeringValue(gVehicleSteering,2);
+        vehicles[c->index - 1]->setSteeringValue(gVehicleSteering,3);
 
         if (c->reverse) {
-            m_vehicle[c->index - 1]->applyEngineForce(-gEngineForce,0);
-            m_vehicle[c->index - 1]->applyEngineForce(-gEngineForce,1);
+            vehicles[c->index - 1]->applyEngineForce(-gEngineForce,0);
+            vehicles[c->index - 1]->applyEngineForce(-gEngineForce,1);
         } else {
-            m_vehicle[c->index - 1]->applyEngineForce(gEngineForce,0);
-            m_vehicle[c->index - 1]->applyEngineForce(gEngineForce,1);
+            vehicles[c->index - 1]->applyEngineForce(gEngineForce,0);
+            vehicles[c->index - 1]->applyEngineForce(gEngineForce,1);
         }
     }
-    m_vehicle[c->index - 1]->setBrake(gBreakingForce + SPEED_DECREASE, 0);
-    m_vehicle[c->index - 1]->setBrake(gBreakingForce + SPEED_DECREASE, 1);
+    vehicles[c->index - 1]->setBrake(gBreakingForce + SPEED_DECREASE, 0);
+    vehicles[c->index - 1]->setBrake(gBreakingForce + SPEED_DECREASE, 1);
 
     for (int i = 0; i < 4; i++)
-        m_vehicle[c->index - 1]->updateWheelTransform(i);
+        vehicles[c->index - 1]->updateWheelTransform(i);
 
     /// Apply updates
-    m_vehicle[c->index - 1]->updateVehicle(VEHICLE_STEP);
+    vehicles[c->index - 1]->updateVehicle(VEHICLE_STEP);
 
     /// Reset car
     if ((c->speed < 5) && active && !locked) {
@@ -496,16 +465,16 @@ void bullet::updateCar(car* c) {
 
 
     /// count angle
-    btQuaternion qn = m_vehicle[c->index - 1]->getRigidBody()->getOrientation();
+    btQuaternion qn = vehicles[c->index - 1]->getRigidBody()->getOrientation();
     float rot = getRotation(qn.x(),qn.y(),qn.z(),qn.w());
     if (!isnan(rot)) {
         c->rot=rot;
     }
 
     /// get position
-    float x = m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getX();
-    float y = m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getY();
-    float z = m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getZ();
+    float x = vehicles[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getX();
+    float y = vehicles[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getY();
+    float z = vehicles[c->index - 1]->getRigidBody()->getCenterOfMassPosition().getZ();
     if (!isnan(x) && !isnan(y) && !isnan(z)) {
         c->pos.x=x;
         c->pos.y=y;
@@ -515,9 +484,9 @@ void bullet::updateCar(car* c) {
     /// get matrices
     for (int index = 0; index < 5; index++) {
         if (index > 0) {
-          m_vehicle[c->index - 1]->getWheelInfo(index - 1).m_worldTransform.getOpenGLMatrix(c->transform[index].value);
+          vehicles[c->index - 1]->getWheelInfo(index - 1).m_worldTransform.getOpenGLMatrix(c->transform[index].value);
         } else {
-          m_vehicle[c->index - 1]->getRigidBody()->getCenterOfMassTransform().getOpenGLMatrix(c->transform[index].value);
+          vehicles[c->index - 1]->getRigidBody()->getCenterOfMassTransform().getOpenGLMatrix(c->transform[index].value);
         }
     }
 }

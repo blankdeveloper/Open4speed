@@ -36,11 +36,10 @@ public:
     /**
      * Geometry objects
      */
-    std::vector<btRaycastVehicle*> m_vehicle;
-    std::vector<btRigidBody*> bodies;
-    std::vector<btCollisionShape*> shapes;
-    std::vector<btTriangleMesh*> meshes;
-    std::vector<btCollisionObject*> bodies2;
+    std::vector<btRigidBody*> dynamicObjects;
+    std::vector<btCollisionObject*> staticObjects;
+    std::vector<btTriangleMesh*> staticMeshes;
+    std::vector<btRaycastVehicle*> vehicles;
 
     /**
      * @brief Construct physical model
@@ -57,8 +56,6 @@ public:
      * @param c is car instance
      */
     void addCar(car* c);
-
-    void addHeightmap(unsigned char* data, int res, glm::vec3 min, glm::vec3 max);
 
     /**
      * @brief addModel adds model into physical model

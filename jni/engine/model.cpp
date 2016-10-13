@@ -178,6 +178,7 @@ void model::culling()
                 if (used.find(id) == used.end())
                 {
                     model3d mod;
+                    mod.dynamic = false;
                     mod.material = models[j].material;
                     mod.texture2D = models[j].texture2D;
                     v3d[id].push_back(mod);

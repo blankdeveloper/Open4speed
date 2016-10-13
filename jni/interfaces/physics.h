@@ -32,8 +32,6 @@ public:
      */
     virtual void addCar(car* c) = 0;
 
-    virtual void addHeightmap(unsigned char* data, int res, glm::vec3 min, glm::vec3 max) = 0;
-
     /**
      * @brief addModel adds model into physical model
      * @param m is 3D model for physical model

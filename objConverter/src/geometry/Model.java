@@ -2,7 +2,6 @@ package geometry;
 
 import java.util.ArrayList;
 
-
 // storage for models
 public class Model
 {
@@ -15,9 +14,13 @@ public class Model
     material = t;
   }
   
+  public boolean isDynamic()
+  {
+    return material.contains("$");
+  }
+  
   public AABB getAABB()
   {
-    // find local center
     Point3D min = new Point3D(99999, 99999, 99999);
     Point3D max = new Point3D(-99999, -99999, -99999);
     for (int i = 0; i < faces.size(); i++)

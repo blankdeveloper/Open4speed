@@ -127,7 +127,7 @@ model* getModel(std::string filename) {
     /// create new instance
     if (strcmp(getExtension(filename).c_str(), "o4s") == 0) {
         model* instance = new model(filename);
-        models[filename] == instance;
+        models[filename] = instance;
         return instance;
     }
     loge("File is not supported:", filename);

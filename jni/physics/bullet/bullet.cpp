@@ -349,6 +349,8 @@ void bullet::resetCar(car* c, bool total)
     vehicles[c->index - 1]->getRigidBody()->setCenterOfMassTransform(tr);
 
     /// get matrices
+    for (int i = 0; i < 4; i++)
+        vehicles[c->index - 1]->updateWheelTransform(i);
     for (int index = 0; index < 5; index++) {
         if (index > 0) {
           vehicles[c->index - 1]->getWheelInfo(index - 1).m_worldTransform.getOpenGLMatrix(c->transform[index].value);
@@ -362,7 +364,8 @@ void bullet::resetCar(car* c, bool total)
  * @brief updateCar updates car state
  * @param c is instance of car
  */
-void bullet::updateCar(car* c) {
+void bullet::updateCar(car* c)
+{
 
     /// get direction
     if ((int)vehicles[c->index - 1]->getCurrentSpeedKmHour() < 0)

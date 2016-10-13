@@ -328,7 +328,9 @@ void idle(int v) {
             /// update current edge for navigation
             if (!physic->locked)
             {
-                if ((distance(getCar(i)->pos, getCar(i)->currentEdge.b) < getCar(i)->control->getUpdate())
+                bool out = distance(getCar(i)->pos, getCar(0)->pos) > 300;
+                float update = out ? 5 : getCar(i)->control->getUpdate();
+                if ((distance(getCar(i)->pos, getCar(i)->currentEdge.b) < update)
                         && (fabsf(getCar(i)->currentEdge.b.y - getCar(i)->pos.y) < 30)) {
                     std::vector<int> nEdges = nextEdge(getCar(i)->edges, getCar(i)->currentEdge);
                     if (nEdges.size() > 0)
@@ -337,10 +339,11 @@ void idle(int v) {
                 }
                 if (i != 0)
                 {
-                  if (distance(getCar(i)->pos, getCar(0)->pos) > 300)
+                  if (out)
                   {
-                    int rnd = (int)(i * 500) % 10;
-                    getCar(i)->pos += glm::normalize(getCar(i)->currentEdge.b - getCar(i)->pos) * (2 + rnd * 0.1f);
+                    int rnd = (int)(i * 17) % 10;
+                    float speed = (1.5f + rnd * 0.1f) * (1 - getCar(i)->control->getBrake());
+                    getCar(i)->pos += glm::normalize(getCar(i)->currentEdge.b - getCar(i)->pos) * speed;
                     getCar(i)->rot = angle(getCar(i)->currentEdge.b, getCar(i)->currentEdge.a) * 180.0f / 3.14f;
                     physic->resetCar(getCar(i), false);
                     continue;

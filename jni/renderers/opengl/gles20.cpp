@@ -70,7 +70,7 @@ void gles20::cleanup()
     }
     if (shadow)
     {
-        delete[] shadow;
+        delete shadow;
         shadow = 0;
     }
 }

@@ -149,7 +149,7 @@ private:
     model *skydome;                           ///< Skydome model
     model *trackdata;                         ///< Track first model
     model *water;                             ///< Water effect model
-    Dynamic eff[WATER_EFF_LENGTH];                      ///< 3D water effect object
+    Dynamic eff[WATER_EFF_LENGTH];            ///< 3D water effect object
 };
 
 #endif // SWITCH_H

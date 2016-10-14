@@ -35,9 +35,9 @@ public:
     /**
      * Geometry objects
      */
-    std::vector<btRigidBody*> dynamicObjects;
-    std::vector<btCollisionObject*> staticObjects;
-    std::vector<btTriangleMesh*> staticMeshes;
+    std::map<id3d, std::vector<btRigidBody*> > dynamicObjects;
+    std::map<id3d, std::vector<btCollisionObject*> > staticObjects;
+    std::map<id3d, std::vector<btTriangleMesh*> > staticMeshes;
     std::vector<btRaycastVehicle*> vehicles;
 
     /**
@@ -59,16 +59,23 @@ public:
     /**
      * @brief addModel adds model into physical model
      * @param m is 3D model for physical model
-     * @param center is model translation
+     * @param id is 3d position index
      */
-    void addModel(model *m);
+    void addModel(model *m, id3d id);
 
     /**
      * @brief getTransform counts OpenGL matrix of transformation
      * @param index is index of object
-     * @return transformation matrix
+     * @param m is float[16] for output
+     * @param id is 3d position index
      */
-    void getTransform(int index, float* m);
+    void getTransform(int index, float* m, id3d id);
+
+    /**
+     * @brief removeModel removes model from physical engine
+     * @param id is 3d position index
+     */
+    void removeModel(id3d id);
 
     /**
      * @brief resetCar updates car state

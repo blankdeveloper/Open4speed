@@ -51,7 +51,6 @@ public:
      */
     virtual void setFrame(int frame) = 0;
 
-
     /**
      * @brief rgb creates texture from color
      * @param width is image width

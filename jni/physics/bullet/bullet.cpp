@@ -49,22 +49,34 @@ bullet::~bullet()
         delete vehicles[vehicles.size() - 1];
         vehicles.pop_back();
     }
-    while(!dynamicObjects.empty())
+    std::map<id3d, std::vector<btRigidBody*> >::iterator itDynamic;
+    for(itDynamic = dynamicObjects.begin(); itDynamic != dynamicObjects.end(); ++itDynamic)
     {
-        delete dynamicObjects[dynamicObjects.size() - 1]->getCollisionShape();
-        delete dynamicObjects[dynamicObjects.size() - 1];
-        dynamicObjects.pop_back();
+        while(!itDynamic->second.empty())
+        {
+            delete itDynamic->second[itDynamic->second.size() - 1]->getCollisionShape();
+            delete itDynamic->second[itDynamic->second.size() - 1];
+            itDynamic->second.pop_back();
+        }
     }
-    while(!staticMeshes.empty())
+    std::map<id3d, std::vector<btCollisionObject*> >::iterator itStatic;
+    for(itStatic = staticObjects.begin(); itStatic != staticObjects.end(); ++itStatic)
     {
-        delete staticMeshes[staticMeshes.size() - 1];
-        staticMeshes.pop_back();
+        while(!itStatic->second.empty())
+        {
+            delete itStatic->second[itStatic->second.size() - 1]->getCollisionShape();
+            delete itStatic->second[itStatic->second.size() - 1];
+            itStatic->second.pop_back();
+        }
     }
-    while(!staticObjects.empty())
+    std::map<id3d, std::vector<btTriangleMesh*> >::iterator itStaticMesh;
+    for(itStaticMesh = staticMeshes.begin(); itStaticMesh != staticMeshes.end(); ++itStaticMesh)
     {
-        delete staticObjects[staticObjects.size() - 1]->getCollisionShape();
-        delete staticObjects[staticObjects.size() - 1];
-        staticObjects.pop_back();
+        while(!itStaticMesh->second.empty())
+        {
+            delete itStaticMesh->second[itStaticMesh->second.size() - 1];
+            itStaticMesh->second.pop_back();
+        }
     }
 
     delete m_vehicleRayCaster;
@@ -160,9 +172,9 @@ void bullet::addCar(car* c)
 /**
  * @brief addModel adds model into physical model
  * @param m is 3D model for physical model
- * @param center is model translation
+ * @param id is 3d position index
  */
-void bullet::addModel(model *m)
+void bullet::addModel(model *m, id3d id)
 {
     btTriangleMesh* mesh = new btTriangleMesh();
     bool touchable = false;
@@ -186,7 +198,7 @@ void bullet::addModel(model *m)
             btVector3 localInertia(0, 0, 0);
             shape->calculateLocalInertia(w * a * h,localInertia);
             btRigidBody* body = new btRigidBody(w * a * h + 1, 0, shape,localInertia);
-            dynamicObjects.push_back(body);
+            dynamicObjects[id].push_back(body);
             m_dynamicsWorld->addRigidBody(body);
 
             /// Set object default transform
@@ -203,7 +215,7 @@ void bullet::addModel(model *m)
             body->setDamping(DYNAMIC_DAMPING, DYNAMIC_DAMPING);
             body->setGravity(btVector3(0, -GRAVITATION * DYNAMIC_GRAVITATION, 0));
             body->setActivationState(ISLAND_SLEEPING);
-            m->models[i].dynamicID = dynamicObjects.size();
+            m->models[i].dynamicID = dynamicObjects[id].size();
         } else if (m->models[i].touchable || !touchable) {
             btVector3 o = btVector3(m->models[i].reg.min.x, m->models[i].reg.min.y, m->models[i].reg.min.z);
             for (int j = 0; j < m->models[i].vertices.size() / 9; j++) {
@@ -215,10 +227,10 @@ void bullet::addModel(model *m)
                 if (count >= 65535)
                 {
                     count = 0;
-                    staticMeshes.push_back(mesh);
+                    staticMeshes[id].push_back(mesh);
                     btRigidBody* body = new btRigidBody(0,0,new btBvhTriangleMeshShape(mesh,true));
                     body->setActivationState(DISABLE_SIMULATION);
-                    staticObjects.push_back(body);
+                    staticObjects[id].push_back(body);
                     m_dynamicsWorld->addCollisionObject(body);
                     mesh = new btTriangleMesh();
                 }
@@ -227,10 +239,10 @@ void bullet::addModel(model *m)
     }
     if (count > 0)
     {
-        staticMeshes.push_back(mesh);
+        staticMeshes[id].push_back(mesh);
         btRigidBody* body = new btRigidBody(0,0,new btBvhTriangleMeshShape(mesh,true));
         body->setActivationState(DISABLE_SIMULATION);
-        staticObjects.push_back(body);
+        staticObjects[id].push_back(body);
         m_dynamicsWorld->addCollisionObject(body);
     } else
         delete mesh;
@@ -239,12 +251,13 @@ void bullet::addModel(model *m)
 /**
  * @brief getTransform counts OpenGL matrix of transformation
  * @param index is index of object
- * @return transformation matrix
+ * @param m is float[16] for output
+ * @param id is 3d position index
  */
-void bullet::getTransform(int index, float* m)
+void bullet::getTransform(int index, float* m, id3d id)
 {
     /// get matrix
-    dynamicObjects[index - 1]->getCenterOfMassTransform().getOpenGLMatrix(m);
+    dynamicObjects[id][index - 1]->getCenterOfMassTransform().getOpenGLMatrix(m);
     for (int i = 0; i < 16; i++)
     {
         if (isnan(m[i]))
@@ -253,6 +266,33 @@ void bullet::getTransform(int index, float* m)
                 m[j] = (j % 5 == 0) ? 1 : 0;
             return;
         }
+    }
+}
+
+/**
+ * @brief removeModel removes model from physical engine
+ * @param id is 3d position index
+ */
+void bullet::removeModel(id3d id)
+{
+    while(!dynamicObjects[id].empty())
+    {
+        m_dynamicsWorld->removeRigidBody(dynamicObjects[id][dynamicObjects[id].size() - 1]);
+        delete dynamicObjects[id][dynamicObjects[id].size() - 1]->getCollisionShape();
+        delete dynamicObjects[id][dynamicObjects[id].size() - 1];
+        dynamicObjects[id].pop_back();
+    }
+    while(!staticObjects[id].empty())
+    {
+        m_dynamicsWorld->removeCollisionObject(staticObjects[id][staticObjects.size() - 1]);
+        delete staticObjects[id][staticObjects.size() - 1]->getCollisionShape();
+        delete staticObjects[id][staticObjects.size() - 1];
+        staticObjects[id].pop_back();
+    }
+    while(!staticMeshes[id].empty())
+    {
+        delete staticMeshes[id][staticMeshes.size() - 1];
+        staticMeshes[id].pop_back();
     }
 }
 

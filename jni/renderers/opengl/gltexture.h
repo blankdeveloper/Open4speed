@@ -22,7 +22,6 @@ public:
     unsigned int currentMultiFrame; ///< Replying frames state
     unsigned int multiFrame;        ///< Replying frames amount
 
-
     /**
      * @brief destruct removes texture from memory
      */

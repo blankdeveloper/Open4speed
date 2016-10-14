@@ -127,10 +127,15 @@ scene::scene(std::string filename)
         eff[i].vertices = new float[4095 * 3];
         eff[i].coords = new float[4095 * 2];
         eff[i].count = 0;
+        eff[i].frame = 0;
     }
 
     /// create instance of physical engine
-    physic->addModel(trackdata);
+    id3d id;
+    id.x = 0;
+    id.y = 0;
+    id.z = 0;
+    physic->addModel(trackdata, id);
     for (unsigned int i = 0; i < getCarCount(); i++)
         physic->addCar(getCar(i));
 
@@ -159,6 +164,12 @@ scene::~scene()
     for (std::map<std::string, texture*>::const_iterator it = textures.begin(); it != textures.end(); ++it)
         delete it->second;
     textures.clear();
+
+    for (int i = 0; i < WATER_EFF_LENGTH; i++)
+    {
+        delete[] eff[i].vertices;
+        delete[] eff[i].coords;
+    }
 
     delete physic;
     delete xrenderer;
@@ -480,9 +491,13 @@ void scene::update()
         }
 
         /// update dynamic objects
+        id3d id;
+        id.x = 0;
+        id.y = 0;
+        id.z = 0;
         for (unsigned int i = 0; i < trackdata->models.size(); i++)
             if (trackdata->models[i].dynamic)
-                physic->getTransform(trackdata->models[i].dynamicID, trackdata->models[i].dynamicMat);
+                physic->getTransform(trackdata->models[i].dynamicID, trackdata->models[i].dynamicMat, id);
 
         /// update scene
         physic->updateWorld();

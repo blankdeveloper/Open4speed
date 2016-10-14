@@ -13,8 +13,6 @@
 #else
 #include <GL/freeglut.h>
 #endif
-#include <stdlib.h>
-#include "engine/io.h"
 #include "engine/scene.h"
 #include "input/keyboard.h"
 
@@ -286,7 +284,7 @@ int main(int argc, char** argv)
     glutInitWindowSize(960,640);
     glutInitContextVersion(3,0);
     glutInitContextProfile(GLUT_CORE_PROFILE);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
+    glutInitDisplayMode(GLUT_DEPTH | GLUT_RGB);
     glutCreateWindow("Open4speed");
 
     /// set handlers

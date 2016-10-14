@@ -36,16 +36,23 @@ public:
     /**
      * @brief addModel adds model into physical model
      * @param m is 3D model for physical model
-     * @param center is model translation
+     * @param id is 3d position index
      */
-    virtual void addModel(model *m) = 0;
+    virtual void addModel(model *m, id3d id) = 0;
 
     /**
      * @brief getTransform counts OpenGL matrix of transformation
      * @param index is index of object
-     * @return transformation matrix
+     * @param m is float[16] for output
+     * @param id is 3d position index
      */
-    virtual void getTransform(int index, float* m) = 0;
+    virtual void getTransform(int index, float* m, id3d id) = 0;
+
+    /**
+     * @brief removeModel removes model from physical engine
+     * @param id is 3d position index
+     */
+    virtual void removeModel(id3d id) = 0;
 
     /**
      * @brief resetCar updates car state

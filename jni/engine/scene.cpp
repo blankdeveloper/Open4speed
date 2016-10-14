@@ -138,9 +138,6 @@ scene::scene(std::string filename)
     physic->addModel(trackdata, id);
     for (unsigned int i = 0; i < getCarCount(); i++)
         physic->addCar(getCar(i));
-
-    /// optimise level
-    trackdata->culling();
 }
 
 /**
@@ -217,14 +214,9 @@ model* scene::getModel(std::string filename)
         return models[filename];
 
     /// create new instance
-    if (strcmp(getExtension(filename).c_str(), "o4s") == 0)
-    {
-        model* instance = new model(filename, this);
-        models[filename] = instance;
-        return instance;
-    }
-    loge("File is not supported:", filename);
-    return 0;
+    model* instance = new model(filename, this);
+    models[filename] = instance;
+    return instance;
 }
 
 /**

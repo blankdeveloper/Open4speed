@@ -1,6 +1,8 @@
-import geometry.Vertex;
+import geometry.Model;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Map;
 
 
 /**
@@ -71,16 +73,21 @@ public class ObjConverter
 
     // process
     long timestamp = System.currentTimeMillis();
-    Vertex.resetStatistics();
     // load data
     ObjLoader obj = new ObjLoader(path);
     obj.loadObj(args[0]);
     obj.parseObj(args[0]);
+    // subdivide data
+    Map<String, ArrayList<Model> > models = new Subdivider().subdivide(obj.getModels());
     // write data
-    O4SWriter o4s = new O4SWriter(args[1]);
-    o4s.write(obj.getModels(), obj.getExtremes());
-    o4s.writeEdges(obj.getGraphs());
+    System.out.print("Writing output file...");
+    O4SWriter o4s = new O4SWriter();
+    o4s.writeEdges(args[1], obj.getGraphs());
+    for(String s : models.keySet())
+      o4s.write(args[1] + s, models.get(s), obj.getExtremes());
+    System.out.println("OK");
 
+    // summary
     int time = (int) ((System.currentTimeMillis() - timestamp) / 1000);
     System.out.println("Done in " + time + " seconds.");
   }

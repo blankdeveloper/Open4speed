@@ -4,7 +4,6 @@ import geometry.Graph;
 import geometry.Model;
 import geometry.Point3D;
 import geometry.Triangle;
-import geometry.Vertex;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,26 +11,17 @@ import java.util.ArrayList;
 
 public class O4SWriter
 {
-  private String outputFile;
-
-  public O4SWriter(String outputFile)
+  public void write(String outputFile, ArrayList<Model> models, String extremes)
   {
-    this.outputFile = outputFile;
-  }
-
-  public void write(ArrayList<Model> models, String extremes)
-  {
-    System.out.print("Writing output file...");
-
     // count faces
     int facesCount = 0;
-    for (int j = 1; j < models.size(); j++)
+    for (int j = 0; j < models.size(); j++)
     {
+      if(models.get(j).material.contains("(null)"))
+        continue;
       // check if current material has faces
       if (models.get(j).faces.size() > 0)
-      {
         facesCount++;
-      }
     }
 
     try
@@ -45,8 +35,10 @@ public class O4SWriter
       fos.write((facesCount + "\n").getBytes());
 
       // save all faces
-      for (int j = 1; j < models.size(); j++)
+      for (int j = 0; j < models.size(); j++)
       {
+        if(models.get(j).material.contains("(null)"))
+          continue;
         // get faces pointer for current material
         ArrayList<Triangle> faces = models.get(j).faces;
         AABB aabb = models.get(j).getAABB();
@@ -92,25 +84,9 @@ public class O4SWriter
       System.err.println("Unable to save file");
       return;
     }
-    System.out.println("OK");
-
-    // show information
-    if (models.get(0).faces.size() > 0)
-    {
-      System.out.println(models.get(0).faces.size() + " polygons weren't parsed.");
-    }
-    Vertex.printStatistics();
-
-    if (facesCount > 0)
-    {
-      System.out.println("Converted " + facesCount + " triangle objects");
-    } else
-    {
-      System.out.println("Nothing converted");
-    }
   }
 
-  public void writeEdges(ArrayList<Graph> graph)
+  public void writeEdges(String outputFile, ArrayList<Graph> graph)
   {
     // count edges
     int edgesCount = 0;
@@ -151,11 +127,6 @@ public class O4SWriter
     {
       System.err.println("Unable to save file");
       return;
-    }
-
-    if (edgesCount > 0)
-    {
-      System.out.println("Converted " + edgesCount + " edge tracks");
     }
   }
 }

@@ -357,6 +357,11 @@ void idle(int v)
             }
         }
 
+        /// update dynamic objects
+        for (unsigned int i = 0; i < trackdata->models.size(); i++)
+            if (trackdata->models[i].dynamic)
+                getPhysics()->getTransform(trackdata->models[i].dynamicID, trackdata->models[i].dynamicMat);
+
         /// update scene
         physic->updateWorld();
     }

@@ -12,8 +12,6 @@
 #include "engine/io.h"
 #include "engine/model.h"
 #include "engine/switch.h"
-#include "files/extfile.h"
-#include "files/zipfile.h"
 #include "input/keyboard.h"
 #include "physics/bullet/bullet.h"
 #include "renderers/opengl/gles20.h"
@@ -29,7 +27,6 @@ std::map<std::string, shader*> shaders;   ///< Shaders storage
 std::map<std::string, texture*> textures; ///< Textures storage
 physics *physic = 0;                      ///< Physical engine instance
 renderer *xrenderer = 0;                  ///< Renderer instance
-zip *APKArchive = 0;                      ///< Access to APK archive
 std::string shaderPath;                   ///< Path to shader files
 
 void clearMediaStorage()
@@ -92,25 +89,6 @@ unsigned int getCarCount()
 void setShaderPath(std::string path)
 {
     shaderPath = path;
-}
-
-file* getFile(std::string filename)
-{
-    filename = fixName(filename);
-    if (!APKArchive)
-    {
-        if (filename[0] == '#')
-            filename = filename.substr(1, filename.length() - 1);
-        logi("Opening file:", filename);
-        return new extfile(filename);
-    } else
-    {
-        logi("Opening file:", filename);
-        if (filename[0] == '#')
-            return new zipfile(filename.substr(1, filename.length() - 1), APKArchive);
-        else
-            return new extfile(filename);
-    }
 }
 
 /**
@@ -263,13 +241,4 @@ texture* getTexture(float r, float g, float b)
     texture* instance = new gltexture(texture::createRGB(1, 1, r, g, b));
     textures[filename] = instance;
     return instance;
-}
-
-/**
- * @brief setZip sets APK archive object
- * @param path is path of APK
- */
-void setZip(std::string path)
-{
-    APKArchive = zip_open(path.c_str(), 0, NULL);
 }

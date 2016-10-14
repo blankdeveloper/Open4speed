@@ -12,6 +12,8 @@
 
 #include <string>
 #include <vector>
+#include <zip.h>
+#include "interfaces/file.h"
 
 std::string fixName(std::string filename);
 
@@ -37,6 +39,13 @@ std::string getConfigStr(std::string item, std::vector<std::string> source);
  * @return extension as char*
  */
 std::string getExtension(std::string filename);
+
+/**
+ * @brief getFile returns instance of file reader
+ * @param filename is path to file
+ * @return instance of file
+ */
+file* getFile(std::string filename);
 
 /**
  * @brief getListEx gets list of string from script file
@@ -66,5 +75,11 @@ void logi(std::string value1, std::string value2);
  * @return number as string
  */
 std::string str(int i);
+
+/**
+ * @brief setZip sets APK archive object
+ * @param path is path of APK
+ */
+void setZip(std::string path);
 
 #endif // IO_H

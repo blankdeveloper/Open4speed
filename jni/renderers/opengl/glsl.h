@@ -11,18 +11,17 @@
 #define GLSL_H
 
 #include <string>
-#include "renderers/opengl/gles20.h"
 #include "interfaces/shader.h"
 
 class glsl : public shader
 {
 public:
-    unsigned int id;            ///< Shader id
-    GLint attribute_v_vertex;   ///< VBO vertices
-    GLint attribute_v_coord;    ///< VBO coords
-    GLint attribute_v_normal;   ///< VBO normals
-    GLuint shader_vp;           ///< Vertex shader
-    GLuint shader_fp;           ///< Fragment shader
+    unsigned int id;          ///< Shader id
+    unsigned int shader_vp;   ///< Vertex shader
+    unsigned int shader_fp;   ///< Fragment shader
+    int attribute_v_vertex;   ///< VBO vertices
+    int attribute_v_coord;    ///< VBO coords
+    int attribute_v_normal;   ///< VBO normals
 
     ~glsl();
 

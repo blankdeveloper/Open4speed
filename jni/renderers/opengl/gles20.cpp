@@ -11,32 +11,6 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "engine/io.h"
 #include "renderers/opengl/gles20.h"
-#include "engine/switch.h"
-
-/**
- * @brief gles20 destructor
- */
-gles20::~gles20()
-{
-    if (rboID)
-    {
-        glDeleteRenderbuffers(2, rboID);
-        delete[] rboID;
-        rboID = 0;
-    }
-    if (fboID)
-    {
-        glDeleteFramebuffers(2, fboID);
-        delete[] fboID;
-        fboID = 0;
-    }
-    if (rendertexture)
-    {
-        glDeleteTextures(2, rendertexture);
-        delete[] rendertexture;
-        rendertexture = 0;
-    }
-}
 
 /**
  * @brief gles20 constructor
@@ -49,12 +23,59 @@ gles20::gles20()
         enable[i] = true;
     aliasing = 1;
     oddFrame = true;
+
+    fboID = 0;
+    rboID = 0;
+    rendertexture = 0;
+    scene = 0;
+    shadow = 0;
+}
+
+/**
+ * @brief gles20 destructor
+ */
+gles20::~gles20()
+{
+    cleanup();
+}
+
+void gles20::cleanup()
+{
+    if (fboID)
+    {
+        glDeleteFramebuffers(2, fboID);
+        delete[] fboID;
+        fboID = 0;
+    }
+    if (rboID)
+    {
+        glDeleteRenderbuffers(2, rboID);
+        delete[] rboID;
+        rboID = 0;
+    }
+    if (rendertexture)
+    {
+        glDeleteTextures(2, rendertexture);
+        delete[] rendertexture;
+        rendertexture = 0;
+    }
+    if (scene)
+    {
+        delete scene;
+        scene = 0;
+    }
+    if (shadow)
+    {
+        delete[] shadow;
+        shadow = 0;
+    }
 }
 
 void gles20::init(int w, int h)
 {
     width = w;
     height = h;
+    cleanup();
 
     //find ideal texture resolution
     int resolution = 2;
@@ -124,8 +145,8 @@ void gles20::init(int w, int h)
     glActiveTexture( GL_TEXTURE0 );
 
     //set shaders
-    scene = getShader("scene");
-    shadow = getShader("shadow");
+    scene = new glsl(getList("VERT", "#assets/shaders/scene.glsl"), getList("FRAG", "#assets/shaders/scene.glsl"));
+    shadow = new glsl(getList("VERT", "#assets/shaders/shadow.glsl"), getList("FRAG", "#assets/shaders/shadow.glsl"));
 }
 
 /**
@@ -276,8 +297,6 @@ void gles20::renderSubModel(model3d *m)
     glm::mat4x4 modelView;
     if (m->dynamic)
     {
-        float mat[16];
-        getPhysics()->getTransform(m->dynamicID, mat);
         float w = m->reg.max.x - m->reg.min.x;
         float a = m->reg.max.y - m->reg.min.y;
         float h = m->reg.max.z - m->reg.min.z;
@@ -288,10 +307,10 @@ void gles20::renderSubModel(model3d *m)
             -w/2, -a/2, -h/2, 1
         );
         glm::mat4x4 dynamic(
-            mat[0],mat[1],mat[2],mat[3],
-            mat[4],mat[5],mat[6],mat[7],
-            mat[8],mat[9],mat[10],mat[11],
-            mat[12],mat[13],mat[14],mat[15]
+            m->dynamicMat[0], m->dynamicMat[1], m->dynamicMat[2], m->dynamicMat[3],
+            m->dynamicMat[4], m->dynamicMat[5], m->dynamicMat[6], m->dynamicMat[7],
+            m->dynamicMat[8], m->dynamicMat[9], m->dynamicMat[10], m->dynamicMat[11],
+            m->dynamicMat[12], m->dynamicMat[13], m->dynamicMat[14], m->dynamicMat[15]
         );
         modelMat = dynamic * translation;
         modelView = view_matrix * modelMat;

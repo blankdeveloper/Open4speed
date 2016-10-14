@@ -10,7 +10,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "engine/io.h"
-#include "engine/switch.h"
+#include "files/extfile.h"
+#include "files/zipfile.h"
 
 #ifdef ANDROID
 #include <android/log.h>
@@ -18,6 +19,7 @@
 #define LOG_TAG    __FILE__ ":" STRINGIFY(__LINE__)
 #endif
 
+zip *APKArchive = 0;                  ///< Access to APK archive
 std::vector<std::string> imports;     ///< Config data list
 
 
@@ -102,6 +104,25 @@ std::string getExtension(std::string filename)
        }
    }
    return std::string();
+}
+
+file* getFile(std::string filename)
+{
+    filename = fixName(filename);
+    if (!APKArchive)
+    {
+        if (filename[0] == '#')
+            filename = filename.substr(1, filename.length() - 1);
+        logi("Opening file:", filename);
+        return new extfile(filename);
+    } else
+    {
+        logi("Opening file:", filename);
+        if (filename[0] == '#')
+            return new zipfile(filename.substr(1, filename.length() - 1), APKArchive);
+        else
+            return new extfile(filename);
+    }
 }
 
 /**
@@ -234,4 +255,13 @@ std::string str(int i)
       }
       return '-' + output;
   }
+}
+
+/**
+ * @brief setZip sets APK archive object
+ * @param path is path of APK
+ */
+void setZip(std::string path)
+{
+    APKArchive = zip_open(path.c_str(), 0, NULL);
 }

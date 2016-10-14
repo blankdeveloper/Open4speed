@@ -36,7 +36,8 @@ struct model3d
     int filter;                  ///< filter index
     shader* material;            ///< shader to use
     bool dynamic;                ///< True if object is dynamic
-    int dynamicID;               ///< ID of the last dynamic update
+    int dynamicID;               ///< ID of the dynamic object
+    float dynamicMat[16];        ///< Model matrix of dynamic object
     AABB reg;                    ///< AABB of the object
     texture* texture2D;          ///< Object texture
     std::vector<float> vertices; ///< Object vertices

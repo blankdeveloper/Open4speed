@@ -12,9 +12,7 @@
 #define SWITCH_H
 
 #include <string>
-#include <zip.h>
 #include "engine/model.h"
-#include "interfaces/file.h"
 #include "interfaces/input.h"
 #include "interfaces/physics.h"
 #include "interfaces/renderer.h"
@@ -47,8 +45,6 @@ unsigned int getCarCount();
  * @param path is relative path to runable file
  */
 void setShaderPath(std::string path);
-
-file* getFile(std::string filename);
 
 /**
  * @brief getInput gets input controller
@@ -97,11 +93,5 @@ texture* getTexture(std::string filename);
  * @return texture instance
  */
 texture* getTexture(float r, float g, float b);
-
-/**
- * @brief setZip sets APK archive object
- * @param path is path of APK
- */
-void setZip(std::string path);
 
 #endif // SWITCH_H

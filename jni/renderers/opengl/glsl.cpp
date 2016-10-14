@@ -9,6 +9,7 @@
 
 #include <stdint.h>
 #include "engine/io.h"
+#include "renderers/opengl/gles20.h"
 #include "renderers/opengl/glsl.h"
 
 const std::string header = "#version 100\nprecision highp float;\n";      ///< Shader header

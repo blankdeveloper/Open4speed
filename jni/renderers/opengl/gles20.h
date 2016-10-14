@@ -21,6 +21,7 @@
 #endif
 #include <vector>
 #include "interfaces/renderer.h"
+#include "renderers/opengl/glsl.h"
 
 /**
  * @brief The gles20 class is implementation of OpenGL ES 2.0
@@ -30,8 +31,8 @@ class gles20 : public renderer
 public:
     GLuint gpuMeasuring[1];               ///< Profiling
     shader* current;                      ///< Current binded shader
-    shader* scene;                        ///< Scene shader
-    shader* shadow;                       ///< Special shader for shadow
+    glsl* scene;                          ///< Scene shader
+    glsl* shadow;                         ///< Special shader for shadow
     bool oddFrame;                        ///< Odd frame info
     bool rttComplete;                     ///< Information if fbo is complete
     unsigned int* rendertexture;          ///< Texture for color buffer
@@ -39,14 +40,14 @@ public:
     unsigned int* rboID;                  ///< Render buffer object id
 
     /**
-     * @brief gles20 destructor
-     */
-    ~gles20();
-
-    /**
      * @brief gles20 constructor
      */
     gles20();
+
+    /**
+     * @brief gles20 destructor
+     */
+    ~gles20();
 
     void init(int w, int h);
 
@@ -82,6 +83,9 @@ public:
      * @param enable is true to start drawing, false to render on screen
      */
     void rtt(bool enable);
+
+private:
+    void cleanup();
 };
 
 #endif // GLES20_H

@@ -9,8 +9,6 @@
 
 #include "engine/io.h"
 #include "engine/model.h"
-#include "engine/switch.h"
-
 
 //http://stackoverflow.com/questions/23880160/stdmap-key-no-match-for-operator
 bool operator<(const id3d& lhs, const id3d& rhs)
@@ -29,8 +27,9 @@ model::~model()
 /**
  * @brief Constructor for loading model from file
  * @param filename is path and name of file to load
+ * @param mtlLoader is instance of object for loading materials
  */
-model::model(std::string filename)
+model::model(std::string filename, materialLoader* mtlLoader)
 {
     /// open file
     file* f = getFile(filename);
@@ -65,19 +64,19 @@ model::model(std::string filename)
 
         /// if texture is not only single color then load it
         if((texturePath[0] != '*') && (texturePath[0] != '('))
-            m.texture2D = getTexture(f->path() + texturePath);
+            m.texture2D = mtlLoader->getTexture(f->path() + texturePath);
         /// create color texture
         else
-            m.texture2D = getTexture(colord[0], colord[1], colord[2]);
+            m.texture2D = mtlLoader->getTexture(colord[0], colord[1], colord[2]);
 
         int cursor = 0;
         m.dynamic = false;
         m.filter = 0;
         m.touchable = false;
         if (m.texture2D->transparent)
-            m.material = getShader("standart_alpha");
+            m.material = mtlLoader->getShader("standart_alpha");
         else
-            m.material = getShader("standart");
+            m.material = mtlLoader->getShader("standart");
 
         /// get material parameters
         while(true)
@@ -110,7 +109,7 @@ model::model(std::string filename)
                     }
                 }
                 shadername[strlen(material) - cursor] = '\000';
-                m.material = getShader(shadername);
+                m.material = mtlLoader->getShader(shadername);
                 delete[] shadername;
                 break;
             } else

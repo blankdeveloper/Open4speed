@@ -27,9 +27,18 @@ public:
     int width;           ///< Screen width
     int height;          ///< Screen height
 
+    /**
+     * @brief renderer destructor
+     */
     virtual ~renderer() {}
 
-    virtual void init(int w, int h) = 0;
+    /**
+     * @brief init inits renderer
+     * @param w is screen width
+     * @param h is screen height
+     * @param a is screen aliasing(reducing resolution)
+     */
+    virtual void init(int w, int h, float a) = 0;
 
     /**
      * @brief renderDynamic render dynamic objects

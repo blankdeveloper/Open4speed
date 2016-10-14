@@ -29,7 +29,7 @@ SOURCES += \
     engine/math.cpp \
     engine/matrices.cpp \
     engine/model.cpp \
-    engine/switch.cpp \
+    engine/scene.cpp \
     files/extfile.cpp \
     files/zipfile.cpp \
     input/airacer.cpp \
@@ -45,13 +45,14 @@ HEADERS += \
     engine/math.h \
     engine/matrices.h \
     engine/model.h \
-    engine/switch.h \
+    engine/scene.h \
     files/extfile.h \
     files/zipfile.h \
     input/airacer.h \
     input/keyboard.h \
     interfaces/file.h \
     interfaces/input.h \
+    interfaces/materialLoader.h \
     interfaces/physics.h \
     interfaces/renderer.h \
     interfaces/shader.h \

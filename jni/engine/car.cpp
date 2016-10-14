@@ -10,7 +10,6 @@
 
 #include "engine/car.h"
 #include "engine/io.h"
-#include "engine/switch.h"
 
 #define PERSPECTIVE_MIN 90
 #define PERSPECTIVE_MAX 150
@@ -27,12 +26,17 @@
  * @param i is car control device(or program)
  * @param e is curve which car may take on
  * @param filename is path to file to load
- * @param automatic is true for automatic transmision
+ * @param skin is car skin model
+ * @param wheel is car wheel model
  */
-car::car(input *i, std::vector<edge> *e, std::string filename)
+car::car(input *i, std::vector<edge> *e, std::string filename, model* skin, model* wheel)
 {
     /// get car atributes
     std::vector<std::string> atributes = getList("", filename);
+
+    /// get models
+    this->skin = skin;
+    this->wheel = wheel;
 
     /// set default values
     n2o = 150;
@@ -57,13 +61,6 @@ car::car(input *i, std::vector<edge> *e, std::string filename)
         for (int j = 0; j < 16; j++)
             transform[i].value[j] = j % 5 == 0 ? 1 : 0;
     }
-
-    /// apply index of car
-    index = getCarCount() + 1;
-
-    /// load models
-    skin = getModel(getConfigStr("skin_model", atributes));
-    wheel = getModel(getConfigStr("wheel_model", atributes));
 
     /// set car wheels position
     wheelX = getConfig("wheel_x", atributes);
@@ -98,7 +95,8 @@ car::car(input *i, std::vector<edge> *e, std::string filename)
  */
 car::~car()
 {
-    delete control;
+    if (control)
+        delete control;
     for (int i = 0; i < 5; i++)
         delete[] transform[i].value;
     delete[] transform;
@@ -168,8 +166,9 @@ void car::setStart(edge e, float sidemove)
 
 /**
  * @brief update updates car wheels state(rotation and steering)
+ * @param dst2camera is distance to camera in meters
  */
-void car::update()
+void car::update(float dst2camera)
 {
     /// count speed
     lspeed = speed;
@@ -285,7 +284,7 @@ void car::update()
     sndRate = sndRate / 50000.0f + 0.2f;
 
     /// set sound distance
-    sndDist =  1 / (distance(getCar(0)->pos, pos) / SOUND_MAXIMAL_DISTANCE + 1);
+    sndDist =  1 / (dst2camera / SOUND_MAXIMAL_DISTANCE + 1);
     if (sndDist < 0)
         sndDist = 0;
     sndDist *= sndDist;

@@ -49,7 +49,13 @@ public:
      */
     ~gles20();
 
-    void init(int w, int h);
+    /**
+     * @brief init inits renderer
+     * @param w is screen width
+     * @param h is screen height
+     * @param a is screen aliasing(reducing resolution)
+     */
+    void init(int w, int h, float a);
 
     /**
      * @brief renderDynamic render dynamic objects

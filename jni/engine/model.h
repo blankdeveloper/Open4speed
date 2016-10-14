@@ -13,8 +13,7 @@
 #include <map>
 #include <string>
 #include "engine/math.h"
-#include "interfaces/shader.h"
-#include "interfaces/texture.h"
+#include "interfaces/materialLoader.h"
 
 #define CULLING_DST 100
 
@@ -46,12 +45,11 @@ struct model3d
 };
 
 /**
- * @brief The model interface
+ * @brief The model class
  */
 class model
 {
 public:
-
     /**
      * @brief model destructor
      */
@@ -60,8 +58,9 @@ public:
     /**
      * @brief Constructor for loading model from file
      * @param filename is path and name of file to load
+     * @param mtlLoader is instance of object for loading materials
      */
-    model(std::string filename);
+    model(std::string filename, materialLoader* mtlLoader);
 
     void culling();
 

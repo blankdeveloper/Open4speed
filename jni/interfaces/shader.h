@@ -37,8 +37,6 @@ public:
      */
     virtual void bind() = 0;
 
-    virtual bool hasAttrib(int i) = 0;
-
     /**
      * @brief it unbinds shader
      */

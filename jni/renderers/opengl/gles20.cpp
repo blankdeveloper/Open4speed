@@ -12,6 +12,11 @@
 #include "engine/io.h"
 #include "renderers/opengl/gles20.h"
 
+#ifdef ANDROID
+#define PACKED_EXTENSION "GL_OES_packed_depth_stencil"
+#define PACKED_EXT GL_DEPTH24_STENCIL8_OES
+#endif
+
 /**
  * @brief gles20 constructor
  */
@@ -21,7 +26,6 @@ gles20::gles20()
     /// set default values
     for (int i = 0; i < 10; i++)
         enable[i] = true;
-    aliasing = 1;
     oddFrame = true;
 
     fboID = 0;
@@ -71,8 +75,15 @@ void gles20::cleanup()
     }
 }
 
-void gles20::init(int w, int h)
+/**
+ * @brief init inits renderer
+ * @param w is screen width
+ * @param h is screen height
+ * @param a is screen aliasing(reducing resolution)
+ */
+void gles20::init(int w, int h, float a)
 {
+    aliasing = a;
     width = w;
     height = h;
     cleanup();

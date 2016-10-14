@@ -51,8 +51,6 @@ public:
      */
     void bind();
 
-    bool hasAttrib(int i);
-
     /**
      * @brief initShader creates shader from code
      * @param vs is vertex shader code

@@ -65,7 +65,6 @@ public:
     float prevEffect;                                                     ///< Previous smoke effect intensity
     float sndCrash, sndDist, sndEngine1, sndEngine2, sndN2O, sndRate;     ///< Sound status
 
-
     /**
      * @brief car destructor
      */
@@ -76,9 +75,10 @@ public:
      * @param i is car control device(or program)
      * @param e is curve which car may take on
      * @param filename is path to file to load
-     * @param automatic is true for automatic transmision
+     * @param skin is car skin model
+     * @param wheel is car wheel model
      */
-    car(input *i, std::vector<edge> *e, std::string filename);
+    car(input *i, std::vector<edge> *e, std::string filename, model* skin, model* wheel);
 
     /**
      * @brief getView gets perspective view of car
@@ -94,8 +94,9 @@ public:
 
     /**
      * @brief update updates car wheels state(rotation and steering)
+     * @param dst2camera is distance to camera in meters
      */
-    void update();
+    void update(float dst2camera);
 };
 
 #endif // CAR_H

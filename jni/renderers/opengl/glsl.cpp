@@ -12,8 +12,6 @@
 #include "renderers/opengl/gles20.h"
 #include "renderers/opengl/glsl.h"
 
-const std::string header = "#version 100\nprecision highp float;\n";      ///< Shader header
-
 glsl::~glsl()
 {
     glDetachShader(id, shader_vp);
@@ -32,6 +30,7 @@ glsl::~glsl()
 glsl::glsl(std::vector<std::string> vert, std::vector<std::string> frag)
 {
     /// convert vertex shader source code
+    std::string header = "#version 100\nprecision highp float;\n";
     int size = header.length();
     for (unsigned int i = 0; i < vert.size(); i++)
         size += vert[i].length() + 2;
@@ -116,17 +115,6 @@ void glsl::bind()
         glEnableVertexAttribArray(attribute_v_normal);
     if (attribute_v_coord != -1)
         glEnableVertexAttribArray(attribute_v_coord);
-}
-
-bool glsl::hasAttrib(int i)
-{
-    if ((i == 0) && (attribute_v_vertex == -1))
-        return false;
-    if ((i == 1) && (attribute_v_normal == -1))
-        return false;
-    if ((i == 2) && (attribute_v_coord == -1))
-        return false;
-    return true;
 }
 
 /**

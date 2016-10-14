@@ -10,7 +10,7 @@
 #include "engine/io.h"
 #include "files/zipfile.h"
 
-zip_file* zipf;
+zip_file* zipf = 0;
 
 zipfile::zipfile(std::string filename, zip* archive)
 {
@@ -27,6 +27,24 @@ zipfile::~zipfile()
 void zipfile::accessStatic()
 {
   zipf = f;
+}
+
+/**
+ * @brief exists detects if file exists
+ * @param name is path to file
+ * @param archive is zip file instance
+ * @return true if file exists
+ */
+bool zipfile::exists(const std::string& name, zip* archive)
+{
+    if (!archive)
+        return false;
+    if (zip_file *file = zip_fopen(archive, name.c_str(), 0))
+    {
+        zip_fclose(file);
+        return true;
+    } else
+        return false;
 }
 
 /**

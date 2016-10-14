@@ -25,6 +25,14 @@ public:
     void accessStatic();
 
     /**
+     * @brief exists detects if file exists
+     * @param name is path to file
+     * @param archive is zip file instance
+     * @return true if file exists
+     */
+    static bool exists(const std::string& name, zip* archive);
+
+    /**
      * @brief gets custom implementation of syntax fgets
      * @param line is data to read
      */

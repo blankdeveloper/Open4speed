@@ -63,7 +63,6 @@ public:
     model(std::string filename, materialLoader* mtlLoader);
 
     std::vector<model3d> models;               ///< Standard parts of model
-    std::map<id3d, std::vector<model3d> > v3d; ///< Models with culling
     AABB aabb;                                 ///< Extremes of current model
 };
 

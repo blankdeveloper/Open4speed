@@ -29,6 +29,21 @@ void extfile::accessStatic()
 }
 
 /**
+ * @brief exists detects if file exists
+ * @param name is path to file
+ * @return true if file exists
+ */
+bool extfile::exists(const std::string& name)
+{
+    if (FILE *file = fopen(name.c_str(), "r"))
+    {
+        fclose(file);
+        return true;
+    } else
+        return false;
+}
+
+/**
  * @brief gets custom implementation of syntax fgets
  * @param line is data to read
  */

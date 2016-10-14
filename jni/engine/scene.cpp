@@ -36,7 +36,11 @@ scene::scene(std::string filename)
     direction = 0;
     std::vector<std::string> atributes = getList("", filename);
     shaderPath = p + getConfigStr("shaders", atributes);
-    trackdata = getModel(p + getConfigStr("track_model", atributes));
+    std::string trackPath = p + getConfigStr("track_model", atributes);
+    if (fileExists(trackPath))
+        trackdata = getModel(trackPath);
+    else
+        trackdata = 0;
     viewDistance = getConfig("view_distance", atributes);
     if (viewDistance == 0)
         viewDistance = 500;
@@ -135,7 +139,8 @@ scene::scene(std::string filename)
     id.x = 0;
     id.y = 0;
     id.z = 0;
-    physic->addModel(trackdata, id);
+    if (trackdata)
+        physic->addModel(trackdata, id);
     for (unsigned int i = 0; i < getCarCount(); i++)
         physic->addCar(getCar(i));
 }
@@ -379,7 +384,8 @@ void scene::render(int cameraCar)
 
     /// render track
     xrenderer->enable[1] = false;
-    xrenderer->renderModel(trackdata);
+    if (trackdata)
+        xrenderer->renderModel(trackdata);
 
     /// render cars
     xrenderer->enable[2] = false;
@@ -487,9 +493,10 @@ void scene::update()
         id.x = 0;
         id.y = 0;
         id.z = 0;
-        for (unsigned int i = 0; i < trackdata->models.size(); i++)
-            if (trackdata->models[i].dynamic)
-                physic->getTransform(trackdata->models[i].dynamicID, trackdata->models[i].dynamicMat, id);
+        if (trackdata)
+            for (unsigned int i = 0; i < trackdata->models.size(); i++)
+                if (trackdata->models[i].dynamic)
+                    physic->getTransform(trackdata->models[i].dynamicID, trackdata->models[i].dynamicMat, id);
 
         /// update scene
         physic->updateWorld();

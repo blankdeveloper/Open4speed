@@ -199,7 +199,7 @@ void gles20::renderDynamic(float* vertices, float* normals, float* coords, shade
 void gles20::renderModel(model* m)
 {
     // culled model
-    if (!m->v3d.empty())
+    /*if (!m->v3d.empty())
     {
         id3d id;
         int steps = 2;
@@ -226,22 +226,21 @@ void gles20::renderModel(model* m)
                                 current->unbind();
                             }
                 }
-    }
+    }*/
 
     /// set opengl for rendering models
     for (unsigned int i = 0; i < m->models.size(); i++)
         if (enable[m->models[i].filter] && !m->models[i].touchable)
-            if(m->models[i].dynamic || m->v3d.empty())
-            {
-                current = m->models[i].material;
-                current->bind();
-                if (m->models[i].texture2D->transparent)
-                    glDisable(GL_CULL_FACE);
-                else
-                    glEnable(GL_CULL_FACE);
-                renderSubModel(&m->models[i]);
-                current->unbind();
-            }
+        {
+            current = m->models[i].material;
+            current->bind();
+            if (m->models[i].texture2D->transparent)
+                glDisable(GL_CULL_FACE);
+            else
+                glEnable(GL_CULL_FACE);
+            renderSubModel(&m->models[i]);
+            current->unbind();
+        }
     glEnable(GL_CULL_FACE);
 }
 
@@ -252,7 +251,7 @@ void gles20::renderModel(model* m)
  */
 void gles20::renderShadow(model* m)
 {
-    if (!rttComplete || !m->v3d.empty())
+    if (!rttComplete)
         return;
 
     glDepthMask(false);

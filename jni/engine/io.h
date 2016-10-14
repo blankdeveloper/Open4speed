@@ -16,6 +16,12 @@
 #include "interfaces/file.h"
 
 std::string fixName(std::string filename);
+/**
+ * @brief fileExists check if file exists
+ * @param filename is path to file
+ * @return true if file exists
+ */
+bool fileExists(std::string filename);
 
 /**
  * @brief getConfig gets config value from file

@@ -22,7 +22,6 @@
 zip *APKArchive = 0;                  ///< Access to APK archive
 std::vector<std::string> imports;     ///< Config data list
 
-
 std::string fixName(std::string filename)
 {
     int index = 0;
@@ -44,6 +43,25 @@ std::string fixName(std::string filename)
             }
         }
         return filename;
+    }
+}
+
+/**
+ * @brief fileExists check if file exists
+ * @param filename is path to file
+ * @return true if file exists
+ */
+bool fileExists(std::string filename)
+{
+    filename = fixName(filename);
+    if (!APKArchive)
+        return extfile::exists(filename);
+    else
+    {
+        if (filename[0] == '#')
+            return zipfile::exists(filename.substr(1, filename.length() - 1), APKArchive);
+        else
+            return extfile::exists(filename);
     }
 }
 

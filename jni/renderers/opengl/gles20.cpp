@@ -198,36 +198,6 @@ void gles20::renderDynamic(float* vertices, float* normals, float* coords, shade
  */
 void gles20::renderModel(model* m)
 {
-    // culled model
-    /*if (!m->v3d.empty())
-    {
-        id3d id;
-        int steps = 2;
-        int cx = camera.x / CULLING_DST;
-        int cy = camera.y / CULLING_DST;
-        int cz = camera.z / CULLING_DST;
-        for (id.x = cx - steps; id.x <= cx + steps; id.x++)
-            for (id.y = cy - steps; id.y <= cy + steps; id.y++)
-                for (id.z = cz - steps; id.z <= cz + steps; id.z++)
-                {
-                    glm::vec3 part = glm::vec3(id.x - cx, id.y - cy, id.z - cz);
-                    if ((glm::dot(part, direction) > -0.005f) ||
-                        (fabs(part.x) < 1.5f) || (fabs(part.x) < 1.5f) || (fabs(part.x) < 1.5f))
-                        if (m->v3d.find(id) != m->v3d.end())
-                            for (unsigned int i = 0; i < m->v3d[id].size(); i++)
-                            {
-                                current = m->v3d[id][i].material;
-                                current->bind();
-                                if (m->v3d[id][i].texture2D->transparent)
-                                    glDisable(GL_CULL_FACE);
-                                else
-                                    glEnable(GL_CULL_FACE);
-                                renderSubModel(&m->v3d[id][i]);
-                                current->unbind();
-                            }
-                }
-    }*/
-
     /// set opengl for rendering models
     for (unsigned int i = 0; i < m->models.size(); i++)
         if (enable[m->models[i].filter] && !m->models[i].touchable)

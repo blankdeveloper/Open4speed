@@ -85,8 +85,6 @@ public:
     void translate(float x, float y, float z);
 
 protected:
-    glm::vec3 camera;                     ///< Camera position
-    glm::vec3 direction;                  ///< Camera direction
     glm::mat4x4 matrix;                   ///< Matrix for dynamic rendering
     glm::mat4x4 modelMat;                 ///< Model matrix
     glm::mat4x4 matrix_result;            ///< Temp matrix for calculations

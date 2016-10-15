@@ -33,10 +33,10 @@ scene::scene(std::string filename)
     std::string p = f->path();
     delete f;
     currentFrame = 0;
-    direction = 0;
+    directionY = 0;
     std::vector<std::string> atributes = getList("", filename);
     shaderPath = p + getConfigStr("shaders", atributes);
-    std::string trackPath = p + getConfigStr("track_model", atributes);
+    trackPath = p + getConfigStr("track_model", atributes);
     if (fileExists(trackPath))
         trackdata = getModel(trackPath);
     else
@@ -334,50 +334,12 @@ void scene::initRenderer(int w, int h, float a)
  */
 void scene::render(int cameraCar)
 {
-    /// update camera direction
-    if (direction * 180 / 3.14 - getCar(cameraCar)->rot > 180)
-        direction -= 6.28;
-    else if (direction * 180 / 3.14 - getCar(cameraCar)->rot < -180)
-        direction += 6.28;
-    float g = getCar(cameraCar)->rot * 3.14 / 180.0 - direction;
-    if (physic->active)
-    {
-        if (getCar(cameraCar)->control->getDistance() < 0)
-            direction += g / 2.0;
-        else
-            direction += g / 15.0;
-    } else
-    {
-        direction += 0.01;
-        if (direction > 6.28)
-            direction -= 6.28;
-    }
-
-    /// fix camera direction
-    int rot = getCar(cameraCar)->rot * 1000;
-    rot += 720 * 1000;
-    rot = rot % 360000;
-    getCar(cameraCar)->rot = rot / 1000.0f;
-
-    float view = getCar(cameraCar)->getView();
+    setCamera(cameraCar);
     xrenderer->rtt(true);
-    /// set camera
-    xrenderer->perspective(view, aspect, 0.5, viewDistance);
-    xrenderer->pushMatrix();
-    float cameraX = getCar(cameraCar)->transform->value[12];
-    float cameraY = getCar(cameraCar)->transform->value[13];
-    float cameraZ = getCar(cameraCar)->transform->value[14];
-    //need for speed style
-    cameraX -= sin(direction) * getCar(cameraCar)->control->getDistance() * 2.5f / (view / 90);
-    cameraY += fmax(1.0, getCar(cameraCar)->control->getDistance()) / (view / 90);
-    cameraZ -= cos(direction) * getCar(cameraCar)->control->getDistance() * 2.5f / (view / 90);
-    xrenderer->lookAt(glm::vec3(cameraX - sin(direction) * 0.1f, cameraY + 0.5f, cameraZ - cos(direction) * 0.1f),
-                      glm::vec3(cameraX + sin(direction) * 100.0f, cameraY, cameraZ + cos(direction) * 100.0f),
-                      glm::vec3(0, 1, 0));
 
     /// render skydome
     xrenderer->pushMatrix();
-    xrenderer->translate(cameraX, cameraY - 50, cameraZ);
+    xrenderer->translate(camera.x, camera.y - 50, camera.z);
     xrenderer->scale(viewDistance * 2 - 50);
     xrenderer->renderModel(skydome);
     xrenderer->popMatrix();
@@ -506,7 +468,7 @@ void scene::update()
     eff[currentFrame].count = 0;
     for (int i = getCarCount() - 1; i >= 0; i--)
     {
-        float g = getCar(i)->rot * 3.14 / 180.0 - direction;
+        float g = getCar(i)->rot * 3.14 / 180.0 - directionY;
         float effect = fabs(getCar(i)->speed) * fabs(getCar(i)->speed * (g + getCar(i)->control->getBrake() * 5.0)) * 0.001f;
         effect = fmax(effect, effect * 0.05 + getCar(i)->prevEffect * 0.95);
         getCar(i)->prevEffect = effect;
@@ -538,4 +500,77 @@ void scene::update()
     currentFrame++;
     if (currentFrame >= WATER_EFF_LENGTH)
         currentFrame = 0;
+}
+
+/**
+ * @brief getVisibility returns ids for culled scene
+ * @param directional is true to return parts in direction only
+ * @return ids of culled scene
+ */
+std::vector<id3d> scene::getVisibility(bool directional)
+{
+    std::vector<id3d> output;
+    id3d id;
+    int steps = 2;
+    int cx = camera.x / CULLING_DST;
+    int cy = camera.y / CULLING_DST;
+    int cz = camera.z / CULLING_DST;
+    for (id.x = cx - steps; id.x <= cx + steps; id.x++)
+        for (id.y = cy - steps; id.y <= cy + steps; id.y++)
+            for (id.z = cz - steps; id.z <= cz + steps; id.z++)
+            {
+                glm::vec3 part = glm::vec3(id.x - cx, id.y - cy, id.z - cz);
+                if ((glm::dot(part, direction) > -0.005f) || !directional ||
+                    (fabs(part.x) < 1.5f) || (fabs(part.x) < 1.5f) || (fabs(part.x) < 1.5f))
+                        output.push_back(id);
+            }
+    return output;
+}
+
+/**
+ * @brief setCamera sets camera in scene by car
+ * @param cameraCar is index of car which should be traced by camera
+ */
+void scene::setCamera(int cameraCar)
+{
+    /// update camera direction
+    if (directionY * 180 / 3.14 - getCar(cameraCar)->rot > 180)
+        directionY -= 6.28;
+    else if (directionY * 180 / 3.14 - getCar(cameraCar)->rot < -180)
+        directionY += 6.28;
+    float g = getCar(cameraCar)->rot * 3.14 / 180.0 - directionY;
+    if (physic->active)
+    {
+        if (getCar(cameraCar)->control->getDistance() < 0)
+            directionY += g / 2.0;
+        else
+            directionY += g / 15.0;
+    } else
+    {
+        directionY += 0.01;
+        if (directionY > 6.28)
+            directionY -= 6.28;
+    }
+
+    /// fix camera direction
+    int rot = getCar(cameraCar)->rot * 1000;
+    rot += 720 * 1000;
+    rot = rot % 360000;
+    getCar(cameraCar)->rot = rot / 1000.0f;
+
+    /// set camera
+    float view = getCar(cameraCar)->getView();
+    xrenderer->perspective(view, aspect, 0.5, viewDistance);
+    xrenderer->pushMatrix();
+    float x = getCar(cameraCar)->transform->value[12];
+    float y = getCar(cameraCar)->transform->value[13];
+    float z = getCar(cameraCar)->transform->value[14];
+    //need for speed style
+    x -= sin(directionY) * getCar(cameraCar)->control->getDistance() * 2.5f / (view / 90);
+    y += fmax(1.0, getCar(cameraCar)->control->getDistance()) / (view / 90);
+    z -= cos(directionY) * getCar(cameraCar)->control->getDistance() * 2.5f / (view / 90);
+    glm::vec3 center = glm::vec3(x + sin(directionY) * 100.0f, y, z + cos(directionY) * 100.0f);
+    camera = glm::vec3(x - sin(directionY) * 0.1f, y + 0.5f, z - cos(directionY) * 0.1f);
+    xrenderer->lookAt(camera, center, glm::vec3(0, 1, 0));
+    direction = glm::normalize(center - camera);
 }

@@ -19,8 +19,6 @@
  */
 void matrices::lookAt(glm::vec3 eye, glm::vec3 center, glm::vec3 up)
 {
-    camera = eye;
-    direction = glm::normalize(center - eye);
     view_matrix = glm::lookAt(eye, center, up);
     matrix_result = glm::mat4x4(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1);
 }

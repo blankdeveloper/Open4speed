@@ -55,7 +55,11 @@ bool fileExists(std::string filename)
 {
     filename = fixName(filename);
     if (!APKArchive)
+    {
+        if (filename[0] == '#')
+            filename = filename.substr(1, filename.length() - 1);
         return extfile::exists(filename);
+    }
     else
     {
         if (filename[0] == '#')

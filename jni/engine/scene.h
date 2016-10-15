@@ -127,6 +127,20 @@ public:
     void update();
 
 private:
+
+    /**
+     * @brief getVisibility returns ids for culled scene
+     * @param directional is true to return parts in direction only
+     * @return ids of culled scene
+     */
+    std::vector<id3d> getVisibility(bool directional);
+
+    /**
+     * @brief setCamera sets camera in scene by car
+     * @param cameraCar is index of car which should be traced by camera
+     */
+    void setCamera(int cameraCar);
+
     /**
      * @brief The game resources
      */
@@ -144,12 +158,15 @@ private:
      */
     float aspect;                             ///< Screen aspect
     int currentFrame;                         ///< Frame index
-    float direction;                          ///< Camera direction
+    float directionY;                         ///< Camera direction
     int viewDistance;                         ///< Camera view distance
+    glm::vec3 camera;                         ///< Camera position
+    glm::vec3 direction;                      ///< Camera direction
     model *skydome;                           ///< Skydome model
     model *trackdata;                         ///< Track first model
     model *water;                             ///< Water effect model
     Dynamic eff[WATER_EFF_LENGTH];            ///< 3D water effect object
+    std::string trackPath;                    ///< Path to 3D model
 };
 
 #endif // SWITCH_H

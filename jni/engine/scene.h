@@ -11,6 +11,7 @@
 #define SWITCH_H
 
 #include <string>
+#include "engine/io.h"
 #include "engine/model.h"
 #include "interfaces/input.h"
 #include "interfaces/materialLoader.h"
@@ -136,6 +137,13 @@ private:
     std::vector<id3d> getVisibility(bool directional);
 
     /**
+     * @brief id2str converts id into file
+     * @param id is id coordinate to convert
+     * @return filename of model
+     */
+    std::string id2str(id3d id) { return trackPath + "." + str(id.x) + "." + str(id.y) + "." + str(id.z); }
+
+    /**
      * @brief setCamera sets camera in scene by car
      * @param cameraCar is index of car which should be traced by camera
      */
@@ -167,6 +175,7 @@ private:
     model *water;                             ///< Water effect model
     Dynamic eff[WATER_EFF_LENGTH];            ///< 3D water effect object
     std::string trackPath;                    ///< Path to 3D model
+    std::map<id3d, model*> trackdataCulled;   ///< Culled track model
 };
 
 #endif // SWITCH_H

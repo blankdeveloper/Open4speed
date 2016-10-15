@@ -7,8 +7,6 @@
 **/
 ///----------------------------------------------------------------------------------------
 
-#include "engine/io.h"
-#include "engine/model.h"
 #include "engine/scene.h"
 #include "input/airacer.h"
 #include "input/keyboard.h"
@@ -348,6 +346,33 @@ void scene::render(int cameraCar)
     xrenderer->enable[1] = false;
     if (trackdata)
         xrenderer->renderModel(trackdata);
+    else
+    {
+        // load culled data
+        std::vector<id3d>::const_iterator it;
+        std::vector<id3d> loadId = getVisibility(false);
+        for (it = loadId.begin(); it != loadId.end(); ++it)
+            if (trackdataCulled.find(*it) == trackdataCulled.end())
+            {
+                std::string name = id2str(*it);
+                if (fileExists(name))
+                {
+                    model* m = getModel(name);
+                    trackdataCulled[*it] = m;
+                    physic->addModel(m, *it);
+                } else
+                    trackdataCulled[*it] = 0;
+            }
+
+        // render culled data
+        std::vector<id3d> renderId = getVisibility(true);
+        for (it = renderId.begin(); it != renderId.end(); ++it)
+        {
+            model* m = trackdataCulled[*it];
+            if (m)
+                xrenderer->renderModel(m);
+        }
+    }
 
     /// render cars
     xrenderer->enable[2] = false;

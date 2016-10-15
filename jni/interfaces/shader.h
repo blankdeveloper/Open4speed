@@ -73,6 +73,7 @@ public:
      */
     virtual void uniformMatrix(const char* name, float* value) = 0;
 
+    int instanceCount;  ///< Amount of instances
 };
 
 #endif // SHADER_H

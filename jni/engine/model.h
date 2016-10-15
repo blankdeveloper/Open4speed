@@ -64,6 +64,7 @@ public:
 
     std::vector<model3d> models;               ///< Standard parts of model
     AABB aabb;                                 ///< Extremes of current model
+    bool toDelete;                             ///< Additional information for culling
 };
 
 #endif // MODEL_H

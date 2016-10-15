@@ -237,7 +237,11 @@ shader* scene::getShader(std::string name)
     /// find previous instance
     name = fixName(name);
     if (shaders.find(name) != shaders.end())
-        return shaders[name];
+    {
+        shader* instance = shaders[name];
+        instance->instanceCount++;
+        return instance;
+    }
 
     std::vector<std::string> vert_atributes = getList("VERT", filename);
     std::vector<std::string> frag_atributes = getList("FRAG", filename);
@@ -259,7 +263,11 @@ texture* scene::getTexture(std::string filename)
 
     /// find previous instance
     if (textures.find(filename) != textures.end())
-        return textures[filename];
+    {
+        texture* instance = textures[filename];
+        instance->instanceCount++;
+        return instance;
+    }
 
     /// create new instance
     if (strcmp(getExtension(filename).c_str(), "png") == 0)
@@ -348,10 +356,19 @@ void scene::render(int cameraCar)
         xrenderer->renderModel(trackdata);
     else
     {
+        // mark everything for deleting
+        std::map<id3d, bool> toDeleteId;
+        for (std::map<id3d, model*>::const_iterator it = trackdataCulled.begin(); it != trackdataCulled.end(); ++it)
+            if (it->second)
+            {
+                it->second->toDelete = true;
+                toDeleteId[it->first] = true;
+            }
+
         // load culled data
-        std::vector<id3d>::const_iterator it;
         std::vector<id3d> loadId = getVisibility(false);
-        for (it = loadId.begin(); it != loadId.end(); ++it)
+        for (std::vector<id3d>::const_iterator it = loadId.begin(); it != loadId.end(); ++it)
+        {
             if (trackdataCulled.find(*it) == trackdataCulled.end())
             {
                 std::string name = id2str(*it);
@@ -363,10 +380,51 @@ void scene::render(int cameraCar)
                 } else
                     trackdataCulled[*it] = 0;
             }
+            if (trackdataCulled[*it])
+            {
+                trackdataCulled[*it]->toDelete = false;
+                toDeleteId[*it] = false;
+            }
+        }
+
+        // remove unused models
+        for (std::map<id3d, bool>::const_iterator it = toDeleteId.begin(); it != toDeleteId.end(); ++it)
+        {
+            if (it->second)
+            {
+                trackdataCulled.erase(it->first);
+                physic->removeModel(it->first);
+            }
+        }
+        // cleanup cache
+        for (std::map<std::string, model*>::const_iterator it = models.begin(); it != models.end(); ++it)
+        {
+            if (it->second->toDelete)
+            {
+                delete it->second;
+                models.erase(it->first);
+            }
+        }
+        for (std::map<std::string, shader*>::const_iterator it = shaders.begin(); it != shaders.end(); ++it)
+        {
+            if (it->second->instanceCount == 0)
+            {
+                delete it->second;
+                shaders.erase(it->first);
+            }
+        }
+        for (std::map<std::string, texture*>::const_iterator it = textures.begin(); it != textures.end(); ++it)
+        {
+            if (it->second->instanceCount == 0)
+            {
+                delete it->second;
+                textures.erase(it->first);
+            }
+        }
 
         // render culled data
         std::vector<id3d> renderId = getVisibility(true);
-        for (it = renderId.begin(); it != renderId.end(); ++it)
+        for (std::vector<id3d>::const_iterator it = renderId.begin(); it != renderId.end(); ++it)
         {
             model* m = trackdataCulled[*it];
             if (m)

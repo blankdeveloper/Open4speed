@@ -137,6 +137,8 @@ public:
       texture.height = height;
       return texture;
     }
+
+    int instanceCount;  ///< Amount of instances
 };
 
 #endif // TEXTURE_H

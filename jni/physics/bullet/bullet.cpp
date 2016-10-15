@@ -275,25 +275,25 @@ void bullet::getTransform(int index, float* m, id3d id)
  */
 void bullet::removeModel(id3d id)
 {
-    while(!dynamicObjects[id].empty())
+    for (std::vector<btRigidBody*>::const_iterator it = dynamicObjects[id].begin(); it != dynamicObjects[id].end(); ++it)
     {
-        m_dynamicsWorld->removeRigidBody(dynamicObjects[id][dynamicObjects[id].size() - 1]);
-        delete dynamicObjects[id][dynamicObjects[id].size() - 1]->getCollisionShape();
-        delete dynamicObjects[id][dynamicObjects[id].size() - 1];
-        dynamicObjects[id].pop_back();
+        m_dynamicsWorld->removeRigidBody(*it);
+        delete (*it)->getCollisionShape();
+        delete (*it);
     }
-    while(!staticObjects[id].empty())
+    dynamicObjects[id].clear();
+    for (std::vector<btCollisionObject*>::const_iterator it = staticObjects[id].begin(); it != staticObjects[id].end(); ++it)
     {
-        m_dynamicsWorld->removeCollisionObject(staticObjects[id][staticObjects.size() - 1]);
-        delete staticObjects[id][staticObjects.size() - 1]->getCollisionShape();
-        delete staticObjects[id][staticObjects.size() - 1];
-        staticObjects[id].pop_back();
+        m_dynamicsWorld->removeCollisionObject(*it);
+        delete (*it)->getCollisionShape();
+        delete (*it);
     }
-    while(!staticMeshes[id].empty())
+    staticObjects[id].clear();
+    for (std::vector<btTriangleMesh*>::const_iterator it = staticMeshes[id].begin(); it != staticMeshes[id].end(); ++it)
     {
-        delete staticMeshes[id][staticMeshes.size() - 1];
-        staticMeshes[id].pop_back();
+        delete (*it);
     }
+    staticMeshes[id].clear();
 }
 
 /**

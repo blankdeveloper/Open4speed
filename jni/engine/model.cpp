@@ -22,6 +22,11 @@ bool operator<(const id3d& lhs, const id3d& rhs)
  */
 model::~model()
 {
+    for (unsigned int i = 0; i < models.size(); i++)
+    {
+        models[i].material->instanceCount--;
+        models[i].texture2D->instanceCount--;
+    }
 }
 
 /**
@@ -35,6 +40,7 @@ model::model(std::string filename, materialLoader* mtlLoader)
     file* f = getFile(filename);
 
     /// get model dimensions
+    toDelete = false;
     char line[1024];
     f->gets(line);
     sscanf(line, "%f %f %f %f %f %f", &aabb.min.x, &aabb.min.y, &aabb.min.z, &aabb.max.x, &aabb.max.y, &aabb.max.z);
@@ -109,6 +115,7 @@ model::model(std::string filename, materialLoader* mtlLoader)
                     }
                 }
                 shadername[strlen(material) - cursor] = '\000';
+                m.material->instanceCount--;
                 m.material = mtlLoader->getShader(shadername);
                 delete[] shadername;
                 break;

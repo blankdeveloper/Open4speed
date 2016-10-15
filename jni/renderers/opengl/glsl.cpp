@@ -29,6 +29,8 @@ glsl::~glsl()
  */
 glsl::glsl(std::vector<std::string> vert, std::vector<std::string> frag)
 {
+    instanceCount = 1;
+
     /// convert vertex shader source code
     std::string header = "#version 100\nprecision highp float;\n";
     int size = header.length();

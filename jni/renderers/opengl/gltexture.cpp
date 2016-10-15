@@ -34,6 +34,7 @@ gltexture::gltexture(std::vector<texture*> anim)
     this->anim = anim;
     transparent = true;
     animated = true;
+    instanceCount = 1;
 
     /// set animation speed
     multiFrame = anim.size() / 50;
@@ -54,6 +55,7 @@ gltexture::gltexture(std::vector<texture*> anim)
 gltexture::gltexture(Texture texture)
 {
     /// create texture
+    instanceCount = 1;
     glGenTextures(1, &this->textureID);
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, this->textureID);

@@ -22,6 +22,16 @@ struct id3d
     int x;
     int y;
     int z;
+
+    bool operator==(id3d v)
+    {
+        return (v.x == x) && (v.y == y) && (v.z == z);
+    }
+
+    bool operator!=(id3d v)
+    {
+        return !(*this==v);
+    }
 };
 
 bool operator<(const id3d& lhs, const id3d& rhs);

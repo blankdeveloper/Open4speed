@@ -185,6 +185,7 @@ private:
     std::map<id3d, model*> trackdataCulled;   ///< Culled track model
     pthread_mutex_t dataMutex;                ///< Lock for multithreading
     pthread_mutex_t loadMutex;                ///< Lock for multithreading
+    id3d lastUpdate;                          ///< Last update of scene
 };
 
 #endif // SWITCH_H

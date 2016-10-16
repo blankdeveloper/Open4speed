@@ -386,10 +386,13 @@ void scene::render(int cameraCar)
         // start loading thread
         if (pthread_mutex_trylock(&loadMutex) == 0)
         {
-            pthread_t id = 0;
-            struct thread_info *tinfo = 0;
-            pthread_create(&id, NULL, loadingLoop, tinfo);
-            //loadingLoop(0);//TODO
+            if (lastUpdate != getVisibility(false)[0])
+            {
+                pthread_t id = 0;
+                struct thread_info *tinfo = 0;
+                pthread_create(&id, NULL, loadingLoop, tinfo);
+            } else
+                pthread_mutex_unlock(&loadMutex);
         }
 
         // render culled data
@@ -710,6 +713,8 @@ void* scene::loadingLoop(void *ptr)
             sc->textures.erase(it->first);
         }
     }
+    // set indicator what was updated
+    sc->lastUpdate = loadId[0];
     pthread_mutex_unlock(&sc->dataMutex);
     pthread_mutex_unlock(&sc->loadMutex);
     if (ptr == 0)

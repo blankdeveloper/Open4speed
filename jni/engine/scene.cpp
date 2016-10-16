@@ -15,6 +15,8 @@
 #include "renderers/opengl/glsl.h"
 #include "renderers/opengl/gltexture.h"
 
+scene* sc = 0; ///< Instance of itself for static access
+
 /**
  * @brief Constructor loads scene from Open4speed config file
  * @param filename is scene configuration file (o4scfg)
@@ -25,6 +27,7 @@ scene::scene(std::string filename)
     controller = new keyboard(); //destroyed by car class
     physic = new bullet();
     xrenderer = new gles20();
+    sc = this;
 
     /// load track
     file* f = getFile(filename);
@@ -141,6 +144,8 @@ scene::scene(std::string filename)
         physic->addModel(trackdata, id);
     for (unsigned int i = 0; i < getCarCount(); i++)
         physic->addCar(getCar(i));
+    if (!trackdata)
+        loadingLoop((void*)1);
 }
 
 /**
@@ -149,6 +154,8 @@ scene::scene(std::string filename)
 scene::~scene()
 {
     physic->active = false;
+    pthread_mutex_lock(&sc->loadMutex);
+    pthread_mutex_unlock(&sc->loadMutex);
 
     while (!cars.empty())
     {
@@ -218,7 +225,9 @@ model* scene::getModel(std::string filename)
 
     /// create new instance
     model* instance = new model(filename, this);
+    pthread_mutex_lock(&sc->dataMutex);
     models[filename] = instance;
+    pthread_mutex_unlock(&sc->dataMutex);
     return instance;
 }
 
@@ -239,7 +248,9 @@ shader* scene::getShader(std::string name)
     if (shaders.find(name) != shaders.end())
     {
         shader* instance = shaders[name];
+        pthread_mutex_lock(&dataMutex);
         instance->instanceCount++;
+        pthread_mutex_unlock(&dataMutex);
         return instance;
     }
 
@@ -248,7 +259,9 @@ shader* scene::getShader(std::string name)
 
     /// create shader from code
     shader* instance = new glsl(vert_atributes, frag_atributes);
+    pthread_mutex_lock(&dataMutex);
     shaders[name] = instance;
+    pthread_mutex_unlock(&dataMutex);
     return instance;
 }
 
@@ -265,7 +278,9 @@ texture* scene::getTexture(std::string filename)
     if (textures.find(filename) != textures.end())
     {
         texture* instance = textures[filename];
+        pthread_mutex_lock(&dataMutex);
         instance->instanceCount++;
+        pthread_mutex_unlock(&dataMutex);
         return instance;
     }
 
@@ -273,7 +288,9 @@ texture* scene::getTexture(std::string filename)
     if (strcmp(getExtension(filename).c_str(), "png") == 0)
     {
       texture* instance = new gltexture(texture::loadPNG(getFile(filename)));
+      pthread_mutex_lock(&dataMutex);
       textures[filename] = instance;
+      pthread_mutex_unlock(&dataMutex);
       return instance;
     } else if (getExtension(filename)[0] == 'p')
     {
@@ -294,7 +311,9 @@ texture* scene::getTexture(std::string filename)
         }
 
         texture* instance = new gltexture(anim);
+        pthread_mutex_lock(&dataMutex);
         textures[filename] = instance;
+        pthread_mutex_unlock(&dataMutex);
         return instance;
     }
     loge("Unsupported texture", filename);
@@ -315,10 +334,18 @@ texture* scene::getTexture(float r, float g, float b)
 
     /// find previous instance
     if (textures.find(filename) != textures.end())
-        return textures[filename];
+    {
+        texture* instance = textures[filename];
+        pthread_mutex_lock(&dataMutex);
+        instance->instanceCount++;
+        pthread_mutex_unlock(&dataMutex);
+        return instance;
+    }
 
     texture* instance = new gltexture(texture::createRGB(1, 1, r, g, b));
+    pthread_mutex_lock(&dataMutex);
     textures[filename] = instance;
+    pthread_mutex_unlock(&dataMutex);
     return instance;
 }
 
@@ -356,80 +383,22 @@ void scene::render(int cameraCar)
         xrenderer->renderModel(trackdata);
     else
     {
-        // mark everything for deleting
-        std::map<id3d, bool> toDeleteId;
-        for (std::map<id3d, model*>::const_iterator it = trackdataCulled.begin(); it != trackdataCulled.end(); ++it)
-            if (it->second)
-            {
-                it->second->toDelete = true;
-                toDeleteId[it->first] = true;
-            }
-
-        // load culled data
-        std::vector<id3d> loadId = getVisibility(false);
-        for (std::vector<id3d>::const_iterator it = loadId.begin(); it != loadId.end(); ++it)
+        // start loading thread
+        if (pthread_mutex_trylock(&loadMutex) == 0)
         {
-            if (trackdataCulled.find(*it) == trackdataCulled.end())
-            {
-                std::string name = id2str(*it);
-                if (fileExists(name))
-                {
-                    model* m = getModel(name);
-                    trackdataCulled[*it] = m;
-                    physic->addModel(m, *it);
-                } else
-                    trackdataCulled[*it] = 0;
-            }
-            if (trackdataCulled[*it])
-            {
-                trackdataCulled[*it]->toDelete = false;
-                toDeleteId[*it] = false;
-            }
-        }
-
-        // remove unused models
-        for (std::map<id3d, bool>::const_iterator it = toDeleteId.begin(); it != toDeleteId.end(); ++it)
-        {
-            if (it->second)
-            {
-                trackdataCulled.erase(it->first);
-                physic->removeModel(it->first);
-            }
-        }
-        // cleanup cache
-        for (std::map<std::string, model*>::const_iterator it = models.begin(); it != models.end(); ++it)
-        {
-            if (it->second->toDelete)
-            {
-                delete it->second;
-                models.erase(it->first);
-            }
-        }
-        for (std::map<std::string, shader*>::const_iterator it = shaders.begin(); it != shaders.end(); ++it)
-        {
-            if (it->second->instanceCount == 0)
-            {
-                delete it->second;
-                shaders.erase(it->first);
-            }
-        }
-        for (std::map<std::string, texture*>::const_iterator it = textures.begin(); it != textures.end(); ++it)
-        {
-            if (it->second->instanceCount == 0)
-            {
-                delete it->second;
-                textures.erase(it->first);
-            }
+            pthread_t id = 0;
+            struct thread_info *tinfo = 0;
+            pthread_create(&id, NULL, loadingLoop, tinfo);
+            //loadingLoop(0);//TODO
         }
 
         // render culled data
+        pthread_mutex_lock(&dataMutex);
         std::vector<id3d> renderId = getVisibility(true);
         for (std::vector<id3d>::const_iterator it = renderId.begin(); it != renderId.end(); ++it)
-        {
-            model* m = trackdataCulled[*it];
-            if (m)
-                xrenderer->renderModel(m);
-        }
+            if(trackdataCulled.find(*it) != trackdataCulled.end())
+                xrenderer->renderModel(trackdataCulled[*it]);
+        pthread_mutex_unlock(&dataMutex);
     }
 
     /// render cars
@@ -616,6 +585,7 @@ std::vector<id3d> scene::getVisibility(bool directional)
  */
 void scene::setCamera(int cameraCar)
 {
+    pthread_mutex_lock(&dataMutex);
     /// update camera direction
     if (directionY * 180 / 3.14 - getCar(cameraCar)->rot > 180)
         directionY -= 6.28;
@@ -656,4 +626,93 @@ void scene::setCamera(int cameraCar)
     camera = glm::vec3(x - sin(directionY) * 0.1f, y + 0.5f, z - cos(directionY) * 0.1f);
     xrenderer->lookAt(camera, center, glm::vec3(0, 1, 0));
     direction = glm::normalize(center - camera);
+    pthread_mutex_unlock(&dataMutex);
+}
+
+/**
+ * @brief loadingLoop is cycle for loading data on background
+ * @param ptr is 1 for non pthread calling
+ * @return 0
+ */
+void* scene::loadingLoop(void *ptr)
+{
+    // mark everything for deleting
+    std::map<id3d, bool> toDeleteId;
+    pthread_mutex_lock(&sc->dataMutex);
+    for (std::map<id3d, model*>::const_iterator it = sc->trackdataCulled.begin(); it != sc->trackdataCulled.end(); ++it)
+        if (it->second)
+        {
+            it->second->toDelete = true;
+            toDeleteId[it->first] = true;
+        }
+
+    // load culled data
+    std::vector<id3d> loadId = sc->getVisibility(false);
+    pthread_mutex_unlock(&sc->dataMutex);
+    for (std::vector<id3d>::const_iterator it = loadId.begin(); it != loadId.end(); ++it)
+    {
+        pthread_mutex_lock(&sc->dataMutex);
+        bool found = sc->trackdataCulled.find(*it) != sc->trackdataCulled.end();
+        pthread_mutex_unlock(&sc->dataMutex);
+        if (!found)
+        {
+            std::string name = sc->id2str(*it);
+            if (fileExists(name))
+            {
+                model* m = sc->getModel(name);
+                pthread_mutex_lock(&sc->dataMutex);
+                sc->trackdataCulled[*it] = m;
+                pthread_mutex_unlock(&sc->dataMutex);
+                sc->physic->addModel(m, *it);
+                found = true;
+            }
+        }
+        if (found)
+        {
+            pthread_mutex_lock(&sc->dataMutex);
+            sc->trackdataCulled[*it]->toDelete = false;
+            toDeleteId[*it] = false;
+            pthread_mutex_unlock(&sc->dataMutex);
+        }
+    }
+
+    // remove unused models
+    pthread_mutex_lock(&sc->dataMutex);
+    for (std::map<id3d, bool>::const_iterator it = toDeleteId.begin(); it != toDeleteId.end(); ++it)
+    {
+        if (it->second)
+        {
+            sc->trackdataCulled.erase(it->first);
+            sc->physic->removeModel(it->first);
+        }
+    }
+    for (std::map<std::string, model*>::const_iterator it = sc->models.begin(); it != sc->models.end(); ++it)
+    {
+        if (it->second->toDelete)
+        {
+            delete it->second;
+            sc->models.erase(it->first);
+        }
+    }
+    for (std::map<std::string, shader*>::const_iterator it = sc->shaders.begin(); it != sc->shaders.end(); ++it)
+    {
+        if (it->second->instanceCount == 0)
+        {
+            delete it->second;
+            sc->shaders.erase(it->first);
+        }
+    }
+    for (std::map<std::string, texture*>::const_iterator it = sc->textures.begin(); it != sc->textures.end(); ++it)
+    {
+        if (it->second->instanceCount == 0)
+        {
+            delete it->second;
+            sc->textures.erase(it->first);
+        }
+    }
+    pthread_mutex_unlock(&sc->dataMutex);
+    pthread_mutex_unlock(&sc->loadMutex);
+    if (ptr == 0)
+        pthread_exit(0);
+    return 0;
 }

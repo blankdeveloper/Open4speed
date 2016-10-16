@@ -17,7 +17,11 @@
 gltexture::~gltexture()
 {
     if (!animated)
+    {
+        if (data)
+            delete[] data;
         glDeleteTextures(1, &textureID);
+    }
     else
     {
         for (int i = anim.size() - 1; i >= 0; i--)
@@ -54,32 +58,13 @@ gltexture::gltexture(std::vector<texture*> anim)
  */
 gltexture::gltexture(Texture texture)
 {
-    /// create texture
     instanceCount = 1;
-    glGenTextures(1, &this->textureID);
-    glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, this->textureID);
-
-    //And if you go and use extensions, you can use Anisotropic filtering textures which are of an
-    //even better quality, but this will do for now.
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-
-    //Here we are setting the parameter to repeat the texture instead of clamping the texture
-    //to the edge of our shape.
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-    if (texture.hasAlpha)
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture.width, texture.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture.data);
-    else
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture.width, texture.height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture.data);
-    glGenerateMipmap(GL_TEXTURE_2D);
-
     twidth = texture.width;
     theight = texture.height;
     transparent = texture.hasAlpha;
     animated = false;
-    delete[] texture.data;
+    data = texture.data;
+    hasAlpha = texture.hasAlpha;
 }
 
 /**
@@ -102,6 +87,31 @@ void gltexture::apply()
             currentFrame = 0;
     } else
     {
+        /// upload texture
+        if (data)
+        {
+            glGenTextures(1, &textureID);
+            glEnable(GL_TEXTURE_2D);
+            glBindTexture(GL_TEXTURE_2D, textureID);
+
+            //And if you go and use extensions, you can use Anisotropic filtering textures which are of an
+            //even better quality, but this will do for now.
+            glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
+            glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+
+            //Here we are setting the parameter to repeat the texture instead of clamping the texture
+            //to the edge of our shape.
+            glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+            glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+            if (hasAlpha)
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, twidth, theight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+            else
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, twidth, theight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            glGenerateMipmap(GL_TEXTURE_2D);
+
+            delete[] data;
+            data = 0;
+        }
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, textureID);
     }

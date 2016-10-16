@@ -150,6 +150,13 @@ private:
     void setCamera(int cameraCar);
 
     /**
+     * @brief loadingLoop is cycle for loading data on background
+     * @param ptr is unused
+     * @return 0
+     */
+    static void* loadingLoop(void *ptr);
+
+    /**
      * @brief The game resources
      */
     std::vector<car*> cars;                   ///< All cars in scene instances
@@ -176,6 +183,8 @@ private:
     Dynamic eff[WATER_EFF_LENGTH];            ///< 3D water effect object
     std::string trackPath;                    ///< Path to 3D model
     std::map<id3d, model*> trackdataCulled;   ///< Culled track model
+    pthread_mutex_t dataMutex;                ///< Lock for multithreading
+    pthread_mutex_t loadMutex;                ///< Lock for multithreading
 };
 
 #endif // SWITCH_H

@@ -199,7 +199,9 @@ void bullet::addModel(model *m, id3d id)
             shape->calculateLocalInertia(w * a * h,localInertia);
             btRigidBody* body = new btRigidBody(w * a * h + 1, 0, shape,localInertia);
             dynamicObjects[id].push_back(body);
+            pthread_mutex_lock(&mutex);
             m_dynamicsWorld->addRigidBody(body);
+            pthread_mutex_unlock(&mutex);
 
             /// Set object default transform
             btTransform tr;
@@ -231,7 +233,9 @@ void bullet::addModel(model *m, id3d id)
                     btRigidBody* body = new btRigidBody(0,0,new btBvhTriangleMeshShape(mesh,true));
                     body->setActivationState(DISABLE_SIMULATION);
                     staticObjects[id].push_back(body);
+                    pthread_mutex_lock(&mutex);
                     m_dynamicsWorld->addCollisionObject(body);
+                    pthread_mutex_unlock(&mutex);
                     mesh = new btTriangleMesh();
                 }
             }
@@ -243,7 +247,9 @@ void bullet::addModel(model *m, id3d id)
         btRigidBody* body = new btRigidBody(0,0,new btBvhTriangleMeshShape(mesh,true));
         body->setActivationState(DISABLE_SIMULATION);
         staticObjects[id].push_back(body);
+        pthread_mutex_lock(&mutex);
         m_dynamicsWorld->addCollisionObject(body);
+        pthread_mutex_unlock(&mutex);
     } else
         delete mesh;
 }
@@ -275,6 +281,7 @@ void bullet::getTransform(int index, float* m, id3d id)
  */
 void bullet::removeModel(id3d id)
 {
+    pthread_mutex_lock(&mutex);
     for (std::vector<btRigidBody*>::const_iterator it = dynamicObjects[id].begin(); it != dynamicObjects[id].end(); ++it)
     {
         m_dynamicsWorld->removeRigidBody(*it);
@@ -294,6 +301,7 @@ void bullet::removeModel(id3d id)
         delete (*it);
     }
     staticMeshes[id].clear();
+    pthread_mutex_unlock(&mutex);
 }
 
 /**
@@ -457,5 +465,7 @@ void bullet::updateCar(car* c)
  */
 void bullet::updateWorld()
 {
-     m_dynamicsWorld->stepSimulation(WORLD_STEP, WORLD_SUBSTEP);
+    pthread_mutex_lock(&mutex);
+    m_dynamicsWorld->stepSimulation(WORLD_STEP, WORLD_SUBSTEP);
+    pthread_mutex_unlock(&mutex);
 }

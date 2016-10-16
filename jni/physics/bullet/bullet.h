@@ -93,6 +93,9 @@ public:
      * @brief updateWorld updates world state
      */
     void updateWorld();
+
+private:
+    pthread_mutex_t mutex;  ///< Lock for multithreading
 };
 
 #endif // BULLET_H

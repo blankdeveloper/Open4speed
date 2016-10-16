@@ -49,6 +49,9 @@ public:
      * @param frame is index of frame
      */
     void setFrame(int frame);
+private:
+    bool hasAlpha;
+    unsigned char* data;
 };
 
 #endif // GLTEXTURE_H

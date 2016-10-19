@@ -6,6 +6,7 @@ import geometry.Point3D;
 import geometry.Triangle;
 import geometry.Vertex;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -176,8 +177,6 @@ public class ObjLoader
                     System.err.println("Unable to find/open " + fileName);
                     return "(null)";
                   }
-                  // get type of texture
-                  int type = img.getType();
                   // scale texture
                   int w = 2;
                   int h = 2;
@@ -189,7 +188,14 @@ public class ObjLoader
                   {
                     h *= 2;
                   }
+                  // detect alpha
+                  boolean hasAlpha = false;
+                  for(int x = 0; x < img.getWidth(); x++)
+                    for(int y = 0; y < img.getHeight(); y++)
+                      if((img.getRGB(x, y) & 0xFF000000) < 0xFF000000)
+                        hasAlpha = true;
                   // resize texture
+                  int type = hasAlpha ? img.getType() : BufferedImage.TYPE_INT_RGB;
                   resizedImage = new BufferedImage(w, h, type);
                   Graphics2D g = resizedImage.createGraphics();
                   g.drawImage(img, 0, 0, w, h, null);

@@ -198,20 +198,15 @@ void gles20::renderDynamic(float* vertices, float* normals, float* coords, shade
  */
 void gles20::renderModel(model* m)
 {
-    /// set opengl for rendering models
+    glDisable(GL_CULL_FACE);
     for (unsigned int i = 0; i < m->models.size(); i++)
         if (enable[m->models[i].filter] && !m->models[i].touchable)
         {
             current = m->models[i].material;
             current->bind();
-            if (m->models[i].texture2D->transparent)
-                glDisable(GL_CULL_FACE);
-            else
-                glEnable(GL_CULL_FACE);
             renderSubModel(&m->models[i]);
             current->unbind();
         }
-    glEnable(GL_CULL_FACE);
 }
 
 
@@ -262,7 +257,6 @@ void gles20::renderShadow(model* m)
     glBlendEquation(GL_FUNC_ADD);
     glDepthFunc(GL_LEQUAL);
     glDepthMask(true);
-    glDisable(GL_CULL_FACE);
     glDisable(GL_STENCIL_TEST);
     glStencilMask(false);
 }

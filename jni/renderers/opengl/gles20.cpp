@@ -327,8 +327,8 @@ void gles20::renderSubModel(model3d *m)
         current->uniformFloat("u_brake", 1.0f);
     else
         current->uniformFloat("u_brake", 0.0f);
-    current->attrib(&m->vertices[0], &m->normals[0], &m->coords[0]);
-    glDrawArrays(GL_TRIANGLES, 0, m->vertices.size() / 3);
+    current->attrib(m->vertices, m->normals, m->coords);
+    glDrawArrays(GL_TRIANGLES, 0, m->count * 3);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 

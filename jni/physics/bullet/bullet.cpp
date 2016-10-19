@@ -222,7 +222,7 @@ void bullet::addModel(model *m, id3d id)
             m->models[i].dynamicID = dynamicObjects[id].size();
         } else if (m->models[i].touchable || !touchable) {
             btVector3 o = btVector3(m->models[i].reg.min.x, m->models[i].reg.min.y, m->models[i].reg.min.z);
-            for (int j = 0; j < m->models[i].vertices.size() / 9; j++) {
+            for (int j = 0; j < m->models[i].count; j++) {
                 btVector3 a = btVector3(m->models[i].vertices[j * 9 + 0], m->models[i].vertices[j * 9 + 1], m->models[i].vertices[j * 9 + 2]);
                 btVector3 b = btVector3(m->models[i].vertices[j * 9 + 3], m->models[i].vertices[j * 9 + 4], m->models[i].vertices[j * 9 + 5]);
                 btVector3 c = btVector3(m->models[i].vertices[j * 9 + 6], m->models[i].vertices[j * 9 + 7], m->models[i].vertices[j * 9 + 8]);

@@ -15,8 +15,6 @@
 #include "engine/math.h"
 #include "interfaces/materialLoader.h"
 
-#define CULLING_DST 100
-
 struct id3d
 {
     int x;
@@ -48,10 +46,11 @@ struct model3d
     int dynamicID;               ///< ID of the dynamic object
     float dynamicMat[16];        ///< Model matrix of dynamic object
     AABB reg;                    ///< AABB of the object
+    int count;                   ///< Amount of triangles
     texture* texture2D;          ///< Object texture
-    std::vector<float> vertices; ///< Object vertices
-    std::vector<float> normals;  ///< Object normals
-    std::vector<float> coords;   ///< Object texture coordinates
+    float* vertices;             ///< Object vertices
+    float* normals;              ///< Object normals
+    float* coords;               ///< Object texture coordinates
 };
 
 /**

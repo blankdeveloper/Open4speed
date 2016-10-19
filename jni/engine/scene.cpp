@@ -15,6 +15,8 @@
 #include "renderers/opengl/glsl.h"
 #include "renderers/opengl/gltexture.h"
 
+#define CULLING_DST 100
+
 scene* sc = 0; ///< Instance of itself for static access
 pthread_mutex_t scene::dataMutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t scene::loadMutex = PTHREAD_MUTEX_INITIALIZER;
@@ -554,7 +556,7 @@ void scene::update()
                     float x = getCar(i)->transform[j].value[12] + (rand() % 50 - 25) * 0.03f + sin(getCar(i)->rot * 3.14 / 180) * k * 0.03f;
                     float y = getCar(i)->transform[j].value[13] - 0.1f;
                     float z = getCar(i)->transform[j].value[14] + (rand() % 50 - 25) * 0.03f + cos(getCar(i)->rot * 3.14 / 180) * k * 0.03f;
-                    for (unsigned int l = 0; l < water->models[0].vertices.size() / 3; l++)
+                    for (unsigned int l = 0; l < water->models[0].count * 3; l++)
                     {
                         eff[currentFrame].vertices[eff[currentFrame].count * 3 + 0] = x;
                         eff[currentFrame].vertices[eff[currentFrame].count * 3 + 1] = y;

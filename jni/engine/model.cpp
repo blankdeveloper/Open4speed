@@ -26,6 +26,12 @@ model::~model()
     {
         models[i].material->instanceCount--;
         models[i].texture2D->instanceCount--;
+        if (models[i].vertices)
+            delete[] models[i].vertices;
+        if (models[i].normals)
+            delete[] models[i].normals;
+        if (models[i].coords)
+            delete[] models[i].coords;
     }
 }
 
@@ -124,26 +130,25 @@ model::model(std::string filename, materialLoader* mtlLoader)
         }
 
         /// prepare model arrays
-        int count = f->scandec();
-        float v[9];
-        float n[9];
-        float t[6];
-        for (int j = 0; j < count; j++)
-        {
+        m.count = f->scandec();
+        m.vertices = new float[m.count * 9];
+        m.normals = new float[m.count * 9];
+        m.coords = new float[m.count * 6];
+        for (int j = 0; j < m.count; j++) {
             /// read triangle parameters
             f->gets(line);
             sscanf(line, "%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f%f %f %f %f %f %f %f %f",
-                   &t[0], &t[1], &n[0], &n[1], &n[2], &v[0], &v[1], &v[2],
-                   &t[2], &t[3], &n[3], &n[4], &n[5], &v[3], &v[4], &v[5],
-                   &t[4], &t[5], &n[6], &n[7], &n[8], &v[6], &v[7], &v[8]);
+                   &m.coords[j * 6 + 0], &m.coords[j * 6 + 1],
+                   &m.normals[j * 9 + 0], &m.normals[j * 9 + 1], &m.normals[j * 9 + 2],
+                   &m.vertices[j * 9 + 0], &m.vertices[j * 9 + 1], &m.vertices[j * 9 + 2],
 
-            /// copy data
-            for(int i = 0; i < 9; i++)
-                m.vertices.push_back(v[i]);
-            for(int i = 0; i < 9; i++)
-                m.normals.push_back(n[i]);
-            for(int i = 0; i < 6; i++)
-                m.coords.push_back(t[i]);
+                   &m.coords[j * 6 + 2], &m.coords[j * 6 + 3],
+                   &m.normals[j * 9 + 3], &m.normals[j * 9 + 4], &m.normals[j * 9 + 5],
+                   &m.vertices[j * 9 + 3], &m.vertices[j * 9 + 4], &m.vertices[j * 9 + 5],
+
+                   &m.coords[j * 6 + 4], &m.coords[j * 6 + 5],
+                   &m.normals[j * 9 + 6], &m.normals[j * 9 + 7], &m.normals[j * 9 + 8],
+                   &m.vertices[j * 9 + 6], &m.vertices[j * 9 + 7], &m.vertices[j * 9 + 8]);
         }
         models.push_back(m);
     }

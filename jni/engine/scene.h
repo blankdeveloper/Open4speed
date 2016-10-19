@@ -183,9 +183,11 @@ private:
     Dynamic eff[WATER_EFF_LENGTH];            ///< 3D water effect object
     std::string trackPath;                    ///< Path to 3D model
     std::map<id3d, model*> trackdataCulled;   ///< Culled track model
-    pthread_mutex_t dataMutex;                ///< Lock for multithreading
-    pthread_mutex_t loadMutex;                ///< Lock for multithreading
+    static pthread_mutex_t dataMutex;         ///< Lock for multithreading
+    static pthread_mutex_t loadMutex;         ///< Lock for multithreading
     id3d lastUpdate;                          ///< Last update of scene
+    int loadingThreadsCount;                  ///< Loading threads amount
+    pthread_t threadId;                       ///< Id of thread
 };
 
 #endif // SWITCH_H

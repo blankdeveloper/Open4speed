@@ -388,12 +388,12 @@ void gles20::rtt(bool enable)
         /// coords
         float coords[] =
         {
-            0, 1,
+            0, aliasing,
             0, 0,
-            1, 0,
-            0, 1,
-            1, 0,
-            1, 1,
+            aliasing, 0,
+            0, aliasing,
+            aliasing, 0,
+            aliasing, aliasing,
         };
 
         scene->bind();

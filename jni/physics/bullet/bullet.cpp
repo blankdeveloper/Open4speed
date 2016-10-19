@@ -36,6 +36,8 @@
 #define WORLD_STEP 100
 #define WORLD_SUBSTEP 4
 
+pthread_mutex_t bullet::mutex = PTHREAD_MUTEX_INITIALIZER;  ///< Lock for multithreading
+
 /**
  * @brief bullet destructor
  */

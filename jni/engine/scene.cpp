@@ -7,6 +7,7 @@
 **/
 ///----------------------------------------------------------------------------------------
 
+#include <algorithm>
 #include "engine/scene.h"
 #include "input/airacer.h"
 #include "input/keyboard.h"
@@ -15,11 +16,18 @@
 #include "renderers/opengl/glsl.h"
 #include "renderers/opengl/gltexture.h"
 
-#define CULLING_DST 100
-
 scene* sc = 0; ///< Instance of itself for static access
 pthread_mutex_t scene::dataMutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t scene::loadMutex = PTHREAD_MUTEX_INITIALIZER;
+glm::vec3 baseId;
+
+bool comparator(const id3d& a, const id3d& b)
+{
+    glm::vec3 va = glm::vec3(a.x, a.y, a.z);
+    glm::vec3 vb = glm::vec3(b.x, b.y, b.z);
+    return glm::length(baseId - va) < glm::length(baseId - vb);
+}
+
 /**
  * @brief Constructor loads scene from Open4speed config file
  * @param filename is scene configuration file (o4scfg)
@@ -402,9 +410,10 @@ void scene::render(int cameraCar)
     else
     {
         // start loading thread
+        bool found = lastUpdate == getVisibility(false)[0];
         if (pthread_mutex_trylock(&loadMutex) == 0)
         {
-            if (lastUpdate != getVisibility(false)[0])
+            if (!found)
             {
                 struct thread_info *tinfo = 0;
                 pthread_create(&threadId, NULL, loadingLoop, tinfo);
@@ -414,8 +423,8 @@ void scene::render(int cameraCar)
         }
 
         // render culled data
-        pthread_mutex_lock(&dataMutex);
         std::vector<id3d> renderId = getVisibility(true);
+        pthread_mutex_lock(&dataMutex);
         for (std::vector<id3d>::const_iterator it = renderId.begin(); it != renderId.end(); ++it)
             if(trackdataCulled.find(*it) != trackdataCulled.end())
                 xrenderer->renderModel(trackdataCulled[*it]);
@@ -584,21 +593,47 @@ void scene::update()
  */
 std::vector<id3d> scene::getVisibility(bool directional)
 {
+    pthread_mutex_lock(&sc->dataMutex);
     std::vector<id3d> output;
-    id3d id;
-    int steps = 2;
+    int steps = 4;
     int cx = camera.x / CULLING_DST;
     int cy = camera.y / CULLING_DST;
     int cz = camera.z / CULLING_DST;
-    for (id.x = cx - steps; id.x <= cx + steps; id.x++)
-        for (id.y = cy - steps; id.y <= cy + steps; id.y++)
-            for (id.z = cz - steps; id.z <= cz + steps; id.z++)
-            {
-                glm::vec3 part = glm::vec3(id.x - cx, id.y - cy, id.z - cz);
-                if ((glm::dot(part, direction) > -0.005f) || !directional ||
-                    (fabs(part.x) < 1.5f) || (fabs(part.x) < 1.5f) || (fabs(part.x) < 1.5f))
-                        output.push_back(id);
-            }
+    id3d id;
+    id.x = cx;
+    id.y = cy;
+    id.z = cz;
+    if( directional )
+    {
+        float m = 0.5f;
+        glm::vec3 dir = glm::normalize(direction);
+        for (int x = (dir.x < m ? -steps : -1); x <= (dir.x > -m ? steps : 1); x++)
+            for (int y = (dir.y < m ? -steps : -1); y <= (dir.y > -m ? steps : 1); y++)
+                for (int z = (dir.z < m ? -steps : -1); z <= (dir.z > -m ? steps : 1); z++)
+                {
+                    id.x = cx + x;
+                    id.y = cy + y;
+                    id.z = cz + z;
+                    output.push_back(id);
+                }
+    }
+    else
+    {
+        for (int x = -steps; x <= steps; x++)
+            for (int y = -steps; y <= steps; y++)
+                for (int z = -steps; z <= steps; z++)
+                {
+                    id.x = cx + x;
+                    id.y = cy + y;
+                    id.z = cz + z;
+                    output.push_back(id);
+                }
+    }
+    baseId.x = cx;
+    baseId.y = cy;
+    baseId.z = cz;
+    std::sort(output.begin(), output.end(), comparator);
+    pthread_mutex_unlock(&sc->dataMutex);
     return output;
 }
 
@@ -668,10 +703,10 @@ void* scene::loadingLoop(void *ptr)
             it->second->toDelete = true;
             toDeleteId[it->first] = true;
         }
+    pthread_mutex_unlock(&sc->dataMutex);
 
     // load culled data
     std::vector<id3d> loadId = sc->getVisibility(false);
-    pthread_mutex_unlock(&sc->dataMutex);
     for (std::vector<id3d>::const_iterator it = loadId.begin(); it != loadId.end(); ++it)
     {
         pthread_mutex_lock(&sc->dataMutex);

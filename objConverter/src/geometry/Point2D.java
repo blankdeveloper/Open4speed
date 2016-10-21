@@ -11,4 +11,9 @@ public class Point2D
     this.u = u;
     this.v = v;
   }
+  
+  public Point2D mix(Point2D p)
+  {
+    return new Point2D((p.u + u) * 0.5f, (p.v + v) * 0.5f);
+  }
 }

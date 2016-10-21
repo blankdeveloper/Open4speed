@@ -15,19 +15,17 @@ public class O4SWriter
   {
     // count faces
     int facesCount = 0;
-    for (int j = 0; j < models.size(); j++)
+    for (Model m : models)
     {
-      if(models.get(j).material.contains("(null)"))
+      if (m.material.contains("(null)"))
         continue;
       // check if current material has faces
-      if (models.get(j).faces.size() > 0)
+      if (m.faces.size() > 0)
         facesCount++;
     }
-
     try
     {
       FileOutputStream fos = new FileOutputStream(outputFile);
-
       // save extreme values
       fos.write(extremes.getBytes());
 
@@ -35,13 +33,19 @@ public class O4SWriter
       fos.write((facesCount + "\n").getBytes());
 
       // save all faces
-      for (int j = 0; j < models.size(); j++)
+      AABB zero = new AABB(new Point3D(0, 0, 0), new Point3D(0, 0, 0));
+      for (Model m : models)
       {
-        if(models.get(j).material.contains("(null)"))
+        if (m.material.contains("(null)"))
           continue;
         // get faces pointer for current material
-        ArrayList<Triangle> faces = models.get(j).faces;
-        AABB aabb = models.get(j).getAABB();
+        ArrayList<Triangle> faces = m.faces;
+        // get bounding box
+        AABB aabb;
+        if (m.isDynamic())
+          aabb = m.getAABB();
+        else
+          aabb = zero;
         Point3D min = aabb.getMin();
         Point3D max = aabb.getMax();
 
@@ -49,33 +53,12 @@ public class O4SWriter
         if (faces.size() > 0)
         {
           // save material parameters
-          fos.write((min.x + " " + min.y + " " + min.z + " " + max.x + " " + max.y + " " + max.z + " "
-              + models.get(j).material + "\n").getBytes());
-          // save faces count
+          fos.write((min.x + " " + min.y + " " + min.z + " " + max.x + " " + max.y + " " + max.z + " ").getBytes());
+          fos.write((m.material + "\n").getBytes());
+          // save faces
           fos.write((faces.size() + "\n").getBytes());
-          // save face parameters
-          for (int i = 0; i < faces.size(); i++)
-          {
-            faces.get(i).a.v.x -= min.x;
-            faces.get(i).a.v.y -= min.y;
-            faces.get(i).a.v.z -= min.z;
-            faces.get(i).b.v.x -= min.x;
-            faces.get(i).b.v.y -= min.y;
-            faces.get(i).b.v.z -= min.z;
-            faces.get(i).c.v.x -= min.x;
-            faces.get(i).c.v.y -= min.y;
-            faces.get(i).c.v.z -= min.z;
-            fos.write(faces.get(i).value());
-            faces.get(i).a.v.x += min.x;
-            faces.get(i).a.v.y += min.y;
-            faces.get(i).a.v.z += min.z;
-            faces.get(i).b.v.x += min.x;
-            faces.get(i).b.v.y += min.y;
-            faces.get(i).b.v.z += min.z;
-            faces.get(i).c.v.x += min.x;
-            faces.get(i).c.v.y += min.y;
-            faces.get(i).c.v.z += min.z;
-          }
+          for (Triangle t : faces)
+            fos.write(t.value(min));
         }
       }
       fos.close();

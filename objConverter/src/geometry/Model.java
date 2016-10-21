@@ -23,85 +23,46 @@ public class Model
   {
     Point3D min = new Point3D(99999, 99999, 99999);
     Point3D max = new Point3D(-99999, -99999, -99999);
-    for (int i = 0; i < faces.size(); i++)
+    for (Triangle t : faces)
     {
-      if (min.x > faces.get(i).a.v.x)
-      {
-        min.x = faces.get(i).a.v.x;
-      }
-      if (min.y > faces.get(i).a.v.y)
-      {
-        min.y = faces.get(i).a.v.y;
-      }
-      if (min.z > faces.get(i).a.v.z)
-      {
-        min.z = faces.get(i).a.v.z;
-      }
+      if (min.x > t.a.v.x)
+        min.x = t.a.v.x;
+      if (min.y > t.a.v.y)
+        min.y = t.a.v.y;
+      if (min.z > t.a.v.z)
+        min.z = t.a.v.z;
+      if (max.x < t.a.v.x)
+        max.x = t.a.v.x;
+      if (max.y < t.a.v.y)
+        max.y = t.a.v.y;
+      if (max.z < t.a.v.z)
+        max.z = t.a.v.z;
 
-      if (max.x < faces.get(i).a.v.x)
-      {
-        max.x = faces.get(i).a.v.x;
-      }
-      if (max.y < faces.get(i).a.v.y)
-      {
-        max.y = faces.get(i).a.v.y;
-      }
-      if (max.z < faces.get(i).a.v.z)
-      {
-        max.z = faces.get(i).a.v.z;
-      }
+      if (min.x > t.b.v.x)
+        min.x = t.b.v.x;
+      if (min.y > t.b.v.y)
+        min.y = t.b.v.y;
+      if (min.z > t.b.v.z)
+        min.z = t.b.v.z;
+      if (max.x < t.b.v.x)
+        max.x = t.b.v.x;
+      if (max.y < t.b.v.y)
+        max.y = t.b.v.y;
+      if (max.z < t.b.v.z)
+        max.z = t.b.v.z;
 
-      if (min.x > faces.get(i).b.v.x)
-      {
-        min.x = faces.get(i).b.v.x;
-      }
-      if (min.y > faces.get(i).b.v.y)
-      {
-        min.y = faces.get(i).b.v.y;
-      }
-      if (min.z > faces.get(i).b.v.z)
-      {
-        min.z = faces.get(i).b.v.z;
-      }
-
-      if (max.x < faces.get(i).b.v.x)
-      {
-        max.x = faces.get(i).b.v.x;
-      }
-      if (max.y < faces.get(i).b.v.y)
-      {
-        max.y = faces.get(i).b.v.y;
-      }
-      if (max.z < faces.get(i).b.v.z)
-      {
-        max.z = faces.get(i).b.v.z;
-      }
-
-      if (min.x > faces.get(i).c.v.x)
-      {
-        min.x = faces.get(i).c.v.x;
-      }
-      if (min.y > faces.get(i).c.v.y)
-      {
-        min.y = faces.get(i).c.v.y;
-      }
-      if (min.z > faces.get(i).c.v.z)
-      {
-        min.z = faces.get(i).c.v.z;
-      }
-
-      if (max.x < faces.get(i).c.v.x)
-      {
-        max.x = faces.get(i).c.v.x;
-      }
-      if (max.y < faces.get(i).c.v.y)
-      {
-        max.y = faces.get(i).c.v.y;
-      }
-      if (max.z < faces.get(i).c.v.z)
-      {
-        max.z = faces.get(i).c.v.z;
-      }
+      if (min.x > t.c.v.x)
+        min.x = t.c.v.x;
+      if (min.y > t.c.v.y)
+        min.y = t.c.v.y;
+      if (min.z > t.c.v.z)
+        min.z = t.c.v.z;
+      if (max.x < t.c.v.x)
+        max.x = t.c.v.x;
+      if (max.y < t.c.v.y)
+        max.y = t.c.v.y;
+      if (max.z < t.c.v.z)
+        max.z = t.c.v.z;
     }
     return new AABB(min, max);
   }

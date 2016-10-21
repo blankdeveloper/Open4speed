@@ -26,6 +26,7 @@ struct Dynamic
     int frame;
 };
 
+#define CULLING_DST 50
 #define WATER_EFF_LENGTH 5
 
 /**

@@ -15,4 +15,9 @@ public class Point3D
     this.y = y;
     this.z = z;
   }
+  
+  public Point3D mix(Point3D p)
+  {
+    return new Point3D((p.x + x) * 0.5f, (p.y + y) * 0.5f, (p.z + z) * 0.5f);
+  }
 }

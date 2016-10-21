@@ -15,7 +15,7 @@ public class Vertex
   }
 
   // compressed values of point
-  String value()
+  String value(Point3D base)
   {
     String output = "";
     if (t == null)
@@ -28,6 +28,6 @@ public class Vertex
     else
       output += n.x + " " + n.y + " " + n.z + " ";
 
-    return output + v.x + " " + v.y + " " + v.z + " ";
+    return output + (v.x - base.x) + " " + (v.y - base.y) + " " + (v.z - base.z) + " ";
   }
 }

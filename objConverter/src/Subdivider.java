@@ -13,6 +13,23 @@ public class Subdivider
   public Map<String, ArrayList<Model> > subdivide(ArrayList<Model> models)
   {
     System.out.print("Subdividing model...");
+    // subdivide too big triangles
+    /*for (int i = 0; i < models.size(); i++)
+    {
+      Model m = models.get(i);
+      for (int j = 0; j < m.faces.size();)
+      {
+        Triangle t = m.faces.get(j);
+        if (t.isTooBig())
+        {
+          Triangle.subdivide(m.faces, t);
+          m.faces.remove(j);
+        }
+        else
+          j++;
+      }
+    }*/
+    
     Id3D id = new Id3D();
     Map<String, ArrayList<Model> >  output = new HashMap<String, ArrayList<Model> >();
     for(int i = 0; i < models.size(); i++)

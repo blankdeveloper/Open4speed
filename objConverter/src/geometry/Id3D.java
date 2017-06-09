@@ -8,7 +8,7 @@ public class Id3D
   
   String value = "";
   
-  public static final int CULLING_DST = 50;
+  public static final int CULLING_DST = 100;
   
   public boolean set(Triangle t)
   {

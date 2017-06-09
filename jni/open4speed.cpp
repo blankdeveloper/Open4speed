@@ -294,8 +294,7 @@ int main(int argc, char** argv)
     glutKeyboardUpFunc(keyboardUp);
 
     /// load data
-    //scn = new scene("#assets/tracks/winter-day.o4scfg");
-    scn = new scene("#assets/gta/gtasa.o4scfg");
+    scn = new scene("#assets/tracks/winter-day.o4scfg");
     scn->setPhysicsLocked(false);
 
     /// start loop

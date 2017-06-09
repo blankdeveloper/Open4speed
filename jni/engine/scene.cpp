@@ -595,7 +595,7 @@ std::vector<id3d> scene::getVisibility(bool directional)
 {
     pthread_mutex_lock(&sc->dataMutex);
     std::vector<id3d> output;
-    int steps = 4;
+    int steps = 3;
     int cx = camera.x / CULLING_DST;
     int cy = camera.y / CULLING_DST;
     int cz = camera.z / CULLING_DST;
